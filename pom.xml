@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <parent>
+        <groupId>com.citytechinc.cq.library</groupId>
+        <artifactId>cq-library</artifactId>
+        <version>6.1.0-SNAPSHOT</version>
+    </parent>
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.citytechinc.cq.harbor</groupId>
+	<artifactId>harbor</artifactId>
+	<packaging>pom</packaging>
+	<version>1.0.0-SNAPSHOT</version>
+	<name>CITYTECH, Inc. Harbor CQ5 Website</name>
+
+	<modules>
+		<module>harbor-core</module>
+		<module>harbor-ui</module>
+	</modules>
+
+    <repositories>
+        <repository>
+            <id>citytech-public</id>
+            <url>http://nexus.citytech.ctmsp.com/content/groups/public</url>
+        </repository>
+        <repository>
+            <id>citytech-private</id>
+            <url>http://nexus.citytech.ctmsp.com/content/groups/CITYTECH-Private/</url>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>citytech-public</id>
+            <url>http://nexus.citytech.ctmsp.com/content/groups/public</url>
+        </pluginRepository>
+        <pluginRepository>
+            <id>citytech-private</id>
+            <url>http://nexus.citytech.ctmsp.com/content/groups/CITYTECH-Private/</url>
+        </pluginRepository>
+    </pluginRepositories>
+
+	<properties>
+		<cq.library.version>6.1.0-SNAPSHOT</cq.library.version>
+		<core.name>harbor-core</core.name>
+		<maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss.SSSZ</maven.build.timestamp.format>
+		<timestamp>${maven.build.timestamp}</timestamp>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<maven.junit.usefile>false</maven.junit.usefile>
+	</properties>
+
+	<profiles>
+		<profile>
+			<id>default</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+                <crx.skip>true</crx.skip>
+                <osgi.bundle.status.skip>true</osgi.bundle.status.skip>
+                <cq.username>admin</cq.username>
+			</properties>
+		</profile>
+		<profile>
+			<id>local</id>
+			<activation>
+				<property>
+					<name>local</name>
+				</property>
+			</activation>
+			<properties>
+                <crx.skip>false</crx.skip>
+                <osgi.bundle.status.skip>false</osgi.bundle.status.skip>
+                <cq.host>localhost</cq.host>
+                <cq.port.author>4502</cq.port.author>
+                <cq.port.publish>4503</cq.port.publish>
+                <cq.username>admin</cq.username>
+                <cq.password>admin</cq.password>
+			</properties>
+		</profile>
+	</profiles>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>versions-maven-plugin</artifactId>
+				<configuration>
+					<generateBackupPoms>false</generateBackupPoms>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.citytechinc.cq.library</groupId>
+                <artifactId>cq-library-core</artifactId>
+                <version>${cq.library.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.citytechinc.cq.library</groupId>
+                <artifactId>cq-library-ui</artifactId>
+                <version>${cq.library.version}</version>
+                <type>zip</type>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>
