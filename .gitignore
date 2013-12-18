@@ -4,6 +4,7 @@
 .classpath
 .settings/
 target/
+.idea/
 *.iml
 *.ipr
 *.iws
