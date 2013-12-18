@@ -1,12 +1,13 @@
 package com.citytechinc.cq.harbor.components.content.test;
 
 import com.citytechinc.cq.component.annotations.Component;
+import com.citytechinc.cq.component.annotations.ContentProperty;
 import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.Listener;
 import com.citytechinc.cq.library.components.AbstractComponent;
 import com.citytechinc.cq.library.content.request.ComponentRequest;
 
-@Component("Test Component")
+@Component(value = "Test Component", contentAdditionalProperties = {@ContentProperty(name="dependencies", value="harbor.components.content.testcomponent")})
 public class TestComponent extends AbstractComponent {
 	
 	public TestComponent(ComponentRequest request) {
