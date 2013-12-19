@@ -5,4 +5,5 @@
           cq:isContainer="{Boolean}false"
           jcr:primaryType="cq:Component"
           sling:resourceSuperType="harbor/components/page/common/global"
-          componentGroup=".hidden"/>
+          componentGroup=".hidden"
+          dependencies="[harbor.jquery,harbor.bootstrap,harbor.fontawesome]" />
