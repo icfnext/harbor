@@ -33,39 +33,39 @@ public class FluidColumn extends AbstractComponent implements AbstractColumn{
         super(node);
     }
 
-    @DialogField(fieldLabel = "Span", fieldDescription="The amount of the space in which the column row is contained which this column will occupy.")
+    @DialogField(fieldLabel = "Column Width", fieldDescription="The amount of the space in which the column row is contained which this column will occupy.")
     @Selection(type = Selection.SELECT, options = {
-            @Option(text = "1/12", value = "col-md-1"),
-            @Option(text = "2/12", value = "col-md-2"),
-            @Option(text = "3/12", value = "col-md-3"),
-            @Option(text = "4/12", value = "col-md-4"),
-            @Option(text = "5/12", value = "col-md-5"),
-            @Option(text = "6/12", value = "col-md-6"),
-            @Option(text = "7/12", value = "col-md-7"),
-            @Option(text = "8/12", value = "col-md-8"),
-            @Option(text = "9/12", value = "col-md-9"),
-            @Option(text = "10/12", value = "col-md-10"),
-            @Option(text = "11/12", value = "col-md-11"),
-            @Option(text = "12/12", value = "col-md-12")
+            @Option(text = "1/12", value = "1"),
+            @Option(text = "2/12", value = "2"),
+            @Option(text = "3/12", value = "3"),
+            @Option(text = "4/12", value = "4"),
+            @Option(text = "5/12", value = "5"),
+            @Option(text = "6/12", value = "6"),
+            @Option(text = "7/12", value = "7"),
+            @Option(text = "8/12", value = "8"),
+            @Option(text = "9/12", value = "9"),
+            @Option(text = "10/12", value = "10"),
+            @Option(text = "11/12", value = "11"),
+            @Option(text = "12/12", value = "12")
     })
     public String getColClass() {
-        return get("colClass", "col-md-1");
+        return get("colClass", "1");
     }
 
     @DialogField(fieldLabel = "Offset", fieldDescription="The amount of the space in which the column row is contained which will be used as a column offset.")
     @Selection(type = Selection.SELECT, options = {
-            @Option(text = "--", value = "col-md-offset-0"),
-            @Option(text = "1/12", value = "col-md-offset-1"),
-            @Option(text = "2/12", value = "col-md-offset-2"),
-            @Option(text = "3/12", value = "col-md-offset-3"),
-            @Option(text = "4/12", value = "col-md-offset-4"),
-            @Option(text = "5/12", value = "col-md-offset-5"),
-            @Option(text = "6/12", value = "col-md-offset-6"),
-            @Option(text = "7/12", value = "col-md-offset-7"),
-            @Option(text = "8/12", value = "col-md-offset-8"),
-            @Option(text = "9/12", value = "col-md-offset-9"),
-            @Option(text = "10/12", value = "col-md-offset-10"),
-            @Option(text = "11/12", value = "col-md-offset-11")
+            @Option(text = "--", value = "offset-0"),
+            @Option(text = "1/12", value = "offset-1"),
+            @Option(text = "2/12", value = "offset-2"),
+            @Option(text = "3/12", value = "offset-3"),
+            @Option(text = "4/12", value = "offset-4"),
+            @Option(text = "5/12", value = "offset-5"),
+            @Option(text = "6/12", value = "offset-6"),
+            @Option(text = "7/12", value = "offset-7"),
+            @Option(text = "8/12", value = "offset-8"),
+            @Option(text = "9/12", value = "offset-9"),
+            @Option(text = "10/12", value = "offset-10"),
+            @Option(text = "11/12", value = "offset-11")
     })
     public String getOffsetClass() {
         return get("offsetClass", "");

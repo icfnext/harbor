@@ -29,7 +29,10 @@ import java.util.List;
 public class FluidColumnRow  extends AbstractComponent {
     private final List<AbstractColumn> columns;
     private final String uniqueId;
-    private final String name;
+    private static final String GRID_EXTRA_SMALL = "col-xs-";
+    private static final String GRID_SMALL = "col-sm-";
+    private static final String GRID_MEDIUM = "col-md-";
+    private static final String GRID_LARGE = "col-lg-";
 
     public FluidColumnRow(ComponentRequest request) {
         super(request);
@@ -42,19 +45,19 @@ public class FluidColumnRow  extends AbstractComponent {
             this.columns.add(new FluidColumn(columnResourceIterator.next().adaptTo(ComponentNode.class)));
         }
 
-        this.name = request.getResource().getName();
         this.uniqueId = request.getResource().getPath().replace("/", "__").replace(":", "___");
     }
 
-    @DialogField(xtype="selection", fieldLabel="Layout", fieldDescription="The layout to apply to the columns of this column row.&lt;br&gt;In a fixed layout, each column takes up a set number of pixels.&lt;br&gt;In a fluid layout, each column takes up a set percentage of the total available space.")
-    @Selection(type = Selection.SELECT, options = { @Option(text = "Fixed", value = "fixed"),
-        @Option(text = "Fluid", value = "fluid")} )
-    public String getLayout() {
-        return get("layout", "fluid");
-    }
-
-    public Boolean getIsFluid() {
-        return get("layout", "fixed").equals("fluid");
+    @DialogField(xtype="selection", fieldLabel="Grid Options",
+            fieldDescription="Bootstrap Grid Options")
+    @Selection(type = Selection.SELECT, options = {
+            @Option(text = "Extra Small Devices (Always Horizontal)", value = GRID_EXTRA_SMALL, qtip = "Never Stacked"),
+            @Option(text = "Small Devices (Horizontal at 768px)", value = GRID_SMALL, qtip = "From Stacked to Horizontal at 768px"),
+            @Option(text = "Medium Devices (Horizontal at 992px)", value = GRID_MEDIUM, qtip = "From Stacked to Horizontal at 992px"),
+            @Option(text = "Large Devices (Horizontal at 1200px)", value = GRID_LARGE, qtip = "From Stacked to Horizontal at 1200px")
+    })
+    public String getGridSize() {
+        return get("gridSize", GRID_MEDIUM);
     }
 
     public String getUniqueId(){
@@ -63,9 +66,5 @@ public class FluidColumnRow  extends AbstractComponent {
 
     public List<AbstractColumn> getColumns(){
         return this.columns;
-    }
-
-    public String getName(){
-        return this.getName();
     }
 }
