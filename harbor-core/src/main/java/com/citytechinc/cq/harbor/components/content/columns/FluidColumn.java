@@ -35,40 +35,40 @@ public class FluidColumn extends AbstractComponent implements AbstractColumn{
 
     @DialogField(fieldLabel = "Span", fieldDescription="The amount of the space in which the column row is contained which this column will occupy.")
     @Selection(type = Selection.SELECT, options = {
-            @Option(text = "1/12", value = "span1"),
-            @Option(text = "2/12", value = "span2"),
-            @Option(text = "3/12", value = "span3"),
-            @Option(text = "4/12", value = "span4"),
-            @Option(text = "5/12", value = "span5"),
-            @Option(text = "6/12", value = "span6"),
-            @Option(text = "7/12", value = "span7"),
-            @Option(text = "8/12", value = "span8"),
-            @Option(text = "9/12", value = "span9"),
-            @Option(text = "10/12", value = "span10"),
-            @Option(text = "11/12", value = "span11"),
-            @Option(text = "12/12", value = "span12")
+            @Option(text = "1/12", value = "col-md-1"),
+            @Option(text = "2/12", value = "col-md-2"),
+            @Option(text = "3/12", value = "col-md-3"),
+            @Option(text = "4/12", value = "col-md-4"),
+            @Option(text = "5/12", value = "col-md-5"),
+            @Option(text = "6/12", value = "col-md-6"),
+            @Option(text = "7/12", value = "col-md-7"),
+            @Option(text = "8/12", value = "col-md-8"),
+            @Option(text = "9/12", value = "col-md-9"),
+            @Option(text = "10/12", value = "col-md-10"),
+            @Option(text = "11/12", value = "col-md-11"),
+            @Option(text = "12/12", value = "col-md-12")
     })
-    public String getSpanClass() {
-        return get("span", "span1");
+    public String getColClass() {
+        return get("colClass", "col-md-1");
     }
 
     @DialogField(fieldLabel = "Offset", fieldDescription="The amount of the space in which the column row is contained which will be used as a column offset.")
     @Selection(type = Selection.SELECT, options = {
-            @Option(text = "--", value = "offset0"),
-            @Option(text = "1/12", value = "offset1"),
-            @Option(text = "2/12", value = "offset2"),
-            @Option(text = "3/12", value = "offset3"),
-            @Option(text = "4/12", value = "offset4"),
-            @Option(text = "5/12", value = "offset5"),
-            @Option(text = "6/12", value = "offset6"),
-            @Option(text = "7/12", value = "offset7"),
-            @Option(text = "8/12", value = "offset8"),
-            @Option(text = "9/12", value = "offset9"),
-            @Option(text = "10/12", value = "offset10"),
-            @Option(text = "11/12", value = "offset11")
+            @Option(text = "--", value = "col-md-offset-0"),
+            @Option(text = "1/12", value = "col-md-offset-1"),
+            @Option(text = "2/12", value = "col-md-offset-2"),
+            @Option(text = "3/12", value = "col-md-offset-3"),
+            @Option(text = "4/12", value = "col-md-offset-4"),
+            @Option(text = "5/12", value = "col-md-offset-5"),
+            @Option(text = "6/12", value = "col-md-offset-6"),
+            @Option(text = "7/12", value = "col-md-offset-7"),
+            @Option(text = "8/12", value = "col-md-offset-8"),
+            @Option(text = "9/12", value = "col-md-offset-9"),
+            @Option(text = "10/12", value = "col-md-offset-10"),
+            @Option(text = "11/12", value = "col-md-offset-11")
     })
     public String getOffsetClass() {
-        return get("offset", "");
+        return get("offsetClass", "");
     }
 
     public String getName() {

@@ -39,7 +39,7 @@ public class FluidColumnRow  extends AbstractComponent {
         Iterator<Resource> columnResourceIterator = request.getResource().listChildren();
 
         while (columnResourceIterator.hasNext()) {
-            this.columns.add(new Column(columnResourceIterator.next().adaptTo(ComponentNode.class)));
+            this.columns.add(new FluidColumn(columnResourceIterator.next().adaptTo(ComponentNode.class)));
         }
 
         this.name = request.getResource().getName();
