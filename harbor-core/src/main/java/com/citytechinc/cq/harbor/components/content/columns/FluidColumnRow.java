@@ -21,19 +21,7 @@ import java.util.List;
         contentAdditionalProperties = {@ContentProperty(name="dependencies", value="harbor.components.content.fluidcolumnrow")},
         actionConfigs = {
                 @ActionConfig(xtype = "tbseparator"),
-                @ActionConfig(text = "Add Column", handler = "function(){\n" +
-                        "                var currentEditable = this;\n" +
-                        "                jQuery.post(\n" +
-                        "                    this.path + '/*',\n" +
-                        "                    {\n" +
-                        "                        'sling:resourceType' : 'harbor/components/content/fluidcolumnrow/column',\n" +
-                        "                        'jcr:primaryType' : 'nt:unstructured',\n" +
-                        "                        ':nameHint' : 'column'\n" +
-                        "                    },\n" +
-                        "                    function( data ) { currentEditable.refreshSelf(); }\n" +
-                        "                );\n" +
-                        "            }")
-
+                @ActionConfig(text = "Add Column", handler = "function(){ Harbor.Components.FluidColumnRow.addColumn(this) }")
         },
         allowedParents = "*/parsys",
         resourceSuperType = "foundation/components/parbase"
@@ -42,7 +30,6 @@ public class FluidColumnRow  extends AbstractComponent {
     private final List<AbstractColumn> columns;
     private final String uniqueId;
     private final String name;
-    private final String style;
 
     public FluidColumnRow(ComponentRequest request) {
         super(request);
@@ -57,14 +44,13 @@ public class FluidColumnRow  extends AbstractComponent {
 
         this.name = request.getResource().getName();
         this.uniqueId = request.getResource().getPath().replace("/", "__").replace(":", "___");
-        this.style = get("style", "");
     }
 
     @DialogField(xtype="selection", fieldLabel="Layout", fieldDescription="The layout to apply to the columns of this column row.&lt;br&gt;In a fixed layout, each column takes up a set number of pixels.&lt;br&gt;In a fluid layout, each column takes up a set percentage of the total available space.")
     @Selection(type = Selection.SELECT, options = { @Option(text = "Fixed", value = "fixed"),
         @Option(text = "Fluid", value = "fluid")} )
     public String getLayout() {
-        return get("layout", "fixed");
+        return get("layout", "fluid");
     }
 
     public Boolean getIsFluid() {
@@ -81,9 +67,5 @@ public class FluidColumnRow  extends AbstractComponent {
 
     public String getName(){
         return this.getName();
-    }
-
-    public String getStyle(){
-        return get("style", "");
     }
 }

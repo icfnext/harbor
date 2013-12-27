@@ -9,12 +9,13 @@
 <c:forEach var="curcolumn" items="${curfluidrow.columns}" varStatus="status">
     <div class="${curcolumn.spanClass} ${curcolumn.offsetClass} fluidColumn" name="${curcolumn.name}">
         <div>
-            <c:if test="${fluidcolumnrow.isFluid}">
+            <cq:include path="${curcolumn.name}" resourceType="harbor/components/content/fluidcolumn" />
+            <%--c:if test="${fluidcolumnrow.isFluid}">
                 <cq:include path="${curcolumn.name}" resourceType="harbor/components/content/fluidcolumn" />
             </c:if>
             <c:if test="${not fluidcolumnrow.isFluid}">
                 <cq:include path="${curcolumn.name}" resourceType="harbor/components/content/column" />
-            </c:if>
+            </c:if>--%>
         </div>
     </div>
 </c:forEach>

@@ -1,6 +1,7 @@
 package com.citytechinc.cq.harbor.components.content.columns;
 
 import com.citytechinc.cq.component.annotations.*;
+import com.citytechinc.cq.component.annotations.editconfig.ActionConfig;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
 import com.citytechinc.cq.library.components.AbstractComponent;
 import com.citytechinc.cq.library.content.node.ComponentNode;
@@ -9,7 +10,17 @@ import com.citytechinc.cq.component.annotations.Component;
 
 
 @Component(value = "Fluid Column",
+        actions = {"text:Fluid Column", "edit", "delete"},
         contentAdditionalProperties = {@ContentProperty(name="dependencies", value="harbor.components.content.fluidcolumnrow")},
+        actionConfigs = {
+                @ActionConfig(xtype = "tbseparator"),
+                @ActionConfig(text="Move Left", handler="Harbor.Components.FluidColumnRow.moveColumnLeft"),
+                @ActionConfig(text="Move Right", handler="Harbor.Components.FluidColumnRow.moveColumnRight")
+        },
+        listeners = {
+                @Listener(name = "afterdelete", value = "REFRESH_PARENT"),
+                @Listener(name = "afteredit", value = "REFRESH_PARENT"),
+        },
         group = ".hidden"
 )
 public class FluidColumn extends AbstractComponent implements AbstractColumn{
