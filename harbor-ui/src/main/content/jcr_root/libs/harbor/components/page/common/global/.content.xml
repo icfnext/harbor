@@ -4,4 +4,5 @@
           xmlns:jcr="http://www.jcp.org/jcr/1.0"
           cq:isContainer="{Boolean}false"
           jcr:primaryType="cq:Component"
-          sling:resourceSuperType="foundation/components/page" />
+          sling:resourceSuperType="foundation/components/page"
+          dependencies="[harbor.jquery,harbor.bootstrap,harbor.fontawesome]" />
