@@ -9,7 +9,7 @@
     <div class = "rowContainer" style="${curfluidrow.rowWidthPadding}">
     <c:forEach var="curcolumn" items="${curfluidrow.columns}" varStatus="status">
         <!-- Inserts the offset class if there is one. Avoids inserting incomplete offset-->
-            <div class="${curcolumn.colClass} ${curcolumn.offsetClass} fluidColumn" name="${curcolumn.name}">
+            <div class="${curfluidrow.gridSize}${curcolumn.colClass} fluidColumn" name="${curcolumn.name}">
             <div>
                 <cq:include path="${curcolumn.name}" resourceType="harbor/components/content/fluidcolumn" />
             </div>

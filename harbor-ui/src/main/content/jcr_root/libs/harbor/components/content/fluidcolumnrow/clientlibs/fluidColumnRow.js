@@ -67,8 +67,7 @@ Harbor.Components.FluidColumnRow = function(jQuery){
             var value = prompt("Enter the number of columns to add.", "1");
             value = parseInt(value, 10); //value, radix
 
-            //TODO: Check for undefined/NaN
-            if (value > 12){
+            if (value > 12 || isNaN(value)){
                 value = 1;
             }
 
@@ -94,7 +93,6 @@ Harbor.Components.FluidColumnRow = function(jQuery){
             })
 
             def.resolve();
-
         }
     }
 }(jQuery);

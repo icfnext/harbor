@@ -29,6 +29,10 @@ import java.util.List;
 public class FluidColumnRow  extends AbstractComponent {
     private final List<FluidColumn> columns;
     private final String uniqueId;
+    private static final String GRID_EXTRA_SMALL = "col-xs-";
+    private static final String GRID_SMALL = "col-sm-";
+    private static final String GRID_MEDIUM = "col-md-";
+    private static final String GRID_LARGE = "col-lg-";
 
     public FluidColumnRow(ComponentRequest request) {
         super(request);
@@ -51,6 +55,18 @@ public class FluidColumnRow  extends AbstractComponent {
     })
     public String getRowWidthPadding(){
         return get("rowWidthPadding", "");
+    }
+
+    @DialogField(xtype="selection", fieldLabel="Grid Options",
+            fieldDescription="Bootstrap Grid Options")
+    @Selection(type = Selection.SELECT, options = {
+            @Option(text = "Extra Small Devices (Always Horizontal)", value = GRID_EXTRA_SMALL, qtip = "Never Stacked"),
+            @Option(text = "Small Devices (Horizontal at 768px)", value = GRID_SMALL, qtip = "From Stacked to Horizontal at 768px"),
+            @Option(text = "Medium Devices (Horizontal at 992px)", value = GRID_MEDIUM, qtip = "From Stacked to Horizontal at 992px"),
+            @Option(text = "Large Devices (Horizontal at 1200px)", value = GRID_LARGE, qtip = "From Stacked to Horizontal at 1200px")
+    })
+    public String getGridSize() {
+        return get("gridSize", GRID_MEDIUM);
     }
 
     public String getUniqueId(){
