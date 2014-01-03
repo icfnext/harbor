@@ -1,6 +1,3 @@
-Harbor = {Components:{}};
-
-
 Harbor.Components.FluidColumnRow = function(jQuery){
     var column = {
         'sling:resourceType' : 'harbor/components/content/fluidcolumn',
