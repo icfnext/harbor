@@ -1,3 +1,5 @@
-Harbor = {};
-
-Harbor.Components = {};
+Harbor = function(){
+    return {
+        Components: {}
+    }
+}();

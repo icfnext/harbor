@@ -5,12 +5,10 @@ import com.citytechinc.cq.component.annotations.ContentProperty;
 import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.Listener;
 import com.citytechinc.cq.component.annotations.Option;
-import com.citytechinc.cq.component.annotations.editconfig.ActionConfig;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
 import com.citytechinc.cq.library.components.AbstractComponent;
 import com.citytechinc.cq.library.content.node.ComponentNode;
 import com.citytechinc.cq.library.content.request.ComponentRequest;
-import org.apache.commons.lang3.StringUtils;
 
 @Component(value = "Fluid Column",
         actions = {"text:Fluid Column", "edit", "delete"},
@@ -29,7 +27,17 @@ public class FluidColumn extends AbstractComponent{
         super(node);
     }
 
-    @DialogField(fieldLabel = "Column Width", fieldDescription="The amount of the space in which the column row is contained which this column will occupy.")
+    @DialogField(fieldLabel = "Inherit Content?",
+            fieldDescription = "Inherit column content from parent page.")
+    @Selection(type=Selection.CHECKBOX, options = {
+            @Option(text="", value = "true")
+    })
+    public Boolean getIsInherited(){
+        return get("isInherited", "").equals("true");
+    }
+
+    @DialogField(fieldLabel = "Column Width",
+            fieldDescription="The amount of the space in which the column row is contained which this column will occupy.")
     @Selection(type = Selection.SELECT, options = {
             @Option(text = "1/12", value = "1"),
             @Option(text = "2/12", value = "2"),

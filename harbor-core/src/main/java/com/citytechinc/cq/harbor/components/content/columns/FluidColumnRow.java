@@ -51,13 +51,14 @@ public class FluidColumnRow  extends AbstractComponent {
     @DialogField(fieldLabel = "Is Full Width?",
         fieldDescription = "Does the Row span the full width of the entire container?")
     @Selection(type=Selection.CHECKBOX, options = {
-            @Option(text="Full Width", value = "padding: 0 15px;")
+            @Option(text="", value = "padding: 0 15px;")
     })
     public String getRowWidthPadding(){
         return get("rowWidthPadding", "");
     }
 
-    @DialogField(xtype="selection", fieldLabel="Grid Options",
+    @DialogField(xtype="selection",
+            fieldLabel="Grid Options",
             fieldDescription="Bootstrap Grid Options")
     @Selection(type = Selection.SELECT, options = {
             @Option(text = "Extra Small Devices (Always Horizontal)", value = GRID_EXTRA_SMALL, qtip = "Never Stacked"),
