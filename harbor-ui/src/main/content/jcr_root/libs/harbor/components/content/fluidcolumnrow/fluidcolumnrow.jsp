@@ -5,7 +5,7 @@
 
 <c:set var="curfluidrow" scope="page" value="${fluidColumnRow}" />
 
-<div class = "row" id="${curfluidrow.uniqueId}-column-row">
+<div class = "row ${curfluidrow.classification.classificationName}" id="${curfluidrow.uniqueId}-column-row">
     <div class = "rowContainer" style="${curfluidrow.rowWidthPadding}">
     <c:forEach var="curcolumn" items="${curfluidrow.columns}" varStatus="status">
         <!-- Inserts the offset class if there is one. Avoids inserting incomplete offset-->

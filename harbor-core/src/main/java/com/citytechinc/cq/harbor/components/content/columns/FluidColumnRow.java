@@ -5,7 +5,9 @@ import com.citytechinc.cq.component.annotations.ContentProperty;
 import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.Option;
 import com.citytechinc.cq.component.annotations.editconfig.ActionConfig;
+import com.citytechinc.cq.component.annotations.widgets.DialogFieldSet;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
+import com.citytechinc.cq.harbor.components.mixins.classifiable.Classification;
 import com.citytechinc.cq.library.components.AbstractComponent;
 import com.citytechinc.cq.library.content.node.ComponentNode;
 import com.citytechinc.cq.library.content.request.ComponentRequest;
@@ -77,4 +79,11 @@ public class FluidColumnRow  extends AbstractComponent {
     public List<FluidColumn> getColumns(){
         return this.columns;
     }
+
+    @DialogField
+    @DialogFieldSet
+    public Classification getClassification() {
+        return new Classification(this.request);
+    }
+
 }
