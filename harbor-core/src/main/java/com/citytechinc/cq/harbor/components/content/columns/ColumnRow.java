@@ -15,34 +15,34 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-@Component(value = "Fluid Column Row",
-        actions = {"text: Fluid Column Row", "-", "edit", "-", "copymove", "delete", "-", "insert"},
-        contentAdditionalProperties = {@ContentProperty(name="dependencies", value="harbor.components.content.fluidcolumnrow")},
+@Component(value = "Column Row",
+        actions = {"text: Column Row", "-", "edit", "-", "copymove", "delete", "-", "insert"},
+        contentAdditionalProperties = {@ContentProperty(name="dependencies", value="harbor.components.content.columnrow")},
         actionConfigs = {
                 @ActionConfig(xtype = "tbseparator"),
-                @ActionConfig(text = "Add Column", handler = "function(){ Harbor.Components.FluidColumnRow.addColumn(this) }"),
-                @ActionConfig(text = "Add n Columns", handler = "function(){ Harbor.Components.FluidColumnRow.addMultipleColumns(this) }")
+                @ActionConfig(text = "Add Column", handler = "function(){ Harbor.Components.ColumnRow.addColumn(this) }"),
+                @ActionConfig(text = "Add n Columns", handler = "function(){ Harbor.Components.ColumnRow.addMultipleColumns(this) }")
         },
         allowedParents = "*/parsys",
         resourceSuperType = "foundation/components/parbase"
 )
-public class FluidColumnRow  extends AbstractComponent {
-    private final List<FluidColumn> columns;
+public class ColumnRow  extends AbstractComponent {
+    private final List<Column> columns;
     private final String uniqueId;
     private static final String GRID_EXTRA_SMALL = "col-xs-";
     private static final String GRID_SMALL = "col-sm-";
     private static final String GRID_MEDIUM = "col-md-";
     private static final String GRID_LARGE = "col-lg-";
 
-    public FluidColumnRow(ComponentRequest request) {
+    public ColumnRow(ComponentRequest request) {
         super(request);
 
-        this.columns = new ArrayList<FluidColumn>();
+        this.columns = new ArrayList<Column>();
 
         Iterator<Resource> columnResourceIterator = request.getResource().listChildren();
 
         while (columnResourceIterator.hasNext()) {
-            this.columns.add(new FluidColumn(columnResourceIterator.next().adaptTo(ComponentNode.class)));
+            this.columns.add(new Column(columnResourceIterator.next().adaptTo(ComponentNode.class)));
         }
 
         this.uniqueId = request.getResource().getPath().replace("/", "__").replace(":", "___");
@@ -74,7 +74,7 @@ public class FluidColumnRow  extends AbstractComponent {
         return this.uniqueId;
     }
 
-    public List<FluidColumn> getColumns(){
+    public List<Column> getColumns(){
         return this.columns;
     }
 }

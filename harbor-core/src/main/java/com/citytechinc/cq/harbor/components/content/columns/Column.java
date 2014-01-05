@@ -12,18 +12,18 @@ import com.citytechinc.cq.library.content.request.ComponentRequest;
 
 @Component(value = "Fluid Column",
         actions = {"text:Fluid Column", "edit", "delete"},
-        contentAdditionalProperties = {@ContentProperty(name="dependencies", value="harbor.components.content.fluidcolumnrow")},
+        contentAdditionalProperties = {@ContentProperty(name="dependencies", value="harbor.components.content.columnrow")},
         listeners = {
                 @Listener(name = "afterdelete", value = "REFRESH_PARENT"),
                 @Listener(name = "afteredit", value = "REFRESH_PARENT"),
         },
         group = ".hidden"
 )
-public class FluidColumn extends AbstractComponent{
-    public FluidColumn(ComponentRequest req) {
+public class Column extends AbstractComponent{
+    public Column(ComponentRequest req) {
         super(req);
     }
-    public FluidColumn(ComponentNode node) {
+    public Column(ComponentNode node) {
         super(node);
     }
 

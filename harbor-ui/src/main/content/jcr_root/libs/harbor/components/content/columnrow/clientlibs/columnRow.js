@@ -1,6 +1,6 @@
-Harbor.Components.FluidColumnRow = function(jQuery){
+Harbor.Components.ColumnRow = function(jQuery){
     var column = {
-        'sling:resourceType' : 'harbor/components/content/fluidcolumn',
+        'sling:resourceType' : 'harbor/components/content/column',
         'jcr:primaryType' : 'nt:unstructured',
         ':nameHint' : 'column'
     };
