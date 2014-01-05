@@ -19,7 +19,9 @@ import java.util.List;
 
 @Component(value = "Column Row",
         actions = {"text: Column Row", "-", "edit", "-", "copymove", "delete", "-", "insert"},
-        contentAdditionalProperties = {@ContentProperty(name="dependencies", value="harbor.components.content.columnrow")},
+        contentAdditionalProperties = {
+                @ContentProperty(name="dependencies", value="harbor.components.content.columnrow")
+        },
         actionConfigs = {
                 @ActionConfig(xtype = "tbseparator"),
                 @ActionConfig(text = "Add Column", handler = "function(){ Harbor.Components.ColumnRow.addColumn(this) }"),

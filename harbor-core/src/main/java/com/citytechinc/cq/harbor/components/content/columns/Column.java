@@ -12,7 +12,9 @@ import com.citytechinc.cq.library.content.request.ComponentRequest;
 
 @Component(value = "Fluid Column",
         actions = {"text:Fluid Column", "edit", "delete"},
-        contentAdditionalProperties = {@ContentProperty(name="dependencies", value="harbor.components.content.columnrow")},
+        contentAdditionalProperties = {
+                @ContentProperty(name="dependencies", value="harbor.components.content.columnrow")
+        },
         listeners = {
                 @Listener(name = "afterdelete", value = "REFRESH_PARENT"),
                 @Listener(name = "afteredit", value = "REFRESH_PARENT"),
