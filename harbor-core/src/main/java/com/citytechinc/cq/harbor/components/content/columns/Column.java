@@ -10,8 +10,8 @@ import com.citytechinc.cq.library.components.AbstractComponent;
 import com.citytechinc.cq.library.content.node.ComponentNode;
 import com.citytechinc.cq.library.content.request.ComponentRequest;
 
-@Component(value = "Fluid Column",
-        actions = {"text:Fluid Column", "edit", "delete"},
+@Component(value = "Column",
+        actions = {"text:Column", "edit", "delete"},
         contentAdditionalProperties = {
                 @ContentProperty(name="dependencies", value="harbor.components.content.columnrow")
         },
