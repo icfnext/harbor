@@ -1,5 +1,6 @@
 Harbor = function(){
     return {
-        Components: {}
+        Components: {},
+        Overrides: {}
     }
 }();

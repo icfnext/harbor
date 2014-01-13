@@ -4,7 +4,7 @@
 
 <c:set var="curRow" scope="page" value="${ColumnRow}" />
 
-<div class = "row" id="${curRow.uniqueId}-column-row">
+<div class="row" id="${curRow.uniqueId}-column-row">
 
     <c:if test="${curfliudrow.isFullWidth}">
         <div class = "rowContainer" style="${curRow.rowWidthPadding}">
