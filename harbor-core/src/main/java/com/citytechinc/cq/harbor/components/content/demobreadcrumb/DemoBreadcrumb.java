@@ -34,12 +34,14 @@ public class DemoBreadcrumb extends AbstractComponent {
         if (sectionLandingPage.isPresent()) {
             PageDecorator currentTrailPage = currentPage;
 
-            while (currentTrailPage != null && !currentTrailPage.equals(sectionLandingPage)) {
+            while (currentTrailPage != null && !currentTrailPage.getPath().equals(sectionLandingPage.get().getPath())) {
+
+                currentTrailPage = currentTrailPage.getParent();
+
                 if (!currentTrailPage.isHideInNav()) {
                     trail.add(currentTrailPage);
                 }
 
-                currentTrailPage = currentTrailPage.getParent();
             }
 
         }

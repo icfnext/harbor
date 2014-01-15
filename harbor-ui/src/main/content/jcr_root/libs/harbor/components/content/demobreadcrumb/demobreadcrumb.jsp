@@ -3,6 +3,6 @@
 
 <ul class="harbor-breadcrumb">
   <c:forEach var="curBreadcrumbItem" items="${breadcrumb.trail}">
-    <li><c:out value="${curBreadcrumbItem.navigationTitle}" /></li>
+    <li><a href="${curBreadcrumbItem.href}"><c:out value="${curBreadcrumbItem.path}" /> : <c:out value="${curBreadcrumbItem.title}" /></a></li>
   </c:forEach>
 </ul>

@@ -8,7 +8,7 @@
           allowedPaths="/content(/.*)?"
           ranking="0">
     <jcr:content
-            jcr:primaryType="cq:PageContent"
+            jcr:primaryType="harbor:HomePage"
             sling:resourceType="harbor/components/page/common/master"
             rdf:type="harbor:HomePage" />
 </jcr:root>
