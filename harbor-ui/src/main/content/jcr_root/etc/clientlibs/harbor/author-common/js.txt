@@ -1,2 +1,3 @@
 #base=js
 sidekick.js
+searchtree.js
