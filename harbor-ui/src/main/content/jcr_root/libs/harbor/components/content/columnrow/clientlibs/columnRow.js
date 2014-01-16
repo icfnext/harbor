@@ -53,17 +53,15 @@ Harbor.Components.ColumnRow = function(jQuery){
             def.resolve();
         },
 
-        hitRowWithGet: function(path){
+        getRowContents: function(path){
             $.ajax({
                 type: "GET",
-                url: path + ".json"
+                url: path + ".1.json"
             }).done(function(data){
-                console.log("done");
-                console.log(data);
+                return data;
             }).fail(function(){
-                console.log("fail");
-                console.log(data);
-            });
+                return {};
+            })
 
         }
     }

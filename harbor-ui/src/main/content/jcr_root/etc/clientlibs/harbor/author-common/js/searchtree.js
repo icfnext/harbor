@@ -95,7 +95,6 @@ Harbor.Overrides.SearchTree = function(){
 (function (){
     CQ.wcm.Design.prototype.getStyleProperty = function (cell, name) {
         console.time("TREE SEARCH");
-        //MATT IS THE BEST, PAUL TOO
         if (this.content == null) {
             return null;
         }
@@ -128,11 +127,11 @@ Harbor.Overrides.SearchTree = function(){
 
                        if(obj && (!obj.hasOwnProperty(name))){
                             /*
-    `                       Here the node's "search scope" is adjusted after successfully indexing into
-                            the target content object, as the stuff we are looking for is buried
-                            inside the content object. The structure of the content object will mirror the edge connections
-                            in our search tree when a design exists for a particular cell.*/
-
+        `                       Here the node's "search scope" is adjusted after successfully indexing into
+                                the target content object, as the stuff we are looking for is buried
+                                inside the content object. The structure of the content object will mirror the edge connections
+                                in our search tree when a design exists for a particular cell.
+                            */
                             //This will set the content level of *every node* where obj was successfully grabbed
                             node.content = obj;
                             //still return false, as we didn't actually find obj[name]

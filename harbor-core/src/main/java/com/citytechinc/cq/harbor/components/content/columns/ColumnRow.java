@@ -8,6 +8,7 @@ import com.citytechinc.cq.component.annotations.editconfig.ActionConfig;
 import com.citytechinc.cq.component.annotations.widgets.DialogFieldSet;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
 import com.citytechinc.cq.harbor.components.mixins.classifiable.Classification;
+import com.citytechinc.cq.harbor.constants.ontology.Bootstrap;
 import com.citytechinc.cq.library.components.AbstractComponent;
 import com.citytechinc.cq.library.content.node.ComponentNode;
 import com.citytechinc.cq.library.content.request.ComponentRequest;
@@ -32,11 +33,6 @@ import java.util.List;
 )
 public class ColumnRow  extends AbstractComponent {
     private final List<Column> columns;
-    private final String uniqueId;
-    private static final String GRID_EXTRA_SMALL = "col-xs-";
-    private static final String GRID_SMALL = "col-sm-";
-    private static final String GRID_MEDIUM = "col-md-";
-    private static final String GRID_LARGE = "col-lg-";
 
     public ColumnRow(ComponentRequest request) {
         super(request);
@@ -48,8 +44,6 @@ public class ColumnRow  extends AbstractComponent {
         while (columnResourceIterator.hasNext()) {
             this.columns.add(new Column(columnResourceIterator.next().adaptTo(ComponentNode.class)));
         }
-
-        this.uniqueId = request.getResource().getPath().replace("/", "__").replace(":", "___");
     }
 
     @DialogField(fieldLabel = "Is Full Width?",
@@ -65,17 +59,13 @@ public class ColumnRow  extends AbstractComponent {
             fieldLabel="Grid Options",
             fieldDescription="Bootstrap Grid Options")
     @Selection(type = Selection.SELECT, options = {
-            @Option(text = "Extra Small Devices (Always Horizontal)", value = GRID_EXTRA_SMALL, qtip = "Never Stacked"),
-            @Option(text = "Small Devices (Horizontal at 768px)", value = GRID_SMALL, qtip = "From Stacked to Horizontal at 768px"),
-            @Option(text = "Medium Devices (Horizontal at 992px)", value = GRID_MEDIUM, qtip = "From Stacked to Horizontal at 992px"),
-            @Option(text = "Large Devices (Horizontal at 1200px)", value = GRID_LARGE, qtip = "From Stacked to Horizontal at 1200px")
+            @Option(text = "Extra Small Devices (Phones)", value = Bootstrap.GRID_EXTRA_SMALL, qtip = "Never Stacked"),
+            @Option(text = "Small Devices (Tablets)", value = Bootstrap.GRID_SMALL, qtip = "From Stacked to Horizontal at the @screen-sm-min bootstrap breakpoint"),
+            @Option(text = "Medium Devices (Desktops)", value = Bootstrap.GRID_MEDIUM, qtip = "From Stacked to Horizontal at the @screen-md-min bootstrap breakpoint"),
+            @Option(text = "Large Devices (Desktops)", value = Bootstrap.GRID_LARGE, qtip = "From Stacked to Horizontal at the @screen-lg-min bootstrap breakpoint")
     })
     public String getGridSize() {
-        return get("gridSize", GRID_MEDIUM);
-    }
-
-    public String getUniqueId(){
-        return this.uniqueId;
+        return get("gridSize", Bootstrap.GRID_MEDIUM);
     }
 
     public List<Column> getColumns(){
