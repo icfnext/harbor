@@ -4,14 +4,14 @@
 
 <c:set var="curRow" scope="page" value="${ColumnRow}" />
 
-<div class="row" id="${curRow.uniqueId}-column-row">
+<div class="row" id="${curRow.uniqueId}-column-row" <c:if test="${ColumnRow.classification.hasClassification}">class="${ColumnRow.classification.classificationName}"</c:if>>
 
     <c:if test="${curfliudrow.isFullWidth}">
         <div class = "rowContainer" style="${curRow.rowWidthPadding}">
     </c:if>
 
     <c:forEach var="curcolumn" items="${curRow.columns}" varStatus="status">
-            <div class="${curRow.gridSize}${curcolumn.colClass}" name="${curcolumn.name}">
+            <div class="${curRow.gridSize}${curcolumn.colClass} ${curcolumn.classification.classificationName}" name="${curcolumn.name}">
             <div>
                 <cq:include path="${curcolumn.name}" resourceType="harbor/components/content/column" />
             </div>
