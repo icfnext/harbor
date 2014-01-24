@@ -24,3 +24,6 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.form.CompositeField , {
     }
 
 } );
+
+
+CQ.Ext.reg('ddcolumnfield', Harbor.Widgets.DdColumnField);
