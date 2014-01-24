@@ -13,6 +13,8 @@ import org.apache.commons.lang.StringUtils;
 @Component("Heading")
 public class Heading extends AbstractComponent {
 
+    public static final String RESOURCE_TYPE = "harbor/components/content/heading";
+
     public static final String SIZE_PROPERTY = "size";
     public static final String TEXT_PROPERTY = "text";
 
@@ -31,7 +33,7 @@ public class Heading extends AbstractComponent {
             @Option( text = Headings.H6_LABEL, value = Headings.H6 )
     } )
     public String getSize() {
-        return get(SIZE_PROPERTY, Headings.H2);
+        return get(SIZE_PROPERTY, Headings.H1);
     }
 
     @DialogField( fieldLabel = "Heading Text", fieldDescription = "The textual content of the rendered heading." )
