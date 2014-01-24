@@ -34,6 +34,9 @@ import java.util.List;
 public class ColumnRow  extends AbstractComponent {
     private final List<Column> columns;
 
+    @DialogField(xtype="ddcolumnfield")
+    private String placeholderColumnConfiguration;
+
     public ColumnRow(ComponentRequest request) {
         super(request);
 
