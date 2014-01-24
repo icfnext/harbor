@@ -5,7 +5,7 @@
 <c:set var="curRow" scope="page" value="${columnRow}" />
 <div class="row">
     <c:if test="${curfliudrow.isFullWidth}">
-        <div class = "rowContainer" style="${curRow.rowWidthPadding}">
+        <div class = "rowContainer">
     </c:if>
     <c:forEach var="curcolumn" items="${curRow.columns}" varStatus="status">
         <div class="${curRow.gridSize}${curcolumn.colClass}">

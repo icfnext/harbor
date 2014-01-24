@@ -32,7 +32,7 @@ Harbor.Overrides.SearchTree = function(){
                 for(var j = 0; j < priorDepth.length; j++){
                     //loop through the split sub expressions in reverse
                     for(var k = curSubSplit.length - 1; k >= 0; k--){
-                    //for(var k = 0; k < curSubSplit.length; k++){
+                        //for(var k = 0; k < curSubSplit.length; k++){
                         var expressionNode = new Node({expression: curSubSplit[k]});
                         currentDepth.push(expressionNode);
                         priorDepth[j].children.push(expressionNode);
@@ -43,7 +43,7 @@ Harbor.Overrides.SearchTree = function(){
             return new SearchTree(root);
         },
 
-        search: function(searchTree, options){
+        DFsearch: function(searchTree, options){
             options = options || {};
             var searchConf = options.searchConfiguration;
             var toSearch = [];
@@ -51,29 +51,106 @@ Harbor.Overrides.SearchTree = function(){
             toSearch.push(searchTree.root);
 
             while(toSearch.length > 0){
-                var currentNode = toSearch.shift();
+                var currentNode = toSearch.pop();
+                //If the current node has not already been visited
+                if(!currentNode.visited){
+                    currentNode.visited = true;
 
-                /*
-                    Apply provided Search configuration logic.
-                 */
-                if(searchConf.searchFunction(currentNode)){
-                    if (searchConf.searchResultBuilder instanceof Function){
-                        searchResults.push(searchConf.searchResultBuilder(currentNode));
+                    /*
+                     Apply provided Search configuration logic.
+                     */
+                    //serachFunction decorates the node with a "context"
+                    if(searchConf.searchFunction(currentNode)){
+                        if (searchConf.searchResultBuilder instanceof Function){
+                            searchResults.push(searchConf.searchResultBuilder(currentNode));
+                        }
                     }
-                }
-                if((!searchConf.pruneBranch instanceof Function) || searchConf.pruneBranch(currentNode) == false){
-                    //transform node, add children
-                    if(searchConf.transformNode instanceof Function){
-                        //apply transform to
-                        currentNode = searchConf.transformNode(currentNode);
-                    }
-                    for(var i = 0; i < currentNode.children.length; i++){
-                        toSearch.push(currentNode.children[i]);
+                    if((!searchConf.pruneBranch instanceof Function) || searchConf.pruneBranch(currentNode) == false){
+                        //transform node, add children
+                        if(searchConf.transformNode instanceof Function){
+                            //apply transform to
+                            currentNode = searchConf.transformNode(currentNode);
+                        }
+                        for(var i = 0; i < currentNode.children.length; i++){
+                            toSearch.push(currentNode.children[i]);
+                        }
                     }
                 }
 
             }
             return searchResults;
+        },
+
+        defaultSearchConfig:function(design_content, target_name){
+            var content = design_content;
+            var name = target_name || "components";
+
+            return {
+                searchFunction: function(node){
+                    var flag = false;
+                    //TODO: clean this up
+                    if(node.isRoot || (node.hasOwnProperty("content") == false)){
+                        node.content = content;
+                        return false;
+                    }
+                    //index into the content object using the node's search expression fragment
+                    var obj = node.content[node.data];
+                    node.content = obj;
+
+                    /*
+                     Found case: checks to see if obj exits,
+                     and if obj has the property "name" (which is 'components')
+                     */
+                    if (obj && obj[name] != null) {
+                        return true;
+                    }
+                    else{
+                        return false;
+                    }
+
+/*
+                    //this still needs to happen regardless if we found the components node in content or not
+                    if(obj){
+                        */
+/*
+                         Here the node's "search scope" is adjusted after successfully indexing into
+                         the target content object, as the stuff we are looking for is buried
+                         inside the content object. The structure of the content object will mirror the edge connections
+                         in our search tree when a design exists for a particular cell.
+                         *//*
+
+                        //This will set the content level of *every node* where obj was successfully grabbed
+                        node.content = obj;
+                        //still return false, as we didn't actually find obj[name]
+                    }
+*/
+
+                    //return flag;
+
+                },
+                searchResultBuilder: function(node){
+                    var obj = node.content[name];
+                    return obj;
+                },
+                pruneBranch: function(node){
+                    if(node.isRoot){
+                        return false;
+                    }
+                    //var obj = node.content[node.data];
+                    if(!node.content){
+                        return true;
+                    }
+                    else{
+                        return false;
+                    }
+                },
+                transformNode: function(node){
+                    for(var i = 0; i < node.children.length; i++){
+                        node.children[i].content = node.content;
+                    }
+                    return node;
+                }
+            }
         }
     }
 }();
@@ -81,17 +158,17 @@ Harbor.Overrides.SearchTree = function(){
 
 //timing test
 /*(function(){
-    var func = CQ.wcm.Design.prototype.getStyleProperty
-    CQ.wcm.Design.prototype.getStyleProperty = function(cell, name){
-        console.time("LINEAR SEARCH TIMER");
-        func(cell, name);
-        console.timeEnd("LINEAR SEARCH TIMER");
-    }
-})();*/
+ var func = CQ.wcm.Design.prototype.getStyleProperty
+ CQ.wcm.Design.prototype.getStyleProperty = function(cell, name){
+ console.time("LINEAR SEARCH TIMER");
+ func(cell, name);
+ console.timeEnd("LINEAR SEARCH TIMER");
+ }
+ })();*/
 
 /*
-    Commence actual overrides of CQ machinery
-*/
+ Commence actual overrides of CQ machinery
+ */
 (function (){
     CQ.wcm.Design.prototype.getStyleProperty = function (cell, name) {
         console.time("TREE SEARCH");
@@ -112,75 +189,10 @@ Harbor.Overrides.SearchTree = function(){
         var searchTree = Harbor.Overrides.SearchTree.buildSearchTree(cell.searchExpr);
 
         //Grab style via a search over our tree.
-        var style =  Harbor.Overrides.SearchTree.search(searchTree, {
-            searchConfiguration: function(){
-                return {
-                    searchFunction: function(node){
-                        //TODO: clean this up
-                        if(node.isRoot || (node.hasOwnProperty("content") == false)){
-                            node.content = content;
-                            return false;
-                        }
-                        //index into the content object using the node's search expression fragment
-                        var obj = node.content[node.data];
-                        node.content = obj;
-
-                       if(obj && (!obj.hasOwnProperty(name))){
-                            /*
-        `                       Here the node's "search scope" is adjusted after successfully indexing into
-                                the target content object, as the stuff we are looking for is buried
-                                inside the content object. The structure of the content object will mirror the edge connections
-                                in our search tree when a design exists for a particular cell.
-                            */
-                            //This will set the content level of *every node* where obj was successfully grabbed
-                            node.content = obj;
-                            //still return false, as we didn't actually find obj[name]
-                            return false;
-                        }
-
-                        /*
-                            Found case: checks to see if obj exits,
-                            and if obj has the property "name" (which is 'components')
-                        */
-                        if (obj && obj[name] != null) {
-                            if(node.children.length == 0){
-                                return true;
-                            }
-                            else{
-                                //not done yet
-                                return false;
-                            }
-                        }
-                        else{
-                            return false;
-                        }
-                    },
-                    searchResultBuilder: function(node){
-                        var obj = node.content[name];
-                        return obj;
-                    },
-                    pruneBranch: function(node){
-                        if(node.isRoot){
-                            return false;
-                        }
-                        //var obj = node.content[node.data];
-                        if(!node.content){
-                            return true;
-                        }
-                        else{
-                            return false;
-                        }
-                    },
-                    transformNode: function(node){
-                        for(var i = 0; i < node.children.length; i++){
-                            node.children[i].content = node.content;
-                        }
-                        return node;
-                    }
-                }
-            }()
+        var style =  Harbor.Overrides.SearchTree.DFsearch(searchTree, {
+            searchConfiguration:  Harbor.Overrides.SearchTree.defaultSearchConfig(content, name)
         });
         console.timeEnd("TREE SEARCH");
-        return style[0];
+        return style.pop();
     }
 })();
