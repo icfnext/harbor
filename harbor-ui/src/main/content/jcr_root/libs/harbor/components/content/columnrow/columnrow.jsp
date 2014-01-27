@@ -1,17 +1,20 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="/libs/harbor/components/global.jsp"%>
 
 <ct:component className="com.citytechinc.cq.harbor.components.content.columns.ColumnRow" name="ColumnRow"/>
 
 <c:set var="curRow" scope="page" value="${ColumnRow}" />
 <div class="row" <c:if test="${ColumnRow.classification.hasClassification}">class="${ColumnRow.classification.classificationName}"</c:if>>
-
-<c:set var="curRow" scope="page" value="${columnRow}" />
-<div class="row">
     <c:forEach var="curcolumn" items="${curRow.columns}" varStatus="status">
-            <div class="${curRow.gridSize}${curcolumn.colClass} ${curcolumn.classification.classificationName}" name="${curcolumn.name}">
-            <div>
-                <cq:include path="${curcolumn.name}" resourceType="harbor/components/content/column" />
-            </div>
+        <c:choose>
+            <c:when test="${ColumnRow.classification.hasClassification}">
+                <div class="${curRow.gridSize}${curcolumn.colClass} ${curcolumn.classification.classificationName}" name="${curcolumn.name}">
+            </c:when>
+            <c:otherwise>
+                <div class="${curRow.gridSize}${curcolumn.colClass}" name="${curcolumn.name}">
+            </c:otherwise>
+        </c:choose>
+            <cq:include path="${curcolumn.name}" resourceType="harbor/components/content/column" />
         </div>
     </c:forEach>
 </div>

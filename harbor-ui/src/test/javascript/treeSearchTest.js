@@ -16,7 +16,7 @@ describe("Design Search Replacement Tests: ", function() {
         it("finds a design for the mainpar (master|global|page/mainpar|parsys)", function(){
             var search_tree = Harbor.Overrides.SearchTree.buildSearchTree("master|global|page/mainpar|parsys");
 
-            var style =  Harbor.Overrides.SearchTree.DFsearch(searchTree, {
+            var style =  Harbor.Overrides.SearchTree.DFsearch(search_tree, {
                 searchConfiguration:  Harbor.Overrides.SearchTree.defaultSearchConfig(content_structure)
             });
             style = style.pop();
