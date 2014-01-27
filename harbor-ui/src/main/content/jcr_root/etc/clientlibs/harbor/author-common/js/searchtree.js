@@ -108,6 +108,7 @@ Harbor.Overrides.SearchTree = function(){
                         return false;
                     }
 
+
 /*
                     //this still needs to happen regardless if we found the components node in content or not
                     if(obj){
@@ -155,7 +156,6 @@ Harbor.Overrides.SearchTree = function(){
     }
 }();
 
-
 //timing test
 /*(function(){
  var func = CQ.wcm.Design.prototype.getStyleProperty
@@ -165,7 +165,6 @@ Harbor.Overrides.SearchTree = function(){
  console.timeEnd("LINEAR SEARCH TIMER");
  }
  })();*/
-
 /*
  Commence actual overrides of CQ machinery
  */
@@ -196,3 +195,4 @@ Harbor.Overrides.SearchTree = function(){
         return style.pop();
     }
 })();
+
