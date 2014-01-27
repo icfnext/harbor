@@ -7,6 +7,7 @@ import com.citytechinc.cq.component.annotations.widgets.Selection;
 import com.citytechinc.cq.harbor.constants.bootstrap.Bootstrap;
 import com.citytechinc.cq.harbor.constants.devices.DeviceTypes;
 import com.citytechinc.cq.harbor.domain.devices.DeviceType;
+import com.citytechinc.cq.harbor.util.bootstrap.BootstrapUtils;
 import com.citytechinc.cq.library.components.AbstractComponent;
 import com.citytechinc.cq.library.content.request.ComponentRequest;
 import com.google.common.base.Joiner;
@@ -27,27 +28,12 @@ public class ResponsiveContainer extends AbstractComponent {
         super(request);
     }
 
-    @DialogField( fieldLabel = "Show In", fieldDescription = "Device types which the content of the container should be visible in." )
+    @DialogField( fieldLabel = "Hide In", fieldDescription = "Device types which the content of the container should be hidden in." )
     @Selection( type = "checkbox", options = {
         @Option( text = "Extra Small", value = DeviceTypes.EXTRA_SMALL, qtip = EXTRA_SMALL_DESCRIPTION ),
         @Option( text = "Small", value = DeviceTypes.SMALL, qtip = SMALL_DESCRIPTION ),
         @Option( text = "Medium", value = DeviceTypes.MEDIUM, qtip = MEDIUM_DESCRIPTION ),
         @Option( text = "Large", value = DeviceTypes.LARGE, qtip = LARGE_DESCRIPTION )
-    } )
-    public List<DeviceType> getShownInDeviceTypes() {
-
-        List<String> deviceTypeStrings = Lists.newArrayList(get("shownInDeviceTypes", new String[0]));
-
-        return transformDeviceTypeIdentifiers(deviceTypeStrings);
-
-    }
-
-    @DialogField( fieldLabel = "Hide In", fieldDescription = "Device types which the content of the container should be hidden in." )
-    @Selection( type = "checkbox", options = {
-            @Option( text = "Extra Small", value = DeviceTypes.EXTRA_SMALL, qtip = EXTRA_SMALL_DESCRIPTION ),
-            @Option( text = "Small", value = DeviceTypes.SMALL, qtip = SMALL_DESCRIPTION ),
-            @Option( text = "Medium", value = DeviceTypes.MEDIUM, qtip = MEDIUM_DESCRIPTION ),
-            @Option( text = "Large", value = DeviceTypes.LARGE, qtip = LARGE_DESCRIPTION )
     } )
     public List<DeviceType> getHiddenInDeviceTypes() {
 
@@ -61,7 +47,7 @@ public class ResponsiveContainer extends AbstractComponent {
      * Produces a space delimited list of CSS classes representing the responsive configuration
      * of this container.  OOB Bootstrap's Responsive Utility Classes are used.  This can be
      * overridden in extending classes by overriding the protected #getHiddenInClassForDeviceType
-     * and #getShownInClassForDeviceType methods.
+     * method.
      *
      * {@link "http://getbootstrap.com/css/#responsive-utilities-classes"}
      *
@@ -71,16 +57,7 @@ public class ResponsiveContainer extends AbstractComponent {
 
         List<String> classes = Lists.newArrayList();
 
-        List<DeviceType> shownInDevices = getShownInDeviceTypes();
         List<DeviceType> hiddenInDevices = getHiddenInDeviceTypes();
-
-        for (DeviceType shownInType : shownInDevices) {
-            Optional<String> shownInTypeClassOptional = getShownInClassForDeviceType(shownInType);
-
-            if (shownInTypeClassOptional.isPresent()) {
-                classes.add(shownInTypeClassOptional.get());
-            }
-        }
 
         for (DeviceType hiddenInType : hiddenInDevices) {
             Optional<String> hiddenInTypeClassOptional = getHiddenInClassForDeviceType(hiddenInType);
@@ -94,38 +71,8 @@ public class ResponsiveContainer extends AbstractComponent {
 
     }
 
-    protected Optional<String> getHiddenInClassForDeviceType(DeviceType deviceType) {
-
-        switch(deviceType) {
-            case PHONE:
-                return Optional.fromNullable(Bootstrap.HIDDEN_XS_CLASS);
-            case TABLET:
-                return Optional.fromNullable(Bootstrap.HIDDEN_SM_CLASS);
-            case DESKTOP:
-                return Optional.fromNullable(Bootstrap.HIDDEN_MD_CLASS);
-            case LARGE_DESKTOP:
-                return Optional.fromNullable(Bootstrap.HIDDEN_LG_CLASS);
-            default:
-                return Optional.absent();
-        }
-
-    }
-
-    protected Optional<String> getShownInClassForDeviceType(DeviceType deviceType) {
-
-        switch(deviceType) {
-            case PHONE:
-                return Optional.fromNullable(Bootstrap.VISIBLE_XS_CLASS);
-            case TABLET:
-                return Optional.fromNullable(Bootstrap.VISIBLE_SM_CLASS);
-            case DESKTOP:
-                return Optional.fromNullable(Bootstrap.VISIBLE_MD_CLASS);
-            case LARGE_DESKTOP:
-                return Optional.fromNullable(Bootstrap.VISIBLE_LG_CLASS);
-            default:
-                return Optional.absent();
-        }
-
+    protected Optional<String> getHiddenInClassForDeviceType(DeviceType type) {
+        return BootstrapUtils.getHiddenInClassForDeviceType(type);
     }
 
     protected List<DeviceType> transformDeviceTypeIdentifiers(List<String> typeIdentifiers) {
