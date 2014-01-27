@@ -1,38 +1,206 @@
 describe("Design Search Replacement Tests: ", function() {
+    var search_path_mainpar = "master|global|page/mainpar|parsys";
+    var target_tree_mainpar = {
+        "root":{
+            "isRoot":true,
+            "data":{},
+            "children":[
+                {
+                    "isRoot":false,
+                    "data":"page",
+                    "children":[
+                        {
+                            "isRoot":false,
+                            "data":"parsys",
+                            "children":[]
+                        },
+                        {
+                            "isRoot":false,
+                            "data":"mainpar",
+                            "children":[]
+                        }
+                    ]
+                },
+                {
+                    "isRoot":false,
+                    "data":"global",
+                    "children":[
+                        {
+                            "isRoot":false,
+                            "data":"parsys",
+                            "children":[]
+                        },
+                        {
+                            "isRoot":false,
+                            "data":"mainpar",
+                            "children":[]
+                        }
+                    ]
+                },
+                {
+                    "isRoot":false,
+                    "data":"master",
+                    "children":[
+                        {
+                            "isRoot":false,
+                            "data":"parsys",
+                            "children":[]
+                        },
+                        {
+                            "isRoot":false,
+                            "data":"mainpar",
+                            "children":[]
+                        }
+                    ]
+                }
+            ]
+        }
+    };
 
     describe("Tree Construction ", function(){
-        it("skips", function(){
-            expect(true).toEqual(true);
-        });
+        it("generates the expected tree for the mainpar", function(){
+            var tree_under_test = Harbor.Overrides.SearchTree.buildSearchTree(search_path_mainpar);
 
+            expect(tree_under_test).toEqual(target_tree_mainpar);
+        });
     });
 
     describe("Design Search", function(){
-        var content_structure = {"jcr:title":"Default Design","cq:lastModified":"Fri Jan 24 2014 13:06:47 GMT-0600","cq:lastModifiedBy":"admin","offerpage":{"par":{"components":["/libs/foundation/components/flash","/libs/foundation/components/image","/libs/foundation/components/slideshow","/libs/foundation/components/text","/libs/foundation/components/textimage"],"section":{}}},"teaserpage":{"par":{"components":["/libs/foundation/components/flash","/libs/foundation/components/image","/libs/foundation/components/slideshow","/libs/foundation/components/text","/libs/foundation/components/textimage"],"section":{}}},"promotion":{"config":{"pairings":{"components":["/libs/commerce/components/promotion/perfectpartner/pairing"],"section":{}}}},"pack":{"vlt:definition":{"filter":{"components":["/libs/cq/packaging/components/pack/definition/filter"]},"screenshots":{"components":["/libs/cq/packaging/components/pack/definition/screenshot"]}}},"collectionpage":{"vlt:definition":{"filter":{"components":["cq/workflow/components/collection/definition/resource"]}}},"formpage":{"par":{"components":"group:Form","section":{}}},"segmentpage":{"par":{"components":["/libs/cq/personalization/components/traits/logic/or","/libs/cq/personalization/components/traits/logic/and"],"section":{}},"orpar":{"components":["group:Segmentation"],"section":{}},"andpar":{"components":["group:Segmentation"],"section":{}}},"newsletterpage":{"header":{"maxWidth":"530"},"par":{"jcr:lastModifiedBy":"admin","components":["group:Newsletter"],"componentsX":["/libs/mcm/components/newsletter/image","/libs/mcm/components/newsletter/text","/libs/mcm/components/newsletter/textimage"],"jcr:lastModified":"Wed Mar 17 2010 11:14:41 GMT-0500","colctrl":{"layouts":"2;310,28,192\t2 Columns, main column left\n2;192,28,310\t2 Columns, main column right"},"section":{},"image":{"maxWidth":"310"}}},"page_geometrixx_newsletter":{"header":{"maxWidth":"530"},"par":{"jcr:lastModifiedBy":"admin","components":["group:Newsletter","/libs/foundation/components/reference"],"componentsX":["/libs/mcm/components/newsletter/image","/libs/mcm/components/newsletter/text","/libs/mcm/components/newsletter/textimage"],"jcr:lastModified":"Wed Mar 17 2010 11:14:41 GMT-0500","colctrl":{"layouts":"2;310,28,192\t2 Columns, main column left\n2;192,28,310\t2 Columns, main column right"},"section":{},"image":{"maxWidth":"310"}}},"model":{"flow":{"jcr:lastModifiedBy":"admin","components":["group:Collaboration Workflow","group:DAM Workflow","group:WCM Workflow","group:Workflow"],"jcr:lastModified":"Thu Sep 23 2010 05:41:41 GMT-0500","section":{}}},"page":{"par":{"video":{"profiles":["hq","firefoxhq"]}}},"clientcontextdesigner":{"stores":{"jcr:lastModifiedBy":"admin","components":"group:Client Context","jcr:lastModified":"Tue Aug 30 2011 08:28:01 GMT-0500","tagcloud":{"store":"tagcloud"},"resolvedsegments":{"store":"segments"},"activitystream":{"store":"activitystream","sling:resovurceType":"cq/personalization/components/contextstores/activitystream"},"geolocation":{"store":"geolocation","jcr:lastModifiedBy":"admin","serviceURL":"http://api.wipmania.com/jsonp?callback=${callback}","properties":["city","region","country","country_code"],"jcr:lastModified":"Tue Sep 13 2011 08:27:16 GMT-0500"}}},"assetshare":{"lenses":{"jcr:lastModifiedBy":"admin","components":["/libs/cq/search/components/lenses/list","/libs/cq/search/components/lenses/mosaic"],"jcr:lastModified":"Tue Jan 05 2010 05:22:21 GMT-0600","section":{}},"actions":{"jcr:lastModifiedBy":"admin","components":["/libs/dam/components/assetshare/actions/delete","/libs/dam/components/assetshare/actions/download","/libs/dam/components/assetshare/actions/lightbox","/libs/dam/components/assetshare/actions/move","/libs/dam/components/assetshare/actions/tags","/libs/dam/components/assetshare/actions/viewasset"],"jcr:lastModified":"Tue Jan 05 2010 06:25:44 GMT-0600","section":{}},"querybuilder":{"compontents":["group:Predicates"],"left":{"jcr:lastModifiedBy":"admin","components":["/libs/cq/search/components/predicates/date","/libs/dam/components/search/predicates/noexpired","/libs/cq/search/components/predicates/options","/libs/cq/search/components/predicates/path","/libs/cq/search/components/predicates/property"],"jcr:lastModified":"Tue Jan 05 2010 05:20:53 GMT-0600","section":{}},"top":{"components":["/libs/cq/search/components/predicates/date","/libs/dam/components/search/predicates/notexpired","/libs/cq/search/components/predicates/options","/libs/cq/search/components/predicates/path","/libs/cq/search/components/predicates/property"]}}},"asseteditor":{"par":{"jcr:lastModifiedBy":"admin","components":["/libs/dam/components/asseteditor/form/start","/libs/dam/components/asseteditor/form/metadata","/libs/dam/components/asseteditor/subassets","/libs/dam/components/asseteditor/tags","/libs/dam/components/asseteditor/thumbnail","/libs/dam/components/asseteditor/title","/libs/foundation/components/parsys/colctrl"],"jcr:lastModified":"Tue Jan 05 2010 06:19:02 GMT-0600","colctrl":{"layouts":"2;cq-colctrl-lt0\t2 Columns\n"},"actions":{"jcr:lastModifiedBy":"admin","components":["/libs/dam/components/asseteditor/actions/download","/libs/dam/components/asseteditor/actions/editors","/libs/dam/components/asseteditor/actions/lightbox","/libs/dam/components/asseteditor/actions/references","/libs/dam/components/asseteditor/actions/versioning","/libs/dam/components/asseteditor/actions/locking"],"jcr:lastModified":"Tue Jan 05 2010 06:16:31 GMT-0600","section":{}},"section":{}}},"master":{"mainpar":{"jcr:lastModifiedBy":"admin","components":["/libs/foundation/components/image","/libs/foundation/components/text","group:Harbor"],"jcr:lastModified":"Fri Jan 24 2014 13:06:47 GMT-0600","section":{},"columnrow":{"column":{"column-par":{"jcr:lastModifiedBy":"admin","components":"group:General","jcr:lastModified":"Fri Jan 24 2014 11:08:49 GMT-0600","section":{}}}}}}};
+        /*
+            This test uses a content structure object grabbed directly out of a debug session with the following "cells"
+            in use. The expected output was also grabbed directly from the same debug session.  The content object had superfluous junk trimmed out
+         */
+        var content_structure = {
+            "page":{
+                "par":{
+                    "video":{
+                        "profiles":[
+                            "hq",
+                            "firefoxhq"
+                        ]
+                    }
+                }
+            },
+            "master":{
+                "mainpar":{
+                    "components":[
+                        "/libs/foundation/components/image",
+                        "/libs/foundation/components/text",
+                        "group:Harbor"
+                    ],
+                    "columnrow":{
+                        "column":{
+                            "column-par":{
+                                "components":"group:General"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        var mainpar_path = "master|global|page/mainpar|parsys";
+        var mainpar_columnRow_column_path = "master|global|page/mainpar|parsys/columnrow|parbase/column/column-par|parsys";
 
+        it("finds a design for the mainpar (" +  mainpar_path + ")", function(){
+            var search_tree = Harbor.Overrides.SearchTree.buildSearchTree(mainpar_path);
 
-
-
-        it("finds a design for the mainpar (master|global|page/mainpar|parsys)", function(){
-            var search_tree = Harbor.Overrides.SearchTree.buildSearchTree("master|global|page/mainpar|parsys");
-
-            var style =  Harbor.Overrides.SearchTree.DFsearch(search_tree, {
+            var style_under_test =  Harbor.Overrides.SearchTree.DFsearch(search_tree, {
                 searchConfiguration:  Harbor.Overrides.SearchTree.defaultSearchConfig(content_structure)
             });
-            style = style.pop();
+            style_under_test = style_under_test.pop();
             //I expect, specifically, to know what that thing is also:
-            expect(style).toEqual([
+            expect(style_under_test).toEqual([
                 "/libs/foundation/components/image",
                 "/libs/foundation/components/text",
                 "group:Harbor"
             ]);
         });
+
+        it("finds a design for a columnRow column in the mainpar: (" + mainpar_columnRow_column_path + ")", function(){
+            var search_tree = Harbor.Overrides.SearchTree.buildSearchTree(mainpar_columnRow_column_path);
+
+            var style_under_test =  Harbor.Overrides.SearchTree.DFsearch(search_tree, {
+                searchConfiguration:  Harbor.Overrides.SearchTree.defaultSearchConfig(content_structure)
+            });
+            style_under_test = style_under_test.pop();
+            expect(style_under_test).toEqual("group:General");
+        });
     });
 
-
     describe("Tree Pruning", function(){
-        it("skips", function(){
-            expect(true).toEqual(true);
+        var content_structure = {
+            "page":{
+                "par":{
+                    "video":{
+                        "profiles":[
+                            "hq",
+                            "firefoxhq"
+                        ]
+                    }
+                }
+            },
+            "master":{
+                "mainpar":{
+                    "components":[
+                        "/libs/foundation/components/image",
+                        "/libs/foundation/components/text",
+                        "group:Harbor"
+                    ],
+                    "columnrow":{
+                        "column":{
+                            "column-par":{
+                                "components":"group:General"
+                            }
+                        }
+                    }
+                }
+            }
+        };
+        var searchConfiguration =  Harbor.Overrides.SearchTree.defaultSearchConfig(content_structure);
+
+        beforeEach(function(){
+            //set up spies to check on the search configuration object's prune calls.
+            spyOn(searchConfiguration, "pruneBranch");
+        });
+
+        it("should prune the 'global' node out of the mainpar search tree", function(){
+            var search_tree = Harbor.Overrides.SearchTree.buildSearchTree(search_path_mainpar);
+
+            //sample search tree for the above sample content_structure.
+            var node = {
+                "root":{
+                    "isRoot":true,
+                    "data":{},
+                    "children":[{
+                        "isRoot":false,
+                        "data":"global",
+                        "children":[
+                            {
+                                "isRoot":false,
+                                "data":"parsys",
+                                "children":[]
+                            },
+                            {
+                                "isRoot":false,
+                                "data":"mainpar",
+                                "children":[]
+                            }
+                        ]
+                    }]
+                }
+            };
+
+            var style_under_test =  Harbor.Overrides.SearchTree.DFsearch(search_tree, {
+                searchConfiguration:  searchConfiguration
+            });
+
+            /*
+                Checks prune results, the root node should not have been pruned, but the
+                root's child global should have been.
+             */
+            expect(searchConfiguration.pruneBranch).toHaveBeenCalled();
+            expect(searchConfiguration.pruneBranch.calls.length).toEqual(2);
+
         });
     });
 
