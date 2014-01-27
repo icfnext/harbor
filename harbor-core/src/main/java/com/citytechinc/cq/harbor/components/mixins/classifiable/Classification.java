@@ -15,6 +15,8 @@ public class Classification extends AbstractComponent {
 
     public static final String CLASSIFICATION_FIELD_LABEL = "Classification";
 
+    private Optional<Tag> classification;
+
     public Classification(ComponentRequest request) {
         super(request);
     }
@@ -23,15 +25,22 @@ public class Classification extends AbstractComponent {
     @TagInputField
     public Optional<Tag> getClassification() {
 
+        if (classification != null) {
+            return classification;
+        }
+
         TagManager tagManager = this.getResource().getResourceResolver().adaptTo(TagManager.class);
 
         String tag = get(Properties.HARBOR_CLASSIFICATION, StringUtils.EMPTY);
 
         if (StringUtils.isNotEmpty(tag)) {
-            return Optional.fromNullable(tagManager.resolve(tag));
+            classification = Optional.fromNullable(tagManager.resolve(tag));
+        }
+        else {
+            classification = Optional.absent();
         }
 
-        return Optional.absent();
+        return classification;
 
     }
 
@@ -56,6 +65,12 @@ public class Classification extends AbstractComponent {
         }
 
         return StringUtils.EMPTY;
+
+    }
+
+    public boolean getHasClassification() {
+
+        return getClassification().isPresent();
 
     }
 
