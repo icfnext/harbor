@@ -186,10 +186,6 @@ describe("Design Search Replacement Tests: ", function() {
             expect(searchConfiguration.pruneBranch(node["root"])).toEqual(false);
         });
         it("should prune the 'global' node out of the mainpar search tree", function(){
-<<<<<<< HEAD
-=======
-            var search_tree = Harbor.Overrides.SearchTree.buildSearchTree(search_path_mainpar);
->>>>>>> 55a3ef0... Refactored the branch prune tests into simple cases. TODO, implement spies to test the entire process
             expect(searchConfiguration.pruneBranch(node["root"].children[0])).toEqual(true);
         });
         it("should not prune nodes with content", function(){
