@@ -156,51 +156,46 @@ describe("Design Search Replacement Tests: ", function() {
                 }
             }
         };
+        //sample search tree for the above sample content_structure.
+        var node = {
+            "root":{
+                "isRoot":true,
+                "data":{},
+                "children":[{
+                    "isRoot":false,
+                    "data":"global",
+                    "children":[
+                        {
+                            "isRoot":false,
+                            "data":"parsys",
+                            "children":[]
+                        },
+                        {
+                            "isRoot":false,
+                            "data":"mainpar",
+                            "content":{}, //non null content (will have been decorated during search)
+                            "children":[]
+                        }
+                    ]
+                }]
+            }
+        };
         var searchConfiguration =  Harbor.Overrides.SearchTree.defaultSearchConfig(content_structure);
 
-        beforeEach(function(){
-            //set up spies to check on the search configuration object's prune calls.
-            spyOn(searchConfiguration, "pruneBranch");
+        it("should not prune the root node. ever", function(){
+            expect(searchConfiguration.pruneBranch(node["root"])).toEqual(false);
         });
-
         it("should prune the 'global' node out of the mainpar search tree", function(){
+<<<<<<< HEAD
+=======
             var search_tree = Harbor.Overrides.SearchTree.buildSearchTree(search_path_mainpar);
-
-            //sample search tree for the above sample content_structure.
-            var node = {
-                "root":{
-                    "isRoot":true,
-                    "data":{},
-                    "children":[{
-                        "isRoot":false,
-                        "data":"global",
-                        "children":[
-                            {
-                                "isRoot":false,
-                                "data":"parsys",
-                                "children":[]
-                            },
-                            {
-                                "isRoot":false,
-                                "data":"mainpar",
-                                "children":[]
-                            }
-                        ]
-                    }]
-                }
-            };
-
-            var style_under_test =  Harbor.Overrides.SearchTree.DFsearch(search_tree, {
-                searchConfiguration:  searchConfiguration
-            });
-
-            /*
-                Checks prune results, the root node should not have been pruned, but the
-                root's child global should have been.
-             */
-            expect(searchConfiguration.pruneBranch).toHaveBeenCalled();
-            expect(searchConfiguration.pruneBranch.calls.length).toEqual(2);
-
+>>>>>>> 55a3ef0... Refactored the branch prune tests into simple cases. TODO, implement spies to test the entire process
+            expect(searchConfiguration.pruneBranch(node["root"].children[0])).toEqual(true);
+        });
+        it("should not prune nodes with content", function(){
+            //this just peeks for the "mainpar" node in the above sample search tree, which we
+            //decorated ourselves for the purposes of this test.
+            expect(searchConfiguration.pruneBranch(node["root"].children[0].children[1])).toEqual(false);
         });
     });
 
