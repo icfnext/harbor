@@ -10,6 +10,11 @@ import com.citytechinc.cq.library.components.AbstractComponent;
 import com.citytechinc.cq.library.content.request.ComponentRequest;
 import org.apache.commons.lang.StringUtils;
 
+/**
+ * The Heading component is intended to be used to title content sections.  The only options available to
+ * the Heading from a size perspective are H2-H6 as it is <em>not</em> intended to represent a page title.
+ * The Title component should be used if a Page Title is intended.
+ */
 @Component("Heading")
 public class Heading extends AbstractComponent {
 
@@ -25,7 +30,6 @@ public class Heading extends AbstractComponent {
     @DialogField( fieldLabel = "Heading Type", fieldDescription = "The type or size of heading to render." )
     @Selection( type = "select",
         options = {
-            @Option( text = Headings.H1_LABEL, value = Headings.H1 ),
             @Option( text = Headings.H2_LABEL, value = Headings.H2 ),
             @Option( text = Headings.H3_LABEL, value = Headings.H3 ),
             @Option( text = Headings.H4_LABEL, value = Headings.H4 ),
@@ -33,7 +37,7 @@ public class Heading extends AbstractComponent {
             @Option( text = Headings.H6_LABEL, value = Headings.H6 )
     } )
     public String getSize() {
-        return get(SIZE_PROPERTY, Headings.H1);
+        return get(SIZE_PROPERTY, Headings.H2);
     }
 
     @DialogField( fieldLabel = "Heading Text", fieldDescription = "The textual content of the rendered heading." )
