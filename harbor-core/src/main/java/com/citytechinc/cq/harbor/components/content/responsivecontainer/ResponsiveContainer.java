@@ -71,8 +71,34 @@ public class ResponsiveContainer extends AbstractComponent {
 
     }
 
+    public String getInverseResponsiveClasses() {
+
+        List<String> classes = Lists.newArrayList();
+
+        List<DeviceType> hiddenInDevices = getHiddenInDeviceTypes();
+
+        for (DeviceType hiddenInType : hiddenInDevices) {
+            Optional<String> shownInTypeClassOptional = getShownInClassForDeviceType(hiddenInType);
+
+            if (shownInTypeClassOptional.isPresent()) {
+                classes.add(shownInTypeClassOptional.get());
+            }
+        }
+
+        return Joiner.on(" ").join(classes);
+
+    }
+
+    public Boolean getHiddenInSomeDevices() {
+        return !getHiddenInDeviceTypes().isEmpty();
+    }
+
     protected Optional<String> getHiddenInClassForDeviceType(DeviceType type) {
         return BootstrapUtils.getHiddenInClassForDeviceType(type);
+    }
+
+    protected Optional<String> getShownInClassForDeviceType(DeviceType type) {
+        return BootstrapUtils.getShownInClassForDeviceType(type);
     }
 
     protected List<DeviceType> transformDeviceTypeIdentifiers(List<String> typeIdentifiers) {
