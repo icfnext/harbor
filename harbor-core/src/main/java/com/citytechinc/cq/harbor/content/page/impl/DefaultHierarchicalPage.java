@@ -1,14 +1,11 @@
 package com.citytechinc.cq.harbor.content.page.impl;
 
 
-import com.citytechinc.cq.harbor.constants.ontology.Properties;
 import com.citytechinc.cq.harbor.content.page.HierarchicalPage;
 import com.citytechinc.cq.harbor.content.page.HomePage;
 import com.citytechinc.cq.harbor.content.page.SectionLandingPage;
 import com.citytechinc.cq.library.content.page.PageDecorator;
 import com.google.common.base.Optional;
-import com.google.common.base.Predicate;
-import org.apache.commons.lang.StringUtils;
 
 public class DefaultHierarchicalPage extends AbstractHierarchicalPage implements HierarchicalPage {
 

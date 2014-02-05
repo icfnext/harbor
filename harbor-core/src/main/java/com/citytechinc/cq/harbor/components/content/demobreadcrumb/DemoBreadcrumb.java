@@ -1,8 +1,9 @@
 package com.citytechinc.cq.harbor.components.content.demobreadcrumb;
 
 import com.citytechinc.cq.component.annotations.Component;
-import com.citytechinc.cq.component.annotations.ContentProperty;
+import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.harbor.content.page.HierarchicalPage;
+import com.citytechinc.cq.harbor.content.page.HomePage;
 import com.citytechinc.cq.harbor.content.page.SectionLandingPage;
 import com.citytechinc.cq.library.components.AbstractComponent;
 import com.citytechinc.cq.library.content.page.PageDecorator;
@@ -29,12 +30,22 @@ public class DemoBreadcrumb extends AbstractComponent {
         trail = Lists.newArrayList();
 
         HierarchicalPage currentHierarchicalPage = this.currentPage.adaptTo(HierarchicalPage.class);
-        Optional<SectionLandingPage> sectionLandingPage = currentHierarchicalPage.getSectionLandingPage();
 
-        if (sectionLandingPage.isPresent()) {
+        Optional<? extends HierarchicalPage> rootPage;
+        String rootPageType = getRootPageType();
+        if (rootPageType.equals(SectionLandingPage.RDF_TYPE)){
+            rootPage = currentHierarchicalPage.getSectionLandingPage();
+        } else if (rootPageType.equals(HomePage.RDF_TYPE)){
+            rootPage = currentHierarchicalPage.getHomePage();
+        } else {
+            rootPage = Optional.absent();
+        }
+
+        if (rootPage.isPresent()) {
             PageDecorator currentTrailPage = currentPage;
+            trail.add(currentTrailPage);
 
-            while (currentTrailPage != null && !currentTrailPage.getPath().equals(sectionLandingPage.get().getPath())) {
+            while (currentTrailPage != null && !currentTrailPage.getPath().equals(rootPage.get().getPath())) {
 
                 currentTrailPage = currentTrailPage.getParent();
 
@@ -49,5 +60,10 @@ public class DemoBreadcrumb extends AbstractComponent {
         trail = Lists.reverse(trail);
 
         return trail;
+    }
+
+    @DialogField(fieldLabel = "Root Page Type")
+    public String getRootPageType(){
+        return get("rootPageType", SectionLandingPage.RDF_TYPE);
     }
 }
