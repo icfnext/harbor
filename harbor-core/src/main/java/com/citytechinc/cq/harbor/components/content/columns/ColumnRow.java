@@ -1,14 +1,11 @@
 package com.citytechinc.cq.harbor.components.content.columns;
 
-import com.citytechinc.cq.component.annotations.Component;
-import com.citytechinc.cq.component.annotations.ContentProperty;
-import com.citytechinc.cq.component.annotations.DialogField;
-import com.citytechinc.cq.component.annotations.Option;
+import com.citytechinc.cq.component.annotations.*;
 import com.citytechinc.cq.component.annotations.editconfig.ActionConfig;
 import com.citytechinc.cq.component.annotations.widgets.DialogFieldSet;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
 import com.citytechinc.cq.harbor.components.mixins.classifiable.Classification;
-import com.citytechinc.cq.harbor.constants.ontology.Bootstrap;
+import com.citytechinc.cq.harbor.constants.bootstrap.Bootstrap;
 import com.citytechinc.cq.library.components.AbstractComponent;
 import com.citytechinc.cq.library.content.node.ComponentNode;
 import com.citytechinc.cq.library.content.request.ComponentRequest;
@@ -27,6 +24,9 @@ import java.util.List;
                 @ActionConfig(xtype = "tbseparator"),
                 @ActionConfig(text = "Add Column", handler = "function(){ Harbor.Components.ColumnRow.addColumn(this) }"),
                 @ActionConfig(text = "Add n Columns", handler = "function(){ Harbor.Components.ColumnRow.addMultipleColumns(this) }")
+        },
+        listeners = {
+                @Listener(name = "afterinsert", value = "REFRESH_PAGE")
         },
         allowedParents = "*/parsys",
         resourceSuperType = "foundation/components/parbase"
@@ -47,15 +47,6 @@ public class ColumnRow  extends AbstractComponent {
         while (columnResourceIterator.hasNext()) {
             this.columns.add(new Column(columnResourceIterator.next().adaptTo(ComponentNode.class)));
         }
-    }
-
-    @DialogField(fieldLabel = "Is Full Width?",
-        fieldDescription = "Does the Row span the full width of the entire container?")
-    @Selection(type=Selection.CHECKBOX, options = {
-            @Option(text="", value = "padding: 0 15px;")
-    })
-    public String getRowWidthPadding(){
-        return get("rowWidthPadding", "");
     }
 
     @DialogField(xtype="selection",
