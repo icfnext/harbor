@@ -17,4 +17,7 @@ public class Bootstrap {
     public static final String HIDDEN_MD_CLASS = "hidden-md";
     public static final String HIDDEN_LG_CLASS = "hidden-lg";
 
+    public static final String CONTAINER_CLASS = "container";
+    public static final String CONTAINER_FULL_WIDTH_CLASS = "container-full-width";
+
 }
