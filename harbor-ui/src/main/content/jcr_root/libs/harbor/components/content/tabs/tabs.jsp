@@ -1,5 +1,5 @@
-<%@include file="/apps/videojet-global/components/global.jsp"%>
-<ct:component className="com.videojet.global.ui.components.content.tabs.Tabs" name="tabs"/>
+<%@include file="/libs/harbor/components/global.jsp"%>
+<ct:component className="com.citytechinc.cq.harbor.components.content.tabs.Tabs" name="tabs"/>
 
 <c:set var="curtabs" scope="page" value="${tabs}" />
 
@@ -15,7 +15,7 @@
 		<c:forEach var="curTab" items="${curtabs.tabs}">
 			<div id="tabs-${curTab.uniqueId}">
 				<section class="tab-content">
-					<cq:include path="${curTab.name}" resourceType="videojet-global/components/content/tabs/tab" />
+					<cq:include path="${curTab.name}" resourceType="harbor/components/content/tabs/tab" />
 				</section>
 			</div>
 		</c:forEach>

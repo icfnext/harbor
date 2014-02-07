@@ -1,32 +1,40 @@
 package com.citytechinc.cq.harbor.components.content.tabs;
 
-import org.apache.sling.api.resource.Resource;
+import com.citytechinc.cq.component.annotations.Component;
+import com.citytechinc.cq.component.annotations.ContentProperty;
+import com.citytechinc.cq.component.annotations.Listener;
+import com.citytechinc.cq.library.components.AbstractComponent;
+import com.citytechinc.cq.library.content.node.ComponentNode;
+import com.citytechinc.cq.library.content.request.ComponentRequest;
 
-import com.citytechinc.cqlibrary.web.annotations.Component;
-import com.citytechinc.cqlibrary.web.components.AbstractComponent;
-import com.citytechinc.cqlibrary.web.content.component.impl.ComponentPropertiesImpl;
-import com.citytechinc.cqlibrary.web.content.request.ComponentRequest;
-import com.videojet.global.ui.utils.JcrUtils;
-
-@Component
+@Component(value = "Tab",
+        actions = {"text: Tab", "-", "edit", "-", "copymove", "delete", "-", "insert"},
+        contentAdditionalProperties = {
+                @ContentProperty(name="dependencies", value="harbor.components.content.tabs")
+        },
+        listeners = {
+                @Listener(name = "afterinsert", value = "REFRESH_PAGE")
+        }
+)
 public class Tab extends AbstractComponent {
 
-	public static final String TYPE = "videojet-global/components/content/tabs/tab";
+	public static final String TYPE = "harbor/components/content/tabs/tab";
 	
 	private final String title;
 	private final String name;
 	private final String uniqueId;
 	
 	public Tab (ComponentRequest request) {
-		this(request.getResource());
+		this(request.getComponentNode());
 	}
 	
-	public Tab (Resource resource) {
-		super(new ComponentPropertiesImpl(resource));
+	public Tab (ComponentNode componentNode) {
+		super(componentNode);
 		
-		this.name = resource.getName();
+		this.name = componentNode.getResource().getName();
 		this.title = this.get("title", this.name);
-		this.uniqueId = JcrUtils.constructUniqueId(resource);
+        //TODO: fix this once Paul creates a unique Id generator
+		this.uniqueId = componentNode.getPath();
 		
 	}
 	

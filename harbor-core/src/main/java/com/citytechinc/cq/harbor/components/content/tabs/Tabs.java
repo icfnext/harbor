@@ -5,14 +5,22 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.sling.api.resource.Resource;
+import com.citytechinc.cq.component.annotations.Component;
+import com.citytechinc.cq.component.annotations.ContentProperty;
+import com.citytechinc.cq.component.annotations.Listener;
+import com.citytechinc.cq.library.components.AbstractComponent;
+import com.citytechinc.cq.library.content.page.PageDecorator;
+import com.citytechinc.cq.library.content.request.ComponentRequest;
 
-import com.citytechinc.cqlibrary.web.annotations.Component;
-import com.citytechinc.cqlibrary.web.components.AbstractComponent;
-import com.citytechinc.cqlibrary.web.content.request.ComponentRequest;
-import com.videojet.global.ui.utils.JcrUtils;
-
-@Component
+@Component(value = "Tabs",
+        actions = {"text: Tabs", "-", "edit", "-", "copymove", "delete", "-", "insert"},
+        contentAdditionalProperties = {
+                @ContentProperty(name="dependencies", value="harbor.components.content.tabs")
+        },
+        listeners = {
+                @Listener(name = "afterinsert", value = "REFRESH_PAGE")
+        }
+)
 public class Tabs extends AbstractComponent {
 	
 	private final String name;
@@ -25,16 +33,16 @@ public class Tabs extends AbstractComponent {
 		this.name = request.getResource().getName();
 		
 		this.tabs = new ArrayList<Tab>();
+        //TODO: change this to use a unique ID generator
+		this.uniqueId = request.getComponentNode().getPath();
 		
-		this.uniqueId = JcrUtils.constructUniqueId(request.getResource());
+		Iterator<PageDecorator> pageDecoratorIterator = request.getCurrentPage().getChildren().iterator();
 		
-		Iterator<Resource> tabResourceIterator = request.getResource().listChildren();
-		
-		while (tabResourceIterator.hasNext()) {
-			Resource curTabResource = tabResourceIterator.next();
+		while (pageDecoratorIterator.hasNext()) {
+			PageDecorator currentPageDecorator = pageDecoratorIterator.next();
 			
-			if (curTabResource.getResourceType().equals(Tab.TYPE)) {
-				this.tabs.add( new Tab(curTabResource) );
+			if (currentPageDecorator.getContentResource().getResourceType().equals(Tab.TYPE)) {
+				this.tabs.add( new Tab(currentPageDecorator.getComponentNode().get()) );
 			}
 		}
 	}
