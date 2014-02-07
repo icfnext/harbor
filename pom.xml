@@ -43,7 +43,7 @@
     </pluginRepositories>
 
 	<properties>
-		<cq.library.version>6.1.0-SNAPSHOT</cq.library.version>
+		<cq.library.version>6.2.1-SNAPSHOT</cq.library.version>
 		<core.name>harbor-core</core.name>
 		<maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss.SSSZ</maven.build.timestamp.format>
 		<timestamp>${maven.build.timestamp}</timestamp>
