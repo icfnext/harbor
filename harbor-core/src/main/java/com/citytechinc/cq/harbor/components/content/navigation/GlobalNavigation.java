@@ -7,10 +7,11 @@ import com.citytechinc.cq.component.annotations.widgets.Selection;
 import com.citytechinc.cq.harbor.content.page.impl.DefaultHierarchicalPage;
 import com.citytechinc.cq.harbor.content.page.impl.DefaultHomePage;
 import com.citytechinc.cq.library.components.AbstractComponent;
+import com.citytechinc.cq.library.components.annotations.AutoInstantiate;
 import com.citytechinc.cq.library.content.request.ComponentRequest;
 
 @Component(value = "Global Navigation",
-        actions = {"text: Global Navigation", "-", "edit"},
+        actions = {"text: Global Navigation", "-", "edit", "-", "delete"},
         contentAdditionalProperties = {
                 @ContentProperty(name="dependencies", value="harbor.components.content.navigation")
         },
@@ -23,6 +24,7 @@ import com.citytechinc.cq.library.content.request.ComponentRequest;
         },
         allowedParents = "*/parsys"
 )
+@AutoInstantiate( instanceName = "globalNavigation" )
 public class GlobalNavigation extends AbstractComponent {
     private final DefaultHomePage homePage;
 
