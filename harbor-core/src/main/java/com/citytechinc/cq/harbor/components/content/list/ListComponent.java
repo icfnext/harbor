@@ -4,12 +4,10 @@ import com.google.common.base.Optional;
 
 import java.util.List;
 
-public interface ListComponent <RootType, ContentType> {
+public interface ListComponent <T> {
 
-    public Optional<RootType> getRootOptional();
+    public List<T> getListItems();
 
-    public Boolean isHasRoot();
-
-    public List<ContentType> getContent();
+    public List<RenderableListItem<T>> getRenderableListItems();
 
 }

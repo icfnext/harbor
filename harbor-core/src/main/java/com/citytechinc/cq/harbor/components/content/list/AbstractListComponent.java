@@ -1,5 +1,7 @@
 package com.citytechinc.cq.harbor.components.content.list;
 
+import com.citytechinc.cq.component.annotations.Component;
+import com.citytechinc.cq.harbor.constants.dom.Elements;
 import com.citytechinc.cq.library.components.AbstractComponent;
 import com.citytechinc.cq.library.content.node.ComponentNode;
 import com.citytechinc.cq.library.content.request.ComponentRequest;
@@ -14,87 +16,100 @@ import org.apache.sling.api.resource.Resource;
 import java.util.Iterator;
 import java.util.List;
 
-public abstract class AbstractListComponent<RootType, RawType, ContentType> extends AbstractComponent implements ListComponent<RootType, ContentType> {
+@Component( value = "Abstract List", group = ".hidden", name = "lists/abstractlist" )
+public abstract class AbstractListComponent<T> extends AbstractComponent implements ListComponent<T> {
 
-    private static final Predicate<Object> INCLUDE_ALL_PREDICATE = new Predicate<Object>() {
+    public static final String RESOURCE_TYPE = "harbor/components/content/lists/abstractlist";
 
-        @Override
-        public boolean apply(Object o) {
-            return true;
-        }
-
-    };
+    protected List<T> listItems;
+    protected List<RenderableListItem<T>> renderableListItems;
 
     public AbstractListComponent(ComponentNode componentNode) {
         super(componentNode);
     }
 
-    public AbstractListComponent(ComponentRequest componentRequest) {
-        super(componentRequest);
+    public AbstractListComponent(ComponentRequest request) {
+        super(request);
     }
 
-    public Optional<RootType> getRootOptional() {
-        return Optional.absent();
+    protected abstract ListConstructionStrategy<T> getListConstructionStrategy();
+
+    protected abstract ListRenderingStrategy<T> getListRenderingStrategy();
+
+    public List<T> getListItems() {
+        if (listItems == null) {
+            listItems = getListConstructionStrategy().constructList();
+        }
+
+        return listItems;
     }
 
-    public Boolean isHasRoot() {
-        return getRootOptional().isPresent();
-    }
+    public List<RenderableListItem<T>> getRenderableListItems() {
+        if (renderableListItems == null) {
+            renderableListItems = Lists.newArrayList();
 
-    public List<ContentType> getContent() {
-        return buildList();
-    }
+            List<T> myListItems = getListItems();
 
-    protected Optional<Integer> getSearchDepthOptional() {
-        return Optional.absent();
-    }
-
-    protected Optional<Ordering<ContentType>> getListOrderingOptional() {
-        return Optional.absent();
-    }
-
-    protected Predicate<? super RawType> getInclusionPredicate() {
-
-        return INCLUDE_ALL_PREDICATE;
-
-    }
-
-    protected Function<RawType, ContentType> getItemTransformationFunction() {
-        return new Function<RawType, ContentType>() {
-            @Override
-            public ContentType apply(RawType rawType) {
-                return null;
-            }
-        };
-    }
-
-    protected List<RawType> buildRawItemList() {
-        return Lists.newArrayList();
-    }
-
-    protected List<ContentType> buildList() {
-
-        List<RawType> rawItemList = buildRawItemList();
-
-        Function<RawType, ContentType> itemTransformationFunction = getItemTransformationFunction();
-        Predicate<? super RawType> inclusionPredicate = getInclusionPredicate();
-
-        List<ContentType> content = Lists.newArrayList();
-
-        for (RawType curRawItem : rawItemList) {
-            if (inclusionPredicate.apply(curRawItem)) {
-                content.add(itemTransformationFunction.apply(curRawItem));
+            for (T curListItem : myListItems) {
+                renderableListItems.add(new RenderableListItem<T>(curListItem, getListRenderingStrategy()));
             }
         }
 
-        Optional<Ordering<ContentType>> contentOrdering = getListOrderingOptional();
+        return renderableListItems;
+    }
 
-        if (contentOrdering.isPresent()) {
-            return contentOrdering.get().immutableSortedCopy(content);
+    public Optional<String> getListElementOptional() {
+        if (getIsOrderedList()) {
+            return Optional.fromNullable(Elements.OL);
+        }
+        if (getIsUnorderedList()) {
+            return Optional.fromNullable(Elements.UL);
         }
 
-        return ImmutableList.copyOf(content);
-
+        return Optional.absent();
     }
+
+    public Boolean getHasListElement() {
+        return getListElementOptional().isPresent();
+    }
+
+    public String getListElement() {
+        return getListElementOptional().get();
+    }
+
+    /**
+     * Indicates whether this list should be rendered as one of the two primary HTML list types, ol and ul
+     *
+     * @return True if this list should be rendered as either an ordered or unordered list, false otherwise
+     */
+    public Boolean getIsHtmlList() {
+        return getIsOrderedList() || getIsUnorderedList();
+    }
+
+    public Boolean getIsOrderedList() {
+        return false;
+    }
+
+    public Boolean getIsUnorderedList() {
+        return false;
+    }
+
+    public Boolean getIsReversed() {
+        return false;
+    }
+
+    public Optional<Integer> getStartOptional() {
+        return Optional.absent();
+    }
+
+    public Boolean getHasStart() {
+        return getStartOptional().isPresent();
+    }
+
+    public Integer getStart() {
+        return getStartOptional().get();
+    }
+
+
 
 }
