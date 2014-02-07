@@ -1,0 +1,10 @@
+#CQ div.well{
+    width: 50px;
+    background: #b9def0;
+    float: left;
+    min-height: 80px;
+    margin-right: 10px;
+}
+#CQ div.well:last-child{
+    margin-right: 0;
+}

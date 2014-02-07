@@ -1,24 +1,42 @@
-Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.form.CompositeField , {
+Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.CustomContentPanel , {
 
-
+    columnCount : 0,
 
 
     initComponent: function() {
 
         Harbor.Widgets.DdColumnField.superclass.initComponent.call(this);
+        var parentContext = this;
+
+        console.log(this);
+
+        this.buttonBar = new function(){
+
+            this.addColumn = function( test ){
 
 
-        var navHandler = function(direction){
-            // This routine could contain business logic required to manage the navigation steps.
-            // It would call setActiveItem as needed, manage navigation button state, handle any
-            // branching logic that might be required, handle alternate actions like cancellation
-            // or finalization, etc.  A complete wizard implementation could get pretty
-            // sophisticated depending on the complexity required, and should probably be
-            // done as a subclass of CardLayout in a real-world implementation.
+                if( parentContext.columnCount != 12 ){
+                    var parentContainer = $('#'+test.ownerCt.ownerCt.id);
+                    var container       = parentContainer.find(".CQAuthorColumnContainer");
+                    var parentWidth     = parentContainer.innerWidth();
+                    var colWidth        = (parentWidth - 120) / 13;
+
+                    parentContext.columnCount++;
+
+                    var col             = $("<div class='well'>" + parentContext.columnCount + "</div>").width(colWidth);
+
+                    container.append(col);
+
+                    console.log( colWidth );
+                }
+
+            }
+
         };
 
+
         this.containerPanel = new CQ.Ext.Panel({
-            title: 'Example Wizard',
+            title: 'Author Columns',
             layout:'card',
             activeItem: 0, // make sure the active item is set on the container config!
             bodyStyle: 'padding:15px',
@@ -28,33 +46,22 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.form.CompositeField , {
             },
             // just an example of one possible navigation scheme, using buttons
             bbar: [
-                {
-                    id: 'move-prev',
-                    text: 'Back',
-                    handler: navHandler.createDelegate(this, [-1]),
-                    disabled: true
-                },
+
                 '->', // greedy spacer so that the buttons are aligned to each side
                 {
-                    id: 'move-next',
-                    text: 'Next',
-                    handler: navHandler.createDelegate(this, [1])
+                    id: 'add-column',
+                    text: 'Add Column',
+                    handler: this.buttonBar.addColumn
                 }
             ],
             // the panels (or "cards") within the layout
-            items: [{
-                id: 'card-0',
-                html: '<h1>Welcome to the Wizard!</h1><p>Step 1 of 3</p>'
-            },{
-                id: 'card-1',
-                html: '<p>Step 2 of 3</p>'
-            },{
-                id: 'card-2',
-                html: '<h1>Congratulations!</h1><p>Step 3 of 3 - Complete</p>'
-            }]
+            html: '<div class="testContainer CQAuthorColumnContainer"></div>'
         });
 
         this.add(this.containerPanel);
+
+
+
 
         this.doLayout();
 
@@ -64,6 +71,10 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.form.CompositeField , {
     onRender: function(ct, position){
         Harbor.Widgets.DdColumnField.superclass.onRender.call(this, ct, position);
 
+
+        this.containerPanel.toolbars[0]
+
+        console.log("render");
     }
 
 
