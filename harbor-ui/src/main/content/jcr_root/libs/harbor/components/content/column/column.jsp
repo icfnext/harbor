@@ -9,5 +9,4 @@
     <c:otherwise>
         <cq:include path="column-par" resourceType="foundation/components/parsys" />
     </c:otherwise>
-
 </c:choose>

@@ -38,6 +38,7 @@
     <cq:include script="stats.jsp"/>
     <c:if test="${isAuthor}">
         <cq:includeClientLib js="harbor.author-common"/>
+        <cq:includeClientLib css="harbor.author-common"/>
     </c:if>
 
     <% if (favIcon != null) { %>
