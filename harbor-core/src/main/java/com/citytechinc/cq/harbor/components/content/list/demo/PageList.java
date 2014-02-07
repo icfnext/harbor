@@ -16,11 +16,11 @@ import com.citytechinc.cq.library.content.request.ComponentRequest;
 public class PageList extends AbstractListComponent<PageDecorator> {
 
     @DialogField
-    @DialogFieldSet
+    @DialogFieldSet( title = "List Construction" )
     private final ChildPageListConstructionStrategy constructionStrategy;
 
     @DialogField
-    @DialogFieldSet
+    @DialogFieldSet( title = "List Rendering" )
     private final LinkablePageRenderingStrategy renderingStrategy;
 
     public PageList(ComponentRequest request) {
