@@ -13,7 +13,7 @@ import java.util.List;
 
 public class ChildPageListConstructionStrategy implements ListConstructionStrategy<PageDecorator> {
 
-    @DialogField( fieldLabel = "Start Page" )
+    @DialogField( fieldLabel = "Start Page", name = "./startPagePath" )
     @PathField
     private final Optional<PageDecorator> startPageOptional;
 

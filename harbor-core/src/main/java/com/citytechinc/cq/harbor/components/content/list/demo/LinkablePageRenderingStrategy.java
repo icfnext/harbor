@@ -9,7 +9,7 @@ import com.citytechinc.cq.library.content.page.PageDecorator;
 
 public class LinkablePageRenderingStrategy implements ListRenderingStrategy<PageDecorator> {
 
-    @DialogField( fieldName = "Render as Link?" )
+    @DialogField( fieldLabel = "Render as Link?" )
     @Selection( type = Selection.CHECKBOX, options = { @Option( text = "", value = "true" ) } )
     private final Boolean renderAsLink;
 

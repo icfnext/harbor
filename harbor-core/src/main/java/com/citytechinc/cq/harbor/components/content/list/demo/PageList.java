@@ -39,4 +39,9 @@ public class PageList extends AbstractListComponent<PageDecorator> {
     protected ListRenderingStrategy<PageDecorator> getListRenderingStrategy() {
         return renderingStrategy;
     }
+
+    @Override
+    public Boolean getIsUnorderedList() {
+        return true;
+    }
 }

@@ -1,4 +1,4 @@
-<%@include file="/libs/harbor/components/global.jsp"%>
+<%@include file="/libs/harbor/components/global.jsp" %>
 <%--
     This resource rendering mechanism is not intended to be instantiated or used directly
     but should be extended by extending the com.citytechinc.cq.harbor.components.content.list.AbstractListComponent
