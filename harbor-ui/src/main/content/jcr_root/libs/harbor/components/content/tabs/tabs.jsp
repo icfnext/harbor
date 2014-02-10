@@ -14,7 +14,7 @@
 		</ul>
 		<c:forEach var="curTab" items="${curtabs.tabs}">
 			<div id="tabs-${curTab.uniqueId}">
-				<section class="tab-content"
+				<section class="tab-content ${'isEditMode || isDesignMode? "tab-par-author": ""'}">
 					<cq:include path="${curTab.name}" resourceType="harbor/components/content/tabs/tab" />
 				</section>
 			</div>
@@ -89,7 +89,7 @@
 		;(function($){
 			$(document).ready(function(){
 		
-				if($('html').data('is-edit-mode')) {
+				if(CQ.WCM.isEditMode()) {
 					// make tabs sortable in edit mode
 					$('#${curtabs.uniqueId}-tabs-container').children('ul.nav-pills').each(function(){
 						var $this = $(this);
