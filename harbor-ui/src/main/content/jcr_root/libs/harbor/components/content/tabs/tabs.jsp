@@ -14,7 +14,7 @@
 		</ul>
 		<c:forEach var="curTab" items="${curtabs.tabs}">
 			<div id="tabs-${curTab.uniqueId}">
-				<section class="tab-content">
+				<section class="tab-content"
 					<cq:include path="${curTab.name}" resourceType="harbor/components/content/tabs/tab" />
 				</section>
 			</div>
