@@ -2,6 +2,8 @@ package com.citytechinc.cq.harbor.components.content.demobreadcrumb;
 
 import com.citytechinc.cq.component.annotations.Component;
 import com.citytechinc.cq.component.annotations.DialogField;
+import com.citytechinc.cq.component.annotations.Option;
+import com.citytechinc.cq.component.annotations.widgets.Selection;
 import com.citytechinc.cq.harbor.content.page.HierarchicalPage;
 import com.citytechinc.cq.harbor.content.page.HomePage;
 import com.citytechinc.cq.harbor.content.page.SectionLandingPage;
@@ -62,7 +64,11 @@ public class DemoBreadcrumb extends AbstractComponent {
         return trail;
     }
 
-    @DialogField(fieldLabel = "Root Page Type")
+    @DialogField(fieldLabel = "Root Page Type", fieldDescription = "The type of page that the breadcrumb will display as the root page.")
+    @Selection(type = Selection.SELECT, options = {
+            @Option(text = "Section Landing Page", value = SectionLandingPage.RDF_TYPE),
+            @Option(text = "Home Page", value = HomePage.RDF_TYPE)
+    })
     public String getRootPageType(){
         return get("rootPageType", SectionLandingPage.RDF_TYPE);
     }
