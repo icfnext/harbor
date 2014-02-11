@@ -34,7 +34,7 @@ public class Tab extends AbstractComponent {
 
         this.name = componentNode.getResource().getName();
         this.title = this.get("title", this.name);
-        //TODO: fix this once Paul creates a unique Id generator
+        //TODO: fix this once Paul decides where to keep the unique Id generator
         this.uniqueId = Tabs.constructUniqueId(componentNode.getResource());
 
     }

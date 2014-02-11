@@ -23,7 +23,7 @@
 </div>
 
 <script type="text/javascript">
-
+    //TODO: research refactoring this to take the javascript out this JSP.
 	;(function($){
 		$(document).ready(function(){
 			

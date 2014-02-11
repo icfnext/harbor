@@ -1,3 +1,4 @@
+//Todo: move this clientlib into it's own folder, so it is only included in author
 Harbor.Components.Tabs = function (jQuery) {
     return {
         addTab: function (component) {
@@ -15,6 +16,7 @@ Harbor.Components.Tabs = function (jQuery) {
             );
         },
 
+        //TODO: I'm being lazy here and putting this function here during development. It will be moved to the appropriate file in the future.
         cellSearchPathModifier: function (componentConstructor) {
 
             var oldSearchPath = componentConstructor.cellSearchPath;
