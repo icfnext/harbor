@@ -12,7 +12,6 @@ import com.citytechinc.cq.component.annotations.Component;
 import com.citytechinc.cq.component.annotations.ContentProperty;
 import com.citytechinc.cq.component.annotations.Listener;
 import com.citytechinc.cq.library.components.AbstractComponent;
-import com.citytechinc.cq.library.content.page.PageDecorator;
 import com.citytechinc.cq.library.content.request.ComponentRequest;
 
 @Component(value = "Tabs",
