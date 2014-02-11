@@ -29,6 +29,10 @@ public class AbstractTreeConstructionStrategy implements TreeNodeConstructionStr
     @NumberField
     private final Optional<Integer> depthLevel;
 
+    private Predicate<PageDecorator> getPredicate(){
+        return  INCLUDE_ALL_CHILD_PAGE_TYPES;
+    }
+
     //TODO predicate selection
     private static final Predicate<PageDecorator> INCLUDE_ALL_CHILD_PAGE_TYPES = new Predicate<PageDecorator>() {
         @Override
@@ -92,14 +96,49 @@ public class AbstractTreeConstructionStrategy implements TreeNodeConstructionStr
         TreeNode<PageDecorator> root = new DefaultTreeNode(pageRoot, pageRoot.getChildren(INCLUDE_ALL_CHILD_PAGE_TYPES));
 
 
-        TreeNode<PageDecorator> new_root = buildTreeRecur(TreeNode<PageDecorator> b, 2);
+        TreeNode<PageDecorator> new_root = buildTreeRecur(root, 2);
 
+        return new_root;
     }
 
     private  TreeNode<PageDecorator> buildTreeRecur(TreeNode<PageDecorator> n, int depth){
+        if (depth == depthLevel.get()){
+            return n;
+        }
 
+        List<TreeNode<PageDecorator>> children_of_n = n.getChildren();
+        List<TreeNode<PageDecorator>> new_children_of_n = new ArrayList();
+
+        //visit step
+        for(TreeNode<PageDecorator> child_of_n : children_of_n){
+            TreeNode<PageDecorator> new_child;
+
+            //grab children from child_of_n.getValue()
+            PageDecorator p_temp = child_of_n.getValue();
+            List<PageDecorator> p_temp_children = p_temp.getChildren(getPredicate());
+
+            //create new node with same value, and value's children
+            TreeNode<PageDecorator> treeNode = TreeNodes.newBasicTreeNode(p_temp, transformListToTreeNodeList(p_temp_children));
+
+            //Recurse, and fill in treenod's children, etc.
+            treeNode =  buildTreeRecur(treeNode, depth++);
+
+            //add new node to our child list
+            new_children_of_n.add(treeNode);
+        }
+
+        //create new node from n, adding in the new child list we create with n's same .getValue() result
+        return TreeNodes.newBasicTreeNode(n.getValue(), new_children_of_n);
     }
 
+    private List<TreeNode<PageDecorator>> transformListToTreeNodeList(List<PageDecorator> list) {
+        List<TreeNode<PageDecorator>> temp = new ArrayList<TreeNode<PageDecorator>>();
+        for(PageDecorator p : list){
+            TreeNode<PageDecorator> treeNode = TreeNodes.newBasicTreeNode(p);
+            temp.add(treeNode);
+        }
+        return temp;
+    }
 
     @Override
     public TreeNode<PageDecorator> construct() {
