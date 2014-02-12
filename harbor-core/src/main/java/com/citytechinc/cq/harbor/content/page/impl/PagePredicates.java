@@ -12,6 +12,8 @@ import org.slf4j.LoggerFactory;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PagePredicates {
 
@@ -58,5 +60,22 @@ public class PagePredicates {
         }
 
     };
+
+    public static final Predicate<PageDecorator> INCLUDE_ALL_CHILD_PAGE_TYPES = new Predicate<PageDecorator>() {
+        @Override
+        public boolean apply(final PageDecorator page) {
+            return PagePredicates.SECTION_LANDING_PAGE_PREDICATE.apply(page)
+                || PagePredicates.HIERARCHICAL_PAGE_PREDICATE.apply(page);
+        }
+    };
+
+    public static final Map<String, Predicate<PageDecorator>> PREDICATE_MAP;
+    static{
+        PREDICATE_MAP = new HashMap<String, Predicate<PageDecorator>>();
+        PREDICATE_MAP.put("HOME_PAGE_PREDICATE", HOME_PAGE_PREDICATE);
+        PREDICATE_MAP.put("HIERARCHICAL_PAGE_PREDICATE", HIERARCHICAL_PAGE_PREDICATE);
+        PREDICATE_MAP.put("SECTION_LANDING_PAGE_PREDICATE", SECTION_LANDING_PAGE_PREDICATE);
+        PREDICATE_MAP.put("INCLUDE_ALL_CHILD_PAGE_TYPES", INCLUDE_ALL_CHILD_PAGE_TYPES);
+    }
 
 }

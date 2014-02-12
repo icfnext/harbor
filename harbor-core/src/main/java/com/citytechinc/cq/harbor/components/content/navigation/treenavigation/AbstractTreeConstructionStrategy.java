@@ -1,8 +1,10 @@
 package com.citytechinc.cq.harbor.components.content.navigation.treenavigation;
 
 import com.citytechinc.cq.component.annotations.DialogField;
+import com.citytechinc.cq.component.annotations.Option;
 import com.citytechinc.cq.component.annotations.widgets.NumberField;
 import com.citytechinc.cq.component.annotations.widgets.PathField;
+import com.citytechinc.cq.component.annotations.widgets.Selection;
 import com.citytechinc.cq.harbor.components.content.tree.DefaultTreeNode;
 import com.citytechinc.cq.harbor.components.content.tree.TreeNode;
 import com.citytechinc.cq.harbor.components.content.tree.TreeNodeConstructionStrategy;
@@ -13,38 +15,32 @@ import com.citytechinc.cq.library.content.page.PageDecorator;
 import com.citytechinc.cq.library.content.page.PageManagerDecorator;
 import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
-import com.google.common.collect.Lists;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
 
 public class AbstractTreeConstructionStrategy implements TreeNodeConstructionStrategy<PageDecorator> {
+    private Predicate<PageDecorator> predicate;
+    private static final String predicateDefault = "INCLUDE_ALL_CHILD_PAGE_TYPES";
+    private static final Integer DEFAULT_NAV_DEPTH = 0;
+
     @DialogField( fieldLabel = "Root Page", name = "./rootPagePath" )
     @PathField
     private final Optional<PageDecorator> rootPageOptional;
 
-    @DialogField(fieldLabel = "Depth Level", fieldDescription = "How many levels deep the tree is to be built.", name = "./depthLevel")
+    @DialogField(fieldLabel = "Depth Level", fieldDescription = "How many levels deep the tree is to be built from the homepage", name = "./depthLevel")
     @NumberField
     private final Optional<Integer> depthLevel;
 
-    private Predicate<PageDecorator> getPredicate(){
-        return  INCLUDE_ALL_CHILD_PAGE_TYPES;
-    }
-
-    //TODO predicate selection
-    private static final Predicate<PageDecorator> INCLUDE_ALL_CHILD_PAGE_TYPES = new Predicate<PageDecorator>() {
-        @Override
-        public boolean apply(PageDecorator page) {
-            return PagePredicates.SECTION_LANDING_PAGE_PREDICATE.apply(page)
-                    || PagePredicates.HIERARCHICAL_PAGE_PREDICATE.apply(page);
-        }
-    };
-
-    //TODO: MANUAL? y/n
-
-    private static final Integer DEFAULT_NAV_DEPTH = 1;
+    @DialogField(fieldLabel = "Page Predicate Selection",
+            fieldDescription = "Limit what types of pages can be added to the navigation.",
+            name = "./predicate")
+    @Selection(type = Selection.SELECT, options = {
+        @Option(text="Content Page", value="HIERARCHICAL_PAGE_PREDICATE"),
+        @Option(text="Section Landing Page", value="SECTION_LANDING_PAGE_PREDICATE"),
+        @Option(text="All Child Page Types", value="INCLUDE_ALL_CHILD_PAGE_TYPES"),
+    })
+    private final Optional<String> predicateString;
 
     public AbstractTreeConstructionStrategy(ComponentNode componentNode) {
 
@@ -71,34 +67,25 @@ public class AbstractTreeConstructionStrategy implements TreeNodeConstructionStr
         else{
             depthLevel = Optional.fromNullable(DEFAULT_NAV_DEPTH);
         }
-    }
 
- /*   @Override
-    public TreeNode<PageDecorator> construct() {
-        if (rootPageOptional.isPresent()) {
-            List<TreeNode<PageDecorator>> childPages = Lists.newArrayList();
-
-            List<PageDecorator> childPageDecorators = rootPageOptional.get().getChildren();
-
-            for (PageDecorator curChildPage : childPageDecorators) {
-                childPages.add(TreeNodes.newBasicTreeNode(curChildPage));
-            }
-
-            return TreeNodes.newBasicTreeNode(rootPageOptional.get(), childPages);
+        /*
+            Init Page Predicate
+         */
+        Optional<String> predicateStringOptional = componentNode.get("predicate", String.class);
+        if(predicateStringOptional.isPresent()){
+            predicateString = Optional.fromNullable(predicateStringOptional.get());
         }
-
-        return null;
-
-    }*/
+        else{
+            predicateString = Optional.fromNullable(predicateDefault);
+        }
+    }
 
     protected TreeNode<PageDecorator> BuildNavigationTree(PageDecorator pageRoot){
         //grab child pages from homePage
-        List<PageDecorator> pageRootChildren = pageRoot.getChildren(INCLUDE_ALL_CHILD_PAGE_TYPES);
-        List<TreeNode<PageDecorator>> pageRootChildren_asTreeNodes =  transformListToTreeNodeList(pageRootChildren);
-        TreeNode<PageDecorator> root = new DefaultTreeNode(pageRoot, pageRootChildren_asTreeNodes);
+        List<PageDecorator> pageRootChildren = pageRoot.getChildren(getPredicate());
+        TreeNode<PageDecorator> root = TreeNodes.newBasicTreeNode(pageRoot);
 
-
-        TreeNode<PageDecorator> new_root = buildTreeRecur(root, depthLevel.get());
+        TreeNode<PageDecorator> new_root = buildTreeRecur(root, 0);
 
         return new_root;
     }
@@ -108,13 +95,11 @@ public class AbstractTreeConstructionStrategy implements TreeNodeConstructionStr
             return n;
         }
 
-        List<TreeNode<PageDecorator>> children_of_n = n.getChildren();
+        List<TreeNode<PageDecorator>> children_of_n = transformListToTreeNodeList(n.getValue().getChildren(getPredicate()));
         List<TreeNode<PageDecorator>> new_children_of_n = new ArrayList();
 
         //visit step
         for(TreeNode<PageDecorator> child_of_n : children_of_n){
-            TreeNode<PageDecorator> new_child;
-
             //grab children from child_of_n.getValue()
             PageDecorator p_temp = child_of_n.getValue();
             List<PageDecorator> p_temp_children = p_temp.getChildren(getPredicate());
@@ -144,6 +129,15 @@ public class AbstractTreeConstructionStrategy implements TreeNodeConstructionStr
 
     @Override
     public TreeNode<PageDecorator> construct() {
-        return BuildNavigationTree(this.rootPageOptional.get());
+        if (rootPageOptional.isPresent() && predicateString.isPresent()) {
+            //snag our predicate
+            this.predicate = PagePredicates.PREDICATE_MAP.get(this.predicateString.get());
+            return BuildNavigationTree(this.rootPageOptional.get());
+        }
+        return null;
+    }
+
+    public Predicate<PageDecorator> getPredicate() {
+        return predicate;
     }
 }
