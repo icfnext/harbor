@@ -93,10 +93,12 @@ public class AbstractTreeConstructionStrategy implements TreeNodeConstructionStr
 
     protected TreeNode<PageDecorator> BuildNavigationTree(PageDecorator pageRoot){
         //grab child pages from homePage
-        TreeNode<PageDecorator> root = new DefaultTreeNode(pageRoot, pageRoot.getChildren(INCLUDE_ALL_CHILD_PAGE_TYPES));
+        List<PageDecorator> pageRootChildren = pageRoot.getChildren(INCLUDE_ALL_CHILD_PAGE_TYPES);
+        List<TreeNode<PageDecorator>> pageRootChildren_asTreeNodes =  transformListToTreeNodeList(pageRootChildren);
+        TreeNode<PageDecorator> root = new DefaultTreeNode(pageRoot, pageRootChildren_asTreeNodes);
 
 
-        TreeNode<PageDecorator> new_root = buildTreeRecur(root, 2);
+        TreeNode<PageDecorator> new_root = buildTreeRecur(root, depthLevel.get());
 
         return new_root;
     }
