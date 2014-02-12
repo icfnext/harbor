@@ -1,5 +1,7 @@
 package com.citytechinc.cq.harbor.components.content.tree;
 
+import com.citytechinc.cq.library.content.page.PageDecorator;
+
 import java.util.List;
 
 public class DefaultTreeNode <T> implements  TreeNode <T> {
@@ -21,4 +23,5 @@ public class DefaultTreeNode <T> implements  TreeNode <T> {
     public List<TreeNode<T>> getChildren() {
         return children;
     }
+
 }

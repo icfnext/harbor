@@ -19,7 +19,7 @@ import com.google.common.base.Predicate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AbstractTreeConstructionStrategy implements TreeNodeConstructionStrategy<PageDecorator> {
+public class TreeConstructionStrategy implements TreeNodeConstructionStrategy<PageDecorator> {
     private Predicate<PageDecorator> predicate;
     private static final String predicateDefault = "INCLUDE_ALL_CHILD_PAGE_TYPES";
     private static final Integer DEFAULT_NAV_DEPTH = 0;
@@ -42,7 +42,7 @@ public class AbstractTreeConstructionStrategy implements TreeNodeConstructionStr
     })
     private final Optional<String> predicateString;
 
-    public AbstractTreeConstructionStrategy(ComponentNode componentNode) {
+    public TreeConstructionStrategy(ComponentNode componentNode) {
 
         /*
             Grabs the root page set up in the Tree Navigation Component.

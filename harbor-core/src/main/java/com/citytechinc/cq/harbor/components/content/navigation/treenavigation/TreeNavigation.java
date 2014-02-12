@@ -12,22 +12,31 @@ import com.citytechinc.cq.library.content.page.PageDecorator;
 import com.citytechinc.cq.library.content.request.ComponentRequest;
 
 @Component( value = "Tree Navigation",
+        group = ".hidden",
         resourceSuperType = AbstractTreeComponent.RESOURCE_TYPE
 )
 @AutoInstantiate( instanceName = "treeComponent" )
 public class TreeNavigation extends AbstractTreeComponent<PageDecorator> {
-    @DialogField
+    @DialogField(ranking = 1)
     @DialogFieldSet( title = "Tree Construction" )
-    private final AbstractTreeConstructionStrategy constructionStrategy;
+    private final TreeConstructionStrategy constructionStrategy;
 
-    private final AbstractTreeRenderingStrategy renderingStrategy;
+    private final TreeRenderingStrategy renderingStrategy;
 
 
     public TreeNavigation(ComponentRequest request) {
         super(request);
-        constructionStrategy = new AbstractTreeConstructionStrategy(request.getComponentNode());
-        renderingStrategy = new AbstractTreeRenderingStrategy();
+        constructionStrategy = CreateConstructionStrategy();
+        renderingStrategy = CreateRenderingStrategy();
 
+    }
+
+    protected TreeConstructionStrategy CreateConstructionStrategy(){
+        return new TreeConstructionStrategy(request.getComponentNode());
+    }
+
+    protected TreeRenderingStrategy CreateRenderingStrategy(){
+        return  new TreeRenderingStrategy();
     }
 
     @Override

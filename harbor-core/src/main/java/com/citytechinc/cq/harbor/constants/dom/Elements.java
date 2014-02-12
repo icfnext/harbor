@@ -8,5 +8,6 @@ public class Elements {
     public static final String OL = "ol";
     public static final String UL = "ul";
     public static final String LI = "li";
-
+    public static final String A = "a";
+    public static final String B = "b";
 }
