@@ -14,20 +14,8 @@ Harbor.Components.Tabs = function (jQuery) {
                     currentEditable.refreshSelf();
                 }
             );
-        },
-
-        //TODO: I'm being lazy here and putting this function here during development. It will be moved to the appropriate file in the future.
-        cellSearchPathModifier: function (componentConstructor) {
-
-            var oldSearchPath = componentConstructor.cellSearchPath;
-
-            var split = oldSearchPath.split('/');
-            if (split.length >= 2) {
-                var newSearchPath = split[0] + '/' + split[1];
-                componentConstructor.cellSearchPath = newSearchPath;
-            }
-
         }
-
     }
 }(jQuery)
+
+$(document)

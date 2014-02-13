@@ -10,13 +10,16 @@ import com.citytechinc.cq.library.content.node.ComponentNode;
 import com.citytechinc.cq.library.content.request.ComponentRequest;
 
 @Component(value = "Tab",
+        name = "tabs/tab",
         actions = {"text: Tab", "edit", "delete"},
         contentAdditionalProperties = {
                 @ContentProperty(name = "dependencies", value = "harbor.components.content.tabs")
         },
         listeners = {
                 @Listener(name = "afterinsert", value = "REFRESH_PAGE")
-        }
+                //refresh parent
+        },
+        group=".hidden"
 )
 public class Tab extends AbstractComponent {
 
@@ -39,7 +42,7 @@ public class Tab extends AbstractComponent {
 
     }
 
-    @DialogField(name = "title", fieldLabel = "Title", fieldDescription = "The title to be presented within the Tab")
+    @DialogField(fieldLabel = "Title", fieldDescription = "The title to be presented within the Tab")
     public String getTitle() {
         return this.title;
     }

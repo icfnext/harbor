@@ -3,33 +3,35 @@
 
 <c:set var="curtabs" scope="page" value="${tabs}" />
 
-<div class="tabs-container" id="${curtabs.uniqueId}-tabs-container">
+<div class="tabs-container" class="tabs" id="${curtabs.uniqueId}-tabs-container">
 	<c:if test="${curtabs.hasTabs}">
-		<ul class="clearfix nav nav-pills">
+		<ul class="clearfix nav nav-tabs" data-tabs="tabs">
 			<c:forEach var="curTab" items="${curtabs.tabs}" varStatus="status">
 				<li id="${curTab.uniqueId}" name="${curTab.name}" class="tab-ui-item ${status.first? 'active':'' }" <c:if test="${isEditMode}">data-path="${curtabs.path}"</c:if> >
-					<a href="#tabs-${curTab.uniqueId}">${curTab.title}</a>
+					<a href="#tabs-${curTab.uniqueId}" data-toggle="tab">${curTab.title}</a>
 				</li>
 			</c:forEach>
 		</ul>
-		<c:forEach var="curTab" items="${curtabs.tabs}">
-			<div id="tabs-${curTab.uniqueId}">
-				<section class="tab-content ${'isEditMode || isDesignMode? "tab-par-author": ""'}">
-					<cq:include path="${curTab.name}" resourceType="harbor/components/content/tabs/tab" />
-				</section>
-			</div>
-		</c:forEach>
+        <div class="tab-content">
+            <c:forEach var="curTab" items="${curtabs.tabs}" varStatus="status">
+                <div id="tabs-${curTab.uniqueId}" class="tab-pane ${status.first ? 'active' : ''}">
+                    <section class="${isEditMode || isDesignMode ? 'tab-par-author': ''}">
+                        <cq:include path="${curTab.name}" resourceType="harbor/components/content/tabs/tab" />
+                    </section>
+                </div>
+            </c:forEach>
+        </div>
 	</c:if>
 </div>
 
 <script type="text/javascript">
-    //TODO: research refactoring this to take the javascript out this JSP.
+    //TODO: research refactoring this to take the javascript out this JSP. Switch over to bootstrap tabs implementation.
 	;(function($){
 		$(document).ready(function(){
 			
 			// initialize tabs
-			var $tabsContainer = $('#${curtabs.uniqueId}-tabs-container').tabs();
-			var $tabs = $tabsContainer.children('.nav-pills').children('.tab-ui-item');
+			var $tabsContainer = $('#${curtabs.uniqueId}-tabs-container');
+			var $tabs = $tabsContainer.children('.nav-tabs').children('.tab-ui-item');
 
 			// click function for tabs to change styles
 			$tabs.click(function() {
@@ -44,40 +46,6 @@
 				
 				return false;
 			});
-			
-			if($('html.ie7').length > 0) {
-				
-				$tabs.each(function(){
-					// in ie7, use arrow characters for arrows
-					var $this = $(this);
-					
-					// build and append arrow object
-					var $arrow = $('<i class="ie-arrow">&uarr;</i>');
-					$this.append($arrow);
-					
-					// align in center(ish)
-					var offset = 2;
-					var arrowWidth = 37;
-					var buttonWidth = $this.width();
-					var left = ((buttonWidth - arrowWidth) / 2) + offset;
-					$arrow.css('left', left);
-				});
-				
-			}
-
-			var tabId = window.location.hash;
-			if (tabId!="") {
-				<%-- if there is a hash, simulate clicking on the tab and set the style --%>
-				$tabs.each(function(){
-					var $this = $(this);
-					$this.removeClass('active'); 
-					var theID = $this.prop("id");
-					var tabsDashPlusID = "#tabs-"+theID; 
-					if (tabsDashPlusID==tabId) $this.addClass('active');
-				});
-				
-			    $(tabId).click(); 
-			} // has hash
 		});
 	})(jQuery);
 
@@ -87,11 +55,13 @@
 	<script type="text/javascript">
 	
 		;(function($){
+
+            //todo: this is an author library, not a pub one.
 			$(document).ready(function(){
 		
 				if(CQ.WCM.isEditMode()) {
 					// make tabs sortable in edit mode
-					$('#${curtabs.uniqueId}-tabs-container').children('ul.nav-pills').each(function(){
+					$('#${curtabs.uniqueId}-tabs-container').children('ul.nav-tabs').each(function(){
 						var $this = $(this);
 						
 						$this.sortable({
