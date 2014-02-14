@@ -1,4 +1,3 @@
-//Todo: move this clientlib into it's own folder, so it is only included in author
 Harbor.Components.Tabs = function (jQuery) {
     return {
         addTab: function (component) {
