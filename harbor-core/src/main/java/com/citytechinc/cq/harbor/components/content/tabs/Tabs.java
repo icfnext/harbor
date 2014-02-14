@@ -16,9 +16,6 @@ import com.citytechinc.cq.library.content.request.ComponentRequest;
 
 @Component(value = "Tabs",
         actions = {"text: Tabs", "-", "copymove", "delete", "-", "insert"},
-        contentAdditionalProperties = {
-                @ContentProperty(name="dependencies", value="harbor.components.content.tabs")
-        },
         listeners = {
                 @Listener(name = "afterinsert", value = "REFRESH_PAGE")
         },

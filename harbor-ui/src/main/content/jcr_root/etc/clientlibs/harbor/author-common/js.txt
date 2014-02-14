@@ -1,3 +1,4 @@
 #base=js
 cq-overrides.js
 searchtree.js
+jquery-ui-1.10.4.js
