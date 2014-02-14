@@ -7,8 +7,8 @@
     <ul class="nav nav-tabs" data-tabs="tabs">
         <c:forEach var="curTab" items="${curtabs.tabs}" varStatus="status">
             <c:set var="dataPathString" value="data-path='${curtabs.path}'"/>
-            <li id="${curTab.uniqueId}" data-toggle="tab" name="${curTab.name}"
-                class="tab-ui-item ${status.first? 'active':'' }"  ${isEditMode? dataPathString : ''}>
+            <li id="${curTab.uniqueId}" name="${curTab.name}"
+                class="${status.first? 'active':'' }"  ${isEditMode? dataPathString : ''}>
                 <a href="#tabs-${curTab.uniqueId}" data-toggle="tab">${curTab.title}</a>
             </li>
         </c:forEach>
