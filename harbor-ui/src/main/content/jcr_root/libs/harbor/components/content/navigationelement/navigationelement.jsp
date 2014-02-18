@@ -2,7 +2,6 @@
 
 <ct:component className="com.citytechinc.cq.harbor.components.content.navigation.globalnavigation.NavigationElement" name="navElement"/>
 
-
 <c:choose>
     <%-- Insert a dropdown if configured for the nav element --%>
     <c:when test="${navElement.hasDropdown}">

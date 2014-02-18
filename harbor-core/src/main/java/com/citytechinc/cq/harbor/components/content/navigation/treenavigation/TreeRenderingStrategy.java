@@ -8,9 +8,6 @@ import com.citytechinc.cq.library.content.page.PageDecorator;
 
 public  class TreeRenderingStrategy implements TreeNodeRenderingStrategy<PageDecorator> {
 
-    //TODO: Render arbitrary depth
-
-
     protected String getNodeTitle(TreeNode<PageDecorator> n){
         if (n.getValue().getPageTitleOptional().isPresent()) {
             return n.getValue().getPageTitle();

@@ -4,6 +4,7 @@ import com.citytechinc.cq.harbor.components.content.navigation.treenavigation.Tr
 import com.citytechinc.cq.harbor.components.content.navigation.treenavigation.TreeRenderingStrategy;
 import com.citytechinc.cq.harbor.components.content.tree.RenderableTreeNode;
 import com.citytechinc.cq.harbor.components.content.tree.TreeNode;
+import com.citytechinc.cq.harbor.constants.bootstrap.Bootstrap;
 import com.citytechinc.cq.harbor.constants.dom.Elements;
 import com.citytechinc.cq.library.content.page.PageDecorator;
 import com.citytechinc.cq.library.content.request.ComponentRequest;
@@ -49,7 +50,7 @@ public class AbstractGlobalNavigation extends TreeNavigation{
 
                 //if n has children, render as dropdown trigger
                 if(hasChildren){
-                    nodeTitle.append("<" + Elements.A + " href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">");
+                    nodeTitle.append("<" + Elements.A + " href=\"#\" class=\"" + Bootstrap.DROPDOWN_TOGGLE + "\" data-toggle=\"" + Bootstrap.DROPDOWN + "\">");
                 }
                 //otherwise, render as hyperlink
                 else{
@@ -65,7 +66,7 @@ public class AbstractGlobalNavigation extends TreeNavigation{
 
                 //close link
                 if(hasChildren){
-                    nodeTitle.append("<" + Elements.B + "class=\"caret\"></" + Elements.B + ">");
+                    nodeTitle.append("<" + Elements.B + " class=\"caret\"></" + Elements.B + ">");
                 }
                 else{
                     nodeTitle.append("</" + Elements.A +">");
@@ -76,12 +77,12 @@ public class AbstractGlobalNavigation extends TreeNavigation{
 
             @Override
             protected String getListItemTagWithChildren(){
-                return "<" + Elements.LI + " class=\"dropdown\">";
+                return "<" + Elements.LI + " class=\"" + Bootstrap.DROPDOWN + "\">";
             }
 
             @Override
             protected String getUnorderedListTag(){
-                return "<" + Elements.UL + " class=\"dropdown-menu\">";
+                return "<" + Elements.UL + " class=\"" + Bootstrap.DROPDOWN_MENU + "\">";
             }
         };
     }

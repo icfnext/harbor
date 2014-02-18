@@ -28,7 +28,7 @@ public class TreeConstructionStrategy implements TreeNodeConstructionStrategy<Pa
     @PathField
     private final Optional<PageDecorator> rootPageOptional;
 
-    @DialogField(fieldLabel = "Depth Level", fieldDescription = "How many levels deep the tree is to be built from the homepage", name = "./depthLevel")
+    @DialogField(fieldLabel = "Depth Level", fieldDescription = "How many levels deep the tree is to be built from the root page.", name = "./depthLevel")
     @NumberField
     private final Optional<Integer> depthLevel;
 
@@ -107,7 +107,7 @@ public class TreeConstructionStrategy implements TreeNodeConstructionStrategy<Pa
             //create new node with same value, and value's children
             TreeNode<PageDecorator> treeNode = TreeNodes.newBasicTreeNode(p_temp, transformListToTreeNodeList(p_temp_children));
 
-            //Recurse, and fill in treenod's children, etc.
+            //Recurse, and fill in treenode's children, etc.
             treeNode =  buildTreeRecur(treeNode, depth++);
 
             //add new node to our child list
