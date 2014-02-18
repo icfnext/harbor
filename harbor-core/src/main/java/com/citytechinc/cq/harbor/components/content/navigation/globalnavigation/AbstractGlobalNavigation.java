@@ -12,7 +12,7 @@ import com.citytechinc.cq.library.content.request.ComponentRequest;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AbstractGlobalNavigation extends TreeNavigation{
+public abstract class AbstractGlobalNavigation extends TreeNavigation{
     public AbstractGlobalNavigation(ComponentRequest request) {
         super(request);
     }
