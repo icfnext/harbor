@@ -1,18 +1,20 @@
 package com.citytechinc.cq.harbor.components.content.tabs;
 
 
+import com.citytechinc.cq.component.annotations.Component;
+import com.citytechinc.cq.component.annotations.Listener;
+import com.citytechinc.cq.component.annotations.editconfig.ActionConfig;
+import com.citytechinc.cq.library.components.AbstractComponent;
+import com.citytechinc.cq.library.components.annotations.AutoInstantiate;
+import com.citytechinc.cq.library.content.node.ComponentNode;
+import com.citytechinc.cq.library.content.request.ComponentRequest;
+import org.apache.jackrabbit.JcrConstants;
+import org.apache.sling.api.resource.Resource;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import com.citytechinc.cq.component.annotations.editconfig.ActionConfig;
-import com.citytechinc.cq.library.content.node.ComponentNode;
-import org.apache.sling.api.resource.Resource;
-import com.citytechinc.cq.component.annotations.Component;
-import com.citytechinc.cq.component.annotations.ContentProperty;
-import com.citytechinc.cq.component.annotations.Listener;
-import com.citytechinc.cq.library.components.AbstractComponent;
-import com.citytechinc.cq.library.content.request.ComponentRequest;
 
 @Component(value = "Tabs",
         actions = {"text: Tabs", "-", "copymove", "delete", "-", "insert"},
@@ -24,62 +26,55 @@ import com.citytechinc.cq.library.content.request.ComponentRequest;
                 @ActionConfig(text = "Add Tab", handler = "function(){Harbor.Components.Tabs.addTab(this)}")
         }
 )
+@AutoInstantiate( instanceName = "tabs" )
 public class Tabs extends AbstractComponent {
+    private List<Tab> tabs;
 
-	private final String name;
+    public Tabs(ComponentRequest request) {
+        super(request);
+    }
 
     //TODO: remove this once implemented in cqlib
-	private final String uniqueId;
-	private final List<Tab> tabs;
-    public static final String JCR_CONTENT = "jcr:content";
+    public static String constructUniqueId(Resource r) {
+        StringBuffer uniqueIdBuffer = new StringBuffer();
 
-	public Tabs( ComponentRequest request ) {
-		super(request);
+        Resource curResource = r;
 
-		this.name = request.getResource().getName();
+        while (curResource != null && !curResource.getName().equals(JcrConstants.JCR_CONTENT)) {
+            uniqueIdBuffer.append(curResource.getName());
+            curResource = curResource.getParent();
+        }
 
-		this.tabs = new ArrayList<Tab>();
+        return uniqueIdBuffer.toString();
+    }
+
+    public String getName() {
+        return this.getResource().getName();
+    }
+
+    public List<Tab> getTabs() {
+        if (this.tabs != null) {
+            return this.tabs;
+        }
+        this.tabs = new ArrayList<Tab>();
+        Iterator<ComponentNode> componentNodeIterator = request.getComponentNode().getComponentNodes().iterator();
+        while (componentNodeIterator.hasNext()) {
+            ComponentNode currentComponentNode = componentNodeIterator.next();
+
+            if (currentComponentNode.getResource().isResourceType(Tab.TYPE)) {
+                this.tabs.add(new Tab(currentComponentNode));
+            }
+        }
+        return this.tabs;
+    }
+
+    public Boolean getHasTabs() {
+        return !this.getTabs().isEmpty();
+    }
+
+    public String getUniqueId() {
         //TODO: change this to use a unique ID generator
-		this.uniqueId = constructUniqueId(request.getResource());
-
-		Iterator<ComponentNode> componentNodeIterator = request.getComponentNode().getComponentNodes().iterator();
-
-		while (componentNodeIterator.hasNext()) {
-	        ComponentNode currentComponentNode = componentNodeIterator.next();
-
-			if (currentComponentNode.getResource().getResourceType().equals(Tab.TYPE)) {
-				this.tabs.add( new Tab(currentComponentNode) );
-			}
-		}
-	}
-
-	public String getName() {
-		return this.name;
-	}
-
-	public List<Tab> getTabs() {
-		return this.tabs;
-	}
-
-	public Boolean getHasTabs() {
-		return !this.tabs.isEmpty();
-	}
-
-	public String getUniqueId() {
-		return this.uniqueId;
-	}
-    //TODO: remove this once implemented in cqlib
-    public static String constructUniqueId( Resource r ) {
-		StringBuffer uniqueIdBuffer = new StringBuffer();
-
-		Resource curResource = r;
-
-		while( curResource != null && !curResource.getName().equals(JCR_CONTENT) ) {
-			uniqueIdBuffer.append(curResource.getName());
-			curResource = curResource.getParent();
-		}
-
-		return uniqueIdBuffer.toString();
-	}
+        return constructUniqueId(request.getResource());
+    }
 
 }

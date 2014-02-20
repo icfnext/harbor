@@ -1,13 +1,11 @@
 <%@include file="/libs/harbor/components/global.jsp" %>
-<ct:component className="com.citytechinc.cq.harbor.components.content.tabs.Tabs" name="tabs"/>
-
 <c:set var="curtabs" scope="page" value="${tabs}"/>
 
 <div class="tabs-container" class="tabs" id="${curtabs.uniqueId}-tabs-container">
     <ul class="nav nav-tabs" data-tabs="tabs">
         <c:forEach var="curTab" items="${curtabs.tabs}" varStatus="status">
             <c:set var="dataPathString" value="data-path='${curtabs.path}'"/>
-            <li id="${curTab.uniqueId}" name="${curTab.name}"
+            <li id="${curTab.uniqueId}"
                 class="${status.first? 'active':'' }"  ${isEditMode? dataPathString : ''}>
                 <a href="#tabs-${curTab.uniqueId}" data-toggle="tab">${curTab.title}</a>
             </li>
