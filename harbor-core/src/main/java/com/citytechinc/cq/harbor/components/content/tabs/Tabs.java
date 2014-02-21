@@ -26,7 +26,7 @@ import java.util.List;
                 @ActionConfig(text = "Add Tab", handler = "function(){Harbor.Components.Tabs.addTab(this)}")
         }
 )
-@AutoInstantiate( instanceName = "tabs" )
+@AutoInstantiate(instanceName = "tabs")
 public class Tabs extends AbstractComponent {
     private List<Tab> tabs;
 

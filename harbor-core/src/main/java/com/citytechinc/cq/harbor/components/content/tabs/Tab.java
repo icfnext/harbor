@@ -12,7 +12,8 @@ import com.citytechinc.cq.library.content.request.ComponentRequest;
         name = "tabs/tab",
         actions = {"text: Tab", "edit", "delete"},
         listeners = {
-                @Listener(name = "afterinsert", value = "REFRESH_PAGE")
+                @Listener(name = "afterinsert", value = "REFRESH_PAGE"),
+                @Listener(name = "afteredit", value = "REFRESH_PARENT")
                 //refresh parent
         },
         group = ".hidden"
