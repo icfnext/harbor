@@ -19,5 +19,5 @@
 %><%@include file="/libs/harbor/components/global.jsp" %><%
 %><cq:includeClientLib categories="cq.foundation-main"/><%
 %><cq:include script="/libs/cq/cloudserviceconfigs/components/servicelibs/servicelibs.jsp"/><%
-%><ct:pageLibrary type="both"/><%
+%><cl:pageLibrary type="both"/><%
     currentDesign.writeCssIncludes(pageContext); %>
