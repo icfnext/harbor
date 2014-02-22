@@ -1,16 +1,24 @@
 Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.CustomContentPanel , {
 
-    columnCount         : 1,
+    columnCount         : 0,
     canAddAnotherColumn : true,
     colWidth            : 0,
     containerWidth      : 0,
     colArray            : [],
+    columnRequestFactory: {},
+    columnManifest: {}, //stores col objects by data-column-id - will be serialized
 
     initComponent: function() {
 
         Harbor.Widgets.DdColumnField.superclass.initComponent.call(this);
         var parentContext = this;
 
+        /*
+            Set up request factory, using the content path of the component.
+         */
+        var parentDialog = this.findParentByType("dialog");
+        var contentPath = parentDialog.responseScope.path;
+        parentContext.columnRequestFactory = Harbor.Components.ColumnRow.getRequestFactoryForEditable(contentPath);
 
         this.buttonBar = new function(){
 
@@ -18,7 +26,7 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.CustomContentPanel , {
 
 
 
-                if( parentContext.columnCount != 12 && parentContext.canAddAnotherColumn ){
+                if( parentContext.columnCount < 12 && parentContext.canAddAnotherColumn ){
 
                     var parentContainer    = $('#'+element.ownerCt.ownerCt.id);
                     var container          = parentContainer.find(".CQAuthorColumnContainer"); //TODO: make this class an attribute of the component
@@ -27,7 +35,7 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.CustomContentPanel , {
                     parentContext.colWidth = colWidth;
 
                     parentContext.columnCount++;
-
+                    //var col = parentContext.getColHtmlString(parentContext.columnCount, {width: colWidth});
                     var col = $("<div class='well col' data-column-id='" + parentContext.columnCount + "'> <h3>" + parentContext.columnCount + "</h3></div>").width(colWidth);
 
                     col.resizable({
@@ -67,11 +75,15 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.CustomContentPanel , {
 
             this.removeColumn = function(){
 
-                if( parentContext.columnCount != 1 ){
+                if( parentContext.columnCount != 0 ){
                     $(".col:last").remove();
 
                     parentContext.columnCount --;
                 }
+
+                //TODO: Set flag on this column in the manifest
+                //make sure it can't be ID'd in normal use (think resize, etc)
+
 
 
 
@@ -114,7 +126,7 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.CustomContentPanel , {
                 wrapper.append(container);
 
                 parentContext.colArray.push(col);
-
+                parentContext.columnCount += 1;
                 return wrapper.html();
             }()
         });
@@ -143,7 +155,6 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.CustomContentPanel , {
                 });
 
                 $(this).on('resizestart', function(event , ui){
-
                     parentContext.columnResize( parentContext , event , ui );
 
                 });
@@ -163,6 +174,66 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.CustomContentPanel , {
             //console.log(container.find('.col'));
 
         });
+
+        this.ownerCt.ownerCt.ownerCt.on("show", function(){
+            parentContext.columnRequestFactory.getColumnsInRow().then(function(data){
+                var col_list = [];
+                var tcolumnData;
+                var tcolumnName;
+                var tid;
+
+                /*
+                 Columns start with "column", lets filter them
+                 out of data, and into a list
+                 */
+                //build a hash of columns
+                for (var prop in data){
+                    if (prop.search("column") != -1){
+                        tcolumnName = prop;
+                        tcolumnData = data[prop];
+                        tid = parentContext.columnCount.toString();
+
+                        var col_hash = {
+                            "id": tid,
+                            "data": tcolumnData,
+                            "colHtml": parentContext.getColHtmlString(tid, {"colClass":parentContext.getSizeForColumn(tcolumnData)})
+                        };
+
+                        col_list.push(col_hash);
+                        //increase col count
+                        parentContext.columnCount += 1;
+                    }
+                }
+
+                //if non-empty,
+                if(col_list){
+
+                    //zero out column container to replace the placeholder with the actual columns
+                    var col_container = $("#"+parentContext.containerPanel.id).find(".CQAuthorColumnContainer");
+                    $(col_container).html("");
+
+                    for(var i = 0; i < col_list.length; i++){
+                        var col = col_list[i];
+
+                        //append column html to column container
+                        $(col_container).append(col.colHtml);
+                        parentContext.colArray.push(col.colHtml);
+
+                        //Add column obj to "manifest"
+                        parentContext.columnManifest[col.id] = col;
+                    }
+                }
+                else{
+                    //otherwise, Leave the lone column there
+                }
+            });
+        });
+
+        this.ownerCt.ownerCt.ownerCt.on("close", function(){
+            //TODO: serialize manifest to JCR
+
+
+        }
 
         this.doLayout();
 
@@ -211,6 +282,8 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.CustomContentPanel , {
 
         }
 
+        //TODO: Resize column in the manifest
+
 
     },
 
@@ -223,6 +296,44 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.CustomContentPanel , {
 
         parentContext.colArray.push($(event.target));
 
+        //TODO create column object for the manifest.
+
+    },
+
+    getSizeForColumn: function(columnData){
+        if(columnData.hasOwnProperty("colClass") && columnData.colClass){
+            return columnData.colClass;
+        }
+        else{
+            return 1;
+        }
+    },
+
+    getColHtmlString: function(id, options){
+        var colClass = options.colClass || null;
+        var width = options.width || null;
+
+        var tmp = $("<div class='well col' data-column-id='" + id + "'><h3>" + id + "</h3></div>");
+
+        if(colClass){
+            var pixels = this.getDefaultColWidth() * parseInt(colClass);
+            return tmp.width(pixels);
+        }
+        else if(width){
+            return tmp.width(width);
+        }
+        else{
+            return tmp.width(this.getDefaultColWidth());
+        }
+    },
+
+    getDefaultColWidth: function(){
+        //return (this.containerWidth - 120) / 13;
+        var col_container_width = $("#"+this.containerPanel.id).find(".CQAuthorColumnContainer").innerWidth();
+        return (col_container_width - 120) / 13;
+    },
+
+    createColData: function(id, data, html){
 
     }
 
