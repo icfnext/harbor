@@ -212,6 +212,10 @@ Harbor.Components.ColumnRow = function(jQuery){
                 }
 
             }
+        },
+
+        getBaseColumnData: function(){
+            return column;
         }
     }
 }(jQuery);

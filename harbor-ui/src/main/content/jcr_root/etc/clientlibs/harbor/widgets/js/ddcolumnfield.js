@@ -1,6 +1,6 @@
 Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.CustomContentPanel , {
 
-    columnCount         : 0,
+    columnCount         : 1,
     canAddAnotherColumn : true,
     colWidth            : 0,
     containerWidth      : 0,
@@ -67,8 +67,6 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.CustomContentPanel , {
 
                     parentContext.colArray.push( col );
 
-
-
                 }
 
             },
@@ -126,7 +124,6 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.CustomContentPanel , {
                 wrapper.append(container);
 
                 parentContext.colArray.push(col);
-                parentContext.columnCount += 1;
                 return wrapper.html();
             }()
         });
@@ -193,20 +190,17 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.CustomContentPanel , {
                         tcolumnData = data[prop];
                         tid = parentContext.columnCount.toString();
 
-                        var col_hash = {
-                            "id": tid,
-                            "data": tcolumnData,
-                            "colHtml": parentContext.getColHtmlString(tid, {"colClass":parentContext.getSizeForColumn(tcolumnData)})
-                        };
+                        var html = parentContext.getColHtmlString(tid, {"colClass":parentContext.getSizeForColumn(tcolumnData)})
+                        var col_hash = parentContext.createColData(tid, tcolumnData, html);
 
                         col_list.push(col_hash);
                         //increase col count
-                        parentContext.columnCount += 1;
+
                     }
                 }
 
                 //if non-empty,
-                if(col_list){
+                if(col_list.length > 0){
 
                     //zero out column container to replace the placeholder with the actual columns
                     var col_container = $("#"+parentContext.containerPanel.id).find(".CQAuthorColumnContainer");
@@ -218,6 +212,7 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.CustomContentPanel , {
                         //append column html to column container
                         $(col_container).append(col.colHtml);
                         parentContext.colArray.push(col.colHtml);
+                        parentContext.columnCount += 1;
 
                         //Add column obj to "manifest"
                         parentContext.columnManifest[col.id] = col;
@@ -229,11 +224,12 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.CustomContentPanel , {
             });
         });
 
-        this.ownerCt.ownerCt.ownerCt.on("close", function(){
+        //TODO: find out why button event isn't accessible from this.ownerCt.ownerCt.ownerCt.buttons[0]
+        this.ownerCt.ownerCt.ownerCt.on("hide", function(t){
+            console.log(t);
+            console.log("dialog hidden ")
             //TODO: serialize manifest to JCR
-
-
-        }
+        });
 
         this.doLayout();
 
@@ -242,6 +238,7 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.CustomContentPanel , {
     columnResize : function( parentContext , event , ui ){
 
         var currentCol     = $(event.currentTarget);
+        var currentColId   = $(currentCol).data("column-id");
         var containerWidth = parentContext.containerWidth;
         var maxWidth       = 0;
 
@@ -283,6 +280,10 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.CustomContentPanel , {
         }
 
         //TODO: Resize column in the manifest
+        this.columnManifest[currentColId].data.colClass = 1;
+        console.log("resize for:")
+        console.log(currentColId);
+
 
 
     },
@@ -298,6 +299,11 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.CustomContentPanel , {
 
         //TODO create column object for the manifest.
 
+        //create column entry for manifest
+        var new_column = this.createColData(this.columnCount,
+            Harbor.Components.ColumnRow.getBaseColumnData(),
+            $(event.target));
+        this.columnManifest[new_column.id] = new_column;
     },
 
     getSizeForColumn: function(columnData){
@@ -334,7 +340,11 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.CustomContentPanel , {
     },
 
     createColData: function(id, data, html){
-
+        return {
+            "id": id,
+            "data": data,
+            "colHtml": html
+        }
     }
 
 } );
