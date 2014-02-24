@@ -17,7 +17,9 @@ Harbor.Components.GlobalNavigation = function($){
     return {
         addNavigationElement: function(editableContext){
             sendNavElementAddPost(editableContext.path + '/*', navigationElement,
-                function( data ){ editableContext.refreshSelf() });
+                function( data ){
+                    editableContext.refreshSelf();
+                });
         }
     };
 }(jQuery);
