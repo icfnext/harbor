@@ -1,8 +1,8 @@
 <%@include file="/libs/harbor/components/global.jsp" %>
 
-<nav class="navbar navbar-default" role="navigation">
+<div class="navbar navbar-default" role="navigation">
     <div class="container-fluid">
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
 
                 <c:choose>
@@ -17,16 +17,18 @@
                             <c:forEach var="currentNode" items="${globalNavigation.rootChildrenAsRenderable}" varStatus="status">
                                 ${currentNode.renderedTreeNodeValue}
                             </c:forEach>
-                            <%--${globalNavigation.renderableRootNode.renderedTreeNodeChildren}--%>
                         </c:if>
                     </c:when>
                     <c:otherwise>
+                        <%--li is inserted due to CQ's insertion of divs for editing the nav elements. This breaks the navbar.--%>
                         <c:forEach var="currentElement" items="${globalNavigation.navigationElementList}" varStatus="status">
-                            <cq:include path="${currentElement.name}" resourceType="harbor/components/content/navigationelement" />
+                            <li <c:if test="${currentElement.hasDropdown}">class="dropdown"</c:if>>
+                                 <cq:include path="${currentElement.name}" resourceType="harbor/components/content/navigationelement" />
+                            </li>
                         </c:forEach>
                     </c:otherwise>
                 </c:choose>
             </ul>
         </div>
     </div>
-</nav>
+</div>

@@ -6,8 +6,12 @@ import com.citytechinc.cq.component.annotations.editconfig.ActionConfig;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
 import com.citytechinc.cq.harbor.components.content.navigation.treenavigation.TreeNavigation;
 import com.citytechinc.cq.library.components.annotations.AutoInstantiate;
+import com.citytechinc.cq.library.content.node.ComponentNode;
 import com.citytechinc.cq.library.content.request.ComponentRequest;
+import org.apache.sling.api.resource.Resource;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @Component(value = "Global Navigation",
@@ -30,6 +34,14 @@ public class GlobalNavigation extends AbstractGlobalNavigation {
 
     public GlobalNavigation(ComponentRequest request) {
         super(request);
+
+        navigationElementList = new ArrayList<NavigationElement>();
+        //Add The child elements of our GlobalNav to the Nav Element list
+        Iterator<Resource> navigationResourceIterator = request.getResource().listChildren();
+
+        while (navigationResourceIterator.hasNext()) {
+            this.navigationElementList.add(new NavigationElement(navigationResourceIterator.next().adaptTo(ComponentNode.class)));
+        }
     }
 
     @DialogField(fieldLabel = "Auto Generate Navigation?",
