@@ -4,7 +4,7 @@ package com.citytechinc.cq.harbor.components.content.navigation.globalnavigation
 import com.citytechinc.cq.component.annotations.*;
 import com.citytechinc.cq.component.annotations.editconfig.ActionConfig;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
-import com.citytechinc.cq.harbor.components.content.navigation.treenavigation.TreeNavigation;
+import com.citytechinc.cq.harbor.components.content.navigation.bootstrapnavigation.BootstrapMainNavigation;
 import com.citytechinc.cq.library.components.annotations.AutoInstantiate;
 import com.citytechinc.cq.library.content.node.ComponentNode;
 import com.citytechinc.cq.library.content.request.ComponentRequest;
@@ -29,7 +29,7 @@ import java.util.List;
         allowedParents = "*/parsys"
 )
 @AutoInstantiate( instanceName = "globalNavigation" )
-public class GlobalNavigation extends AbstractGlobalNavigation {
+public class GlobalNavigation extends BootstrapMainNavigation {
     private List<NavigationElement> navigationElementList;
 
     public GlobalNavigation(ComponentRequest request) {

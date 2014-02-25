@@ -1,7 +1,6 @@
 package com.citytechinc.cq.harbor.components.content.navigation.globalnavigation;
 
 import com.citytechinc.cq.component.annotations.*;
-import com.citytechinc.cq.component.annotations.editconfig.ActionConfig;
 import com.citytechinc.cq.component.annotations.widgets.PathField;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
 import com.citytechinc.cq.library.components.AbstractComponent;

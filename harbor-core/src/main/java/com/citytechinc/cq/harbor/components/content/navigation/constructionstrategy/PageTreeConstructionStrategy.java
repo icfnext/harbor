@@ -1,11 +1,10 @@
-package com.citytechinc.cq.harbor.components.content.navigation.treenavigation;
+package com.citytechinc.cq.harbor.components.content.navigation.constructionstrategy;
 
 import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.Option;
 import com.citytechinc.cq.component.annotations.widgets.NumberField;
 import com.citytechinc.cq.component.annotations.widgets.PathField;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
-import com.citytechinc.cq.harbor.components.content.tree.DefaultTreeNode;
 import com.citytechinc.cq.harbor.components.content.tree.TreeNode;
 import com.citytechinc.cq.harbor.components.content.tree.TreeNodeConstructionStrategy;
 import com.citytechinc.cq.harbor.components.content.tree.TreeNodes;
@@ -19,7 +18,7 @@ import com.google.common.base.Predicate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TreeConstructionStrategy implements TreeNodeConstructionStrategy<PageDecorator> {
+public class PageTreeConstructionStrategy implements TreeNodeConstructionStrategy<PageDecorator> {
     private Predicate<PageDecorator> predicate;
     private static final String predicateDefault = "INCLUDE_ALL_CHILD_PAGE_TYPES";
     private static final Integer DEFAULT_NAV_DEPTH = 0;
@@ -36,13 +35,13 @@ public class TreeConstructionStrategy implements TreeNodeConstructionStrategy<Pa
             fieldDescription = "Limit what types of pages can be added to the navigation.",
             name = "./predicate")
     @Selection(type = Selection.SELECT, options = {
-        @Option(text="Content Page", value="HIERARCHICAL_PAGE_PREDICATE"),
-        @Option(text="Section Landing Page", value="SECTION_LANDING_PAGE_PREDICATE"),
-        @Option(text="All Child Page Types", value="INCLUDE_ALL_CHILD_PAGE_TYPES"),
+            @Option(text="Content Page", value="HIERARCHICAL_PAGE_PREDICATE"),
+            @Option(text="Section Landing Page", value="SECTION_LANDING_PAGE_PREDICATE"),
+            @Option(text="All Child Page Types", value="INCLUDE_ALL_CHILD_PAGE_TYPES"),
     })
     private final Optional<String> predicateString;
 
-    public TreeConstructionStrategy(ComponentNode componentNode) {
+    public PageTreeConstructionStrategy(ComponentNode componentNode) {
 
         /*
             Grabs the root page set up in the Tree Navigation Component.

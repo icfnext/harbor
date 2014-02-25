@@ -15,8 +15,8 @@ import com.citytechinc.cq.library.content.request.ComponentRequest;
         allowedParents = "*/parsys"
 )
 @AutoInstantiate( instanceName = "secondaryNavigation" )
-public class SecondaryNavigation extends AbstractSecondaryNavigation{
+public class SecondaryNavigation {
     public SecondaryNavigation(ComponentRequest request) {
-        super(request);
+        //super(request);
     }
 }
