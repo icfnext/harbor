@@ -1,4 +1,4 @@
-package com.citytechinc.cq.harbor.components.content.navigation.globalnavigation;
+package com.citytechinc.cq.harbor.components.content.navigation.bootstrapnavigation;
 
 import com.citytechinc.cq.component.annotations.*;
 import com.citytechinc.cq.component.annotations.widgets.PathField;
@@ -15,11 +15,11 @@ import com.citytechinc.cq.library.content.request.ComponentRequest;
         },
         group = ".hidden"
 )
-public class NavigationElement extends AbstractComponent {
-    public NavigationElement(ComponentRequest req) {
+public class BootstrapMainNavigationElement extends AbstractComponent {
+    public BootstrapMainNavigationElement(ComponentRequest req) {
         super(req);
     }
-    public NavigationElement(ComponentNode node) {
+    public BootstrapMainNavigationElement(ComponentNode node) {
         super(node);
     }
 

@@ -1,7 +1,7 @@
 Harbor.Components.GlobalNavigation = function($){
 
     var navigationElement = {
-        'sling:resourceType': '/harbor/components/content/navigationelement',
+        'sling:resourceType': '/harbor/components/content/bootstrapmainnavigationnavigationelement',
         'jcr:primaryType': 'nt:unstructured',
         ':nameHint': 'nav_element'
     };

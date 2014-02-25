@@ -1,6 +1,6 @@
 <%@include file="/libs/harbor/components/global.jsp" %>
 
-<ct:component className="com.citytechinc.cq.harbor.components.content.navigation.globalnavigation.NavigationElement" name="navElement"/>
+<ct:component className="com.citytechinc.cq.harbor.components.content.navigation.bootstrapnavigation.BootstrapMainNavigationElement" name="navElement"/>
 
 <c:choose>
     <%-- Insert a dropdown if configured for the nav element --%>
