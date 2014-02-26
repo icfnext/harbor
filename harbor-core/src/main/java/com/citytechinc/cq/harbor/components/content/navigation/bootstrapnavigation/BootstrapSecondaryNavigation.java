@@ -1,4 +1,4 @@
-package com.citytechinc.cq.harbor.components.content.navigation.secondarynavigation;
+package com.citytechinc.cq.harbor.components.content.navigation.bootstrapnavigation;
 
 
 import com.citytechinc.cq.component.annotations.Component;
@@ -7,7 +7,8 @@ import com.citytechinc.cq.library.components.annotations.AutoInstantiate;
 import com.citytechinc.cq.library.content.request.ComponentRequest;
 
 
-@Component(value = "Secondary Navigation",
+@Component(value = "Bootstrap Secondary Navigation",
+        group = "Harbor Scaffolding",
         actions = {"text: Global Navigation", "-", "edit", "-", "delete"},
         listeners = {
                 @Listener(name = "afterinsert", value = "REFRESH_PAGE")
@@ -15,8 +16,8 @@ import com.citytechinc.cq.library.content.request.ComponentRequest;
         allowedParents = "*/parsys"
 )
 @AutoInstantiate( instanceName = "secondaryNavigation" )
-public class SecondaryNavigation {
-    public SecondaryNavigation(ComponentRequest request) {
+public class BootstrapSecondaryNavigation {
+    public BootstrapSecondaryNavigation(ComponentRequest request) {
         //super(request);
     }
 }
