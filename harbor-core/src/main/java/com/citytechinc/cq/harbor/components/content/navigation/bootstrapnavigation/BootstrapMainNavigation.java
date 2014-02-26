@@ -1,6 +1,5 @@
 package com.citytechinc.cq.harbor.components.content.navigation.bootstrapnavigation;
 
-
 import com.citytechinc.cq.component.annotations.*;
 import com.citytechinc.cq.component.annotations.editconfig.ActionConfig;
 import com.citytechinc.cq.component.annotations.widgets.DialogFieldSet;
@@ -20,7 +19,7 @@ import java.util.List;
 
 @Component( value = "Bootstrap Main Navigation",
         group = "Harbor Scaffolding",
-        actions = {"text: Global Navigation", "-", "edit", "-", "delete"},
+        actions = {"text:Bootstrap Main Navigation", "-", "edit", "-", "delete"},
         contentAdditionalProperties = {
                 @ContentProperty(name="dependencies", value="harbor.components.content.globalnavigation")
         },
@@ -32,7 +31,6 @@ import java.util.List;
                 @Listener(name = "afterinsert", value = "REFRESH_PAGE")
         },
         allowedParents = "*/parsys"
-
 )
 @AutoInstantiate( instanceName = "bootstrapMainNavigation" )
 public class BootstrapMainNavigation extends AbstractTreeComponent<PageDecorator> {

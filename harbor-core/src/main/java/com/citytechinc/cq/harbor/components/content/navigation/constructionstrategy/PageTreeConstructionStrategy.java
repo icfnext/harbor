@@ -12,6 +12,7 @@ import com.citytechinc.cq.harbor.content.page.impl.PagePredicates;
 import com.citytechinc.cq.library.content.node.ComponentNode;
 import com.citytechinc.cq.library.content.page.PageDecorator;
 import com.citytechinc.cq.library.content.page.PageManagerDecorator;
+import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
 
@@ -136,7 +137,16 @@ public class PageTreeConstructionStrategy implements TreeNodeConstructionStrateg
         return null;
     }
 
-    public Predicate<PageDecorator> getPredicate() {
+    private Predicate<PageDecorator> getPredicate() {
         return predicate;
     }
+
+    protected TreeNode<PageDecorator> getTreeNode(PageDecorator p){
+        return TreeNodes.newBasicTreeNode(p);
+    }
+
+    protected TreeNode<PageDecorator> getTreeNode(PageDecorator p, List<TreeNode<PageDecorator>> p_list ){
+        return TreeNodes.newBasicTreeNode(p, p_list);
+    }
+
 }
