@@ -5,10 +5,10 @@
     <c:forEach var="curBreadcrumbItem" items="${breadcrumb.trail}" varStatus="loop">
         <c:choose>
             <c:when test="${!loop.last}">
-                <li><a href="${curBreadcrumbItem.href}">${curBreadcrumbItem.title}</a></li>
+                <li class="fa ${breadcrumb.delimiter} divider" ><a href="${curBreadcrumbItem.href}">${curBreadcrumbItem.title}</a></li>
             </c:when>
             <c:otherwise>
-                <li class="active">${curBreadcrumbItem.title}</li>
+                <li class="active fa ${breadcrumb.delimiter} divider">${curBreadcrumbItem.title}</li>
             </c:otherwise>
         </c:choose>
     </c:forEach>

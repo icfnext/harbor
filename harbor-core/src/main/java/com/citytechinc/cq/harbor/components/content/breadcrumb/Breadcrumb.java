@@ -74,9 +74,9 @@ public class Breadcrumb extends AbstractComponent {
         return get("rootPageType", SectionLandingPage.RDF_TYPE);
     }
 
-    @DialogField(fieldLabel = "Divider", fieldDescription = "The icon that will divide the different pages in the breadcrumb.", ranking = 2)
-    @Selection(type = Selection.COMBOBOX, optionsUrl = ComponentConstants.FONT_AWESOME_SERVLET_PATH )
-    public String getDivider(){
-        return get("rootPageType", SectionLandingPage.RDF_TYPE);
+    @DialogField(fieldLabel = "delimiter", fieldDescription = "The icon that will divide the different pages in the breadcrumb.", ranking = 2)
+    @Selection(type = Selection.SELECT, optionsUrl = ComponentConstants.FONT_AWESOME_SERVLET_PATH)
+    public String getDelimiter(){
+        return get("delimiter", "");
     }
 }
