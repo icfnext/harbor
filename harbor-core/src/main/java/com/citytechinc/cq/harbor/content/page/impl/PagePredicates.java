@@ -33,12 +33,12 @@ public class PagePredicates {
 
     };
 
-    public static final Predicate<PageDecorator> HIERARCHICAL_PAGE_PREDICATE = new Predicate<PageDecorator>() {
+    public static final Predicate<PageDecorator> CONTENT_PAGE_PREDICATE = new Predicate<PageDecorator>() {
 
         @Override
         public boolean apply(final PageDecorator page) {
             try {
-                return page.getContentResource().adaptTo(Node.class).isNodeType(HierarchicalPage.RDF_TYPE);
+                return page.getContentResource().adaptTo(Node.class).isNodeType("harbor:ContentPage");
             } catch (RepositoryException e) {
                 LOG.error("Repository Exception encountered while evaluating Hierarchical Page page predicate");
                 return false;
@@ -65,7 +65,7 @@ public class PagePredicates {
         @Override
         public boolean apply(final PageDecorator page) {
             return PagePredicates.SECTION_LANDING_PAGE_PREDICATE.apply(page)
-                || PagePredicates.HIERARCHICAL_PAGE_PREDICATE.apply(page);
+                || PagePredicates.CONTENT_PAGE_PREDICATE.apply(page);
         }
     };
 
@@ -73,7 +73,7 @@ public class PagePredicates {
     static{
         PREDICATE_MAP = new HashMap<String, Predicate<PageDecorator>>();
         PREDICATE_MAP.put("HOME_PAGE_PREDICATE", HOME_PAGE_PREDICATE);
-        PREDICATE_MAP.put("HIERARCHICAL_PAGE_PREDICATE", HIERARCHICAL_PAGE_PREDICATE);
+        PREDICATE_MAP.put("HIERARCHICAL_PAGE_PREDICATE", CONTENT_PAGE_PREDICATE);
         PREDICATE_MAP.put("SECTION_LANDING_PAGE_PREDICATE", SECTION_LANDING_PAGE_PREDICATE);
         PREDICATE_MAP.put("INCLUDE_ALL_CHILD_PAGE_TYPES", INCLUDE_ALL_CHILD_PAGE_TYPES);
     }

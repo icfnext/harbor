@@ -10,5 +10,5 @@
     <jcr:content
             jcr:primaryType="cq:PageContent"
             sling:resourceType="harbor/components/page/common/master"
-            rdf:type="harbor:HierarchicalPage"/>
+            rdf:type="harbor:ContentPage"/>
 </jcr:root>

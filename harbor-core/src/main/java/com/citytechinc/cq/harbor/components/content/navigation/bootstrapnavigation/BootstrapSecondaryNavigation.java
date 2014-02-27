@@ -6,12 +6,13 @@ import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.Listener;
 import com.citytechinc.cq.component.annotations.widgets.DialogFieldSet;
 import com.citytechinc.cq.harbor.components.content.navigation.constructionstrategy.PageTreeConstructionStrategy;
-import com.citytechinc.cq.harbor.components.content.tree.AbstractTreeComponent;
-import com.citytechinc.cq.harbor.components.content.tree.TreeNodeConstructionStrategy;
-import com.citytechinc.cq.harbor.components.content.tree.TreeNodeRenderingStrategy;
+import com.citytechinc.cq.harbor.components.content.tree.*;
 import com.citytechinc.cq.library.components.annotations.AutoInstantiate;
 import com.citytechinc.cq.library.content.page.PageDecorator;
 import com.citytechinc.cq.library.content.request.ComponentRequest;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Component(value = "Bootstrap Secondary Navigation",
@@ -34,7 +35,7 @@ public class BootstrapSecondaryNavigation extends AbstractTreeComponent<PageDeco
         super(request);
 
         constructionStrategy = new PageTreeConstructionStrategy(request.getComponentNode());
-        renderingStrategy = new BootstrapSecondaryNavigationRenderingStrategy();
+        renderingStrategy = new BootstrapSecondaryNavigationRenderingStrategy(request);
     }
 
     @Override
@@ -45,5 +46,22 @@ public class BootstrapSecondaryNavigation extends AbstractTreeComponent<PageDeco
     @Override
     protected TreeNodeRenderingStrategy<PageDecorator> getTreeRenderingStrategy() {
         return renderingStrategy;
+    }
+
+    public List<TreeNode<PageDecorator>> getRootChildren(){
+        if(getRootNode() != null){
+            return getRootNode().getChildren();
+        }
+        return null;
+    }
+    public List<RenderableTreeNode<PageDecorator>> getRootChildrenAsRenderable(){
+        List<RenderableTreeNode<PageDecorator>> out = new ArrayList();
+        if(getRootNode() != null){
+            for(TreeNode<PageDecorator> node : getRootChildren()){
+                out.add(new RenderableTreeNode<PageDecorator>(node, getTreeRenderingStrategy()));
+            }
+            return out;
+        }
+        return null;
     }
 }

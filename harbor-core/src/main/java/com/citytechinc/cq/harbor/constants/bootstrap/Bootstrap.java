@@ -24,4 +24,8 @@ public class Bootstrap {
     public static final String DROPDOWN_TOGGLE = "dropdown-toggle";
     public static final String DROPDOWN_MENU = "dropdown-menu";
 
+    public static final String NAV_PILLS_STACKED = "nav nav-pills nav-stacked";
+
+    public static final String ACTIVE = "active";
+
 }

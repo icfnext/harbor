@@ -21,12 +21,4 @@ public class TreeNodes {
 
     }
 
-    public static <T> TreeNode<T> newNavigationTreeNode(T value){
-        return new NavigationTreeNode<T>(value, new ArrayList<TreeNode<T>>());
-    }
-
-    public static <T> TreeNode<T> newNavigationTreeNode(T value, List<TreeNode<T>> children){
-        return new NavigationTreeNode<T>(value, children);
-
-    }
 }

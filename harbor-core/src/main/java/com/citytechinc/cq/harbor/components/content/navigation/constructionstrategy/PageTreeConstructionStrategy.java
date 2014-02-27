@@ -12,7 +12,6 @@ import com.citytechinc.cq.harbor.content.page.impl.PagePredicates;
 import com.citytechinc.cq.library.content.node.ComponentNode;
 import com.citytechinc.cq.library.content.page.PageDecorator;
 import com.citytechinc.cq.library.content.page.PageManagerDecorator;
-import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
 
@@ -36,7 +35,7 @@ public class PageTreeConstructionStrategy implements TreeNodeConstructionStrateg
             fieldDescription = "Limit what types of pages can be added to the navigation.",
             name = "./predicate")
     @Selection(type = Selection.SELECT, options = {
-            @Option(text="Content Page", value="HIERARCHICAL_PAGE_PREDICATE"),
+            @Option(text="Content Page", value="CONTENT_PAGE_PREDICATE"),
             @Option(text="Section Landing Page", value="SECTION_LANDING_PAGE_PREDICATE"),
             @Option(text="All Child Page Types", value="INCLUDE_ALL_CHILD_PAGE_TYPES"),
     })
@@ -137,16 +136,7 @@ public class PageTreeConstructionStrategy implements TreeNodeConstructionStrateg
         return null;
     }
 
-    private Predicate<PageDecorator> getPredicate() {
+    public Predicate<PageDecorator> getPredicate() {
         return predicate;
     }
-
-    protected TreeNode<PageDecorator> getTreeNode(PageDecorator p){
-        return TreeNodes.newBasicTreeNode(p);
-    }
-
-    protected TreeNode<PageDecorator> getTreeNode(PageDecorator p, List<TreeNode<PageDecorator>> p_list ){
-        return TreeNodes.newBasicTreeNode(p, p_list);
-    }
-
 }
