@@ -1,5 +1,5 @@
 <%@include file="/libs/harbor/components/global.jsp"%>
-<ct:component className="com.citytechinc.cq.harbor.components.content.demobreadcrumb.DemoBreadcrumb" name="breadcrumb"/>
+<ct:component className="com.citytechinc.cq.harbor.components.content.breadcrumb.Breadcrumb" name="breadcrumb"/>
 
 <ol class="harbor-breadcrumb breadcrumb">
     <c:forEach var="curBreadcrumbItem" items="${breadcrumb.trail}" varStatus="loop">

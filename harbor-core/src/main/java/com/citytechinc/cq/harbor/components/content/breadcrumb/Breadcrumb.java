@@ -1,9 +1,10 @@
-package com.citytechinc.cq.harbor.components.content.demobreadcrumb;
+package com.citytechinc.cq.harbor.components.content.breadcrumb;
 
 import com.citytechinc.cq.component.annotations.Component;
 import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.Option;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
+import com.citytechinc.cq.harbor.constants.components.ComponentConstants;
 import com.citytechinc.cq.harbor.content.page.HierarchicalPage;
 import com.citytechinc.cq.harbor.content.page.HomePage;
 import com.citytechinc.cq.harbor.content.page.SectionLandingPage;
@@ -15,12 +16,12 @@ import com.google.common.collect.Lists;
 
 import java.util.List;
 
-@Component("Demo Breadcrumb")
-public class DemoBreadcrumb extends AbstractComponent {
+@Component("Breadcrumb")
+public class Breadcrumb extends AbstractComponent {
 
     private List<PageDecorator> trail;
 
-    public DemoBreadcrumb(ComponentRequest request) {
+    public Breadcrumb(ComponentRequest request) {
         super(request);
     }
 
@@ -64,12 +65,18 @@ public class DemoBreadcrumb extends AbstractComponent {
         return trail;
     }
 
-    @DialogField(fieldLabel = "Root Page Type", fieldDescription = "The type of page that the breadcrumb will display as the root page.")
+    @DialogField(fieldLabel = "Root Page Type", fieldDescription = "The type of page that the breadcrumb will display as the root page.", ranking=2)
     @Selection(type = Selection.SELECT, options = {
             @Option(text = "Section Landing Page", value = SectionLandingPage.RDF_TYPE),
             @Option(text = "Home Page", value = HomePage.RDF_TYPE)
     })
     public String getRootPageType(){
+        return get("rootPageType", SectionLandingPage.RDF_TYPE);
+    }
+
+    @DialogField(fieldLabel = "Divider", fieldDescription = "The icon that will divide the different pages in the breadcrumb.", ranking = 2)
+    @Selection(type = Selection.COMBOBOX, optionsUrl = ComponentConstants.FONT_AWESOME_SERVLET_PATH )
+    public String getDivider(){
         return get("rootPageType", SectionLandingPage.RDF_TYPE);
     }
 }
