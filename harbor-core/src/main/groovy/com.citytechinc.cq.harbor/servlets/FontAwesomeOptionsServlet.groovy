@@ -2,15 +2,12 @@ package com.citytechinc.cq.harbor.servlets
 
 import com.citytechinc.cq.harbor.constants.components.ComponentConstants
 import com.citytechinc.cq.library.content.request.ComponentServletRequest
-import com.citytechinc.cq.library.servlets.AbstractJsonResponseServlet
 import com.citytechinc.cq.library.servlets.optionsprovider.AbstractOptionsProviderServlet
 import com.citytechinc.cq.library.servlets.optionsprovider.Option
 import com.google.common.base.Charsets
 import com.google.common.base.Optional
 import org.apache.felix.scr.annotations.sling.SlingServlet
 import org.apache.jackrabbit.JcrConstants
-import org.apache.sling.api.SlingHttpServletRequest
-import org.apache.sling.api.SlingHttpServletResponse
 import org.apache.sling.api.resource.Resource
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -34,7 +31,7 @@ public class FontAwesomeOptionsServlet extends AbstractOptionsProviderServlet {
 		//Get resource which contains the Font Awesome CSS
 		def resource = request.getResourceResolver().getResource(ComponentConstants.FONT_AWESOME_CSS_FILE_PATH);
 		def iconOptions = parseResourceForIconOptions(resource);
-		return iconOptions;
+		return iconOptions.sort();
 	}
 
 	private List<Option> parseResourceForIconOptions(Resource resource) {
