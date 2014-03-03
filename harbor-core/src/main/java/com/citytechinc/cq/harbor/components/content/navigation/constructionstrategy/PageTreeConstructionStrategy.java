@@ -81,9 +81,7 @@ public class PageTreeConstructionStrategy implements TreeNodeConstructionStrateg
 
     protected TreeNode<PageDecorator> BuildNavigationTree(PageDecorator pageRoot){
         //grab child pages from homePage
-        List<PageDecorator> pageRootChildren = pageRoot.getChildren(getPredicate());
         TreeNode<PageDecorator> root = TreeNodes.newBasicTreeNode(pageRoot);
-
         TreeNode<PageDecorator> new_root = buildTreeRecur(root, 0);
 
         return new_root;
