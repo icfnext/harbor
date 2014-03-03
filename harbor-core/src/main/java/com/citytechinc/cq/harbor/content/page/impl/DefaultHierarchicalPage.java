@@ -52,4 +52,15 @@ public class DefaultHierarchicalPage extends AbstractHierarchicalPage implements
         return this.homePage;
     }
 
+    //TODO: implement these methods
+    @Override
+    public Optional<String> getPageIconImage() {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public Optional<String> getPageIcon() {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
 }

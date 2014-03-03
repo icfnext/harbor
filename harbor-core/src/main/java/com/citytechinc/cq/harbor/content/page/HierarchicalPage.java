@@ -10,4 +10,8 @@ public interface HierarchicalPage extends PageDecorator {
 
     public Optional<HomePage> getHomePage();
 
+    public Optional<String> getPageIconImage();
+
+    public Optional<String> getPageIcon();
+
 }
