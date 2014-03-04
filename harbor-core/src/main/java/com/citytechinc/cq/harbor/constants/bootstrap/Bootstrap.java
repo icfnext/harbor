@@ -20,4 +20,12 @@ public class Bootstrap {
     public static final String CONTAINER_CLASS = "container";
     public static final String CONTAINER_FULL_WIDTH_CLASS = "container-full-width";
 
+    public static final String DROPDOWN = "dropdown";
+    public static final String DROPDOWN_TOGGLE = "dropdown-toggle";
+    public static final String DROPDOWN_MENU = "dropdown-menu";
+
+    public static final String NAV_PILLS_STACKED = "nav nav-pills nav-stacked";
+
+    public static final String ACTIVE = "active";
+
 }
