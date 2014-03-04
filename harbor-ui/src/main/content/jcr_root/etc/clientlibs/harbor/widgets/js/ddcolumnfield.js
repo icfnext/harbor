@@ -135,11 +135,9 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.CustomContentPanel , {
                 }
                 else{
                     //otherwise, Leave the lone column there
-
-                    if( parentContext.colArray.length == 0 ){
+                    if( parentContext.columnCount == 0 ){
                         parentContext.addColumn( parentContext );
                     }
-
 
                 }
             });
@@ -227,15 +225,15 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.CustomContentPanel , {
             colContainer.append( col );
 
             this.columnManifest[ this.columnCount ] = this.createColData(
-                                                                            this.columnCount ,
-                                                                            {
-                                                                                colSize      : 1 ,
-                                                                                class        : this.columnClassPrefix + 1,
-                                                                                maxColSize   : this.getMaxColSize( this.columnCount ),
-                                                                                canAddColumn : true
-                                                                            } ,
-                                                                            col
-                                                                        );
+                this.columnCount ,
+                {
+                    colSize      : 1 ,
+                    class        : this.columnClassPrefix + 1,
+                    maxColSize   : this.getMaxColSize( this.columnCount ),
+                    canAddColumn : true
+                } ,
+                col
+            );
 
             this.columnResized();
 
