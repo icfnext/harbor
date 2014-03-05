@@ -32,17 +32,7 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.CustomContentPanel , {
 
             this.removeColumn = function(){
 
-                if( parentContext.columnCount != 1 ){
-                    $(".col:last").remove();
-
-                    parentContext.columnCount --;
-                }
-
-                //TODO: Set flag on this column in the manifest
-                //make sure it can't be ID'd in normal use (think resize, etc)
-
-
-
+                parentContext.removeColumn();
 
             }
 
@@ -241,6 +231,31 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.CustomContentPanel , {
 
     },
 
+    removeColumn : function( ){
+
+        var lastCol = $(".col:last");
+
+        if( this.columnCount != 1 ){
+
+
+            var id = lastCol.data("column-id");
+            this.columnManifest[ id ].data = {
+                colSize      : 0,
+                maxColSize   : 0,
+                class        : '',
+                canAddColumn : false
+            }
+
+
+            lastCol.remove();
+            this.columnCount --;
+        }
+
+        //TODO: Set flag on this column in the manifest
+        //make sure it can't be ID'd in normal use (think resize, etc)
+
+    },
+
     getSizeForColumn: function(columnData){
         if(columnData.hasOwnProperty("colClass") && columnData.colClass){
             return columnData.colClass;
@@ -254,7 +269,7 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.CustomContentPanel , {
         var colWidth = options.width || '1';
         var colClass = this.columnClassPrefix + colWidth;
 
-        var tmp = $("<div class='" + colClass + "' data-column-id='" + id + "'>"+
+        var tmp = $("<div class='" + colClass + " col' data-column-id='" + id + "'>"+
                         "<div class='well'>" +
                             "<h3>" + id + "</h3> " +
                             "<div class='x-small'>" +
