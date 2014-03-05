@@ -78,6 +78,7 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.CustomContentPanel , {
         this.ownerCt.ownerCt.ownerCt.on("show", function(){
 
             parentContext.columnRequestFactory.getColumnsInRow().then(function(data){
+                console.log(data);
                 var col_list = [];
                 var tcolumnData;
                 var tcolumnName;
@@ -94,32 +95,44 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.CustomContentPanel , {
                         tcolumnData = data[prop];
                         tid = parentContext.columnCount.toString();
 
-                        var html = parentContext.getColHtmlString(tid, {"colClass":parentContext.getSizeForColumn(tcolumnData)})
-                        var col_hash = parentContext.createColData(tid, tcolumnData, html);
+                        //var html = parentContext.getColHtmlString(tid, {"colClass":parentContext.getSizeForColumn(tcolumnData)})
+                        var col_hash = parentContext.createColData(tid, {
+                            colSize: tcolumnData["colClass"] || 1,
+                            maxColSize: null, //tcolumnData["maxColSize"] || null,
+                            class: null,//tcolumnData["class"] || null,
+                            canAddColumn: null,//tcolumnData["canAddColumn"] || null
+                            name: tcolumnName
+                        });
 
                         col_list.push(col_hash);
-                        //increase col count
-
                     }
                 }
+
+
+               /* * @param data = {
+                *                  colSize      : integer,
+                *                  maxColSize   : integer,
+                *                  class        : string,
+                *                  canAddColumn : boolean
+                *               }*/
 
                 //if non-empty,
                 if(col_list.length > 0){
 
                     //zero out column container to replace the placeholder with the actual columns
-                    var col_container = $("#"+parentContext.containerPanel.id).find("." + parentContext.columnContainerClass);
-                    $(col_container).html("");
+                    //var col_container = $("#"+parentContext.containerPanel.id).find("." + parentContext.columnContainerClass);
+                    //$(col_container).html("");
 
                     for(var i = 0; i < col_list.length; i++){
                         var col = col_list[i];
 
-                        //append column html to column container
-                        $(col_container).append(col.colHtml);
-                        parentContext.colArray.push(col.colHtml);
-                        parentContext.columnCount += 1;
+                        /*
+                            Invoke add column with the column data that was returned via ajax.
+                         */
+                        parentContext.addColumn(parentContext, {
+                            data: col.data
+                        });
 
-                        //Add column obj to "manifest"
-                        parentContext.columnManifest[col.id] = col;
                     }
 
                 }
@@ -133,11 +146,16 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.CustomContentPanel , {
             });
         });
 
-        //TODO: find out why button event isn't accessible from this.ownerCt.ownerCt.ownerCt.buttons[0]
+
         this.ownerCt.ownerCt.ownerCt.on("hide", function(t){
-            console.log(t);
-            console.log("dialog hidden ")
-            //TODO: serialize manifest to JCR
+            //Zero out the manifest
+            parentContext.columnManifest = {};
+            //Zero out the column count
+            parentContext.columnCount = 0;
+            //zero out column container
+            var col_container = $("#"+parentContext.containerPanel.id).find("." + parentContext.columnContainerClass);
+            $(col_container).html("");
+
         });
 
         this.doLayout();
@@ -157,8 +175,6 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.CustomContentPanel , {
 
         } );
 
-
-
         $.each( this.columnManifest , function( index , col ) {
 
             if( totalColumnsSpanned < 12 ){
@@ -171,15 +187,12 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.CustomContentPanel , {
                 parentContext.canAddAnotherColumn = false;
             }
 
-
         } )
-
-
-
 
     },
 
-    addColumn : function( parentContext ){
+    addColumn : function( parentContext , options ){
+        options = options || {};
 
         if( this.columnCount < 12 && this.canAddAnotherColumn ){
 
@@ -187,7 +200,7 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.CustomContentPanel , {
 
             var parentPanel  = $( "#" + this.containerPanel.id );
             var colContainer = parentPanel.find( "." + this.columnContainerClass);
-            var col          = this.getColHtmlString( this.columnCount, {} );
+            var col          = this.getColHtmlString( this.columnCount, options );
 
             col.find(".more").click( function( e ){
 
@@ -211,18 +224,17 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.CustomContentPanel , {
                 e.preventDefault();
             } )
 
-
             colContainer.append( col );
 
             this.columnManifest[ this.columnCount ] = this.createColData(
                 this.columnCount ,
                 {
-                    colSize      : 1 ,
-                    class        : this.columnClassPrefix + 1,
-                    maxColSize   : this.getMaxColSize( this.columnCount ),
-                    canAddColumn : true
-                } ,
-                col
+                    colSize      : options.colSize || 1 ,
+                    class        : options.class || this.columnClassPrefix + (options.width || 1) ,
+                    maxColSize   : options.maxColSize || this.getMaxColSize( this.columnCount ),
+                    canAddColumn : options.canAddColumn || true,
+                    name: options.columnName || ":column" //This is for the serialization differentiation
+                }
             );
 
             this.columnResized();
@@ -266,7 +278,8 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.CustomContentPanel , {
     },
 
     getColHtmlString: function(id, options){
-        var colWidth = options.width || '1';
+        options.data = options.data || {};
+        var colWidth = options.data.colSize || '1';
         var colClass = this.columnClassPrefix + colWidth;
 
         var tmp = $("<div class='" + colClass + " col' data-column-id='" + id + "'>"+
@@ -373,15 +386,13 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.CustomContentPanel , {
      *                  class        : string,
      *                  canAddColumn : boolean
      *               }
-     * @param html
-     * @returns {{id: *, data: *, colHtml: *}}
+     * @returns {{id: *, data: *}}
      */
 
-    createColData: function(id, data, html){
+    createColData: function(id, data){
         return {
             "id": id,
-            "data": data,
-            "colHtml": html
+            "data": data
         }
     }
 
