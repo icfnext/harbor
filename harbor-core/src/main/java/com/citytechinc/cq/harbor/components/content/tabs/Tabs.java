@@ -2,6 +2,7 @@ package com.citytechinc.cq.harbor.components.content.tabs;
 
 
 import com.citytechinc.cq.component.annotations.Component;
+import com.citytechinc.cq.component.annotations.ContentProperty;
 import com.citytechinc.cq.component.annotations.Listener;
 import com.citytechinc.cq.component.annotations.editconfig.ActionConfig;
 import com.citytechinc.cq.library.components.AbstractComponent;
@@ -24,6 +25,9 @@ import java.util.List;
         actionConfigs = {
                 @ActionConfig(xtype = "tbseparator"),
                 @ActionConfig(text = "Add Tab", handler = "function(){Harbor.Components.Tabs.addTab(this)}")
+        },
+        contentAdditionalProperties = {
+                @ContentProperty(name="dependencies", value="harbor.components.content.tabs")
         }
 )
 @AutoInstantiate(instanceName = "tabs")

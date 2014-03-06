@@ -26,7 +26,7 @@ Harbor.Components.Tabs = function (jQuery) {
                         update: function (event, ui) {
                             // reorder tabs on back end on update
                             var $item = ui.item;
-                            var name = $item.attr('name');
+                            var name = $item.data('name');
 
                             if (name) {
                                 var path = $item.data('path') + '/' + name;
