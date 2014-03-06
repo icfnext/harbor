@@ -22,8 +22,7 @@ import java.util.ListIterator;
 
 @Component(value = "Breadcrumb",
         contentAdditionalProperties = {
-                @ContentProperty(name = "dependencies", value = "harbor.fontawesome"),
-                @ContentProperty(name = "dependencies", value = "harbor.bootstrap")
+                @ContentProperty(name = "dependencies", value = "[harbor.fontawesome,harbor.bootstrap]"),
         })
 public class Breadcrumb extends AbstractComponent {
 
