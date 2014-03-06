@@ -7,14 +7,14 @@ import com.citytechinc.cq.component.annotations.widgets.Selection;
 public class BreadcrumbItemConfigNode {
     private final boolean hideIcon;
     private final boolean hideTitle;
-    private final boolean useIcon;
+    private final boolean useHtmlDelimiter;
     private final String delimiterIcon;
     private final String delimiterHtml;
 
-    public BreadcrumbItemConfigNode(boolean hideIcon, boolean hideTitle, boolean useIcon, String delimiterIcon, String delimiterHtml) {
+    public BreadcrumbItemConfigNode(boolean hideIcon, boolean hideTitle, boolean useHtmlDelimiter, String delimiterIcon, String delimiterHtml) {
         this.hideIcon = hideIcon;
         this.hideTitle = hideTitle;
-        this.useIcon = useIcon;
+        this.useHtmlDelimiter = useHtmlDelimiter;
         this.delimiterIcon = delimiterIcon;
         this.delimiterHtml = delimiterHtml;
     }
@@ -35,8 +35,8 @@ public class BreadcrumbItemConfigNode {
         return hideTitle;
     }
 
-    public boolean getUseIcon() {
-        return useIcon;
+    public boolean getUseHtmlDelimiter() {
+        return useHtmlDelimiter;
     }
 
     public String getDelimiterIcon() {

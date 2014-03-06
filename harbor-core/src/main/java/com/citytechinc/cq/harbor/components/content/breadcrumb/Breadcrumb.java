@@ -31,7 +31,7 @@ public class Breadcrumb extends AbstractComponent {
     private final static String BREADCRUMB_PAGE_OPTIONS_NODE_PREFIX = "breadcrumbPageOptions/";
     private final String HIDE_ICON_PROPERTY_NAME = "hideIcon";
     private final String HIDE_TITLE_PROPERTY_NAME = "hideTitle";
-    private final boolean ICON_DELIMITER_BOOLEAN = true;
+    private final boolean ICON_DELIMITER_BOOLEAN = false;
     private final String ROOT_PAGE_SAME_AS_REST_OF_BREADCRUMB_DELIMITER_ICON_TYPE = "breadcrumbdelimiter";
     private final String ROOT_PAGE_PAGE_ICON_DELIMITER_TYPE = "pageicon";
     private List<BreadcrumbItem> trail;
@@ -40,6 +40,11 @@ public class Breadcrumb extends AbstractComponent {
         super(request);
     }
 
+    /**
+     * Returns a List of {@link BreadcrumbItem}, sorted in descending order.
+     *
+     * @return A descending trail of {@link BreadcrumbItem}.
+     */
     public List<BreadcrumbItem> getTrail() {
         if (trail != null) {
             return trail;
@@ -75,6 +80,13 @@ public class Breadcrumb extends AbstractComponent {
         return formatListForBreadcrumb(trailAsPageDecorators);
     }
 
+    /**
+     * Returns a list of PageDecorators to be rendered a Breadcrumb, using the {@link BreadcrumbItem} object.
+     * The first element of this List is going to be considered the "rootPage." The last element will be considered the "current page".
+     *
+     * @param trailAsPageDecorators A trail of page decorators, already sorted in the order in which you want them to be displayed.
+     * @return An unordered list of {@link BreadcrumbItem}.
+     */
     public List<BreadcrumbItem> formatListForBreadcrumb(List<PageDecorator> trailAsPageDecorators) {
         //The first, intermediate, and root pages all have special behavior. Instead of making the JSP worry about that, we're going to go ahead and do it here.
         //Here we use Lists.newArrayList in order to make the list mutable.
@@ -91,7 +103,7 @@ public class Breadcrumb extends AbstractComponent {
         while (trailListIterator.hasNext()) {
             currentBreadcrumbPage = trailListIterator.next();
             if (isRoot) {
-                String rootPageIcon = currentBreadcrumbPage.getPage().getPageIcon();
+                String rootPageIcon = currentBreadcrumbPage.getPageIcon();
                 currentBreadcrumbPage.setBreadcrumbTrailNode(getRootBreadcrumbItemConfigNode(rootPageIcon));
             } else {
                 currentBreadcrumbPage.setBreadcrumbTrailNode(getBreadcrumbItemConfigNode());
@@ -107,29 +119,68 @@ public class Breadcrumb extends AbstractComponent {
         return trail;
     }
 
+    /**
+     * A dialog field prompting the user to choose weather or not to use the HTML delimiter, as opposed to the icon delimiter.
+     *
+     * @return <code>true</code> if the {@link Breadcrumb} should display the HTML delimiter <code>false</code> if the {@link Breadcrumb} should display the icon delimiter.
+     */
     @DialogField(fieldLabel = "Use HTML delimiter?", ranking = 1)
-    @Selection(type = Selection.CHECKBOX, options = @Option(value = "false"))
+    @Selection(type = Selection.CHECKBOX, options = @Option(value = "true"))
     public boolean getUseHTMLDelimiter() {
-        return get("useHTMLDelimiter", true);
+        return get("useHTMLDelimiter", false);
     }
 
+    /**
+     * A dialog field which allows the user to choose what kind of delimiter icon they wish to be displayed.
+     *
+     * @return a string representing the font awesome icon class the user has selected.
+     */
     @DialogField(fieldLabel = "Delimiter Icon", ranking = 2)
     @Selection(type = Selection.COMBOBOX, optionsUrl = ComponentConstants.FONT_AWESOME_SERVLET_PATH)
     public String getIconDelimiter() {
         return get("iconDelimiter", DEFAULT_DELIMITER);
     }
 
+    /**
+     * A dialog field which allows the user to enter any HTML string they wish.
+     *
+     * @return The {@link Breadcrumb} HTML delimiter.
+     */
     @DialogField(fieldLabel = "Delimiter HTML", ranking = 3)
     public String getHtmlDelimiter() {
         return get("htmlDelimiter", "");
     }
 
+    /**
+     * Allows the user to choose what type of Icon should be used for the root page.
+     *
+     * @return a string representing the Root Page Icon Type
+     */
+    @DialogField(fieldLabel = "Root Page Icon Type", fieldDescription = "The type of icon you wish to be displayed, for the home page.", ranking = 4)
+    @Selection(type = Selection.SELECT, options = {
+            @Option(text = "Default breadcrumb icon", value = ROOT_PAGE_SAME_AS_REST_OF_BREADCRUMB_DELIMITER_ICON_TYPE),
+            @Option(text = "Page Icon", value = ROOT_PAGE_PAGE_ICON_DELIMITER_TYPE)
+    })
+    public String getRootPageIconType() {
+        return get("rootPageIconType", ROOT_PAGE_SAME_AS_REST_OF_BREADCRUMB_DELIMITER_ICON_TYPE);
+    }
+
+    /**
+     * A dialog field which allows the user to check a box if they wish to hide the current page in the breadcrumb.
+     *
+     * @return <code>true</code> will hide the last item in the {@link BreadcrumbItem} list. <code>false</code> will display the last item.
+     */
     @DialogField(fieldLabel = "Hide current page in Breadcrumb?", ranking = 4)
     @Selection(type = Selection.CHECKBOX, options = @Option(value = "true"))
     public boolean getHideCurrentPageInBreadcrumb() {
         return get("hideCurrentPageInBreadcrumb", false);
     }
 
+    /**
+     * A dialog field which allows the user to choose the type of root page icon should be displayed.
+     *
+     * @ return A string representing the option the user has chosen.
+     */
     @DialogField(fieldLabel = "Root Page Type", fieldDescription = "The type of page that the breadcrumb will display as the root page.", ranking = 6)
     @Selection(type = Selection.SELECT, options = {
             @Option(text = "Section Landing Page", value = SectionLandingPage.RDF_TYPE),
@@ -139,24 +190,37 @@ public class Breadcrumb extends AbstractComponent {
         return get("rootPageType", SectionLandingPage.RDF_TYPE);
     }
 
+    /**
+     * A dialog field which allows the user to specify what fields to display in the root page.
+     * Additionally, uses {@link #getUseHTMLDelimiter()}, {@link #getIconDelimiter()}, {@link #getRootPageIconType} and {@link #getHtmlDelimiter()} to build a {@link BreadcrumbItemConfigNode}
+     *
+     * @param rootPageIcon The Icon String to use if {@link #getRootPageIconType} == {@link #ROOT_PAGE_PAGE_ICON_DELIMITER_TYPE}
+     * @return A properly configured {@link BreadcrumbItemConfigNode} for a root page.
+     */
     @DialogField(ranking = 7)
     @DialogFieldSet(collapsible = true, collapsed = true, namePrefix = ROOT_BREADCRUMB_PAGE_OPTIONS_NODE_PREFIX, title = "Root Page Config")
     public BreadcrumbItemConfigNode getRootBreadcrumbItemConfigNode(String rootPageIcon) {
         boolean hideIcon = get(ROOT_BREADCRUMB_PAGE_OPTIONS_NODE_PREFIX + HIDE_ICON_PROPERTY_NAME, false);
         boolean hideTitle = get(ROOT_BREADCRUMB_PAGE_OPTIONS_NODE_PREFIX + HIDE_TITLE_PROPERTY_NAME, false);
-        boolean delimiterType;
+        boolean useHtmlDelimiter;
         String icon;
         String rootPageIconType = getRootPageIconType();
         if (rootPageIconType.equals(ROOT_PAGE_PAGE_ICON_DELIMITER_TYPE)) {
-            delimiterType = ICON_DELIMITER_BOOLEAN;
+            useHtmlDelimiter = ICON_DELIMITER_BOOLEAN;
             icon = rootPageIcon;
         } else {
-            delimiterType = getUseHTMLDelimiter();
+            useHtmlDelimiter = getUseHTMLDelimiter();
             icon = getIconDelimiter();
         }
-        return new BreadcrumbItemConfigNode(hideIcon, hideTitle, delimiterType, icon, getHtmlDelimiter());
+        return new BreadcrumbItemConfigNode(hideIcon, hideTitle, useHtmlDelimiter, icon, getHtmlDelimiter());
     }
 
+    /**
+     * A dialog field which allows the user to specify what elements to display in most breadcrumb pages.
+     * Additionally, uses {@link #getUseHTMLDelimiter()}, {@link #getIconDelimiter()} and {@link #getHtmlDelimiter()} to build a {@link BreadcrumbItemConfigNode}
+     *
+     * @return A {@link BreadcrumbItemConfigNode}
+     */
     @DialogField(ranking = 8)
     @DialogFieldSet(collapsible = true, collapsed = true, namePrefix = BREADCRUMB_PAGE_OPTIONS_NODE_PREFIX, title = "Page Config")
     public BreadcrumbItemConfigNode getBreadcrumbItemConfigNode() {
@@ -164,14 +228,5 @@ public class Breadcrumb extends AbstractComponent {
         boolean hideTitle = get(BREADCRUMB_PAGE_OPTIONS_NODE_PREFIX + HIDE_TITLE_PROPERTY_NAME, false);
 
         return new BreadcrumbItemConfigNode(hideIcon, hideTitle, getUseHTMLDelimiter(), getIconDelimiter(), getHtmlDelimiter());
-    }
-
-    @DialogField(fieldLabel = "Root Page Icon Type", fieldDescription = "The type of icon you wish to be displayed, for the home page.", ranking = 4)
-    @Selection(type = Selection.SELECT, options = {
-            @Option(text = "Default breadcrumb icon", value = ROOT_PAGE_SAME_AS_REST_OF_BREADCRUMB_DELIMITER_ICON_TYPE),
-            @Option(text = "Page Icon", value = ROOT_PAGE_PAGE_ICON_DELIMITER_TYPE)
-    })
-    public String getRootPageIconType() {
-        return get("rootPageIconType", ROOT_PAGE_SAME_AS_REST_OF_BREADCRUMB_DELIMITER_ICON_TYPE);
     }
 }

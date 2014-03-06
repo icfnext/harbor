@@ -3,13 +3,8 @@ package com.citytechinc.cq.harbor.components.content.breadcrumb.impl;
 import com.citytechinc.cq.harbor.components.content.breadcrumb.BreadcrumbItem;
 import com.citytechinc.cq.harbor.components.content.breadcrumb.BreadcrumbItemConfigNode;
 import com.citytechinc.cq.harbor.content.page.HierarchicalPage;
-import com.citytechinc.cq.library.content.node.BasicNode;
-import com.citytechinc.cq.library.content.node.ComponentNode;
-import com.citytechinc.cq.library.content.node.impl.DefaultComponentNode;
 import com.citytechinc.cq.library.content.page.PageDecorator;
-import com.google.common.base.Optional;
 import org.apache.sling.api.adapter.Adaptable;
-import org.apache.sling.api.resource.Resource;
 
 public class DefaultBreadcrumbItem implements BreadcrumbItem, Adaptable {
     private HierarchicalPage page;
@@ -47,8 +42,8 @@ public class DefaultBreadcrumbItem implements BreadcrumbItem, Adaptable {
         return breadcrumbTrailNode.getDelimiterHtml();
     }
 
-    public boolean getDelimiterType() {
-        return breadcrumbTrailNode.getUseIcon();
+    public boolean getUseHtmlDelimiter() {
+        return breadcrumbTrailNode.getUseHtmlDelimiter();
     }
 
     public String getHref() {
@@ -59,8 +54,13 @@ public class DefaultBreadcrumbItem implements BreadcrumbItem, Adaptable {
         return page.getTitle();
     }
 
-    public HierarchicalPage getPage() {
+    private HierarchicalPage getPage() {
         return page;
+    }
+
+    @Override
+    public String getPageIcon() {
+        return getPage().getPageIcon();
     }
 
     @Override

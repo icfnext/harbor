@@ -7,11 +7,11 @@
         <c:set var='htmlDelimiter'
                value="<span class='breadcrumb-html-delimiter'>${curBreadcrumbItem.htmlDelimiter}</span>"></c:set>
         <c:set var='title' value="${curBreadcrumbItem.title}"></c:set>
-        <c:set var='isDelimiterTypeIcon' value="${curBreadcrumbItem.delimiterType == true}"></c:set>
+        <c:set var='useHtmlDelimiter' value="${curBreadcrumbItem.useHtmlDelimiter == true}"></c:set>
         <li>
             <a href="${href}">
-                ${!curBreadcrumbItem.hideIcon && !isDelimiterTypeIcon ? htmlDelimiter : ''}
-                <i class="fa ${!curBreadcrumbItem.hideIcon && isDelimiterTypeIcon ? iconDelimiter : ''}"></i>${curBreadcrumbItem.hideTitle ?  '' : title}
+                ${!curBreadcrumbItem.hideIcon && useHtmlDelimiter ? htmlDelimiter : ''}
+                <i class="fa ${!curBreadcrumbItem.hideIcon && !useHtmlDelimiter ? iconDelimiter : ''}"></i>${curBreadcrumbItem.hideTitle ?  '' : title}
             </a>
         </li>
     </c:forEach>
