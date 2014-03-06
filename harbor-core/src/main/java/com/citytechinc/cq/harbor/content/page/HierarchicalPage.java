@@ -12,8 +12,8 @@ public interface HierarchicalPage extends PageDecorator {
 
     public Optional<HomePage> getHomePage();
 
-    public Optional<String> getPageIconImage();
+    // TODO: on backlog public String getPageIconImage();
 
-    public Optional<String> getPageIcon();
+    public String getPageIcon();
 
 }

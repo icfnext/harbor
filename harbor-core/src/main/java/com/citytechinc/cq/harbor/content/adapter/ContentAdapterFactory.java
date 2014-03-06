@@ -1,5 +1,7 @@
 package com.citytechinc.cq.harbor.content.adapter;
 
+import com.citytechinc.cq.harbor.components.content.breadcrumb.BreadcrumbItem;
+import com.citytechinc.cq.harbor.components.content.breadcrumb.impl.DefaultBreadcrumbItem;
 import com.citytechinc.cq.harbor.content.page.HierarchicalPage;
 import com.citytechinc.cq.harbor.content.page.HomePage;
 import com.citytechinc.cq.harbor.content.page.SectionLandingPage;
@@ -27,7 +29,8 @@ import org.osgi.framework.Constants;
         @Property(name = "adapters", value = {
                 "com.citytechinc.cq.harbor.content.page.HierarchicalPage",
                 "com.citytechinc.cq.harbor.content.page.SectionLandingPage",
-                "com.citytechinc.cq.harbor.content.page.HomePage"
+                "com.citytechinc.cq.harbor.content.page.HomePage",
+                "com.citytechinc.cq.harbor.components.content.breadcrumb.BreadcrumbItem"
         })
 })
 public class ContentAdapterFactory implements AdapterFactory {
@@ -72,6 +75,8 @@ public class ContentAdapterFactory implements AdapterFactory {
         }
         if (type == HomePage.class && PagePredicates.HOME_PAGE_PREDICATE.apply(pageDecorator)) {
             return (AdapterType) new DefaultHomePage(pageDecorator);
+        } if (type == BreadcrumbItem.class){
+            return (AdapterType) new DefaultBreadcrumbItem(pageDecorator);
         }
 
         return null;

@@ -3,17 +3,20 @@ package com.citytechinc.cq.harbor.components.content.breadcrumb;
 import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.Option;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
-import com.citytechinc.cq.library.components.AbstractComponent;
 
-public class BreadcrumbTrailConfigNode {
+public class BreadcrumbItemConfigNode {
     private final boolean hideIcon;
     private final boolean hideTitle;
+    private final boolean useIcon;
+    private final String delimiterIcon;
+    private final String delimiterHtml;
 
-
-
-    public BreadcrumbTrailConfigNode(boolean hideIcon, boolean hideTitle) {
+    public BreadcrumbItemConfigNode(boolean hideIcon, boolean hideTitle, boolean useIcon, String delimiterIcon, String delimiterHtml) {
         this.hideIcon = hideIcon;
         this.hideTitle = hideTitle;
+        this.useIcon = useIcon;
+        this.delimiterIcon = delimiterIcon;
+        this.delimiterHtml = delimiterHtml;
     }
 
     @DialogField(fieldLabel = "Hide Icon")
@@ -30,5 +33,17 @@ public class BreadcrumbTrailConfigNode {
     })
     public boolean getHideTitle() {
         return hideTitle;
+    }
+
+    public boolean getUseIcon() {
+        return useIcon;
+    }
+
+    public String getDelimiterIcon() {
+        return delimiterIcon;
+    }
+
+    public String getDelimiterHtml() {
+        return delimiterHtml;
     }
 }

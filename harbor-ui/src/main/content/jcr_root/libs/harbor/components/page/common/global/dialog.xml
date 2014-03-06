@@ -36,10 +36,11 @@
                         jcr:primaryType="cq:Widget"
                         path="/libs/harbor/components/page/common/global/icon.infinity.json"
                         xtype="cqinclude" />
-                <iconimage
+                <!--TODO: Backlogged
+                iconimage
                         jcr:primaryType="cq:Widget"
                         path="/libs/harbor/components/page/common/global/iconimage.infinity.json"
-                        xtype="cqinclude" />
+                        xtype="cqinclude" /-->
             </items>
         </tabs>
     </items>

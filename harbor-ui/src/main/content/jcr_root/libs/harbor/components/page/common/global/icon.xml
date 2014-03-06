@@ -12,7 +12,7 @@
                 <icons
                         jcr:primaryType="cq:Widget"
                         fieldLabel="Icon"
-                        name="./harbor:icon"
+                        name="./harboricon"
                         xtype="selection"
                         type="select"
                         options="/bin/fontawesomeservlet" />

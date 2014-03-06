@@ -1,40 +1,27 @@
 package com.citytechinc.cq.harbor.components.content.breadcrumb;
 
+import com.citytechinc.cq.harbor.content.page.HierarchicalPage;
 import com.citytechinc.cq.library.content.page.PageDecorator;
 
-public class BreadcrumbItem {
-    private PageDecorator page;
-    private BreadcrumbTrailConfigNode breadcrumbTrailNode;
+public interface BreadcrumbItem {
 
-    public BreadcrumbItem(PageDecorator page) {
-        this.page = page;
-    }
+    public BreadcrumbItemConfigNode getBreadcrumbTrailNode();
 
-    public BreadcrumbTrailConfigNode getBreadcrumbTrailNode() {
-        return breadcrumbTrailNode;
-    }
+    public void setBreadcrumbTrailNode(BreadcrumbItemConfigNode breadcrumbTrailNode);
 
-    public void setBreadcrumbTrailNode(BreadcrumbTrailConfigNode breadcrumbTrailNode) {
-        this.breadcrumbTrailNode = breadcrumbTrailNode;
-    }
+    public boolean isHideIcon();
 
-    public boolean isHideIcon() {
-        return breadcrumbTrailNode.getHideIcon();
-    }
+    public boolean isHideTitle();
 
-    public boolean isHideTitle() {
-        return breadcrumbTrailNode.getHideTitle();
-    }
+    public String getIconDelimiter();
 
-    public String getHref() {
-        return page.getHref();
-    }
+    public String getHtmlDelimiter();
 
-    public String getTitle() {
-        return page.getTitle();
-    }
+    public boolean getDelimiterType();
 
-    public PageDecorator getPage() {
-        return page;
-    }
+    public String getHref();
+
+    public String getTitle();
+
+    public HierarchicalPage getPage();
 }

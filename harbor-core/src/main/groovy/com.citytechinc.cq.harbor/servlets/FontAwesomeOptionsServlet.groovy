@@ -30,8 +30,18 @@ public class FontAwesomeOptionsServlet extends AbstractOptionsProviderServlet {
 	protected List<Option> getOptions(final ComponentServletRequest request) {
 		//Get resource which contains the Font Awesome CSS
 		def resource = request.getResourceResolver().getResource(ComponentConstants.FONT_AWESOME_CSS_FILE_PATH);
-		def iconOptions = parseResourceForIconOptions(resource);
-		return iconOptions.sort();
+		List<Option> iconOptions = parseResourceForIconOptions(resource);
+		return iconOptions.sort { map1, map2 ->
+			def a = map1.getText();
+			def b = map2.getText();
+			if (a < b) {
+				return -1;
+			} else if (a > b) {
+				return 1;
+			} else {
+				return 0;
+			}
+		};
 	}
 
 	private List<Option> parseResourceForIconOptions(Resource resource) {
