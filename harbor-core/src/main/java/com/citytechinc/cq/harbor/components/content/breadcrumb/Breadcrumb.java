@@ -1,6 +1,7 @@
 package com.citytechinc.cq.harbor.components.content.breadcrumb;
 
 import com.citytechinc.cq.component.annotations.Component;
+import com.citytechinc.cq.component.annotations.ContentProperty;
 import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.Option;
 import com.citytechinc.cq.component.annotations.widgets.DialogFieldSet;
@@ -19,7 +20,11 @@ import com.google.common.collect.Lists;
 import java.util.List;
 import java.util.ListIterator;
 
-@Component(value = "Breadcrumb")
+@Component(value = "Breadcrumb",
+        contentAdditionalProperties = {
+                @ContentProperty(name = "dependencies", value = "harbor.fontawesome"),
+                @ContentProperty(name = "dependencies", value = "harbor.bootstrap")
+        })
 public class Breadcrumb extends AbstractComponent {
 
     private static final String DEFAULT_DELIMITER = "fa-bootstrap-slash";
@@ -110,7 +115,7 @@ public class Breadcrumb extends AbstractComponent {
     }
 
     @DialogField(fieldLabel = "Delimiter Icon", ranking = 2)
-    @Selection(type = Selection.SELECT, optionsUrl = ComponentConstants.FONT_AWESOME_SERVLET_PATH)
+    @Selection(type = Selection.COMBOBOX, optionsUrl = ComponentConstants.FONT_AWESOME_SERVLET_PATH)
     public String getIconDelimiter() {
         return get("iconDelimiter", DEFAULT_DELIMITER);
     }

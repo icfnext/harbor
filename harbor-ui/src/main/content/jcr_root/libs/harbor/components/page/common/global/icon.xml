@@ -14,7 +14,7 @@
                         fieldLabel="Icon"
                         name="./harboricon"
                         xtype="selection"
-                        type="select"
+                        type="combobox"
                         options="/bin/fontawesomeservlet" />
             </items>
         </icon>
