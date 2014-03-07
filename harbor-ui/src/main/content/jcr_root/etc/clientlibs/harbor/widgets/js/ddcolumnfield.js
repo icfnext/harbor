@@ -77,8 +77,31 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.CustomContentPanel , {
 
         this.ownerCt.ownerCt.ownerCt.on("show", function(){
 
+            /*if(function(){
+                for (item in parentContext.columnManifest){
+                    if(parentContext.columnManifest.hasOwnProperty(item)){
+                        return true;
+                    }
+                }
+                return false;
+            }()){
+
+            }*/
+
+
             parentContext.columnRequestFactory.getColumnsInRow().then(function(data){
                 console.log(data);
+
+                //Zero out the manifest
+                parentContext.columnManifest = {};
+                //Zero out the column count
+                parentContext.columnCount = 0;
+                //zero out the can add another column field
+                parentContext.canAddAnotherColumn = true;
+                //zero out column container
+                var col_container = $("#"+parentContext.containerPanel.id).find("." + parentContext.columnContainerClass);
+                $(col_container).html("");
+
                 var col_list = [];
                 var tcolumnData;
                 var tcolumnName;
@@ -97,24 +120,16 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.CustomContentPanel , {
 
                         //var html = parentContext.getColHtmlString(tid, {"colClass":parentContext.getSizeForColumn(tcolumnData)})
                         var col_hash = parentContext.createColData(tid, {
-                            colSize: tcolumnData["colClass"] || 1,
-                            maxColSize: null, //tcolumnData["maxColSize"] || null,
-                            class: null,//tcolumnData["class"] || null,
-                            canAddColumn: null,//tcolumnData["canAddColumn"] || null
-                            name: tcolumnName
-                        });
+                            colSize: parseInt(tcolumnData["colSize"]) || 1,
+                            maxColSize: parseInt(tcolumnData["maxColSize"]) || null,
+                            class: tcolumnData["class"] || null,
+                            canAddColumn: tcolumnData["canAddColumn"] || null,
+                            name: tcolumnName  //IMPORTANT
+                        }, null);
 
                         col_list.push(col_hash);
                     }
                 }
-
-
-               /* * @param data = {
-                *                  colSize      : integer,
-                *                  maxColSize   : integer,
-                *                  class        : string,
-                *                  canAddColumn : boolean
-                *               }*/
 
                 //if non-empty,
                 if(col_list.length > 0){
@@ -144,19 +159,33 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.CustomContentPanel , {
 
                 }
             });
-        });
 
 
-        this.ownerCt.ownerCt.ownerCt.on("hide", function(t){
-            //Zero out the manifest
-            parentContext.columnManifest = {};
-            //Zero out the column count
-            parentContext.columnCount = 0;
-            //zero out column container
-            var col_container = $("#"+parentContext.containerPanel.id).find("." + parentContext.columnContainerClass);
-            $(col_container).html("");
 
         });
+
+        /*
+            This replaces the click handler on the Dialog's OK button
+
+            This is where the manifest is serialized.
+         */
+        this.ownerCt.ownerCt.ownerCt.buttons[0].handler = function(button){
+
+
+            var toBeAddedList = Harbor.Components.ColumnRow.manifestUtil.filterColumnDataToAdd(parentContext.columnManifest);
+            var toBeRemovedList = Harbor.Components.ColumnRow.manifestUtil.filterColumnDataToRemove(parentContext.columnManifest);
+            var toBeMofifiedList = Harbor.Components.ColumnRow.manifestUtil.filterColumnDataToModify(parentContext.columnManifest);
+
+
+            parentContext.columnRequestFactory.modifyColumnList(toBeMofifiedList);
+            parentContext.columnRequestFactory.addColumnList(toBeAddedList);
+
+
+
+            //invokes normal click action
+            this.ok(button);
+
+        };
 
         this.doLayout();
 
@@ -170,7 +199,7 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.CustomContentPanel , {
 
         $.each( this.columnManifest , function( index , col ) {
 
-            var colWidth = col.data.colSize;
+            var colWidth = parseInt(col.data.colSize);
             totalColumnsSpanned = totalColumnsSpanned + colWidth;
 
         } );
@@ -226,15 +255,21 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.CustomContentPanel , {
 
             colContainer.append( col );
 
+            var colData =   {
+                colSize      : options.data.colSize || 1 ,
+                class        : options.data.class || this.columnClassPrefix + (options.width || 1) ,
+                maxColSize   : options.data.maxColSize || this.getMaxColSize( this.columnCount ),
+                canAddColumn : options.data.canAddColumn || true
+            }
+
+            if(options.data.name){
+                colData.name = options.data.name;
+            }
+
             this.columnManifest[ this.columnCount ] = this.createColData(
                 this.columnCount ,
-                {
-                    colSize      : options.colSize || 1 ,
-                    class        : options.class || this.columnClassPrefix + (options.width || 1) ,
-                    maxColSize   : options.maxColSize || this.getMaxColSize( this.columnCount ),
-                    canAddColumn : options.canAddColumn || true,
-                    name: options.columnName || ":column" //This is for the serialization differentiation
-                }
+                colData,
+                col
             );
 
             this.columnResized();
@@ -255,27 +290,24 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.CustomContentPanel , {
                 colSize      : 0,
                 maxColSize   : 0,
                 class        : '',
-                canAddColumn : false
+                canAddColumn : false,
+                name: this.columnManifest[ id ].data.name
             }
 
 
             lastCol.remove();
             this.columnCount --;
         }
-
-        //TODO: Set flag on this column in the manifest
-        //make sure it can't be ID'd in normal use (think resize, etc)
-
     },
 
-    getSizeForColumn: function(columnData){
+/*    getSizeForColumn: function(columnData){
         if(columnData.hasOwnProperty("colClass") && columnData.colClass){
             return columnData.colClass;
         }
         else{
             return 1;
         }
-    },
+    },*/
 
     getColHtmlString: function(id, options){
         options.data = options.data || {};
@@ -286,7 +318,7 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.CustomContentPanel , {
                         "<div class='well'>" +
                             "<h3>" + id + "</h3> " +
                             "<div class='x-small'>" +
-                                "<button class='btn btn-default less disabled'>" +
+                                "<button class='btn btn-default less'>" +
                                     "<i class='fa fa-step-backward'></i>" +
                                 "</button>" +
                                 "<button class='btn btn-default more'>" +
@@ -334,7 +366,7 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.CustomContentPanel , {
         console.log(col.data);
 
         if(col.data.colSize != 1){
-            col.data.colSize = col.data.colSize - 1;
+            col.data.colSize =  col.data.colSize - 1;
             col.data.class   = this.columnClassPrefix + col.data.colSize;
 
             console.log(col.data);
@@ -386,13 +418,15 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.CustomContentPanel , {
      *                  class        : string,
      *                  canAddColumn : boolean
      *               }
-     * @returns {{id: *, data: *}}
+     * @param html
+     * @returns {{id: *, data: *, colHtml: *}}
      */
 
-    createColData: function(id, data){
+    createColData: function(id, data, html){
         return {
             "id": id,
-            "data": data
+            "data": data,
+            "colHtml": html
         }
     }
 

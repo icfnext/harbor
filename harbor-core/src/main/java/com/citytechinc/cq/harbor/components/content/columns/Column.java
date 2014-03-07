@@ -56,8 +56,8 @@ public class Column extends AbstractComponent{
             @Option(text = "11/12", value = "11"),
             @Option(text = "12/12", value = "12")
     })
-    public String getColClass() {
-        return get("colClass", "1");
+    public String getColSize() {
+        return get("colSize", "1");
     }
 
     public String getName() {

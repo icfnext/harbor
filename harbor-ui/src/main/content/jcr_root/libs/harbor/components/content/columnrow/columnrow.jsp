@@ -8,10 +8,10 @@
     <c:forEach var="curcolumn" items="${curRow.columns}" varStatus="status">
         <c:choose>
             <c:when test="${ColumnRow.classification.hasClassification}">
-                <div class="${curRow.gridSize}${curcolumn.colClass} ${curcolumn.classification.classificationName}" name="${curcolumn.name}">
+                <div class="${curRow.gridSize}${curcolumn.colSize} ${curcolumn.classification.classificationName}" name="${curcolumn.name}">
             </c:when>
             <c:otherwise>
-                <div class="${curRow.gridSize}${curcolumn.colClass}" name="${curcolumn.name}">
+                <div class="${curRow.gridSize}${curcolumn.colSize}" name="${curcolumn.name}">
             </c:otherwise>
         </c:choose>
             <cq:include path="${curcolumn.name}" resourceType="harbor/components/content/column" />

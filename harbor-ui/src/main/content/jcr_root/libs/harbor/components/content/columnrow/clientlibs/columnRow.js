@@ -8,87 +8,7 @@ Harbor.Components.ColumnRow = function(jQuery){
     };
 
     return {
-        ColumnManager: function ColumnManager(rowPath){
-            if(! (this instanceof ColumnManager))
-                return new ColumnManager(rowPath);
-
-            var rowPath = rowPath;
-            var requestFactory = Harbor.Components.ColumnRow.getRequestFactoryForEditable(rowPath);
-
-            //initializes a list of columns to add
-            var toBeAdded = [];
-            var toBeRemoved = [];
-            var toBeModified = [];
-
-            /*
-             Creates a list of column objects,
-             {name: x. data: column info}
-             */
-            var toList = function(hash){
-                var list = [];
-                for (var prop in hash){
-                    if (hash.hasOwnProperty(prop)) {
-                        var name = prop;
-                        var tempObj = {name:prop, data: hash[prop]}
-                        list.push(tempObj);
-                    }
-                }
-                return list;
-            }
-
-
-            //initializes existing columns
-            var existingColumnDict = {};
-            requestFactory.getColumnsInRow().done(function(data){
-                /*
-                 Columns start with "column", lets filter them
-                 out of data, and into a list
-                 */
-                //build a hash of columns
-                for (var prop in data){
-                    if (prop.search(nameHint) != -1){
-                        existingColumnDict[prop] = data[prop];
-                    }
-                }
-
-            });
-            this.existingColumnDict = existingColumnDict;
-
-            /*
-             utility methods
-             */
-
-            //creates a column object that can be later added via POST
-            this.addColumn = function(size){
-                //extend basic column with a size
-                var col = column;
-                col[columnWidthProperty] = size || 1;
-
-                //add column to the toBeAddedList
-                toBeAdded.push(col);
-            }
-
-            this.modifyColumn = function(name, data){
-                //We ignore adding these to a list, because that is done automatically in the serialization phase
-                for (var item in data){
-                    if (data.hasOwnProperty(item)){
-                        //index into the existing dict hash and change fields
-                        existingColumnDict[name][item] = data[item]; //bam
-                    }
-                }
-            }
-
-            this.removeColumn = function(name){
-                /*
-                 Adds column name to the "to Remove" list,
-                 IF that column is in the existing column dictionary
-                 */
-                if (this.existingColumnDict.hasOwnProperty(name)){
-                    toBeRemoved.push(name);
-                }
-            }
-
-
+  /*
             this.serializeColumnsToJCR = function(){
                 toBeModified = toList(this.existingColumnDict);
                 var reqFactory = Harbor.Components.ColumnRow.getRequestFactoryForEditable(rowPath);
@@ -103,7 +23,117 @@ Harbor.Components.ColumnRow = function(jQuery){
                 //3. Run Removals
                 //reqFactory.removeColumnList(toBeRemoved);
             }
-        },
+        },*/
+        manifestUtil: function(){
+            var predicates = {
+                isToBeAdded: function(data){
+                    if(!data.name){
+                        return true;
+                    }
+                    return false;
+                },
+                isToBeRemoved: function(data){
+                    return data.colSize == 0 && data.name != (":" + nameHint);
+
+                },
+                isToBeModified: function(data){
+                    return data.colSize != 0 && this.isToBeAdded(data) == false;
+                }
+            }
+
+            /*
+                These filters build an aggregation of AJAX payload objects.
+                The lists here will be used for that purpose only.
+             */
+
+            return {
+                filterColumnDataToAdd: function(manifest){
+                    var buildAddToPayload = function(data){
+                        var newColumnBase = column;
+
+                        for (prop in data) {
+                            if (data.hasOwnProperty(prop)){
+                                //Add props from data to newColumnBase
+                                newColumnBase[prop] = data[prop];
+                            }
+                        }
+
+                        return newColumnBase;
+
+                    }
+
+                    /*
+                        Filters columns that have a name of ':column'
+
+                        This is inserted as a name for columns added using the add button.
+                        This won't actually be the column's name, but serves as a way to fetch it.
+                        New columns use the nameHint defined in this class to have their names
+                        auto-generated when plopped into the jcr.
+                     */
+                    var filtered = [];
+
+                    for(prop in manifest){
+                        if(manifest.hasOwnProperty(prop)){
+                            //BAM DATA TOWN
+
+                            //We check colSize here also, because we don't want to add something that
+                            //had been added, but removed from the column builder
+                            var tmp = manifest[prop];
+                            if(predicates.isToBeAdded(tmp.data)){
+                                //Add this to our list of filtered items
+                                filtered.push(buildAddToPayload(tmp.data));
+                            }
+                        }
+                    }
+
+                    return filtered;
+                },
+
+                filterColumnDataToRemove: function(manifest){
+                    /*
+                        Filters columns with a 'colSize' that has been zero'd out.
+                     */
+
+                    var filtered = [];
+                    for(prop in manifest){
+                        if(manifest.hasOwnProperty(prop)){
+                            //Check for the name, because we don't want to send for a removal of something that wasn't
+                            //put into the jcr yet. (the :nameHint is given to NEW columns added via button)
+                            var tmp = manifest[prop];
+                            if(predicates.isToBeRemoved(tmp.data)){
+                                filtered.push({
+                                    name: tmp.data.name,
+                                    data: tmp.data
+                                });
+                            }
+                        }
+                    }
+
+                    return filtered;
+                },
+
+                filterColumnDataToModify: function(manifest){
+                    /*
+                        Filters columns with a non-zero colSize,
+                        and columns with names that are not ":column" (well, ':' + nameHint)
+                     */
+                    var filtered = [];
+                    for(prop in manifest){
+                        if(manifest.hasOwnProperty(prop)){
+                            var tmp = manifest[prop];
+                            if(predicates.isToBeModified(tmp.data)){
+                                filtered.push({
+                                    name: tmp.data.name,
+                                    data: tmp.data
+                                });
+                            }
+                        }
+                    }
+
+                    return filtered;
+                }
+            }
+        }(),
 
         getRequestFactoryForEditable: function(path){
             var path = path;
@@ -118,18 +148,18 @@ Harbor.Components.ColumnRow = function(jQuery){
                     data: col,
                     url: path + '/*'
                 }).then(function(data){
-                        return data;
-                    })
+                    return data;
+                });
             };
 
-            var modifyColumnInRow = function(columnName, data){
-                $.ajax({
+            var modifyColumnInRow = function(columnName, col){
+                return $.ajax({
                     type: "POST",
-                    contentType: "multipart/form-data",
-                    url: path + "/" + columnName + "?" + $.param(data)
+                    data: col,
+                    url: path + "/" + columnName
                 }).then(function(data){
-                        return data;
-                    });
+                    return data;
+                });
             };
 
             var removeColumnFromRow = function(name){
@@ -149,7 +179,7 @@ Harbor.Components.ColumnRow = function(jQuery){
                     })
                 },
 
-                removeColumnList: function(nameList){
+                /*removeColumnList: function(nameList){
                     var def = $.Deferred();
                     var def_promise = def.promise();
 
@@ -167,15 +197,10 @@ Harbor.Components.ColumnRow = function(jQuery){
 
                     def.resolve();
                 },
-
+*/
                 modifyColumnList: function(list){
                     var def = $.Deferred();
                     var def_promise = def.promise();
-
-                    /*
-                     Current assumption here is that a during a modify, I can just repost what
-                     was returned already placed into the existingColumnDict with getColumnsInRow
-                     */
 
                     $.each(list, function(i, postData){
                         //build a .then chain with the promise
@@ -199,13 +224,14 @@ Harbor.Components.ColumnRow = function(jQuery){
                     $.each(list, function(i, postData){
                         //build a .then chain with the promise
                         def_promise = def_promise.then(function(){
-                            return addColumnToRow(postData.data);
+                            return addColumnToRow(postData);
                         });
                     });
 
                     //final then
                     def_promise.then(function(){
                         //editableContext.refreshSelf();
+                        console.log("ADD COLUMN LIST PROMISE THEN")
                     })
 
                     def.resolve();
@@ -216,6 +242,9 @@ Harbor.Components.ColumnRow = function(jQuery){
 
         getBaseColumnData: function(){
             return column;
-        }
+        },
+
+        defaultNewColumnName: ":" + nameHint
+
     }
 }(jQuery);
