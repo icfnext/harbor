@@ -11,12 +11,14 @@ import com.citytechinc.cq.harbor.content.page.HierarchicalPage;
 import com.citytechinc.cq.harbor.content.page.HomePage;
 import com.citytechinc.cq.harbor.content.page.SectionLandingPage;
 import com.citytechinc.cq.library.components.AbstractComponent;
+import com.citytechinc.cq.library.content.node.BasicNode;
 import com.citytechinc.cq.library.content.page.PageDecorator;
 import com.citytechinc.cq.library.content.request.ComponentRequest;
-import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import com.google.common.collect.Lists;
+import org.apache.sling.api.resource.Resource;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -27,13 +29,10 @@ import java.util.ListIterator;
 public class Breadcrumb extends AbstractComponent {
 
     private static final String DEFAULT_DELIMITER = "fa-bootstrap-slash";
-    private final static String ROOT_BREADCRUMB_PAGE_OPTIONS_NODE_PREFIX = "rootBreadcrumbPageOptions/";
-    private final static String BREADCRUMB_PAGE_OPTIONS_NODE_PREFIX = "breadcrumbPageOptions/";
-    private final String HIDE_ICON_PROPERTY_NAME = "hideIcon";
-    private final String HIDE_TITLE_PROPERTY_NAME = "hideTitle";
-    private final boolean ICON_DELIMITER_BOOLEAN = false;
-    private final String ROOT_PAGE_SAME_AS_REST_OF_BREADCRUMB_DELIMITER_ICON_TYPE = "breadcrumbdelimiter";
-    private final String ROOT_PAGE_PAGE_ICON_DELIMITER_TYPE = "pageicon";
+    private final static String ROOT_BREADCRUMB_PAGE_OPTIONS_NODE_PATH = "rootBreadcrumbPageOptions";
+    private static final String INTERMEDIARY_BREADCRUMB_PAGE_OPTIONS_NODE_PATH = "intermediaryBreadcrumbPageOptions";
+    private static final String CURRENT_BREADCRUMB_PAGE_OPTIONS_NODE_PATH = "currentBreadcrumbPageOptions";
+    private final String ICON_DELIMITER_HTML = "<i class=\"fa %s\"></i>";
     private List<BreadcrumbItem> trail;
 
     public Breadcrumb(final ComponentRequest request) {
@@ -90,53 +89,42 @@ public class Breadcrumb extends AbstractComponent {
     public List<BreadcrumbItem> formatListForBreadcrumb(List<PageDecorator> trailAsPageDecorators) {
         //The first, intermediate, and root pages all have special behavior. Instead of making the JSP worry about that, we're going to go ahead and do it here.
         //Here we use Lists.newArrayList in order to make the list mutable.
-        trail = Lists.newArrayList(Lists.transform(trailAsPageDecorators, new Function<PageDecorator, BreadcrumbItem>() {
-            public BreadcrumbItem apply(final PageDecorator pageDecorator) {
-                return pageDecorator.adaptTo(BreadcrumbItem.class);
-            }
-        }));
-
-        ListIterator<BreadcrumbItem> trailListIterator = trail.listIterator();
-        BreadcrumbItem currentBreadcrumbPage;
+        ListIterator<PageDecorator> trailAsPageDecoratorsIterator = trailAsPageDecorators.listIterator();
+        List<BreadcrumbItem> newBreadcrumbItemList = new ArrayList<BreadcrumbItem>();
+        HierarchicalPage currentPage;
         //We know root is going to be the first object we iterate over. So instead of doing a check, we just set a flag.
         boolean isRoot = true;
-        while (trailListIterator.hasNext()) {
-            currentBreadcrumbPage = trailListIterator.next();
+        while (trailAsPageDecoratorsIterator.hasNext()) {
+            currentPage = trailAsPageDecoratorsIterator.next().adaptTo(HierarchicalPage.class);
             if (isRoot) {
-                String rootPageIcon = currentBreadcrumbPage.getPageIcon();
-                currentBreadcrumbPage.setBreadcrumbTrailNode(getRootBreadcrumbItemConfigNode(rootPageIcon));
+                newBreadcrumbItemList.add(new BreadcrumbItem(currentPage, Optional.fromNullable(getRootBreadcrumbItemConfigNode())));
+            } else if (trailAsPageDecoratorsIterator.previousIndex() == trailAsPageDecorators.size() - 1) {
+                newBreadcrumbItemList.add(new BreadcrumbItem(currentPage, Optional.fromNullable(getCurrentBreadcrumbItemConfigNode())));
             } else {
-                currentBreadcrumbPage.setBreadcrumbTrailNode(getBreadcrumbItemConfigNode());
+                newBreadcrumbItemList.add(new BreadcrumbItem(currentPage, Optional.fromNullable(getIntermediaryBreadcrumbItemConfigNode())));
             }
-            trailListIterator.set(currentBreadcrumbPage);
+            trailAsPageDecoratorsIterator.set(currentPage);
             isRoot = false;
         }
 
+
         // If we're to hide the current page in the breadcrumb, we simply remove it from the list.
         if (getHideCurrentPageInBreadcrumb()) {
-            trail.remove(trail.size() - 1);
+            newBreadcrumbItemList.remove(newBreadcrumbItemList.size() - 1);
         }
+
+        trail = newBreadcrumbItemList;
+
         return trail;
     }
 
     /**
-     * A dialog field prompting the user to choose weather or not to use the HTML delimiter, as opposed to the icon delimiter.
-     *
-     * @return <code>true</code> if the {@link Breadcrumb} should display the HTML delimiter <code>false</code> if the {@link Breadcrumb} should display the icon delimiter.
-     */
-    @DialogField(fieldLabel = "Use HTML delimiter?", ranking = 1)
-    @Selection(type = Selection.CHECKBOX, options = @Option(value = "true"))
-    public boolean getUseHTMLDelimiter() {
-        return get("useHTMLDelimiter", false);
-    }
-
-    /**
-     * A dialog field which allows the user to choose what kind of delimiter icon they wish to be displayed.
+     * A dialog field which allows the user to choose what delimiter icon they wish to be displayed.
      *
      * @return a string representing the font awesome icon class the user has selected.
      */
     @DialogField(fieldLabel = "Delimiter Icon", ranking = 2)
-    @Selection(type = Selection.COMBOBOX, optionsUrl = ComponentConstants.FONT_AWESOME_SERVLET_PATH)
+    @Selection(type = Selection.SELECT, optionsUrl = ComponentConstants.FONT_AWESOME_SERVLET_PATH)
     public String getIconDelimiter() {
         return get("iconDelimiter", DEFAULT_DELIMITER);
     }
@@ -151,18 +139,13 @@ public class Breadcrumb extends AbstractComponent {
         return get("htmlDelimiter", "");
     }
 
-    /**
-     * Allows the user to choose what type of Icon should be used for the root page.
-     *
-     * @return a string representing the Root Page Icon Type
-     */
-    @DialogField(fieldLabel = "Root Page Icon Type", fieldDescription = "The type of icon you wish to be displayed, for the home page.", ranking = 4)
-    @Selection(type = Selection.SELECT, options = {
-            @Option(text = "Default breadcrumb icon", value = ROOT_PAGE_SAME_AS_REST_OF_BREADCRUMB_DELIMITER_ICON_TYPE),
-            @Option(text = "Page Icon", value = ROOT_PAGE_PAGE_ICON_DELIMITER_TYPE)
-    })
-    public String getRootPageIconType() {
-        return get("rootPageIconType", ROOT_PAGE_SAME_AS_REST_OF_BREADCRUMB_DELIMITER_ICON_TYPE);
+    public String getDelimiter() {
+        if (!getHtmlDelimiter().isEmpty()) {
+            return getHtmlDelimiter();
+        } else {
+            String iconDelimiterHtml = String.format(ICON_DELIMITER_HTML, getIconDelimiter());
+            return iconDelimiterHtml;
+        }
     }
 
     /**
@@ -177,7 +160,7 @@ public class Breadcrumb extends AbstractComponent {
     }
 
     /**
-     * A dialog field which allows the user to choose the type of root page icon should be displayed.
+     * A dialog field which allows the user to choose the type of root page to use for this breadcrumb instance.
      *
      * @ return A string representing the option the user has chosen.
      */
@@ -191,42 +174,50 @@ public class Breadcrumb extends AbstractComponent {
     }
 
     /**
-     * A dialog field which allows the user to specify what fields to display in the root page.
-     * Additionally, uses {@link #getUseHTMLDelimiter()}, {@link #getIconDelimiter()}, {@link #getRootPageIconType} and {@link #getHtmlDelimiter()} to build a {@link BreadcrumbItemConfigNode}
+     * A dialog field which allows the user to specify what elements to display in most breadcrumb pages.
      *
-     * @param rootPageIcon The Icon String to use if {@link #getRootPageIconType} == {@link #ROOT_PAGE_PAGE_ICON_DELIMITER_TYPE}
-     * @return A properly configured {@link BreadcrumbItemConfigNode} for a root page.
+     * @return A {@link BreadcrumbItemConfigNode}
      */
     @DialogField(ranking = 7)
-    @DialogFieldSet(collapsible = true, collapsed = true, namePrefix = ROOT_BREADCRUMB_PAGE_OPTIONS_NODE_PREFIX, title = "Root Page Config")
-    public BreadcrumbItemConfigNode getRootBreadcrumbItemConfigNode(String rootPageIcon) {
-        boolean hideIcon = get(ROOT_BREADCRUMB_PAGE_OPTIONS_NODE_PREFIX + HIDE_ICON_PROPERTY_NAME, false);
-        boolean hideTitle = get(ROOT_BREADCRUMB_PAGE_OPTIONS_NODE_PREFIX + HIDE_TITLE_PROPERTY_NAME, false);
-        boolean useHtmlDelimiter;
-        String icon;
-        String rootPageIconType = getRootPageIconType();
-        if (rootPageIconType.equals(ROOT_PAGE_PAGE_ICON_DELIMITER_TYPE)) {
-            useHtmlDelimiter = ICON_DELIMITER_BOOLEAN;
-            icon = rootPageIcon;
+    @DialogFieldSet(collapsible = true, collapsed = true, namePrefix = CURRENT_BREADCRUMB_PAGE_OPTIONS_NODE_PATH + "/", title = "Current Page Config")
+    public BreadcrumbItemConfigNode getCurrentBreadcrumbItemConfigNode() {
+        Resource intermediaryPageResource = getResource().getChild(CURRENT_BREADCRUMB_PAGE_OPTIONS_NODE_PATH);
+        if (intermediaryPageResource != null) {
+            return new BreadcrumbItemConfigNode(intermediaryPageResource.adaptTo(BasicNode.class));
         } else {
-            useHtmlDelimiter = getUseHTMLDelimiter();
-            icon = getIconDelimiter();
+            return null;
         }
-        return new BreadcrumbItemConfigNode(hideIcon, hideTitle, useHtmlDelimiter, icon, getHtmlDelimiter());
     }
 
     /**
      * A dialog field which allows the user to specify what elements to display in most breadcrumb pages.
-     * Additionally, uses {@link #getUseHTMLDelimiter()}, {@link #getIconDelimiter()} and {@link #getHtmlDelimiter()} to build a {@link BreadcrumbItemConfigNode}
      *
      * @return A {@link BreadcrumbItemConfigNode}
      */
     @DialogField(ranking = 8)
-    @DialogFieldSet(collapsible = true, collapsed = true, namePrefix = BREADCRUMB_PAGE_OPTIONS_NODE_PREFIX, title = "Page Config")
-    public BreadcrumbItemConfigNode getBreadcrumbItemConfigNode() {
-        boolean hideIcon = get(BREADCRUMB_PAGE_OPTIONS_NODE_PREFIX + HIDE_ICON_PROPERTY_NAME, false);
-        boolean hideTitle = get(BREADCRUMB_PAGE_OPTIONS_NODE_PREFIX + HIDE_TITLE_PROPERTY_NAME, false);
+    @DialogFieldSet(collapsible = true, collapsed = true, namePrefix = INTERMEDIARY_BREADCRUMB_PAGE_OPTIONS_NODE_PATH + "/", title = "Intermediary Page Config")
+    public BreadcrumbItemConfigNode getIntermediaryBreadcrumbItemConfigNode() {
+        Resource intermediaryPageResource = getResource().getChild(INTERMEDIARY_BREADCRUMB_PAGE_OPTIONS_NODE_PATH);
+        if (intermediaryPageResource != null) {
+            return new BreadcrumbItemConfigNode(intermediaryPageResource.adaptTo(BasicNode.class));
+        } else {
+            return null;
+        }
+    }
 
-        return new BreadcrumbItemConfigNode(hideIcon, hideTitle, getUseHTMLDelimiter(), getIconDelimiter(), getHtmlDelimiter());
+    /**
+     * A dialog field which allows the user to specify what fields to display in the root page.
+     *
+     * @return A properly configured {@link BreadcrumbItemConfigNode} for a root page.
+     */
+    @DialogField(ranking = 9)
+    @DialogFieldSet(collapsible = true, collapsed = true, namePrefix = ROOT_BREADCRUMB_PAGE_OPTIONS_NODE_PATH + "/", title = "Root Page Config")
+    public BreadcrumbItemConfigNode getRootBreadcrumbItemConfigNode() {
+        Resource rootPageResource = getResource().getChild(ROOT_BREADCRUMB_PAGE_OPTIONS_NODE_PATH);
+        if (rootPageResource != null) {
+            return new BreadcrumbItemConfigNode(rootPageResource.adaptTo(BasicNode.class));
+        } else {
+            return null;
+        }
     }
 }

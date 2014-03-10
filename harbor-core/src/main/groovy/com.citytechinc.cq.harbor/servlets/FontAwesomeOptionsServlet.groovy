@@ -31,12 +31,14 @@ public class FontAwesomeOptionsServlet extends AbstractOptionsProviderServlet {
 		//Get resource which contains the Font Awesome CSS
 		def resource = request.getResourceResolver().getResource(ComponentConstants.FONT_AWESOME_CSS_FILE_PATH);
 		List<Option> iconOptions = parseResourceForIconOptions(resource);
+		//We need to sort this list of maps, so here I pass a comparator to the groovy sort function.
 		return iconOptions.sort { map1, map2 ->
-			def a = map1.getText();
-			def b = map2.getText();
-			if (a < b) {
+			def textFromMap1 = map1.getText();
+			def textFromMap2 = map2.getText();
+			//Groovy will compare strings alphabetically, so here I just see which one comes first, and return the correct integer.
+			if (textFromMap1 < textFromMap2) {
 				return -1;
-			} else if (a > b) {
+			} else if (textFromMap1 > textFromMap2) {
 				return 1;
 			} else {
 				return 0;

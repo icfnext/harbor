@@ -1,74 +1,51 @@
 package com.citytechinc.cq.harbor.components.content.breadcrumb;
 
-public interface BreadcrumbItem {
+import com.citytechinc.cq.harbor.content.page.HierarchicalPage;
+import com.google.common.base.Optional;
 
-    /**
-     * Returns objects {@link BreadcrumbItemConfigNode}
-     *
-     * @return {@link BreadcrumbItemConfigNode}
-     */
-    public BreadcrumbItemConfigNode getBreadcrumbTrailNode();
+public class BreadcrumbItem {
 
-    /**
-     * Sets objects {@link BreadcrumbItemConfigNode}
-     *
-     * @param breadcrumbTrailNode to be stored in the object
-     */
-    public void setBreadcrumbTrailNode(BreadcrumbItemConfigNode breadcrumbTrailNode);
+    private HierarchicalPage page;
+    private Optional<BreadcrumbItemConfigNode> breadcrumbItemConfigNode;
 
-    /**
-     * Indicates if the Breadcrumb should hide this item's icon.
-     *
-     * @return <code>true</code>} if the item's icon should be hidden, <code>false</code> otherwise.
-     */
-    public boolean isHideIcon();
+    public BreadcrumbItem(HierarchicalPage page, Optional<BreadcrumbItemConfigNode> breadcrumbItemConfigNode) {
+        this.page = page;
+        this.breadcrumbItemConfigNode = breadcrumbItemConfigNode;
+    }
 
-    /**
-     * Indicates if the Breadcrumb should hide this item's icon.
-     *
-     * @return <code>true</code> if the item's icon should be hidden, <code>false</code> otherwise.
-     */
-    public boolean isHideTitle();
+    public Optional<BreadcrumbItemConfigNode> getBreadcrumbItemConfigNode() {
+        return breadcrumbItemConfigNode;
+    }
 
-    /**
-     * Returns a string containing this item's icon delimiter.
-     *
-     * @return This item's icon delimiter
-     */
-    public String getIconDelimiter();
+    public boolean isHideIcon() {
+        if (breadcrumbItemConfigNode.isPresent()) {
+            return breadcrumbItemConfigNode.get().getHideIcon();
+        } else {
+            return false;
+        }
+    }
 
-    /**
-     * Returns a string containing this item's icon delimiter.
-     *
-     * @return This item's icon delimiter
-     */
-    public String getHtmlDelimiter();
+    public boolean isHideTitle() {
+        if (breadcrumbItemConfigNode.isPresent()) {
+            return breadcrumbItemConfigNode.get().getHideTitle();
+        } else {
+            return false;
+        }
+    }
 
-    /**
-     * A function used in order to determine what type of delimiter should be shown for this item.
-     *
-     * @return
-     */
-    public boolean getUseHtmlDelimiter();
+    public String getHref() {
+        return page.getHref();
+    }
 
-    /**
-     * Returns the href to the page this BreadcrumbItem represents.
-     *
-     * @return An href formatted for html.
-     */
-    public String getHref();
+    public String getTitle() {
+        return page.getTitle();
+    }
 
-    /**
-     * Returns the title of the page this BreadcrumbItem represents.
-     *
-     * @return A string.
-     */
-    public String getTitle();
+    private HierarchicalPage getPage() {
+        return page;
+    }
 
-    /**
-     * Returns a string representing the icon associated with this pages "pageicon"
-     *
-     * @return A string representing this page's "pageicon"
-     */
-    public String getPageIcon();
+    public String getPageIcon() {
+        return getPage().getPageIcon();
+    }
 }

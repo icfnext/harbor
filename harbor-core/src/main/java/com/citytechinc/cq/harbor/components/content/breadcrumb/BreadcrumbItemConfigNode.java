@@ -3,20 +3,19 @@ package com.citytechinc.cq.harbor.components.content.breadcrumb;
 import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.Option;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
+import com.citytechinc.cq.library.content.node.BasicNode;
 
 public class BreadcrumbItemConfigNode {
-    private final boolean hideIcon;
-    private final boolean hideTitle;
-    private final boolean useHtmlDelimiter;
-    private final String delimiterIcon;
-    private final String delimiterHtml;
 
-    public BreadcrumbItemConfigNode(boolean hideIcon, boolean hideTitle, boolean useHtmlDelimiter, String delimiterIcon, String delimiterHtml) {
-        this.hideIcon = hideIcon;
-        this.hideTitle = hideTitle;
-        this.useHtmlDelimiter = useHtmlDelimiter;
-        this.delimiterIcon = delimiterIcon;
-        this.delimiterHtml = delimiterHtml;
+    private boolean hideTitle;
+    private boolean hideIcon;
+    private final String HIDE_ICON_PROPERTY_NAME = "hideIcon";
+    private final String HIDE_TITLE_PROPERTY_NAME = "hideTitle";
+
+
+    public BreadcrumbItemConfigNode(BasicNode basicNode) {
+        this.hideTitle = basicNode.get(HIDE_TITLE_PROPERTY_NAME, false);
+        this.hideIcon = basicNode.get(HIDE_ICON_PROPERTY_NAME, false);
     }
 
     @DialogField(fieldLabel = "Hide Icon")
@@ -33,17 +32,5 @@ public class BreadcrumbItemConfigNode {
     })
     public boolean getHideTitle() {
         return hideTitle;
-    }
-
-    public boolean getUseHtmlDelimiter() {
-        return useHtmlDelimiter;
-    }
-
-    public String getDelimiterIcon() {
-        return delimiterIcon;
-    }
-
-    public String getDelimiterHtml() {
-        return delimiterHtml;
     }
 }

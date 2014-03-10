@@ -3,15 +3,10 @@
 <ol class="harbor-breadcrumb breadcrumb">
     <c:forEach var="curBreadcrumbItem" items="${breadcrumb.trail}" varStatus="loop">
         <c:set var='href' value="${curBreadcrumbItem.href}"></c:set>
-        <c:set var='iconDelimiter' value="${curBreadcrumbItem.iconDelimiter}"></c:set>
-        <c:set var='htmlDelimiter'
-               value="<span class='breadcrumb-html-delimiter'>${curBreadcrumbItem.htmlDelimiter}</span>"></c:set>
         <c:set var='title' value="${curBreadcrumbItem.title}"></c:set>
-        <c:set var='useHtmlDelimiter' value="${curBreadcrumbItem.useHtmlDelimiter == true}"></c:set>
-        <li>
+        <li> ${loop.first ? '' : breadcrumb.delimiter}
             <a href="${href}">
-                ${!curBreadcrumbItem.hideIcon && useHtmlDelimiter ? htmlDelimiter : ''}
-                <i class="fa ${!curBreadcrumbItem.hideIcon && !useHtmlDelimiter ? iconDelimiter : ''}"></i>${curBreadcrumbItem.hideTitle ?  '' : title}
+                <i class="fa ${curBreadcrumbItem.hideIcon ? '' : curBreadcrumbItem.pageIcon}"></i>${curBreadcrumbItem.hideTitle ?  '' : title}
             </a>
         </li>
     </c:forEach>
