@@ -176,11 +176,9 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.CustomContentPanel , {
             var toBeRemovedList = Harbor.Components.ColumnRow.manifestUtil.filterColumnDataToRemove(parentContext.columnManifest);
             var toBeMofifiedList = Harbor.Components.ColumnRow.manifestUtil.filterColumnDataToModify(parentContext.columnManifest);
 
-
             parentContext.columnRequestFactory.modifyColumnList(toBeMofifiedList);
             parentContext.columnRequestFactory.addColumnList(toBeAddedList);
-
-
+            parentContext.columnRequestFactory.removeColumnList(toBeRemovedList);
 
             //invokes normal click action
             this.ok(button);

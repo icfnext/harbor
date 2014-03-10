@@ -8,22 +8,6 @@ Harbor.Components.ColumnRow = function(jQuery){
     };
 
     return {
-  /*
-            this.serializeColumnsToJCR = function(){
-                toBeModified = toList(this.existingColumnDict);
-                var reqFactory = Harbor.Components.ColumnRow.getRequestFactoryForEditable(rowPath);
-                //execute ajax requests
-
-                //1. Run Modifies
-                reqFactory.modifyColumnList(toBeModified);
-
-                //2. Run Adds
-                reqFactory.addColumnList(toBeAdded);
-
-                //3. Run Removals
-                //reqFactory.removeColumnList(toBeRemoved);
-            }
-        },*/
         manifestUtil: function(){
             var predicates = {
                 isToBeAdded: function(data){
@@ -72,7 +56,7 @@ Harbor.Components.ColumnRow = function(jQuery){
                      */
                     var filtered = [];
 
-                    for(prop in manifest){
+                    for(var prop in manifest){
                         if(manifest.hasOwnProperty(prop)){
                             //BAM DATA TOWN
 
@@ -95,7 +79,7 @@ Harbor.Components.ColumnRow = function(jQuery){
                      */
 
                     var filtered = [];
-                    for(prop in manifest){
+                    for(var prop in manifest){
                         if(manifest.hasOwnProperty(prop)){
                             //Check for the name, because we don't want to send for a removal of something that wasn't
                             //put into the jcr yet. (the :nameHint is given to NEW columns added via button)
@@ -118,7 +102,7 @@ Harbor.Components.ColumnRow = function(jQuery){
                         and columns with names that are not ":column" (well, ':' + nameHint)
                      */
                     var filtered = [];
-                    for(prop in manifest){
+                    for(var prop in manifest){
                         if(manifest.hasOwnProperty(prop)){
                             var tmp = manifest[prop];
                             if(predicates.isToBeModified(tmp.data)){
@@ -137,10 +121,6 @@ Harbor.Components.ColumnRow = function(jQuery){
 
         getRequestFactoryForEditable: function(path){
             var path = path;
-
-            var writeQueryParams = function(dict){
-
-            }
 
             var addColumnToRow = function(col){
                 return $.ajax({
@@ -163,12 +143,13 @@ Harbor.Components.ColumnRow = function(jQuery){
             };
 
             var removeColumnFromRow = function(name){
-                $.ajax({
-                    data: ":operation=delete",
+                return $.ajax({
+                    type: "POST",
+                    data: {":operation": "delete"},
                     url: path + "/" + name
                 }).then(function(data){
-                        return data;
-                    });
+                    return data;
+                });
             };
 
             return {
@@ -176,28 +157,27 @@ Harbor.Components.ColumnRow = function(jQuery){
                     return $.ajax({
                         type: "GET",
                         url: path + ".1.json"
-                    })
+                    });
                 },
 
-                /*removeColumnList: function(nameList){
+                removeColumnList: function(list){
                     var def = $.Deferred();
                     var def_promise = def.promise();
 
-                    $.each(nameList, function(i, name){
+                    $.each(list, function(i, postData){
                         //build a .then chain with the promise
                         def_promise = def_promise.then(function(){
-                            return removeColumnFromRow(name);
+                            return removeColumnFromRow(postData.name);
                         });
                     });
 
                     //final then
                     def_promise.then(function(){
                         //editableContext.refreshSelf();
-                    })
+                    });
 
                     def.resolve();
                 },
-*/
                 modifyColumnList: function(list){
                     var def = $.Deferred();
                     var def_promise = def.promise();
@@ -212,7 +192,7 @@ Harbor.Components.ColumnRow = function(jQuery){
                     //final then
                     def_promise.then(function(){
                         //editableContext.refreshSelf();
-                    })
+                    });
 
                     def.resolve();
                 },
@@ -232,7 +212,7 @@ Harbor.Components.ColumnRow = function(jQuery){
                     def_promise.then(function(){
                         //editableContext.refreshSelf();
                         console.log("ADD COLUMN LIST PROMISE THEN")
-                    })
+                    });
 
                     def.resolve();
                 }
