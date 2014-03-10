@@ -11,13 +11,13 @@ Harbor.Components.ColumnRow = function(jQuery){
         manifestUtil: function(){
             var predicates = {
                 isToBeAdded: function(data){
-                    if(!data.name){
+                    if(!data.name && data.colSize != 0){
                         return true;
                     }
                     return false;
                 },
                 isToBeRemoved: function(data){
-                    return data.colSize == 0 && data.name != (":" + nameHint);
+                    return data.colSize == 0 && data.name; //data.name is undefined for newly added cols
 
                 },
                 isToBeModified: function(data){
