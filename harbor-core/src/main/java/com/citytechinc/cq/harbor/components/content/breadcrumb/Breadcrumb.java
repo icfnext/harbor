@@ -76,19 +76,27 @@ public class Breadcrumb extends AbstractComponent {
             }
         }
         trailAsPageDecorators = Lists.reverse(trailAsPageDecorators);
-        return formatListForBreadcrumb(trailAsPageDecorators);
+
+        trail = formatListForBreadcrumb(trailAsPageDecorators);
+
+        // If we're to hide the current page in the breadcrumb, we simply remove it from the list.
+        if (getHideCurrentPageInBreadcrumb()) {
+            trail.remove(trail.size() - 1);
+        }
+
+        return trail;
     }
 
     /**
      * Returns a list of PageDecorators to be rendered a Breadcrumb, using the {@link BreadcrumbItem} object.
-     * The first element of this List is going to be considered the "rootPage." The last element will be considered the "current page".
+     * The first element of this List is going to be considered the "rootPage." The last element will be considered the "current page", and will be set using the ${@link #getCurrentBreadcrumbItemConfigNode()} and ${@link #getRootBreadcrumbItemConfigNode()}
+     * All Intermediate pages are set using the ${@link #getIntermediaryBreadcrumbItemConfigNode()}
      *
      * @param trailAsPageDecorators A trail of page decorators, already sorted in the order in which you want them to be displayed.
      * @return An unordered list of {@link BreadcrumbItem}.
      */
     public List<BreadcrumbItem> formatListForBreadcrumb(List<PageDecorator> trailAsPageDecorators) {
         //The first, intermediate, and root pages all have special behavior. Instead of making the JSP worry about that, we're going to go ahead and do it here.
-        //Here we use Lists.newArrayList in order to make the list mutable.
         ListIterator<PageDecorator> trailAsPageDecoratorsIterator = trailAsPageDecorators.listIterator();
         List<BreadcrumbItem> newBreadcrumbItemList = new ArrayList<BreadcrumbItem>();
         HierarchicalPage currentPage;
@@ -107,15 +115,7 @@ public class Breadcrumb extends AbstractComponent {
             isRoot = false;
         }
 
-
-        // If we're to hide the current page in the breadcrumb, we simply remove it from the list.
-        if (getHideCurrentPageInBreadcrumb()) {
-            newBreadcrumbItemList.remove(newBreadcrumbItemList.size() - 1);
-        }
-
-        trail = newBreadcrumbItemList;
-
-        return trail;
+        return newBreadcrumbItemList;
     }
 
     /**
