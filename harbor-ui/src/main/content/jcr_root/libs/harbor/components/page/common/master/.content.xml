@@ -6,4 +6,4 @@
           jcr:primaryType="cq:Component"
           sling:resourceSuperType="harbor/components/page/common/global"
           componentGroup=".hidden"
-          dependencies="[harbor.jquery,harbor.bootstrap,harbor.fontawesome,harbor.namespace]" />
+          dependencies="[harbor.jquery,harbor.bootstrap,harbor.fontawesome,harbor.namespace,harbor.author-common]" />
