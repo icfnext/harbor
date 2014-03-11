@@ -5,7 +5,7 @@ import com.citytechinc.cq.harbor.components.content.navigation.constructionstrat
 import com.citytechinc.cq.harbor.components.content.tree.TreeNode;
 import com.citytechinc.cq.harbor.components.content.tree.TreeNodeConstructionStrategy;
 import com.citytechinc.cq.harbor.components.content.tree.TreeNodes;
-import com.citytechinc.cq.harbor.services.SitemapService;
+import com.citytechinc.cq.harbor.service.SitemapConfigService;
 import com.citytechinc.cq.library.content.page.PageDecorator;
 import com.citytechinc.cq.library.content.page.PageManagerDecorator;
 import org.apache.felix.scr.annotations.Reference;
@@ -26,7 +26,7 @@ import java.util.Set;
 public class SitemapServlet extends SlingSafeMethodsServlet {
 
     @Reference
-    private SitemapService siteMapService;
+    private SitemapConfigService siteMapService;
 
 
     @Override

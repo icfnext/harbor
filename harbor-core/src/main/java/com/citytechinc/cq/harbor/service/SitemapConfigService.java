@@ -1,4 +1,4 @@
-package com.citytechinc.cq.harbor.services;
+package com.citytechinc.cq.harbor.service;
 
 import com.google.common.collect.Sets;
 import org.apache.felix.scr.annotations.*;
@@ -11,7 +11,7 @@ import java.util.Set;
 
 @Component(label = "Accelerate Sitemap Configuration service", immediate = true, metatype = true)
 @Service
-public final class SitemapService {
+public final class SitemapConfigService implements SitemapConfigServiceInterface{
 
     @Property(label = "Sitemap Root Locations",
             description = "List of paths that the sitemap servlet will use when generating a sitemap. ",
@@ -20,6 +20,7 @@ public final class SitemapService {
 
     private Set<String> sitemapRootPaths = Collections.emptySet();
 
+    @Override
     public Set<String> getSiteMapRootPaths(){
         return sitemapRootPaths;
     }
