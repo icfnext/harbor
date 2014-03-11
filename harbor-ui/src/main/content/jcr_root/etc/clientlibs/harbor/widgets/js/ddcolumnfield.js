@@ -171,7 +171,6 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.CustomContentPanel , {
          */
         this.ownerCt.ownerCt.ownerCt.buttons[0].handler = function(button){
 
-
             var toBeAddedList = Harbor.Components.ColumnRow.manifestUtil.filterColumnDataToAdd(parentContext.columnManifest);
             var toBeRemovedList = Harbor.Components.ColumnRow.manifestUtil.filterColumnDataToRemove(parentContext.columnManifest);
             var toBeMofifiedList = Harbor.Components.ColumnRow.manifestUtil.filterColumnDataToModify(parentContext.columnManifest);
@@ -221,6 +220,8 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.CustomContentPanel , {
     addColumn : function( parentContext , options ){
         options = options || {};
 
+        console.log(options);
+
         if( this.columnCount < 12 && this.canAddAnotherColumn ){
 
             this.columnCount++;
@@ -235,8 +236,6 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.CustomContentPanel , {
 
                 parentContext.expandColumn( id );
 
-                console.log(id);
-
                 e.preventDefault();
             } );
 
@@ -245,8 +244,6 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.CustomContentPanel , {
                 var id = $(this).parent().parent().parent().data("column-id");
 
                 parentContext.reduceColumn( id );
-
-                console.log(id);
 
                 e.preventDefault();
             } )
@@ -289,7 +286,7 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.CustomContentPanel , {
                 maxColSize   : 0,
                 class        : '',
                 canAddColumn : false,
-                name: this.columnManifest[ id ].data.name
+                name         : this.columnManifest[ id ].data.name
             }
 
 
@@ -298,24 +295,27 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.CustomContentPanel , {
         }
     },
 
-/*    getSizeForColumn: function(columnData){
-        if(columnData.hasOwnProperty("colClass") && columnData.colClass){
-            return columnData.colClass;
-        }
-        else{
-            return 1;
-        }
-    },*/
 
     getColHtmlString: function(id, options){
-        options.data = options.data || {};
-        var colWidth = options.data.colSize || '1';
-        var colClass = this.columnClassPrefix + colWidth;
+        options.data             = options.data || {};
+        var colWidth             = options.data.colSize || 1;
+        var colClass             = this.columnClassPrefix + colWidth;
+        var buttonContainerClass = "x-small";
+
+        if( colWidth != 1 ){
+
+            if( colWidth >=2 && colWidth <= 4 ){
+                buttonContainerClass = 'small';
+            }else if( colWidth > 4 ){
+                buttonContainerClass = 'regular';
+            }
+
+        }
 
         var tmp = $("<div class='" + colClass + " col' data-column-id='" + id + "'>"+
                         "<div class='well'>" +
                             "<h3>" + id + "</h3> " +
-                            "<div class='x-small'>" +
+                            "<div class='btn-group " + buttonContainerClass + "'>" +
                                 "<button class='btn btn-default less'>" +
                                     "<i class='fa fa-step-backward'></i>" +
                                 "</button>" +
