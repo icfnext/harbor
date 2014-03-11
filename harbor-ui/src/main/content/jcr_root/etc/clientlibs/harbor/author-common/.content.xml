@@ -5,4 +5,5 @@
         xmlns:jcr="http://www.jcp.org/jcr/1.0"
         jcr:primaryType="cq:ClientLibraryFolder"
         embed="harbor.authoroverrides"
-        categories="harbor.author-common"/>
+        categories="harbor.author-common"
+        runModes="author" />
