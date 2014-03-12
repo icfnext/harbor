@@ -26,7 +26,6 @@ public class RssFeedGeneratorServlet extends AbstractComponentServlet {
 			def rootNode = new XmlParser().parse(url);
 			rootNode.children().each { channel ->
 				channel.children().each { node ->
-					//TODO: make this a constant
 					if (node.name() == ITEM_NODE_NAME) {
 						def itemMap = [
 								//title: node.title.text(),
