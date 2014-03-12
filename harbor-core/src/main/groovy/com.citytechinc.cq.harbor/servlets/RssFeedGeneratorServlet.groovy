@@ -28,10 +28,10 @@ public class RssFeedGeneratorServlet extends AbstractComponentServlet {
 				channel.children().each { node ->
 					if (node.name() == ITEM_NODE_NAME) {
 						def itemMap = [
-								//title: node.title.text(),
+								title: node.title.text(),
 								link: node.link.text(),
 								pubDate: node.pubDate.text(),
-								//description: node.description.text()
+								description: node.description.text()
 						]
 						itemList.add(itemMap);
 					}
