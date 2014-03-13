@@ -430,7 +430,7 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.Ext.Panel , {
 
         }
 
-        console.log("hiddenFieldsObject",hiddenFieldsObject);
+        console.log("hiddenFieldsObject", hiddenFieldsObject);
 
         dialog.addHidden( hiddenFieldsObject );
 
