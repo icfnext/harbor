@@ -35,7 +35,5 @@ public class RSSFeedListConstructionStrategy implements ListConstructionStrategy
             rssFeedItemList = rssFeedGeneratorService.getListOfRSSFeedItemsFromUrls(RSSUrlListOptional.get());
         }
         return rssFeedItemList;
-
-
     }
 }

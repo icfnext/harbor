@@ -20,6 +20,7 @@ public class RSSFeedRenderingStrategy implements ListRenderingStrategy<RSSFeedIt
     public String renderListItem(RSSFeedItem item) {
         StringBuffer renderingStringBuffer = new StringBuffer();
 
+        renderingStringBuffer.append("<div>");
         renderingStringBuffer.append(String.format("Item title: %s", item.getTitle()));
         renderingStringBuffer.append("<br/>");
         renderingStringBuffer.append(String.format("Item Link: %s", item.getLink()));

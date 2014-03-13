@@ -1,6 +1,9 @@
 package com.citytechinc.cq.harbor.components.content.rssfeed;
 
-public class RSSFeedItem {
+import com.citytechinc.cq.harbor.components.content.list.ListRenderingStrategy;
+import com.citytechinc.cq.harbor.components.content.list.RenderableListItem;
+
+public class RSSFeedItem extends RenderableListItem<RSSFeedItem> {
     public static String PUB_DATE_XML_TAG_NAME = "pubDate";
     public static String TITLE_XML_TAG_NAME = "title";
     public static String LINK_XML_TAG_NAME = "link";
@@ -9,6 +12,10 @@ public class RSSFeedItem {
     private String link;
     private String pubDate;
     private String description;
+
+    public RSSFeedItem(RSSFeedItem item, ListRenderingStrategy renderingStrategy) {
+        super(item, renderingStrategy);
+    }
 
     public String getTitle() {
         return title;
