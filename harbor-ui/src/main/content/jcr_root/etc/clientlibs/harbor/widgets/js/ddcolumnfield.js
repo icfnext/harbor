@@ -1,4 +1,4 @@
-Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.CustomContentPanel , {
+Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.Ext.Panel , {
 
     columnCount          : 0,
     canAddAnotherColumn  : true,
@@ -8,6 +8,7 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.CustomContentPanel , {
     columnClassPrefix    : 'col-xs-',
     columnRequestFactory : {},
     columnManifest       : {}, //stores col objects by data-column-id - will be serialized
+    columnPathNameBase   : "column-id-",
 
     initComponent: function() {
 
@@ -185,6 +186,14 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.CustomContentPanel , {
         };
 
         this.doLayout();
+
+        var dialog = this.findParentByType("dialog");
+
+        dialog.on("beforesubmit", function(e){
+
+            parentContext.serializeToDialogForm();
+
+        })
 
     },
 
@@ -404,6 +413,28 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.CustomContentPanel , {
             return colsLeft;
 
         }
+
+    },
+
+    serializeToDialogForm: function(){
+
+        var manifest           = this.columnManifest;
+        var hiddenFieldsObject = {};
+        var dialog             = this.findParentByType("dialog");
+
+        for( var key in manifest ){
+
+            var columnObject = manifest[key];
+
+            hiddenFieldsObject[ this.columnPathNameBase + columnObject.id ] = columnObject.data.colSize;
+
+        }
+
+        console.log("hiddenFieldsObject",hiddenFieldsObject);
+
+        dialog.addHidden( hiddenFieldsObject );
+
+
 
     },
 
