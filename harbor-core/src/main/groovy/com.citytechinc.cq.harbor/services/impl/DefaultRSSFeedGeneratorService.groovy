@@ -11,20 +11,10 @@ import org.apache.sling.api.resource.LoginException
 import java.text.SimpleDateFormat
 
 @Service
-@Component(label = "RSSFeedItems Generator", immediate = true, metatype = true)
+@Component(label = "RSS Feed Generator Service", immediate = true, metatype = true)
 public final class DefaultRSSFeedGeneratorService implements RSSFeedGeneratorService {
 
-	@Activate
-	protected void activate(final Map<String, Object> properties) throws LoginException {
-		//Do nothing.
-	}
-
-	@Deactivate
-	protected void deactivate() {
-		//continue to do nothing.
-	}
-
-	public static final String ITEM_NODE_NAME = "item";
+	private static final String ITEM_NODE_NAME = "item";
 	public static final String RSS_FEED_PUBDATE_DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss zzz";
 
 	@Override
@@ -59,6 +49,16 @@ public final class DefaultRSSFeedGeneratorService implements RSSFeedGeneratorSer
 		itemList = itemList.sort(byPubDateComparator).reverse();
 
 		return itemList;
+	}
+
+	@Activate
+	protected void activate(final Map<String, Object> properties) throws LoginException {
+		//Do nothing.
+	}
+
+	@Deactivate
+	protected void deactivate() {
+		//continue to do nothing.
 	}
 
 }

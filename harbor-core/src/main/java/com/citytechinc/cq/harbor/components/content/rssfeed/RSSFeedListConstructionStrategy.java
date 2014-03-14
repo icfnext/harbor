@@ -15,11 +15,12 @@ import java.util.List;
 
 public class RSSFeedListConstructionStrategy implements ListConstructionStrategy<RSSFeedItem> {
 
+
+
     @DialogField(fieldLabel = "rssFeedPaths", name = "./rssFeedPaths")
     @PathField
     private final Optional<List<String>> RSSUrlListOptional;
 
-    @Reference
     private RSSFeedGeneratorService rssFeedGeneratorService;
 
     public RSSFeedListConstructionStrategy(ComponentNode componentNode) {
@@ -35,5 +36,9 @@ public class RSSFeedListConstructionStrategy implements ListConstructionStrategy
             rssFeedItemList = rssFeedGeneratorService.getListOfRSSFeedItemsFromUrls(RSSUrlListOptional.get());
         }
         return rssFeedItemList;
+    }
+
+    public void setRssFeedGeneratorService(RSSFeedGeneratorService rssFeedGeneratorService) {
+        this.rssFeedGeneratorService = rssFeedGeneratorService;
     }
 }
