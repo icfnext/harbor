@@ -22,19 +22,20 @@ public final class DefaultRSSFeedGeneratorService implements RSSFeedGeneratorSer
 		List<RSSFeedItem> itemList = new ArrayList<RSSFeedItem>();
 		rssPaths.each { url ->
 			def rootNode = new XmlParser().parse(url);
-			rootNode.children().each { channel ->
-				channel.children().each { node ->
-					if (node.name() == ITEM_NODE_NAME) {
-						String nodeTitle = node.title.text();
-						String nodeLink = node.link.text();
-						String nodePubDate = node.pubDate.text();
-						String nodeDescription = node.description.text();
+			if (url.length() > 0)
+				rootNode.children().each { channel ->
+					channel.children().each { node ->
+						if (node.name() == ITEM_NODE_NAME) {
+							String nodeTitle = node.title.text();
+							String nodeLink = node.link.text();
+							String nodePubDate = node.pubDate.text();
+							String nodeDescription = node.description.text();
 
-						RSSFeedItem rssFeedItem = new RSSFeedItem(nodeTitle, nodeLink, nodePubDate, nodeDescription);
-						itemList.add(rssFeedItem);
+							RSSFeedItem rssFeedItem = new RSSFeedItem(nodeTitle, nodeLink, nodePubDate, nodeDescription);
+							itemList.add(rssFeedItem);
+						}
 					}
 				}
-			}
 		}
 
 		def byPubDateComparator = [

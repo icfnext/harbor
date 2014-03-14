@@ -18,8 +18,12 @@ public class RSSFeedListConstructionStrategy implements ListConstructionStrategy
 
 
     @DialogField(fieldLabel = "rssFeedPaths", name = "./rssFeedPaths")
+    @MultiField
     @PathField
     private final Optional<List<String>> RSSUrlListOptional;
+
+    @DialogField(fieldLabel = "Number of Feed Items to display", name = "./numberOfFeedItemsToDisplay")
+    private final int numberOfFeedItemsToDisplay;
 
     private RSSFeedGeneratorService rssFeedGeneratorService;
 
@@ -27,6 +31,7 @@ public class RSSFeedListConstructionStrategy implements ListConstructionStrategy
         PageManagerDecorator pageManagerDecorator = componentNode.getResource().getResourceResolver().adaptTo(PageManagerDecorator.class);
         List<String> RSSUrlList = componentNode.getAsList("rssFeedPaths", String.class);
         RSSUrlListOptional = Optional.fromNullable(RSSUrlList);
+        numberOfFeedItemsToDisplay = componentNode.get("numberOfFeedItemsToDisplay", 10);
     }
 
     @Override
@@ -34,6 +39,9 @@ public class RSSFeedListConstructionStrategy implements ListConstructionStrategy
         List<RSSFeedItem> rssFeedItemList = new ArrayList<RSSFeedItem>();
         if (RSSUrlListOptional.isPresent()) {
             rssFeedItemList = rssFeedGeneratorService.getListOfRSSFeedItemsFromUrls(RSSUrlListOptional.get());
+        }
+        if (rssFeedItemList.size() > numberOfFeedItemsToDisplay){
+            rssFeedItemList =  rssFeedItemList.subList(0,numberOfFeedItemsToDisplay);
         }
         return rssFeedItemList;
     }
