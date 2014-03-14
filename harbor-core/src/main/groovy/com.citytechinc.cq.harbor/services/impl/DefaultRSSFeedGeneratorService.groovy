@@ -19,29 +19,31 @@ public final class DefaultRSSFeedGeneratorService implements RSSFeedGeneratorSer
 
 	@Override
 	public final List<RSSFeedItem> getListOfRSSFeedItemsFromUrls(final List<String> rssPaths) {
-		def itemList = [];
+		List<RSSFeedItem> itemList = new ArrayList<RSSFeedItem>();
 		rssPaths.each { url ->
 			def rootNode = new XmlParser().parse(url);
 			rootNode.children().each { channel ->
 				channel.children().each { node ->
 					if (node.name() == ITEM_NODE_NAME) {
-						def itemMap = [
-								"${RSSFeedItem.TITLE_XML_TAG_NAME}": node.title.text(),
-								"${RSSFeedItem.LINK_XML_TAG_NAME}": node.link.text(),
-								"${RSSFeedItem.PUB_DATE_XML_TAG_NAME}": node.pubDate.text(),
-								"${RSSFeedItem.DESCRIPTION_XML_TAG_NAME}": node.description.text()
-						]
-						itemList.add(itemMap);
+						String nodeTitle = node.title.text();
+						String nodeLink = node.link.text();
+						String nodePubDate = node.pubDate.text();
+						String nodeDescription = node.description.text();
+
+						RSSFeedItem rssFeedItem = new RSSFeedItem(nodeTitle, nodeLink, nodePubDate, nodeDescription);
+						itemList.add(rssFeedItem);
 					}
 				}
 			}
 		}
 
 		def byPubDateComparator = [
-				compare: { map1, map2 ->
+				compare: { rssFeedItem1, rssFeedItem2 ->
 					def dateFormat = new SimpleDateFormat(RSS_FEED_PUBDATE_DATE_FORMAT);
-					def date1 = dateFormat.parse(map1.pubDate);
-					def date2 = dateFormat.parse(map2.pubDate);
+					String map1PubDate = rssFeedItem1.getPubDate();
+					String map2PubDate = rssFeedItem2.getPubDate();
+					def date1 = dateFormat.parse(map1PubDate);
+					def date2 = dateFormat.parse(map2PubDate);
 					return date1.compareTo(date2);
 				}
 		] as Comparator;

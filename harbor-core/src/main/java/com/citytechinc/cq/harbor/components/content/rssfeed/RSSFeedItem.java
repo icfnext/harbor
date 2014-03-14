@@ -1,14 +1,18 @@
 package com.citytechinc.cq.harbor.components.content.rssfeed;
 
 public class RSSFeedItem {
-    public static String PUB_DATE_XML_TAG_NAME = "pubDate";
-    public static String TITLE_XML_TAG_NAME = "title";
-    public static String LINK_XML_TAG_NAME = "link";
-    public static String DESCRIPTION_XML_TAG_NAME = "description";
+
     private String title;
     private String link;
     private String pubDate;
     private String description;
+
+    public RSSFeedItem(String title, String link, String pubDate, String description) {
+        this.title = title;
+        this.link = link;
+        this.pubDate = pubDate;
+        this.description = description;
+    }
 
     public String getTitle() {
         return title;
