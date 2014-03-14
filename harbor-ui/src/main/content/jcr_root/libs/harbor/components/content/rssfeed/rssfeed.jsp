@@ -7,10 +7,25 @@
     that the component should be auto instantiated under the name 'listComponent' using the
     com.citytechinc.cq.library.components.annotations.AutoInstantiate annotation.
 --%>
-<c:if test="${listComponent.hasListElement}"><${listComponent.listElement} class="list-group" <c:if test="${listComponent.isOrderedList}"><c:if test="${listComponent.hasStart}">start="${listComponent.start}"</c:if> <c:if test="${listComponent.isReversed}">reversed="true"</c:if></c:if>></c:if>
+<c:if test="${listComponent.hasListElement}">
+    <${listComponent.listElement} class="list-group"
+    <c:if test="${listComponent.isOrderedList}">
+        <c:if test="${listComponent.hasStart}">start="${listComponent.start}"
+        </c:if>
+        <c:if test="${listComponent.isReversed}">
+            reversed="true"
+        </c:if>
+    </c:if>>
+</c:if>
 <c:forEach items="${listComponent.renderableListItems}" var="curListItem">
-    <c:if test="${listComponent.isHtmlList}"><li class="list-group-item"></c:if>
-        ${curListItem.renderedItem}
-    <c:if test="${listComponent.isHtmlList}"></li></c:if>
+    <c:if test="${listComponent.isHtmlList}">
+        <li class="list-group-item">
+    </c:if>
+    ${curListItem.renderedItem}
+    <c:if test="${listComponent.isHtmlList}">
+        </li>
+    </c:if>
 </c:forEach>
-<c:if test="${listComponent.hasListElement}"></${listComponent.listElement}></c:if>
+<c:if test="${listComponent.hasListElement}">
+    </${listComponent.listElement}>
+</c:if>
