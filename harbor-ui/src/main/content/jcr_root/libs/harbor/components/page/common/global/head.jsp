@@ -36,10 +36,7 @@
     <cq:include script="headlibs.jsp"/>
     <cq:include script="/libs/wcm/core/components/init/init.jsp"/>
     <cq:include script="stats.jsp"/>
-    <c:if test="${isAuthor}">
-        <cq:includeClientLib js="harbor.author-common"/>
-        <cq:includeClientLib css="harbor.author-common"/>
-    </c:if>
+    <cq:include script="clientlibs.jsp"/>
 
     <% if (favIcon != null) { %>
     <link rel="icon" type="image/vnd.microsoft.icon" href="<%= xssAPI.getValidHref(favIcon) %>"<%=xs%>>
