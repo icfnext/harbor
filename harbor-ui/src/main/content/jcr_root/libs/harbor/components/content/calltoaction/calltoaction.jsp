@@ -3,25 +3,30 @@
 
 
 
-<button id="callToActionButton" class="btn ${cta.size} ${cta.style}" data-toggle="modal" data-target="#callToActionModal"><c:out value="${cta.text}"/></button>
-
-
-<div class="modal fade cta-modal" <c:if test="${CQ.WCM.isEditMode || CQ.WCM.isDesignMode}">data-keyboard="false"</c:if><c:if test="${CQ.WCM.isPublish || CQ.WCM.isPreviewMode}">tabindex="-1"</c:if>  role="dialog" id="callToActionModal">
+<c:if test="${cta.openNewWindow}">
+<button id="callToActionButton" class="btn ${cta.size} ${cta.style}" data-toggle="modal" data-target="#callToActionModal">
+	<c:out value="${cta.text}"/>
+</button>
 
 <!-- Modal -->
-
-
+<div class="modal fade cta-modal" data-keyboard="false" tabindex="-1"  role="dialog" id="callToActionModal">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-body">
-				<cq:include path="modal-container-par" resourceType="foundation/components/parsys" />
+				<cq:include path="container-par" resourceType="foundation/components/parsys" />
 			</div>
 		</div>
 	</div>
 </div>
 
-
 	<script type="text/javascript">
-		Harbor.Components.CallToAction.changeEditableContext( '${cta.path}/modal-container-par' );
-
+		jQuery( document ).ready( function( $ ) {
+			$( '#callToActionModal' ).on('shown.bs.modal', function() {
+				Harbor.Components.editables().changeEditableContext( '${cta.path}/container-par' );
+			} );
+			$( '#callToActionModal' ).on('hide.bs.modal', function() {
+				Harbor.Components.editables().resetEditableContext();
+			} );
+		} );
 	</script>
+</c:if>

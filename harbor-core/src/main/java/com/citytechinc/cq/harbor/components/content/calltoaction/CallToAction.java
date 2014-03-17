@@ -1,6 +1,7 @@
 package com.citytechinc.cq.harbor.components.content.calltoaction;
 
 import com.citytechinc.cq.component.annotations.*;
+import com.citytechinc.cq.component.annotations.widgets.PathField;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
 import com.citytechinc.cq.harbor.constants.bootstrap.Bootstrap;
 import com.citytechinc.cq.library.components.AbstractComponent;
@@ -20,6 +21,10 @@ public class CallToAction extends AbstractComponent {
     private static final String SIZE_PROPERTY = "size";
     private static final String STYLE_PROPERTY = "style";
 	private static final String ACTION_PROPERTY = "action";
+
+	private final String OPEN_MODAL = "openModal";
+	private final String LINK_IN_WINDOW = "newWindow";
+	private final String LINK_IN_CURRENT = "openModal";
 
     @DialogField(fieldLabel = "Text",
             fieldDescription = "Provide the widget's text")
@@ -62,8 +67,7 @@ public class CallToAction extends AbstractComponent {
 			@Option(text = "Link",
 					qtip = "Deemphasize a button by making it look like a link while maintaining button behavior",
 					value = Bootstrap.BTN_LINK)
-})
-
+	})
     private final String style;
 
 	@DialogField(fieldLabel = "Action",
@@ -71,16 +75,22 @@ public class CallToAction extends AbstractComponent {
 	@Selection (type=Selection.SELECT, options = {
 			@Option(text = "Modal",
 					qtip = "Opens an authored modal on button click.",
-					value = "openModal"),
+					value = OPEN_MODAL),
 			@Option(text = "New Window/Tab",
 					qtip = "Opens link to specified path in a new window or tab.",
-					value = "openWindow"),
+					value = LINK_IN_WINDOW),
 			@Option(text = "Current Window",
 					qtip = "Opens link to specified path in current window.",
-					value = "currentWindow")
+					value = LINK_IN_CURRENT)
 	})
-
 	private final String action;
+
+	@DialogField(fieldLabel = "Link Target",
+			fieldDescription = "URL path this button leads to")
+	@PathField(rootPath="/" , rootTitle="Test Title")
+	public String getLinkTarget(){
+		return get("linkTarget", "#");
+	}
 
     public CallToAction(ComponentRequest request) {
         super(request);
@@ -108,5 +118,20 @@ public class CallToAction extends AbstractComponent {
 
 	public String getAction() {
 		return action;
+	}
+
+	public String getOpenNewWindow() {
+		if(action == LINK_IN_WINDOW){ return "true";}
+		else {return "false";}
+	}
+
+	public String getOpenCurrentWindow() {
+		if(action == LINK_IN_CURRENT){ return "true";}
+		else {return "false";}
+	}
+
+	public String getOpenModal() {
+		if(action == OPEN_MODAL){ return "true";}
+		return "false";
 	}
 }
