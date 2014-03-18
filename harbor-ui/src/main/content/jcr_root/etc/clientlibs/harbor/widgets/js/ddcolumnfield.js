@@ -9,6 +9,7 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.Ext.Panel , {
     columnRequestFactory : {},
     columnManifest       : {}, //stores col objects by data-column-id - will be serialized
     columnPathNameBase   : "column-id-",
+    hiddenFields: [],
 
     initComponent: function() {
 
@@ -21,15 +22,13 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.Ext.Panel , {
         var parentDialog = this.findParentByType("dialog");
         var contentPath  = parentDialog.responseScope.path;
 
-        parentContext.columnRequestFactory = Harbor.Components.ColumnRow.getRequestFactoryForEditable(contentPath);
-
         this.buttonBar = new function(){
 
             this.addColumn = function( element ){
 
                 parentContext.addColumn( parentContext );
 
-            },
+            }
 
             this.removeColumn = function(){
 
@@ -76,122 +75,97 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.Ext.Panel , {
         this.add(this.containerPanel);
 
 
-        this.ownerCt.ownerCt.ownerCt.on("show", function(){
+        parentDialog.on("loadcontent", function(dialog, records, opts, success){
+            console.log("load content event fired")
+            var _this = this;
+            var d = dialog;
+            var r = records;
+            var o = opts;
 
-            /*if(function(){
-                for (item in parentContext.columnManifest){
-                    if(parentContext.columnManifest.hasOwnProperty(item)){
-                        return true;
-                    }
+            console.log(records)
+            console.log(opts)
+            console.log(success)
+
+            console.log("-----")
+
+            var response = r[0].json;
+            //Zero out the manifest
+            parentContext.columnManifest = {};
+            //Zero out the column count
+            parentContext.columnCount = 0;
+            //zero out the can add another column field
+            parentContext.canAddAnotherColumn = true;
+            //zero out column container
+            var col_container = $("#"+parentContext.containerPanel.id).find("." + parentContext.columnContainerClass);
+            $(col_container).html("");
+
+            var col_list = [];
+            var tcolumnData;
+            var tcolumnName;
+            var tid;
+
+            /*
+            Columns start with "column", lets filter them
+            out of data, and into a list
+            */
+            //build a hash of columns
+            for (var prop in response){
+                if (prop.search("column") != -1){
+                    tcolumnName = prop;
+                    tcolumnData = response[prop];
+                    tid = parentContext.columnCount.toString();
+
+                    //var html = parentContext.getColHtmlString(tid, {"colClass":parentContext.getSizeForColumn(tcolumnData)})
+                    var col_hash = parentContext.createColData(tid, {
+                        colSize: parseInt(tcolumnData["colSize"]) || 1,
+                        maxColSize: parseInt(tcolumnData["maxColSize"]) || null,
+                        class: tcolumnData["class"] || null,
+                        canAddColumn: tcolumnData["canAddColumn"] || null,
+                        name: tcolumnName  //IMPORTANT
+                    }, null);
+
+                    col_list.push(col_hash);
                 }
-                return false;
-            }()){
+            }
 
-            }*/
+            //if non-empty,
+            if(col_list.length > 0){
 
+                //zero out column container to replace the placeholder with the actual columns
+                //var col_container = $("#"+parentContext.containerPanel.id).find("." + parentContext.columnContainerClass);
+                //$(col_container).html("");
 
-            parentContext.columnRequestFactory.getColumnsInRow().then(function(data){
-                console.log(data);
+                for(var i = 0; i < col_list.length; i++){
+                    var col = col_list[i];
 
-                //Zero out the manifest
-                parentContext.columnManifest = {};
-                //Zero out the column count
-                parentContext.columnCount = 0;
-                //zero out the can add another column field
-                parentContext.canAddAnotherColumn = true;
-                //zero out column container
-                var col_container = $("#"+parentContext.containerPanel.id).find("." + parentContext.columnContainerClass);
-                $(col_container).html("");
-
-                var col_list = [];
-                var tcolumnData;
-                var tcolumnName;
-                var tid;
-
-                /*
-                 Columns start with "column", lets filter them
-                 out of data, and into a list
-                 */
-                //build a hash of columns
-                for (var prop in data){
-                    if (prop.search("column") != -1){
-                        tcolumnName = prop;
-                        tcolumnData = data[prop];
-                        tid = parentContext.columnCount.toString();
-
-                        //var html = parentContext.getColHtmlString(tid, {"colClass":parentContext.getSizeForColumn(tcolumnData)})
-                        var col_hash = parentContext.createColData(tid, {
-                            colSize: parseInt(tcolumnData["colSize"]) || 1,
-                            maxColSize: parseInt(tcolumnData["maxColSize"]) || null,
-                            class: tcolumnData["class"] || null,
-                            canAddColumn: tcolumnData["canAddColumn"] || null,
-                            name: tcolumnName  //IMPORTANT
-                        }, null);
-
-                        col_list.push(col_hash);
-                    }
-                }
-
-                //if non-empty,
-                if(col_list.length > 0){
-
-                    //zero out column container to replace the placeholder with the actual columns
-                    //var col_container = $("#"+parentContext.containerPanel.id).find("." + parentContext.columnContainerClass);
-                    //$(col_container).html("");
-
-                    for(var i = 0; i < col_list.length; i++){
-                        var col = col_list[i];
-
-                        /*
-                            Invoke add column with the column data that was returned via ajax.
-                         */
-                        parentContext.addColumn(parentContext, {
-                            data: col.data
-                        });
-
-                    }
+                    /*
+                    Invoke add column with the column data that was returned via ajax.
+                        */
+                    parentContext.addColumn(parentContext, {
+                        data: col.data
+                    });
 
                 }
-                else{
-                    //otherwise, Leave the lone column there
-                    if( parentContext.columnCount == 0 ){
-                        parentContext.addColumn( parentContext );
-                    }
 
+            }
+            else{
+                //otherwise, Leave the lone column there
+                if( parentContext.columnCount == 0 ){
+                    parentContext.addColumn( parentContext );
                 }
-            });
 
-
-
+            }
         });
-
-        /*
-            This replaces the click handler on the Dialog's OK button
-
-            This is where the manifest is serialized.
-         */
-        this.ownerCt.ownerCt.ownerCt.buttons[0].handler = function(button){
-
-            var toBeAddedList = Harbor.Components.ColumnRow.manifestUtil.filterColumnDataToAdd(parentContext.columnManifest);
-            var toBeRemovedList = Harbor.Components.ColumnRow.manifestUtil.filterColumnDataToRemove(parentContext.columnManifest);
-            var toBeMofifiedList = Harbor.Components.ColumnRow.manifestUtil.filterColumnDataToModify(parentContext.columnManifest);
-
-            parentContext.columnRequestFactory.modifyColumnList(toBeMofifiedList);
-            parentContext.columnRequestFactory.addColumnList(toBeAddedList);
-            parentContext.columnRequestFactory.removeColumnList(toBeRemovedList);
-
-            //invokes normal click action
-            this.ok(button);
-
-        };
 
         this.doLayout();
 
-        var dialog = this.findParentByType("dialog");
+        //var dialog = this.findParentByType("dialog");
 
-        dialog.on("beforesubmit", function(e){
+        parentDialog.on("beforesubmit", function(e){
 
             parentContext.serializeToDialogForm();
+
+            console.log("PARENT DIALOG FORM ITEMS, BEFORE SUB --- ", parentDialog.form.items);
 
         })
 
@@ -263,11 +237,21 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.Ext.Panel , {
                 colSize      : options.data.colSize || 1 ,
                 class        : options.data.class || this.columnClassPrefix + (options.width || 1) ,
                 maxColSize   : options.data.maxColSize || this.getMaxColSize( this.columnCount ),
-                canAddColumn : options.data.canAddColumn || true
+                canAddColumn : options.data.canAddColumn || true,
+                name         : this.columnPathNameBase + this.columnCount.toString()
             }
 
+            //This will execute if a column name was pulled from the JCR
             if(options.data.name){
                 colData.name = options.data.name;
+            }
+            /*
+                If this else branch executes, then we can flag this column as "new"
+                aka: "added via the dialog". We do this by setting the name to something
+                false-ish
+            */
+            else{
+                colData.isNewColumn = true;
             }
 
             this.columnManifest[ this.columnCount ] = this.createColData(
@@ -422,18 +406,56 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.Ext.Panel , {
         var hiddenFieldsObject = {};
         var dialog             = this.findParentByType("dialog");
 
+
+        /*
+         Delete fields for the current Column Name
+         */
+        //var columnName = columnObject.data.name;
+        var columnPredicate = function(item){
+            return item.name.indexOf("column-id-") != -1;
+        }
+
+        /*
+        var new_items = dialog.form.items.filterBy(columnPredicate);
+        dialog.form.items.clear();
+        //dialog.form.items.addAll(new_items);
+        dialog.form.items = new_items;*/
+
+        dialog.formPanel.items.each(function(item/*, index, length*/) {
+            if(item.xtype == "hidden"){
+                if (columnPredicate(item)) {
+                    dialog.formPanel.remove(item);
+                    // TODO: remove all fields from form
+                    //dialog.form.items.findParentByType("form").getForm().remove(item);
+                }
+            }
+        });
+
+
         for( var key in manifest ){
 
             var columnObject = manifest[key];
 
-            hiddenFieldsObject[ this.columnPathNameBase + columnObject.id ] = columnObject.data.colSize;
+            var hiddenFieldObject = Harbor.Components.ColumnRow.manifestUtil.generateHiddenFieldObject(columnObject.data);
+
+            //Add all elements in the hidden field object created for the column into the hidden field object we add to the dialog
+
+            for(var prop in hiddenFieldObject){
+                if (hiddenFieldObject.hasOwnProperty(prop)){
+                    hiddenFieldsObject[prop] = hiddenFieldObject[prop];
+                }
+            }
+
+            //this.containerPanel.items.addAll(this.hiddenFields);
+            //hiddenFieldsObject [ columnObject.data.name ] = hiddenFieldObject;
+
+            //hiddenFieldsObject[ this.columnPathNameBase + columnObject.id ] = columnObject.data.colSize;
 
         }
 
-        console.log("hiddenFieldsObject", hiddenFieldsObject);
-
+        console.log("FORM ITEMS --- ", dialog.form.items);
         dialog.addHidden( hiddenFieldsObject );
-
+        console.log("FORM ITEMS POST ADD --- ", dialog.form.items);
 
 
     },

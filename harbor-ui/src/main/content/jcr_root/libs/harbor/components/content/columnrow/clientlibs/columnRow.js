@@ -3,222 +3,86 @@ Harbor.Components.ColumnRow = function(jQuery){
     var nameHint = "column";
     var column = {
         'sling:resourceType' : 'harbor/components/content/column',
-        'jcr:primaryType' : 'nt:unstructured',
-        ':nameHint' : nameHint
+        'jcr:primaryType' : 'nt:unstructured'
     };
 
     return {
         manifestUtil: function(){
-            var predicates = {
-                isToBeAdded: function(data){
-                    if(!data.name && data.colSize != 0){
-                        return true;
-                    }
-                    return false;
-                },
-                isToBeRemoved: function(data){
-                    return data.colSize == 0 && data.name; //data.name is undefined for newly added cols
-
-                },
-                isToBeModified: function(data){
-                    return data.colSize != 0 && this.isToBeAdded(data) == false;
-                }
-            }
-
-            /*
-                These filters build an aggregation of AJAX payload objects.
-                The lists here will be used for that purpose only.
-             */
 
             return {
-                filterColumnDataToAdd: function(manifest){
-                    var buildAddToPayload = function(data){
-                        var newColumnBase = column;
+                predicates: {
+                    isToBeAdded: function(data){
+                        if(data.isNewColumn && data.colSize != 0){
+                            return true;
+                        }
+                        return false;
+                    },
+                    isToBeRemoved: function(data){
+                        return data.colSize == 0 && data.name; //data.name is undefined for newly added cols
 
-                        for (prop in data) {
-                            if (data.hasOwnProperty(prop)){
+                    },
+                    isToBeModified: function(data){
+                        return data.colSize != 0 && this.isToBeAdded(data) == false;
+                    }
+                },
+
+                generateHiddenFieldObject: function(colData){
+                    /*
+                        Determine if colData is to be added,
+                        modified, or removed, and create the appropriate
+                        data dictionary that can be inserted as a hidden field
+                    */
+                    var dataPrefix = './' + colData.name + '/';
+
+                    if (this.predicates.isToBeAdded(colData)){
+                        //sling type, and node type
+                        var resourceTypeKey = dataPrefix + 'sling:resourceType';
+                        var primaryTypeKey = dataPrefix + 'jcr:primaryType';
+                        var addColData = {};
+                        addColData[resourceTypeKey] = 'harbor/components/content/column';
+                        addColData[primaryTypeKey]  = 'nt:unstructured';
+
+                        //Adds the colData passed to the function into the addColData object
+                        for (var prop in colData) {
+                            if (colData.hasOwnProperty(prop)){
                                 //Add props from data to newColumnBase
-                                newColumnBase[prop] = data[prop];
+                                if(prop != "isNewColumn"){   //we cn skip serializing this
+                                    addColData[dataPrefix + prop] = colData[prop];
+                                }
                             }
                         }
-
-                        return newColumnBase;
-
+                        return addColData;
                     }
 
-                    /*
-                        Filters columns that have a name of ':column'
-
-                        This is inserted as a name for columns added using the add button.
-                        This won't actually be the column's name, but serves as a way to fetch it.
-                        New columns use the nameHint defined in this class to have their names
-                        auto-generated when plopped into the jcr.
-                     */
-                    var filtered = [];
-
-                    for(var prop in manifest){
-                        if(manifest.hasOwnProperty(prop)){
-                            //BAM DATA TOWN
-
-                            //We check colSize here also, because we don't want to add something that
-                            //had been added, but removed from the column builder
-                            var tmp = manifest[prop];
-                            if(predicates.isToBeAdded(tmp.data)){
-                                //Add this to our list of filtered items
-                                filtered.push(buildAddToPayload(tmp.data));
+                    else if(this.predicates.isToBeModified(colData)){
+                        var newData = {};
+                        for (var prop in colData) {
+                            if (colData.hasOwnProperty(prop)){
+                                //Add props from data to newColumnBase
+                                newData[dataPrefix + prop] = colData[prop];
                             }
                         }
+                        return newData;
                     }
 
-                    return filtered;
+                    else if(this.predicates.isToBeRemoved(colData)){
+
+                        var colName = './' + colData.name + "@Delete";
+                        var obj = {}
+                        obj[colName] = true;
+                        return obj;
+                    }
+                },
+                createAddColumnPayload: function(colData){
+                    //extend column data with sling stuff
+
                 },
 
-                filterColumnDataToRemove: function(manifest){
-                    /*
-                        Filters columns with a 'colSize' that has been zero'd out.
-                     */
+                createModifyColumnPayload: function(colData){
 
-                    var filtered = [];
-                    for(var prop in manifest){
-                        if(manifest.hasOwnProperty(prop)){
-                            //Check for the name, because we don't want to send for a removal of something that wasn't
-                            //put into the jcr yet. (the :nameHint is given to NEW columns added via button)
-                            var tmp = manifest[prop];
-                            if(predicates.isToBeRemoved(tmp.data)){
-                                filtered.push({
-                                    name: tmp.data.name,
-                                    data: tmp.data
-                                });
-                            }
-                        }
-                    }
-
-                    return filtered;
-                },
-
-                filterColumnDataToModify: function(manifest){
-                    /*
-                        Filters columns with a non-zero colSize,
-                        and columns with names that are not ":column" (well, ':' + nameHint)
-                     */
-                    var filtered = [];
-                    for(var prop in manifest){
-                        if(manifest.hasOwnProperty(prop)){
-                            var tmp = manifest[prop];
-                            if(predicates.isToBeModified(tmp.data)){
-                                filtered.push({
-                                    name: tmp.data.name,
-                                    data: tmp.data
-                                });
-                            }
-                        }
-                    }
-
-                    return filtered;
                 }
             }
         }(),
-
-        getRequestFactoryForEditable: function(path){
-            var path = path;
-
-            var addColumnToRow = function(col){
-                return $.ajax({
-                    type: "POST",
-                    data: col,
-                    url: path + '/*'
-                }).then(function(data){
-                    return data;
-                });
-            };
-
-            var modifyColumnInRow = function(columnName, col){
-                return $.ajax({
-                    type: "POST",
-                    data: col,
-                    url: path + "/" + columnName
-                }).then(function(data){
-                    return data;
-                });
-            };
-
-            var removeColumnFromRow = function(name){
-                return $.ajax({
-                    type: "POST",
-                    data: {":operation": "delete"},
-                    url: path + "/" + name
-                }).then(function(data){
-                    return data;
-                });
-            };
-
-            return {
-                getColumnsInRow: function(){
-                    return $.ajax({
-                        type: "GET",
-                        url: path + ".1.json"
-                    });
-                },
-
-                removeColumnList: function(list){
-                    var def = $.Deferred();
-                    var def_promise = def.promise();
-
-                    $.each(list, function(i, postData){
-                        //build a .then chain with the promise
-                        def_promise = def_promise.then(function(){
-                            return removeColumnFromRow(postData.name);
-                        });
-                    });
-
-                    //final then
-                    def_promise.then(function(){
-                        //editableContext.refreshSelf();
-                    });
-
-                    def.resolve();
-                },
-                modifyColumnList: function(list){
-                    var def = $.Deferred();
-                    var def_promise = def.promise();
-
-                    $.each(list, function(i, postData){
-                        //build a .then chain with the promise
-                        def_promise = def_promise.then(function(){
-                            return modifyColumnInRow(postData.name, postData.data);
-                        });
-                    });
-
-                    //final then
-                    def_promise.then(function(){
-                        //editableContext.refreshSelf();
-                    });
-
-                    def.resolve();
-                },
-
-                addColumnList: function(list){
-                    var def = $.Deferred();
-                    var def_promise = def.promise();
-
-                    $.each(list, function(i, postData){
-                        //build a .then chain with the promise
-                        def_promise = def_promise.then(function(){
-                            return addColumnToRow(postData);
-                        });
-                    });
-
-                    //final then
-                    def_promise.then(function(){
-                        //editableContext.refreshSelf();
-                        console.log("ADD COLUMN LIST PROMISE THEN")
-                    });
-
-                    def.resolve();
-                }
-
-            }
-        },
 
         getBaseColumnData: function(){
             return column;

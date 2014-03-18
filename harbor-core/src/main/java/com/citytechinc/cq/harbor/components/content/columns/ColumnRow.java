@@ -20,11 +20,6 @@ import java.util.List;
         contentAdditionalProperties = {
                 @ContentProperty(name="dependencies", value="harbor.components.content.columnrow")
         },
-        actionConfigs = {
-                @ActionConfig(xtype = "tbseparator"),
-                @ActionConfig(text = "Add Column", handler = "function(){ Harbor.Components.ColumnRow.addColumn(this) }"),
-                @ActionConfig(text = "Add n Columns", handler = "function(){ Harbor.Components.ColumnRow.addMultipleColumns(this) }")
-        },
         listeners = {
                 @Listener(name = "afterinsert", value = "REFRESH_PAGE")
         },
