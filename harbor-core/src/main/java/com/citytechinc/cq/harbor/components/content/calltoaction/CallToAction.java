@@ -16,15 +16,14 @@ import org.apache.commons.lang.StringUtils;
 )
 public class CallToAction extends AbstractComponent {
 
-    private static final String TEXT_PROPERTY = "text";
-    private static final String SIZE_PROPERTY = "size";
-    private static final String STYLE_PROPERTY = "style";
+	private static final String TEXT_PROPERTY = "text";
+	private static final String SIZE_PROPERTY = "size";
+	private static final String STYLE_PROPERTY = "style";
 	private static final String ACTION_PROPERTY = "action";
 	private static final String PATH_PROPERTY = "linkTarget";
-
-	private final String OPEN_MODAL = "modal";
-	private final String LINK_IN_WINDOW = "window";
-	private final String LINK_IN_CURRENT = "current";
+	private static final String OPEN_MODAL = "modal";
+	private static final String LINK_IN_WINDOW = "window";
+	private static final String LINK_IN_CURRENT = "current";
 
     @DialogField(fieldLabel = "Text",
             fieldDescription = "Provide the widget's text")
