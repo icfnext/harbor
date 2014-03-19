@@ -41,11 +41,12 @@ public class BreadcrumbItem {
         return page.getTitle();
     }
 
-    private HierarchicalPage getPage() {
+    public HierarchicalPage getPage() {
         return page;
     }
 
     public String getPageIcon() {
         return getPage().getPageIcon();
     }
+
 }
