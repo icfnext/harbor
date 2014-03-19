@@ -17,13 +17,14 @@ import com.citytechinc.cq.library.content.request.ComponentRequest;
         })
 @AutoInstantiate( instanceName = ListConstants.LIST_PAGE_CONTEXT_NAME )
 public class Breadcrumb extends AbstractListComponent<BreadcrumbItem> {
-    @DialogField
-    @DialogFieldSet( title = "List Construction" )
-    BreadcrumbItemListConstructionStrategy breadcrumbItemListConstructionStrategy;
 
     @DialogField
-    @DialogFieldSet( title = "List Rendering" )
+    @DialogFieldSet(border = false, collapsible = false)
     BreadcrumbItemRenderingStrategy breadcrumbItemListRenderingStrategy;
+
+    @DialogField
+    @DialogFieldSet(border = false, collapsible = false)
+    BreadcrumbItemListConstructionStrategy breadcrumbItemListConstructionStrategy;
 
     public Breadcrumb(final ComponentRequest request) {
         super(request);

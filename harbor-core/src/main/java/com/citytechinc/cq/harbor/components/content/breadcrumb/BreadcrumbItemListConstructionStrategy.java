@@ -10,7 +10,6 @@ import com.citytechinc.cq.harbor.content.page.HomePage;
 import com.citytechinc.cq.harbor.content.page.SectionLandingPage;
 import com.citytechinc.cq.library.content.node.BasicNode;
 import com.citytechinc.cq.library.content.node.ComponentNode;
-import com.citytechinc.cq.library.content.page.PageDecorator;
 import com.citytechinc.cq.library.content.request.ComponentRequest;
 import com.google.common.base.Optional;
 import com.google.common.collect.Lists;
@@ -37,6 +36,7 @@ public class BreadcrumbItemListConstructionStrategy implements ListConstructionS
         List<BreadcrumbItem> breadcrumbPageList = new ArrayList<BreadcrumbItem>();
         Optional<? extends HierarchicalPage> rootPageOptional;
         String rootPageType = getRootPageType();
+
         if (rootPageType.equals(SectionLandingPage.RDF_TYPE)) {
             rootPageOptional = currentPage.getSectionLandingPage();
         } else if (rootPageType.equals(HomePage.RDF_TYPE)) {
@@ -48,6 +48,7 @@ public class BreadcrumbItemListConstructionStrategy implements ListConstructionS
         if (rootPageOptional.isPresent()) {
             String rootPagePath = rootPageOptional.get().getPath();
             HierarchicalPage currentTrailPage = currentPage;
+            breadcrumbPageList.add(new BreadcrumbItem(currentTrailPage, getCurrentBreadcrumbItemConfigNodeOptional()));
             while (currentTrailPage != null && !currentTrailPage.getPath().equals(rootPagePath)) {
                 currentTrailPage = currentTrailPage.getParent().adaptTo(HierarchicalPage.class);
                 breadcrumbPageList.add(new BreadcrumbItem(currentTrailPage, getIntermediaryBreadcrumbItemConfigNodeOptional()));
@@ -60,10 +61,6 @@ public class BreadcrumbItemListConstructionStrategy implements ListConstructionS
             BreadcrumbItem rootBreadcrumbItem = breadcrumbPageList.get(breadcrumbPageListLastItemIndex);
             rootBreadcrumbItem = new BreadcrumbItem(rootBreadcrumbItem.getPage(), getRootBreadcrumbItemConfigNodeOptional());
             breadcrumbPageList.set(breadcrumbPageListLastItemIndex, rootBreadcrumbItem);
-
-            BreadcrumbItem currentBreadcrumbItem = breadcrumbPageList.get(0);
-            currentBreadcrumbItem = new BreadcrumbItem(currentBreadcrumbItem.getPage(), getCurrentBreadcrumbItemConfigNodeOptional());
-            breadcrumbPageList.set(0, currentBreadcrumbItem);
         }
 
         if (getHideCurrentPageInBreadcrumb()) {
@@ -82,21 +79,31 @@ public class BreadcrumbItemListConstructionStrategy implements ListConstructionS
         return currentComponentNode.get("rootPageType", SectionLandingPage.RDF_TYPE);
     }
 
-    /**
-     * A dialog field which allows the user to check a box if they wish to hide the current page in the breadcrumb.
-     *
-     * @return <code>true</code> will hide the last item in the {@link BreadcrumbItem} list. <code>false</code> will display the last item.
-     */
     @DialogField(fieldLabel = "Hide current page in Breadcrumb?", ranking = 2)
     @Selection(type = Selection.CHECKBOX, options = @Option(value = "true"))
     public boolean getHideCurrentPageInBreadcrumb() {
         return currentComponentNode.get("hideCurrentPageInBreadcrumb", false);
     }
 
-    @DialogField(ranking = 3)
-    @DialogFieldSet(collapsible = true, collapsed = true, namePrefix = CURRENT_BREADCRUMB_PAGE_OPTIONS_NODE_PATH + "/", title = "Current Page Config")
     private Optional<BreadcrumbItemConfigNode> getCurrentBreadcrumbItemConfigNodeOptional() {
         return Optional.fromNullable(getBreadcrumbItemConfigNode(CURRENT_BREADCRUMB_PAGE_OPTIONS_NODE_PATH));
+    }
+
+    private Optional<BreadcrumbItemConfigNode> getIntermediaryBreadcrumbItemConfigNodeOptional() {
+        return Optional.fromNullable(getBreadcrumbItemConfigNode(INTERMEDIARY_BREADCRUMB_PAGE_OPTIONS_NODE_PATH));
+    }
+
+    private Optional<BreadcrumbItemConfigNode> getRootBreadcrumbItemConfigNodeOptional() {
+        return Optional.fromNullable(getBreadcrumbItemConfigNode(ROOT_BREADCRUMB_PAGE_OPTIONS_NODE_PATH));
+    }
+
+    private BreadcrumbItemConfigNode getBreadcrumbItemConfigNode(String nodeType) {
+        Resource rootPageResource = currentComponentNode.getResource().getChild(nodeType);
+        if (rootPageResource != null) {
+            return new BreadcrumbItemConfigNode(rootPageResource.adaptTo(BasicNode.class));
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -108,12 +115,6 @@ public class BreadcrumbItemListConstructionStrategy implements ListConstructionS
     @DialogFieldSet(collapsible = true, collapsed = true, namePrefix = CURRENT_BREADCRUMB_PAGE_OPTIONS_NODE_PATH + "/", title = "Current Page Config")
     public BreadcrumbItemConfigNode getCurrentBreadcrumbItemConfigNode() {
         return null;
-    }
-
-    @DialogField(ranking = 4)
-    @DialogFieldSet(collapsible = true, collapsed = true, namePrefix = INTERMEDIARY_BREADCRUMB_PAGE_OPTIONS_NODE_PATH + "/", title = "Intermediary Page Config")
-    private Optional<BreadcrumbItemConfigNode> getIntermediaryBreadcrumbItemConfigNodeOptional() {
-        return Optional.fromNullable(getBreadcrumbItemConfigNode(INTERMEDIARY_BREADCRUMB_PAGE_OPTIONS_NODE_PATH));
     }
 
     /**
@@ -128,31 +129,13 @@ public class BreadcrumbItemListConstructionStrategy implements ListConstructionS
     }
 
     /**
-     * A dialog field which allows the user to specify what fields to display in the root page.
+     * A method whose only purpose is to create a dialog entry for the current breadcrumb page configuration.
      *
-     * @return A properly configured {@link BreadcrumbItemConfigNode} for a root page.
-     */
-    private Optional<BreadcrumbItemConfigNode> getRootBreadcrumbItemConfigNodeOptional() {
-        return Optional.fromNullable(getBreadcrumbItemConfigNode(ROOT_BREADCRUMB_PAGE_OPTIONS_NODE_PATH));
-    }
-
-    /**
-     * A dialog field which allows the user to specify what fields to display in the root page.
-     *
-     * @return A properly configured {@link BreadcrumbItemConfigNode} for a root page.
+     * @return null
      */
     @DialogField(ranking = 5)
     @DialogFieldSet(collapsible = true, collapsed = true, namePrefix = ROOT_BREADCRUMB_PAGE_OPTIONS_NODE_PATH + "/", title = "Root Page Config")
     public BreadcrumbItemConfigNode getRootBreadcrumbItemConfigNode() {
         return null;
-    }
-
-    private BreadcrumbItemConfigNode getBreadcrumbItemConfigNode(String nodeType) {
-        Resource rootPageResource = currentComponentNode.getResource().getChild(nodeType);
-        if (rootPageResource != null) {
-            return new BreadcrumbItemConfigNode(rootPageResource.adaptTo(BasicNode.class));
-        } else {
-            return null;
-        }
     }
 }
