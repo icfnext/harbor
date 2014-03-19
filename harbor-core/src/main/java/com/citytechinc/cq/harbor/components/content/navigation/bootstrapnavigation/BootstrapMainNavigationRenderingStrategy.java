@@ -12,7 +12,12 @@ public class BootstrapMainNavigationRenderingStrategy implements TreeNodeRenderi
     private String getNodeLinkText(TreeNode<PageDecorator>  n){
         PageDecorator d = n.getValue();
         String pageTitle = d.getPageTitle();
-        if(pageTitle != null){
+        String navigationTitle = d.getNavigationTitle();
+
+        if(navigationTitle != null){
+            return navigationTitle;
+        }
+        else if(pageTitle != null){
             return pageTitle;
         }
         else{

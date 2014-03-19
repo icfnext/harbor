@@ -14,7 +14,10 @@ import com.citytechinc.cq.library.content.page.PageDecorator;
 import com.citytechinc.cq.library.content.page.PageManagerDecorator;
 import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
+import com.google.common.collect.Collections2;
 
+import javax.jcr.Node;
+import javax.jcr.RepositoryException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -96,12 +99,23 @@ public class PageTreeConstructionStrategy implements TreeNodeConstructionStrateg
         }
 
         List<TreeNode<PageDecorator>> children_of_n = transformListToTreeNodeList(n.getValue().getChildren(getPredicate()));
+        /*
+            Here, we filter out items that are hidden from navigation.
+         */
+        List<TreeNode<PageDecorator>> children_of_n_filtered = new ArrayList<TreeNode<PageDecorator>>();
+        for(TreeNode<PageDecorator> child_node : children_of_n){
+            if(child_node.getValue().isHideInNav() == false){
+                children_of_n_filtered.add(child_node);
+            }
+        }
+
         List<TreeNode<PageDecorator>> new_children_of_n = new ArrayList();
 
         //visit step
-        for(TreeNode<PageDecorator> child_of_n : children_of_n){
+        for(TreeNode<PageDecorator> child_of_n : children_of_n_filtered){
             //grab children from child_of_n.getValue()
             PageDecorator p_temp = child_of_n.getValue();
+
             List<PageDecorator> p_temp_children = p_temp.getChildren(getPredicate());
 
             //create new node with same value, and value's children
@@ -140,4 +154,5 @@ public class PageTreeConstructionStrategy implements TreeNodeConstructionStrateg
     public Predicate<PageDecorator> getPredicate() {
         return predicate;
     }
+
 }
