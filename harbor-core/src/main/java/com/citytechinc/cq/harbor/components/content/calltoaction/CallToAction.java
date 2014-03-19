@@ -6,11 +6,9 @@ import com.citytechinc.cq.component.annotations.widgets.Selection;
 import com.citytechinc.cq.harbor.constants.bootstrap.Bootstrap;
 import com.citytechinc.cq.library.components.AbstractComponent;
 import com.citytechinc.cq.library.content.request.ComponentRequest;
+import com.google.common.base.Optional;
 import org.apache.commons.lang.StringUtils;
 
-/**
- *
- */
 @Component(value = "Call to Action", group = "Harbor", name = "calltoaction",
 		contentAdditionalProperties = {
 				@ContentProperty(name="dependencies", value="harbor.components.content.calltoaction")
@@ -30,7 +28,9 @@ public class CallToAction extends AbstractComponent {
 
     @DialogField(fieldLabel = "Text",
             fieldDescription = "Provide the widget's text")
-    private final String text;
+    public String getText() {
+	    return get(TEXT_PROPERTY, StringUtils.EMPTY);
+    }
 
     @DialogField(fieldLabel = "Size",
             fieldDescription = "Select the widget's size")
@@ -40,7 +40,9 @@ public class CallToAction extends AbstractComponent {
             @Option(text = "Small", value = Bootstrap.BTN_SMALL),
             @Option(text = "Mini", value = Bootstrap.BTN_MINI)
     })
-	private final String size;
+    public String getSize() {
+	    return get(SIZE_PROPERTY, StringUtils.EMPTY);
+    }
 
 	@DialogField(fieldLabel = "Style",
 			fieldDescription = "Select the widget's style")
@@ -70,7 +72,9 @@ public class CallToAction extends AbstractComponent {
 					qtip = "Deemphasize a button by making it look like a link while maintaining button behavior",
 					value = Bootstrap.BTN_LINK)
 	})
-    private final String style;
+	public String getStyle() {
+		return get(STYLE_PROPERTY, StringUtils.EMPTY);
+	}
 
 	@DialogField(fieldLabel = "Action",
 			fieldDescription = "Select the widget's action upon being clicked")
@@ -85,45 +89,31 @@ public class CallToAction extends AbstractComponent {
 					qtip = "Opens link to specified path in current window.",
 					value = LINK_IN_CURRENT)
 	})
-	private final String action;
+	public String getAction() {
+		return get(ACTION_PROPERTY, StringUtils.EMPTY);
+	}
 
 	@DialogField(fieldLabel = "Link Target",
 			fieldDescription = "URL path this button leads to")
-	@PathField(rootPath="/content/" , rootTitle="Test Title")
-	private final String path;
-
-    public CallToAction(ComponentRequest request) {
-        super(request);
-        text = get(TEXT_PROPERTY, StringUtils.EMPTY);
-        size = get(SIZE_PROPERTY, StringUtils.EMPTY);
-        style = get(STYLE_PROPERTY, StringUtils.EMPTY);
-	    action = get(ACTION_PROPERTY, StringUtils.EMPTY);
-		path = getAsHref(PATH_PROPERTY, true, true).or(StringUtils.EMPTY);
-    }
-
-    public String getText() {
-        return text;
-    }
-    public String getSize() {
-        return size;
-    }
-    public String getStyle() {
-        return style;
-    }
-	public String getAction() {
-		return action;
+	@PathField
+	public String getLinkTarget(){
+		return get(PATH_PROPERTY, StringUtils.EMPTY);
 	}
-	public String getLinkTarget(){return path;}
 
+	public CallToAction(ComponentRequest request) {
+		super(request);
+	}
+
+	public String getLinkUrl() {
+		return getLinkBuilder().forPath(getLinkTarget()).build().getHref();
+	}
 	public Boolean getOpenWindow() {
-		return StringUtils.equalsIgnoreCase(action,LINK_IN_WINDOW);
+		return StringUtils.equalsIgnoreCase(getAction(),LINK_IN_WINDOW);
 	}
-
 	public Boolean getOpenCurrent() {
-		return StringUtils.equalsIgnoreCase(action,LINK_IN_CURRENT);
+		return StringUtils.equalsIgnoreCase(getAction(),LINK_IN_CURRENT);
 	}
-
 	public Boolean getOpenModal() {
-		return StringUtils.equalsIgnoreCase(action,OPEN_MODAL);
+		return StringUtils.equalsIgnoreCase(getAction(),OPEN_MODAL);
 	}
 }
