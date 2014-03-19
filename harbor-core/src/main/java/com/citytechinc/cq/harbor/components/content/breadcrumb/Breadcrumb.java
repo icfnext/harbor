@@ -28,7 +28,7 @@ public class Breadcrumb extends AbstractListComponent<BreadcrumbItem> {
     public Breadcrumb(final ComponentRequest request) {
         super(request);
         breadcrumbItemListConstructionStrategy = new BreadcrumbItemListConstructionStrategy(request);
-        breadcrumbItemListRenderingStrategy = new BreadcrumbItemRenderingStrategy(request.getComponentNode());
+        breadcrumbItemListRenderingStrategy = new BreadcrumbItemRenderingStrategy(request);
     }
 
     @Override
@@ -43,7 +43,7 @@ public class Breadcrumb extends AbstractListComponent<BreadcrumbItem> {
 
     @Override
     public Boolean getIsReversed() {
-        return true;
+        return false;
     }
 
 

@@ -13,6 +13,7 @@ import com.citytechinc.cq.library.content.node.ComponentNode;
 import com.citytechinc.cq.library.content.page.PageDecorator;
 import com.citytechinc.cq.library.content.request.ComponentRequest;
 import com.google.common.base.Optional;
+import com.google.common.collect.Lists;
 import org.apache.sling.api.resource.Resource;
 
 import java.util.ArrayList;
@@ -48,8 +49,8 @@ public class BreadcrumbItemListConstructionStrategy implements ListConstructionS
             String rootPagePath = rootPageOptional.get().getPath();
             HierarchicalPage currentTrailPage = currentPage;
             while (currentTrailPage != null && !currentTrailPage.getPath().equals(rootPagePath)) {
-                breadcrumbPageList.add(new BreadcrumbItem(currentTrailPage, getIntermediaryBreadcrumbItemConfigNodeOptional()));
                 currentTrailPage = currentTrailPage.getParent().adaptTo(HierarchicalPage.class);
+                breadcrumbPageList.add(new BreadcrumbItem(currentTrailPage, getIntermediaryBreadcrumbItemConfigNodeOptional()));
             }
         }
 
@@ -69,7 +70,7 @@ public class BreadcrumbItemListConstructionStrategy implements ListConstructionS
             breadcrumbPageList.remove(0);
         }
 
-        return breadcrumbPageList;
+        return Lists.reverse(breadcrumbPageList);
     }
 
     @DialogField(fieldLabel = "Root Page Type", fieldDescription = "The type of page that the breadcrumb will display as the root page.", ranking = 1)
@@ -88,7 +89,7 @@ public class BreadcrumbItemListConstructionStrategy implements ListConstructionS
      */
     @DialogField(fieldLabel = "Hide current page in Breadcrumb?", ranking = 2)
     @Selection(type = Selection.CHECKBOX, options = @Option(value = "true"))
-    private boolean getHideCurrentPageInBreadcrumb() {
+    public boolean getHideCurrentPageInBreadcrumb() {
         return currentComponentNode.get("hideCurrentPageInBreadcrumb", false);
     }
 

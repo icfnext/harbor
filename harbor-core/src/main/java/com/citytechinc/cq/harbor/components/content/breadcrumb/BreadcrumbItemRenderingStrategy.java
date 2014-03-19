@@ -5,23 +5,38 @@ import com.citytechinc.cq.component.annotations.widgets.Selection;
 import com.citytechinc.cq.harbor.components.content.list.ListRenderingStrategy;
 import com.citytechinc.cq.harbor.constants.components.ComponentConstants;
 import com.citytechinc.cq.library.content.node.ComponentNode;
+import com.citytechinc.cq.library.content.request.ComponentRequest;
 
 public class BreadcrumbItemRenderingStrategy implements ListRenderingStrategy<BreadcrumbItem> {
 
 
     private static final String DEFAULT_DELIMITER = "fa-bootstrap-slash";
-    private final String ICON_DELIMITER_HTML = "<i class=\"fa %s\"></i>";
+    private static final String END_ANCHOR_HTML = "</a>";
+    private final String ICON_DELIMITER_HTML = "<i class='fa %s'></i>";
+    private final String START_ANCHOR_HTML = "<a href=\"%s\">";
     private final ComponentNode currentComponentNode;
+    private final String currentPagePath;
 
-    public BreadcrumbItemRenderingStrategy(ComponentNode componentNode) {
-        currentComponentNode = componentNode;
+    public BreadcrumbItemRenderingStrategy(ComponentRequest componentRequest) {
+        currentComponentNode = componentRequest.getComponentNode();
+        currentPagePath = componentRequest.getCurrentPage().getPath();
     }
 
     @Override
     public String renderListItem(BreadcrumbItem item) {
         StringBuffer itemStringBuffer = new StringBuffer();
-
-        return "bacon";
+        itemStringBuffer.append(getDelimiter());
+        String currentItemPagePath = item.getPage().getPath();
+        boolean isCurrentPage = currentItemPagePath.equals(currentPagePath);
+        if (!isCurrentPage)
+            itemStringBuffer.append(String.format(START_ANCHOR_HTML, item.getPage().getPath()));
+        if (!item.isHideIcon())
+            itemStringBuffer.append(item.getPageIcon());
+        if (!item.isHideTitle())
+            itemStringBuffer.append(item.getTitle());
+        if (!isCurrentPage)
+            itemStringBuffer.append(END_ANCHOR_HTML);
+        return itemStringBuffer.toString();
 
     }
 
@@ -45,7 +60,6 @@ public class BreadcrumbItemRenderingStrategy implements ListRenderingStrategy<Br
     public String getHtmlDelimiter() {
         return currentComponentNode.get("htmlDelimiter", "");
     }
-
 
     public String getDelimiter() {
         if (!getHtmlDelimiter().isEmpty()) {

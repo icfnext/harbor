@@ -48,5 +48,4 @@ public class BreadcrumbItem {
     public String getPageIcon() {
         return getPage().getPageIcon();
     }
-
 }
