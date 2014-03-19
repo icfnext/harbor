@@ -35,7 +35,6 @@ public class PageTreeConstructionStrategy implements TreeNodeConstructionStrateg
             fieldDescription = "Limit what types of pages can be added to the navigation.",
             name = "./predicate")
     @Selection(type = Selection.SELECT, options = {
-            @Option(text="Content Page", value="CONTENT_PAGE_PREDICATE"),
             @Option(text="Section Landing Page", value="SECTION_LANDING_PAGE_PREDICATE"),
             @Option(text="All Child Page Types", value="INCLUDE_ALL_CHILD_PAGE_TYPES"),
     })
@@ -82,13 +81,17 @@ public class PageTreeConstructionStrategy implements TreeNodeConstructionStrateg
     protected TreeNode<PageDecorator> BuildNavigationTree(PageDecorator pageRoot){
         //grab child pages from homePage
         TreeNode<PageDecorator> root = TreeNodes.newBasicTreeNode(pageRoot);
-        TreeNode<PageDecorator> new_root = buildTreeRecur(root, 0);
+        TreeNode<PageDecorator> new_root = buildTreeRecur(root, 1);
 
         return new_root;
     }
 
     private  TreeNode<PageDecorator> buildTreeRecur(TreeNode<PageDecorator> n, int depth){
-        if (depth == depthLevel.get()){
+        /*
+            We check if we are over the depth level here, becuase we start at 1, and not zero,
+            due to our initial grab of child pages into children_of_n
+         */
+        if (depth > depthLevel.get()){
             return n;
         }
 
@@ -105,7 +108,7 @@ public class PageTreeConstructionStrategy implements TreeNodeConstructionStrateg
             TreeNode<PageDecorator> treeNode = TreeNodes.newBasicTreeNode(p_temp, transformListToTreeNodeList(p_temp_children));
 
             //Recurse, and fill in treenode's children, etc.
-            treeNode =  buildTreeRecur(treeNode, depth++);
+            treeNode =  buildTreeRecur(treeNode, (depth + 1));
 
             //add new node to our child list
             new_children_of_n.add(treeNode);

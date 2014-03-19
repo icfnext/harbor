@@ -9,6 +9,17 @@ import com.citytechinc.cq.library.content.page.PageDecorator;
 
 public class BootstrapMainNavigationRenderingStrategy implements TreeNodeRenderingStrategy<PageDecorator> {
 
+    private String getNodeLinkText(TreeNode<PageDecorator>  n){
+        PageDecorator d = n.getValue();
+        String pageTitle = d.getPageTitle();
+        if(pageTitle != null){
+            return pageTitle;
+        }
+        else{
+            return d.getTitle();
+        }
+    }
+
     private String getNodeTitle(TreeNode<PageDecorator> n){
         Boolean hasChildren = n.getChildren().size() != 0;
         StringBuilder nodeTitle = new StringBuilder();
@@ -22,11 +33,9 @@ public class BootstrapMainNavigationRenderingStrategy implements TreeNodeRenderi
             nodeTitle.append("<" + Elements.A + " href=" + n.getValue().getHref() + ">");
         }
 
-        if (n.getValue().getPageTitleOptional().isPresent()) {
-            nodeTitle.append(n.getValue().getPageTitle());
-        }
 
-        nodeTitle.append(n.getValue().getTitle());
+        nodeTitle.append(getNodeLinkText(n));
+
 
         //close link
         if(hasChildren){
