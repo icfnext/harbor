@@ -36,10 +36,10 @@ public class Bootstrap {
     public static final String BTN_INVERSE = "btn-inverse";
     public static final String BTN_LINK = "btn-link";
 
-    public static final String BTN_LARGE = "btn-large";
-    public static final String BTN_SMALL = "btn-small";
-    public static final String BTN_MINI = "btn-mini";
-    public static final String BTN_DEFAULT = "btn";
+    public static final String BTN_LARGE = "btn-lg";
+    public static final String BTN_SMALL = "btn-sm";
+    public static final String BTN_MINI = "btn-xs";
+    public static final String BTN_DEFAULT = "btn-default";
 
     public static final String DROPDOWN = "dropdown";
     public static final String DROPDOWN_TOGGLE = "dropdown-toggle";

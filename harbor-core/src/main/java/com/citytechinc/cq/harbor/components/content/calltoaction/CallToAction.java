@@ -25,6 +25,10 @@ public class CallToAction extends AbstractComponent {
 	private static final String LINK_IN_WINDOW = "window";
 	private static final String LINK_IN_CURRENT = "current";
 
+	private static int class_instance_count = 0;
+
+	private final int instance_id;
+
     @DialogField(fieldLabel = "Text",
             fieldDescription = "Provide the widget's text")
     public String getText() {
@@ -101,6 +105,12 @@ public class CallToAction extends AbstractComponent {
 
 	public CallToAction(ComponentRequest request) {
 		super(request);
+		instance_id = class_instance_count;
+		class_instance_count++;
+	}
+
+	public int getId(){
+		return instance_id;
 	}
 
 	public String getLinkUrl() {
