@@ -59,7 +59,7 @@ public class BootstrapMainManualNavigation extends AbstractComponent {
             @Option(text="", value = "true")
     })
     public Boolean getStickyNavigationEnabled(){
-        return get("stickyNavigationEnabled", "").equals("true");
+        return getInherited("stickyNavigationEnabled", "").equals("true");
     }
 
     public List<BootstrapMainNavigationElement> getBootstrapMainNavigationElementList(){
