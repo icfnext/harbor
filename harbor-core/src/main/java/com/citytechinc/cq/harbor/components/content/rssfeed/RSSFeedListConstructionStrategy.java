@@ -17,7 +17,7 @@ public class RSSFeedListConstructionStrategy implements ListConstructionStrategy
 
 
 
-    @DialogField(fieldLabel = "rssFeedPaths", name = "./rssFeedPaths")
+    @DialogField(fieldLabel = "RSS Feed Paths", name = "./rssFeedPaths")
     @MultiField
     @PathField
     private final Optional<List<String>> RSSUrlListOptional;
@@ -28,7 +28,6 @@ public class RSSFeedListConstructionStrategy implements ListConstructionStrategy
     private RSSFeedGeneratorService rssFeedGeneratorService;
 
     public RSSFeedListConstructionStrategy(ComponentNode componentNode) {
-        PageManagerDecorator pageManagerDecorator = componentNode.getResource().getResourceResolver().adaptTo(PageManagerDecorator.class);
         List<String> RSSUrlList = componentNode.getAsList("rssFeedPaths", String.class);
         RSSUrlListOptional = Optional.fromNullable(RSSUrlList);
         numberOfFeedItemsToDisplay = componentNode.get("numberOfFeedItemsToDisplay", 10);

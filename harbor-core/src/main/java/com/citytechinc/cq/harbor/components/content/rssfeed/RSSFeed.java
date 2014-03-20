@@ -22,11 +22,9 @@ public class RSSFeed extends AbstractListComponent<RSSFeedItem> {
     private RSSFeedGeneratorService rssFeedGeneratorService;
 
     @DialogField
-    @DialogFieldSet(title = "List Construction")
+    @DialogFieldSet(collapsible = false, border = false)
     private final RSSFeedListConstructionStrategy constructionStrategy;
 
-    @DialogField
-    @DialogFieldSet(title = "List Rendering")
     private final RSSFeedRenderingStrategy renderingStrategy;
 
     public RSSFeed(ComponentRequest request) {
