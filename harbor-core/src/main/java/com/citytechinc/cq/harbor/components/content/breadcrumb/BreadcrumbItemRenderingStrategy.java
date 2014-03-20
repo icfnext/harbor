@@ -12,29 +12,26 @@ public class BreadcrumbItemRenderingStrategy implements ListRenderingStrategy<Br
 
     private static final String DEFAULT_DELIMITER = "fa-bootstrap-slash";
     private static final String END_ANCHOR_HTML = "</a>";
-    private final String ICON_DELIMITER_HTML = "<i class='fa %s'></i>";
+    private final String ICON_HTML = "<i class='fa %s'></i>";
     private final String START_ANCHOR_HTML = "<a href=\"%s\">";
     private final ComponentNode currentComponentNode;
-    private final String currentPagePath;
 
     public BreadcrumbItemRenderingStrategy(ComponentRequest componentRequest) {
         currentComponentNode = componentRequest.getComponentNode();
-        currentPagePath = componentRequest.getCurrentPage().getPath();
     }
 
     @Override
     public String renderListItem(BreadcrumbItem item) {
         StringBuffer itemStringBuffer = new StringBuffer();
-        itemStringBuffer.append(getDelimiter());
-        String currentItemPagePath = item.getPage().getPath();
-        boolean isCurrentPage = currentItemPagePath.equals(currentPagePath);
-        if (!isCurrentPage)
+        if (!item.isRoot())
+            itemStringBuffer.append(getDelimiter());
+        if (!item.isCurrentPage())
             itemStringBuffer.append(String.format(START_ANCHOR_HTML, item.getPage().getPath()));
         if (!item.isHideIcon())
-            itemStringBuffer.append(item.getPageIcon());
+            itemStringBuffer.append(String.format(ICON_HTML, item.getPageIcon()));
         if (!item.isHideTitle())
             itemStringBuffer.append(item.getTitle());
-        if (!isCurrentPage)
+        if (!item.isCurrentPage())
             itemStringBuffer.append(END_ANCHOR_HTML);
         return itemStringBuffer.toString();
 
@@ -65,7 +62,7 @@ public class BreadcrumbItemRenderingStrategy implements ListRenderingStrategy<Br
         if (!getHtmlDelimiter().isEmpty()) {
             return getHtmlDelimiter();
         } else {
-            String iconDelimiterHtml = String.format(ICON_DELIMITER_HTML, getIconDelimiter());
+            String iconDelimiterHtml = String.format(ICON_HTML, getIconDelimiter());
             return iconDelimiterHtml;
         }
     }

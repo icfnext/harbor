@@ -25,15 +25,12 @@ public class BreadcrumbItemListConstructionStrategy implements ListConstructionS
     private static final String CURRENT_BREADCRUMB_PAGE_OPTIONS_NODE_PATH = "currentBreadcrumbPageOptions";
     private final HierarchicalPage currentPage;
     private final ComponentNode currentComponentNode;
-
     @DialogField(ranking = 3)
     @DialogFieldSet(title = "Current Page Config", collapsible = true, collapsed = true, namePrefix = CURRENT_BREADCRUMB_PAGE_OPTIONS_NODE_PATH + "/")
     public BreadcrumbItemConfigNode currentBreadcrumbItemConfigNode;
-
     @DialogField(ranking = 4)
     @DialogFieldSet(title = "Intermediary Page Config", collapsible = true, collapsed = true, namePrefix = INTERMEDIARY_BREADCRUMB_PAGE_OPTIONS_NODE_PATH + "/")
     public BreadcrumbItemConfigNode intermediaryBreadcrumbItemConfigNode;
-
     @DialogField(ranking = 5)
     @DialogFieldSet(title = "Root Page Config", collapsible = true, collapsed = true, namePrefix = ROOT_BREADCRUMB_PAGE_OPTIONS_NODE_PATH + "/")
     public BreadcrumbItemConfigNode rootBreadcrumbItemConfigNode;
@@ -60,17 +57,20 @@ public class BreadcrumbItemListConstructionStrategy implements ListConstructionS
         if (rootPageOptional.isPresent()) {
             String rootPagePath = rootPageOptional.get().getPath();
             HierarchicalPage currentTrailPage = currentPage;
-            breadcrumbPageList.add(new BreadcrumbItem(currentTrailPage, getCurrentBreadcrumbItemConfigNodeOptional()));
+            BreadcrumbItem currentPageBreadcrumbItem = new BreadcrumbItem(currentTrailPage, getCurrentBreadcrumbItemConfigNodeOptional());
+            currentPageBreadcrumbItem.setIsCurrentPage(true);
+            breadcrumbPageList.add(currentPageBreadcrumbItem);
             while (currentTrailPage != null && !currentTrailPage.getPath().equals(rootPagePath)) {
                 currentTrailPage = currentTrailPage.getParent().adaptTo(HierarchicalPage.class);
                 breadcrumbPageList.add(new BreadcrumbItem(currentTrailPage, getIntermediaryBreadcrumbItemConfigNodeOptional()));
             }
         }
         //The last item in the breadcrumb page is the "root page" and has additional configuration to account for.
-        if (!(breadcrumbPageList.size() > 1)) {
+        if (breadcrumbPageList.size() > 1) {
             int breadcrumbPageListLastItemIndex = breadcrumbPageList.size() - 1;
             BreadcrumbItem rootBreadcrumbItem = breadcrumbPageList.get(breadcrumbPageListLastItemIndex);
             rootBreadcrumbItem = new BreadcrumbItem(rootBreadcrumbItem.getPage(), getRootBreadcrumbItemConfigNodeOptional());
+            rootBreadcrumbItem.setIsRoot(true);
             breadcrumbPageList.set(breadcrumbPageListLastItemIndex, rootBreadcrumbItem);
         }
 

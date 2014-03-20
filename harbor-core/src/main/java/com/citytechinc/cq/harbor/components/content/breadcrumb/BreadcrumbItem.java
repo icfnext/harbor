@@ -7,6 +7,8 @@ public class BreadcrumbItem {
 
     private HierarchicalPage page;
     private Optional<BreadcrumbItemConfigNode> breadcrumbItemConfigNode;
+    private boolean isRoot = false;
+    private boolean isCurrentPage = false;
 
     public BreadcrumbItem(HierarchicalPage page, Optional<BreadcrumbItemConfigNode> breadcrumbItemConfigNode) {
         this.page = page;
@@ -47,5 +49,21 @@ public class BreadcrumbItem {
 
     public String getPageIcon() {
         return getPage().getPageIcon();
+    }
+
+    public void setIsRoot(boolean isRoot){
+        this.isRoot = isRoot;
+    }
+
+    public boolean isRoot(){
+        return isRoot;
+    }
+
+    public boolean isCurrentPage() {
+        return isCurrentPage;
+    }
+
+    public void setIsCurrentPage(boolean currentPage) {
+        isCurrentPage = currentPage;
     }
 }
