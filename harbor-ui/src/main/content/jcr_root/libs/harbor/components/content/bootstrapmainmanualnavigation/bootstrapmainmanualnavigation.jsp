@@ -12,7 +12,7 @@
 </c:choose>
     <div class="container-fluid">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#${bootstrapMainManualNavigation.id}">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -20,7 +20,7 @@
             </button>
         </div>
 
-        <div class="navbar-collapse collapse">
+        <div class="navbar-collapse collapse" id="${bootstrapMainManualNavigation.id}">
             <ul class="nav navbar-nav">
                 <%--li is inserted due to CQ's insertion of divs for editing the nav elements. This breaks the navbar.--%>
                 <c:forEach var="currentElement" items="${bootstrapMainManualNavigation.bootstrapMainNavigationElementList}" varStatus="status">

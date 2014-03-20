@@ -19,7 +19,7 @@ import java.util.List;
 
 @Component( value = "Bootstrap Main Manual Navigation",
         group = "Harbor Scaffolding",
-        actions = {"text:Bootstrap Main Manual Navigation", "-", "delete"},
+        actions = {"text:Bootstrap Main Manual Navigation", "-", "edit", "-", "delete"},
         contentAdditionalProperties = {
                 @ContentProperty(name="dependencies", value="harbor.components.content.globalnavigation")
         },
@@ -47,6 +47,10 @@ public class BootstrapMainManualNavigation extends AbstractComponent {
         while (navigationResourceIterator.hasNext()) {
             this.bootstrapMainNavigationElementList.add(new BootstrapMainNavigationElement(navigationResourceIterator.next().adaptTo(ComponentNode.class)));
         }
+    }
+
+    public String getId(){
+        return this.getPath().split(":")[1].replaceAll("/", "-");
     }
 
     @DialogField(fieldLabel = "Enable Sticky Navigation?",

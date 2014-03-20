@@ -53,6 +53,10 @@ public class BootstrapMainAutoNavigation extends AbstractTreeComponent<PageDecor
         return get("stickyNavigationEnabled", "").equals("true");
     }
 
+    public String getId(){
+        return this.getPath().split(":")[1].replaceAll("/", "-");
+    }
+
     @Override
     protected TreeNodeConstructionStrategy<PageDecorator> getTreeConstructionStrategy() {
         return constructionStrategy;
