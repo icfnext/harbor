@@ -53,7 +53,7 @@ public class BootstrapMainAutoNavigation extends AbstractTreeComponent<PageDecor
             @Option(text="", value = "true")
     })
     public Boolean getStickyNavigationEnabled(){
-        return get("stickyNavigationEnabled", "").equals("true");
+        return getInherited("stickyNavigationEnabled", "").equals("true");
     }
 
     public String getId(){

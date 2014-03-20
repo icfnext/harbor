@@ -48,7 +48,7 @@ public class PageTreeConstructionStrategy implements TreeNodeConstructionStrateg
         /*
             Grabs the root page set up in the Tree Navigation Component.
          */
-        Optional<String> rootPagePathOptional = componentNode.get("rootPagePath", String.class);
+        Optional<String> rootPagePathOptional = componentNode.getInherited("rootPagePath", String.class);
 
         if (rootPagePathOptional.isPresent()) {
             PageManagerDecorator pageManagerDecorator = componentNode.getResource().getResourceResolver().adaptTo(PageManagerDecorator.class);
@@ -61,7 +61,7 @@ public class PageTreeConstructionStrategy implements TreeNodeConstructionStrateg
         /*
             Initialize depth level
          */
-        Optional<String> depthLevelRaw = componentNode.get("depthLevel", String.class);
+        Optional<String> depthLevelRaw = componentNode.getInherited("depthLevel", String.class);
         if(depthLevelRaw.isPresent()){
             depthLevel = Optional.fromNullable(Integer.parseInt(depthLevelRaw.get()));
         }
@@ -72,7 +72,7 @@ public class PageTreeConstructionStrategy implements TreeNodeConstructionStrateg
         /*
             Init Page Predicate
          */
-        Optional<String> predicateStringOptional = componentNode.get("predicate", String.class);
+        Optional<String> predicateStringOptional = componentNode.getInherited("predicate", String.class);
         if(predicateStringOptional.isPresent()){
             predicateString = Optional.fromNullable(predicateStringOptional.get());
         }
