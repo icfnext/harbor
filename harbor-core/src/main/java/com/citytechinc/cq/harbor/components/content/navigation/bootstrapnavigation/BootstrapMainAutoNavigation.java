@@ -20,6 +20,9 @@ import java.util.List;
 @Component( value = "Bootstrap Main Auto Navigation",
         group = "Harbor Scaffolding",
         actions = {"text:Bootstrap Main Auto Navigation", "-", "edit", "-", "delete"},
+        contentAdditionalProperties = {
+                @ContentProperty(name="dependencies", value="harbor.bootstrap.navbar")
+        },
         listeners = {
                 @Listener(name = "afterinsert", value = "REFRESH_PAGE")
         },
