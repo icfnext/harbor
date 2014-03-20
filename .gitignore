@@ -8,3 +8,5 @@ target/
 *.iml
 *.ipr
 *.iws
+
+node_modules
