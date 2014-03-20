@@ -18,11 +18,11 @@ import com.citytechinc.cq.library.content.request.ComponentRequest;
 @AutoInstantiate( instanceName = ListConstants.LIST_PAGE_CONTEXT_NAME )
 public class Breadcrumb extends AbstractListComponent<BreadcrumbItem> {
 
-    @DialogField
+    @DialogField(ranking = 1)
     @DialogFieldSet(border = false, collapsible = false)
     BreadcrumbItemRenderingStrategy breadcrumbItemListRenderingStrategy;
 
-    @DialogField
+    @DialogField(ranking = 2)
     @DialogFieldSet(border = false, collapsible = false)
     BreadcrumbItemListConstructionStrategy breadcrumbItemListConstructionStrategy;
 
@@ -46,6 +46,4 @@ public class Breadcrumb extends AbstractListComponent<BreadcrumbItem> {
     public Boolean getIsReversed() {
         return false;
     }
-
-
 }
