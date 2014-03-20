@@ -1,4 +1,3 @@
-<%@include file="/libs/harbor/components/global.jsp" %>
 <ct:component className="com.citytechinc.cq.harbor.components.content.calltoaction.CallToAction" name="cta"/>
 
 <!-- Call to Action Button -->

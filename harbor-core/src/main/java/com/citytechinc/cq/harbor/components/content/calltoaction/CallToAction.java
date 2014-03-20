@@ -25,18 +25,18 @@ public class CallToAction extends AbstractComponent {
 	private static final String LINK_IN_WINDOW = "window";
 	private static final String LINK_IN_CURRENT = "current";
 
-	private static int class_instance_count = 0;
-
+	//These fields govern the generation of instance id's for each component
+	private static int class_id_count = 0;
 	private final int instance_id;
 
     @DialogField(fieldLabel = "Text",
-            fieldDescription = "Provide the widget's text")
+            fieldDescription = "Provide the widget's text", ranking = 0)
     public String getText() {
 	    return get(TEXT_PROPERTY, StringUtils.EMPTY);
     }
 
     @DialogField(fieldLabel = "Size",
-            fieldDescription = "Select the widget's size")
+            fieldDescription = "Select the widget's size" , ranking = 2)
     @Selection(type=Selection.SELECT, options = {
             @Option(text = "Large", value = Bootstrap.BTN_LARGE),
             @Option(text = "Default", value = Bootstrap.BTN_DEFAULT),
@@ -48,7 +48,7 @@ public class CallToAction extends AbstractComponent {
     }
 
 	@DialogField(fieldLabel = "Style",
-			fieldDescription = "Select the widget's style")
+			fieldDescription = "Select the widget's style" , ranking = 3)
 	@Selection(type=Selection.SELECT, options = {
 			@Option(text = "Default",
 					qtip = "Standard gray button with gradient",
@@ -80,7 +80,7 @@ public class CallToAction extends AbstractComponent {
 	}
 
 	@DialogField(fieldLabel = "Action",
-			fieldDescription = "Select the widget's action upon being clicked")
+			fieldDescription = "Select the widget's action upon being clicked" , ranking = 4)
 	@Selection (type=Selection.SELECT, options = {
 			@Option(text = "Modal",
 					qtip = "Opens an authored modal on button click.",
@@ -97,7 +97,7 @@ public class CallToAction extends AbstractComponent {
 	}
 
 	@DialogField(fieldLabel = "Link Target",
-			fieldDescription = "URL path this button leads to")
+			fieldDescription = "URL path this button leads to", ranking = 2)
 	@PathField
 	public String getLinkTarget(){
 		return get(PATH_PROPERTY, StringUtils.EMPTY);
@@ -105,14 +105,14 @@ public class CallToAction extends AbstractComponent {
 
 	public CallToAction(ComponentRequest request) {
 		super(request);
-		instance_id = class_instance_count;
-		class_instance_count++;
+		//Assign current instance an id and update the class id count for the next instance.
+		class_id_count++;
+		instance_id = class_id_count;
 	}
 
 	public int getId(){
 		return instance_id;
 	}
-
 	public String getLinkUrl() {
 		return getLinkBuilder().forPath(getLinkTarget()).build().getHref();
 	}
