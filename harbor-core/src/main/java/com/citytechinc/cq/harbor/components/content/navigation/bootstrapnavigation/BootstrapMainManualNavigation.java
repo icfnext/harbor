@@ -1,6 +1,7 @@
 package com.citytechinc.cq.harbor.components.content.navigation.bootstrapnavigation;
 
 import com.citytechinc.cq.component.annotations.*;
+import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.editconfig.ActionConfig;
 import com.citytechinc.cq.component.annotations.widgets.DialogFieldSet;
 import com.citytechinc.cq.component.annotations.widgets.Selection;

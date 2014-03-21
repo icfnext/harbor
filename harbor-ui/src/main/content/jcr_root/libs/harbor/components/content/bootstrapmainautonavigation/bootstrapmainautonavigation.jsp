@@ -17,6 +17,9 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
+            <c:if test="${bootstrapMainAutoNavigation.homeLinkEnabled}">
+                <a class="navbar-brand" href="${bootstrapMainAutoNavigation.brandLinkTarget}">${bootstrapMainAutoNavigation.brandLinkText}</a>
+            </c:if>
         </div>
         <div class="navbar-collapse collapse" id="${bootstrapMainAutoNavigation.id}">
             <ul class="nav navbar-nav">
