@@ -22,7 +22,7 @@ import java.util.List;
         group = "Harbor Scaffolding",
         actions = {"text:Bootstrap Main Manual Navigation", "-", "edit", "-", "delete"},
         contentAdditionalProperties = {
-                @ContentProperty(name="dependencies", value="harbor.components.content.globalnavigation,harbor.bootstrap.navbar")
+                @ContentProperty(name="dependencies", value="[harbor.components.content.bootstrapmainmanualnavigation,harbor.bootstrap.navbar]")
         },
         actionConfigs = {
                 @ActionConfig(xtype = "tbseparator"),
