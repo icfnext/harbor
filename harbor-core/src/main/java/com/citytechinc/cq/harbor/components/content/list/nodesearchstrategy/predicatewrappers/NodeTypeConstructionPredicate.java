@@ -1,4 +1,4 @@
-package com.citytechinc.cq.harbor.components.content.list.nodesearchstrategy;
+package com.citytechinc.cq.harbor.components.content.list.nodesearchstrategy.predicatewrappers;
 
 import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.widgets.TextField;

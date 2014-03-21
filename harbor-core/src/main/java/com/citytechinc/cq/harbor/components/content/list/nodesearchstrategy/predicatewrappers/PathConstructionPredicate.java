@@ -1,7 +1,6 @@
-package com.citytechinc.cq.harbor.components.content.list.nodesearchstrategy;
+package com.citytechinc.cq.harbor.components.content.list.nodesearchstrategy.predicatewrappers;
 
 import com.citytechinc.cq.component.annotations.DialogField;
-import com.citytechinc.cq.component.annotations.widgets.NumberField;
 import com.citytechinc.cq.component.annotations.widgets.PathField;
 import com.citytechinc.cq.library.content.node.ComponentNode;
 import com.day.cq.search.eval.NodenamePredicateEvaluator;

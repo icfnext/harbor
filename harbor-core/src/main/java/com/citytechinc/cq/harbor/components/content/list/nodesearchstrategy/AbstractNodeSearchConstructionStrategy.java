@@ -1,8 +1,8 @@
 package com.citytechinc.cq.harbor.components.content.list.nodesearchstrategy;
 
 import com.citytechinc.cq.harbor.components.content.list.ListConstructionStrategy;
+import com.citytechinc.cq.harbor.components.content.list.nodesearchstrategy.predicatewrappers.AbstractConstructionPredicate;
 import com.citytechinc.cq.library.content.node.ComponentNode;
-import com.day.cq.search.Predicate;
 import com.day.cq.search.PredicateGroup;
 import com.day.cq.search.Query;
 import com.day.cq.search.QueryBuilder;

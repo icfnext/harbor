@@ -1,4 +1,4 @@
-package com.citytechinc.cq.harbor.components.content.list.nodesearchstrategy;
+package com.citytechinc.cq.harbor.components.content.list.nodesearchstrategy.predicatewrappers;
 
 import com.citytechinc.cq.library.content.node.ComponentNode;
 import com.day.cq.search.Predicate;
@@ -10,7 +10,7 @@ import java.util.Map;
  * Base class for construction predicates. Has reference to underlying Predicate object that can be used to limit a
  *  query on the JCR.
  */
-abstract class AbstractConstructionPredicate {
+public abstract class AbstractConstructionPredicate {
 
     protected ComponentNode parentNode;
 
