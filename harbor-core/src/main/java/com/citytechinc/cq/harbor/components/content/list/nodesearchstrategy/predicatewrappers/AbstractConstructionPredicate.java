@@ -18,19 +18,11 @@ public abstract class AbstractConstructionPredicate {
     protected String predicateName;
 
     /**
-     * Must be implemented by subclasses.
-     *
-     * @return a constant string indicating what type of predicate this is.
-     */
-    protected abstract String getPredicateType();
-
-    /**
      * Default constructor. Properties for this class should be located under the component node, prefixed with the
      *  variable given with predicateName.
      *
-     * @param componentNode Base component node that contains the properties for this predicateß.
-     * @param predicateName Name of prefix for predicate's properties, also the name of this predicate when it
-     *                          is used to query.
+     * @param componentNode Base component node that contains the properties for this predicate.
+     * @param predicateName Name of prefix for predicate's properties, also the name of this predicate when it is used to query.
      */
     protected AbstractConstructionPredicate (ComponentNode componentNode, String predicateName) {
 
@@ -49,6 +41,17 @@ public abstract class AbstractConstructionPredicate {
     protected void set(String paramName, String paramValue) {
 
         this.predicates.put(paramName, paramValue);
+
+    }
+
+    /**
+     * Remove a property on the underlying predicate.
+     *
+     * @param paramName     name of parameter to remove.
+     */
+    protected void unset(String paramName) {
+
+        this.predicates.remove(paramName);
 
     }
 

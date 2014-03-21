@@ -6,6 +6,7 @@ import com.citytechinc.cq.harbor.components.content.list.nodesearchstrategy.Abst
 import com.citytechinc.cq.harbor.components.content.list.nodesearchstrategy.predicatewrappers.NodeTypeConstructionPredicate;
 import com.citytechinc.cq.harbor.components.content.list.nodesearchstrategy.predicatewrappers.PathConstructionPredicate;
 import com.citytechinc.cq.harbor.components.content.list.nodesearchstrategy.predicatewrappers.QueryParameterConstructionPredicate;
+import com.citytechinc.cq.harbor.components.content.list.nodesearchstrategy.predicatewrappers.TagsConstructionPredicate;
 import com.citytechinc.cq.library.content.node.ComponentNode;
 import com.day.cq.dam.api.Asset;
 import com.day.cq.dam.api.DamConstants;
@@ -24,10 +25,10 @@ public class AssetListConstructionStrategy extends AbstractNodeSearchConstructio
 
     private static final Logger LOG = LoggerFactory.getLogger(AssetListConstructionStrategy.class);
 
-    private static final String PROP_PREFIX_NODE_TYPE_PREDICATE = "type_predicate_";
+    private static final String PROP_PREFIX_NODE_TYPE_PREDICATE = "0";
     private NodeTypeConstructionPredicate nodeTypeConstructionPredicate;
 
-    private static final String PROP_PREFIX_PATH_PREDICATE = "path_predicate_";
+    private static final String PROP_PREFIX_PATH_PREDICATE = "1";
     @DialogField
     @DialogFieldSet(
             title = "Path",
@@ -37,7 +38,17 @@ public class AssetListConstructionStrategy extends AbstractNodeSearchConstructio
     )
     private PathConstructionPredicate pathConstructionPredicate;
 
-    private static final String PROP_PREFIX_QUERY_PARAM_PREDICATE = "query_predicate_";
+    private static final String PROP_PREFIX_TAGS_PREDICATE = "2";
+    @DialogField
+    @DialogFieldSet(
+            title = "Tags",
+            namePrefix = PROP_PREFIX_TAGS_PREDICATE,
+            collapsible = true,
+            collapsed = true
+    )
+    private TagsConstructionPredicate tagsConstructionPredicate;
+
+    private static final String PROP_PREFIX_QUERY_PARAM_PREDICATE = "3";
     @DialogField
     @DialogFieldSet(
             title = "Query Parameters",
@@ -71,6 +82,10 @@ public class AssetListConstructionStrategy extends AbstractNodeSearchConstructio
         // add author specified path predicate
         pathConstructionPredicate = new PathConstructionPredicate(componentNode, PROP_PREFIX_PATH_PREDICATE);
         addPredicate(pathConstructionPredicate);
+
+        // add author specified tags predicate
+        tagsConstructionPredicate = new TagsConstructionPredicate(componentNode, PROP_PREFIX_TAGS_PREDICATE);
+        addPredicate(tagsConstructionPredicate);
 
         // add author specified query predicate
         queryParameterConstructionPredicate = new QueryParameterConstructionPredicate(componentNode, PROP_PREFIX_QUERY_PARAM_PREDICATE);

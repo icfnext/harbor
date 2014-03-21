@@ -18,8 +18,6 @@ import org.apache.commons.lang.StringUtils;
  */
 public class QueryParameterConstructionPredicate extends AbstractConstructionPredicate {
 
-    private static final String PREDICATE_TYPE = "group";
-
     private static final String PARAM_LIMIT = "limit";
     private static final String PARAM_QUERY_LIMIT = "p." + PredicateGroup.PARAM_LIMIT;
     private static final int DEFAULT_LIMIT = 10;
@@ -62,19 +60,12 @@ public class QueryParameterConstructionPredicate extends AbstractConstructionPre
     )
     private String sortType;
 
-    @Override
-    protected String getPredicateType() {
-
-        return PREDICATE_TYPE;
-
-    }
-
     /**
      * Default constructor. Properties for this class should be located under the component node, prefixed with the
      * variable given with predicateName.
      *
-     * @param componentNode Base component node that contains the properties for this predicateß.
-     * @param predicateName Name of prefix for predicate's properties, also the name of this predicate when it
+     * @param componentNode Base component node that contains the properties for this predicate.
+     * @param predicateName Name of prefix for predicate's properties, also the name of this predicate when it  is used to query.
      */
     public QueryParameterConstructionPredicate(ComponentNode componentNode, String predicateName) {
         super(componentNode, predicateName);
