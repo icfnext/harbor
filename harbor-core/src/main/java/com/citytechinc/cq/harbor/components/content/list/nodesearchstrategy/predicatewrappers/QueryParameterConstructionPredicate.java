@@ -13,6 +13,8 @@ import org.apache.commons.lang.StringUtils;
 /**
  * Dialog representation of a query parameter predicate. Should be converted to a predicate for a query on the JCR by a
  *  parent component construction strategy, thus limiting--based on given dialog input--what nodes will be rendered.
+ *
+ * Stores and handles all predicates that modify how search results are returned.
  */
 public class QueryParameterConstructionPredicate extends AbstractConstructionPredicate {
 
@@ -83,11 +85,20 @@ public class QueryParameterConstructionPredicate extends AbstractConstructionPre
 
     }
 
+    /**
+     * @return limit on the number of results to return.
+     */
     public int getLimit() {
 
         return limit;
+
     }
 
+    /**
+     * Set the maximum number of results to return.
+     *
+     * @param limit
+     */
     public void setLimit(int limit) {
 
         this.limit = limit;
@@ -95,12 +106,21 @@ public class QueryParameterConstructionPredicate extends AbstractConstructionPre
 
     }
 
+    /**
+     * @return  a JCR field or special xpath variable to order results by.
+     */
     public String getOrderBy() {
 
         return orderBy;
 
     }
 
+    /**
+     * Set a JCR field or special xpath variable to order results by. This predicate will only be added to a query if
+     *  it is not blank.
+     *
+     * @param orderBy
+     */
     public void setOrderBy(String orderBy) {
 
         this.orderBy = orderBy;
@@ -113,12 +133,20 @@ public class QueryParameterConstructionPredicate extends AbstractConstructionPre
 
     }
 
+    /**
+     * @return  direction to sort results in.
+     */
     public String getSortType() {
 
         return sortType;
 
     }
 
+    /**
+     * Set the direction to sort results in. This predicate will only be added to a query if it is not blank.
+     *
+     * @param sortType
+     */
     public void setSortType(String sortType) {
 
         this.sortType = sortType;

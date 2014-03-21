@@ -1,7 +1,6 @@
 package com.citytechinc.cq.harbor.components.content.list.nodesearchstrategy.predicatewrappers;
 
 import com.citytechinc.cq.library.content.node.ComponentNode;
-import com.day.cq.search.Predicate;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -54,8 +53,7 @@ public abstract class AbstractConstructionPredicate {
     }
 
     /**
-     * @return the name used for the node holding this predicate's properties and the name of the predicate in the JCR
-     *      query.
+     * @return name of this predicate, used as prefix for properties.
      */
     protected String getPredicateName() {
 
@@ -72,6 +70,9 @@ public abstract class AbstractConstructionPredicate {
 
     }
 
+    /**
+     * @return the map that stores the predicates to be used at query time.
+     */
     public Map<String, String> getPredicates() {
 
         return predicates;

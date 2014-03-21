@@ -9,6 +9,8 @@ import org.apache.commons.lang.StringUtils;
 /**
  * Dialog representation of a node type predicate. Should be converted to a predicate for a query on the JCR by a parent
  *  component construction strategy, thus limiting--based on given dialog input--what nodes will be rendered.
+ *
+ * Stores and handles all predicates that have to do with selecting nodes based on their type.
  */
 public class NodeTypeConstructionPredicate extends AbstractConstructionPredicate {
 
@@ -45,6 +47,11 @@ public class NodeTypeConstructionPredicate extends AbstractConstructionPredicate
 
     }
 
+    /**
+     * Set node type to search for. Should correspond to a valid JCR node type.
+     *
+     * @param nodeType
+     */
     public void setNodeType(String nodeType) {
 
         this.nodeType = nodeType;
@@ -52,6 +59,9 @@ public class NodeTypeConstructionPredicate extends AbstractConstructionPredicate
 
     }
 
+    /**
+     * @return  node type to search for.
+     */
     public String getNodeType() {
 
         return nodeType;

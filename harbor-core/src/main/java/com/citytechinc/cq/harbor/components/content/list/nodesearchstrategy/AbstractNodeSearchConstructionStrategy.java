@@ -51,6 +51,7 @@ public abstract class AbstractNodeSearchConstructionStrategy<T> implements ListC
 
         this.predicatesMap = new HashMap<String, String>();
 
+        // get query builder resource from bundle context
         BundleContext bundleContext = FrameworkUtil.getBundle(QueryBuilder.class).getBundleContext();
         ServiceReference serviceReference = bundleContext.getServiceReference(QueryBuilder.class.getName());
         this.queryBuilder = (QueryBuilder) bundleContext.getService(serviceReference);
@@ -79,14 +80,14 @@ public abstract class AbstractNodeSearchConstructionStrategy<T> implements ListC
 
         // perform query
         PredicateGroup predicateGroup = PredicateGroup.create(this.predicatesMap);
-        Query query = queryBuilder.createQuery(predicateGroup, this.session);
+        Query query = this.queryBuilder.createQuery(predicateGroup, this.session);
         SearchResult result = query.getResult();
 
         // transform results into given object
         List<T> transformedHits = new ArrayList<T>();
         for(Hit hit : result.getHits()) {
 
-            T transformedHit = transformHit(hit);
+            T transformedHit = this.transformHit(hit);
 
             if(transformedHit != null) {
 
