@@ -38,7 +38,7 @@ public class PagePredicates {
         @Override
         public boolean apply(final PageDecorator page) {
             try {
-                return page.getContentResource().adaptTo(Node.class).isNodeType("harbor:ContentPage");
+                return page.getContentResource().adaptTo(Node.class).isNodeType("cq:PageContent");
             } catch (RepositoryException e) {
                 LOG.error("Repository Exception encountered while evaluating Hierarchical Page page predicate");
                 return false;

@@ -9,12 +9,14 @@
         <c:choose>
             <c:when test="${ColumnRow.classification.hasClassification}">
                 <div class="${curRow.gridSize}${curcolumn.colClass} ${curcolumn.classification.classificationName}" name="${curcolumn.name}">
+                    <cq:include path="${curcolumn.name}" resourceType="harbor/components/content/column" />
+                </div>
             </c:when>
             <c:otherwise>
                 <div class="${curRow.gridSize}${curcolumn.colClass}" name="${curcolumn.name}">
+                    <cq:include path="${curcolumn.name}" resourceType="harbor/components/content/column" />
+                </div>
             </c:otherwise>
         </c:choose>
-            <cq:include path="${curcolumn.name}" resourceType="harbor/components/content/column" />
-        </div>
     </c:forEach>
 </div>

@@ -1,6 +1,7 @@
 package com.citytechinc.cq.harbor.components.content.navigation.bootstrapnavigation;
 
 
+import com.citytechinc.cq.harbor.components.content.navigation.Util;
 import com.citytechinc.cq.harbor.components.content.tree.TreeNode;
 import com.citytechinc.cq.harbor.components.content.tree.TreeNodeRenderingStrategy;
 import com.citytechinc.cq.harbor.constants.bootstrap.Bootstrap;
@@ -9,32 +10,23 @@ import com.citytechinc.cq.library.content.page.PageDecorator;
 
 public class BootstrapMainNavigationRenderingStrategy implements TreeNodeRenderingStrategy<PageDecorator> {
 
-    private String getNodeTitle(TreeNode<PageDecorator> n){
-        Boolean hasChildren = n.getChildren().size() != 0;
+    private String getDropdownToggleTitle(TreeNode<PageDecorator> n){
         StringBuilder nodeTitle = new StringBuilder();
 
-        //if n has children, render as dropdown trigger
-        if(hasChildren){
-            nodeTitle.append("<" + Elements.A + " href=\"#\" class=\"" + Bootstrap.DROPDOWN_TOGGLE + "\" data-toggle=\"" + Bootstrap.DROPDOWN + "\">");
-        }
-        //otherwise, render as hyperlink
-        else{
-            nodeTitle.append("<" + Elements.A + " href=" + n.getValue().getHref() + ">");
-        }
+        nodeTitle.append("<" + Elements.A + " href=\"#\" class=\"" + Bootstrap.DROPDOWN_TOGGLE + "\" data-toggle=\"" + Bootstrap.DROPDOWN + "\">");
+        nodeTitle.append(Util.getNodeLinkText(n));
+        nodeTitle.append("<" + Elements.B + " class=\"caret\"></" + Elements.B + ">");
+        nodeTitle.append("</" + Elements.A + ">");
 
-        if (n.getValue().getPageTitleOptional().isPresent()) {
-            nodeTitle.append(n.getValue().getPageTitle());
-        }
+        return nodeTitle.toString();
+    }
 
-        nodeTitle.append(n.getValue().getTitle());
+    private String getNodeTitle(TreeNode<PageDecorator> n){
+        StringBuilder nodeTitle = new StringBuilder();
 
-        //close link
-        if(hasChildren){
-            nodeTitle.append("<" + Elements.B + " class=\"caret\"></" + Elements.B + ">");
-        }
-        else{
-            nodeTitle.append("</" + Elements.A +">");
-        }
+        nodeTitle.append("<" + Elements.A + " href=" + n.getValue().getHref() + ">");
+        nodeTitle.append(Util.getNodeLinkText(n));
+        nodeTitle.append("</" + Elements.A + ">");
 
         return nodeTitle.toString();
     }
@@ -62,7 +54,7 @@ public class BootstrapMainNavigationRenderingStrategy implements TreeNodeRenderi
                 Render a "title" to the list,
                 then render children underneath
              */
-            renderedElement.append(getNodeTitle(treeNode));
+            renderedElement.append(getDropdownToggleTitle(treeNode));
             renderedElement.append(renderChildren(treeNode));
         }
 
