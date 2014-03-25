@@ -82,12 +82,6 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.Ext.Panel , {
             var r = records;
             var o = opts;
 
-            console.log(records)
-            console.log(opts)
-            console.log(success)
-
-            console.log("-----")
-
             var response = r[0].json;
             //Zero out the manifest
             parentContext.columnManifest = {};
@@ -164,8 +158,6 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.Ext.Panel , {
         parentDialog.on("beforesubmit", function(e){
 
             parentContext.serializeToDialogForm();
-
-            console.log("PARENT DIALOG FORM ITEMS, BEFORE SUB --- ", parentDialog.form.items);
 
         })
 
@@ -410,7 +402,6 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.Ext.Panel , {
         /*
          Delete fields for the current Column Name
          */
-        //var columnName = columnObject.data.name;
         var columnPredicate = function(item){
             return item.name.indexOf("column-id-") != -1;
         }
@@ -425,8 +416,6 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.Ext.Panel , {
             if(item.xtype == "hidden"){
                 if (columnPredicate(item)) {
                     dialog.formPanel.remove(item);
-                    // TODO: remove all fields from form
-                    //dialog.form.items.findParentByType("form").getForm().remove(item);
                 }
             }
         });
@@ -445,17 +434,9 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.Ext.Panel , {
                     hiddenFieldsObject[prop] = hiddenFieldObject[prop];
                 }
             }
-
-            //this.containerPanel.items.addAll(this.hiddenFields);
-            //hiddenFieldsObject [ columnObject.data.name ] = hiddenFieldObject;
-
-            //hiddenFieldsObject[ this.columnPathNameBase + columnObject.id ] = columnObject.data.colSize;
-
         }
 
-        console.log("FORM ITEMS --- ", dialog.form.items);
         dialog.addHidden( hiddenFieldsObject );
-        console.log("FORM ITEMS POST ADD --- ", dialog.form.items);
 
 
     },
