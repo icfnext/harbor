@@ -3,7 +3,7 @@
 <ct:component className="com.citytechinc.cq.harbor.components.content.calltoaction.CallToAction" name="cta"/>
 
 <!-- Call to Action Button -->
-<a id="callToActionButton" class="btn ${cta.size} ${cta.style}"
+<a id="callToActionButton${cta.id}" class="btn ${cta.size} ${cta.style} cta-btn"
 		<c:if test="${cta.openModal}"> data-toggle="modal" data-target="#callToActionModal${cta.id}" </c:if>
 		<c:if test="${cta.openWindow || cta.openCurrent}"> href="${cta.linkUrl}" </c:if>
 		<c:if test="${cta.openWindow}">target="_blank"</c:if>
