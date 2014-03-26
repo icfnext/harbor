@@ -4920,7 +4920,8 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .breadcrumb > li + li:before {
   padding: 0 5px;
   color: #cccccc;
-  content: "/\00a0";
+  /* Commented out content to work better with fontawesome. You can get this behavior from the .fa-bootstrap-slash class in FontAwesome */
+  /*content: "/\00a0"; */
 }
 
 .breadcrumb > .active {

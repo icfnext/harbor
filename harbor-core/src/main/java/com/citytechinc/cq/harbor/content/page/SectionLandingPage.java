@@ -11,5 +11,5 @@ public interface SectionLandingPage extends HierarchicalPage {
 
     public boolean isSubSectionLandingPage();
 
-    public List<SectionLandingPage> getSubSectionLandingPages();
+    public List<SectionLandingPage> getSectionLandingPages();
 }
