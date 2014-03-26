@@ -14,7 +14,10 @@ import com.citytechinc.cq.library.content.page.PageDecorator;
 import com.citytechinc.cq.library.content.page.PageManagerDecorator;
 import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
+import com.google.common.collect.Collections2;
 
+import javax.jcr.Node;
+import javax.jcr.RepositoryException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +38,6 @@ public class PageTreeConstructionStrategy implements TreeNodeConstructionStrateg
             fieldDescription = "Limit what types of pages can be added to the navigation.",
             name = "./predicate")
     @Selection(type = Selection.SELECT, options = {
-            @Option(text="Content Page", value="CONTENT_PAGE_PREDICATE"),
             @Option(text="Section Landing Page", value="SECTION_LANDING_PAGE_PREDICATE"),
             @Option(text="All Child Page Types", value="INCLUDE_ALL_CHILD_PAGE_TYPES"),
     })
@@ -46,7 +48,7 @@ public class PageTreeConstructionStrategy implements TreeNodeConstructionStrateg
         /*
             Grabs the root page set up in the Tree Navigation Component.
          */
-        Optional<String> rootPagePathOptional = componentNode.get("rootPagePath", String.class);
+        Optional<String> rootPagePathOptional = componentNode.getInherited("rootPagePath", String.class);
 
         if (rootPagePathOptional.isPresent()) {
             PageManagerDecorator pageManagerDecorator = componentNode.getResource().getResourceResolver().adaptTo(PageManagerDecorator.class);
@@ -59,7 +61,7 @@ public class PageTreeConstructionStrategy implements TreeNodeConstructionStrateg
         /*
             Initialize depth level
          */
-        Optional<String> depthLevelRaw = componentNode.get("depthLevel", String.class);
+        Optional<String> depthLevelRaw = componentNode.getInherited("depthLevel", String.class);
         if(depthLevelRaw.isPresent()){
             depthLevel = Optional.fromNullable(Integer.parseInt(depthLevelRaw.get()));
         }
@@ -70,7 +72,7 @@ public class PageTreeConstructionStrategy implements TreeNodeConstructionStrateg
         /*
             Init Page Predicate
          */
-        Optional<String> predicateStringOptional = componentNode.get("predicate", String.class);
+        Optional<String> predicateStringOptional = componentNode.getInherited("predicate", String.class);
         if(predicateStringOptional.isPresent()){
             predicateString = Optional.fromNullable(predicateStringOptional.get());
         }
@@ -82,30 +84,45 @@ public class PageTreeConstructionStrategy implements TreeNodeConstructionStrateg
     protected TreeNode<PageDecorator> BuildNavigationTree(PageDecorator pageRoot){
         //grab child pages from homePage
         TreeNode<PageDecorator> root = TreeNodes.newBasicTreeNode(pageRoot);
-        TreeNode<PageDecorator> new_root = buildTreeRecur(root, 0);
+        TreeNode<PageDecorator> new_root = buildTreeRecur(root, 1);
 
         return new_root;
     }
 
     private  TreeNode<PageDecorator> buildTreeRecur(TreeNode<PageDecorator> n, int depth){
-        if (depth == depthLevel.get()){
+        /*
+            We check if we are over the depth level here, becuase we start at 1, and not zero,
+            due to our initial grab of child pages into children_of_n
+         */
+        if (depth > depthLevel.get()){
             return n;
         }
 
         List<TreeNode<PageDecorator>> children_of_n = transformListToTreeNodeList(n.getValue().getChildren(getPredicate()));
+        /*
+            Here, we filter out items that are hidden from navigation.
+         */
+        List<TreeNode<PageDecorator>> children_of_n_filtered = new ArrayList<TreeNode<PageDecorator>>();
+        for(TreeNode<PageDecorator> child_node : children_of_n){
+            if(child_node.getValue().isHideInNav() == false){
+                children_of_n_filtered.add(child_node);
+            }
+        }
+
         List<TreeNode<PageDecorator>> new_children_of_n = new ArrayList();
 
         //visit step
-        for(TreeNode<PageDecorator> child_of_n : children_of_n){
+        for(TreeNode<PageDecorator> child_of_n : children_of_n_filtered){
             //grab children from child_of_n.getValue()
             PageDecorator p_temp = child_of_n.getValue();
+
             List<PageDecorator> p_temp_children = p_temp.getChildren(getPredicate());
 
             //create new node with same value, and value's children
             TreeNode<PageDecorator> treeNode = TreeNodes.newBasicTreeNode(p_temp, transformListToTreeNodeList(p_temp_children));
 
             //Recurse, and fill in treenode's children, etc.
-            treeNode =  buildTreeRecur(treeNode, depth++);
+            treeNode =  buildTreeRecur(treeNode, (depth + 1));
 
             //add new node to our child list
             new_children_of_n.add(treeNode);
@@ -137,4 +154,5 @@ public class PageTreeConstructionStrategy implements TreeNodeConstructionStrateg
     public Predicate<PageDecorator> getPredicate() {
         return predicate;
     }
+
 }

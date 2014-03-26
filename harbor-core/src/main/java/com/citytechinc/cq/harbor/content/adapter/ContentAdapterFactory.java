@@ -1,5 +1,6 @@
 package com.citytechinc.cq.harbor.content.adapter;
 
+import com.citytechinc.cq.harbor.components.content.breadcrumb.BreadcrumbItem;
 import com.citytechinc.cq.harbor.content.page.HierarchicalPage;
 import com.citytechinc.cq.harbor.content.page.HomePage;
 import com.citytechinc.cq.harbor.content.page.SectionLandingPage;
