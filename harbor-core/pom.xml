@@ -44,9 +44,9 @@
                 </configuration>
 			</plugin>
 			<plugin>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>maven-scr-plugin</artifactId>
-                <extensions>true</extensions>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-scr-plugin</artifactId>
+				<extensions>true</extensions>
                 <configuration>
                     <scanClasses>true</scanClasses>
                 </configuration>

@@ -4,49 +4,53 @@ import com.citytechinc.cq.component.annotations.Component;
 import com.citytechinc.cq.component.annotations.ContentProperty;
 import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.widgets.DialogFieldSet;
+import com.citytechinc.cq.component.annotations.widgets.MultiField;
+import com.citytechinc.cq.component.annotations.widgets.PathField;
 import com.citytechinc.cq.harbor.components.content.list.AbstractListComponent;
 import com.citytechinc.cq.harbor.components.content.list.ListConstructionStrategy;
 import com.citytechinc.cq.harbor.components.content.list.ListRenderingStrategy;
 import com.citytechinc.cq.harbor.constants.lists.ListConstants;
 import com.citytechinc.cq.harbor.services.RSSFeedGeneratorService;
+import com.citytechinc.cq.library.components.AbstractComponent;
 import com.citytechinc.cq.library.components.annotations.AutoInstantiate;
+import com.citytechinc.cq.library.content.node.ComponentNode;
 import com.citytechinc.cq.library.content.request.ComponentRequest;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Component(value = "RSS Feed",
         contentAdditionalProperties = {
-                @ContentProperty(name = "dependencies", value = "[harbor.fontawesome,harbor.bootstrap]")
+                @ContentProperty(name = "dependencies", value = "[harbor.namespace,harbor.components.content.rssfeed]")
         }, resourceSuperType = AbstractListComponent.RESOURCE_TYPE)
-@AutoInstantiate( instanceName = ListConstants.LIST_PAGE_CONTEXT_NAME)
-public class RSSFeed extends AbstractListComponent<RSSFeedItem> {
+@AutoInstantiate( instanceName = RSSFeed.RSS_FEED_NAME)
+public class RSSFeed extends AbstractComponent {
 
-    private RSSFeedGeneratorService rssFeedGeneratorService;
-
-    @DialogField
-    @DialogFieldSet(collapsible = false, border = false)
-    private final RSSFeedListConstructionStrategy constructionStrategy;
-
-    private final RSSFeedRenderingStrategy renderingStrategy;
+    public static final String RSS_FEED_NAME = "rssFeed";
 
     public RSSFeed(ComponentRequest request) {
         super(request);
-        constructionStrategy = new RSSFeedListConstructionStrategy(request.getComponentNode());
-        renderingStrategy = new RSSFeedRenderingStrategy(request.getComponentNode());
-        rssFeedGeneratorService = getService(RSSFeedGeneratorService.class);
     }
 
-    @Override
-    protected ListConstructionStrategy<RSSFeedItem> getListConstructionStrategy() {
-        constructionStrategy.setRssFeedGeneratorService(rssFeedGeneratorService);
-        return constructionStrategy;
+    public RSSFeed(ComponentNode componentNode){
+        super(componentNode);
     }
 
-    @Override
-    protected ListRenderingStrategy<RSSFeedItem> getListRenderingStrategy() {
-        return renderingStrategy;
+    @DialogField(fieldLabel = "RSS Feed Paths")
+    @MultiField
+    @PathField
+    public final List<String> getRSSUrlList(){
+        return getAsList("rSSUrlList", String.class);
     }
 
-    @Override
-    public Boolean getIsUnorderedList() {
-        return true;
+    @DialogField(fieldLabel = "Number of Feed Items to display")
+    public final int getNumberOfFeedItemsToDisplay(){
+        return get("numberOfFeedItemsToDisplay", 10);
     }
+
+    public final String getCurrentRSSFeedPath(){
+        return this.getPath();
+    }
+
+
 }

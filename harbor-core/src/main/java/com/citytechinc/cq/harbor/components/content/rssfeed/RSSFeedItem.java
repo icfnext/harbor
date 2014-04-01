@@ -1,19 +1,24 @@
 package com.citytechinc.cq.harbor.components.content.rssfeed;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class RSSFeedItem {
 
     private String title;
     private String link;
     private String pubDate;
     private String description;
+    private String HTML;
 
-    public RSSFeedItem(String title, String link, String pubDate, String description) {
+    public RSSFeedItem(String title, String link, String pubDate, String description, String HTML) {
         this.title = title;
         this.link = link;
         this.pubDate = pubDate;
         this.description = description;
+        this.HTML = HTML;
     }
 
+    @JsonProperty("title")
     public String getTitle() {
         return title;
     }
@@ -22,6 +27,7 @@ public class RSSFeedItem {
         this.title = title;
     }
 
+    @JsonProperty("link")
     public String getLink() {
         return link;
     }
@@ -30,6 +36,7 @@ public class RSSFeedItem {
         this.link = link;
     }
 
+    @JsonProperty("pubdate")
     public String getPubDate() {
         return pubDate;
     }
@@ -38,11 +45,17 @@ public class RSSFeedItem {
         this.pubDate = pubDate;
     }
 
+    @JsonProperty("description")
     public String getDescription() {
         return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @JsonProperty("HTML")
+    public String getHTML() {
+        return HTML;
     }
 }

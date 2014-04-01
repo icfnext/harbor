@@ -18,7 +18,7 @@ public final class DefaultRSSFeedGeneratorService implements RSSFeedGeneratorSer
 	public static final String RSS_FEED_PUBDATE_DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss zzz";
 
 	@Override
-	public final List<RSSFeedItem> getListOfRSSFeedItemsFromUrls(final List<String> rssPaths) {
+	public final List<RSSFeedItem> getListOfRSSFeedItemsFromUrls(final List<String> rssPaths, final int numberOfItemsToDisplay) {
 		List<RSSFeedItem> itemList = new ArrayList<RSSFeedItem>();
 		rssPaths.each { url ->
 			def rootNode = new XmlParser().parse(url);
@@ -30,8 +30,9 @@ public final class DefaultRSSFeedGeneratorService implements RSSFeedGeneratorSer
 							String nodeLink = node.link.text();
 							String nodePubDate = node.pubDate.text();
 							String nodeDescription = node.description.text();
+							String HTML = "<li class=\"list-group-item\" data-title=\"${nodeTitle}\">Title: ${nodeTitle}<br>Link: ${nodeLink}<br>Pub Date: ${nodePubDate}<br>Description: ${nodeDescription}</li>"
 
-							RSSFeedItem rssFeedItem = new RSSFeedItem(nodeTitle, nodeLink, nodePubDate, nodeDescription);
+							RSSFeedItem rssFeedItem = new RSSFeedItem(nodeTitle, nodeLink, nodePubDate, nodeDescription, HTML);
 							itemList.add(rssFeedItem);
 						}
 					}
@@ -51,7 +52,7 @@ public final class DefaultRSSFeedGeneratorService implements RSSFeedGeneratorSer
 
 		itemList = itemList.sort(byPubDateComparator).reverse();
 
-		return itemList;
+		return itemList.take(numberOfItemsToDisplay);
 	}
 
 	@Activate

@@ -6,9 +6,8 @@ import com.citytechinc.cq.harbor.content.page.HierarchicalPage;
 import com.citytechinc.cq.harbor.content.page.HomePage;
 import com.citytechinc.cq.harbor.content.page.SectionLandingPage;
 import com.citytechinc.cq.library.content.page.PageDecorator;
+import org.apache.jackrabbit.JcrConstants;
 import com.google.common.base.Optional;
-import com.google.common.base.Predicate;
-import org.apache.commons.lang.StringUtils;
 
 public class DefaultHierarchicalPage extends AbstractHierarchicalPage implements HierarchicalPage {
 
@@ -53,6 +52,17 @@ public class DefaultHierarchicalPage extends AbstractHierarchicalPage implements
         }
 
         return this.homePage;
+    }
+
+    /* TODO: in backlog
+    @Override
+    public String getPageIconImage() {
+        return this.getImageSource(Properties.PAGE_ICON_IMAGE).or("");
+    } */
+
+    @Override
+    public String getPageIcon() {
+        return getProperties().get(Properties.PAGE_ICON, "");
     }
 
 }

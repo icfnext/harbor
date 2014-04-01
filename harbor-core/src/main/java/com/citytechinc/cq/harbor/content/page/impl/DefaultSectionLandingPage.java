@@ -5,6 +5,7 @@ import com.citytechinc.cq.harbor.content.page.SectionLandingPage;
 import com.citytechinc.cq.library.content.page.PageDecorator;
 import com.google.common.base.Optional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DefaultSectionLandingPage extends DefaultHierarchicalPage implements SectionLandingPage {
@@ -19,7 +20,12 @@ public class DefaultSectionLandingPage extends DefaultHierarchicalPage implement
     }
 
     @Override
-    public List<SectionLandingPage> getSubSectionLandingPages() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    public List<SectionLandingPage> getSectionLandingPages() {
+        List<PageDecorator> sectionLandingPageList = getPageManager().findPages(getPath(), PagePredicates.SECTION_LANDING_PAGE_PREDICATE);
+        List<SectionLandingPage> sectionLandingPages = new ArrayList<SectionLandingPage>();
+        for(PageDecorator currentPageDecorator : sectionLandingPageList){
+            sectionLandingPages.add(currentPageDecorator.adaptTo(SectionLandingPage.class));
+        }
+        return sectionLandingPages;
     }
 }
