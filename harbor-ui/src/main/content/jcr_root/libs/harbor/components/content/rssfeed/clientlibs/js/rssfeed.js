@@ -1,50 +1,60 @@
 Harbor.Components.RSSFeed = function (jQuery) {
-    function refreshRSSFeed(rssFeedJSON) {
-        var currentRSSDiv = Harbor.Components.RSSFeed.currentRSSDiv;
-        var currentRSSDivChildrenNames = [];
-        currentRSSDiv.children().each(function () {
-            var currentTitle = $(this).data("title");
-            currentRSSDivChildrenNames.push(currentTitle)
-
-        });
+    //TODO rename
+    function refreshRSSFeed(rssFeedJSON, currentRSSFeedDiv) {
         $.each(rssFeedJSON, function () {
-            var currentTitle = this.title;
-            if ($.each(currentRSSDivChildrenNames, function () {
-                if (this === currentTitle) {
-                    return true;
-                } else {
-                    return false;
-                }
-            })) {
-                currentRSSDiv.prepend(this.HTML);
+            if (!isCurrentItemInRSSDiv(this, currentRSSFeedDiv)) {
+                currentRSSFeedDiv.prepend(this.HTML);
             }
         });
 
     }
 
+    function isCurrentItemInRSSDiv(currentRSSJsonItem, currentRSSFeedDiv) {
+        var currentTitle = currentRSSJsonItem.title;
+        var isCurrentItemInRSSDivFlag = false;
+        currentRSSFeedDiv.children().each(function () {
+            if ($(this).data("title") === currentTitle) {
+                isCurrentItemInRSSDivFlag = true;
+            }
+        });
+
+        return isCurrentItemInRSSDivFlag;
+    }
+
     return {
-        updateRSSFeeds: function () {
-            $(".list-group.rssfeed").each(function () {
-                    Harbor.Components.RSSFeed.currentRSSDiv = $(this);
-                    var currentRSSFeedPath = $(this).data("currentrssfeedpath");
-                    $.ajax({
-                            url: currentRSSFeedPath + "." + "rssfeed" + ".json",
-                            dataType: "json",
-                            type: "GET",
-                            cache: false,
-                            success: refreshRSSFeed
-                        }
-                    );
+        updateRSSFeed: function (currentRSSFeedDiv) {
+            var currentRSSFeedPath = currentRSSFeedDiv.data("currentrssfeedpath");
+
+            $.ajax({
+                    url: currentRSSFeedPath + "." + "rssfeed" + ".json",
+                    dataType: "json",
+                    type: "GET",
+                    cache: false,
+                    success: function(data){
+                        refreshRSSFeed(data, currentRSSFeedDiv)
+                    }
                 }
-            )
+            );
         }
     }
 }(jQuery);
 
 
 $(document).ready(function () {
-    Harbor.Components.RSSFeed.updateRSSFeeds();
-    setInterval(function () {
-        Harbor.Components.RSSFeed.updateRSSFeeds();
-    }, 10000);
-})
+
+    $(".list-group.rssfeed").each(function () {
+        console.time("UPDATE RSS FEED");
+        Harbor.Components.RSSFeed.updateRSSFeed($(this));
+        console.timeEnd("UPDATE RSS FEED");
+    });
+
+    $(".list-group.rssfeed").each(function () {
+
+        var currentRSSFeedDiv = $(this);
+        setInterval(function () {
+            console.time("UPDATE RSS FEED");
+            Harbor.Components.RSSFeed.updateRSSFeed(currentRSSFeedDiv);
+            console.timeEnd("UPDATE RSS FEED");
+        }, currentRSSFeedDiv.data("updateinterval"));
+    });
+});

@@ -52,5 +52,11 @@ public class RSSFeed extends AbstractComponent {
         return this.getPath();
     }
 
+    @DialogField(fieldLabel = "Update Interval", fieldDescription = "The update interval you want, in seconds")
+    public final double getUpdateInterval(){
+        return get("updateInterval", 10) * 1000;
+    }
+
+
 
 }

@@ -39,7 +39,7 @@ public class RSSFeedServlet extends AbstractComponentServlet {
             List<RSSFeedItem> rssFeedItemList = rssFeedGeneratorService.getListOfRSSFeedItemsFromUrls(rssUrlList, numberOfItemsToDisplay);
             this.writeJsonResponse(slingResponse, rssFeedItemList);
         } else {
-            throw new ServletException("rssUrlList expected, none received.");
+            throw new ServletException("No RSS Urls found, please prove some URLS to RSS Feeds.");
         }
     }
 }
