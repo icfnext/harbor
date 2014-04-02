@@ -52,7 +52,7 @@ public class RSSFeed extends AbstractComponent {
         return get("updateInterval", 10) * 1000;
     }
 
-    public final String getRSSFeedUniqueID() {
+    public final String getRSSFeedUniqueId() {
         return ComponentUtils.getComponentId(request.getCurrentPage(), this.getResource());
     }
 }

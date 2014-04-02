@@ -19,7 +19,7 @@ public final class DefaultRSSFeedGeneratorService implements RSSFeedGeneratorSer
 	Logger LOG = LoggerFactory.getLogger(DefaultRSSFeedGeneratorService.class);
 
 	private static final String ITEM_NODE_NAME = "item";
-	public static final String RSS_FEED_PUBDATE_DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss zzz";
+	public static final String RSS_FEED_PUBDATE_DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss Z";
 
 	@Override
 	public final List<RSSFeedItem> getListOfRSSFeedItemsFromUrls(final List<String> rssPaths, final int numberOfItemsToDisplay) {
@@ -44,7 +44,7 @@ public final class DefaultRSSFeedGeneratorService implements RSSFeedGeneratorSer
 
 		def byPubDateComparator = [
 				compare: { rssFeedItem1, rssFeedItem2 ->
-					def dateFormat = new SimpleDateFormat(RSS_FEED_PUBDATE_DATE_FORMAT);
+					def dateFormat = new SimpleDateFormat(RSS_FEED_PUBDATE_DATE_FORMAT, Locale.ENGLISH);
 					String map1PubDate = rssFeedItem1.getPubDate();
 					String map2PubDate = rssFeedItem2.getPubDate();
 					def date1 = dateFormat.parse(map1PubDate);

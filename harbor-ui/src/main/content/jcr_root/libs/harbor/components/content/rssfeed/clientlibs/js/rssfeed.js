@@ -1,6 +1,9 @@
 Harbor.Components.RSSFeed = function (jQuery) {
 
     function refreshRSSFeed(rssFeedJSON, currentRSSFeedDiv) {
+        //We reverse the array because we prepend the items one after the other.
+        // Since we receive the list in order, we have to reverse it to render it in order.
+        rssFeedJSON = rssFeedJSON.reverse();
         $.each(rssFeedJSON, function () {
             if (!isCurrentItemInRSSDiv(this, currentRSSFeedDiv)) {
                 currentRSSFeedDiv.prepend(this.HTML);
@@ -37,7 +40,7 @@ Harbor.Components.RSSFeed = function (jQuery) {
                 }
             );
         },
-        initRSSFeed: function (currentRSSFeedUniqueId) {
+        initRSSFeed: function (currentRSSFeedUniqueId, updateInterval) {
             var previousIntervalId = Harbor.Components.RSSFeed.intervalIDs[currentRSSFeedUniqueId];
             if (previousIntervalId != undefined && previousIntervalId != null) {
                 clearInterval(previousIntervalId);
@@ -48,7 +51,7 @@ Harbor.Components.RSSFeed = function (jQuery) {
                 console.time("UPDATE RSS FEED" + currentRSSFeedUniqueId);
                 Harbor.Components.RSSFeed.updateRSSFeed(currentRSSFeedDiv);
                 console.timeEnd("UPDATE RSS FEED" +  currentRSSFeedUniqueId);
-            }, currentRSSFeedDiv.data("updateinterval"));
+            }, updateInterval);
             Harbor.Components.RSSFeed.intervalIDs[currentRSSFeedUniqueId] = intervalId;
         }
     }
