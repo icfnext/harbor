@@ -1,9 +1,9 @@
 package com.citytechinc.cq.harbor.content.search.impl;
 
+import com.citytechinc.cq.harbor.content.search.ContentHit;
 import com.citytechinc.cq.harbor.content.search.ContentSearchService;
 import java.util.ArrayList;
 import java.util.List;
-import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.query.Query;
@@ -19,24 +19,25 @@ import org.apache.felix.scr.annotations.Service;
 public class DefaultContentSearchService implements ContentSearchService {
 
     private static final String QUERY_TEMPLATE
-            = "select * from [nt:base] as s where isdescendantnode([/content]) and contains(s.*, '%s')";
+            = "select excerpt(.) from nt:base where jcr:path like '/content/%' and contains(*, 'searchForText')";
 
     @Override
-    public List<Node> search(Session session, String searchForText) {
-        List<Node> foundNodes = new ArrayList<Node>();
-        String queryString = String.format(QUERY_TEMPLATE, searchForText);
+    public List<ContentHit> search(Session session, String searchForText) {
+        List<ContentHit> foundContent = new ArrayList<ContentHit>();
+        String queryString = QUERY_TEMPLATE.replace("searchForText", searchForText);
         try {
             QueryManager qm = session.getWorkspace().getQueryManager();
-            Query q = qm.createQuery(queryString, Query.JCR_SQL2);
+            Query q = qm.createQuery(queryString, Query.SQL);
             QueryResult result = q.execute();
             for (RowIterator it = result.getRows(); it.hasNext();) {
                 Row r = it.nextRow();
-                foundNodes.add(r.getNode());
+                String excerpt = r.getValue("rep:excerpt(.)").getString();
+                foundContent.add(new ContentHit(r.getNode(), excerpt));
             }
         } catch (RepositoryException e) {
             throw new RuntimeException(e);
         }
-        return foundNodes;
+        return foundContent;
     }
 
 }
