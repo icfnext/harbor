@@ -48,9 +48,7 @@ Harbor.Components.RSSFeed = function (jQuery) {
             var currentRSSFeedDiv = $("#" + currentRSSFeedUniqueId);
             Harbor.Components.RSSFeed.updateRSSFeed(currentRSSFeedDiv);
             var intervalId = setInterval(function () {
-                console.time("UPDATE RSS FEED" + currentRSSFeedUniqueId);
                 Harbor.Components.RSSFeed.updateRSSFeed(currentRSSFeedDiv);
-                console.timeEnd("UPDATE RSS FEED" +  currentRSSFeedUniqueId);
             }, updateInterval);
             Harbor.Components.RSSFeed.intervalIDs[currentRSSFeedUniqueId] = intervalId;
         }

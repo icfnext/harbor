@@ -31,7 +31,7 @@ public final class DefaultRSSFeedGeneratorService implements RSSFeedGeneratorSer
 				rootNode = new XmlParser().parse(url);
 			} catch (FileNotFoundException e) {
 				LOG.error("File not found, please enter a valid file.", e);
-			} catch (SAXException e){
+			} catch (SAXException e) {
 				LOG.error("Invalid path passed to XMLParser", e);
 			}
 			if (rootNode)

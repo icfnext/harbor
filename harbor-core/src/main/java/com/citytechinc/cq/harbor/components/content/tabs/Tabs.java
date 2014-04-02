@@ -11,7 +11,6 @@ import com.citytechinc.cq.library.components.annotations.AutoInstantiate;
 import com.citytechinc.cq.library.content.node.ComponentNode;
 import com.citytechinc.cq.library.content.request.ComponentRequest;
 import com.day.cq.wcm.api.Page;
-import org.apache.jackrabbit.JcrConstants;
 import org.apache.sling.api.resource.Resource;
 
 import java.util.ArrayList;
@@ -29,7 +28,7 @@ import java.util.List;
                 @ActionConfig(text = "Add Tab", handler = "function(){Harbor.Components.Tabs.addTab(this)}")
         },
         contentAdditionalProperties = {
-                @ContentProperty(name="dependencies", value="[harbor.components.content.tabs,harbor.bootstrap]")
+                @ContentProperty(name = "dependencies", value = "[harbor.components.content.tabs,harbor.bootstrap]")
         }
 )
 @AutoInstantiate(instanceName = "tabs")
@@ -69,7 +68,7 @@ public class Tabs extends AbstractComponent {
     }
 
     public String getUniqueId() {
-        return constructUniqueId(request.getCurrentPage(),request.getResource());
+        return constructUniqueId(request.getCurrentPage(), request.getResource());
     }
 
 }
