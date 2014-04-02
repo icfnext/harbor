@@ -7,12 +7,16 @@ import org.apache.felix.scr.annotations.Component
 import org.apache.felix.scr.annotations.Deactivate
 import org.apache.felix.scr.annotations.Service
 import org.apache.sling.api.resource.LoginException
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 import java.text.SimpleDateFormat
 
 @Service
 @Component(label = "RSS Feed Generator Service", immediate = true, metatype = true)
 public final class DefaultRSSFeedGeneratorService implements RSSFeedGeneratorService {
+
+	Logger LOG = LoggerFactory.getLogger(DefaultRSSFeedGeneratorService.class);
 
 	private static final String ITEM_NODE_NAME = "item";
 	public static final String RSS_FEED_PUBDATE_DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss zzz";
@@ -21,15 +25,22 @@ public final class DefaultRSSFeedGeneratorService implements RSSFeedGeneratorSer
 	public final List<RSSFeedItem> getListOfRSSFeedItemsFromUrls(final List<String> rssPaths, final int numberOfItemsToDisplay) {
 		List<RSSFeedItem> itemList = new ArrayList<RSSFeedItem>();
 		rssPaths.each { url ->
-			def rootNode = new XmlParser().parse(url);
-			rootNode.children().each { channel ->
-				channel.children().each { node ->
-					if (node.name() == ITEM_NODE_NAME) {
-						itemList.add(getRSSFeedItemFromNode(node));
+			def rootNode;
+			try {
+				rootNode = new XmlParser().parse(url);
+			} catch (FileNotFoundException e) {
+				LOG.error("File not found, please enter a valid file.", e);
+			}
+			if (rootNode)
+				rootNode.children().each { channel ->
+					channel.children().each { node ->
+						if (node.name() == ITEM_NODE_NAME) {
+							itemList.add(getRSSFeedItemFromNode(node));
+						}
 					}
 				}
-			}
 		}
+
 
 		def byPubDateComparator = [
 				compare: { rssFeedItem1, rssFeedItem2 ->
