@@ -9,6 +9,7 @@ import org.apache.felix.scr.annotations.Service
 import org.apache.sling.api.resource.LoginException
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import org.xml.sax.SAXException
 
 import java.text.SimpleDateFormat
 
@@ -30,6 +31,8 @@ public final class DefaultRSSFeedGeneratorService implements RSSFeedGeneratorSer
 				rootNode = new XmlParser().parse(url);
 			} catch (FileNotFoundException e) {
 				LOG.error("File not found, please enter a valid file.", e);
+			} catch (SAXException e){
+				LOG.error("Invalid path passed to XMLParser", e);
 			}
 			if (rootNode)
 				rootNode.children().each { channel ->
