@@ -1,5 +1,5 @@
 Harbor.Components.RSSFeed = function (jQuery) {
-    //TODO rename
+
     function refreshRSSFeed(rssFeedJSON, currentRSSFeedDiv) {
         $.each(rssFeedJSON, function () {
             if (!isCurrentItemInRSSDiv(this, currentRSSFeedDiv)) {
@@ -22,6 +22,7 @@ Harbor.Components.RSSFeed = function (jQuery) {
     }
 
     return {
+        intervalIDs: {},
         updateRSSFeed: function (currentRSSFeedDiv) {
             var currentRSSFeedPath = currentRSSFeedDiv.data("currentrssfeedpath");
 
@@ -30,31 +31,28 @@ Harbor.Components.RSSFeed = function (jQuery) {
                     dataType: "json",
                     type: "GET",
                     cache: false,
-                    success: function(data){
+                    success: function (data) {
                         refreshRSSFeed(data, currentRSSFeedDiv)
                     }
                 }
             );
+        },
+        initRSSFeed: function (currentRSSFeedUniqueId) {
+            var previousIntervalId = Harbor.Components.RSSFeed.intervalIDs[currentRSSFeedUniqueId];
+            if (previousIntervalId != undefined && previousIntervalId != null) {
+                clearInterval(previousIntervalId);
+            }
+            var currentRSSFeedDiv = $("#" + currentRSSFeedUniqueId);
+            Harbor.Components.RSSFeed.updateRSSFeed(currentRSSFeedDiv);
+            var intervalId = setInterval(function () {
+                console.time("UPDATE RSS FEED" + currentRSSFeedUniqueId);
+                Harbor.Components.RSSFeed.updateRSSFeed(currentRSSFeedDiv);
+                console.timeEnd("UPDATE RSS FEED" +  currentRSSFeedUniqueId);
+            }, currentRSSFeedDiv.data("updateinterval"));
+            Harbor.Components.RSSFeed.intervalIDs[currentRSSFeedUniqueId] = intervalId;
         }
     }
 }(jQuery);
 
 
-$(document).ready(function () {
 
-    $(".list-group.rssfeed").each(function () {
-        console.time("UPDATE RSS FEED");
-        Harbor.Components.RSSFeed.updateRSSFeed($(this));
-        console.timeEnd("UPDATE RSS FEED");
-    });
-
-    $(".list-group.rssfeed").each(function () {
-
-        var currentRSSFeedDiv = $(this);
-        setInterval(function () {
-            console.time("UPDATE RSS FEED");
-            Harbor.Components.RSSFeed.updateRSSFeed(currentRSSFeedDiv);
-            console.timeEnd("UPDATE RSS FEED");
-        }, currentRSSFeedDiv.data("updateinterval"));
-    });
-});

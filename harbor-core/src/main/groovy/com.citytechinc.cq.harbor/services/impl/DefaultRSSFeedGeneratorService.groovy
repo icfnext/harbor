@@ -22,21 +22,13 @@ public final class DefaultRSSFeedGeneratorService implements RSSFeedGeneratorSer
 		List<RSSFeedItem> itemList = new ArrayList<RSSFeedItem>();
 		rssPaths.each { url ->
 			def rootNode = new XmlParser().parse(url);
-			if (url.length() > 0)
-				rootNode.children().each { channel ->
-					channel.children().each { node ->
-						if (node.name() == ITEM_NODE_NAME) {
-							String nodeTitle = node.title.text();
-							String nodeLink = node.link.text();
-							String nodePubDate = node.pubDate.text();
-							String nodeDescription = node.description.text();
-							String HTML = "<li class=\"list-group-item\" data-title=\"${nodeTitle}\">Title: ${nodeTitle}<br>Link: ${nodeLink}<br>Pub Date: ${nodePubDate}<br>Description: ${nodeDescription}</li>"
-
-							RSSFeedItem rssFeedItem = new RSSFeedItem(nodeTitle, nodeLink, nodePubDate, nodeDescription, HTML);
-							itemList.add(rssFeedItem);
-						}
+			rootNode.children().each { channel ->
+				channel.children().each { node ->
+					if (node.name() == ITEM_NODE_NAME) {
+						itemList.add(getRSSFeedItemFromNode(node));
 					}
 				}
+			}
 		}
 
 		def byPubDateComparator = [
@@ -63,6 +55,16 @@ public final class DefaultRSSFeedGeneratorService implements RSSFeedGeneratorSer
 	@Deactivate
 	protected void deactivate() {
 		//continue to do nothing.
+	}
+
+	private RSSFeedItem getRSSFeedItemFromNode(Node node) {
+		String nodeTitle = node.title.text();
+		String nodeLink = node.link.text();
+		String nodePubDate = node.pubDate.text();
+		String nodeDescription = node.description.text();
+		String HTML = "<li class=\"list-group-item\" data-title=\"${nodeTitle}\">Title: ${nodeTitle}<br>Link: ${nodeLink}<br>Pub Date: ${nodePubDate}<br>Description: ${nodeDescription}</li>"
+
+		return new RSSFeedItem(nodeTitle, nodeLink, nodePubDate, nodeDescription, HTML);
 	}
 
 }

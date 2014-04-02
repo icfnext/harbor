@@ -5,10 +5,12 @@ import com.citytechinc.cq.component.annotations.Component;
 import com.citytechinc.cq.component.annotations.ContentProperty;
 import com.citytechinc.cq.component.annotations.Listener;
 import com.citytechinc.cq.component.annotations.editconfig.ActionConfig;
+import com.citytechinc.cq.harbor.util.ComponentUtils;
 import com.citytechinc.cq.library.components.AbstractComponent;
 import com.citytechinc.cq.library.components.annotations.AutoInstantiate;
 import com.citytechinc.cq.library.content.node.ComponentNode;
 import com.citytechinc.cq.library.content.request.ComponentRequest;
+import com.day.cq.wcm.api.Page;
 import org.apache.jackrabbit.JcrConstants;
 import org.apache.sling.api.resource.Resource;
 
@@ -38,18 +40,8 @@ public class Tabs extends AbstractComponent {
         super(request);
     }
 
-    //TODO: remove this once implemented in cqlib
-    public static String constructUniqueId(Resource r) {
-        StringBuffer uniqueIdBuffer = new StringBuffer();
-
-        Resource curResource = r;
-
-        while (curResource != null && !curResource.getName().equals(JcrConstants.JCR_CONTENT)) {
-            uniqueIdBuffer.append(curResource.getName());
-            curResource = curResource.getParent();
-        }
-
-        return uniqueIdBuffer.toString();
+    public static String constructUniqueId(Page page, Resource r) {
+        return ComponentUtils.getComponentId(page, r);
     }
 
     public String getName() {
@@ -77,8 +69,7 @@ public class Tabs extends AbstractComponent {
     }
 
     public String getUniqueId() {
-        //TODO: change this to use a unique ID generator
-        return constructUniqueId(request.getResource());
+        return constructUniqueId(request.getCurrentPage(),request.getResource());
     }
 
 }
