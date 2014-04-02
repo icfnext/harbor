@@ -4,6 +4,7 @@ import com.citytechinc.cq.harbor.content.search.ContentHit;
 import com.citytechinc.cq.harbor.content.search.ContentSearchService;
 import java.util.ArrayList;
 import java.util.List;
+import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.query.Query;
@@ -23,7 +24,7 @@ public class DefaultContentSearchService implements ContentSearchService {
 
     @Override
     public List<ContentHit> search(Session session, String searchForText) {
-        List<ContentHit> foundContent = new ArrayList<ContentHit>();
+        List<ContentHit> hits = new ArrayList<ContentHit>();
         String queryString = QUERY_TEMPLATE.replace("searchForText", searchForText);
         try {
             QueryManager qm = session.getWorkspace().getQueryManager();
@@ -31,13 +32,42 @@ public class DefaultContentSearchService implements ContentSearchService {
             QueryResult result = q.execute();
             for (RowIterator it = result.getRows(); it.hasNext();) {
                 Row r = it.nextRow();
-                String excerpt = r.getValue("rep:excerpt(.)").getString();
-                foundContent.add(new ContentHit(r.getNode(), excerpt));
+                Node parentPageNode = getNearestParentPageNode(r.getNode());
+                if (parentPageNode != null) {
+                    String excerpt = r.getValue("rep:excerpt(.)").getString();
+                    hits.add(new ContentHit(parentPageNode, excerpt));
+                }
             }
         } catch (RepositoryException e) {
             throw new RuntimeException(e);
         }
-        return foundContent;
+        return hits;
+    }
+
+    private Node getNearestParentPageNode(Node node) {
+        try {
+            if (isPageNode(node)) {
+                return node;
+            }
+            do {
+                node = node.getParent();
+                if (isPageNode(node)) {
+                    return node;
+                }
+            } while (node.getDepth() > 0);
+            
+        } catch (RepositoryException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
+    }
+
+    private boolean isPageNode(Node n) {
+        try {
+            return n.isNodeType("cq:Page");
+        } catch (RepositoryException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }
