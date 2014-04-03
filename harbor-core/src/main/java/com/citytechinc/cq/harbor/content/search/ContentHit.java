@@ -2,6 +2,8 @@ package com.citytechinc.cq.harbor.content.search;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 public class ContentHit {
 
@@ -25,4 +27,29 @@ public class ContentHit {
         return excerpt;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj == this) {
+            return true;
+        }
+        if (obj.getClass() != getClass()) {
+            return false;
+        }
+        ContentHit rhs = (ContentHit) obj;
+        return new EqualsBuilder()
+                .append(getPath(), rhs.getPath())
+                .append(excerpt, rhs.excerpt)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37).
+                append(getPath()).
+                append(excerpt).
+                toHashCode();
+    }
 }
