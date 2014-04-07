@@ -8,17 +8,20 @@
     com.citytechinc.cq.library.components.annotations.AutoInstantiate annotation.
 --%>
 <c:if test="${listComponent.hasListElement}"><${listComponent.listElement} <c:if test="${listComponent.isOrderedList}"><c:if test="${listComponent.hasStart}">start="${listComponent.start}"</c:if> <c:if test="${listComponent.isReversed}">reversed="true"</c:if></c:if>></c:if>
-<c:forEach items="${listComponent.renderableListItems}" var="curListItem">
-    <c:if test="${listComponent.isHtmlList}"><li></c:if>
-        ${curListItem.renderedItem}
-    <c:if test="${listComponent.isHtmlList}"></li></c:if>
-</c:forEach>
+
+<c:choose>
+
+    <c:when test="${listComponent.isHtmlList}">
+
+        <ctharbor:includeListItems items="${listComponent.renderableListItems}" script="/libs/harbor/components/content/lists/abstractlist/htmllist.jsp" />
+
+    </c:when>
+    <c:otherwise>
+
+        <ctharbor:includeListItems items="${listComponent.renderableListItems}" script="/libs/harbor/components/content/lists/abstractlist/nonhtmllist.jsp" />
+
+    </c:otherwise>
+
+</c:choose>
+
 <c:if test="${listComponent.hasListElement}"></${listComponent.listElement}></c:if>
-
-<div>
-
-    TESTING JSP:<BR>
-    <ctharbor:includeListItems items="${listComponent.renderableListItems}" script="/libs/harbor/components/content/lists/testing.jsp" />
-
-</div>
-

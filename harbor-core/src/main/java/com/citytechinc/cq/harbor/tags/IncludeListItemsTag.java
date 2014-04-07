@@ -21,6 +21,7 @@ import java.util.List;
  */
 public class IncludeListItemsTag extends TagSupport {
 
+    private static final String JSP_VAR_ITEMS = "items";
     private List<? extends RenderableListItem> items;
 
     private String script;
@@ -28,9 +29,21 @@ public class IncludeListItemsTag extends TagSupport {
     @Override
     public int doEndTag() throws JspException {
 
-        this.includeScript(this.script);
+        String resolvedPath = resolveScriptPath();
+        this.includeScript(resolvedPath);
 
         return EVAL_PAGE;
+
+    }
+
+    private String resolveScriptPath() {
+
+// TODO : have method to figure out script path relative to current script
+/*
+includeScript is copied from com.day.cq.wcm:cq-wcm-taglib bundle, use that to figure relative stuff
+ */
+
+        return this.script;
 
     }
 
@@ -42,8 +55,11 @@ public class IncludeListItemsTag extends TagSupport {
      */
     private void includeScript(String scriptPath) throws JspException {
 
-        /// get some necessary variables
+        /// get request and set the items variable on it
         ServletRequest request = this.pageContext.getRequest();
+        request.setAttribute(JSP_VAR_ITEMS, this.items);
+
+        // get variables necessary to render and pass on jsp
         SlingBindings bindings = (SlingBindings) request.getAttribute(SlingBindings.class.getName());
         ResourceResolver resourceResolver = bindings.getRequest().getResourceResolver();
         SlingScriptHelper scriptHelper = bindings.getSling();
@@ -63,6 +79,9 @@ public class IncludeListItemsTag extends TagSupport {
             // put rendering in response
             SlingHttpServletResponse response = new JspSlingHttpServletResponseWrapper(this.pageContext);
             servlet.service(this.pageContext.getRequest(), response);
+
+            // remove items variable from request variables
+            request.removeAttribute(JSP_VAR_ITEMS);
 
         } catch (ServletException e) {
 

@@ -1,1 +1,0 @@
-TESTING: ${listComponent.renderableListItems}
