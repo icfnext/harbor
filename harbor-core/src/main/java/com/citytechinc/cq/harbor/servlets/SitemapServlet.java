@@ -18,10 +18,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 @SlingServlet(
-    methods = "GET",
-    selectors = "sitemap",
-    extensions = "xml",
-    paths = "/"
+    //methods = "GET",
+    //selectors = "sitemap",
+    //extensions = "xml",
+    paths = "/bin/sitemap"
 )
 public class SitemapServlet extends SlingSafeMethodsServlet {
 
