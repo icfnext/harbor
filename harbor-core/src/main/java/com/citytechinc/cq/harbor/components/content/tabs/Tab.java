@@ -44,6 +44,6 @@ public class Tab extends AbstractComponent {
     }
 
     public String getUniqueId() {
-        return Tabs.constructUniqueId(this.getResource());
+        return Tabs.constructUniqueId(this.currentPage, this.getResource());
     }
 }
