@@ -14,3 +14,11 @@
     <c:if test="${listComponent.isHtmlList}"></li></c:if>
 </c:forEach>
 <c:if test="${listComponent.hasListElement}"></${listComponent.listElement}></c:if>
+
+<div>
+
+    TESTING JSP:<BR>
+    <ctharbor:includeListItems items="${listComponent.renderableListItems}" script="/libs/harbor/components/content/lists/testing.jsp" />
+
+</div>
+
