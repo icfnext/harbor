@@ -2,6 +2,7 @@ package com.citytechinc.cq.harbor.content.search.impl;
 
 import com.citytechinc.cq.harbor.content.search.ContentHit;
 import com.citytechinc.cq.harbor.content.search.ContentSearchService;
+import com.google.common.base.Optional;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -26,60 +27,53 @@ public class DefaultContentSearchService implements ContentSearchService {
 
     @Override
     public List<ContentHit> search(Session session, String searchForText) {
-        List<ContentHit> hits = new ArrayList<ContentHit>();
+        try {
+            QueryResult result = executeQuery(searchForText, session);
+            List<ContentHit> hits = extractHits(result);
+            return hits;
+        } catch (RepositoryException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private QueryResult executeQuery(String searchForText, Session session) throws RepositoryException {
         String queryString = QUERY_TEMPLATE.replace("searchForText", searchForText);
-        try {
-            QueryManager qm = session.getWorkspace().getQueryManager();
-            Query q = qm.createQuery(queryString, Query.SQL);
-            QueryResult result = q.execute();
-            for (RowIterator it = result.getRows(); it.hasNext();) {
-                Row r = it.nextRow();
-                Node parentPageNode = getNearestParentPageNode(r.getNode());
-                if (parentPageNode != null) {
-                    String excerpt = r.getValue("rep:excerpt(.)").getString();
-                    hits.add(new ContentHit(parentPageNode, excerpt));
-                }
-            }
-        } catch (RepositoryException e) {
-            throw new RuntimeException(e);
-        }
-        hits = removeDuplicates(hits);
-        return hits;
+        QueryManager qm = session.getWorkspace().getQueryManager();
+        Query q = qm.createQuery(queryString, Query.SQL);
+        QueryResult result = q.execute();
+        return result;
     }
 
-    private Node getNearestParentPageNode(Node node) {
-        try {
+    private List<ContentHit> extractHits(QueryResult result) throws RepositoryException {
+        /* use a linked hash set to bounce duplicates while maintaining sort order */
+        Set<ContentHit> hits = new LinkedHashSet<ContentHit>();
+        for (RowIterator it = result.getRows(); it.hasNext();) {
+            Row r = it.nextRow();
+            Optional<Node> parentPageNodeOptional = getNearestParentPageNode(r.getNode());
+            if (parentPageNodeOptional.isPresent()) {
+                String excerpt = r.getValue("rep:excerpt(.)").getString();
+                Node parentPageNode = parentPageNodeOptional.get();
+                hits.add(new ContentHit(parentPageNode, excerpt));
+            }
+        }
+        return new ArrayList<ContentHit>(hits);
+    }
+
+    private Optional<Node> getNearestParentPageNode(Node node) throws RepositoryException {
+        if (isPageNode(node)) {
+            return Optional.of(node);
+        }
+        do {
+            node = node.getParent();
             if (isPageNode(node)) {
-                return node;
+                return Optional.of(node);
             }
-            do {
-                node = node.getParent();
-                if (isPageNode(node)) {
-                    return node;
-                }
-            } while (node.getDepth() > 0);
+        } while (node.getDepth() > 0);
 
-        } catch (RepositoryException e) {
-            throw new RuntimeException(e);
-        }
-        return null;
+        return Optional.absent();
     }
 
-    private boolean isPageNode(Node n) {
-        try {
-            return n.isNodeType("cq:Page");
-        } catch (RepositoryException e) {
-            throw new RuntimeException(e);
-        }
+    private boolean isPageNode(Node n) throws RepositoryException {
+        return n.isNodeType("cq:Page");
     }
-
-    private List<ContentHit> removeDuplicates(List<ContentHit> hits) {
-        /* use a linked hash set to maintain sort order */
-        Set<ContentHit> uniqueHits = new LinkedHashSet<ContentHit>();
-        for (ContentHit hit : hits) {
-            uniqueHits.add(hit);
-        }
-        return new ArrayList<ContentHit>(uniqueHits);
-    }
-
 }
