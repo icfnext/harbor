@@ -11,6 +11,7 @@ import com.citytechinc.cq.library.components.annotations.AutoInstantiate;
 import com.citytechinc.cq.library.content.node.ComponentNode;
 import com.citytechinc.cq.library.content.page.PageDecorator;
 import com.citytechinc.cq.library.content.request.ComponentRequest;
+import com.citytechinc.cq.harbor.components.content.navigation.Util;
 import org.apache.sling.api.resource.Resource;
 
 import java.util.ArrayList;
@@ -56,8 +57,25 @@ public class BootstrapMainAutoNavigation extends AbstractTreeComponent<PageDecor
         return getInherited("stickyNavigationEnabled", "").equals("true");
     }
 
+    @DialogField(fieldLabel = "Show Home Link?",
+            fieldDescription = "Enable this to display a link to the root path as the first navigation element")
+    @Selection(type=Selection.CHECKBOX, options = {
+            @Option(text="", value = "true")
+    })
+    public Boolean getHomeLinkEnabled(){
+        return getInherited("homeLinkEnabled", "").equals("true");
+    }
+
     public String getId(){
         return this.getPath().split(":")[1].replaceAll("/", "-");
+    }
+
+    public String getBrandLinkTarget(){
+        return getRootNode().getValue().getHref();
+    }
+
+    public String getBrandLinkText(){
+        return Util.getNodeLinkText(getRootNode());
     }
 
     @Override

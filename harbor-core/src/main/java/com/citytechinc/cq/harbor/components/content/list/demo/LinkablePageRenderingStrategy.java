@@ -2,6 +2,7 @@ package com.citytechinc.cq.harbor.components.content.list.demo;
 
 import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.Option;
+import com.citytechinc.cq.component.annotations.widgets.MultiField;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
 import com.citytechinc.cq.harbor.components.content.list.ListRenderingStrategy;
 import com.citytechinc.cq.library.content.node.ComponentNode;
