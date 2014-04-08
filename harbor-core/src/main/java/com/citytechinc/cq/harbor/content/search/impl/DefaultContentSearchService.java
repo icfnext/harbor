@@ -26,10 +26,10 @@ public class DefaultContentSearchService implements ContentSearchService {
             = "select excerpt(.) from nt:base where jcr:path like '/content/%' and contains(*, 'searchForText')";
 
     @Override
-    public List<ContentHit> search(Session session, String searchForText) {
+    public List<ContentHit> search(Session session, Set<String> searchPaths, String searchForText) {
         try {
             QueryResult result = executeQuery(searchForText, session);
-            List<ContentHit> hits = extractHits(result);
+            List<ContentHit> hits = extractHits(result, searchPaths);
             return hits;
         } catch (RepositoryException e) {
             throw new RuntimeException(e);
@@ -44,15 +44,19 @@ public class DefaultContentSearchService implements ContentSearchService {
         return result;
     }
 
-    private List<ContentHit> extractHits(QueryResult result) throws RepositoryException {
+    private List<ContentHit> extractHits(QueryResult result, Set<String> searchPaths) throws RepositoryException {
         /* use a linked hash set to bounce duplicates while maintaining sort order */
         Set<ContentHit> hits = new LinkedHashSet<ContentHit>();
         for (RowIterator it = result.getRows(); it.hasNext();) {
-            Row r = it.nextRow();
-            Optional<Node> parentPageNodeOptional = getNearestParentPageNode(r.getNode());
+            Row row = it.nextRow();
+            Node node = row.getNode();
+            Optional<Node> parentPageNodeOptional = getNearestParentPageNode(node);
             if (parentPageNodeOptional.isPresent()) {
-                String excerpt = r.getValue("rep:excerpt(.)").getString();
                 Node parentPageNode = parentPageNodeOptional.get();
+                if (isNotUnderSearchPaths(parentPageNode, searchPaths)) {
+                    continue;
+                }
+                String excerpt = row.getValue("rep:excerpt(.)").getString();
                 hits.add(new ContentHit(parentPageNode, excerpt));
             }
         }
@@ -75,5 +79,14 @@ public class DefaultContentSearchService implements ContentSearchService {
 
     private boolean isPageNode(Node n) throws RepositoryException {
         return n.isNodeType("cq:Page");
+    }
+
+    private boolean isNotUnderSearchPaths(Node parentPageNode, Set<String> searchPaths) throws RepositoryException {
+        for (String searchPath : searchPaths) {
+            if (parentPageNode.getPath().startsWith(searchPath)) {
+                return false;
+            }
+        }
+        return true;
     }
 }
