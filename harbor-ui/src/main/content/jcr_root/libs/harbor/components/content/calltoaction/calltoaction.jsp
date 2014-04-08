@@ -6,21 +6,21 @@
 </a>
 
 <c:if test="${cta.openModal}">
-<div class="modal fade cta-modal" data-keyboard="false" tabindex="-1"  role="dialog" id="callToActionModal${cta.id}">
+<div class="modal fade cta-modal" data-keyboard="false" tabindex="-1"  role="dialog" id="callToActionModal-${cta.id}">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-body">
-				<cq:include path="container-par${cta.id}" resourceType="foundation/components/parsys" />
+				<cq:include path="container-par-${cta.id}" resourceType="foundation/components/parsys" />
 			</div>
 		</div>
 	</div>
 </div>
 	<script type="text/javascript">
 		jQuery( document ).ready( function( $ ) {
-			$( '#callToActionModal${cta.id}' ).on('show.bs.modal', function() {
-				Harbor.Components.editables().changeEditableContext( '${cta.path}/container-par${cta.id}' );
+			$( '#callToActionModal-${cta.id}' ).on('show.bs.modal', function() {
+				Harbor.Components.editables().changeEditableContext( '${cta.path}/container-par-${cta.id}' );
 			} );
-			$( '#callToActionModal${cta.id}' ).on('hide.bs.modal', function() {
+			$( '#callToActionModal-${cta.id}' ).on('hide.bs.modal', function() {
 				Harbor.Components.editables().resetEditableContext();
 			} );
 		} );
