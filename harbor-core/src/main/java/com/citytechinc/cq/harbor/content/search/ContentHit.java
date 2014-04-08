@@ -41,7 +41,6 @@ public class ContentHit {
         ContentHit rhs = (ContentHit) obj;
         return new EqualsBuilder()
                 .append(getPath(), rhs.getPath())
-                .append(excerpt, rhs.excerpt)
                 .isEquals();
     }
 
@@ -49,7 +48,6 @@ public class ContentHit {
     public int hashCode() {
         return new HashCodeBuilder(17, 37).
                 append(getPath()).
-                append(excerpt).
                 toHashCode();
     }
 }
