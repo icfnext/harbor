@@ -25,13 +25,13 @@ import java.util.Set;
 )
 public class SitemapServlet extends SlingSafeMethodsServlet {
 
-    @Reference
+  /*  @Reference
     private SitemapConfigService siteMapService;
 
-
+*/
     @Override
-    protected void doGet(final SlingHttpServletRequest request, final SlingHttpServletResponse response) {
-        //Build Tree from the root
+    protected void doGet(org.apache.sling.api.SlingHttpServletRequest request, org.apache.sling.api.SlingHttpServletResponse response) throws javax.servlet.ServletException, java.io.IOException {
+        /*//Build Tree from the root
         TreeNodeConstructionStrategy constructionStrategy = new SitemapConstructionStrategy(request);
 
         Set<String> sitemapRootPaths = siteMapService.getSiteMapRootPaths();
@@ -47,7 +47,7 @@ public class SitemapServlet extends SlingSafeMethodsServlet {
                 TreeNode<PageDecorator> rootPageNode = TreeNodes.newBasicTreeNode(rootPage);
 
             }
-        }
+        }*/
 
 
         //Level-order traversal of tree, rendering nodes as we go
