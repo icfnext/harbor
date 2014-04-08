@@ -15,8 +15,6 @@ import com.citytechinc.cq.library.content.request.ComponentRequest;
                 @Listener(name = "afterinsert", value = "REFRESH_PAGE"),
                 @Listener(name = "afteredit", value = "REFRESH_PARENT"),
                 @Listener(name = "afterdelete", value = "REFRESH_PARENT")
-
-                //refresh parent
         },
         group = ".hidden"
 )
@@ -24,7 +22,6 @@ import com.citytechinc.cq.library.content.request.ComponentRequest;
 public class Tab extends AbstractComponent {
 
     public static final String TYPE = "harbor/components/content/tabs/tab";
-    private String title;
 
     public Tab(ComponentRequest request) {
         this(request.getComponentNode());

@@ -18,6 +18,7 @@ Harbor.Components.RSSFeed = function (jQuery) {
         currentRSSFeedDiv.children().each(function () {
             if ($(this).data("title") === currentTitle) {
                 isCurrentItemInRSSDivFlag = true;
+                return false;
             }
         });
 

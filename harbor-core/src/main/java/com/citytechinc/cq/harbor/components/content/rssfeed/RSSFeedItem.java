@@ -41,17 +41,9 @@ public class RSSFeedItem {
         return pubDate;
     }
 
-    public void setPubDate(String pubDate) {
-        this.pubDate = pubDate;
-    }
-
     @JsonProperty("description")
     public String getDescription() {
         return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     @JsonProperty("HTML")

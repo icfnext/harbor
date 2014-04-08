@@ -7,10 +7,6 @@ public class RSSFeedRenderingStrategy implements ListRenderingStrategy<RSSFeedIt
 
     private static final String ITEM_TITLE_HTML = "<a href=\"%s\">%s</a><small>%s</small><br>%s";
 
-    public RSSFeedRenderingStrategy(ComponentNode componentNode) {
-        //Nothin'
-    }
-
     @Override
     public String renderListItem(RSSFeedItem item) {
         StringBuffer renderingStringBuffer = new StringBuffer();
