@@ -1,6 +1,7 @@
 package com.citytechinc.cq.harbor.components.content.list.nodesearchstrategy.predicatewrappers;
 
 import com.citytechinc.cq.component.annotations.DialogField;
+import com.citytechinc.cq.component.annotations.FieldProperty;
 import com.citytechinc.cq.component.annotations.Option;
 import com.citytechinc.cq.component.annotations.widgets.NumberField;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
@@ -35,7 +36,7 @@ public class QueryParameterConstructionPredicate extends AbstractConstructionPre
 
     private static final String PARAM_ORDER_BY = "orderBy";
     private static final String PARAM_QUERY_ORDER_BY = Predicate.ORDER_BY;
-    private static final String DEFAULT_ORDER_BY = StringUtils.EMPTY;
+    private static final String DEFAULT_ORDER_BY = "nodename";
     @DialogField(
             fieldLabel = "Order By",
             fieldDescription = "Name of JCR property to order results by. Leave blank for no ordering.",
@@ -54,8 +55,8 @@ public class QueryParameterConstructionPredicate extends AbstractConstructionPre
     @Selection(
             type = Selection.SELECT,
             options = {
-                    @Option( text = "Ascending", value = Predicate.SORT_ASCENDING ),
-                    @Option( text = "Descending", value = Predicate.SORT_DESCENDING)
+                    @Option(text = "Ascending", value = Predicate.SORT_ASCENDING),
+                    @Option(text = "Descending", value = Predicate.SORT_DESCENDING)
             }
     )
     private String sortType;
