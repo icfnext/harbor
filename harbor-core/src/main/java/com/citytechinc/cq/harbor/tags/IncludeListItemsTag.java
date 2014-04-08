@@ -14,6 +14,7 @@ import javax.servlet.Servlet;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.TagSupport;
 import java.io.IOException;
 import java.util.HashMap;
@@ -37,8 +38,18 @@ public class IncludeListItemsTag extends TagSupport {
         Map<String, Object> variables = new HashMap<String, Object>();
         variables.put(JSP_VAR_ITEMS, this.items);
 
-        // include the script
-        this.includeScript(variables);
+        // check if script path was provided
+        if(StringUtils.isNotBlank(this.script)) {
+
+            // path provided, include the script
+            this.writeScript(variables);
+
+        } else {
+
+            // script path not provided, just render out each item via its RenderableListItem interface
+            this.writeListItems();
+
+        }
 
         return EVAL_PAGE;
 
@@ -50,7 +61,7 @@ public class IncludeListItemsTag extends TagSupport {
      * @param variables     Map of variables to pass on to the included JSP.
      * @throws JspException
      */
-    private void includeScript(Map<String, Object> variables) throws JspException {
+    private void writeScript(Map<String, Object> variables) throws JspException {
 
         /// get request object
         ServletRequest request = this.pageContext.getRequest();
@@ -129,6 +140,30 @@ public class IncludeListItemsTag extends TagSupport {
 
             // servlet error occurred, throw an error
             throw new JspException("Error while executing script " + absScriptPath, e);
+
+        }
+
+    }
+
+    /**
+     * Write out list items. This function should only be used if a script path has not been provided.
+     */
+    private void writeListItems() throws JspException {
+
+        JspWriter out = this.pageContext.getOut();
+
+        // loop through and write out rendered items
+        for(RenderableListItem item : this.items) {
+
+            try {
+
+                out.write(item.getRenderedItem());
+
+            } catch (IOException e) {
+
+                throw new JspException("Error while attempting to render list items.", e);
+
+            }
 
         }
 
