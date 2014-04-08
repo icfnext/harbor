@@ -1336,3 +1336,7 @@
 .fa-plus-square-o:before {
   content: "\f196";
 }
+
+.fa-bootstrap-slash:before {
+    content: "/\00a0";
+}

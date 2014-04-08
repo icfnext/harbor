@@ -4,7 +4,7 @@ import com.citytechinc.cq.library.content.page.PageDecorator;
 
 import java.util.List;
 
-public interface HomePage extends PageDecorator {
+public interface HomePage extends HierarchicalPage {
 
     public static final String RDF_TYPE = "harbor:HomePage";
 

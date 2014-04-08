@@ -1,6 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="/libs/harbor/components/global.jsp"%>
-<%--<%@taglib prefix="ct" uri="http://www.citytechinc.com/taglibs/cq-library"%>--%>
 <ct:component className="com.citytechinc.cq.harbor.components.content.calltoaction.CallToAction" name="cta"/>
 
 <!-- Call to Action Button -->
@@ -22,7 +21,6 @@
 	</c:otherwise>
 </c:choose>
 
-
 <!-- Modal -->
 <c:if test="${cta.openModal}">
 	<div class="modal fade cta-modal" data-keyboard="false" tabindex="-1"  role="dialog" id="callToActionModal-${cta.id}">
@@ -35,8 +33,7 @@
 		</div>
 	</div>
 
-
-	<c:if test="${isEditMode}">
+	<c:if test="${isEditMode or isDesignMode}">
 		<script type="text/javascript">
 			jQuery( document ).ready( function( $ ) {
 				$( '#callToActionModal${cta.id}' ).on('show.bs.modal', function() {
