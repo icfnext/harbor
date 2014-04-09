@@ -48,9 +48,6 @@ public class Tabs extends AbstractComponent {
     }
 
     public List<Tab> getTabs() {
-        if (this.tabs != null) {
-            return this.tabs;
-        }
         this.tabs = new ArrayList<Tab>();
         Iterator<ComponentNode> componentNodeIterator = request.getComponentNode().getComponentNodes().iterator();
         while (componentNodeIterator.hasNext()) {

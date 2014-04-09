@@ -5,8 +5,6 @@ import com.citytechinc.cq.harbor.components.content.rssfeed.RSSFeedItem;
 import com.citytechinc.cq.harbor.services.RSSFeedGeneratorService;
 import com.citytechinc.cq.library.content.request.ComponentServletRequest;
 import com.citytechinc.cq.library.servlets.AbstractComponentServlet;
-import com.google.common.base.Optional;
-import com.google.common.collect.Lists;
 import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.sling.SlingServlet;
 import org.apache.sling.api.SlingHttpServletResponse;
@@ -22,14 +20,13 @@ import java.util.List;
         methods = "GET")
 public class RSSFeedServlet extends AbstractComponentServlet {
     private static final Logger LOG = LoggerFactory.getLogger(RSSFeedServlet.class);
-    private static String RSS_URL_LIST_PARAMETER_NAME = "rssUrlList";
-    private static String RSS_NUMBER_OF_ITEMS_TO_DISPLAY_PARAMETER_NAME = "numberOfItemsToDisplay";
     @Reference
     private RSSFeedGeneratorService rssFeedGeneratorService;
 
     @Override
     protected final void processGet(final ComponentServletRequest request) throws ServletException, IOException {
         SlingHttpServletResponse slingResponse = request.getSlingResponse();
+        //TODO: move this into ajax call
         RSSFeed rssFeed = new RSSFeed(request.getComponentNode());
         List<String> rssUrlList = rssFeed.getRSSUrlList();
 

@@ -25,10 +25,11 @@
 
 <c:if test="${isEditMode}">
     <script type="text/javascript">
-        (function ($) {
-            $(document).ready(function () {
-                Harbor.Components.Tabs.initTabsSorting("${curtabs.uniqueId}");
-            });
-        })(jQuery);
+        $(document).ready(
+            function ($) {
+                $(document).ready(function () {
+                    Harbor.Components.Tabs.initTabsSorting("${curtabs.uniqueId}");
+                });
+        });
     </script>
 </c:if>

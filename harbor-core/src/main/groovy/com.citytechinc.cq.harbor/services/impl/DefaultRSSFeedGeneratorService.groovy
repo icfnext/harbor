@@ -2,11 +2,8 @@ package com.citytechinc.cq.harbor.services.impl
 
 import com.citytechinc.cq.harbor.components.content.rssfeed.RSSFeedItem
 import com.citytechinc.cq.harbor.services.RSSFeedGeneratorService
-import org.apache.felix.scr.annotations.Activate
 import org.apache.felix.scr.annotations.Component
-import org.apache.felix.scr.annotations.Deactivate
 import org.apache.felix.scr.annotations.Service
-import org.apache.sling.api.resource.LoginException
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.xml.sax.SAXException
@@ -52,23 +49,11 @@ public final class DefaultRSSFeedGeneratorService implements RSSFeedGeneratorSer
 					String map2PubDate = rssFeedItem2.getPubDate();
 					def date1 = dateFormat.parse(map1PubDate);
 					def date2 = dateFormat.parse(map2PubDate);
-					return date1.compareTo(date2);
+					return date2.compareTo(date1);
 				}
 		] as Comparator;
 
-		itemList = itemList.sort(byPubDateComparator).reverse();
-
 		return itemList.take(numberOfItemsToDisplay);
-	}
-
-	@Activate
-	protected void activate(final Map<String, Object> properties) throws LoginException {
-		//Do nothing.
-	}
-
-	@Deactivate
-	protected void deactivate() {
-		//continue to do nothing.
 	}
 
 	private RSSFeedItem getRSSFeedItemFromNode(Node node) {

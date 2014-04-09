@@ -1,6 +1,10 @@
 package com.citytechinc.cq.harbor.components.content.calltoaction;
 
-import com.citytechinc.cq.component.annotations.*;
+//import com.citytechinc.cq.component.annotations.*;
+import com.citytechinc.cq.component.annotations.Component;
+import com.citytechinc.cq.component.annotations.ContentProperty;
+import com.citytechinc.cq.component.annotations.DialogField;
+import com.citytechinc.cq.component.annotations.Option;
 import com.citytechinc.cq.component.annotations.widgets.PathField;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
 import com.citytechinc.cq.harbor.constants.bootstrap.Bootstrap;
@@ -8,6 +12,9 @@ import com.citytechinc.cq.library.components.AbstractComponent;
 import com.citytechinc.cq.library.content.request.ComponentRequest;
 import com.google.common.base.Optional;
 import org.apache.commons.lang.StringUtils;
+import org.apache.sling.api.resource.Resource;
+import org.apache.jackrabbit.JcrConstants;
+
 
 @Component(value = "Call to Action", group = "Harbor", name = "calltoaction",
 		contentAdditionalProperties = {
@@ -24,10 +31,6 @@ public class CallToAction extends AbstractComponent {
 	private static final String OPEN_MODAL = "modal";
 	private static final String LINK_IN_WINDOW = "window";
 	private static final String LINK_IN_CURRENT = "current";
-
-	//These fields govern the generation of instance id's for each component
-	private static int class_id_count = 0;
-	private final int instance_id;
 
     @DialogField(fieldLabel = "Text",
             fieldDescription = "Provide the widget's text", ranking = 0)
@@ -105,13 +108,21 @@ public class CallToAction extends AbstractComponent {
 
 	public CallToAction(ComponentRequest request) {
 		super(request);
-		//Assign current instance an id and update the class id count for the next instance.
-		class_id_count++;
-		instance_id = class_id_count;
 	}
 
-	public int getId(){
-		return instance_id;
+	private String constructUniqueId(Resource r) {
+		StringBuffer uniqueIdBuffer = new StringBuffer();
+		Resource curResource = r;
+
+		while (curResource != null && !curResource.getName().equals(JcrConstants.JCR_CONTENT)) {
+			uniqueIdBuffer.append(curResource.getName());
+			curResource = curResource.getParent();
+		}
+		return uniqueIdBuffer.toString();
+	}
+
+	public String getId(){
+		return this.constructUniqueId(this.getResource());
 	}
 	public String getLinkUrl() {
 		return getLinkBuilder().forPath(getLinkTarget()).build().getHref();
