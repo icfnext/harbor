@@ -28,26 +28,19 @@ public class IncludeListItemsTag extends TagSupport {
 
     private List<? extends RenderableListItem> items;
 
-    private static final String DEFAULT_JSP_VAR_ITEMS = "items";
-    private String itemsVar;
+    private static final String DEFAULT_JSP_VAR_ITEM = "item";
+    private String itemVar;
 
     private String script;
 
     @Override
     public int doEndTag() throws JspException {
 
-        // figure out if items var has been set
-        String varName = StringUtils.isNotBlank(this.itemsVar) ? this.itemsVar : DEFAULT_JSP_VAR_ITEMS;
-
-        // set up map of variables that will be passed into the script
-        Map<String, Object> variables = new HashMap<String, Object>();
-        variables.put(varName, this.items);
-
         // check if script path was provided
         if(StringUtils.isNotBlank(this.script)) {
 
             // path provided, include the script
-            this.writeScript(variables);
+            this.writeScript();
 
         } else {
 
@@ -63,31 +56,21 @@ public class IncludeListItemsTag extends TagSupport {
     /**
      * Include a rendered JSP page given at path provided.
      *
-     * @param variables     Map of variables to pass on to the included JSP.
      * @throws JspException
      */
-    private void writeScript(Map<String, Object> variables) throws JspException {
+    private void writeScript() throws JspException {
 
         /// get request object
-        ServletRequest request = this.pageContext.getRequest();
-
-        // put all variables into the request
-        for(Map.Entry<String, Object> entry : variables.entrySet()) {
-
-            request.setAttribute(entry.getKey(), entry.getValue());
-
-        }
+        ServletRequest pageContextRequest = this.pageContext.getRequest();
 
         // get variables necessary to render and pass on jsp
-        SlingBindings bindings = (SlingBindings) request.getAttribute(SlingBindings.class.getName());
+        SlingBindings bindings = (SlingBindings) pageContextRequest.getAttribute(SlingBindings.class.getName());
         ResourceResolver resourceResolver = bindings.getRequest().getResourceResolver();
         SlingScriptHelper scriptHelper = bindings.getSling();
         ServletResolver servletResolver = scriptHelper.getService(ServletResolver.class);
 
-        // resolve script path
+        // resolve absolute script path
         String absScriptPath = StringUtils.EMPTY;
-
-        // check if path is absolute or relative
         if (!this.script.startsWith("/")) {
 
             // this is a relative path, figure out what the absolute path is
@@ -114,37 +97,46 @@ public class IncludeListItemsTag extends TagSupport {
 
         }
 
-        // get resolved jsp
+        // get resolved jsp, render it
         Servlet servlet = servletResolver.resolveServlet(resourceResolver, absScriptPath);
-        if (servlet == null) {
+        if (servlet != null) {
 
-            // could not find jsp, throw an error
-            throw new JspException("Could not find script " + absScriptPath);
+            try {
 
-        }
+                // figure out if items var has been set
+                String varName = StringUtils.isNotBlank(this.itemVar) ? this.itemVar : DEFAULT_JSP_VAR_ITEM;
 
-        try {
+                // loop through and render one script per JSP
+                for(RenderableListItem item : this.items) {
 
-            // put rendering in response
-            SlingHttpServletResponse response = new JspSlingHttpServletResponseWrapper(this.pageContext);
-            servlet.service(this.pageContext.getRequest(), response);
+                    // put item variable into request
+                    pageContextRequest.setAttribute(varName, item);
 
-            // remove all variables from request
-            for(String key : variables.keySet()) {
+                    // put rendering in response
+                    SlingHttpServletResponse response = new JspSlingHttpServletResponseWrapper(this.pageContext);
+                    servlet.service(pageContextRequest, response);
 
-                request.removeAttribute(key);
+                    // remove item variable from request
+                    pageContextRequest.removeAttribute(varName);
+
+                }
+
+            } catch (ServletException e) {
+
+                // servlet error occurred, throw an error
+                throw new JspException("Error while executing script " + absScriptPath, e);
+
+            } catch (IOException e) {
+
+                // servlet error occurred, throw an error
+                throw new JspException("Error while executing script " + absScriptPath, e);
 
             }
 
-        } catch (ServletException e) {
+        } else {
 
-            // servlet error occurred, throw an error
-            throw new JspException("Error while executing script " + absScriptPath, e);
-
-        } catch (IOException e) {
-
-            // servlet error occurred, throw an error
-            throw new JspException("Error while executing script " + absScriptPath, e);
+            // could not find jsp, throw an error
+            throw new JspException("Could not find script " + absScriptPath);
 
         }
 
@@ -184,18 +176,18 @@ public class IncludeListItemsTag extends TagSupport {
     }
 
     /**
-     * @param itemsVar  Name of variable that items will be accessible through in given JSP. This is optional, and will
+     * @param itemVar  Name of variable that each item will be accessible through in given JSP. This is optional, and will
      *                      default to 'items' if not provided.
      */
-    public void setItemsVar(String itemsVar) {
+    public void setItemVar(String itemVar) {
 
-        this.itemsVar = itemsVar;
+        this.itemVar = itemVar;
 
     }
 
     /**
      * @param script    Absolute or relative path to JSP to render. Relative paths must be relative to current script
-     *                      location.
+     *                      location. This JSP will be rendered once per item passed in through 'items' attribute.
      */
     public void setScript(String script) {
 
