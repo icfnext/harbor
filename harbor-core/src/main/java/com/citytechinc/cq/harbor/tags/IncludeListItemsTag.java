@@ -22,21 +22,26 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * JSP tag that takes a list of RenderableListItems and renders them with given JSP script.
+ * JSP tag that takes a list of {@link com.citytechinc.cq.harbor.components.content.list.RenderableListItem} and renders them with given JSP script.
  */
 public class IncludeListItemsTag extends TagSupport {
 
-    private static final String JSP_VAR_ITEMS = "items";
     private List<? extends RenderableListItem> items;
+
+    private static final String DEFAULT_JSP_VAR_ITEMS = "items";
+    private String itemsVar;
 
     private String script;
 
     @Override
     public int doEndTag() throws JspException {
 
+        // figure out if items var has been set
+        String varName = StringUtils.isNotBlank(this.itemsVar) ? this.itemsVar : DEFAULT_JSP_VAR_ITEMS;
+
         // set up map of variables that will be passed into the script
         Map<String, Object> variables = new HashMap<String, Object>();
-        variables.put(JSP_VAR_ITEMS, this.items);
+        variables.put(varName, this.items);
 
         // check if script path was provided
         if(StringUtils.isNotBlank(this.script)) {
@@ -169,12 +174,29 @@ public class IncludeListItemsTag extends TagSupport {
 
     }
 
+    /**
+     * @param items List of items to render in the script. List items must extend {@link com.citytechinc.cq.harbor.components.content.list.RenderableListItem}.
+     */
     public void setItems(List<? extends RenderableListItem> items) {
 
         this.items = items;
 
     }
 
+    /**
+     * @param itemsVar  Name of variable that items will be accessible through in given JSP. This is optional, and will
+     *                      default to 'items' if not provided.
+     */
+    public void setItemsVar(String itemsVar) {
+
+        this.itemsVar = itemsVar;
+
+    }
+
+    /**
+     * @param script    Absolute or relative path to JSP to render. Relative paths must be relative to current script
+     *                      location.
+     */
     public void setScript(String script) {
 
         this.script = script;

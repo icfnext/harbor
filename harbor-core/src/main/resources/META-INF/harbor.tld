@@ -19,6 +19,12 @@
         </attribute>
 
         <attribute>
+            <name>itemsVar</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+
+        <attribute>
             <name>script</name>
             <required>false</required>
             <rtexprvalue>true</rtexprvalue>
