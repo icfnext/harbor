@@ -4,5 +4,7 @@
         xmlns:cq="http://www.day.com/jcr/cq/1.0"
         xmlns:jcr="http://www.jcp.org/jcr/1.0"
         jcr:primaryType="cq:ClientLibraryFolder"
-        embed="[harbor.authoroverrides,harbor.jqueryui,harbor.widgets]"
-        categories="harbor.author-common"/>
+        embed="harbor.authoroverrides"
+        dependencies="[harbor.namespace,harbor.widgets]"
+        categories="harbor.author-common"
+        runModes="author" />

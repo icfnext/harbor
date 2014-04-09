@@ -14,7 +14,5 @@
                 <div class="${curRow.gridSize}${curcolumn.colSize}" name="${curcolumn.name}">
             </c:otherwise>
         </c:choose>
-            <cq:include path="${curcolumn.name}" resourceType="harbor/components/content/column" />
-        </div>
     </c:forEach>
 </div>

@@ -2,4 +2,3 @@
 
 [harbor:SectionLandingPage] > cq:PageContent
 [harbor:HomePage] > harbor:SectionLandingPage
-
