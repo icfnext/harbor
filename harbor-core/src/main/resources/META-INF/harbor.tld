@@ -4,7 +4,7 @@
         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee web-jsptaglibrary_2_0.xsd">
 
     <tlib-version>1.0</tlib-version>
-    <short-name>ctharbor</short-name>
+    <short-name>harbor</short-name>
     <uri>http://www.citytechinc.com/taglibs/harbor</uri>
 
     <tag>
