@@ -14,6 +14,7 @@
 	<name>CITYTECH, Inc. Harbor Core</name>
 
 	<build>
+        <testSourceDirectory>src/test/groovy</testSourceDirectory>
         <resources>
             <resource>
                 <directory>src/main/resources/SLING-INF</directory>
@@ -61,7 +62,26 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
+                <version>2.16</version>
+                <configuration>
+                    <includes>
+                        <include>**/*Spec*</include>
+                    </includes>
+                </configuration>
 			</plugin>
+            <plugin>
+                <groupId>org.codehaus.groovy</groupId>
+                <artifactId>groovy-eclipse-compiler</artifactId>
+                <version>2.8.0-01</version>
+                <extensions>true</extensions>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.codehaus.groovy</groupId>
+                        <artifactId>groovy-eclipse-batch</artifactId>
+                        <version>2.1.8-01</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
 		</plugins>
 	</build>
 
@@ -186,5 +206,12 @@
 			<groupId>com.citytechinc.cq.cq-component-plugin</groupId>
 			<artifactId>cq-component-annotations</artifactId>
 		</dependency>
+
+        <dependency>
+            <groupId>com.citytechinc.aem.prosper</groupId>
+            <artifactId>prosper</artifactId>
+            <version>0.9.0</version>
+            <scope>test</scope>
+        </dependency>
 	</dependencies>
 </project>
