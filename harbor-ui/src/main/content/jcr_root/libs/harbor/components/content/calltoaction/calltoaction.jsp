@@ -33,13 +33,13 @@
 		</div>
 	</div>
 
-	<c:if test="${isEditMode or isDesignMode}">
+	<c:if test="${isEditMode || isDesignMode}">
 		<script type="text/javascript">
 			jQuery( document ).ready( function( $ ) {
-				$( '#callToActionModal${cta.id}' ).on('show.bs.modal', function() {
+				$( '#callToActionModal-${cta.id}' ).on('show.bs.modal', function() {
 					Harbor.Components.editables().changeEditableContext( '${cta.path}/container-par-${cta.id}' );
 				} );
-				$( '#callToActionModal${cta.id}' ).on('hide.bs.modal', function() {
+				$( '#callToActionModal-${cta.id}' ).on('hide.bs.modal', function() {
 					Harbor.Components.editables().resetEditableContext();
 				} );
 			} );
