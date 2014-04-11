@@ -20,7 +20,6 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.Ext.Panel , {
             Set up request factory, using the content path of the component.
          */
         var parentDialog = this.findParentByType("dialog");
-        var contentPath  = parentDialog.responseScope.path;
 
         this.buttonBar = new function(){
 
@@ -99,23 +98,21 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.Ext.Panel , {
             var tid;
 
             /*
-            Columns start with "column", lets filter them
-            out of data, and into a list
+                Columns start with "column", lets filter them
+                out of the data object, and into a list
             */
-            //build a hash of columns
             for (var prop in response){
                 if (prop.search("column") != -1){
                     tcolumnName = prop;
                     tcolumnData = response[prop];
                     tid = parentContext.columnCount.toString();
 
-                    //var html = parentContext.getColHtmlString(tid, {"colClass":parentContext.getSizeForColumn(tcolumnData)})
                     var col_hash = parentContext.createColData(tid, {
                         colSize: parseInt(tcolumnData["colSize"]) || 1,
                         maxColSize: parseInt(tcolumnData["maxColSize"]) || null,
                         class: tcolumnData["class"] || null,
                         canAddColumn: tcolumnData["canAddColumn"] || null,
-                        name: tcolumnName  //IMPORTANT
+                        name: tcolumnName
                     }, null);
 
                     col_list.push(col_hash);
@@ -125,16 +122,12 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.Ext.Panel , {
             //if non-empty,
             if(col_list.length > 0){
 
-                //zero out column container to replace the placeholder with the actual columns
-                //var col_container = $("#"+parentContext.containerPanel.id).find("." + parentContext.columnContainerClass);
-                //$(col_container).html("");
-
                 for(var i = 0; i < col_list.length; i++){
                     var col = col_list[i];
 
                     /*
-                    Invoke add column with the column data that was returned via ajax.
-                        */
+                        Invoke add column with the column data that was returned via ajax.
+                    */
                     parentContext.addColumn(parentContext, {
                         data: col.data
                     });
@@ -152,8 +145,6 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.Ext.Panel , {
         });
 
         this.doLayout();
-
-        //var dialog = this.findParentByType("dialog");
 
         parentDialog.on("beforesubmit", function(e){
 
@@ -194,8 +185,6 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.Ext.Panel , {
 
     addColumn : function( parentContext , options ){
         options = options || {};
-
-        console.log(options);
 
         if( this.columnCount < 12 && this.canAddAnotherColumn ){
 
@@ -264,7 +253,6 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.Ext.Panel , {
 
         if( this.columnCount != 1 ){
 
-
             var id = lastCol.data("column-id");
             this.columnManifest[ id ].data = {
                 colSize      : 0,
@@ -273,7 +261,6 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.Ext.Panel , {
                 canAddColumn : false,
                 name         : this.columnManifest[ id ].data.name
             }
-
 
             lastCol.remove();
             this.columnCount --;
@@ -320,13 +307,11 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.Ext.Panel , {
         var col         = this.columnManifest[ parseInt(columnID) ];
         var oldColClass = col.data.class;
 
-        console.log(col.data);
 
         if(col.data.canAddColumn && col.data.colSize != 12){
             col.data.colSize = col.data.colSize + 1;
             col.data.class   = this.columnClassPrefix + col.data.colSize;
 
-            console.log(col.data);
 
             if( col.data.colSize > 1 && col.data.colSize < 4 ){
                 col.colHtml.removeClass( oldColClass ).addClass( col.data.class ).find( ".x-small" ).removeClass( "x-small" ).addClass( "small" ).addClass( "btn-group" );
@@ -346,13 +331,11 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.Ext.Panel , {
         var col         = this.columnManifest[ parseInt(columnID) ];
         var oldColClass = col.data.class;
 
-        console.log(col.data);
 
         if(col.data.colSize != 1){
             col.data.colSize =  col.data.colSize - 1;
             col.data.class   = this.columnClassPrefix + col.data.colSize;
 
-            console.log(col.data);
 
             col.colHtml.removeClass( oldColClass ).addClass( col.data.class )
 
@@ -406,12 +389,6 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.Ext.Panel , {
             return item.name.indexOf("column-id-") != -1;
         }
 
-        /*
-        var new_items = dialog.form.items.filterBy(columnPredicate);
-        dialog.form.items.clear();
-        //dialog.form.items.addAll(new_items);
-        dialog.form.items = new_items;*/
-
         dialog.formPanel.items.each(function(item/*, index, length*/) {
             if(item.xtype == "hidden"){
                 if (columnPredicate(item)) {
@@ -437,7 +414,6 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.Ext.Panel , {
         }
 
         dialog.addHidden( hiddenFieldsObject );
-
 
     },
 

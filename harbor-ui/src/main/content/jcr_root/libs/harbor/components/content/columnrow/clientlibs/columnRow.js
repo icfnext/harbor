@@ -1,5 +1,4 @@
-Harbor.Components.ColumnRow = function(jQuery){
-    var columnWidthProperty = "colClass";
+Harbor.Components.ColumnRow = function(){
     var nameHint = "column";
     var column = {
         'sling:resourceType' : 'harbor/components/content/column',
@@ -72,23 +71,11 @@ Harbor.Components.ColumnRow = function(jQuery){
                         obj[colName] = true;
                         return obj;
                     }
-                },
-                createAddColumnPayload: function(colData){
-                    //extend column data with sling stuff
-
-                },
-
-                createModifyColumnPayload: function(colData){
-
                 }
             }
         }(),
 
-        getBaseColumnData: function(){
-            return column;
-        },
-
         defaultNewColumnName: ":" + nameHint
 
     }
-}(jQuery);
+}();
