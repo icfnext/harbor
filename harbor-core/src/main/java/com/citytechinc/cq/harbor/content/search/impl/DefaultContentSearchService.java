@@ -24,7 +24,7 @@ import org.apache.felix.scr.annotations.Service;
 @Service
 public class DefaultContentSearchService implements ContentSearchService {
 
-    private static final String QUERY_TEMPLATE = "select excerpt(.) from nt:base where jcr:path like '/content/%' and contains(*, 'searchForText')";
+    private static final String QUERY_TEMPLATE = "select excerpt(.) from nt:base where jcr:path like '/content/%' and contains(*, 'searchForText') order by jcr:score desc";
 
     @Override
     public PageOfResults search(Session session, Set<String> searchPaths, String searchForText,
