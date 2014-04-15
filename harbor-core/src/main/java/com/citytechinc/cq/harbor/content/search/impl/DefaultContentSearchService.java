@@ -164,7 +164,7 @@ public class DefaultContentSearchService implements ContentSearchService {
     }
 
     /**
-     * Converts the excerpt from ISO-8859-1 to UTF-8 to fix strange
+     * Transcodes the String excerpt from ISO-8859-1 to UTF-8 to fix strange
      * characters showing up in the text when the excerpt is displayed on a web
      * page.
      */
