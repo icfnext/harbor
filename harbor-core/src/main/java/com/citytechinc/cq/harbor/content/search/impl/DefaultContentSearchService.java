@@ -4,6 +4,7 @@ import com.citytechinc.cq.harbor.content.search.ContentHit;
 import com.citytechinc.cq.harbor.content.search.ContentSearchService;
 import com.citytechinc.cq.harbor.content.search.PageOfResults;
 import com.google.common.base.Optional;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
@@ -67,8 +68,9 @@ public class DefaultContentSearchService implements ContentSearchService {
                     continue;
                 }
                 String excerpt = row.getValue("rep:excerpt(.)").getString();
-                String excerptWithHighlightingFixed = fixExcerptHighlighting(searchForText, excerpt);
-                hits.add(new ContentHit(parentPageNode, excerptWithHighlightingFixed));
+                excerpt = fixExcerptHighlighting(searchForText, excerpt);
+                excerpt = transcodeToUtf8(excerpt);
+                hits.add(new ContentHit(parentPageNode, excerpt));
             }
         }
         return new ArrayList<ContentHit>(hits);
@@ -157,6 +159,21 @@ public class DefaultContentSearchService implements ContentSearchService {
             }
             m.appendTail(sb);
             excerpt = sb.toString();
+        }
+        return excerpt;
+    }
+
+    /**
+     * Converts the excerpt from ISO-8859-1 to UTF-8 to fix strange
+     * characters showing up in the text when the excerpt is displayed on a web
+     * page.
+     */
+    private String transcodeToUtf8(String excerpt) throws RuntimeException {
+        try {
+            byte[] utf8 = new String(excerpt.getBytes(), "ISO-8859-1").getBytes("UTF-8");
+            excerpt = new String(utf8);
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
         }
         return excerpt;
     }
