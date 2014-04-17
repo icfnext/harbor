@@ -1,8 +1,8 @@
-package com.citytechinc.cq.harbor.content.search.impl;
+package com.citytechinc.cq.harbor.services.search.page.impl;
 
-import com.citytechinc.cq.harbor.content.search.PageHit;
-import com.citytechinc.cq.harbor.content.search.PageTextSearch;
-import com.citytechinc.cq.harbor.content.search.PageOfResults;
+import com.citytechinc.cq.harbor.services.search.page.PageHit;
+import com.citytechinc.cq.harbor.services.search.page.PageTextSearchService;
+import com.citytechinc.cq.harbor.services.search.page.PageOfResults;
 import com.google.common.base.Optional;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -27,7 +27,7 @@ import java.util.regex.Pattern;
 
 @Component
 @Service
-public class DefaultPageTextSearch implements PageTextSearch {
+public class DefaultPageTextSearchService implements PageTextSearchService {
 
     private static final String QUERY_TEMPLATE = "select excerpt(.) from nt:base where jcr:path like '/content/%' and contains(*, 'searchForText') order by jcr:score desc";
 

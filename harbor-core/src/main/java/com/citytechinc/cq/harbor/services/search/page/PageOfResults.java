@@ -1,4 +1,4 @@
-package com.citytechinc.cq.harbor.content.search;
+package com.citytechinc.cq.harbor.services.search.page;
 
 import java.util.List;
 
