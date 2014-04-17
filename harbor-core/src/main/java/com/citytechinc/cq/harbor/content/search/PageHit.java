@@ -5,22 +5,26 @@ import javax.jcr.RepositoryException;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-public class ContentHit {
+public class PageHit {
 
-    private final Node node;
+    private final Node pageNode;
     private final String excerpt;
 
-    public ContentHit(Node node, String excerpt) {
-        this.node = node;
+    public PageHit(Node pageNode, String excerpt) {
+        this.pageNode = pageNode;
         this.excerpt = excerpt;
     }
 
-    public String getPath() {
+    public String getPagePath() {
         try {
-            return node.getPath();
+            return pageNode.getPath();
         } catch (RepositoryException e) {
             throw new RuntimeException(e);
         }
+    }
+    
+    public Node getPageNode() {
+        return pageNode;
     }
 
     public String getExcerpt() {
@@ -38,16 +42,16 @@ public class ContentHit {
         if (obj.getClass() != getClass()) {
             return false;
         }
-        ContentHit rhs = (ContentHit) obj;
+        PageHit rhs = (PageHit) obj;
         return new EqualsBuilder()
-                .append(getPath(), rhs.getPath())
+                .append(getPagePath(), rhs.getPagePath())
                 .isEquals();
     }
 
     @Override
     public int hashCode() {
         return new HashCodeBuilder(17, 37).
-                append(getPath()).
+                append(getPagePath()).
                 toHashCode();
     }
 }

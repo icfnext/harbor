@@ -1,7 +1,7 @@
 package com.citytechinc.cq.harbor.content.search.impl;
 
-import com.citytechinc.cq.harbor.content.search.ContentHit;
-import com.citytechinc.cq.harbor.content.search.ContentSearchService;
+import com.citytechinc.cq.harbor.content.search.PageHit;
+import com.citytechinc.cq.harbor.content.search.PageTextSearch;
 import com.citytechinc.cq.harbor.content.search.PageOfResults;
 import com.google.common.base.Optional;
 import java.io.UnsupportedEncodingException;
@@ -27,7 +27,7 @@ import java.util.regex.Pattern;
 
 @Component
 @Service
-public class DefaultContentSearchService implements ContentSearchService {
+public class DefaultPageTextSearch implements PageTextSearch {
 
     private static final String QUERY_TEMPLATE = "select excerpt(.) from nt:base where jcr:path like '/content/%' and contains(*, 'searchForText') order by jcr:score desc";
 
@@ -39,7 +39,7 @@ public class DefaultContentSearchService implements ContentSearchService {
 
         try {
             QueryResult result = executeQuery(searchForText, session);
-            List<ContentHit> hits = extractHits(result, searchPaths, searchForText);
+            List<PageHit> hits = extractHits(result, searchPaths, searchForText);
             PageOfResults results = getRequestedPage(hits, requestedPageNbr, pageSize);
             return results;
         } catch (RepositoryException e) {
@@ -55,9 +55,9 @@ public class DefaultContentSearchService implements ContentSearchService {
         return result;
     }
 
-    private List<ContentHit> extractHits(QueryResult result, Set<String> searchPaths, String searchForText) throws RepositoryException {
+    private List<PageHit> extractHits(QueryResult result, Set<String> searchPaths, String searchForText) throws RepositoryException {
         /* use a linked hash set to bounce duplicates while maintaining sort order */
-        Set<ContentHit> hits = new LinkedHashSet<ContentHit>();
+        Set<PageHit> hits = new LinkedHashSet<PageHit>();
         for (RowIterator it = result.getRows(); it.hasNext();) {
             Row row = it.nextRow();
             Node node = row.getNode();
@@ -70,10 +70,10 @@ public class DefaultContentSearchService implements ContentSearchService {
                 String excerpt = row.getValue("rep:excerpt(.)").getString();
                 excerpt = fixExcerptHighlighting(searchForText, excerpt);
                 excerpt = transcodeToUtf8(excerpt);
-                hits.add(new ContentHit(parentPageNode, excerpt));
+                hits.add(new PageHit(parentPageNode, excerpt));
             }
         }
-        return new ArrayList<ContentHit>(hits);
+        return new ArrayList<PageHit>(hits);
     }
 
     private Optional<Node> getNearestParentPageNode(Node node) throws RepositoryException {
@@ -103,7 +103,7 @@ public class DefaultContentSearchService implements ContentSearchService {
         return true;
     }
 
-    private PageOfResults getRequestedPage(List<ContentHit> hits, int requestedPageNbr, int pageSize) {
+    private PageOfResults getRequestedPage(List<PageHit> hits, int requestedPageNbr, int pageSize) {
         int totalNbrOfPages = calculateTotalNbrOfPages(hits, pageSize);
         if (totalNbrOfPages == 0) {
             int pageNbr = 0;
@@ -118,16 +118,16 @@ public class DefaultContentSearchService implements ContentSearchService {
 
         if (requestedPageNbr == totalNbrOfPages) {
             int indexOfLastHitForRequestedPage = hits.size() - 1;
-            List<ContentHit> pageOfHits = hits.subList(indexOfFirstHitForRequestedPage, indexOfLastHitForRequestedPage + 1);
+            List<PageHit> pageOfHits = hits.subList(indexOfFirstHitForRequestedPage, indexOfLastHitForRequestedPage + 1);
             return new PageOfResults(requestedPageNbr, totalNbrOfPages, pageOfHits);
         }
 
         int indexOfLastHitForRequestedPage = requestedPageNbr * pageSize - 1;
-        List<ContentHit> pageOfHits = hits.subList(indexOfFirstHitForRequestedPage, indexOfLastHitForRequestedPage + 1);
+        List<PageHit> pageOfHits = hits.subList(indexOfFirstHitForRequestedPage, indexOfLastHitForRequestedPage + 1);
         return new PageOfResults(requestedPageNbr, totalNbrOfPages, pageOfHits);
     }
 
-    private int calculateTotalNbrOfPages(List<ContentHit> hits, int pageSize) {
+    private int calculateTotalNbrOfPages(List<PageHit> hits, int pageSize) {
         if (hits.isEmpty()) {
             return 0;
         }
@@ -138,6 +138,12 @@ public class DefaultContentSearchService implements ContentSearchService {
         return totalNbrOfPages;
     }
 
+    /**
+     * Removes and then reapplies the highlighting (wrapping with <strong> tags)
+     * of the search terms found within the excerpt Strings returned by the jcr
+     * query. This is being done because the jcr query often incorrectly
+     * highlights blocks of text other than the search terms.
+     */
     private String fixExcerptHighlighting(String searchForText, String excerpt) {
         excerpt = excerpt.replaceAll("<strong>", "");
         excerpt = excerpt.replaceAll("</strong>", "");
