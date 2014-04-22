@@ -41,9 +41,4 @@ public class Breadcrumb extends AbstractListComponent<BreadcrumbItem> {
     protected ListRenderingStrategy<BreadcrumbItem> getListRenderingStrategy() {
         return breadcrumbItemListRenderingStrategy;
     }
-
-    @Override
-    public Boolean getIsReversed() {
-        return false;
-    }
 }

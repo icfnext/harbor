@@ -9,7 +9,6 @@ import com.citytechinc.cq.library.content.request.ComponentRequest;
 
 public class BreadcrumbItemRenderingStrategy implements ListRenderingStrategy<BreadcrumbItem> {
 
-
     private static final String DEFAULT_DELIMITER = "fa-bootstrap-slash";
     private static final String END_ANCHOR_HTML = "</a>";
     private final String ICON_HTML = "<i class='fa %s'></i>";
@@ -23,18 +22,23 @@ public class BreadcrumbItemRenderingStrategy implements ListRenderingStrategy<Br
     @Override
     public String renderListItem(BreadcrumbItem item) {
         StringBuffer itemStringBuffer = new StringBuffer();
+
         if (!item.isRoot())
-            itemStringBuffer.append(getDelimiter());
+            itemStringBuffer.append(getDelimiterHtml());
+
         if (!item.isCurrentPage())
             itemStringBuffer.append(String.format(START_ANCHOR_HTML, item.getPage().getPath()));
+
         if (!item.isHideIcon())
             itemStringBuffer.append(String.format(ICON_HTML, item.getPageIcon()));
+
         if (!item.isHideTitle())
             itemStringBuffer.append(item.getTitle());
+
         if (!item.isCurrentPage())
             itemStringBuffer.append(END_ANCHOR_HTML);
-        return itemStringBuffer.toString();
 
+        return itemStringBuffer.toString();
     }
 
     /**
@@ -58,7 +62,12 @@ public class BreadcrumbItemRenderingStrategy implements ListRenderingStrategy<Br
         return currentComponentNode.get("htmlDelimiter", "");
     }
 
-    public String getDelimiter() {
+    /**
+     * Returns the current delimiter.
+     * If getHtmlDelimiter is not null, it will be returned. Otherwise, the getIconDelimiter will be formatted for display in HTML, and displayed.
+     * @return
+     */
+    public String getDelimiterHtml() {
         if (!getHtmlDelimiter().isEmpty()) {
             return getHtmlDelimiter();
         } else {
@@ -66,6 +75,5 @@ public class BreadcrumbItemRenderingStrategy implements ListRenderingStrategy<Br
             return iconDelimiterHtml;
         }
     }
-
 
 }
