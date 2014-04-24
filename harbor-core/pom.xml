@@ -17,6 +17,11 @@
         <testSourceDirectory>src/test/groovy</testSourceDirectory>
         <resources>
             <resource>
+                <directory>src/main/resources/META-INF</directory>
+                <targetPath>META-INF</targetPath>
+                <filtering>true</filtering>
+            </resource>
+            <resource>
                 <directory>src/main/resources/SLING-INF</directory>
                 <targetPath>SLING-INF</targetPath>
                 <filtering>true</filtering>
@@ -154,6 +159,10 @@
 			<groupId>org.apache.sling</groupId>
 			<artifactId>org.apache.sling.jcr.resource</artifactId>
 		</dependency>
+        <dependency>
+            <groupId>org.apache.sling</groupId>
+            <artifactId>org.apache.sling.scripting.jsp</artifactId>
+        </dependency>
 		<dependency>
 			<groupId>org.apache.sling</groupId>
 			<artifactId>org.apache.sling.scripting.jsp.taglib</artifactId>
