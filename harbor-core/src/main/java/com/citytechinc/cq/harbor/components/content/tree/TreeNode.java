@@ -7,6 +7,4 @@ public interface TreeNode <T> {
     public T getValue();
 
     public List<TreeNode<T>> getChildren();
-
-
 }

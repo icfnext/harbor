@@ -22,10 +22,8 @@ public class PageTree extends AbstractTreeComponent <PageDecorator>{
 
     public PageTree(ComponentRequest request) {
         super(request);
-
         childPageTreeConstructionStrategy = new ChildPageTreeConstructionStrategy(request.getComponentNode());
         childPageTreeRenderingStrategy = new ChildPageTreeRenderingStrategy(request.getComponentNode());
-
     }
 
     @Override
