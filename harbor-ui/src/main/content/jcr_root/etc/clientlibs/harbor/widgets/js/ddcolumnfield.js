@@ -16,9 +16,6 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.Ext.Panel , {
         Harbor.Widgets.DdColumnField.superclass.initComponent.call(this);
         var parentContext = this;
 
-        /*
-            Set up request factory, using the content path of the component.
-         */
         var parentDialog = this.findParentByType("dialog");
 
         this.buttonBar = new function(){
@@ -75,7 +72,6 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.Ext.Panel , {
 
 
         parentDialog.on("loadcontent", function(dialog, records, opts, success){
-            console.log("load content event fired")
             var _this = this;
             var d = dialog;
             var r = records;
@@ -210,7 +206,7 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.Ext.Panel , {
                 parentContext.reduceColumn( id );
 
                 e.preventDefault();
-            } )
+            } );
 
             colContainer.append( col );
 
@@ -220,7 +216,7 @@ Harbor.Widgets.DdColumnField = CQ.Ext.extend ( CQ.Ext.Panel , {
                 maxColSize   : options.data.maxColSize || this.getMaxColSize( this.columnCount ),
                 canAddColumn : options.data.canAddColumn || true,
                 name         : this.columnPathNameBase + this.columnCount.toString()
-            }
+            };
 
             //This will execute if a column name was pulled from the JCR
             if(options.data.name){

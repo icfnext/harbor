@@ -31,7 +31,7 @@ import java.util.List;
 public class ColumnRow  extends AbstractComponent {
     private final List<Column> columns;
 
-    @DialogField(xtype="ddcolumnfield")
+    @DialogField(xtype="ddcolumnfield", ranking = 1)
     private String placeholderColumnConfiguration;
 
     public ColumnRow(ComponentRequest request) {
@@ -48,7 +48,9 @@ public class ColumnRow  extends AbstractComponent {
 
     @DialogField(xtype="selection",
             fieldLabel="Grid Options",
-            fieldDescription="Bootstrap Grid Options")
+            fieldDescription="Bootstrap Grid Options",
+            ranking = 2
+    )
     @Selection(type = Selection.SELECT, options = {
             @Option(text = "Extra Small Devices (Phones)", value = Bootstrap.GRID_EXTRA_SMALL, qtip = "Never Stacked"),
             @Option(text = "Small Devices (Tablets)", value = Bootstrap.GRID_SMALL, qtip = "From Stacked to Horizontal at the @screen-sm-min bootstrap breakpoint"),
@@ -63,7 +65,7 @@ public class ColumnRow  extends AbstractComponent {
         return this.columns;
     }
 
-    @DialogField
+    @DialogField(ranking = 3)
     @DialogFieldSet
     public Classification getClassification() {
         return new Classification(this.request);
