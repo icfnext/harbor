@@ -107,27 +107,6 @@ Harbor.Overrides.SearchTree = function(){
                     else{
                         return false;
                     }
-
-
-/*
-                    //this still needs to happen regardless if we found the components node in content or not
-                    if(obj){
-                        */
-/*
-                         Here the node's "search scope" is adjusted after successfully indexing into
-                         the target content object, as the stuff we are looking for is buried
-                         inside the content object. The structure of the content object will mirror the edge connections
-                         in our search tree when a design exists for a particular cell.
-                         *//*
-
-                        //This will set the content level of *every node* where obj was successfully grabbed
-                        node.content = obj;
-                        //still return false, as we didn't actually find obj[name]
-                    }
-*/
-
-                    //return flag;
-
                 },
                 searchResultBuilder: function(node){
                     var obj = node.content[name];

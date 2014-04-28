@@ -10,21 +10,11 @@ $(function () {
     }
 });
 
-//timing test
-/*(function(){
-    var func = CQ.wcm.Design.prototype.getStyleProperty
-    CQ.wcm.Design.prototype.getStyleProperty = function(cell, name){
-    console.time("LINEAR SEARCH TIMER");
-    func(cell, name);
-    console.timeEnd("LINEAR SEARCH TIMER");
-    }
-})();*/
 /*
 Commence actual overrides of CQ machinery
 */
 (function (){
     CQ.wcm.Design.prototype.getStyleProperty = function (cell, name) {
-        console.time("TREE SEARCH");
         if (this.content == null) {
             return null;
         }
@@ -45,7 +35,6 @@ Commence actual overrides of CQ machinery
     var style =  Harbor.Overrides.SearchTree.DFsearch(searchTree, {
         searchConfiguration:  Harbor.Overrides.SearchTree.defaultSearchConfig(content, name)
         });
-    console.timeEnd("TREE SEARCH");
     return style.pop();
     }
 })();
