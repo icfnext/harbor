@@ -65,7 +65,7 @@ public class ColumnRow  extends AbstractComponent {
         return this.columns;
     }
 
-    @DialogField(ranking = 3)
+    @DialogField(ranking = 3 )
     @DialogFieldSet
     public Classification getClassification() {
         return new Classification(this.request);
