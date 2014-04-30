@@ -61,7 +61,7 @@ public final class DefaultRSSFeedGeneratorService implements RSSFeedGeneratorSer
 		String nodeLink = node.link.text();
 		String nodePubDate = node.pubDate.text();
 		String nodeDescription = node.description.text();
-		String HTML = "<li class=\"list-group-item\" data-title=\"${nodeTitle}\">Title: ${nodeTitle}<br>Link: ${nodeLink}<br>Pub Date: ${nodePubDate}<br>Description: ${nodeDescription}</li>"
+		String HTML = "<a href='${nodeLink}' class=\"list-group-item\" data-title=\"${nodeTitle}\"><h4 class='list-group-item-heading'>${nodeTitle}</h4><p class='list-group-item-text'>${nodePubDate}</p><p class='list-group-item-text'>${nodeDescription}</p></a>"
 
 		return new RSSFeedItem(nodeTitle, nodeLink, nodePubDate, nodeDescription, HTML);
 	}
