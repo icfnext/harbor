@@ -1,13 +1,16 @@
-package com.citytechinc.cq.harbor.content.search.impl;
+package com.citytechinc.cq.harbor.services.search.page.impl;
 
-import com.citytechinc.cq.harbor.content.search.ContentHit;
-import com.citytechinc.cq.harbor.content.search.ContentSearchService;
-import com.citytechinc.cq.harbor.content.search.PageOfResults;
+import com.citytechinc.cq.harbor.services.search.page.PageHit;
+import com.citytechinc.cq.harbor.services.search.page.PageTextSearchService;
+import com.citytechinc.cq.harbor.services.search.page.PageOfResults;
 import com.google.common.base.Optional;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.HashSet;
 import java.util.Collections;
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
@@ -19,19 +22,24 @@ import javax.jcr.query.Row;
 import javax.jcr.query.RowIterator;
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Service;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Component
 @Service
-public class DefaultContentSearchService implements ContentSearchService {
+public class DefaultPageTextSearchService implements PageTextSearchService {
 
-    private static final String QUERY_TEMPLATE = "select excerpt(.) from nt:base where jcr:path like '/content/%' and contains(*, 'searchForText')";
+    private static final String QUERY_TEMPLATE = "select excerpt(.) from nt:base where jcr:path like '/content/%' and contains(*, 'searchForText') order by jcr:score desc";
 
     @Override
     public PageOfResults search(Session session, Set<String> searchPaths, String searchForText,
             int requestedPageNbr, int pageSize) {
+
+        searchForText = searchForText.trim();
+
         try {
             QueryResult result = executeQuery(searchForText, session);
-            List<ContentHit> hits = extractHits(result, searchPaths);
+            List<PageHit> hits = extractHits(result, searchPaths, searchForText);
             PageOfResults results = getRequestedPage(hits, requestedPageNbr, pageSize);
             return results;
         } catch (RepositoryException e) {
@@ -47,9 +55,9 @@ public class DefaultContentSearchService implements ContentSearchService {
         return result;
     }
 
-    private List<ContentHit> extractHits(QueryResult result, Set<String> searchPaths) throws RepositoryException {
+    private List<PageHit> extractHits(QueryResult result, Set<String> searchPaths, String searchForText) throws RepositoryException {
         /* use a linked hash set to bounce duplicates while maintaining sort order */
-        Set<ContentHit> hits = new LinkedHashSet<ContentHit>();
+        Set<PageHit> hits = new LinkedHashSet<PageHit>();
         for (RowIterator it = result.getRows(); it.hasNext();) {
             Row row = it.nextRow();
             Node node = row.getNode();
@@ -60,10 +68,12 @@ public class DefaultContentSearchService implements ContentSearchService {
                     continue;
                 }
                 String excerpt = row.getValue("rep:excerpt(.)").getString();
-                hits.add(new ContentHit(parentPageNode, excerpt));
+                excerpt = fixExcerptHighlighting(searchForText, excerpt);
+                excerpt = transcodeToUtf8(excerpt);
+                hits.add(new PageHit(parentPageNode, excerpt));
             }
         }
-        return new ArrayList<ContentHit>(hits);
+        return new ArrayList<PageHit>(hits);
     }
 
     private Optional<Node> getNearestParentPageNode(Node node) throws RepositoryException {
@@ -93,7 +103,7 @@ public class DefaultContentSearchService implements ContentSearchService {
         return true;
     }
 
-    private PageOfResults getRequestedPage(List<ContentHit> hits, int requestedPageNbr, int pageSize) {
+    private PageOfResults getRequestedPage(List<PageHit> hits, int requestedPageNbr, int pageSize) {
         int totalNbrOfPages = calculateTotalNbrOfPages(hits, pageSize);
         if (totalNbrOfPages == 0) {
             int pageNbr = 0;
@@ -108,17 +118,16 @@ public class DefaultContentSearchService implements ContentSearchService {
 
         if (requestedPageNbr == totalNbrOfPages) {
             int indexOfLastHitForRequestedPage = hits.size() - 1;
-            List<ContentHit> pageOfHits = hits.subList(indexOfFirstHitForRequestedPage, indexOfLastHitForRequestedPage + 1);
+            List<PageHit> pageOfHits = hits.subList(indexOfFirstHitForRequestedPage, indexOfLastHitForRequestedPage + 1);
             return new PageOfResults(requestedPageNbr, totalNbrOfPages, pageOfHits);
         }
 
         int indexOfLastHitForRequestedPage = requestedPageNbr * pageSize - 1;
-        List<ContentHit> pageOfHits = hits.subList(indexOfFirstHitForRequestedPage, indexOfLastHitForRequestedPage + 1);
+        List<PageHit> pageOfHits = hits.subList(indexOfFirstHitForRequestedPage, indexOfLastHitForRequestedPage + 1);
         return new PageOfResults(requestedPageNbr, totalNbrOfPages, pageOfHits);
-
     }
 
-    private int calculateTotalNbrOfPages(List<ContentHit> hits, int pageSize) {
+    private int calculateTotalNbrOfPages(List<PageHit> hits, int pageSize) {
         if (hits.isEmpty()) {
             return 0;
         }
@@ -127,5 +136,51 @@ public class DefaultContentSearchService implements ContentSearchService {
             totalNbrOfPages++;
         }
         return totalNbrOfPages;
+    }
+
+    /**
+     * Removes and then reapplies the highlighting (wrapping with <strong> tags)
+     * of the search terms found within the excerpt Strings returned by the jcr
+     * query. This is being done because the jcr query often incorrectly
+     * highlights blocks of text other than the search terms.
+     */
+    private String fixExcerptHighlighting(String searchForText, String excerpt) {
+        excerpt = excerpt.replaceAll("<strong>", "");
+        excerpt = excerpt.replaceAll("</strong>", "");
+
+        /* split up the terms in the search string based on them having 1 or more spaces between them */
+        String[] searchTerms = searchForText.split(" +");
+        /* add to set to eliminate duplicate search terms */
+        Set<String> searchTermsSet = new HashSet<String>();
+        searchTermsSet.addAll(Arrays.asList(searchTerms));
+
+        for (String searchTerm : searchTermsSet) {
+
+            Pattern p = Pattern.compile("(?i)" + searchTerm);
+            Matcher m = p.matcher(excerpt);
+            StringBuffer sb = new StringBuffer();
+            while (m.find()) {
+                String foundSearchTerm = m.group();
+                m.appendReplacement(sb, "<strong>" + foundSearchTerm + "</strong>");
+            }
+            m.appendTail(sb);
+            excerpt = sb.toString();
+        }
+        return excerpt;
+    }
+
+    /**
+     * Transcodes the String excerpt from ISO-8859-1 to UTF-8 to fix strange
+     * characters showing up in the text when the excerpt is displayed on a web
+     * page.
+     */
+    private String transcodeToUtf8(String excerpt) throws RuntimeException {
+        try {
+            byte[] utf8 = new String(excerpt.getBytes(), "ISO-8859-1").getBytes("UTF-8");
+            excerpt = new String(utf8);
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        }
+        return excerpt;
     }
 }

@@ -1,4 +1,4 @@
-package com.citytechinc.cq.harbor.content.search;
+package com.citytechinc.cq.harbor.services.search.page;
 
 import java.util.List;
 
@@ -6,9 +6,9 @@ public class PageOfResults {
 
     private final int pageNbr;
     private final int totalNbrOfPages;
-    private final List<ContentHit> pageOfHits;
+    private final List<PageHit> pageOfHits;
 
-    public PageOfResults(int pageNbr, int totalNbrOfPages, List<ContentHit> pageOfHits) {
+    public PageOfResults(int pageNbr, int totalNbrOfPages, List<PageHit> pageOfHits) {
         this.pageNbr = pageNbr;
         this.totalNbrOfPages = totalNbrOfPages;
         this.pageOfHits = pageOfHits;
@@ -22,7 +22,7 @@ public class PageOfResults {
         return totalNbrOfPages;
     }
 
-    public List<ContentHit> getPageOfHits() {
+    public List<PageHit> getPageOfHits() {
         return pageOfHits;
     }
 

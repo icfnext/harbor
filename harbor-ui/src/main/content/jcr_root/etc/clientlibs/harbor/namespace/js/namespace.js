@@ -1,6 +1,7 @@
-Harbor = function(){
+this.Harbor = function(){
     return {
         Components: {},
-        Overrides: {}
+        Overrides: {},
+        Widgets: {}
     }
 }();

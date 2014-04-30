@@ -1,68 +1,81 @@
-Harbor.Components.ColumnRow = function(jQuery){
+Harbor.Components.ColumnRow = function(){
+    var nameHint = "column";
     var column = {
         'sling:resourceType' : 'harbor/components/content/column',
-        'jcr:primaryType' : 'nt:unstructured',
-        ':nameHint' : 'column'
+        'jcr:primaryType' : 'nt:unstructured'
     };
 
-    var sendColumnAddPost = function(path, data, success){
-        return jQuery.post(
-            path, column, success
-        ).then(function(data){
-            return data;
-        });
-    }
-
-
     return {
-        addColumn: function(editableContext){
-            sendColumnAddPost(editableContext.path + '/*', column,
-                function( data ) { editableContext.refreshSelf() });
-        },
+        manifestUtil: function(){
 
-        addMultipleColumns: function(editableContext){
-            //Prompt User for value.
-            var value = prompt("Enter the number of columns to add.", "1");
-            value = parseInt(value, 10); //value, radix
+            return {
+                predicates: {
+                    isToBeAdded: function(data){
+                        if(data.isNewColumn && data.colSize != 0){
+                            return true;
+                        }
+                        return false;
+                    },
+                    isToBeRemoved: function(data){
+                        return data.colSize == 0 && data.name; //data.name is undefined for newly added cols
 
-            if (value > 12 || isNaN(value)){
-                value = 1;
+                    },
+                    isToBeModified: function(data){
+                        return data.colSize != 0 && this.isToBeAdded(data) == false;
+                    }
+                },
+
+                generateHiddenFieldObject: function(colData){
+                    /*
+                        Determine if colData is to be added,
+                        modified, or removed, and create the appropriate
+                        data dictionary that can be inserted as a hidden field
+                    */
+                    var dataPrefix = './' + colData.name + '/';
+
+                    if (this.predicates.isToBeAdded(colData)){
+                        //sling type, and node type
+                        var resourceTypeKey = dataPrefix + 'sling:resourceType';
+                        var primaryTypeKey = dataPrefix + 'jcr:primaryType';
+                        var addColData = {};
+                        addColData[resourceTypeKey] = 'harbor/components/content/column';
+                        addColData[primaryTypeKey]  = 'nt:unstructured';
+
+                        //Adds the colData passed to the function into the addColData object
+                        for (var prop in colData) {
+                            if (colData.hasOwnProperty(prop)){
+                                //Add props from data to newColumnBase
+                                if(prop != "isNewColumn"){   //we cn skip serializing this
+                                    addColData[dataPrefix + prop] = colData[prop];
+                                }
+                            }
+                        }
+                        return addColData;
+                    }
+
+                    else if(this.predicates.isToBeModified(colData)){
+                        var newData = {};
+                        for (var prop in colData) {
+                            if (colData.hasOwnProperty(prop)){
+                                //Add props from data to newColumnBase
+                                newData[dataPrefix + prop] = colData[prop];
+                            }
+                        }
+                        return newData;
+                    }
+
+                    else if(this.predicates.isToBeRemoved(colData)){
+
+                        var colName = './' + colData.name + "@Delete";
+                        var obj = {}
+                        obj[colName] = true;
+                        return obj;
+                    }
+                }
             }
+        }(),
 
-            //init column array for the promise .then chain loop
-            var postData = [];
-            for(var i = 0; i < value; i++){
-                postData.push(column);
-            }
+        defaultNewColumnName: ":" + nameHint
 
-            var def = $.Deferred();
-            var def_promise = def.promise();
-
-            $.each(postData, function(i, post){
-                //build a .then chain with the promise
-                def_promise = def_promise.then(function(){
-                    return sendColumnAddPost(editableContext.path + '/*', post);
-                });
-            });
-
-            //final then
-            def_promise.then(function(){
-                editableContext.refreshSelf();
-            })
-
-            def.resolve();
-        },
-
-        getRowContents: function(path){
-            $.ajax({
-                type: "GET",
-                url: path + ".1.json"
-            }).done(function(data){
-                return data;
-            }).fail(function(){
-                return {};
-            })
-
-        }
     }
-}(jQuery);
+}();

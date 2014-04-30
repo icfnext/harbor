@@ -21,11 +21,6 @@ import java.util.List;
         contentAdditionalProperties = {
                 @ContentProperty(name="dependencies", value="harbor.components.content.columnrow")
         },
-        actionConfigs = {
-                @ActionConfig(xtype = "tbseparator"),
-                @ActionConfig(text = "Add Column", handler = "function(){ Harbor.Components.ColumnRow.addColumn(this) }"),
-                @ActionConfig(text = "Add n Columns", handler = "function(){ Harbor.Components.ColumnRow.addMultipleColumns(this) }")
-        },
         listeners = {
                 @Listener(name = "afterinsert", value = "REFRESH_PAGE")
         },
@@ -35,6 +30,9 @@ import java.util.List;
 @AutoInstantiate( instanceName = "ColumnRow" )
 public class ColumnRow  extends AbstractComponent {
     private final List<Column> columns;
+
+    @DialogField(xtype="ddcolumnfield", ranking = 1)
+    private String placeholderColumnConfiguration;
 
     public ColumnRow(ComponentRequest request) {
         super(request);
@@ -50,7 +48,9 @@ public class ColumnRow  extends AbstractComponent {
 
     @DialogField(xtype="selection",
             fieldLabel="Grid Options",
-            fieldDescription="Bootstrap Grid Options")
+            fieldDescription="Bootstrap Grid Options",
+            ranking = 2
+    )
     @Selection(type = Selection.SELECT, options = {
             @Option(text = "Extra Small Devices (Phones)", value = Bootstrap.GRID_EXTRA_SMALL, qtip = "Never Stacked"),
             @Option(text = "Small Devices (Tablets)", value = Bootstrap.GRID_SMALL, qtip = "From Stacked to Horizontal at the @screen-sm-min bootstrap breakpoint"),
@@ -65,7 +65,7 @@ public class ColumnRow  extends AbstractComponent {
         return this.columns;
     }
 
-    @DialogField
+    @DialogField(ranking = 3 )
     @DialogFieldSet
     public Classification getClassification() {
         return new Classification(this.request);
