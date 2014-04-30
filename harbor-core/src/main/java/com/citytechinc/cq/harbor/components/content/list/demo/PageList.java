@@ -4,16 +4,18 @@ import com.citytechinc.cq.component.annotations.Component;
 import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.widgets.DialogFieldSet;
 import com.citytechinc.cq.harbor.components.content.list.AbstractListComponent;
-import com.citytechinc.cq.harbor.components.content.list.ListConstructionStrategy;
-import com.citytechinc.cq.harbor.components.content.list.ListRenderingStrategy;
+import com.citytechinc.cq.harbor.lists.construction.ListConstructionStrategy;
+import com.citytechinc.cq.harbor.lists.rendering.ListRenderingStrategy;
 import com.citytechinc.cq.harbor.constants.lists.ListConstants;
 import com.citytechinc.cq.library.components.annotations.AutoInstantiate;
 import com.citytechinc.cq.library.content.page.PageDecorator;
 import com.citytechinc.cq.library.content.request.ComponentRequest;
 
+import java.util.List;
+
 @Component( value = "Demo Page List", group = "Harbor Lists", resourceSuperType = AbstractListComponent.RESOURCE_TYPE, name = "lists/demopagelist" )
 @AutoInstantiate( instanceName = ListConstants.LIST_PAGE_CONTEXT_NAME )
-public class PageList extends AbstractListComponent<PageDecorator> {
+public class PageList extends AbstractListComponent<PageDecorator, List<LinkablePageRenderingStrategy.LinkablePage>> {
 
     @DialogField
     @DialogFieldSet( title = "List Construction" )
@@ -36,7 +38,7 @@ public class PageList extends AbstractListComponent<PageDecorator> {
     }
 
     @Override
-    protected ListRenderingStrategy<PageDecorator> getListRenderingStrategy() {
+    protected ListRenderingStrategy<PageDecorator, List<LinkablePageRenderingStrategy.LinkablePage>> getListRenderingStrategy() {
         return renderingStrategy;
     }
 

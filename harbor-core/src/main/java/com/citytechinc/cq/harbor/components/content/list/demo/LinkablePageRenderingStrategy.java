@@ -2,13 +2,15 @@ package com.citytechinc.cq.harbor.components.content.list.demo;
 
 import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.Option;
-import com.citytechinc.cq.component.annotations.widgets.MultiField;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
-import com.citytechinc.cq.harbor.components.content.list.ListRenderingStrategy;
+import com.citytechinc.cq.harbor.lists.rendering.ListRenderingStrategy;
 import com.citytechinc.cq.library.content.node.ComponentNode;
 import com.citytechinc.cq.library.content.page.PageDecorator;
+import com.google.common.collect.Lists;
 
-public class LinkablePageRenderingStrategy implements ListRenderingStrategy<PageDecorator> {
+import java.util.List;
+
+public class LinkablePageRenderingStrategy implements ListRenderingStrategy<PageDecorator, List<LinkablePageRenderingStrategy.LinkablePage>> {
 
     @DialogField( fieldLabel = "Render as Link?" )
     @Selection( type = Selection.CHECKBOX, options = { @Option( text = "", value = "true" ) } )
@@ -18,26 +20,38 @@ public class LinkablePageRenderingStrategy implements ListRenderingStrategy<Page
         renderAsLink = componentNode.get("renderAsLink", false);
     }
 
-    @Override
-    public String renderListItem(PageDecorator item) {
-        StringBuffer renderingStringBuffer = new StringBuffer();
-
-        if (renderAsLink) {
-            renderingStringBuffer.append("<a href=\"" + item.getHref() + "\">");
-        }
-
-        if (item.getPageTitleOptional().isPresent()) {
-            renderingStringBuffer.append(item.getPageTitle());
-        }
-        else {
-            renderingStringBuffer.append(item.getTitle());
-        }
-
-        if (renderAsLink) {
-            renderingStringBuffer.append("</a>");
-        }
-
-        return renderingStringBuffer.toString();
+    public Boolean getRenderAsLink() {
+        return renderAsLink;
     }
 
+    @Override
+    public List<LinkablePage> toRenderableList(Iterable<PageDecorator> itemIterable) {
+        List<LinkablePage> retList = Lists.newArrayList();
+
+        for (PageDecorator currentPageDecorator : itemIterable) {
+            retList.add(new LinkablePage(currentPageDecorator, getRenderAsLink()));
+        }
+
+        return retList;
+    }
+
+    public static class LinkablePage {
+
+        private final PageDecorator pageDecorator;
+        private final Boolean renderAsLink;
+
+        public LinkablePage(PageDecorator pageDecorator, Boolean renderAsLink) {
+            this.pageDecorator = pageDecorator;
+            this.renderAsLink = renderAsLink;
+        }
+
+        public PageDecorator getPageDecorator() {
+            return pageDecorator;
+        }
+
+        public Boolean getRenderAsLink() {
+            return renderAsLink;
+        }
+
+    }
 }
