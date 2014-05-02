@@ -5,6 +5,7 @@ import com.citytechinc.cq.component.annotations.ContentProperty;
 import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.widgets.DialogFieldSet;
 import com.citytechinc.cq.harbor.components.content.list.AbstractListComponent;
+import com.citytechinc.cq.harbor.components.content.page.TrailPage;
 import com.citytechinc.cq.harbor.content.page.lists.construction.PageTrailListConstructionStrategy;
 import com.citytechinc.cq.harbor.lists.construction.ListConstructionStrategy;
 import com.citytechinc.cq.harbor.lists.rendering.ListRenderingStrategy;
@@ -16,7 +17,7 @@ import com.citytechinc.cq.library.content.request.ComponentRequest;
                 @ContentProperty(name = "dependencies", value = "[harbor.fontawesome,harbor.bootstrap]"),
         } )
 @AutoInstantiate( instanceName = "breadcrumb" )
-public class Breadcrumb extends AbstractListComponent<BreadcrumbPage, BreadcrumbTrail> {
+public class Breadcrumb extends AbstractListComponent<TrailPage, BreadcrumbTrail> {
 
     @DialogField(ranking = 2)
     @DialogFieldSet(border = false, collapsible = false)
@@ -33,12 +34,12 @@ public class Breadcrumb extends AbstractListComponent<BreadcrumbPage, Breadcrumb
     }
 
     @Override
-    protected ListConstructionStrategy<BreadcrumbPage> getListConstructionStrategy() {
+    protected ListConstructionStrategy<TrailPage> getListConstructionStrategy() {
         return breadcrumbItemListConstructionStrategy;
     }
 
     @Override
-    protected ListRenderingStrategy<BreadcrumbPage, BreadcrumbTrail> getListRenderingStrategy() {
+    protected ListRenderingStrategy<TrailPage, BreadcrumbTrail> getListRenderingStrategy() {
         return breadcrumbItemListRenderingStrategy;
     }
 

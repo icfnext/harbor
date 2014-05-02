@@ -3,7 +3,7 @@ package com.citytechinc.cq.harbor.content.page.lists.construction;
 import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.Option;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
-import com.citytechinc.cq.harbor.components.content.breadcrumb.BreadcrumbPage;
+import com.citytechinc.cq.harbor.components.content.page.TrailPage;
 import com.citytechinc.cq.harbor.content.page.impl.PagePredicates;
 import com.citytechinc.cq.harbor.lists.construction.ListConstructionStrategy;
 import com.citytechinc.cq.harbor.content.page.HomePage;
@@ -15,11 +15,11 @@ import com.google.common.collect.Lists;
 
 import java.util.List;
 
-public class PageTrailListConstructionStrategy implements ListConstructionStrategy<BreadcrumbPage> {
+public class PageTrailListConstructionStrategy implements ListConstructionStrategy<TrailPage> {
 
     private final ComponentRequest request;
 
-    private List<BreadcrumbPage> constructedList;
+    private List<TrailPage> constructedList;
 
     private PageDecorator currentPage;
 
@@ -47,21 +47,21 @@ public class PageTrailListConstructionStrategy implements ListConstructionStrate
     }
 
     @Override
-    public List<BreadcrumbPage> construct() {
+    public List<TrailPage> construct() {
 
         if (constructedList == null) {
 
-            List<BreadcrumbPage> listUnderConstruction = Lists.newArrayList();
+            List<TrailPage> listUnderConstruction = Lists.newArrayList();
 
             PageDecorator currentPageInTrail = getCurrentPage();
 
             if (isIncludeCurrentPageInTrail()) {
 
                 if (getRootPagePredicate().apply(currentPageInTrail)) {
-                    listUnderConstruction.add(BreadcrumbPage.forRootCurrentPage(currentPageInTrail));
+                    listUnderConstruction.add(TrailPage.forRootCurrentPage(currentPageInTrail));
                 }
                 else {
-                    listUnderConstruction.add(BreadcrumbPage.forRootCurrentPage(currentPageInTrail));
+                    listUnderConstruction.add(TrailPage.forRootCurrentPage(currentPageInTrail));
                 }
 
             }
@@ -69,12 +69,12 @@ public class PageTrailListConstructionStrategy implements ListConstructionStrate
             currentPageInTrail = currentPageInTrail.getParent();
 
             while (currentPageInTrail != null && !isPageRoot(currentPageInTrail)) {
-                listUnderConstruction.add(BreadcrumbPage.forCurrentPage(currentPageInTrail));
+                listUnderConstruction.add(TrailPage.forCurrentPage(currentPageInTrail));
                 currentPageInTrail = currentPageInTrail.getParent();
             }
 
             if (currentPageInTrail != null && isIncludeRootPageInTrail()) {
-                listUnderConstruction.add(BreadcrumbPage.forRootPage(currentPageInTrail));
+                listUnderConstruction.add(TrailPage.forRootPage(currentPageInTrail));
             }
 
             constructedList = Lists.reverse(listUnderConstruction);

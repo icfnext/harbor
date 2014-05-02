@@ -4,6 +4,7 @@ import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.Option;
 import com.citytechinc.cq.component.annotations.widgets.DialogFieldSet;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
+import com.citytechinc.cq.harbor.components.content.page.TrailPage;
 import com.citytechinc.cq.harbor.lists.rendering.ListRenderingStrategy;
 import com.citytechinc.cq.harbor.constants.components.ComponentConstants;
 import com.citytechinc.cq.library.content.node.ComponentNode;
@@ -13,7 +14,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 
-public class BreadcrumbItemRenderingStrategy implements ListRenderingStrategy<BreadcrumbPage, BreadcrumbTrail> {
+public class BreadcrumbItemRenderingStrategy implements ListRenderingStrategy<TrailPage, BreadcrumbTrail> {
 
     private static final String DEFAULT_DELIMITER = "fa-bootstrap-slash";
 
@@ -43,11 +44,11 @@ public class BreadcrumbItemRenderingStrategy implements ListRenderingStrategy<Br
     }
 
     @Override
-    public BreadcrumbTrail toRenderableList(Iterable<BreadcrumbPage> itemIterable) {
+    public BreadcrumbTrail toRenderableList(Iterable<TrailPage> itemIterable) {
         if (breadcrumbTrail == null) {
             List<BreadcrumbItem> renderableList = Lists.newArrayList();
 
-            for (BreadcrumbPage currentBreadcrumbPage : itemIterable) {
+            for (TrailPage currentBreadcrumbPage : itemIterable) {
                 if (currentBreadcrumbPage.isRoot()) {
                     renderableList.add(new BreadcrumbItem(currentBreadcrumbPage, getRootItemConfiguration()));
                 }

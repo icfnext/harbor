@@ -1,13 +1,14 @@
 package com.citytechinc.cq.harbor.components.content.breadcrumb;
 
+import com.citytechinc.cq.harbor.components.content.page.TrailPage;
 import com.citytechinc.cq.harbor.content.page.HierarchicalPage;
 
 public class BreadcrumbItem {
 
-    private final BreadcrumbPage page;
+    private final TrailPage page;
     private final BreadcrumbItemConfiguration itemConfiguration;
 
-    public BreadcrumbItem(BreadcrumbPage page, BreadcrumbItemConfiguration breadcrumbItemConfiguration) {
+    public BreadcrumbItem(TrailPage page, BreadcrumbItemConfiguration breadcrumbItemConfiguration) {
         this.page = page;
         this.itemConfiguration = breadcrumbItemConfiguration;
     }
@@ -28,7 +29,7 @@ public class BreadcrumbItem {
         return page.getTitle();
     }
 
-    public BreadcrumbPage getPage() {
+    public TrailPage getPage() {
         return page;
     }
 
