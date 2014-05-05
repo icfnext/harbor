@@ -2,7 +2,7 @@ package com.citytechinc.cq.harbor.components.content.list.demo;
 
 import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.widgets.PathField;
-import com.citytechinc.cq.harbor.components.content.list.ListConstructionStrategy;
+import com.citytechinc.cq.harbor.lists.construction.ListConstructionStrategy;
 import com.citytechinc.cq.library.content.node.ComponentNode;
 import com.citytechinc.cq.library.content.page.PageDecorator;
 import com.citytechinc.cq.library.content.page.PageManagerDecorator;
@@ -31,7 +31,7 @@ public class ChildPageListConstructionStrategy implements ListConstructionStrate
     }
 
     @Override
-    public List<PageDecorator> constructList() {
+    public List<PageDecorator> construct() {
 
         if (startPageOptional.isPresent()) {
             return startPageOptional.get().getChildren();
