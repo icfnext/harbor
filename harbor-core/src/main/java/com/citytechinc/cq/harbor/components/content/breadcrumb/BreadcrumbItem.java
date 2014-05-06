@@ -1,38 +1,24 @@
 package com.citytechinc.cq.harbor.components.content.breadcrumb;
 
+import com.citytechinc.cq.harbor.components.content.page.TrailPage;
 import com.citytechinc.cq.harbor.content.page.HierarchicalPage;
-import com.google.common.base.Optional;
 
 public class BreadcrumbItem {
 
-    private HierarchicalPage page;
-    private Optional<BreadcrumbItemConfigNode> breadcrumbItemConfigNode;
-    private boolean isRoot = false;
-    private boolean isCurrentPage = false;
+    private final TrailPage page;
+    private final BreadcrumbItemConfiguration itemConfiguration;
 
-    public BreadcrumbItem(HierarchicalPage page, Optional<BreadcrumbItemConfigNode> breadcrumbItemConfigNode) {
+    public BreadcrumbItem(TrailPage page, BreadcrumbItemConfiguration breadcrumbItemConfiguration) {
         this.page = page;
-        this.breadcrumbItemConfigNode = breadcrumbItemConfigNode;
-    }
-
-    public Optional<BreadcrumbItemConfigNode> getBreadcrumbItemConfigNode() {
-        return breadcrumbItemConfigNode;
+        this.itemConfiguration = breadcrumbItemConfiguration;
     }
 
     public boolean isHideIcon() {
-        if (breadcrumbItemConfigNode.isPresent()) {
-            return breadcrumbItemConfigNode.get().getHideIcon();
-        } else {
-            return false;
-        }
+        return itemConfiguration.getHideIcon();
     }
 
     public boolean isHideTitle() {
-        if (breadcrumbItemConfigNode.isPresent()) {
-            return breadcrumbItemConfigNode.get().getHideTitle();
-        } else {
-            return false;
-        }
+        return itemConfiguration.getHideTitle();
     }
 
     public String getHref() {
@@ -43,27 +29,20 @@ public class BreadcrumbItem {
         return page.getTitle();
     }
 
-    public HierarchicalPage getPage() {
+    public TrailPage getPage() {
         return page;
     }
 
     public String getPageIcon() {
-        return getPage().getPageIcon();
-    }
-
-    public void setIsRoot(boolean isRoot){
-        this.isRoot = isRoot;
+        return getPage().adaptTo(HierarchicalPage.class).getPageIcon();
     }
 
     public boolean isRoot(){
-        return isRoot;
+        return page.isRoot();
     }
 
     public boolean isCurrentPage() {
-        return isCurrentPage;
+        return page.isCurrent();
     }
 
-    public void setIsCurrentPage(boolean currentPage) {
-        isCurrentPage = currentPage;
-    }
 }

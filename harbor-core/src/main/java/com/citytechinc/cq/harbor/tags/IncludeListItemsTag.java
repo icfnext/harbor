@@ -1,6 +1,5 @@
 package com.citytechinc.cq.harbor.tags;
 
-import com.citytechinc.cq.harbor.components.content.list.RenderableListItem;
 import org.apache.commons.lang.StringUtils;
 import org.apache.sling.api.SlingHttpServletResponse;
 import org.apache.sling.api.resource.ResourceResolver;
@@ -8,6 +7,7 @@ import org.apache.sling.api.resource.ResourceUtil;
 import org.apache.sling.api.scripting.SlingBindings;
 import org.apache.sling.api.scripting.SlingScriptHelper;
 import org.apache.sling.api.servlets.ServletResolver;
+import com.citytechinc.cq.harbor.lists.rendering.RenderableItem;
 import org.apache.sling.scripting.jsp.util.JspSlingHttpServletResponseWrapper;
 
 import javax.servlet.Servlet;
@@ -17,16 +17,17 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.TagSupport;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 
 /**
- * JSP tag that takes a list of {@link com.citytechinc.cq.harbor.components.content.list.RenderableListItem} and renders them with given JSP script.
+ * JSP tag that takes a list of items and renders each using a specified Script.  If no script is specified then we check whether
+ * the item is an instance of {@link com.citytechinc.cq.harbor.lists.rendering.RenderableItem}.  If it is then we produce a rendering given
+ * the implementation in the RenderableItem class.
  */
 public class IncludeListItemsTag extends TagSupport {
 
-    private List<? extends RenderableListItem> items;
+    private List<?> items;
 
     private static final String DEFAULT_JSP_VAR_ITEM = "item";
     private String itemVar;
@@ -44,7 +45,7 @@ public class IncludeListItemsTag extends TagSupport {
 
         } else {
 
-            // script path not provided, just render out each item via its RenderableListItem interface
+            // script path not provided, just render out each item via its RenderableItem interface
             this.writeListItems();
 
         }
@@ -107,7 +108,7 @@ public class IncludeListItemsTag extends TagSupport {
                 String varName = StringUtils.isNotBlank(this.itemVar) ? this.itemVar : DEFAULT_JSP_VAR_ITEM;
 
                 // loop through and render one script per JSP
-                for(RenderableListItem item : this.items) {
+                for(Object item : this.items) {
 
                     // put item variable into request
                     pageContextRequest.setAttribute(varName, item);
@@ -150,26 +151,31 @@ public class IncludeListItemsTag extends TagSupport {
         JspWriter out = this.pageContext.getOut();
 
         // loop through and write out rendered items
-        for(RenderableListItem item : this.items) {
+        for(Object item : this.items) {
 
-            try {
+            if (item instanceof RenderableItem) {
+                RenderableItem renderableItem = (RenderableItem) item;
 
-                out.write(item.getRenderedItem());
+                try {
 
-            } catch (IOException e) {
+                    out.write(renderableItem.render());
 
-                throw new JspException("Error while attempting to render list items.", e);
+                } catch (IOException e) {
 
+                    throw new JspException("Error while attempting to render list items.", e);
+
+                }
             }
+
 
         }
 
     }
 
     /**
-     * @param items List of items to render in the script. List items must extend {@link com.citytechinc.cq.harbor.components.content.list.RenderableListItem}.
+     * @param items List of items to render.
      */
-    public void setItems(List<? extends RenderableListItem> items) {
+    public void setItems(List<?> items) {
 
         this.items = items;
 

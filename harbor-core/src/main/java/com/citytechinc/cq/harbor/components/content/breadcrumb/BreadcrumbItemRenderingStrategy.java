@@ -1,44 +1,88 @@
 package com.citytechinc.cq.harbor.components.content.breadcrumb;
 
 import com.citytechinc.cq.component.annotations.DialogField;
+import com.citytechinc.cq.component.annotations.Option;
+import com.citytechinc.cq.component.annotations.widgets.DialogFieldSet;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
-import com.citytechinc.cq.harbor.components.content.list.ListRenderingStrategy;
+import com.citytechinc.cq.harbor.components.content.page.TrailPage;
+import com.citytechinc.cq.harbor.lists.rendering.ListRenderingStrategy;
 import com.citytechinc.cq.harbor.constants.components.ComponentConstants;
 import com.citytechinc.cq.library.content.node.ComponentNode;
 import com.citytechinc.cq.library.content.request.ComponentRequest;
+import com.google.common.collect.Lists;
+import org.apache.commons.lang3.StringUtils;
 
-public class BreadcrumbItemRenderingStrategy implements ListRenderingStrategy<BreadcrumbItem> {
+import java.util.List;
+
+public class BreadcrumbItemRenderingStrategy implements ListRenderingStrategy<TrailPage, BreadcrumbTrail> {
 
     private static final String DEFAULT_DELIMITER = "fa-bootstrap-slash";
-    private static final String END_ANCHOR_HTML = "</a>";
-    private final String ICON_HTML = "<i class='fa %s'></i>";
-    private final String START_ANCHOR_HTML = "<a href=\"%s\">";
-    private final ComponentNode currentComponentNode;
+
+    public static final String ROOT_ITEM_CONFIGURATION_PREFIX = "rootItem";
+    public static final String INTERMEDIATE_ITEM_CONFIGURATION_PREFIX = "intermediateItem";
+    public static final String CURRENT_ITEM_CONFIGURATION_PREFIX = "currentItem";
+
+    private final ComponentNode componentNode;
+
+    private Boolean renderAsLink;
+
+    private String iconDelimiter;
+    private String htmlDelimiter;
+
+    private BreadcrumbItemConfiguration rootItemConfiguration;
+    private BreadcrumbItemConfiguration intermediateItemConfiguration;
+    private BreadcrumbItemConfiguration currentItemConfiguration;
+
+    private BreadcrumbTrail breadcrumbTrail;
 
     public BreadcrumbItemRenderingStrategy(ComponentRequest componentRequest) {
-        currentComponentNode = componentRequest.getComponentNode();
+        this.componentNode = componentRequest.getComponentNode();
+    }
+
+    public BreadcrumbItemRenderingStrategy(ComponentNode componentNode) {
+        this.componentNode = componentNode;
     }
 
     @Override
-    public String renderListItem(BreadcrumbItem item) {
-        StringBuffer itemStringBuffer = new StringBuffer();
+    public BreadcrumbTrail toRenderableList(Iterable<TrailPage> itemIterable) {
+        if (breadcrumbTrail == null) {
+            List<BreadcrumbItem> renderableList = Lists.newArrayList();
 
-        if (!item.isRoot())
-            itemStringBuffer.append(getDelimiterHtml());
+            for (TrailPage currentBreadcrumbPage : itemIterable) {
+                if (currentBreadcrumbPage.isRoot()) {
+                    renderableList.add(new BreadcrumbItem(currentBreadcrumbPage, getRootItemConfiguration()));
+                }
+                else if (currentBreadcrumbPage.isCurrent()) {
+                    renderableList.add(new BreadcrumbItem(currentBreadcrumbPage, getCurrentItemConfiguration()));
+                }
+                else {
+                    renderableList.add(new BreadcrumbItem(currentBreadcrumbPage, getIntermediateItemConfiguration()));
+                }
+            }
 
-        if (!item.isCurrentPage())
-            itemStringBuffer.append(String.format(START_ANCHOR_HTML, item.getPage().getPath()));
+            breadcrumbTrail = new BreadcrumbTrail(
+                    getRenderAsLink(),
+                    getIconDelimiter(),
+                    getHtmlDelimiter(),
+                    getRootItemConfiguration(),
+                    getIntermediateItemConfiguration(),
+                    getCurrentItemConfiguration(),
+                    renderableList
+            );
+        }
 
-        if (!item.isHideIcon())
-            itemStringBuffer.append(String.format(ICON_HTML, item.getPageIcon()));
+        return breadcrumbTrail;
 
-        if (!item.isHideTitle())
-            itemStringBuffer.append(item.getTitle());
+    }
 
-        if (!item.isCurrentPage())
-            itemStringBuffer.append(END_ANCHOR_HTML);
+    @DialogField(fieldLabel = "Render As Link", ranking = 1)
+    @Selection(type = Selection.CHECKBOX, options = {@Option(text = "Yes", value = "true")})
+    public Boolean getRenderAsLink() {
+        if (renderAsLink == null) {
+            renderAsLink = componentNode.get("renderAsLink", false);
+        }
 
-        return itemStringBuffer.toString();
+        return renderAsLink;
     }
 
     /**
@@ -46,10 +90,14 @@ public class BreadcrumbItemRenderingStrategy implements ListRenderingStrategy<Br
      *
      * @return a string representing the font awesome icon class the user has selected.
      */
-    @DialogField(fieldLabel = "Delimiter Icon", ranking = 1)
+    @DialogField(fieldLabel = "Delimiter Icon", ranking = 10)
     @Selection(type = Selection.SELECT, optionsUrl = ComponentConstants.FONT_AWESOME_SERVLET_PATH)
     public String getIconDelimiter() {
-        return currentComponentNode.get("iconDelimiter", DEFAULT_DELIMITER);
+        if (iconDelimiter == null) {
+            iconDelimiter = componentNode.get("iconDelimiter", DEFAULT_DELIMITER);
+        }
+
+        return iconDelimiter;
     }
 
     /**
@@ -57,23 +105,47 @@ public class BreadcrumbItemRenderingStrategy implements ListRenderingStrategy<Br
      *
      * @return The {@link Breadcrumb} HTML delimiter.
      */
-    @DialogField(fieldLabel = "Delimiter HTML", ranking = 2)
+    @DialogField(fieldLabel = "Delimiter HTML", ranking = 20, fieldDescription = "Allows for the use of arbitrary HTML as a Breadcrumb Trail Item Delimiter. The delimiter authored in this field will trump the delimiter authored in the icon field.")
     public String getHtmlDelimiter() {
-        return currentComponentNode.get("htmlDelimiter", "");
+        if (htmlDelimiter == null) {
+            htmlDelimiter = componentNode.get("htmlDelimiter", StringUtils.EMPTY);
+        }
+
+        return htmlDelimiter;
     }
 
-    /**
-     * Returns the current delimiter.
-     * If getHtmlDelimiter is not null, it will be returned. Otherwise, the getIconDelimiter will be formatted for display in HTML, and displayed.
-     * @return
-     */
-    public String getDelimiterHtml() {
-        if (!getHtmlDelimiter().isEmpty()) {
-            return getHtmlDelimiter();
-        } else {
-            String iconDelimiterHtml = String.format(ICON_HTML, getIconDelimiter());
-            return iconDelimiterHtml;
+    @DialogField(ranking = 30)
+    @DialogFieldSet( title = "Root Item Configuration", namePrefix = ROOT_ITEM_CONFIGURATION_PREFIX )
+    public BreadcrumbItemConfiguration getRootItemConfiguration() {
+        if (rootItemConfiguration == null) {
+            rootItemConfiguration = getItemConfiguration(ROOT_ITEM_CONFIGURATION_PREFIX);
         }
+
+        return rootItemConfiguration;
+    }
+
+    @DialogField(ranking = 40)
+    @DialogFieldSet( title = "Intermediate Item Configuration", namePrefix = INTERMEDIATE_ITEM_CONFIGURATION_PREFIX )
+    public BreadcrumbItemConfiguration getIntermediateItemConfiguration() {
+        if (intermediateItemConfiguration == null) {
+            intermediateItemConfiguration = getItemConfiguration(INTERMEDIATE_ITEM_CONFIGURATION_PREFIX);
+        }
+
+        return intermediateItemConfiguration;
+    }
+
+    @DialogField(ranking = 50)
+    @DialogFieldSet( title = "Current Item Configuration", namePrefix = CURRENT_ITEM_CONFIGURATION_PREFIX )
+    public BreadcrumbItemConfiguration getCurrentItemConfiguration() {
+        if (currentItemConfiguration == null) {
+            currentItemConfiguration = getItemConfiguration(CURRENT_ITEM_CONFIGURATION_PREFIX);
+        }
+
+        return currentItemConfiguration;
+    }
+
+    protected BreadcrumbItemConfiguration getItemConfiguration(String prefix) {
+        return new BreadcrumbItemConfiguration(componentNode, prefix);
     }
 
 }
