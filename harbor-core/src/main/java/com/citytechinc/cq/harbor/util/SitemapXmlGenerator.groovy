@@ -36,10 +36,7 @@ class SitemapXmlGenerator {
 				return
 			}
 		}
-
-		markupBuilder.urlset(xmlns: "http://www.sitemaps.org/schemas/sitemap/0.9") {
-			recursiveXMLBuilderFunction(rootPage)
-		}
+		recursiveXMLBuilderFunction(rootPage)
 		return stringWriter.toString();
 	}
 }

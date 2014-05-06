@@ -34,6 +34,8 @@ public class SitemapServlet extends SlingSafeMethodsServlet {
         Set<String> sitemapRootPaths = siteMapService.getSiteMapRootPaths();
         PageManagerDecorator pageManagerDecorator = request.getResourceResolver().adaptTo(PageManagerDecorator.class);
         StringBuffer xmlStringBuffer = new StringBuffer();
+        xmlStringBuffer.append("<?xml version='1.0' encoding='UTF-8'?>");
+        xmlStringBuffer.append("<urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>");
         for (String item : sitemapRootPaths){
             //attempt to grab a page decorator.
             PageDecorator rootPage = pageManagerDecorator.getPage(item);
@@ -43,6 +45,7 @@ public class SitemapServlet extends SlingSafeMethodsServlet {
             }
         }
         //Level-order traversal of tree, rendering nodes as we go
+        xmlStringBuffer.append("</urlset>");
         response.getWriter().write(xmlStringBuffer.toString());
     }
 }
