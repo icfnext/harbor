@@ -1,2 +1,0 @@
-
-${renderableItems.renderedItem}

@@ -1,2 +1,0 @@
-
-<li>${renderableItem.renderedItem}</li>
