@@ -3,15 +3,18 @@ package com.citytechinc.cq.harbor.components.content.list.assets;
 import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.Option;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
-import com.citytechinc.cq.harbor.components.content.list.ListRenderingStrategy;
+import com.citytechinc.cq.harbor.lists.rendering.ListRenderingStrategy;
 import com.citytechinc.cq.library.content.node.ComponentNode;
 import com.day.cq.dam.api.Asset;
+import com.google.common.collect.Lists;
 import org.apache.commons.lang.StringUtils;
+
+import java.util.List;
 
 /**
  * Renders a list of assets as links.
  */
-public class AssetListRenderingStrategy implements ListRenderingStrategy<Asset> {
+public class AssetListRenderingStrategy implements ListRenderingStrategy<Asset, List<AssetListRenderingStrategy.RenderableAsset>> {
 
     private static final String PARAM_AS_LINKS = "renderAsLinks";
     private static final boolean DEFAULT_AS_LINKS = false;
@@ -23,11 +26,13 @@ public class AssetListRenderingStrategy implements ListRenderingStrategy<Asset> 
             type = Selection.CHECKBOX,
             options = @Option( value = "true" )
     )
-    private boolean renderAsLinks;
+    private final boolean renderAsLinks;
+
+    private List<RenderableAsset> renderableAssets;
 
     public AssetListRenderingStrategy(ComponentNode componentNode) {
 
-        setRenderAsLinks(componentNode.get(PARAM_AS_LINKS, DEFAULT_AS_LINKS));
+        renderAsLinks = componentNode.get(PARAM_AS_LINKS, DEFAULT_AS_LINKS);
 
     }
 
@@ -37,7 +42,6 @@ public class AssetListRenderingStrategy implements ListRenderingStrategy<Asset> 
      * @param item
      * @return
      */
-    @Override
     public String renderListItem(Asset item) {
 
         String rendered = StringUtils.EMPTY;
@@ -57,19 +61,47 @@ public class AssetListRenderingStrategy implements ListRenderingStrategy<Asset> 
     }
 
     /**
-     * Set to true to render items as links to their resources, otherwise render items as static text.
+     * True to render items as links to their resources, otherwise render items as static text.
      *
-     * @param renderAsLinks
      */
-    public void setRenderAsLinks(boolean renderAsLinks) {
-
-        this.renderAsLinks = renderAsLinks;
-
-    }
-
     public boolean getRenderAsLinks() {
 
         return this.renderAsLinks;
+
+    }
+
+    @Override
+    public List<RenderableAsset> toRenderableList(Iterable<Asset> itemIterable) {
+
+        if (renderableAssets == null) {
+            renderableAssets = Lists.newArrayList();
+
+            for (Asset currentAsset : itemIterable) {
+                renderableAssets.add(new RenderableAsset(currentAsset, getRenderAsLinks()));
+            }
+        }
+
+        return renderableAssets;
+
+    }
+
+    public static class RenderableAsset {
+
+        private final Asset asset;
+        private final boolean renderAsLink;
+
+        public RenderableAsset(Asset asset, boolean renderAsLink) {
+            this.asset = asset;
+            this.renderAsLink = renderAsLink;
+        }
+
+        public Asset getAsset() {
+            return asset;
+        }
+
+        public boolean isRenderAsLink() {
+            return renderAsLink;
+        }
 
     }
 

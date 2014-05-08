@@ -1,20 +1,20 @@
 package com.citytechinc.cq.harbor.components.content.list.nodesearchstrategy;
 
-import com.citytechinc.cq.harbor.components.content.list.ListConstructionStrategy;
-import com.citytechinc.cq.harbor.components.content.list.nodesearchstrategy.predicatewrappers.AbstractConstructionPredicate;
+import com.citytechinc.cq.harbor.lists.construction.ListConstructionStrategy;
+import com.citytechinc.cq.harbor.lists.construction.search.ConstructionPredicate;
 import com.citytechinc.cq.library.content.node.ComponentNode;
 import com.day.cq.search.PredicateGroup;
 import com.day.cq.search.Query;
 import com.day.cq.search.QueryBuilder;
 import com.day.cq.search.result.Hit;
 import com.day.cq.search.result.SearchResult;
+import com.google.common.collect.Maps;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
 import org.osgi.framework.ServiceReference;
 
 import javax.jcr.Session;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -49,8 +49,6 @@ public abstract class AbstractNodeSearchConstructionStrategy<T> implements ListC
 
         this.session = componentNode.getResource().getResourceResolver().adaptTo(Session.class);
 
-        this.predicatesMap = new HashMap<String, String>();
-
         // get query builder resource from bundle context
         BundleContext bundleContext = FrameworkUtil.getBundle(QueryBuilder.class).getBundleContext();
         ServiceReference serviceReference = bundleContext.getServiceReference(QueryBuilder.class.getName());
@@ -58,28 +56,30 @@ public abstract class AbstractNodeSearchConstructionStrategy<T> implements ListC
 
     }
 
-    /**
-     * Each construction predicate a construction strategy has should be added via this function so that the predicate
-     *  can be used when constructing the list via query builder.
-     *
-     * @param abstractConstructionPredicate construction predicate to add.
-     */
-    protected void addPredicate(AbstractConstructionPredicate abstractConstructionPredicate) {
+    protected abstract List<ConstructionPredicate> getPredicates();
 
-        Map<String, String> predicates = abstractConstructionPredicate.getPredicates();
-        this.predicatesMap.putAll(predicates);
+    protected Map<String, String> getPredicatesMap() {
+
+        if (predicatesMap == null) {
+            predicatesMap = Maps.newHashMap();
+            for (ConstructionPredicate currentConstructionPredicate : getPredicates()) {
+                predicatesMap.putAll(currentConstructionPredicate.asQueryPredicate());
+            }
+        }
+
+        return predicatesMap;
 
     }
 
     /**
      * Call query builder with given predicates and return a list of results.
      *
-     * @return  a list of Hits that are the results from query builder.
+     * @return List of Transformed Hits that are the results from query builder.
      */
-    private List<T> doQuery() {
+    protected List<T> doQuery() {
 
         // perform query
-        PredicateGroup predicateGroup = PredicateGroup.create(this.predicatesMap);
+        PredicateGroup predicateGroup = PredicateGroup.create(getPredicatesMap());
         Query query = this.queryBuilder.createQuery(predicateGroup, this.session);
         SearchResult result = query.getResult();
 
@@ -108,7 +108,7 @@ public abstract class AbstractNodeSearchConstructionStrategy<T> implements ListC
      * @return  a list of objects for the construction strategy.
      */
     @Override
-    public List<T> constructList() {
+    public List<T> construct() {
 
         return doQuery();
 

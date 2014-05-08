@@ -1,15 +1,18 @@
 package com.citytechinc.cq.harbor.components.content.list.nodesearchstrategy.predicatewrappers;
 
 import com.citytechinc.cq.component.annotations.DialogField;
-import com.citytechinc.cq.component.annotations.FieldProperty;
 import com.citytechinc.cq.component.annotations.Option;
 import com.citytechinc.cq.component.annotations.widgets.NumberField;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
 import com.citytechinc.cq.component.annotations.widgets.TextField;
+import com.citytechinc.cq.harbor.lists.construction.search.ConstructionPredicate;
 import com.citytechinc.cq.library.content.node.ComponentNode;
 import com.day.cq.search.Predicate;
 import com.day.cq.search.PredicateGroup;
+import com.google.common.collect.Maps;
 import org.apache.commons.lang.StringUtils;
+
+import java.util.Map;
 
 /**
  * Dialog representation of a query parameter predicate. Should be converted to a predicate for a query on the JCR by a
@@ -17,7 +20,7 @@ import org.apache.commons.lang.StringUtils;
  *
  * Stores and handles all predicates that modify how search results are returned.
  */
-public class QueryParameterConstructionPredicate extends AbstractConstructionPredicate {
+public class QueryParameterConstructionPredicate implements ConstructionPredicate {
 
     private static final String PARAM_LIMIT = "limit";
     private static final String PARAM_QUERY_LIMIT = "p." + PredicateGroup.PARAM_LIMIT;
@@ -32,7 +35,7 @@ public class QueryParameterConstructionPredicate extends AbstractConstructionPre
             allowDecimals = false,
             allowNegative = false
     )
-    private int limit;
+    private final int limit;
 
     private static final String PARAM_ORDER_BY = "orderBy";
     private static final String PARAM_QUERY_ORDER_BY = Predicate.ORDER_BY;
@@ -43,7 +46,7 @@ public class QueryParameterConstructionPredicate extends AbstractConstructionPre
             defaultValue = DEFAULT_ORDER_BY
     )
     @TextField
-    private String orderBy;
+    private final String orderBy;
 
     private static final String PARAM_SORT_TYPE = "sortType";
     private static final String PARAM_QUERY_SORT_TYPE = Predicate.ORDER_BY + '.' + Predicate.PARAM_SORT;
@@ -59,7 +62,9 @@ public class QueryParameterConstructionPredicate extends AbstractConstructionPre
                     @Option(text = "Descending", value = Predicate.SORT_DESCENDING)
             }
     )
-    private String sortType;
+    private final String sortType;
+
+    private Map<String, String> queryParameters;
 
     /**
      * Default constructor. Properties for this class should be located under the component node, prefixed with the
@@ -69,11 +74,10 @@ public class QueryParameterConstructionPredicate extends AbstractConstructionPre
      * @param predicateName Name of prefix for predicate's properties, also the name of this predicate when it  is used to query.
      */
     public QueryParameterConstructionPredicate(ComponentNode componentNode, String predicateName) {
-        super(componentNode, predicateName);
 
-        setLimit(componentNode.get(predicateName + PARAM_LIMIT, DEFAULT_LIMIT));
-        setOrderBy(componentNode.get(predicateName + PARAM_ORDER_BY, DEFAULT_ORDER_BY));
-        setSortType(componentNode.get(predicateName + PARAM_SORT_TYPE, DEFAULT_SORT_TYPE));
+        limit = componentNode.get(predicateName + PARAM_LIMIT, DEFAULT_LIMIT);
+        orderBy = componentNode.get(predicateName + PARAM_ORDER_BY, DEFAULT_ORDER_BY);
+        sortType = componentNode.get(predicateName + PARAM_SORT_TYPE, DEFAULT_SORT_TYPE);
 
     }
 
@@ -87,41 +91,11 @@ public class QueryParameterConstructionPredicate extends AbstractConstructionPre
     }
 
     /**
-     * Set the maximum number of results to return.
-     *
-     * @param limit
-     */
-    public void setLimit(int limit) {
-
-        this.limit = limit;
-        this.set(PARAM_QUERY_LIMIT, String.valueOf(limit));
-
-    }
-
-    /**
      * @return  a JCR field or special xpath variable to order results by.
      */
     public String getOrderBy() {
 
         return orderBy;
-
-    }
-
-    /**
-     * Set a JCR field or special xpath variable to order results by. This predicate will only be added to a query if
-     *  it is not blank.
-     *
-     * @param orderBy
-     */
-    public void setOrderBy(String orderBy) {
-
-        this.orderBy = orderBy;
-        if(StringUtils.isNotBlank(orderBy)) {
-
-            // add this predicate only if order by isn't blank
-            this.set(PARAM_QUERY_ORDER_BY, orderBy);
-
-        }
 
     }
 
@@ -134,21 +108,22 @@ public class QueryParameterConstructionPredicate extends AbstractConstructionPre
 
     }
 
-    /**
-     * Set the direction to sort results in. This predicate will only be added to a query if it is not blank.
-     *
-     * @param sortType
-     */
-    public void setSortType(String sortType) {
+    @Override
+    public Map<String, String> asQueryPredicate() {
 
-        this.sortType = sortType;
-        if(StringUtils.isNotBlank(this.orderBy)) {
+        if (queryParameters == null) {
+            queryParameters = Maps.newHashMap();
+            queryParameters.put(PARAM_QUERY_LIMIT, String.valueOf(getLimit()));
 
-            // add this predicate only if order by isn't blank
-            this.set(PARAM_QUERY_SORT_TYPE, sortType);
+            if (StringUtils.isNotBlank(getOrderBy())) {
+                queryParameters.put(PARAM_QUERY_ORDER_BY, getOrderBy());
+            }
 
+            if (StringUtils.isNotBlank(getSortType())) {
+                queryParameters.put(PARAM_QUERY_SORT_TYPE, getSortType());
+            }
         }
 
+        return queryParameters;
     }
-
 }

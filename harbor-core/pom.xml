@@ -127,6 +127,10 @@
 			<groupId>com.day.cq.wcm</groupId>
 			<artifactId>cq-msm-api</artifactId>
 		</dependency>
+        <dependency>
+            <groupId>com.day.cq</groupId>
+            <artifactId>cq-search</artifactId>
+        </dependency>
 		<dependency>
 			<groupId>com.adobe.granite</groupId>
 			<artifactId>com.adobe.granite.replication.core</artifactId>

@@ -4,17 +4,19 @@ import com.citytechinc.cq.component.annotations.Component;
 import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.widgets.DialogFieldSet;
 import com.citytechinc.cq.harbor.components.content.list.AbstractListComponent;
-import com.citytechinc.cq.harbor.components.content.list.ListConstructionStrategy;
-import com.citytechinc.cq.harbor.components.content.list.ListRenderingStrategy;
 import com.citytechinc.cq.harbor.constants.lists.ListConstants;
+import com.citytechinc.cq.harbor.lists.construction.ListConstructionStrategy;
+import com.citytechinc.cq.harbor.lists.rendering.ListRenderingStrategy;
 import com.citytechinc.cq.library.components.annotations.AutoInstantiate;
 import com.citytechinc.cq.library.content.node.ComponentNode;
 import com.citytechinc.cq.library.content.request.ComponentRequest;
 import com.day.cq.dam.api.Asset;
 
+import java.util.List;
+
 @Component(value = "Asset List", group = "Harbor Lists", resourceSuperType = AbstractListComponent.RESOURCE_TYPE, name = "lists/assetlist")
 @AutoInstantiate(instanceName = ListConstants.LIST_PAGE_CONTEXT_NAME)
-public class AssetList extends AbstractListComponent<Asset> {
+public class AssetList extends AbstractListComponent<Asset, List<AssetListRenderingStrategy.RenderableAsset>> {
 
     @DialogField
     @DialogFieldSet(
@@ -48,7 +50,7 @@ public class AssetList extends AbstractListComponent<Asset> {
     }
 
     @Override
-    protected ListRenderingStrategy<Asset> getListRenderingStrategy() {
+    protected ListRenderingStrategy<Asset, List<AssetListRenderingStrategy.RenderableAsset>> getListRenderingStrategy() {
 
         return renderingStrategy;
 
