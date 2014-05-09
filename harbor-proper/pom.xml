@@ -16,6 +16,7 @@
 	<name>CITYTECH, Inc. Harbor CQ5 Website</name>
 
 	<modules>
+        <module>harbor-proper-api</module>
 		<module>harbor-proper-core</module>
 		<module>harbor-proper-ui</module>
 	</modules>
@@ -45,6 +46,9 @@
 	<properties>
 		<cq.library.version>7.1.0-SNAPSHOT</cq.library.version>
 		<core.name>harbor-proper-core</core.name>
+        <core.version>1.0.0-SNAPSHOT</core.version>
+        <api.name>harbor-proper-api</api.name>
+        <api.version>1.0.0-SNAPSHOT</api.version>
 		<maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss.SSSZ</maven.build.timestamp.format>
 		<timestamp>${maven.build.timestamp}</timestamp>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

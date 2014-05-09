@@ -10,7 +10,7 @@
     <tag>
 
         <name>includeListItems</name>
-        <tag-class>com.citytechinc.cq.harbor.proper.tags.IncludeListItemsTag</tag-class>
+        <tag-class>com.citytechinc.cq.harbor.proper.core.tags.IncludeListItemsTag</tag-class>
 
         <attribute>
             <name>items</name>

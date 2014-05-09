@@ -9,19 +9,11 @@
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>harbor-proper-core</artifactId>
+	<artifactId>harbor-proper-api</artifactId>
 	<packaging>bundle</packaging>
-	<name>CITYTECH, Inc. Harbor Core</name>
+	<name>CITYTECH, Inc. Harbor API</name>
 
 	<build>
-        <testSourceDirectory>src/test/groovy</testSourceDirectory>
-        <resources>
-            <resource>
-                <directory>src/main/resources/META-INF</directory>
-                <targetPath>META-INF</targetPath>
-                <filtering>true</filtering>
-            </resource>
-        </resources>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -35,7 +27,7 @@
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
                         <Bundle-Name>${project.name}</Bundle-Name>
                         <Bundle-Vendor>${project.parent.organization.name}</Bundle-Vendor>
-                        <Export-Package>!*.impl,com.citytechinc.cq.harbor.proper.core.*</Export-Package>
+                        <Export-Package>!*.impl,com.citytechinc.cq.harbor.proper.api.*</Export-Package>
                         <Import-Package>!com.citytechinc.cq.component.*,!javassist</Import-Package>
                         <DynamicImport-Package>*</DynamicImport-Package>
 
@@ -57,15 +49,6 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin>
-			<plugin>
-				<artifactId>maven-surefire-plugin</artifactId>
-                <version>2.16</version>
-                <configuration>
-                    <includes>
-                        <include>**/*Spec*</include>
-                    </includes>
-                </configuration>
 			</plugin>
             <plugin>
                 <groupId>org.codehaus.groovy</groupId>
@@ -219,19 +202,5 @@
             <artifactId>harbor-ns-core</artifactId>
         </dependency>
 
-        <!-- Harbor API -->
-        <dependency>
-            <groupId>com.citytechinc.cq.harbor.proper</groupId>
-            <artifactId>harbor-proper-api</artifactId>
-            <version>${api.version}</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.citytechinc.aem.prosper</groupId>
-            <artifactId>prosper</artifactId>
-            <version>0.9.0</version>
-            <scope>test</scope>
-        </dependency>
 	</dependencies>
 </project>
