@@ -1,4 +1,4 @@
-package com.citytechinc.cq.harbor.components.layout.pageheader;
+package com.citytechinc.cq.harbor.imperium.components.layout.pageheader;
 
 import com.citytechinc.cq.component.annotations.Component;
 import com.citytechinc.cq.harbor.imperium.components.layout.container.Container;
