@@ -14,7 +14,7 @@ import com.citytechinc.cq.library.content.request.ComponentRequest;
 
 @Component(value = "Breadcrumb",
         contentAdditionalProperties = {
-                @ContentProperty(name = "dependencies", value = "[harbor.fontawesome,harbor.bootstrap]"),
+                @ContentProperty(name = "dependencies", value = "[harbor.fontawesome,harbor.bootstrap.breadcrumbs]"),
         } )
 @AutoInstantiate( instanceName = "breadcrumb" )
 public class Breadcrumb extends AbstractListComponent<TrailPage, BreadcrumbTrail> {

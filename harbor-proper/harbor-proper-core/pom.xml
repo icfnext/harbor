@@ -227,6 +227,12 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- Client Librarian -->
+        <dependency>
+            <groupId>com.citytechinc.cq.clientlibs</groupId>
+            <artifactId>clientlibrarian-api</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>com.citytechinc.aem.prosper</groupId>
             <artifactId>prosper</artifactId>

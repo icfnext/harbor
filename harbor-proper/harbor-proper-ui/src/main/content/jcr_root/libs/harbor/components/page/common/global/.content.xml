@@ -5,4 +5,4 @@
           cq:isContainer="{Boolean}false"
           jcr:primaryType="cq:Component"
           sling:resourceSuperType="foundation/components/page"
-          dependencies="[harbor.jquery,harbor.bootstrap,harbor.fontawesome,harbor.author-common]" />
+          dependencies="[harbor.jquery,harbor.bootstrap.layout.scaffolding,harbor.fontawesome,harbor.author-common]" />

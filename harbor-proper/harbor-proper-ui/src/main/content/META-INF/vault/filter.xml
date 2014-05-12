@@ -8,4 +8,5 @@
     <filter root="/libs/harbor/install" />
     <filter root="/etc/clientlibs/cq-library" />
     <filter root="/etc/clientlibs/harbor" />
+    <filter root="/etc/brands/defaultbootstrapbrand" />
 </workspaceFilter>

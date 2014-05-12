@@ -10,4 +10,6 @@ public class Properties {
 
     public static final String PAGE_ICON = "harboricon";
 
+    public static final String HARBOR_BRAND = "harbor:brand";
+
 }

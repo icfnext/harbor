@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root
+        xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
+        xmlns:cq="http://www.day.com/jcr/cq/1.0"
+        xmlns:jcr="http://www.jcp.org/jcr/1.0"
+        jcr:primaryType="cq:ClientLibraryFolder"
+        categories="harbor.bootstrap.navbar"
+        dependencies="[harbor.bootstrap.mixins,harbor.bootstrap.vars,harbor.bootstrap.navs,harbor.bootstrap.collapse,harbor.bootstrap.forms,harbor.bootstrap.buttons,harbor.bootstrap.buttongroups,harbor.bootstrap.dropdowns]"/>

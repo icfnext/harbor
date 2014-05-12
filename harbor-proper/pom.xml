@@ -138,6 +138,14 @@
                 <version>1.0.0-SNAPSHOT</version>
                 <scope>provided</scope>
             </dependency>
+
+            <!-- Client Librarian -->
+            <dependency>
+                <groupId>com.citytechinc.cq.clientlibs</groupId>
+                <artifactId>clientlibrarian-api</artifactId>
+                <version>0.3.0-SNAPSHOT</version>
+                <scope>provided</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 </project>
