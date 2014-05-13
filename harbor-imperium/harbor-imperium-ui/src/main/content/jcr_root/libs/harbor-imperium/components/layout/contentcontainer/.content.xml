@@ -9,6 +9,6 @@
         cq:isContainer="{Boolean}false"
         sling:resourceSuperType="imperium/components/layout/layoutsection"
         cq:noDecoration="{Boolean}false"
-        dependencies="harbor.bootstrap.layout.scaffolding"
+        dependencies="[harbor.bootstrap.layout.scaffolding,imperium.layoutmode.section]"
         jcr:primaryType="imperium:LayoutComponent"
         jcr:title="Layout Container"/>

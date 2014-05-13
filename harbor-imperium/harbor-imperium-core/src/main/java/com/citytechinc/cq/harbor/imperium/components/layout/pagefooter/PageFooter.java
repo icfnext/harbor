@@ -8,7 +8,7 @@ import com.citytechinc.cq.library.components.annotations.AutoInstantiate;
 import com.citytechinc.cq.library.content.request.ComponentRequest;
 import com.google.common.base.Optional;
 
-@Component( value = "Page Footer", group = "Harbor Layout", resourceSuperType = Container.RESOURCE_TYPE, path = "layout" )
+@Component( value = "Page Footer", group = "Harbor Layout", resourceSuperType = Container.RESOURCE_TYPE, path = "layout", layout = "rollover" )
 @AutoInstantiate( instanceName = "contentContainer" )
 public class PageFooter extends Container {
 
@@ -24,6 +24,10 @@ public class PageFooter extends Container {
     @Override
     public String getContainerElement() {
         return Elements.FOOTER;
+    }
+
+    public String getContainerName() {
+        return "Footer Container";
     }
 
 }

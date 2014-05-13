@@ -17,7 +17,8 @@ import com.google.common.base.Optional;
         value = "Layout Container",
         description = "A container in which content may be placed.  All content should be placed in a container element.",
         path = "layout",
-        name = "contentcontainer" )
+        name = "contentcontainer",
+        layout = "rollover" )
 @AutoInstantiate( instanceName = "contentContainer" )
 public class Container extends AbstractLayoutComponent {
 
@@ -82,6 +83,10 @@ public class Container extends AbstractLayoutComponent {
 
     public String getRole() {
         return getRoleOptional().get();
+    }
+
+    public String getContainerName() {
+        return "Content Container";
     }
 
     protected String getContainerFullWidthClass() {
