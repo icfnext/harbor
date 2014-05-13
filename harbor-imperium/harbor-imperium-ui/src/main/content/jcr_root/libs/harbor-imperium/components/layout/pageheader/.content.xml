@@ -4,7 +4,7 @@
         xmlns:cq="http://www.day.com/jcr/cq/1.0"
         xmlns:jcr="http://www.jcp.org/jcr/1.0"
         xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
-        className="com.citytechinc.cq.harbor.components.layout.pageheader.PageHeader"
+        className="com.citytechinc.cq.harbor.imperium.components.layout.pageheader.PageHeader"
         sling:resourceSuperType="harbor-imperium/components/layout/contentcontainer"
         componentGroup="Harbor Layout"
         cq:isContainer="{Boolean}false"

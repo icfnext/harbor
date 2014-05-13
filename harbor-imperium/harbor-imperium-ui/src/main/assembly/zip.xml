@@ -27,7 +27,7 @@
     </fileSets>
     <dependencySets>
         <dependencySet>
-            <outputDirectory>jcr_root/apps/harbor-imperium/install</outputDirectory>
+            <outputDirectory>jcr_root/libs/harbor-imperium/install</outputDirectory>
             <useProjectArtifact>false</useProjectArtifact>
             <scope>compile</scope>
             <includes>

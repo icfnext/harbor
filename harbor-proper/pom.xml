@@ -44,7 +44,7 @@
     </pluginRepositories>
 
 	<properties>
-		<cq.library.version>7.1.0-SNAPSHOT</cq.library.version>
+		<cq.library.version>7.1.1-SNAPSHOT</cq.library.version>
 		<core.name>harbor-proper-core</core.name>
         <core.version>1.0.0-SNAPSHOT</core.version>
         <api.name>harbor-proper-api</api.name>

@@ -202,5 +202,11 @@
             <groupId>com.citytechinc.aem.imperium.ns</groupId>
             <artifactId>imperium-ns-core</artifactId>
         </dependency>
+
+        <!-- Client Librarian -->
+        <dependency>
+            <groupId>com.citytechinc.cq.clientlibs</groupId>
+            <artifactId>clientlibrarian-api</artifactId>
+        </dependency>
     </dependencies>
 </project>
