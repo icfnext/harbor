@@ -210,5 +210,9 @@
             <groupId>com.citytechinc.cq.harbor.proper</groupId>
             <artifactId>harbor-proper-api</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.citytechinc.cq.harbor.proper</groupId>
+            <artifactId>harbor-proper-core</artifactId>
+        </dependency>
     </dependencies>
 </project>
