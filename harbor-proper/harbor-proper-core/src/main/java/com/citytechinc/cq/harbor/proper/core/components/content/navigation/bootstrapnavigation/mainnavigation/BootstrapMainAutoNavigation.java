@@ -7,7 +7,6 @@ import com.citytechinc.cq.harbor.proper.api.lists.construction.RootedListConstru
 import com.citytechinc.cq.harbor.proper.api.lists.rendering.RootedListRenderingStrategy;
 import com.citytechinc.cq.harbor.proper.core.components.content.list.AbstractRootedListComponent;
 
-import com.citytechinc.cq.harbor.proper.core.content.page.navigation.construction.PageNavigationListConstructionStrategy;
 import com.citytechinc.cq.harbor.proper.core.content.page.navigation.construction.SiteNavigationListConstructionStrategy;
 import com.citytechinc.cq.library.components.annotations.AutoInstantiate;
 import com.citytechinc.cq.library.content.request.ComponentRequest;
@@ -24,6 +23,7 @@ import javax.jcr.RepositoryException;
         listeners = {
                 @Listener(name = "afterinsert", value = "REFRESH_PAGE")
         },
+        name = "navigation/bootstrapmainautonavigation",
         allowedParents = "*/parsys"
 )
 @AutoInstantiate( instanceName = "bootstrapMainAutoNavigation" )
