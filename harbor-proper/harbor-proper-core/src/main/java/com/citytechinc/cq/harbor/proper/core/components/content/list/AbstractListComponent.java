@@ -16,7 +16,7 @@ public abstract class AbstractListComponent<T, R extends Iterable<?>> extends Ab
 
     public static final String RESOURCE_TYPE = "harbor/components/content/lists/abstractlist";
 
-    protected List<T> rawListItems;
+    protected Iterable<T> rawListItems;
     protected R listItems;
 
     public AbstractListComponent(ComponentNode componentNode) {
@@ -90,7 +90,7 @@ public abstract class AbstractListComponent<T, R extends Iterable<?>> extends Ab
         return getStart() != null;
     }
 
-    protected List<T> getRawListItems() {
+    protected Iterable<T> getRawListItems() {
         if (rawListItems == null) {
             rawListItems = getListConstructionStrategy().construct();
         }

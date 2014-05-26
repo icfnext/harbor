@@ -233,6 +233,7 @@
             <artifactId>clientlibrarian-api</artifactId>
         </dependency>
 
+        <!-- Prosper -->
         <dependency>
             <groupId>com.citytechinc.aem.prosper</groupId>
             <artifactId>prosper</artifactId>
