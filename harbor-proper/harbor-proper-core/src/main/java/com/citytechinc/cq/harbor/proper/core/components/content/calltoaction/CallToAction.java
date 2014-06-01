@@ -9,23 +9,24 @@ import com.citytechinc.cq.component.annotations.widgets.Selection;
 import com.citytechinc.cq.harbor.proper.api.constants.bootstrap.Bootstrap;
 import com.citytechinc.cq.library.components.AbstractComponent;
 import com.citytechinc.cq.library.components.annotations.AutoInstantiate;
+import com.citytechinc.cq.library.content.link.Link;
+import com.citytechinc.cq.library.content.link.builders.LinkBuilder;
 import com.citytechinc.cq.library.content.request.ComponentRequest;
-import com.day.cq.commons.jcr.JcrConstants;
+import com.google.common.base.Optional;
 import org.apache.commons.lang.StringUtils;
-import org.apache.sling.api.resource.Resource;
+
+import javax.jcr.Node;
+import javax.jcr.RepositoryException;
 
 
-@Component(value = "Call to Action", group = "Harbor", name = "calltoaction",
-		contentAdditionalProperties = {
-				@ContentProperty(name="dependencies", value="harbor.components.content.calltoaction")
-		}
-)
+@Component(value = "Call to Action", group = "Harbor", name = "calltoaction", contentAdditionalProperties = {@ContentProperty(name="dependencies", value="harbor.bootstrap.modals")})
 @AutoInstantiate( instanceName = CallToAction.INSTANCE_NAME )
 public class CallToAction extends AbstractComponent {
 
     public static final String INSTANCE_NAME = "cta";
 
 	private static final String TEXT_PROPERTY = "text";
+    private static final String TEXT_DEFAULT = "Call to Action";
 	private static final String SIZE_PROPERTY = "size";
 	private static final String STYLE_PROPERTY = "style";
 	private static final String ACTION_PROPERTY = "action";
@@ -34,10 +35,16 @@ public class CallToAction extends AbstractComponent {
 	private static final String LINK_IN_WINDOW = "window";
 	private static final String LINK_IN_CURRENT = "current";
 
+    private Link target;
+
+    public CallToAction(ComponentRequest request) {
+        super(request);
+    }
+
     @DialogField(fieldLabel = "Text",
             fieldDescription = "Provide the widget's text", ranking = 0)
     public String getText() {
-	    return get(TEXT_PROPERTY, StringUtils.EMPTY);
+	    return get(TEXT_PROPERTY, TEXT_DEFAULT);
     }
 
     @DialogField(fieldLabel = "Size",
@@ -56,7 +63,7 @@ public class CallToAction extends AbstractComponent {
 			fieldDescription = "Select the widget's style" , ranking = 3)
 	@Selection(type=Selection.SELECT, options = {
 			@Option(text = "Default",
-					qtip = "Standard gray button with gradient",
+					qtip = "Standard basic button style, not tied to a semantic action or use",
 					value = Bootstrap.BTN_DEFAULT),
 			@Option(text = "Primary",
 					qtip = "Provides extra visual weight and identifies the primary action in a set of buttons",
@@ -74,10 +81,10 @@ public class CallToAction extends AbstractComponent {
 					qtip = "Indicates a dangerous or potentially negative action",
 					value = Bootstrap.BTN_DANGER),
 			@Option(text = "Inverse",
-					qtip = "Alternate dark gray button, not tied to a semantic action or use",
+					qtip = "Alternate to the default button style, not tied to a semantic action or use",
 					value = Bootstrap.BTN_INVERSE),
 			@Option(text = "Link",
-					qtip = "Deemphasize a button by making it look like a link while maintaining button behavior",
+					qtip = "Indicates that this button represents a simple link to a target resource or page",
 					value = Bootstrap.BTN_LINK)
 	})
 	public String getStyle() {
@@ -104,38 +111,37 @@ public class CallToAction extends AbstractComponent {
 	@DialogField(fieldLabel = "Link Target",
 			fieldDescription = "URL path this button leads to", ranking = 2)
 	@PathField
-	public String getLinkTarget(){
-		return get(PATH_PROPERTY, StringUtils.EMPTY);
+	public Link getLinkTarget(){
+        if (target == null) {
+            Optional<Link> targetOptional = getAsLink(PATH_PROPERTY);
+
+            if (targetOptional.isPresent()) {
+                target = targetOptional.get();
+            }
+            else {
+                target = LinkBuilder.forPage(currentPage).build();
+            }
+        }
+
+        return target;
 	}
 
-	public CallToAction(ComponentRequest request) {
-		super(request);
+
+
+	public String getId() throws RepositoryException {
+		return getResource().adaptTo(Node.class).getIdentifier();
 	}
 
-	private String constructUniqueId(Resource r) {
-		StringBuffer uniqueIdBuffer = new StringBuffer();
-		Resource curResource = r;
-
-		while (curResource != null && !curResource.getName().equals(JcrConstants.JCR_CONTENT)) {
-			uniqueIdBuffer.append(curResource.getName());
-			curResource = curResource.getParent();
-		}
-		return uniqueIdBuffer.toString();
+	public Boolean getOpensInNewWindow() {
+		return StringUtils.equalsIgnoreCase(getAction(), LINK_IN_WINDOW);
 	}
 
-	public String getId(){
-		return this.constructUniqueId(this.getResource());
+	public Boolean getOpensInCurrentWindow() {
+		return StringUtils.equalsIgnoreCase(getAction(), LINK_IN_CURRENT);
 	}
-	public String getLinkUrl() {
-		return getLinkBuilder().forPath(getLinkTarget()).build().getHref();
+
+	public Boolean getOpensAsModal() {
+		return StringUtils.equalsIgnoreCase(getAction(), OPEN_MODAL);
 	}
-	public Boolean getOpenWindow() {
-		return StringUtils.equalsIgnoreCase(getAction(),LINK_IN_WINDOW);
-	}
-	public Boolean getOpenCurrent() {
-		return StringUtils.equalsIgnoreCase(getAction(),LINK_IN_CURRENT);
-	}
-	public Boolean getOpenModal() {
-		return StringUtils.equalsIgnoreCase(getAction(),OPEN_MODAL);
-	}
+
 }

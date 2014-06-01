@@ -1,3 +1,8 @@
+/**
+ * Provides contextualization of editables in Author Mode.  Editables in the current context are shown on the page
+ * while those outside the current context are hidden.  The actual showing and hiding ends up being handled by the
+ * editable visibility mechanisms defined in Harbor's overridden CQ.wcm.EditBar.
+ */
 Harbor.Components.editables = function (){
  return {
 	changeEditableContext : function (contextPath) {
