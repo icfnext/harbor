@@ -4,6 +4,7 @@ import com.citytechinc.cq.harbor.proper.api.content.rss.RSSChannel;
 import com.citytechinc.cq.harbor.proper.api.content.rss.RSSFeed;
 import com.citytechinc.cq.harbor.proper.api.content.rss.RSSItem;
 import com.citytechinc.cq.harbor.proper.api.services.rss.RSSFeedGeneratorService;
+import com.citytechinc.cq.harbor.proper.api.services.rss.RssResourceProvider;
 import com.google.common.base.Optional;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -22,9 +23,13 @@ import java.util.Map;
 
 @Component(label = "RSS Resource Provider", metatype = true, configurationFactory = true)
 @Service
-public class RssResourceProvider implements ModifyingResourceProvider {
+public class DefaultRssResourceProvider implements ModifyingResourceProvider, RssResourceProvider {
 
-    private static final Logger LOG = LoggerFactory.getLogger(RssResourceProvider.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DefaultRssResourceProvider.class);
+
+    @Property(label = "RSS Feed Title", value = "", description = "A title used to identify this Service Instance externally.  Setting the title has no systematic consequence as far as the feed itself is concerned")
+    private static final String TITLE_PROPERTY = "rssFeedTitle";
+    private String rssFeedTitle;
 
     @Property(label = "Resource Provider Root", value = "", description = "The root in the content tree which this service will respond to")
     private static final String PROVIDER_ROOT_PROPERTY = ResourceProvider.ROOTS;
@@ -45,6 +50,7 @@ public class RssResourceProvider implements ModifyingResourceProvider {
         this.providerRoot = PropertiesUtil.toString(properties.get(PROVIDER_ROOT_PROPERTY), "");
         this.absoluteProviderRoot = "/" + this.providerRoot;
         this.rssFeedUrl = PropertiesUtil.toString(properties.get(RSS_FEED_URL_PROPERTY), "");
+        this.rssFeedTitle = PropertiesUtil.toString(properties.get(TITLE_PROPERTY), rssFeedUrl);
     }
 
     @Deprecated
@@ -112,9 +118,20 @@ public class RssResourceProvider implements ModifyingResourceProvider {
             }
         }
 
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return null;
     }
 
+    @Override
+    public String getTitle() {
+        return rssFeedTitle;
+    }
+
+    @Override
+    public String getProviderRoot() {
+        return providerRoot;
+    }
+
+    @Override
     public String getRssFeedUrl() {
         return rssFeedUrl;
     }
