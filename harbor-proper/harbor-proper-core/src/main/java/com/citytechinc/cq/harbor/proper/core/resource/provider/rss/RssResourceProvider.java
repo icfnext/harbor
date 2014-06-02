@@ -20,15 +20,16 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-@Component(label = "RSS Resource Provider")
+@Component(label = "RSS Resource Provider", metatype = true, configurationFactory = true)
 @Service
-@Properties({@Property(name = ResourceProvider.ROOTS, value = RssResourceProvider.PROVIDER_ROOT)})
 public class RssResourceProvider implements ModifyingResourceProvider {
 
     private static final Logger LOG = LoggerFactory.getLogger(RssResourceProvider.class);
 
-    public static final String PROVIDER_ROOT = "content/rss";
-    public static final String ABSOLUTE_PROVIDER_ROOT = "/" + PROVIDER_ROOT;
+    @Property(label = "Resource Provider Root", value = "", description = "The root in the content tree which this service will respond to")
+    private static final String PROVIDER_ROOT_PROPERTY = ResourceProvider.ROOTS;
+    private String providerRoot;
+    private String absoluteProviderRoot;
 
     @Property(label = "RSS Feed URL", value = "", description = "This is temporary config.  Point it to the URL of the RSS feed")
     private static final String RSS_FEED_URL_PROPERTY = "rssFeedUrl";
@@ -41,6 +42,8 @@ public class RssResourceProvider implements ModifyingResourceProvider {
     @Activate
     @Modified
     protected void activate(final Map<String, Object> properties) throws Exception {
+        this.providerRoot = PropertiesUtil.toString(properties.get(PROVIDER_ROOT_PROPERTY), "");
+        this.absoluteProviderRoot = "/" + this.providerRoot;
         this.rssFeedUrl = PropertiesUtil.toString(properties.get(RSS_FEED_URL_PROPERTY), "");
     }
 
@@ -59,14 +62,14 @@ public class RssResourceProvider implements ModifyingResourceProvider {
      */
     @Override
     public Resource getResource(ResourceResolver resourceResolver, String path) {
-        if (StringUtils.isBlank(getRssFeedUrl())) {
+        if (StringUtils.isBlank(getRssFeedUrl()) || StringUtils.isBlank(absoluteProviderRoot)) {
             return null;
         }
 
         Optional<RSSFeed> rssFeedOptional = rssFeedGeneratorService.getRSSFeed(getRssFeedUrl());
 
         if (rssFeedOptional.isPresent()) {
-            if (ABSOLUTE_PROVIDER_ROOT.equals(path)) {
+            if (absoluteProviderRoot.equals(path)) {
                 RSSChannelValueMap rssChannelValueMap = new RSSChannelValueMap(rssFeedOptional.get().getChannel());
                 return new RSSChannelResource(resourceResolver, path, rssChannelValueMap);
             }
@@ -90,19 +93,19 @@ public class RssResourceProvider implements ModifyingResourceProvider {
      */
     @Override
     public Iterator<Resource> listChildren(Resource resource) {
-        if (StringUtils.isBlank(getRssFeedUrl())) {
+        if (StringUtils.isBlank(getRssFeedUrl()) || StringUtils.isBlank(absoluteProviderRoot)) {
             return null;
         }
 
         Optional<RSSFeed> rssFeedOptional = rssFeedGeneratorService.getRSSFeed(getRssFeedUrl());
 
         if (rssFeedOptional.isPresent()) {
-            if (ABSOLUTE_PROVIDER_ROOT.equals(resource.getPath())) {
+            if (absoluteProviderRoot.equals(resource.getPath())) {
                 List<Resource> children = Lists.newArrayList();
                 for (int i=0; i<rssFeedOptional.get().getChannel().getItems().size(); i++) {
                     RSSItem currentRssFeedItem = rssFeedOptional.get().getChannel().getItems().get(i);
 
-                    children.add(new RSSItemResource(resource.getResourceResolver(), ABSOLUTE_PROVIDER_ROOT + "/" + i, new RSSItemValueMap(currentRssFeedItem)));
+                    children.add(new RSSItemResource(resource.getResourceResolver(), absoluteProviderRoot + "/" + i, new RSSItemValueMap(currentRssFeedItem)));
                 }
 
                 return children.iterator();
@@ -117,7 +120,7 @@ public class RssResourceProvider implements ModifyingResourceProvider {
     }
 
     private String getRssPathRegularExpression() {
-        return "^" + ABSOLUTE_PROVIDER_ROOT + "/(\\d)*$";
+        return "^" + absoluteProviderRoot + "/(\\d)*$";
     }
 
     @Override
