@@ -24,62 +24,23 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <crx.plugin.goal>install</crx.plugin.goal>
+                <package.goal>install</package.goal>
             </properties>
         </profile>
         <profile>
-            <id>activate</id>
+            <id>replicate</id>
             <activation>
                 <property>
-                    <name>activate</name>
+                    <name>replicate</name>
                 </property>
             </activation>
             <properties>
-                <crx.plugin.goal>activate</crx.plugin.goal>
+                <package.goal>replicate</package.goal>
             </properties>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>com.citytechinc.maven.plugins</groupId>
-                        <artifactId>osgi-bundle-status-maven-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>status-publish</id>
-                                <goals>
-                                    <goal>status</goal>
-                                </goals>
-                                <configuration>
-                                    <bundleNames>
-                                        <bundleName>${core.name}</bundleName>
-                                    </bundleNames>
-                                    <host>${cq.host}</host>
-                                    <port>${cq.port.publish}</port>
-                                    <username>${cq.username}</username>
-                                    <password>${cq.password}</password>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
         </profile>
     </profiles>
 
 	<build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>com.cognifide.maven.plugins</groupId>
-                    <artifactId>maven-crx-plugin</artifactId>
-                    <version>1.0.3</version>
-                    <configuration>
-                        <url>http://${cq.host}:${cq.port.author}</url>
-                        <user>${cq.username}</user>
-                        <password>${cq.password}</password>
-                    </configuration>
-                </plugin>
-            </plugins>
-        </pluginManagement>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -150,16 +111,23 @@
 				</configuration>
 			</plugin>
             <plugin>
-                <groupId>com.cognifide.maven.plugins</groupId>
-                <artifactId>maven-crx-plugin</artifactId>
+                <groupId>com.citytechinc.maven.plugins</groupId>
+                <artifactId>cq-package-maven-plugin</artifactId>
                 <executions>
                     <execution>
                         <phase>install</phase>
                         <goals>
-                            <goal>${crx.plugin.goal}</goal>
+                            <goal>${package.goal}</goal>
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <host>${cq.host}</host>
+                    <port>${cq.port}</port>
+                    <username>${cq.username}</username>
+                    <password>${cq.password}</password>
+                    <skip>${package.skip}</skip>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>com.citytechinc.maven.plugins</groupId>
@@ -175,7 +143,7 @@
                                 <bundleName>${core.name}</bundleName>
                             </bundleNames>
                             <host>${cq.host}</host>
-                            <port>${cq.port.author}</port>
+                            <port>${cq.port}</port>
                             <username>${cq.username}</username>
                             <password>${cq.password}</password>
                         </configuration>

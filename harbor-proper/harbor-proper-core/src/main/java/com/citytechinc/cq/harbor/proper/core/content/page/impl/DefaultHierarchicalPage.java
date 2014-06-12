@@ -1,7 +1,6 @@
 package com.citytechinc.cq.harbor.proper.core.content.page.impl;
 
-
-import com.citytechinc.cq.harbor.ns.ontology.Properties;
+import com.citytechinc.cq.accelerate.api.ontology.Properties;
 import com.citytechinc.cq.harbor.proper.api.content.page.HierarchicalPage;
 import com.citytechinc.cq.harbor.proper.api.content.page.HomePage;
 import com.citytechinc.cq.harbor.proper.api.content.page.SectionLandingPage;
@@ -61,7 +60,7 @@ public class DefaultHierarchicalPage extends AbstractHierarchicalPage implements
 
     @Override
     public String getPageIcon() {
-        return getProperties().get(Properties.PAGE_ICON, "");
+        return getProperties().get(Properties.ACCELERATE_ICONIC_REPRESENTATION, "");
     }
 
 }

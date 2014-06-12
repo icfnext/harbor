@@ -1,6 +1,6 @@
 package com.citytechinc.cq.harbor.proper.core.domain.brand.bootstrap;
 
-import com.citytechinc.cq.harbor.ns.ontology.Properties;
+import com.citytechinc.cq.accelerate.api.ontology.Properties;
 import com.citytechinc.cq.harbor.proper.core.domain.brand.bootstrap.impl.DefaultBootstrapBrand;
 import com.citytechinc.cq.library.content.node.ComponentNode;
 import com.google.common.base.Optional;
@@ -44,7 +44,7 @@ public class BootstrapBrands {
 
         ComponentNode componentNode = resource.adaptTo(ComponentNode.class);
 
-        Optional<String> brandPath = componentNode.get(Properties.HARBOR_BRAND, String.class);
+        Optional<String> brandPath = componentNode.get(Properties.ACCELERATE_BRAND, String.class);
 
         if (brandPath.isPresent() && StringUtils.isNotBlank(brandPath.get())) {
             ResourceResolver resourceResolver = resource.getResourceResolver();

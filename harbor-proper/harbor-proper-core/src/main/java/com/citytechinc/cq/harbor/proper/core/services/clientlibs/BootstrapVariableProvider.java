@@ -1,7 +1,7 @@
 package com.citytechinc.cq.harbor.proper.core.services.clientlibs;
 
+import com.citytechinc.cq.accelerate.api.ontology.Properties;
 import com.citytechinc.cq.clientlibs.api.services.clientlibs.transformer.VariableProvider;
-import com.citytechinc.cq.harbor.ns.ontology.Properties;
 import com.citytechinc.cq.harbor.proper.core.domain.brand.bootstrap.BootstrapBrand;
 import com.citytechinc.cq.harbor.proper.core.domain.brand.bootstrap.BootstrapBrands;
 import com.citytechinc.cq.library.content.node.ComponentNode;
@@ -29,7 +29,7 @@ public class BootstrapVariableProvider implements VariableProvider {
         if (templateResourceOptional.isPresent()) {
             ComponentNode templateResourceComponentNode = templateResourceOptional.get().adaptTo(ComponentNode.class);
 
-            if (templateResourceComponentNode.get(Properties.HARBOR_BRAND, String.class).isPresent()) {
+            if (templateResourceComponentNode.get(Properties.ACCELERATE_BRAND, String.class).isPresent()) {
                 Optional<BootstrapBrand> brand = BootstrapBrands.forTemplateResource(templateResourceOptional.get());
 
                 if (brand.isPresent()) {

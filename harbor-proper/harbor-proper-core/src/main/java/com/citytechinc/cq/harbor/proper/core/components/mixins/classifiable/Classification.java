@@ -1,9 +1,8 @@
 package com.citytechinc.cq.harbor.proper.core.components.mixins.classifiable;
 
-
+import com.citytechinc.cq.accelerate.api.ontology.Properties;
 import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.widgets.TagInputField;
-import com.citytechinc.cq.harbor.ns.ontology.Properties;
 import com.citytechinc.cq.library.components.AbstractComponent;
 import com.citytechinc.cq.library.content.node.ComponentNode;
 import com.citytechinc.cq.library.content.request.ComponentRequest;
@@ -26,7 +25,7 @@ public class Classification extends AbstractComponent {
         super(componentNode);
     }
 
-    @DialogField(fieldLabel = CLASSIFICATION_FIELD_LABEL, name = "./" + Properties.HARBOR_CLASSIFICATION)
+    @DialogField(fieldLabel = CLASSIFICATION_FIELD_LABEL, name = "./" + Properties.ACCELERATE_CLASSIFICATION)
     @TagInputField
     public Optional<Tag> getClassification() {
 
@@ -36,7 +35,7 @@ public class Classification extends AbstractComponent {
 
         TagManager tagManager = this.getResource().getResourceResolver().adaptTo(TagManager.class);
 
-        String tag = get(Properties.HARBOR_CLASSIFICATION, StringUtils.EMPTY);
+        String tag = get(Properties.ACCELERATE_CLASSIFICATION, StringUtils.EMPTY);
 
         if (StringUtils.isNotEmpty(tag)) {
             classification = Optional.fromNullable(tagManager.resolve(tag));

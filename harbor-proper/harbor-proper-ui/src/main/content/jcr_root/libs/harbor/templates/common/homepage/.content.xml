@@ -3,14 +3,14 @@
           xmlns:cq="http://www.day.com/jcr/cq/1.0"
           xmlns:jcr="http://www.jcp.org/jcr/1.0"
           xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-          xmlns:harbor="http://www.citytechinc.com/harbor/"
+          xmlns:accelerate="http://www.citytechinc.com/ns/accelerate/"
           jcr:primaryType="cq:Template"
           jcr:title="Home Page Template"
           allowedPaths="/content(/.*)?"
-          harbor:brand="/etc/brands/defaultbootstrapbrand/jcr:content"
+          accelerate:brand="/etc/brands/defaultbootstrapbrand/jcr:content"
           ranking="0">
     <jcr:content
-            jcr:primaryType="harbor:HomePage"
+            jcr:primaryType="accelerate:HomePage"
             sling:resourceType="harbor/components/page/common/master"
-            rdf:type="harbor:HomePage" />
+            rdf:type="accelerate:HomePage" />
 </jcr:root>
