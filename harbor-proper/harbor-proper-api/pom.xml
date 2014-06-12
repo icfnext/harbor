@@ -196,10 +196,10 @@
 			<artifactId>cq-component-annotations</artifactId>
 		</dependency>
 
-        <!-- Harbor NS -->
+        <!-- Accelerate API -->
         <dependency>
-            <groupId>com.citytechinc.cq.harbor.ns</groupId>
-            <artifactId>harbor-ns-core</artifactId>
+            <groupId>com.citytechinc.cq.accelerate</groupId>
+            <artifactId>accelerate-api</artifactId>
         </dependency>
 
 	</dependencies>

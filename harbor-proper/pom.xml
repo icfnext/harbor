@@ -3,9 +3,9 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <parent>
-        <groupId>com.citytechinc.cq.library</groupId>
-        <artifactId>cq-library</artifactId>
-        <version>7.1.1-SNAPSHOT</version>
+        <groupId>com.citytechinc.cq.accelerate</groupId>
+        <artifactId>accelerate</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
     </parent>
 
 	<modelVersion>4.0.0</modelVersion>
@@ -44,7 +44,6 @@
     </pluginRepositories>
 
 	<properties>
-		<cq.library.version>7.1.1-SNAPSHOT</cq.library.version>
 		<core.name>harbor-proper-core</core.name>
         <core.version>1.0.0-SNAPSHOT</core.version>
         <api.name>harbor-proper-api</api.name>
@@ -55,37 +54,6 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<maven.junit.usefile>false</maven.junit.usefile>
 	</properties>
-
-	<profiles>
-		<profile>
-			<id>default</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<properties>
-                <crx.skip>true</crx.skip>
-                <osgi.bundle.status.skip>true</osgi.bundle.status.skip>
-                <cq.username>admin</cq.username>
-			</properties>
-		</profile>
-		<profile>
-			<id>local</id>
-			<activation>
-				<property>
-					<name>local</name>
-				</property>
-			</activation>
-			<properties>
-                <crx.skip>false</crx.skip>
-                <osgi.bundle.status.skip>false</osgi.bundle.status.skip>
-                <cq.host>localhost</cq.host>
-                <cq.port.author>4502</cq.port.author>
-                <cq.port.publish>4503</cq.port.publish>
-                <cq.username>admin</cq.username>
-                <cq.password>admin</cq.password>
-			</properties>
-		</profile>
-	</profiles>
 
 	<build>
 		<plugins>
@@ -133,8 +101,8 @@
                 <type>zip</type>
             </dependency>
             <dependency>
-                <groupId>com.citytechinc.cq.harbor.ns</groupId>
-                <artifactId>harbor-ns-core</artifactId>
+                <groupId>com.citytechinc.cq.accelerate</groupId>
+                <artifactId>accelerate-api</artifactId>
                 <version>1.0.0-SNAPSHOT</version>
                 <scope>provided</scope>
             </dependency>
@@ -143,7 +111,7 @@
             <dependency>
                 <groupId>com.citytechinc.cq.clientlibs</groupId>
                 <artifactId>clientlibrarian-api</artifactId>
-                <version>0.3.0-SNAPSHOT</version>
+                <version>${clientlibrarian.version}</version>
                 <scope>provided</scope>
             </dependency>
         </dependencies>

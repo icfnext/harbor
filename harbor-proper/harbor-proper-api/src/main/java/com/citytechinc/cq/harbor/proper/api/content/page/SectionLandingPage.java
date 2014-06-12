@@ -1,6 +1,6 @@
 package com.citytechinc.cq.harbor.proper.api.content.page;
 
-import com.citytechinc.cq.harbor.ns.ontology.Types;
+import com.citytechinc.cq.accelerate.api.ontology.Types;
 
 import java.util.List;
 
@@ -9,9 +9,10 @@ import java.util.List;
  */
 public interface SectionLandingPage extends HierarchicalPage {
 
-    public static final String RDF_TYPE = Types.HARBOR_SECTION_LANDING_PAGE;
+    public static final String RDF_TYPE = Types.ACCELERATE_SECTION_LANDING_PAGE;
 
     public boolean isSubSectionLandingPage();
 
     public List<SectionLandingPage> getSectionLandingPages();
+
 }

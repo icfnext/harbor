@@ -14,7 +14,6 @@
 	<name>CITYTECH, Inc. Harbor Core</name>
 
 	<build>
-        <testSourceDirectory>src/test/groovy</testSourceDirectory>
         <resources>
             <resource>
                 <directory>src/main/resources/META-INF</directory>
@@ -213,10 +212,10 @@
 			<artifactId>cq-component-annotations</artifactId>
 		</dependency>
 
-        <!-- Harbor NS -->
+        <!-- Accelerate API -->
         <dependency>
-            <groupId>com.citytechinc.cq.harbor.ns</groupId>
-            <artifactId>harbor-ns-core</artifactId>
+            <groupId>com.citytechinc.cq.accelerate</groupId>
+            <artifactId>accelerate-api</artifactId>
         </dependency>
 
         <!-- Harbor API -->

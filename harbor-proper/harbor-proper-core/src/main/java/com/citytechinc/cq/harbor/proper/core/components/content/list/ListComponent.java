@@ -2,6 +2,7 @@ package com.citytechinc.cq.harbor.proper.core.components.content.list;
 
 import java.util.Iterator;
 
+//TODO: Why does this exist here and in the API?
 public interface ListComponent <T extends Iterable> {
 
     /**
