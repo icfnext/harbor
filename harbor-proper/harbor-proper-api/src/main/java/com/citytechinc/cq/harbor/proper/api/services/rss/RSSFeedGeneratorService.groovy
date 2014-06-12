@@ -1,9 +1,10 @@
 package com.citytechinc.cq.harbor.proper.api.services.rss
 
-import com.citytechinc.cq.harbor.proper.api.content.rss.RSSFeedItem
+import com.citytechinc.cq.harbor.proper.api.content.rss.RSSFeed
+import com.google.common.base.Optional
 
 public interface RSSFeedGeneratorService {
 
-    public List<RSSFeedItem> getListOfRSSFeedItemsFromUrls(List<String> urlList, int numberOfItemsToDisplay);
+    public Optional<RSSFeed> getRSSFeed(String feedUrl);
 
 }

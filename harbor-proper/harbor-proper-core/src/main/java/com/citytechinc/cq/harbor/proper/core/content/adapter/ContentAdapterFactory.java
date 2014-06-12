@@ -8,6 +8,7 @@ import com.citytechinc.cq.harbor.proper.core.content.page.impl.DefaultHomePage;
 import com.citytechinc.cq.harbor.proper.core.content.page.impl.DefaultSectionLandingPage;
 import com.citytechinc.cq.harbor.proper.core.content.page.impl.PagePredicates;
 import com.citytechinc.cq.library.content.page.PageDecorator;
+import com.day.cq.wcm.api.Page;
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Properties;
 import org.apache.felix.scr.annotations.Property;
@@ -22,7 +23,8 @@ import org.osgi.framework.Constants;
         @Property(name = Constants.SERVICE_DESCRIPTION, value = "CQ Library Content API Adapter Factory"),
         @Property(name = "adaptables", value = {
                 "org.apache.sling.api.resource.Resource",
-                "com.citytechinc.cq.library.content.page.PageDecorator"
+                "com.citytechinc.cq.library.content.page.PageDecorator",
+                "com.day.cq.wcm.api.Page"
         }),
         @Property(name = "adapters", value = {
                 "com.citytechinc.cq.harbor.proper.api.content.page.HierarchicalPage",
@@ -40,6 +42,9 @@ public class ContentAdapterFactory implements AdapterFactory {
         }
         if (adaptable instanceof PageDecorator) {
             return getAdapter((PageDecorator) adaptable, type);
+        }
+        if (adaptable instanceof Page) {
+            return getAdapter((Page) adaptable, type);
         }
 
         return null;
@@ -78,5 +83,10 @@ public class ContentAdapterFactory implements AdapterFactory {
 
     }
 
+    private <AdapterType> AdapterType getAdapter(Page page, Class<AdapterType> type) {
+
+        return getAdapter(page.adaptTo(PageDecorator.class), type);
+
+    }
 
 }

@@ -1,13 +1,14 @@
 <%@include file="/libs/harbor/components/global.jsp"%>
 
+<%-- Rendering for the Button Itself --%>
 <c:choose>
-	<c:when test="${cta.openModal}">
+	<c:when test="${cta.opensAsModal}">
 		<a id="callToActionButton-${cta.id}" role="button" class="btn ${cta.size} ${cta.style} cta-btn" data-toggle="modal" data-target="#callToActionModal-${cta.id}">
 			<c:out value="${cta.text}"/>
 		</a>
 	</c:when>
-	<c:when test="${cta.openCurrent||cta.openWindow}">
-		<a id="callToActionButton-${cta.id}" role="button" class="btn ${cta.size} ${cta.style} cta-btn" href="${cta.linkUrl}"<c:if test="${cta.openWindow}">target="_blank"</c:if>>
+	<c:when test="${cta.opensInCurrentWindow||cta.opensInNewWindow}">
+		<a id="callToActionButton-${cta.id}" role="button" class="btn ${cta.size} ${cta.style} cta-btn" href="${cta.linkTarget.href}"<c:if test="${cta.opensInNewWindow}">target="_blank"</c:if>>
 			<c:out value="${cta.text}"/>
 		</a>
 	</c:when>
@@ -18,7 +19,8 @@
 	</c:otherwise>
 </c:choose>
 
-<c:if test="${cta.openModal}">
+<%-- Rendering for the Modal in the case that the buttons action is to open a Modal --%>
+<c:if test="${cta.opensAsModal}">
 	<div class="modal fade cta-modal" data-keyboard="false" tabindex="-1"  role="dialog" id="callToActionModal-${cta.id}">
 		<div class="modal-dialog">
 			<div class="modal-content">
