@@ -19,7 +19,12 @@ import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
 
-@Component(value = "Call to Action", group = "Harbor", name = "calltoaction", contentAdditionalProperties = {@ContentProperty(name="dependencies", value="harbor.bootstrap.modals")})
+@Component(
+        value = "Call to Action",
+        group = "Harbor",
+        name = "calltoaction",
+        layout = "rollover",
+        contentAdditionalProperties = {@ContentProperty(name="dependencies", value="[harbor.bootstrap.modals,harbor.bootstrap.buttons,harbor.author-common]")})
 @AutoInstantiate( instanceName = CallToAction.INSTANCE_NAME )
 public class CallToAction extends AbstractComponent {
 
@@ -34,6 +39,9 @@ public class CallToAction extends AbstractComponent {
 	private static final String OPEN_MODAL = "modal";
 	private static final String LINK_IN_WINDOW = "window";
 	private static final String LINK_IN_CURRENT = "current";
+
+    public static final String BUTTON_ID_PREFIX = "callToActionButton-";
+    public static final String MODAL_ID_PREFIX = "callToActionModal-";
 
     private Link target;
 
@@ -126,11 +134,17 @@ public class CallToAction extends AbstractComponent {
         return target;
 	}
 
-
-
 	public String getId() throws RepositoryException {
 		return getResource().adaptTo(Node.class).getIdentifier();
 	}
+
+    public String getButtonId() throws RepositoryException {
+        return BUTTON_ID_PREFIX + getId();
+    }
+
+    public String getModalId() throws RepositoryException {
+        return MODAL_ID_PREFIX + getId();
+    }
 
 	public Boolean getOpensInNewWindow() {
 		return StringUtils.equalsIgnoreCase(getAction(), LINK_IN_WINDOW);
