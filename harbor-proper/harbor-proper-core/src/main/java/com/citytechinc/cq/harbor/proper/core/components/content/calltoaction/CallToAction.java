@@ -102,13 +102,13 @@ public class CallToAction extends AbstractComponent {
 	@DialogField(fieldLabel = "Action",
 			fieldDescription = "Select the widget's action upon being clicked" , ranking = 4)
 	@Selection (type=Selection.SELECT, options = {
-			@Option(text = "Modal",
+			@Option(text = "Open as a Modal",
 					qtip = "Opens an authored modal on button click.",
 					value = OPEN_MODAL),
-			@Option(text = "New Window/Tab",
+			@Option(text = "Open in a New Window/Tab",
 					qtip = "Opens link to specified path in a new window or tab.",
 					value = LINK_IN_WINDOW),
-			@Option(text = "Current Window",
+			@Option(text = "Open in the Current Window",
 					qtip = "Opens link to specified path in current window.",
 					value = LINK_IN_CURRENT)
 	})
