@@ -43,6 +43,18 @@
         </pluginRepository>
     </pluginRepositories>
 
+    <distributionManagement>
+        <repository>
+            <id>citytech-private-releases</id>
+            <url>http://nexus.citytech.ctmsp.com/content/repositories/releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>citytech-private-snapshots</id>
+            <url>http://nexus.citytech.ctmsp.com/content/repositories/snapshots</url>
+            <uniqueVersion>false</uniqueVersion>
+        </snapshotRepository>
+    </distributionManagement>
+
 	<properties>
 		<core.name>harbor-proper-core</core.name>
         <core.version>1.0.0-SNAPSHOT</core.version>
