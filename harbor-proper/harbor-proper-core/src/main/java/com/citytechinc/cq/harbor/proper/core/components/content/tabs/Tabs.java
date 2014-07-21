@@ -28,7 +28,7 @@ import java.util.List;
                 @ActionConfig(text = "Add Tab", handler = "function(){Harbor.Components.Tabs.addTab(this)}")
         },
         contentAdditionalProperties = {
-                @ContentProperty(name = "dependencies", value = "[harbor.components.content.tabs,harbor.bootstrap]")
+                @ContentProperty(name = "dependencies", value = "[harbor.components.content.tabs]")
         }
 )
 @AutoInstantiate(instanceName = "tabs")

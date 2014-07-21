@@ -36,5 +36,6 @@ Harbor.Components.Tabs = function (jQuery) {
             });
         }
     }
-}(jQuery)
+}(jQuery);
+
 
