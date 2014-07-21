@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <parent>
+        <groupId>com.citytechinc.cq.accelerate</groupId>
+        <artifactId>accelerate</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.citytechinc.cq.harbor.proper</groupId>
+	<artifactId>harbor-proper</artifactId>
+	<packaging>pom</packaging>
+	<version>1.0.0-SNAPSHOT</version>
+	<name>CITYTECH, Inc. Harbor CQ5 Website</name>
+
+	<modules>
+        <module>harbor-proper-api</module>
+		<module>harbor-proper-core</module>
+		<module>harbor-proper-ui</module>
+	</modules>
+
+    <repositories>
+        <repository>
+            <id>citytech-public</id>
+            <url>http://nexus.citytech.ctmsp.com/content/groups/public</url>
+        </repository>
+        <repository>
+            <id>citytech-private</id>
+            <url>http://nexus.citytech.ctmsp.com/content/groups/CITYTECH-Private/</url>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>citytech-public</id>
+            <url>http://nexus.citytech.ctmsp.com/content/groups/public</url>
+        </pluginRepository>
+        <pluginRepository>
+            <id>citytech-private</id>
+            <url>http://nexus.citytech.ctmsp.com/content/groups/CITYTECH-Private/</url>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <distributionManagement>
+        <repository>
+            <id>citytech-private-releases</id>
+            <url>http://nexus.citytech.ctmsp.com/content/repositories/releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>citytech-private-snapshots</id>
+            <url>http://nexus.citytech.ctmsp.com/content/repositories/snapshots</url>
+            <uniqueVersion>false</uniqueVersion>
+        </snapshotRepository>
+    </distributionManagement>
+
+	<properties>
+		<core.name>harbor-proper-core</core.name>
+        <core.version>1.0.0-SNAPSHOT</core.version>
+        <api.name>harbor-proper-api</api.name>
+        <api.version>1.0.0-SNAPSHOT</api.version>
+		<maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss.SSSZ</maven.build.timestamp.format>
+		<timestamp>${maven.build.timestamp}</timestamp>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<maven.junit.usefile>false</maven.junit.usefile>
+	</properties>
+
+
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>versions-maven-plugin</artifactId>
+				<configuration>
+					<generateBackupPoms>false</generateBackupPoms>
+				</configuration>
+			</plugin>
+            <plugin>
+                <groupId>com.github.searls</groupId>
+                <artifactId>jasmine-maven-plugin</artifactId>
+                <version>1.3.1.4</version>
+                <inherited>false</inherited>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>test</goal>
+                        </goals>
+                        <configuration>
+                            <jsTestSrcDir>${project.basedir}/harbor-ui/src/test/javascript</jsTestSrcDir>
+                            <preloadSources>
+                                <source>${project.basedir}/harbor-proper-ui/src/main/content/jcr_root/etc/clientlibs/harbor/namespace/js/namespace.js</source>
+                                <source>${project.basedir}/harbor-proper-ui/src/main/content/jcr_root/etc/clientlibs/harbor/author-common/js/searchtree.js</source>
+                            </preloadSources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+		</plugins>
+	</build>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.citytechinc.cq.library</groupId>
+                <artifactId>cq-library-core</artifactId>
+                <version>${cq.library.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.citytechinc.cq.library</groupId>
+                <artifactId>cq-library-ui</artifactId>
+                <version>${cq.library.version}</version>
+                <type>zip</type>
+            </dependency>
+            <dependency>
+                <groupId>com.citytechinc.cq.accelerate</groupId>
+                <artifactId>accelerate-api</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <!-- Client Librarian -->
+            <dependency>
+                <groupId>com.citytechinc.cq.clientlibs</groupId>
+                <artifactId>clientlibrarian-api</artifactId>
+                <version>${clientlibrarian.version}</version>
+                <scope>provided</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>

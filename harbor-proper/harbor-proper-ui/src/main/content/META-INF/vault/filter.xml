@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workspaceFilter version="1.0">
+    <filter root="/apps/cq-library/components" />
+    <filter root="/apps/cq-library/config" />
+    <filter root="/apps/cq-library/install" />
+    <filter root="/libs/harbor/components" />
+    <filter root="/libs/harbor/templates" />
+    <filter root="/libs/harbor/install" />
+    <filter root="/etc/clientlibs/cq-library" />
+    <filter root="/etc/clientlibs/harbor" />
+    <filter root="/etc/brands/defaultbootstrapbrand" />
+</workspaceFilter>

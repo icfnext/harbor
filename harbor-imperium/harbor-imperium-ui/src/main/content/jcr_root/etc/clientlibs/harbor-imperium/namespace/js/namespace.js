@@ -1,0 +1,5 @@
+Harbor.Imperium = {
+    Components : {
+        Layout : {}
+    }
+};

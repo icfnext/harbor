@@ -1,0 +1,2 @@
+#base=css
+newWithVar_variables.less

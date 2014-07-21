@@ -1,1 +1,0 @@
-console.log( 'A testcomponent is on the page' );

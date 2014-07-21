@@ -2,10 +2,9 @@
 .project
 .metadata
 .classpath
+.idea
 .settings/
 target/
-.idea/
 *.iml
 *.ipr
 *.iws
-/nbactions.xml
