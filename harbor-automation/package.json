@@ -12,7 +12,7 @@
     },
     "options": {
         "clientlibsPaths" : {
-            "bootstrap" : "../harbor-ui/src/main/content/jcr_root/etc/clientlibs/harbor/bootstrap/"
+            "bootstrap" : "../harbor-proper/harbor-proper-ui/src/main/content/jcr_root/etc/clientlibs/harbor/bootstrap"
         },
         "repositoriesPath" : "front-end-repositories/"
 
