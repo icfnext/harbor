@@ -6,6 +6,7 @@ import com.citytechinc.cq.component.annotations.Option;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
 import com.citytechinc.cq.harbor.proper.api.constants.devices.DeviceTypes;
 import com.citytechinc.cq.harbor.proper.api.domain.devices.DeviceType;
+import com.citytechinc.cq.harbor.proper.core.constants.groups.ComponentGroups;
 import com.citytechinc.cq.harbor.proper.core.util.bootstrap.BootstrapUtils;
 import com.citytechinc.cq.library.components.AbstractComponent;
 import com.citytechinc.cq.library.components.annotations.AutoInstantiate;
@@ -16,7 +17,7 @@ import com.google.common.collect.Lists;
 
 import java.util.List;
 
-@Component( value = "Responsive Container", description =  "A content container which can be shown or hidden at various device size breakpoints." )
+@Component( value = "Responsive Container", description =  "A content container which can be shown or hidden at various device size breakpoints.", group = ComponentGroups.HARBOR_SCAFFOLDING )
 @AutoInstantiate( instanceName = ResponsiveContainer.INSTANCE_NAME )
 public class ResponsiveContainer extends AbstractComponent {
 

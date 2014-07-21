@@ -5,6 +5,7 @@ import com.citytechinc.cq.component.annotations.Component;
 import com.citytechinc.cq.component.annotations.ContentProperty;
 import com.citytechinc.cq.component.annotations.Listener;
 import com.citytechinc.cq.component.annotations.editconfig.ActionConfig;
+import com.citytechinc.cq.harbor.proper.core.constants.groups.ComponentGroups;
 import com.citytechinc.cq.harbor.proper.core.util.ComponentUtils;
 import com.citytechinc.cq.library.components.AbstractComponent;
 import com.citytechinc.cq.library.components.annotations.AutoInstantiate;
@@ -19,6 +20,7 @@ import java.util.List;
 
 
 @Component(value = "Tabs",
+        group = ComponentGroups.HARBOR_SCAFFOLDING,
         actions = {"text: Tabs", "-", "copymove", "delete", "-", "insert"},
         listeners = {
                 @Listener(name = "afterinsert", value = "REFRESH_PAGE")

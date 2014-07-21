@@ -8,13 +8,14 @@ import com.citytechinc.cq.component.annotations.widgets.DialogFieldSet;
 import com.citytechinc.cq.harbor.proper.api.content.page.navigation.NavigablePage;
 import com.citytechinc.cq.harbor.proper.api.lists.rendering.RootedListRenderingStrategy;
 import com.citytechinc.cq.harbor.proper.core.components.content.list.AbstractRootedListComponent;
+import com.citytechinc.cq.harbor.proper.core.constants.groups.ComponentGroups;
 import com.citytechinc.cq.harbor.proper.core.content.page.navigation.construction.HierarchicalPageNavigationListConstructionStrategy;
 import com.citytechinc.cq.harbor.proper.core.lists.rendering.PassthroughRootedListRenderingStrategy;
 import com.citytechinc.cq.library.components.annotations.AutoInstantiate;
 import com.citytechinc.cq.library.content.request.ComponentRequest;
 
 @Component(value = "Bootstrap Secondary Navigation",
-        group = "Harbor Scaffolding",
+        group = ComponentGroups.HARBOR_NAVIGATION,
         name = "navigation/bootstrapsecondarynavigation",
         listeners = {
                 @Listener(name = "afterinsert", value = "REFRESH_PAGE")

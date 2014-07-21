@@ -4,6 +4,7 @@ import com.citytechinc.cq.component.annotations.*;
 import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.editconfig.ActionConfig;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
+import com.citytechinc.cq.harbor.proper.core.constants.groups.ComponentGroups;
 import com.citytechinc.cq.library.components.AbstractComponent;
 import com.citytechinc.cq.library.components.annotations.AutoInstantiate;
 import com.citytechinc.cq.library.content.node.ComponentNode;
@@ -15,7 +16,7 @@ import java.util.Iterator;
 import java.util.List;
 
 @Component( value = "Bootstrap Main Manual Navigation",
-        group = "Harbor Scaffolding",
+        group = ComponentGroups.HARBOR_NAVIGATION,
         actions = {"text:Bootstrap Main Manual Navigation", "-", "edit", "-", "delete"},
         contentAdditionalProperties = {
                 @ContentProperty(name="dependencies", value="[harbor.components.content.bootstrapmainmanualnavigation,harbor.bootstrap.navbar]")

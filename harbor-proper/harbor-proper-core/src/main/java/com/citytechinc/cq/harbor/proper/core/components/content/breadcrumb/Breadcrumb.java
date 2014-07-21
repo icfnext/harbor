@@ -8,6 +8,7 @@ import com.citytechinc.cq.harbor.proper.api.lists.construction.ListConstructionS
 import com.citytechinc.cq.harbor.proper.api.lists.rendering.ListRenderingStrategy;
 import com.citytechinc.cq.harbor.proper.core.components.content.list.AbstractListComponent;
 import com.citytechinc.cq.harbor.proper.core.components.content.page.TrailPage;
+import com.citytechinc.cq.harbor.proper.core.constants.groups.ComponentGroups;
 import com.citytechinc.cq.harbor.proper.core.content.page.lists.construction.PageTrailListConstructionStrategy;
 import com.citytechinc.cq.library.components.annotations.AutoInstantiate;
 import com.citytechinc.cq.library.content.request.ComponentRequest;
@@ -15,7 +16,8 @@ import com.citytechinc.cq.library.content.request.ComponentRequest;
 @Component(value = "Breadcrumb",
         contentAdditionalProperties = {
                 @ContentProperty(name = "dependencies", value = "[harbor.fontawesome,harbor.bootstrap.breadcrumbs]"),
-        } )
+        },
+        group = ComponentGroups.HARBOR_NAVIGATION )
 @AutoInstantiate( instanceName = "breadcrumb" )
 public class Breadcrumb extends AbstractListComponent<TrailPage, BreadcrumbTrail> {
 

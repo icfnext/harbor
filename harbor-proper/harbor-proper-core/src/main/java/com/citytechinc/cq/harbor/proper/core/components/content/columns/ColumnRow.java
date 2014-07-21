@@ -5,6 +5,7 @@ import com.citytechinc.cq.component.annotations.widgets.DialogFieldSet;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
 import com.citytechinc.cq.harbor.proper.api.constants.bootstrap.Bootstrap;
 import com.citytechinc.cq.harbor.proper.core.components.mixins.classifiable.Classification;
+import com.citytechinc.cq.harbor.proper.core.constants.groups.ComponentGroups;
 import com.citytechinc.cq.library.components.AbstractComponent;
 import com.citytechinc.cq.library.components.annotations.AutoInstantiate;
 import com.citytechinc.cq.library.content.node.ComponentNode;
@@ -16,6 +17,7 @@ import java.util.Iterator;
 import java.util.List;
 
 @Component(value = "Column Row",
+        group = ComponentGroups.HARBOR_SCAFFOLDING,
         actions = {"text: Column Row", "-", "edit", "-", "copymove", "delete", "-", "insert"},
         contentAdditionalProperties = {
                 @ContentProperty(name="dependencies", value="harbor.components.content.columnrow")

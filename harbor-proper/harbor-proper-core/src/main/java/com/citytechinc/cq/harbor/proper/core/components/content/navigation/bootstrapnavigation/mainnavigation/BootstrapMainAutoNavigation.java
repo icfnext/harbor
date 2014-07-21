@@ -7,6 +7,7 @@ import com.citytechinc.cq.harbor.proper.api.lists.construction.RootedListConstru
 import com.citytechinc.cq.harbor.proper.api.lists.rendering.RootedListRenderingStrategy;
 import com.citytechinc.cq.harbor.proper.core.components.content.list.AbstractRootedListComponent;
 
+import com.citytechinc.cq.harbor.proper.core.constants.groups.ComponentGroups;
 import com.citytechinc.cq.harbor.proper.core.content.page.navigation.construction.SiteNavigationListConstructionStrategy;
 import com.citytechinc.cq.library.components.annotations.AutoInstantiate;
 import com.citytechinc.cq.library.content.request.ComponentRequest;
@@ -15,7 +16,7 @@ import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
 @Component( value = "Bootstrap Main Auto Navigation",
-        group = "Harbor Scaffolding",
+        group = ComponentGroups.HARBOR_NAVIGATION,
         actions = {"text:Bootstrap Main Auto Navigation", "-", "edit", "-", "delete"},
         contentAdditionalProperties = {
                 @ContentProperty(name="dependencies", value="harbor.bootstrap.navbar")

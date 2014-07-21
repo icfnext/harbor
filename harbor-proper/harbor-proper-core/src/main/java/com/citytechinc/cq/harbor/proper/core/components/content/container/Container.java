@@ -8,12 +8,13 @@ import com.citytechinc.cq.component.annotations.widgets.Selection;
 import com.citytechinc.cq.harbor.proper.api.constants.bootstrap.Bootstrap;
 import com.citytechinc.cq.harbor.proper.api.constants.dom.Elements;
 import com.citytechinc.cq.harbor.proper.core.components.mixins.classifiable.Classification;
+import com.citytechinc.cq.harbor.proper.core.constants.groups.ComponentGroups;
 import com.citytechinc.cq.library.components.AbstractComponent;
 import com.citytechinc.cq.library.components.annotations.AutoInstantiate;
 import com.citytechinc.cq.library.content.request.ComponentRequest;
 import com.google.common.base.Optional;
 
-@Component( value = "Container", description = "A container in which content may be placed.  All content should be placed in a container element.", name = "contentcontainer" )
+@Component( value = "Container", description = "A container in which content may be placed.  All content should be placed in a container element.", name = "contentcontainer", group = ComponentGroups.HARBOR_SCAFFOLDING )
 @AutoInstantiate( instanceName = Container.INSTANCE_NAME )
 public class Container extends AbstractComponent {
 
