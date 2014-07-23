@@ -1,0 +1,20 @@
+{
+    "name": "Harbor",
+    "version": "0.0.0",
+    "description": "",
+    "repository": "",
+    "dependencies": {
+        "grunt": "~0.4.1",
+        "shelljs": "*",
+        "chalk": "*",
+        "underscore": "*",
+        "line-by-line": "*"
+    },
+    "options": {
+        "clientlibsPaths" : {
+            "bootstrap" : "../harbor-proper/harbor-proper-ui/src/main/content/jcr_root/etc/clientlibs/harbor/bootstrap"
+        },
+        "repositoriesPath" : "front-end-repositories/"
+
+    }
+}
