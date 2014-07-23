@@ -5,6 +5,7 @@ import com.citytechinc.cq.component.annotations.Option;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
 import com.citytechinc.cq.harbor.proper.api.content.page.navigation.NavigablePage;
 import com.citytechinc.cq.harbor.proper.api.lists.rendering.RootedListRenderingStrategy;
+import com.citytechinc.cq.harbor.proper.core.components.content.navigation.bootstrapnavigation.mainnavigation.BootstrapPageNavigableRenderableRoot;
 import com.citytechinc.cq.library.components.AbstractComponent;
 import com.citytechinc.cq.library.content.request.ComponentRequest;
 import org.apache.commons.lang.StringUtils;
