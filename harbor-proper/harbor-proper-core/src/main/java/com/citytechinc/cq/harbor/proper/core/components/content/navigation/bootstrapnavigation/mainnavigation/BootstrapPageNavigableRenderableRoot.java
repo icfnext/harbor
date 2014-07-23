@@ -54,4 +54,8 @@ public class BootstrapPageNavigableRenderableRoot implements RootedItems<Navigab
         return getItems().iterator();
     }
 
+    public String getHref() {
+        return rootPage.getHref();
+    }
+
 }
