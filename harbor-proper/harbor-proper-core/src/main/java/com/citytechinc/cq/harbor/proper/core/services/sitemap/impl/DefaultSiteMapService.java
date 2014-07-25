@@ -22,7 +22,7 @@ import java.util.List;
 import static com.google.common.collect.Lists.newArrayList;
 
 @Service
-@Component(name="Dummy Page Service", label = "Dummy Page Service")
+@Component(name="Site Map Service", label = "Site Map Service")
 public class DefaultSiteMapService implements SiteMapService {
     protected static final Logger LOG = LoggerFactory.getLogger(DefaultSiteMapService.class);
 
