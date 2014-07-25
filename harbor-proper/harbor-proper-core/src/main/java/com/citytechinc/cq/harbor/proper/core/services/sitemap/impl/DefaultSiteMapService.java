@@ -1,6 +1,7 @@
 package com.citytechinc.cq.harbor.proper.core.services.sitemap.impl;
 
 import com.citytechinc.cq.harbor.proper.core.services.sitemap.SiteMapService;
+import com.citytechinc.cq.harbor.proper.core.services.sitemap.domain.ChangeFrequency;
 import com.citytechinc.cq.harbor.proper.core.services.sitemap.domain.SiteMap;
 import com.citytechinc.cq.harbor.proper.core.services.sitemap.domain.SiteMapEntry;
 import com.citytechinc.cq.library.content.page.PageDecorator;
@@ -20,6 +21,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
+import static org.apache.commons.lang.StringUtils.isEmpty;
 
 @Service
 @Component(name="Site Map Service", label = "Site Map Service")
@@ -42,10 +44,20 @@ public class DefaultSiteMapService implements SiteMapService {
     protected static final String jcrCreated = "jcr:created";
     protected static final String logTemplateSiteMapEntries = "built sitemap containing {} entries";
     protected static final String logTemplateSiteMapEntry = "built sitemap entry, loc={}, lastModified={}, changeFrequency={}, priority={}";
+    protected static final String logTemplateUnknownFrequency = "{} value must be one of {}";
+    protected static final String logTemplateInvalidPriority = "{} value must be between 0 and 1";
+    protected static int priorityMin = 0;
+    protected static int priorityMax = 1;
 
 
     @Reference
-    Externalizer externalizer;
+    protected Externalizer externalizer;
+
+    public DefaultSiteMapService() {}
+
+    protected DefaultSiteMapService(final Externalizer externalizer) {
+        this.externalizer = externalizer;
+    }
 
 
     @Override
@@ -72,8 +84,8 @@ public class DefaultSiteMapService implements SiteMapService {
         final ValueMap contentResourceValueMap = contentResource.adaptTo(ValueMap.class);
         final String loc = this.determineLoc(resourceResolver, pageDecorator, contentResourceValueMap);
         final String lastModified = this.determineLastModified(contentResourceValueMap);
-        final String changeFrequency = contentResourceValueMap.get(jcrAccelerateSitemapChangeFrequency, null);
-        final String urlPriority = contentResourceValueMap.get(jcrAccelerateSitemapPriority, null);
+        final String changeFrequency = this.determineChangeFrequency(contentResourceValueMap);
+        final String urlPriority = this.determinePriority(contentResourceValueMap);
         final SiteMapEntry siteMapEntry = this.newSiteMapEntry(loc, lastModified, changeFrequency, urlPriority);
 
         if(LOG.isDebugEnabled()) {
@@ -83,9 +95,47 @@ public class DefaultSiteMapService implements SiteMapService {
         return siteMapEntry;
     }
 
-    protected String determineLoc(final ResourceResolver resourceResolver, final PageDecorator pageDecorator, final ValueMap pageContentValueMap) {
-        final String externalPublishLink = externalizer.publishLink(resourceResolver, pageDecorator.getPath());
-        final String extension = pageContentValueMap.get(jcrAccelerateSitemapExtension, defaultLocSuffix);
+    protected String determineChangeFrequency(final ValueMap contentResourceValueMap) {
+        final String specifiedChangeFrequency = contentResourceValueMap.get(jcrAccelerateSitemapChangeFrequency, null);
+
+        final boolean changeFrequencyContains = ChangeFrequency.contains(specifiedChangeFrequency);
+
+        if(isEmpty(specifiedChangeFrequency) || !changeFrequencyContains) {
+            LOG.error(logTemplateUnknownFrequency, new Object[]{jcrAccelerateSitemapChangeFrequency, ChangeFrequency.valuesString()});
+            return null;
+        }else {
+            return specifiedChangeFrequency;
+        }
+    }
+
+    protected String determinePriority(final ValueMap contentResourceValueMap) {
+        final String specifiedPriority = contentResourceValueMap.get(jcrAccelerateSitemapPriority, null);
+
+        if(isEmpty(specifiedPriority)) {
+            return null;
+        }
+
+        final Double parsedSpecifiedPriority = (this.parseDouble(specifiedPriority));
+
+        if(null == parsedSpecifiedPriority || (parsedSpecifiedPriority < priorityMin || parsedSpecifiedPriority > priorityMax)) {
+            LOG.error(logTemplateInvalidPriority, jcrAccelerateSitemapPriority);
+            return null;
+        }else {
+            return parsedSpecifiedPriority.toString();
+        }
+    }
+
+    protected Double parseDouble(final String value) {
+        try {
+            return Double.parseDouble(value);
+        }catch(final Exception e) {
+            return null;
+        }
+    }
+
+    protected String determineLoc(final ResourceResolver resourceResolver, final PageDecorator pageDecorator, final ValueMap contentResourceValueMap) {
+        final String externalPublishLink = this.externalizer.publishLink(resourceResolver, pageDecorator.getPath());
+        final String extension = contentResourceValueMap.get(jcrAccelerateSitemapExtension, defaultLocSuffix);
         final StringBuffer locBuffer = this.newStringBuffer(externalPublishLink).append(extension);
 
         return locBuffer.toString();

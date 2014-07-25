@@ -7,6 +7,7 @@ public class SiteMapEntry {
     protected String changefreq;
     protected String priority;
 
+    public SiteMapEntry() {}
 
     public SiteMapEntry(final String loc, final String lastmod, final String changefreq, final String priority) {
         this.loc = loc;
