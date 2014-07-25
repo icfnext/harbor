@@ -40,6 +40,8 @@ public class DefaultSiteMapService implements SiteMapService {
     protected static final String jcrAccelerateSitemapPriority = "accelerate:priority";
     protected static final String jcrCqLastModified = "cq:lastModified";
     protected static final String jcrCreated = "jcr:created";
+    protected static final String logTemplateSiteMapEntries = "built sitemap containing {} entries";
+    protected static final String logTemplateSiteMapEntry = "built sitemap entry, loc={}, lastModified={}, changeFrequency={}, priority={}";
 
 
     @Reference
@@ -58,6 +60,10 @@ public class DefaultSiteMapService implements SiteMapService {
             siteMapEntries.add(siteMapEntry);
         }
 
+        if(LOG.isDebugEnabled()) {
+            LOG.debug(logTemplateSiteMapEntries, siteMapEntries.size());
+        }
+
         return this.newSiteMap(siteMapEntries);
     }
 
@@ -69,6 +75,10 @@ public class DefaultSiteMapService implements SiteMapService {
         final String changeFrequency = contentResourceValueMap.get(jcrAccelerateSitemapChangeFrequency, null);
         final String urlPriority = contentResourceValueMap.get(jcrAccelerateSitemapPriority, null);
         final SiteMapEntry siteMapEntry = this.newSiteMapEntry(loc, lastModified, changeFrequency, urlPriority);
+
+        if(LOG.isDebugEnabled()) {
+            LOG.debug(logTemplateSiteMapEntry, new Object[] {loc, lastModified, changeFrequency, urlPriority});
+        }
 
         return siteMapEntry;
     }
