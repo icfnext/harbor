@@ -1,2 +1,2 @@
 @javax.xml.bind.annotation.XmlSchema(namespace = "http://www.sitemaps.org/schemas/sitemap/0.9", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
-package com.citytechinc.cq.harbor.proper.core.services.sitemap.domain;
+package com.citytechinc.cq.harbor.proper.api.domain.sitemap;

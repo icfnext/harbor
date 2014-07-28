@@ -1,4 +1,4 @@
-package com.citytechinc.cq.harbor.proper.core.services.sitemap.domain;
+package com.citytechinc.cq.harbor.proper.core.domain.sitemap;
 
 import org.codehaus.groovy.util.ArrayIterator;
 

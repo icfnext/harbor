@@ -1,9 +1,9 @@
 package com.citytechinc.cq.harbor.proper.core.services.sitemap.impl;
 
-import com.citytechinc.cq.harbor.proper.core.services.sitemap.SiteMapService;
-import com.citytechinc.cq.harbor.proper.core.services.sitemap.domain.ChangeFrequency;
-import com.citytechinc.cq.harbor.proper.core.services.sitemap.domain.SiteMap;
-import com.citytechinc.cq.harbor.proper.core.services.sitemap.domain.SiteMapEntry;
+import com.citytechinc.cq.harbor.proper.api.domain.sitemap.SiteMap;
+import com.citytechinc.cq.harbor.proper.api.domain.sitemap.SiteMapEntry;
+import com.citytechinc.cq.harbor.proper.core.domain.sitemap.ChangeFrequency;
+import com.citytechinc.cq.harbor.proper.api.services.sitemap.SiteMapService;
 import com.citytechinc.cq.library.content.page.PageDecorator;
 import com.day.cq.commons.Externalizer;
 import com.google.common.base.Predicate;

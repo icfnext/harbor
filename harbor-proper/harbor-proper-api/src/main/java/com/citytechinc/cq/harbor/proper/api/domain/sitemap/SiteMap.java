@@ -1,4 +1,4 @@
-package com.citytechinc.cq.harbor.proper.core.services.sitemap.domain;
+package com.citytechinc.cq.harbor.proper.api.domain.sitemap;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;

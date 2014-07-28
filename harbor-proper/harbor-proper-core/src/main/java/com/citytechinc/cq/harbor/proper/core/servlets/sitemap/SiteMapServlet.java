@@ -1,8 +1,8 @@
 package com.citytechinc.cq.harbor.proper.core.servlets.sitemap;
 
 
-import com.citytechinc.cq.harbor.proper.core.services.sitemap.SiteMapService;
-import com.citytechinc.cq.harbor.proper.core.services.sitemap.domain.SiteMap;
+import com.citytechinc.cq.harbor.proper.api.domain.sitemap.SiteMap;
+import com.citytechinc.cq.harbor.proper.api.services.sitemap.SiteMapService;
 import com.citytechinc.cq.library.content.page.PageDecorator;
 import com.citytechinc.cq.library.content.page.PageManagerDecorator;
 import com.day.cq.wcm.api.Page;
