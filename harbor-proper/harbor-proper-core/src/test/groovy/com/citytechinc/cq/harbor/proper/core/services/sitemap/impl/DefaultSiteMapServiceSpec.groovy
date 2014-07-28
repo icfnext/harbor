@@ -6,6 +6,9 @@ import org.apache.sling.api.resource.ResourceResolver
 import org.apache.sling.api.resource.ValueMap
 import spock.lang.Specification
 
+import static com.citytechinc.cq.accelerate.api.ontology.Properties.ACCELERATE_SITEMAP_PRIORITY
+import static com.citytechinc.cq.accelerate.api.ontology.Properties.ACCELERATE_SITEMAP_RESOURCE_EXTENSION
+
 class DefaultSiteMapServiceSpec extends Specification {
     DefaultSiteMapService defaultSiteMapService = Spy()
 
@@ -18,9 +21,9 @@ class DefaultSiteMapServiceSpec extends Specification {
         defaultSiteMapService.externalizer = Mock(Externalizer)
     }
 
-    def "determinePriority should return the resource jcrAccelerateSitemapPriority when it resolves to a non-empty numeric value between 0 and 1"() {
+    def "determinePriority should return the resource accelerate:priority when it resolves to a valid non-empty numeric value between 0 and 1"() {
         setup:
-        contentResourceValueMap.get(DefaultSiteMapService.jcrAccelerateSitemapPriority, null) >> "0.3"
+        contentResourceValueMap.get(ACCELERATE_SITEMAP_PRIORITY, null) >> "0.3"
 
         when:
         def result = defaultSiteMapService.determinePriority(contentResourceValueMap)
@@ -29,9 +32,9 @@ class DefaultSiteMapServiceSpec extends Specification {
         result == "0.3"
     }
 
-    def "determinePriority should return null if resource jcrAccelerateSitemapPriority resolves to empty"() {
+    def "determinePriority should return null if resource accelerate:priority resolves to empty"() {
         setup:
-        contentResourceValueMap.get(DefaultSiteMapService.jcrAccelerateSitemapPriority, null) >> null
+        contentResourceValueMap.get(ACCELERATE_SITEMAP_PRIORITY, null) >> null
 
         when:
         def result = defaultSiteMapService.determinePriority(contentResourceValueMap)
@@ -40,9 +43,9 @@ class DefaultSiteMapServiceSpec extends Specification {
         result == null
     }
 
-    def "determinePriority should return null when resolved jcrAccelerateSitemapPriority value is numeric but less than 0"() {
+    def "determinePriority should return null when resolved accelerate:priority value is numeric but less than 0"() {
         setup:
-        contentResourceValueMap.get(DefaultSiteMapService.jcrAccelerateSitemapPriority, null) >> "-0.3"
+        contentResourceValueMap.get(ACCELERATE_SITEMAP_PRIORITY, null) >> "-0.3"
 
         when:
         def result = defaultSiteMapService.determinePriority(contentResourceValueMap)
@@ -51,9 +54,9 @@ class DefaultSiteMapServiceSpec extends Specification {
         result == null
     }
 
-    def "determinePriority should return null when resolved jcrAccelerateSitemapPriority value is numeric but more than 1"() {
+    def "determinePriority should return null when resolved accelerate:priority value is numeric but more than 1"() {
         setup:
-        contentResourceValueMap.get(DefaultSiteMapService.jcrAccelerateSitemapPriority, null) >> "1.1"
+        contentResourceValueMap.get(ACCELERATE_SITEMAP_PRIORITY, null) >> "1.1"
 
         when:
         def result = defaultSiteMapService.determinePriority(contentResourceValueMap)
@@ -92,13 +95,13 @@ class DefaultSiteMapServiceSpec extends Specification {
     def externalPublishLink = "http://bin${jcrPagePath}"
     def jcrPageExtension = ".htm"
 
-    def "determineLoc should lookup the external publish link and jcrPageExtension then combine it with the pageDecorator path for the loc value"() {
+    def "determineLoc should lookup the external publish link and accelerate:locExtension then combine it with the pageDecorator path for the loc value"() {
         setup:
         StringBuffer locBuffer = new StringBuffer(externalPublishLink)
 
         pageDecorator.getPath() >> jcrPagePath
         defaultSiteMapService.externalizer.publishLink(resourceResolver, jcrPagePath) >> externalPublishLink
-        contentResourceValueMap.get(DefaultSiteMapService.jcrAccelerateSitemapExtension, DefaultSiteMapService.defaultLocSuffix) >> jcrPageExtension
+        contentResourceValueMap.get(ACCELERATE_SITEMAP_RESOURCE_EXTENSION, DefaultSiteMapService.defaultLocSuffix) >> jcrPageExtension
         defaultSiteMapService.newStringBuffer(externalPublishLink) >> locBuffer
 
         when:
@@ -114,7 +117,7 @@ class DefaultSiteMapServiceSpec extends Specification {
 
         pageDecorator.getPath() >> jcrPagePath
         defaultSiteMapService.externalizer.publishLink(resourceResolver, jcrPagePath) >> externalPublishLink
-        contentResourceValueMap.get(DefaultSiteMapService.jcrAccelerateSitemapExtension, DefaultSiteMapService.defaultLocSuffix) >> DefaultSiteMapService.defaultLocSuffix
+        contentResourceValueMap.get(ACCELERATE_SITEMAP_RESOURCE_EXTENSION, DefaultSiteMapService.defaultLocSuffix) >> DefaultSiteMapService.defaultLocSuffix
         defaultSiteMapService.newStringBuffer(externalPublishLink) >> locBuffer
 
         when:

@@ -20,6 +20,9 @@ import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import static com.citytechinc.cq.accelerate.api.ontology.Properties.*;
+import static com.day.cq.commons.jcr.JcrConstants.JCR_CREATED;
+import static com.day.cq.wcm.api.NameConstants.PN_PAGE_LAST_MOD;
 import static com.google.common.collect.Lists.newArrayList;
 import static org.apache.commons.lang.StringUtils.isEmpty;
 
@@ -37,11 +40,6 @@ public class DefaultSiteMapService implements SiteMapService {
 
     protected static final String defaultLocSuffix = ".html";
     protected static final String iso8601DateFormat = "yyyy-MM-dd";
-    protected static final String jcrAccelerateSitemapExtension = "accelerate:loc.extension";
-    protected static final String jcrAccelerateSitemapChangeFrequency = "accelerate:changefreq";
-    protected static final String jcrAccelerateSitemapPriority = "accelerate:priority";
-    protected static final String jcrCqLastModified = "cq:lastModified";
-    protected static final String jcrCreated = "jcr:created";
     protected static final String logTemplateSiteMapEntries = "built sitemap containing {} entries";
     protected static final String logTemplateSiteMapEntry = "built sitemap entry, loc={}, lastModified={}, changeFrequency={}, priority={}";
     protected static final String logTemplateUnknownFrequency = "{} value must be one of {}";
@@ -53,12 +51,6 @@ public class DefaultSiteMapService implements SiteMapService {
 
     @Reference
     protected Externalizer externalizer;
-
-    public DefaultSiteMapService() {}
-
-    protected DefaultSiteMapService(final Externalizer externalizer) {
-        this.externalizer = externalizer;
-    }
 
 
     @Override
@@ -97,12 +89,12 @@ public class DefaultSiteMapService implements SiteMapService {
     }
 
     protected String determineChangeFrequency(final ValueMap contentResourceValueMap) {
-        final String specifiedChangeFrequency = contentResourceValueMap.get(jcrAccelerateSitemapChangeFrequency, null);
+        final String specifiedChangeFrequency = contentResourceValueMap.get(ACCELERATE_SITEMAP_CHANGE_FREQUENCY, null);
 
         final boolean changeFrequencyContains = ChangeFrequency.contains(specifiedChangeFrequency);
 
         if(isEmpty(specifiedChangeFrequency) || !changeFrequencyContains) {
-            LOG.error(logTemplateUnknownFrequency, new Object[]{jcrAccelerateSitemapChangeFrequency, ChangeFrequency.valuesString()});
+            LOG.error(logTemplateUnknownFrequency, new Object[]{ACCELERATE_SITEMAP_CHANGE_FREQUENCY, ChangeFrequency.valuesString()});
             return null;
         }else {
             return specifiedChangeFrequency;
@@ -110,7 +102,7 @@ public class DefaultSiteMapService implements SiteMapService {
     }
 
     protected String determinePriority(final ValueMap contentResourceValueMap) {
-        final String specifiedPriority = contentResourceValueMap.get(jcrAccelerateSitemapPriority, null);
+        final String specifiedPriority = contentResourceValueMap.get(ACCELERATE_SITEMAP_PRIORITY, null);
 
         if(isEmpty(specifiedPriority)) {
             return null;
@@ -119,7 +111,7 @@ public class DefaultSiteMapService implements SiteMapService {
         final Double parsedSpecifiedPriority = (this.parseDouble(specifiedPriority));
 
         if(null == parsedSpecifiedPriority || (parsedSpecifiedPriority < priorityMin || parsedSpecifiedPriority > priorityMax)) {
-            LOG.error(logTemplateInvalidPriority, jcrAccelerateSitemapPriority);
+            LOG.error(logTemplateInvalidPriority, ACCELERATE_SITEMAP_PRIORITY);
             return null;
         }else {
             return parsedSpecifiedPriority.toString();
@@ -136,7 +128,7 @@ public class DefaultSiteMapService implements SiteMapService {
 
     protected String determineLoc(final ResourceResolver resourceResolver, final PageDecorator pageDecorator, final ValueMap contentResourceValueMap) {
         final String externalPublishLink = this.externalizer.publishLink(resourceResolver, pageDecorator.getPath());
-        final String extension = contentResourceValueMap.get(jcrAccelerateSitemapExtension, defaultLocSuffix);
+        final String extension = contentResourceValueMap.get(ACCELERATE_SITEMAP_RESOURCE_EXTENSION, defaultLocSuffix);
         final StringBuffer locBuffer = this.newStringBuffer(externalPublishLink).append(extension);
 
         return locBuffer.toString();
@@ -144,7 +136,7 @@ public class DefaultSiteMapService implements SiteMapService {
 
     protected String determineLastModified(final ValueMap pageContentValueMap) {
         final GregorianCalendar lastModified =
-            (GregorianCalendar)pageContentValueMap.get(jcrCqLastModified, pageContentValueMap.get(jcrCreated));
+            (GregorianCalendar)pageContentValueMap.get(PN_PAGE_LAST_MOD, pageContentValueMap.get(JCR_CREATED));
 
         if(null == lastModified) {
             return null;
