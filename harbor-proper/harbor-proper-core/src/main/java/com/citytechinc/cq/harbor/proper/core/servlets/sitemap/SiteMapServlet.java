@@ -22,7 +22,7 @@ import java.io.IOException;
 
 @SlingServlet(
         resourceTypes = "cq:Page",
-        selectors = "pagelist",
+        selectors = "sitemap",
         methods = "GET",
         extensions = "xml"
 )
