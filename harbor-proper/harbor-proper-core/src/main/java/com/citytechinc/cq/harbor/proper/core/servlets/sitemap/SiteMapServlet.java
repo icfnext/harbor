@@ -36,7 +36,7 @@ public class SiteMapServlet extends SlingAllMethodsServlet {
     @Override
     protected void doGet(final SlingHttpServletRequest slingHttpServletRequest, final SlingHttpServletResponse slingHttpServletResponse) throws ServletException, IOException {
         final PageDecorator currentPage = this.unpackCurrentPage(slingHttpServletRequest);
-        final SiteMap siteMap = this.siteMapService.getSitemapEntryList(slingHttpServletRequest.getResourceResolver(), currentPage);
+        final SiteMap siteMap = this.siteMapService.getSitemapEntryList(currentPage);
 
         this.writeXmlResponse(slingHttpServletResponse, siteMap);
     }

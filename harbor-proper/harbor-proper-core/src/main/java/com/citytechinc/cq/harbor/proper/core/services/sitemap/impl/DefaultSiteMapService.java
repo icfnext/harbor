@@ -54,7 +54,8 @@ public class DefaultSiteMapService implements SiteMapService {
 
 
     @Override
-    public SiteMap getSitemapEntryList(final ResourceResolver resourceResolver, final PageDecorator root) {
+    public SiteMap getSitemapEntryList(final PageDecorator root) {
+        final ResourceResolver resourceResolver = root.adaptTo(Resource.class).getResourceResolver();
         final List<SiteMapEntry> siteMapEntries = newArrayList();
 
         final SiteMapEntry rootSiteMapEntry = this.buildSiteMapEntry(resourceResolver, root);
