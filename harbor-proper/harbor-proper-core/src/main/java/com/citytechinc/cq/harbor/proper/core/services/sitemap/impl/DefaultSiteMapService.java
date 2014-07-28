@@ -74,12 +74,10 @@ public class DefaultSiteMapService implements SiteMapService {
     }
 
     protected SiteMapEntry buildSiteMapEntry(final ResourceResolver resourceResolver, final PageDecorator pageDecorator) {
-        final Resource contentResource = pageDecorator.getContentResource();
-        final ValueMap contentResourceValueMap = contentResource.adaptTo(ValueMap.class);
-        final String loc = this.determineLoc(resourceResolver, pageDecorator, contentResourceValueMap);
-        final String lastModified = this.determineLastModified(contentResourceValueMap);
-        final String changeFrequency = this.determineChangeFrequency(contentResourceValueMap);
-        final String urlPriority = this.determinePriority(contentResourceValueMap);
+        final String loc = this.determineLoc(resourceResolver, pageDecorator, pageDecorator.getProperties());
+        final String lastModified = this.determineLastModified(pageDecorator.getProperties());
+        final String changeFrequency = this.determineChangeFrequency(pageDecorator.getProperties());
+        final String urlPriority = this.determinePriority(pageDecorator.getProperties());
         final SiteMapEntry siteMapEntry = this.newSiteMapEntry(loc, lastModified, changeFrequency, urlPriority);
 
         if(LOG.isDebugEnabled()) {
