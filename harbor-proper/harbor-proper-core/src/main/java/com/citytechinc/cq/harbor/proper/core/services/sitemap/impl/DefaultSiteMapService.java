@@ -46,8 +46,9 @@ public class DefaultSiteMapService implements SiteMapService {
     protected static final String logTemplateSiteMapEntry = "built sitemap entry, loc={}, lastModified={}, changeFrequency={}, priority={}";
     protected static final String logTemplateUnknownFrequency = "{} value must be one of {}";
     protected static final String logTemplateInvalidPriority = "{} value must be between 0 and 1";
-    protected static int priorityMin = 0;
+
     protected static int priorityMax = 1;
+    protected static int priorityMin = 0;
 
 
     @Reference
