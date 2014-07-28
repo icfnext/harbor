@@ -36,7 +36,7 @@ public class Container extends AbstractLayoutComponent {
     @Selection( options = { @Option( text = "true", value = "true" ) }, type = Selection.CHECKBOX )
     public Boolean getIsContainerFullWidth() {
 
-        return getLayoutProperty(FULL_WIDTH_PROPERTY, false);
+        return get(FULL_WIDTH_PROPERTY, false);
 
     }
 
@@ -52,7 +52,7 @@ public class Container extends AbstractLayoutComponent {
 
     public String getContainerClass() {
 
-        StringBuffer classStringBuffer = new StringBuffer();
+        StringBuilder classStringBuffer = new StringBuilder();
 
         if (getIsContainerFullWidth()) {
             classStringBuffer.append(getContainerFullWidthClass());

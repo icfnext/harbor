@@ -1,7 +1,7 @@
 <%@include file="/libs/harbor-imperium/components/global.jsp" %>
 
 <c:set var="curRow" scope="page" value="${ColumnRow}" />
-<c:if test="${curRow.isLayoutMode}">
+<c:if test="${curRow.layoutMode}">
     <div class="imperium-layout-section-container">
         <span class="imperium-layout-section-name">
             Layout Column Row
@@ -17,10 +17,10 @@
                 <div class="${curRow.gridSize}${curcolumn.colClass}" name="${curcolumn.name}">
             </c:otherwise>
         </c:choose>
-            <imperium:includeLayoutElement path="${curcolumn.name}" resourceType="harbor-imperium/components/layout/layoutcolumn" />
+            <cq:include path="${curcolumn.name}" resourceType="harbor-imperium/components/layout/layoutcolumn" />
         </div>
     </c:forEach>
 </div>
-<c:if test="${curRow.isLayoutMode}">
+<c:if test="${curRow.layoutMode}">
     </div>
 </c:if>

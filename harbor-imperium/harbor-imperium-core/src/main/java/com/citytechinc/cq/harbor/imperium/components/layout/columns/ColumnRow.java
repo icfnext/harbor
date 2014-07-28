@@ -1,6 +1,5 @@
 package com.citytechinc.cq.harbor.imperium.components.layout.columns;
 
-import com.citytechinc.aem.imperium.proper.api.layout.LayoutElement;
 import com.citytechinc.aem.imperium.proper.core.components.layout.AbstractLayoutComponent;
 import com.citytechinc.cq.component.annotations.*;
 import com.citytechinc.cq.component.annotations.editconfig.ActionConfig;
@@ -11,9 +10,7 @@ import com.citytechinc.cq.harbor.proper.core.components.mixins.classifiable.Clas
 import com.citytechinc.cq.library.components.annotations.AutoInstantiate;
 import com.citytechinc.cq.library.content.node.ComponentNode;
 import com.citytechinc.cq.library.content.request.ComponentRequest;
-import com.google.common.base.Optional;
 import com.google.common.collect.Lists;
-import org.apache.sling.api.resource.Resource;
 
 import java.util.List;
 
@@ -58,7 +55,7 @@ public class ColumnRow  extends AbstractLayoutComponent {
     public String getGridSize() {
 
         if (gridSize == null) {
-            gridSize = getLayoutProperty("gridSize", Bootstrap.GRID_MEDIUM);
+            gridSize = get("gridSize", Bootstrap.GRID_MEDIUM);
         }
 
         return gridSize;
@@ -69,21 +66,9 @@ public class ColumnRow  extends AbstractLayoutComponent {
         if (columns == null) {
             columns = Lists.newArrayList();
 
-            Optional<LayoutElement> layoutElementOptional = getLayoutElement();
-
-            if (layoutElementOptional.isPresent()) {
-
-                for (Resource currentLayoutColumnResource : layoutElementOptional.get().getChildren()) {
-                    Optional<LayoutElement> currentLayoutColumnLayoutElementOptional =
-                            layoutElementOptional.get().getChildLayoutElement(currentLayoutColumnResource.getName());
-
-                    if (currentLayoutColumnLayoutElementOptional.isPresent()) {
-                        this.columns.add(new Column(currentLayoutColumnResource.adaptTo(ComponentNode.class), currentLayoutColumnLayoutElementOptional.get(), getIsLayoutMode()));
-                    }
-                }
-
+            for (ComponentNode currentLayoutColumnComponentNode : getComponentNodes()) {
+                this.columns.add(new Column(currentLayoutColumnComponentNode, isLayoutMode()));
             }
-
         }
 
         return columns;
@@ -93,9 +78,7 @@ public class ColumnRow  extends AbstractLayoutComponent {
     @DialogFieldSet
     public Classification getClassification() {
         if (classification == null) {
-            if (getLayoutComponentNode().isPresent()) {
-                classification = new Classification(getLayoutComponentNode().get());
-            }
+            classification = new Classification(getResource().adaptTo(ComponentNode.class));
         }
 
         return classification;

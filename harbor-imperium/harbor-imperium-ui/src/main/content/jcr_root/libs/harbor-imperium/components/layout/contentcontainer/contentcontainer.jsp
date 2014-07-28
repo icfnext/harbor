@@ -1,7 +1,7 @@
 <%@include file="/libs/harbor-imperium/components/global.jsp"%>
 
 <c:choose>
-    <c:when test="${contentContainer.isLayoutMode}">
+    <c:when test="${contentContainer.layoutMode}">
         <div class="imperium-layout-section-container">
             <span class="imperium-layout-section-name">
                 ${contentContainer.containerName} <c:if test="${contentContainer.hasRole}">${contentContainer.role}</c:if>

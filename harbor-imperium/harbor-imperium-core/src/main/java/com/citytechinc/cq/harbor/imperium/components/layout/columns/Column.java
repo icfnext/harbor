@@ -1,6 +1,5 @@
 package com.citytechinc.cq.harbor.imperium.components.layout.columns;
 
-import com.citytechinc.aem.imperium.proper.api.layout.LayoutElement;
 import com.citytechinc.aem.imperium.proper.core.components.layout.AbstractLayoutComponent;
 import com.citytechinc.cq.component.annotations.*;
 import com.citytechinc.cq.component.annotations.widgets.DialogFieldSet;
@@ -34,8 +33,8 @@ public class Column extends AbstractLayoutComponent {
         super(request);
     }
 
-    public Column(ComponentNode componentNode, LayoutElement layoutElement, Boolean layoutMode) {
-        super(componentNode, layoutElement, layoutMode);
+    public Column(ComponentNode componentNode, Boolean layoutMode) {
+        super(componentNode, layoutMode);
     }
 
     @DialogField(fieldLabel = "Inherit Content?",
@@ -68,7 +67,7 @@ public class Column extends AbstractLayoutComponent {
     public String getColClass() {
 
         if (colClass == null) {
-            colClass = getLayoutProperty("colClass", "1");
+            colClass = get("colClass", "1");
         }
 
         return colClass;
@@ -76,7 +75,7 @@ public class Column extends AbstractLayoutComponent {
     }
 
     public String getName() {
-        return this.getLayoutElement().get().getName();
+        return getResource().getName();
     }
 
     @DialogField
@@ -84,9 +83,7 @@ public class Column extends AbstractLayoutComponent {
     public Classification getClassification() {
 
         if (classification == null) {
-            if (getLayoutComponentNode().isPresent()) {
-                classification = new Classification(getLayoutComponentNode().get());
-            }
+            classification = new Classification(getResource().adaptTo(ComponentNode.class));
         }
 
         return classification;

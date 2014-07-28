@@ -4,9 +4,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <parent>
-        <groupId>com.citytechinc.cq.library</groupId>
-        <artifactId>cq-library</artifactId>
-        <version>7.1.1-SNAPSHOT</version>
+        <groupId>com.citytechinc.cq.accelerate</groupId>
+        <artifactId>accelerate</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
@@ -43,11 +43,20 @@
         </pluginRepository>
     </pluginRepositories>
 
+    <distributionManagement>
+        <repository>
+            <id>citytech-private-releases</id>
+            <url>http://nexus.citytech.ctmsp.com/content/repositories/releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>citytech-private-snapshots</id>
+            <url>http://nexus.citytech.ctmsp.com/content/repositories/snapshots</url>
+            <uniqueVersion>false</uniqueVersion>
+        </snapshotRepository>
+    </distributionManagement>
+
     <properties>
         <core.artifactId>harbor-imperium-core</core.artifactId>
-
-        <!-- versions -->
-        <cq.library.version>7.1.1-SNAPSHOT</cq.library.version>
 
         <!-- defaults -->
         <package.skip>true</package.skip>
@@ -101,13 +110,15 @@
                 <type>zip</type>
             </dependency>
 
-            <!-- Harbor -->
+            <!-- Accelerate -->
             <dependency>
-                <groupId>com.citytechinc.cq.harbor.ns</groupId>
-                <artifactId>harbor-ns-core</artifactId>
+                <groupId>com.citytechinc.cq.accelerate</groupId>
+                <artifactId>accelerate-api</artifactId>
                 <version>1.0.0-SNAPSHOT</version>
                 <scope>provided</scope>
             </dependency>
+
+            <!-- Harbor -->
             <dependency>
                 <groupId>com.citytechinc.cq.harbor.proper</groupId>
                 <artifactId>harbor-proper-api</artifactId>
@@ -131,12 +142,6 @@
             <dependency>
                 <groupId>com.citytechinc.aem.imperium.proper</groupId>
                 <artifactId>imperium-proper-core</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>com.citytechinc.aem.imperium.ns</groupId>
-                <artifactId>imperium-ns-core</artifactId>
                 <version>1.0.0-SNAPSHOT</version>
                 <scope>provided</scope>
             </dependency>

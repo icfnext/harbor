@@ -175,11 +175,13 @@
             <artifactId>cq-component-annotations</artifactId>
         </dependency>
 
-        <!-- Harbor -->
+        <!-- Accelerate -->
         <dependency>
-            <groupId>com.citytechinc.cq.harbor.ns</groupId>
-            <artifactId>harbor-ns-core</artifactId>
+            <groupId>com.citytechinc.cq.accelerate</groupId>
+            <artifactId>accelerate-api</artifactId>
         </dependency>
+
+        <!-- Harbor -->
         <dependency>
             <groupId>com.citytechinc.cq.harbor.proper</groupId>
             <artifactId>harbor-proper-api</artifactId>
@@ -197,10 +199,6 @@
         <dependency>
             <groupId>com.citytechinc.aem.imperium.proper</groupId>
             <artifactId>imperium-proper-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.citytechinc.aem.imperium.ns</groupId>
-            <artifactId>imperium-ns-core</artifactId>
         </dependency>
 
         <!-- Client Librarian -->
