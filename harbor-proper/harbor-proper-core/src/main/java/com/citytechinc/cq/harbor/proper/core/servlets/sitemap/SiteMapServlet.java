@@ -3,15 +3,11 @@ package com.citytechinc.cq.harbor.proper.core.servlets.sitemap;
 
 import com.citytechinc.cq.harbor.proper.api.domain.sitemap.SiteMap;
 import com.citytechinc.cq.harbor.proper.api.services.sitemap.SiteMapService;
-import com.citytechinc.cq.library.content.page.PageDecorator;
-import com.citytechinc.cq.library.content.page.PageManagerDecorator;
-import com.day.cq.wcm.api.Page;
+import com.citytechinc.cq.library.content.request.ComponentServletRequest;
+import com.citytechinc.cq.library.servlets.AbstractComponentServlet;
 import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.sling.SlingServlet;
-import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.SlingHttpServletResponse;
-import org.apache.sling.api.resource.ResourceResolver;
-import org.apache.sling.api.servlets.SlingAllMethodsServlet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,7 +22,7 @@ import java.io.IOException;
         methods = "GET",
         extensions = "xml"
 )
-public class SiteMapServlet extends SlingAllMethodsServlet {
+public class SiteMapServlet extends AbstractComponentServlet {
     protected static final Logger LOG = LoggerFactory.getLogger(SiteMapServlet.class);
 
     @Reference
@@ -34,19 +30,9 @@ public class SiteMapServlet extends SlingAllMethodsServlet {
 
 
     @Override
-    protected void doGet(final SlingHttpServletRequest slingHttpServletRequest, final SlingHttpServletResponse slingHttpServletResponse) throws ServletException, IOException {
-        final PageDecorator currentPage = this.unpackCurrentPage(slingHttpServletRequest);
-        final SiteMap siteMap = this.siteMapService.getSitemapEntryList(currentPage);
-
-        this.writeXmlResponse(slingHttpServletResponse, siteMap);
-    }
-
-    protected PageDecorator unpackCurrentPage(final SlingHttpServletRequest slingHttpServletRequest) {
-        final ResourceResolver resourceResolver = slingHttpServletRequest.getResourceResolver();
-        final PageManagerDecorator pageManager = resourceResolver.adaptTo(PageManagerDecorator.class);
-        final Page page = pageManager.getContainingPage(slingHttpServletRequest.getResource());
-
-        return pageManager.getPage(page);
+    protected void processGet(final ComponentServletRequest request) throws ServletException, IOException {
+        final SiteMap siteMap = this.siteMapService.getSitemapEntryList(request.getCurrentPage());
+        this.writeXmlResponse(request.getSlingResponse(), siteMap);
     }
 
     protected void writeXmlResponse(final SlingHttpServletResponse slingHttpServletResponse, final SiteMap siteMap) {
