@@ -1,6 +1,6 @@
 Harbor.Imperium.Components.Layout.ColumnRow = function(jQuery){
     var column = {
-        'sling:resourceType' : 'harbor/components/layout/layoutcolumn',
+        'sling:resourceType' : 'harbor-imperium/components/layout/layoutcolumn',
         'jcr:primaryType' : 'nt:unstructured',
         ':nameHint' : 'column'
     };

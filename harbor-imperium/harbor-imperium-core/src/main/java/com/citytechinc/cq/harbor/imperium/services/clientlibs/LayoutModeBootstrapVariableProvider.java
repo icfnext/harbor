@@ -1,7 +1,7 @@
 package com.citytechinc.cq.harbor.imperium.services.clientlibs;
 
 import com.citytechinc.aem.imperium.proper.api.constants.paths.Paths;
-import com.citytechinc.aem.imperium.proper.api.utils.ModeUtils;
+import com.citytechinc.aem.imperium.proper.api.constants.types.ResourceTypes;
 import com.citytechinc.cq.accelerate.api.ontology.Properties;
 import com.citytechinc.cq.clientlibs.api.services.clientlibs.transformer.VariableProvider;
 import com.citytechinc.cq.harbor.proper.core.domain.brand.bootstrap.BootstrapBrand;
@@ -26,7 +26,7 @@ public class LayoutModeBootstrapVariableProvider implements VariableProvider {
     public Map<String, String> getVariables(Resource root) {
 
         //Variable provider only operates in Layout Mode
-        if (ModeUtils.isLayoutMode(root)) {
+        if (isResourceAMemberOfAnAuthoredLayout(root)) {
 
             Optional<Resource> templateResourceOptional = getTemplateResourceForContainingPageOptional(root);
 
@@ -47,6 +47,21 @@ public class LayoutModeBootstrapVariableProvider implements VariableProvider {
         }
 
         return Maps.newHashMap();
+
+    }
+
+    protected boolean isResourceAMemberOfAnAuthoredLayout(Resource resource) {
+
+        if (resource.getPath().startsWith(Paths.TEMPLATE_BUILDER)) {
+            PageManagerDecorator pageManagerDecorator = resource.getResourceResolver().adaptTo(PageManagerDecorator.class);
+            PageDecorator containingPage = pageManagerDecorator.getContainingPage(resource);
+
+            if (containingPage != null && containingPage.getContentResource().isResourceType(ResourceTypes.AUTHORABLE_TEMPLATE)) {
+                return true;
+            }
+        }
+
+        return false;
 
     }
 
