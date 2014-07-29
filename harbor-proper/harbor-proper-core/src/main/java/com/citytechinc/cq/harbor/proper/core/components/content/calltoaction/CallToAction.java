@@ -13,10 +13,13 @@ import com.citytechinc.cq.library.content.link.Link;
 import com.citytechinc.cq.library.content.link.builders.LinkBuilder;
 import com.citytechinc.cq.library.content.request.ComponentRequest;
 import com.google.common.base.Optional;
+import com.google.common.hash.HashFunction;
+import com.google.common.hash.Hashing;
 import org.apache.commons.lang.StringUtils;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
+import java.nio.charset.Charset;
 
 
 @Component(
@@ -27,6 +30,8 @@ import javax.jcr.RepositoryException;
         contentAdditionalProperties = {@ContentProperty(name="dependencies", value="[harbor.bootstrap.modals,harbor.bootstrap.buttons,harbor.author-common]")})
 @AutoInstantiate( instanceName = CallToAction.INSTANCE_NAME )
 public class CallToAction extends AbstractComponent {
+
+    private static HashFunction hashFunction = Hashing.md5();
 
     public static final String INSTANCE_NAME = "cta";
 
@@ -135,7 +140,7 @@ public class CallToAction extends AbstractComponent {
 	}
 
 	public String getId() throws RepositoryException {
-		return getResource().adaptTo(Node.class).getIdentifier();
+		return hashFunction.newHasher().putString(getResource().getPath(), Charset.defaultCharset()).hash().toString();
 	}
 
     public String getButtonId() throws RepositoryException {

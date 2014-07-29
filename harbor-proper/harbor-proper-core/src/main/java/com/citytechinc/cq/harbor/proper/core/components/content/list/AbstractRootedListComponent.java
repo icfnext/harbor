@@ -39,7 +39,7 @@ public abstract class AbstractRootedListComponent <T extends RootedItems, R exte
             }
         }
 
-        return renderableItemsOptional.get();
+        return renderableItemsOptional.orNull();
     }
 
     @Override
