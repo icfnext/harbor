@@ -12,9 +12,12 @@ import com.citytechinc.cq.harbor.proper.core.content.page.navigation.constructio
 import com.citytechinc.cq.harbor.proper.core.components.content.navigation.bootstrapnavigation.mainnavigation.BootstrapPageNavigableRenderableRoot;
 import com.citytechinc.cq.library.components.annotations.AutoInstantiate;
 import com.citytechinc.cq.library.content.request.ComponentRequest;
+import com.google.common.hash.HashFunction;
+import com.google.common.hash.Hashing;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
+import java.nio.charset.Charset;
 
 @Component( value = "Bootstrap Main Auto Navigation",
         group = ComponentGroups.HARBOR_NAVIGATION,
@@ -30,6 +33,8 @@ import javax.jcr.RepositoryException;
 )
 @AutoInstantiate( instanceName = "bootstrapMainAutoNavigation" )
 public class BootstrapMainAutoNavigation extends AbstractRootedListComponent<NavigablePage, BootstrapPageNavigableRenderableRoot> {
+
+    private static HashFunction hashFunction = Hashing.md5();
 
     @DialogField(ranking = 1)
     @DialogFieldSet( title = "Page Navigation Construction" )
@@ -62,7 +67,7 @@ public class BootstrapMainAutoNavigation extends AbstractRootedListComponent<Nav
     }
 
     public String getId() throws RepositoryException {
-        return getResource().adaptTo(Node.class).getIdentifier();
+        return hashFunction.newHasher().putString(getResource().getPath(), Charset.defaultCharset()).hash().toString();
     }
 
 }
