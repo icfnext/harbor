@@ -1,8 +1,7 @@
 package com.citytechinc.cq.harbor.proper.core.domain.sitemap;
 
-import org.codehaus.groovy.util.ArrayIterator;
-
 import static org.apache.commons.lang.StringUtils.isEmpty;
+import static org.apache.commons.lang.StringUtils.join;
 
 public enum ChangeFrequency {
     always, hourly, daily, weekly, monthly, yearly, never;
@@ -22,16 +21,7 @@ public enum ChangeFrequency {
     }
 
     public static String valuesString() {
-        final StringBuffer resultBuffer = new StringBuffer();
-        final ArrayIterator arrayIterator = new ArrayIterator(ChangeFrequency.values());
-
-        while(arrayIterator.hasNext()) {
-            resultBuffer.append(arrayIterator.next());
-
-            if(arrayIterator.hasNext()) resultBuffer.append(", ");
-        }
-
-        return resultBuffer.toString();
+        return join(ChangeFrequency.values(), ',');
     }
 
 }
