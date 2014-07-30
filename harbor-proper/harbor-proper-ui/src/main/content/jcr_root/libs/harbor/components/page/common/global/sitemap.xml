@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+          jcr:primaryType="cq:Panel"
+          title="Sitemap">
+    <items jcr:primaryType="cq:WidgetCollection">
+        <sitemap
+                jcr:primaryType="cq:Widget"
+                collapsed="{Boolean}false"
+                collapsible="{Boolean}false"
+                xtype="dialogfieldset">
+            <items jcr:primaryType="cq:WidgetCollection">
+                <location_extension
+                        jcr:primaryType="cq:Widget"
+                        fieldLabel="Location Extension"
+                        name="./accelerate:locExtension"
+                        xtype="textfield" />
+                <change_frequency
+                        jcr:primaryType="cq:Widget"
+                        fieldLabel="Change Frequency"
+                        name="./accelerate:changefreq"
+                        xtype="textfield" />
+                <priority
+                        jcr:primaryType="cq:Widget"
+                        fieldLabel="Priority [0.0, 1.0]"
+                        name="./accelerate:priority"
+                        xtype="textfield" />
+            </items>
+        </sitemap>
+    </items>
+</jcr:root>
