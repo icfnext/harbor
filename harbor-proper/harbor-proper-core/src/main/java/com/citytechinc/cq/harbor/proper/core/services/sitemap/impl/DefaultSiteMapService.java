@@ -2,8 +2,8 @@ package com.citytechinc.cq.harbor.proper.core.services.sitemap.impl;
 
 import com.citytechinc.cq.harbor.proper.api.domain.sitemap.SiteMap;
 import com.citytechinc.cq.harbor.proper.api.domain.sitemap.SiteMapEntry;
-import com.citytechinc.cq.harbor.proper.core.domain.sitemap.ChangeFrequency;
 import com.citytechinc.cq.harbor.proper.api.services.sitemap.SiteMapService;
+import com.citytechinc.cq.harbor.proper.core.domain.sitemap.ChangeFrequency;
 import com.citytechinc.cq.library.content.page.PageDecorator;
 import com.day.cq.commons.Externalizer;
 import com.google.common.base.Predicate;
@@ -42,7 +42,8 @@ public class DefaultSiteMapService implements SiteMapService {
     protected static final String iso8601DateFormat = "yyyy-MM-dd";
     protected static final String logTemplateSiteMapEntries = "built sitemap containing {} entries";
     protected static final String logTemplateSiteMapEntry = "built sitemap entry, loc={}, lastModified={}, changeFrequency={}, priority={}";
-    protected static final String logTemplateUnknownFrequency = "{} value must be one of {}";
+    protected static final String logTemplateEmptyFrequency = "{} value is not set, valid values are: [{}]";
+    protected static final String logTemplateUnknownFrequency = "{} value must be value in: [{}]";
     protected static final String logTemplateInvalidPriority = "{} value must be between 0 and 1";
 
     protected static int priorityMax = 1;
@@ -92,7 +93,10 @@ public class DefaultSiteMapService implements SiteMapService {
 
         final boolean changeFrequencyContains = ChangeFrequency.contains(specifiedChangeFrequency);
 
-        if(isEmpty(specifiedChangeFrequency) || !changeFrequencyContains) {
+        if(isEmpty(specifiedChangeFrequency)) {
+            LOG.warn(logTemplateEmptyFrequency, new Object[]{ACCELERATE_SITEMAP_CHANGE_FREQUENCY, ChangeFrequency.valuesString()});
+            return null;
+        }else if(!changeFrequencyContains) {
             LOG.error(logTemplateUnknownFrequency, new Object[]{ACCELERATE_SITEMAP_CHANGE_FREQUENCY, ChangeFrequency.valuesString()});
             return null;
         }else {
@@ -117,6 +121,15 @@ public class DefaultSiteMapService implements SiteMapService {
         }
     }
 
+    protected String determineLoc(final ResourceResolver resourceResolver, final PageDecorator pageDecorator, final ValueMap contentResourceValueMap) {
+        final String externalPublishLink = this.externalizer.publishLink(resourceResolver, pageDecorator.getPath());
+        // TODO Add defaultValue of ".html" to _tab node and remove this? Allowing a user to specify "" in WCM/CRX that would make it to sitemap response
+        final String extension = contentResourceValueMap.get(ACCELERATE_SITEMAP_RESOURCE_EXTENSION, defaultLocSuffix);
+        final StringBuffer locBuffer = this.newStringBuffer(externalPublishLink).append(extension);
+
+        return locBuffer.toString();
+    }
+
     protected Double parseDouble(final String value) {
         try {
             return Double.parseDouble(value);
@@ -125,13 +138,6 @@ public class DefaultSiteMapService implements SiteMapService {
         }
     }
 
-    protected String determineLoc(final ResourceResolver resourceResolver, final PageDecorator pageDecorator, final ValueMap contentResourceValueMap) {
-        final String externalPublishLink = this.externalizer.publishLink(resourceResolver, pageDecorator.getPath());
-        final String extension = contentResourceValueMap.get(ACCELERATE_SITEMAP_RESOURCE_EXTENSION, defaultLocSuffix);
-        final StringBuffer locBuffer = this.newStringBuffer(externalPublishLink).append(extension);
-
-        return locBuffer.toString();
-    }
 
     protected String determineLastModified(final ValueMap pageContentValueMap) {
         final GregorianCalendar lastModified =
