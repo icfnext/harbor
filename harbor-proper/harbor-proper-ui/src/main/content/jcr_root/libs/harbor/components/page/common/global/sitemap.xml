@@ -13,6 +13,7 @@
                         jcr:primaryType="cq:Widget"
                         fieldLabel="Location Extension"
                         name="./accelerate:locExtension"
+                        defaultValue=".html"
                         xtype="textfield" />
 
                 <change_frequency

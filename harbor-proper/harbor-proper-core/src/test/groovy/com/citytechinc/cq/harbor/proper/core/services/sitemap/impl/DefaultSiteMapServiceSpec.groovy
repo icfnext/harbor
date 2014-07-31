@@ -8,6 +8,7 @@ import spock.lang.Specification
 
 import static com.citytechinc.cq.accelerate.api.ontology.Properties.ACCELERATE_SITEMAP_PRIORITY
 import static com.citytechinc.cq.accelerate.api.ontology.Properties.ACCELERATE_SITEMAP_RESOURCE_EXTENSION
+import static org.apache.commons.lang.StringUtils.EMPTY
 
 class DefaultSiteMapServiceSpec extends Specification {
     DefaultSiteMapService defaultSiteMapService = Spy()
@@ -15,6 +16,10 @@ class DefaultSiteMapServiceSpec extends Specification {
     ValueMap contentResourceValueMap = Mock()
     ResourceResolver resourceResolver = Mock()
     PageDecorator pageDecorator = Mock()
+
+    def jcrPagePath = "/content/page"
+    def externalPublishLink = "http://bin${jcrPagePath}"
+    def jcrPageExtension = ".htm"
 
 
     def setup() {
@@ -91,17 +96,13 @@ class DefaultSiteMapServiceSpec extends Specification {
         notThrown(NullPointerException)
     }
 
-    def jcrPagePath = "/content/page"
-    def externalPublishLink = "http://bin${jcrPagePath}"
-    def jcrPageExtension = ".htm"
-
     def "determineLoc should lookup the external publish link and accelerate:locExtension then combine it with the pageDecorator path for the loc value"() {
         setup:
         StringBuffer locBuffer = new StringBuffer(externalPublishLink)
 
         pageDecorator.getPath() >> jcrPagePath
         defaultSiteMapService.externalizer.publishLink(resourceResolver, jcrPagePath) >> externalPublishLink
-        contentResourceValueMap.get(ACCELERATE_SITEMAP_RESOURCE_EXTENSION, DefaultSiteMapService.defaultLocSuffix) >> jcrPageExtension
+        contentResourceValueMap.get(ACCELERATE_SITEMAP_RESOURCE_EXTENSION, EMPTY) >> jcrPageExtension
         defaultSiteMapService.newStringBuffer(externalPublishLink) >> locBuffer
 
         when:
@@ -111,20 +112,20 @@ class DefaultSiteMapServiceSpec extends Specification {
         result == "${externalPublishLink}${jcrPageExtension}"
     }
 
-    def "determineLoc should lookup the external publish link and user default extension when no jcrPageExtension resolves then combine it with the pageDecorator path for the loc value"() {
+    def "determineLoc should lookup the external publish link and use an empty string as the extension when no jcrPageExtension resolves then combine it with the pageDecorator path for the loc value"() {
         setup:
         StringBuffer locBuffer = new StringBuffer(externalPublishLink)
 
         pageDecorator.getPath() >> jcrPagePath
         defaultSiteMapService.externalizer.publishLink(resourceResolver, jcrPagePath) >> externalPublishLink
-        contentResourceValueMap.get(ACCELERATE_SITEMAP_RESOURCE_EXTENSION, DefaultSiteMapService.defaultLocSuffix) >> DefaultSiteMapService.defaultLocSuffix
+        contentResourceValueMap.get(ACCELERATE_SITEMAP_RESOURCE_EXTENSION, EMPTY) >> EMPTY
         defaultSiteMapService.newStringBuffer(externalPublishLink) >> locBuffer
 
         when:
         def result = defaultSiteMapService.determineLoc(resourceResolver, pageDecorator, contentResourceValueMap)
 
         then:
-        result == "${externalPublishLink}${DefaultSiteMapService.defaultLocSuffix}"
+        result == "${externalPublishLink}${EMPTY}"
     }
 
 }

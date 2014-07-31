@@ -24,6 +24,7 @@ import static com.citytechinc.cq.accelerate.api.ontology.Properties.*;
 import static com.day.cq.commons.jcr.JcrConstants.JCR_CREATED;
 import static com.day.cq.wcm.api.NameConstants.PN_PAGE_LAST_MOD;
 import static com.google.common.collect.Lists.newArrayList;
+import static org.apache.commons.lang.StringUtils.EMPTY;
 import static org.apache.commons.lang.StringUtils.isEmpty;
 
 @Service
@@ -38,7 +39,6 @@ public class DefaultSiteMapService implements SiteMapService {
         }
     };
 
-    protected static final String defaultLocSuffix = ".html";
     protected static final String iso8601DateFormat = "yyyy-MM-dd";
     protected static final String logTemplateSiteMapEntries = "built sitemap containing {} entries";
     protected static final String logTemplateSiteMapEntry = "built sitemap entry, loc={}, lastModified={}, changeFrequency={}, priority={}";
@@ -123,11 +123,13 @@ public class DefaultSiteMapService implements SiteMapService {
 
     protected String determineLoc(final ResourceResolver resourceResolver, final PageDecorator pageDecorator, final ValueMap contentResourceValueMap) {
         final String externalPublishLink = this.externalizer.publishLink(resourceResolver, pageDecorator.getPath());
-        // TODO Add defaultValue of ".html" to _tab node and remove this? Allowing a user to specify "" in WCM/CRX that would make it to sitemap response
-        final String extension = contentResourceValueMap.get(ACCELERATE_SITEMAP_RESOURCE_EXTENSION, defaultLocSuffix);
-        final StringBuffer locBuffer = this.newStringBuffer(externalPublishLink).append(extension);
+        final String extension = contentResourceValueMap.get(ACCELERATE_SITEMAP_RESOURCE_EXTENSION, EMPTY);
 
-        return locBuffer.toString();
+        if(isEmpty(extension)) {
+            return externalPublishLink;
+        }else {
+            return this.newStringBuffer(externalPublishLink).append(extension).toString();
+        }
     }
 
     protected Double parseDouble(final String value) {
