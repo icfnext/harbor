@@ -19,11 +19,11 @@ import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 import java.nio.charset.Charset;
 
-@Component( value = "Bootstrap Main Auto Navigation",
+@Component( value = "Main Auto Navigation",
         group = ComponentGroups.HARBOR_NAVIGATION,
-        actions = {"text:Bootstrap Main Auto Navigation", "-", "edit", "-", "delete"},
+        actions = {"text:Bootstrap Main Auto Navigation", "-", "edit", "-", "copymove", "delete"},
         contentAdditionalProperties = {
-                @ContentProperty(name="dependencies", value="harbor.bootstrap.navbar")
+                @ContentProperty(name="dependencies", value="harbor.navigation.mainnavigation")
         },
         listeners = {
                 @Listener(name = "afterinsert", value = "REFRESH_PAGE")
