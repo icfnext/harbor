@@ -8,6 +8,6 @@
         <span class="icon-bar"></span>
     </button>
     <c:if test="${bootstrapMainAutoNavigation.root.showBrandLink}">
-        <a class="navbar-brand" href="${bootstrapMainAutoNavigation.root.href}">${bootstrapMainAutoNavigation.root.brandLinkText}</a>
+        <a class="navbar-brand" href="${bootstrapMainAutoNavigation.root.href}">${bootstrapMainAutoNavigation.root.brandLinkText}<c:if test="${bootstrapMainAutoNavigation.root.hasBrandLinkImage}"><img src="${bootstrapMainAutoNavigation.root.brandLinkImage}"/></c:if></a>
     </c:if>
 </div>

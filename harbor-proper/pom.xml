@@ -66,6 +66,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<maven.junit.usefile>false</maven.junit.usefile>
 		<package.skip>true</package.skip>
+		<osgi.bundle.status.skip>true</osgi.bundle.status.skip>
 	</properties>
 
 	<profiles>

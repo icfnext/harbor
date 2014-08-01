@@ -12,16 +12,12 @@ import com.citytechinc.cq.harbor.proper.api.lists.rendering.RootedListRenderingS
 import com.citytechinc.cq.harbor.proper.core.components.content.list.AbstractRootedListComponent;
 import com.citytechinc.cq.harbor.proper.core.constants.groups.ComponentGroups;
 import com.citytechinc.cq.harbor.proper.core.content.page.navigation.construction.SiteNavigationListConstructionStrategy;
-import com.google.common.hash.HashFunction;
-import com.google.common.hash.Hashing;
 
 @Component(value = "Bootstrap Main Auto Navigation", group = ComponentGroups.HARBOR_NAVIGATION, actions = {
-	"text:Bootstrap Main Auto Navigation", "-", "edit", "-", "delete" }, contentAdditionalProperties = { @ContentProperty(name = "dependencies", value = "harbor.bootstrap.navbar") }, listeners = { @Listener(name = "afterinsert", value = "REFRESH_PAGE") }, name = "navigation/bootstrapmainautonavigation", allowedParents = "*/parsys")
+	"text:Bootstrap Main Auto Navigation", "-", "edit", "-", "copymove", "delete" }, contentAdditionalProperties = { @ContentProperty(name = "dependencies", value = "harbor.bootstrap.navbar") }, listeners = { @Listener(name = "afterinsert", value = "REFRESH_PAGE") }, name = "navigation/bootstrapmainautonavigation", allowedParents = "*/parsys")
 @AutoInstantiate(instanceName = "bootstrapMainAutoNavigation")
 public class BootstrapMainAutoNavigation extends
 	AbstractRootedListComponent<NavigablePage, BootstrapPageNavigableRenderableRoot> {
-
-	private static HashFunction hashFunction = Hashing.md5();
 
 	@DialogField(ranking = 1)
 	@DialogFieldSet(title = "Page Navigation Construction")
