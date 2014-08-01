@@ -4,10 +4,10 @@ import java.util.Iterator;
 
 public interface RootedItems<T> {
 
-    public Iterable<T> getItems();
+	public Iterable<T> getItems();
 
-    public boolean getHasItems();
+	public boolean getHasItems();
 
-    public Iterator<T> getItemsIterator();
+	public Iterator<T> getItemsIterator();
 
 }

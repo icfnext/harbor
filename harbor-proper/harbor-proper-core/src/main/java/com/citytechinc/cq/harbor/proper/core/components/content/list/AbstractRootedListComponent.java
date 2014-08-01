@@ -1,58 +1,49 @@
 package com.citytechinc.cq.harbor.proper.core.components.content.list;
 
+import com.citytechinc.aem.bedrock.core.components.AbstractComponent;
 import com.citytechinc.cq.harbor.proper.api.lists.RootedItems;
 import com.citytechinc.cq.harbor.proper.api.lists.construction.RootedListConstructionStrategy;
 import com.citytechinc.cq.harbor.proper.api.lists.rendering.RootedListRenderingStrategy;
-import com.citytechinc.cq.library.components.AbstractComponent;
-import com.citytechinc.cq.library.content.node.ComponentNode;
-import com.citytechinc.cq.library.content.request.ComponentRequest;
 import com.google.common.base.Optional;
 
-public abstract class AbstractRootedListComponent <T extends RootedItems, R extends RootedItems> extends AbstractComponent implements RootedListComponent<R> {
+public abstract class AbstractRootedListComponent<T extends RootedItems, R extends RootedItems> extends
+	AbstractComponent implements RootedListComponent<R> {
 
-    private Optional<R> renderableItemsOptional;
-    private Optional<T> rawItemsOptional;
+	private Optional<R> renderableItemsOptional;
+	private Optional<T> rawItemsOptional;
 
-    public AbstractRootedListComponent(ComponentRequest request) {
-        super(request);
-    }
+	protected abstract RootedListConstructionStrategy<T> getListConstructionStrategy();
 
-    public AbstractRootedListComponent(ComponentNode node) {
-        super(node);
-    }
+	protected abstract RootedListRenderingStrategy<T, R> getListRenderingStrategy();
 
-    protected abstract RootedListConstructionStrategy<T> getListConstructionStrategy();
+	@Override
+	public R getRoot() {
+		if (renderableItemsOptional == null) {
 
-    protected abstract RootedListRenderingStrategy<T, R> getListRenderingStrategy();
+			Optional<T> requestedRawItemsOptional = getRawItemsOptional();
 
-    @Override
-    public R getRoot() {
-        if (renderableItemsOptional == null) {
+			if (requestedRawItemsOptional.isPresent()) {
+				renderableItemsOptional = Optional.of(getListRenderingStrategy().toRenderableList(
+					requestedRawItemsOptional.get()));
+			} else {
+				renderableItemsOptional = Optional.absent();
+			}
+		}
 
-            Optional<T> requestedRawItemsOptional = getRawItemsOptional();
+		return renderableItemsOptional.orNull();
+	}
 
-            if (requestedRawItemsOptional.isPresent()) {
-                renderableItemsOptional = Optional.of(getListRenderingStrategy().toRenderableList(requestedRawItemsOptional.get()));
-            }
-            else {
-                renderableItemsOptional = Optional.absent();
-            }
-        }
+	@Override
+	public boolean getHasRoot() {
+		return getListConstructionStrategy().construct().isPresent();
+	}
 
-        return renderableItemsOptional.orNull();
-    }
+	protected Optional<T> getRawItemsOptional() {
+		if (rawItemsOptional == null) {
+			rawItemsOptional = getListConstructionStrategy().construct();
+		}
 
-    @Override
-    public boolean getHasRoot() {
-        return getListConstructionStrategy().construct().isPresent();
-    }
-
-    protected Optional<T> getRawItemsOptional() {
-        if (rawItemsOptional == null) {
-            rawItemsOptional = getListConstructionStrategy().construct();
-        }
-
-        return rawItemsOptional;
-    }
+		return rawItemsOptional;
+	}
 
 }

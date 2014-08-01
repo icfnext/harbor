@@ -1,81 +1,71 @@
 package com.citytechinc.cq.harbor.proper.core.components.mixins.classifiable;
 
+import org.apache.commons.lang.StringUtils;
+
+import com.citytechinc.aem.bedrock.core.components.AbstractComponent;
 import com.citytechinc.cq.accelerate.api.ontology.Properties;
 import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.widgets.TagInputField;
-import com.citytechinc.cq.library.components.AbstractComponent;
-import com.citytechinc.cq.library.content.node.ComponentNode;
-import com.citytechinc.cq.library.content.request.ComponentRequest;
 import com.day.cq.tagging.Tag;
 import com.day.cq.tagging.TagManager;
 import com.google.common.base.Optional;
-import org.apache.commons.lang.StringUtils;
 
 public class Classification extends AbstractComponent {
 
-    public static final String CLASSIFICATION_FIELD_LABEL = "Classification";
+	public static final String CLASSIFICATION_FIELD_LABEL = "Classification";
 
-    private Optional<Tag> classification;
+	private Optional<Tag> classification;
 
-    public Classification(ComponentRequest request) {
-        super(request);
-    }
+	@DialogField(fieldLabel = CLASSIFICATION_FIELD_LABEL, name = "./" + Properties.ACCELERATE_CLASSIFICATION)
+	@TagInputField
+	public Optional<Tag> getClassification() {
 
-    public Classification(ComponentNode componentNode) {
-        super(componentNode);
-    }
+		if (classification != null) {
+			return classification;
+		}
 
-    @DialogField(fieldLabel = CLASSIFICATION_FIELD_LABEL, name = "./" + Properties.ACCELERATE_CLASSIFICATION)
-    @TagInputField
-    public Optional<Tag> getClassification() {
+		TagManager tagManager = this.getResource().getResourceResolver().adaptTo(TagManager.class);
 
-        if (classification != null) {
-            return classification;
-        }
+		String tag = get(Properties.ACCELERATE_CLASSIFICATION, StringUtils.EMPTY);
 
-        TagManager tagManager = this.getResource().getResourceResolver().adaptTo(TagManager.class);
+		if (StringUtils.isNotEmpty(tag)) {
+			classification = Optional.fromNullable(tagManager.resolve(tag));
+		} else {
+			classification = Optional.absent();
+		}
 
-        String tag = get(Properties.ACCELERATE_CLASSIFICATION, StringUtils.EMPTY);
+		return classification;
 
-        if (StringUtils.isNotEmpty(tag)) {
-            classification = Optional.fromNullable(tagManager.resolve(tag));
-        }
-        else {
-            classification = Optional.absent();
-        }
+	}
 
-        return classification;
+	public String getClassificationName() {
 
-    }
+		Optional<Tag> classification = getClassification();
 
-    public String getClassificationName() {
+		if (classification.isPresent()) {
+			return classification.get().getName();
+		}
 
-        Optional<Tag> classification = getClassification();
+		return StringUtils.EMPTY;
 
-        if (classification.isPresent()) {
-            return classification.get().getName();
-        }
+	}
 
-        return StringUtils.EMPTY;
+	public String getClassificationId() {
 
-    }
+		Optional<Tag> classification = getClassification();
 
-    public String getClassificationId() {
+		if (classification.isPresent()) {
+			return classification.get().getTagID();
+		}
 
-        Optional<Tag> classification = getClassification();
+		return StringUtils.EMPTY;
 
-        if (classification.isPresent()) {
-            return classification.get().getTagID();
-        }
+	}
 
-        return StringUtils.EMPTY;
+	public boolean getHasClassification() {
 
-    }
+		return getClassification().isPresent();
 
-    public boolean getHasClassification() {
-
-        return getClassification().isPresent();
-
-    }
+	}
 
 }

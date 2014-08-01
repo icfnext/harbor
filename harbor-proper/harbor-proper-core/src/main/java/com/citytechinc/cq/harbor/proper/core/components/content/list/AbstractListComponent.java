@@ -1,101 +1,93 @@
 package com.citytechinc.cq.harbor.proper.core.components.content.list;
 
+import java.util.Iterator;
+
+import com.citytechinc.aem.bedrock.core.components.AbstractComponent;
 import com.citytechinc.cq.component.annotations.Component;
 import com.citytechinc.cq.harbor.proper.api.constants.dom.Elements;
 import com.citytechinc.cq.harbor.proper.api.lists.construction.ListConstructionStrategy;
 import com.citytechinc.cq.harbor.proper.api.lists.rendering.ListRenderingStrategy;
-import com.citytechinc.cq.library.components.AbstractComponent;
-import com.citytechinc.cq.library.content.node.ComponentNode;
-import com.citytechinc.cq.library.content.request.ComponentRequest;
 
-import java.util.Iterator;
-import java.util.List;
+@Component(value = "Abstract List", group = ".hidden", name = "lists/abstractlist")
+public abstract class AbstractListComponent<T, R extends Iterable<?>> extends AbstractComponent implements
+	ListComponent<R> {
 
-@Component( value = "Abstract List", group = ".hidden", name = "lists/abstractlist" )
-public abstract class AbstractListComponent<T, R extends Iterable<?>> extends AbstractComponent implements ListComponent<R> {
+	public static final String RESOURCE_TYPE = "harbor/components/content/lists/abstractlist";
 
-    public static final String RESOURCE_TYPE = "harbor/components/content/lists/abstractlist";
+	protected Iterable<T> rawListItems;
+	protected R listItems;
 
-    protected Iterable<T> rawListItems;
-    protected R listItems;
+	protected abstract ListConstructionStrategy<T> getListConstructionStrategy();
 
-    public AbstractListComponent(ComponentNode componentNode) {
-        super(componentNode);
-    }
+	protected abstract ListRenderingStrategy<T, R> getListRenderingStrategy();
 
-    public AbstractListComponent(ComponentRequest request) {
-        super(request);
-    }
+	@Override
+	public R getItems() {
+		if (listItems == null) {
+			listItems = getListRenderingStrategy().toRenderableList(getRawListItems());
+		}
 
-    protected abstract ListConstructionStrategy<T> getListConstructionStrategy();
+		return listItems;
+	}
 
-    protected abstract ListRenderingStrategy<T, R> getListRenderingStrategy();
+	@Override
+	public Iterator<?> getIterator() {
+		return getItems().iterator();
+	}
 
-    @Override
-    public R getItems() {
-        if (listItems == null) {
-            listItems = getListRenderingStrategy().toRenderableList(getRawListItems());
-        }
+	public String getListElement() {
+		if (getIsOrderedList()) {
+			return Elements.OL;
+		}
 
-        return listItems;
-    }
+		if (getIsUnorderedList()) {
+			return Elements.UL;
+		}
 
-    @Override
-    public Iterator<?> getIterator() {
-        return getItems().iterator();
-    }
+		return null;
+	}
 
-    public String getListElement() {
-        if (getIsOrderedList()) {
-            return Elements.OL;
-        }
+	public Boolean getHasListElement() {
+		return getListElement() != null;
+	}
 
-        if (getIsUnorderedList()) {
-            return Elements.UL;
-        }
+	public Boolean getIsOrderedList() {
+		return false;
+	}
 
-        return null;
-    }
+	public Boolean getIsUnorderedList() {
+		return false;
+	}
 
-    public Boolean getHasListElement() {
-        return getListElement() != null;
-    }
+	/**
+	 * Indicates whether this list should be rendered as one of the two primary
+	 * HTML list types, ol and ul
+	 *
+	 * @return True if this list should be rendered as either an ordered or
+	 *         unordered list, false otherwise
+	 */
+	public Boolean getIsHtmlList() {
+		return getIsOrderedList() || getIsUnorderedList();
+	}
 
-    public Boolean getIsOrderedList() {
-        return false;
-    }
+	public Boolean getIsReversed() {
+		return false;
+	}
 
-    public Boolean getIsUnorderedList() {
-        return false;
-    }
+	public Integer getStart() {
+		return null;
+	}
 
-    /**
-     * Indicates whether this list should be rendered as one of the two primary HTML list types, ol and ul
-     *
-     * @return True if this list should be rendered as either an ordered or unordered list, false otherwise
-     */
-    public Boolean getIsHtmlList() {
-        return getIsOrderedList() || getIsUnorderedList();
-    }
+	public Boolean getHasStart() {
+		return getStart() != null;
+	}
 
-    public Boolean getIsReversed() {
-        return false;
-    }
+	protected Iterable<T> getRawListItems() {
+		if (rawListItems == null) {
+			rawListItems = getListConstructionStrategy().construct();
+		}
 
-    public Integer getStart() {
-        return null;
-    }
-
-    public Boolean getHasStart() {
-        return getStart() != null;
-    }
-
-    protected Iterable<T> getRawListItems() {
-        if (rawListItems == null) {
-            rawListItems = getListConstructionStrategy().construct();
-        }
-
-        return rawListItems;
-    }
+		return rawListItems;
+	}
 
 }

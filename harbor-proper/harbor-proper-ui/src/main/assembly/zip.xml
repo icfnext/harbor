@@ -40,13 +40,13 @@
             <useProjectArtifact>false</useProjectArtifact>
             <scope>compile</scope>
             <includes>
-                <include>com.citytechinc.cq.library:cq-library-ui:zip</include>
+                <include>com.citytechinc.aem.bedrock:bedrock-ui:zip</include>
             </includes>
             <unpack>true</unpack>
             <unpackOptions>
                 <includes>
-                    <include>jcr_root/apps/cq-library/**/*</include>
-                    <include>jcr_root/etc/clientlibs/cq-library/**/*</include>
+                    <include>jcr_root/apps/**/*</include>
+                    <include>jcr_root/etc/**/*</include>
                 </includes>
             </unpackOptions>
             <useStrictFiltering>true</useStrictFiltering>

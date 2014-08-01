@@ -10,13 +10,14 @@ import com.google.common.base.Optional;
  */
 public interface RootedListConstructionStrategy<T extends RootedItems> {
 
-    /**
-     * Construction produces a Parent object representing the rooted list.  If construction does not
-     * result in a root then an absent Optional is returned representing the absence of a list root.
-     *
-     * @return An optional Parent representing the rooted list or Optional.absent if no root can be produced by
-     *         the Strategy.
-     */
-    Optional<T> construct();
+	/**
+	 * Construction produces a Parent object representing the rooted list. If
+	 * construction does not result in a root then an absent Optional is
+	 * returned representing the absence of a list root.
+	 *
+	 * @return An optional Parent representing the rooted list or
+	 *         Optional.absent if no root can be produced by the Strategy.
+	 */
+	Optional<T> construct();
 
 }

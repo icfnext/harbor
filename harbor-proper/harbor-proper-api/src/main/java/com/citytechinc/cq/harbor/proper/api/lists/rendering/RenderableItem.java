@@ -5,6 +5,6 @@ package com.citytechinc.cq.harbor.proper.api.lists.rendering;
  */
 public interface RenderableItem {
 
-    public String render();
+	public String render();
 
 }

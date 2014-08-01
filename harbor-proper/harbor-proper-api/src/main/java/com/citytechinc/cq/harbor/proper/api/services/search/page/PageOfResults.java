@@ -4,9 +4,9 @@ import java.util.List;
 
 public interface PageOfResults {
 
-    public int getPageNbr();
+	public int getPageNbr();
 
-    public int getTotalNbrOfPages();
+	public int getTotalNbrOfPages();
 
-    public List<PageHit> getPageOfHits();
+	public List<PageHit> getPageOfHits();
 }

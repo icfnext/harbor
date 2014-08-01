@@ -1,13 +1,14 @@
 package com.citytechinc.cq.harbor.proper.api.content.page;
 
-import com.citytechinc.cq.accelerate.api.ontology.Types;
-
 import java.util.List;
 
-public interface HomePage extends HierarchicalPage {
+import com.citytechinc.aem.bedrock.api.page.PageDecorator;
+import com.citytechinc.cq.accelerate.api.ontology.Types;
 
-    public static final String RDF_TYPE = Types.ACCELERATE_HOME_PAGE;
+public interface HomePage extends HierarchicalPage, PageDecorator {
 
-    public List<SectionLandingPage> getSectionLandingPages();
+	public static final String RDF_TYPE = Types.ACCELERATE_HOME_PAGE;
+
+	public List<SectionLandingPage> getSectionLandingPages();
 
 }

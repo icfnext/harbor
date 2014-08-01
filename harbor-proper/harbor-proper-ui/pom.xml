@@ -165,8 +165,8 @@
             <version>${api.version}</version>
         </dependency>
 		<dependency>
-			<groupId>com.citytechinc.cq.library</groupId>
-			<artifactId>cq-library-ui</artifactId>
+			<groupId>com.citytechinc.aem.bedrock</groupId>
+			<artifactId>bedrock-ui</artifactId>
 			<type>zip</type>
 		</dependency>
 	</dependencies>

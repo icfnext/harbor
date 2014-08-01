@@ -5,6 +5,6 @@ package com.citytechinc.cq.harbor.proper.api.content.rss;
  */
 public interface RSSFeed {
 
-    public RSSChannel getChannel();
+	public RSSChannel getChannel();
 
 }

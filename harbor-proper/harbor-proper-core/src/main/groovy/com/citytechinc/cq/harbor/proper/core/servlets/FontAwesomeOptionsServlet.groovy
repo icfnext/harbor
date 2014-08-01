@@ -1,19 +1,20 @@
 package com.citytechinc.cq.harbor.proper.core.servlets
 
-import com.citytechinc.cq.harbor.proper.api.constants.components.ComponentConstants
-import com.citytechinc.cq.library.content.request.ComponentServletRequest
-import com.citytechinc.cq.library.servlets.optionsprovider.AbstractOptionsProviderServlet
-import com.citytechinc.cq.library.servlets.optionsprovider.Option
-import com.day.cq.commons.jcr.JcrConstants
-import com.google.common.base.Charsets
-import com.google.common.base.Optional
+import javax.jcr.Node
+import javax.jcr.Property
+
 import org.apache.felix.scr.annotations.sling.SlingServlet
 import org.apache.sling.api.resource.Resource
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
-import javax.jcr.Node
-import javax.jcr.Property
+import com.citytechinc.aem.bedrock.api.request.ComponentServletRequest
+import com.citytechinc.aem.bedrock.core.servlets.optionsprovider.AbstractOptionsProviderServlet
+import com.citytechinc.cq.component.annotations.Option
+import com.citytechinc.cq.harbor.proper.api.constants.components.ComponentConstants
+import com.day.cq.commons.jcr.JcrConstants
+import com.google.common.base.Charsets
+import com.google.common.base.Optional
 
 @SlingServlet(paths = ComponentConstants.FONT_AWESOME_SERVLET_PATH)
 public class FontAwesomeOptionsServlet extends AbstractOptionsProviderServlet {
@@ -24,7 +25,7 @@ public class FontAwesomeOptionsServlet extends AbstractOptionsProviderServlet {
 	private final static String HTML_STRING_FOR_OPTIONS_MAP = "%s <i class='fa %s'></i>";
 
 	private static final Logger LOG = LoggerFactory.getLogger(
-			FontAwesomeOptionsServlet.class);
+	FontAwesomeOptionsServlet.class);
 
 	@Override
 	protected List<Option> getOptions(final ComponentServletRequest request) {
