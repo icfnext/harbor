@@ -9,16 +9,16 @@
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.citytechinc.cq.harbor.proper</groupId>
-	<artifactId>harbor-proper</artifactId>
+	<groupId>com.citytechinc.cq.harbor</groupId>
+	<artifactId>harbor</artifactId>
 	<packaging>pom</packaging>
 	<version>1.0.0-SNAPSHOT</version>
 	<name>CITYTECH, Inc. Harbor CQ5 Website</name>
 
 	<modules>
-		<module>harbor-proper-api</module>
-		<module>harbor-proper-core</module>
-		<module>harbor-proper-ui</module>
+		<module>harbor-api</module>
+		<module>harbor-core</module>
+		<module>harbor-ui</module>
 	</modules>
 
 	<repositories>
@@ -56,10 +56,9 @@
 	</distributionManagement>
 
 	<properties>
-		<core.name>harbor-proper-core</core.name>
-		<core.version>1.0.0-SNAPSHOT</core.version>
-		<api.name>harbor-proper-api</api.name>
-		<api.version>1.0.0-SNAPSHOT</api.version>
+		<accelerate.version>1.0.0-SNAPSHOT</accelerate.version>
+		<clientlibrarian.version>0.4.0</clientlibrarian.version>
+		<bedrock.version>1.1.1</bedrock.version>
 		<maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss.SSSZ</maven.build.timestamp.format>
 		<timestamp>${maven.build.timestamp}</timestamp>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -110,8 +109,8 @@
 						<configuration>
 							<jsTestSrcDir>${project.basedir}/harbor-ui/src/test/javascript</jsTestSrcDir>
 							<preloadSources>
-								<source>${project.basedir}/harbor-proper-ui/src/main/content/jcr_root/etc/clientlibs/harbor/namespace/js/namespace.js</source>
-								<source>${project.basedir}/harbor-proper-ui/src/main/content/jcr_root/etc/clientlibs/harbor/author-common/js/searchtree.js</source>
+								<source>${project.basedir}/harbor-ui/src/main/content/jcr_root/etc/clientlibs/harbor/namespace/js/namespace.js</source>
+								<source>${project.basedir}/harbor-ui/src/main/content/jcr_root/etc/clientlibs/harbor/author-common/js/searchtree.js</source>
 							</preloadSources>
 						</configuration>
 					</execution>
@@ -125,18 +124,25 @@
 			<dependency>
 				<groupId>com.citytechinc.aem.bedrock</groupId>
 				<artifactId>bedrock-core</artifactId>
-				<version>1.1.1</version>
+				<version>${bedrock.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.citytechinc.aem.bedrock</groupId>
 				<artifactId>bedrock-ui</artifactId>
 				<type>zip</type>
-				<version>1.1.1</version>
+				<version>${bedrock.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.citytechinc.cq.accelerate</groupId>
 				<artifactId>accelerate-api</artifactId>
-				<version>1.0.0-SNAPSHOT</version>
+				<version>${accelerate.version}</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.citytechinc.cq.accelerate</groupId>
+				<artifactId>accelerate-ui</artifactId>
+				<version>${accelerate.version}</version>
+				<type>zip</type>
 				<scope>provided</scope>
 			</dependency>
 
@@ -144,7 +150,15 @@
 			<dependency>
 				<groupId>com.citytechinc.cq.clientlibs</groupId>
 				<artifactId>clientlibrarian-api</artifactId>
-				<version>0.4.0</version>
+				<version>${clientlibrarian.version}</version>
+				<scope>provided</scope>
+			</dependency>
+			
+			<dependency>
+				<groupId>com.citytechinc.cq.clientlibs</groupId>
+				<artifactId>clientlibrarian-ui</artifactId>
+				<version>${clientlibrarian.version}</version>
+				<type>zip</type>
 				<scope>provided</scope>
 			</dependency>
 		</dependencies>

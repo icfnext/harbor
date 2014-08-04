@@ -3,24 +3,17 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<parent>
-		<groupId>com.citytechinc.cq.harbor.proper</groupId>
-		<artifactId>harbor-proper</artifactId>
+		<groupId>com.citytechinc.cq.harbor</groupId>
+		<artifactId>harbor</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>harbor-proper-core</artifactId>
+	<artifactId>harbor-api</artifactId>
 	<packaging>bundle</packaging>
-	<name>CITYTECH, Inc. Harbor Core</name>
+	<name>CITYTECH, Inc. Harbor API</name>
 
 	<build>
-        <resources>
-            <resource>
-                <directory>src/main/resources/META-INF</directory>
-                <targetPath>META-INF</targetPath>
-                <filtering>true</filtering>
-            </resource>
-        </resources>
 		<plugins>
 			<plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -51,7 +44,7 @@
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
                         <Bundle-Name>${project.name}</Bundle-Name>
                         <Bundle-Vendor>${project.parent.organization.name}</Bundle-Vendor>
-                        <Export-Package>!*.impl,com.citytechinc.cq.harbor.proper.core.*</Export-Package>
+                        <Export-Package>!*.impl,com.citytechinc.cq.harbor.proper.api.*</Export-Package>
                         <Import-Package>!com.citytechinc.cq.component.*,!javassist</Import-Package>
                         <DynamicImport-Package>*</DynamicImport-Package>
 
@@ -74,37 +67,14 @@
 					</execution>
 				</executions>
 			</plugin>
-			<plugin>
-				<artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <includes>
-                        <include>**/*Spec*</include>
-                    </includes>
-                </configuration>
-			</plugin>
 		</plugins>
 	</build>
 
 	<dependencies>
-        <dependency>
-            <groupId>org.apache.sling</groupId>
-            <artifactId>org.apache.sling.scripting.jsp</artifactId>
-        </dependency>
-		<dependency>
-			<groupId>org.apache.sling</groupId>
-			<artifactId>org.apache.sling.scripting.jsp.taglib</artifactId>
-		</dependency>
-	
-        <!-- CITYTECH library -->
+        <!-- Bedrock -->
 		<dependency>
 			<groupId>com.citytechinc.aem.bedrock</groupId>
 			<artifactId>bedrock-core</artifactId>
-		</dependency>
-
-		<!-- Component Annotation -->
-		<dependency>
-			<groupId>com.citytechinc.cq.cq-component-plugin</groupId>
-			<artifactId>cq-component-annotations</artifactId>
 		</dependency>
 
         <!-- Accelerate API -->
@@ -113,18 +83,5 @@
             <artifactId>accelerate-api</artifactId>
         </dependency>
 
-        <!-- Harbor API -->
-        <dependency>
-            <groupId>com.citytechinc.cq.harbor.proper</groupId>
-            <artifactId>harbor-proper-api</artifactId>
-            <version>${api.version}</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <!-- Client Librarian -->
-        <dependency>
-            <groupId>com.citytechinc.cq.clientlibs</groupId>
-            <artifactId>clientlibrarian-api</artifactId>
-        </dependency>
 	</dependencies>
 </project>

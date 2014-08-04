@@ -36,19 +36,30 @@
     </fileSets>
     <dependencySets>
         <dependencySet>
-            <outputDirectory>/</outputDirectory>
+            <outputDirectory>/etc/packages/bedrock</outputDirectory>
             <useProjectArtifact>false</useProjectArtifact>
             <scope>compile</scope>
             <includes>
                 <include>com.citytechinc.aem.bedrock:bedrock-ui:zip</include>
             </includes>
-            <unpack>true</unpack>
-            <unpackOptions>
-                <includes>
-                    <include>jcr_root/apps/**/*</include>
-                    <include>jcr_root/etc/**/*</include>
-                </includes>
-            </unpackOptions>
+            <useStrictFiltering>true</useStrictFiltering>
+        </dependencySet>
+        <dependencySet>
+            <outputDirectory>/etc/packages/accelerate</outputDirectory>
+            <useProjectArtifact>false</useProjectArtifact>
+            <scope>compile</scope>
+            <includes>
+                <include>com.citytechinc.cq.accelerate:accelerate-ui:zip</include>
+            </includes>
+            <useStrictFiltering>true</useStrictFiltering>
+        </dependencySet>
+        <dependencySet>
+            <outputDirectory>/etc/packages/clientlibrarian</outputDirectory>
+            <useProjectArtifact>false</useProjectArtifact>
+            <scope>compile</scope>
+            <includes>
+                <include>com.citytechinc.cq.clientlibs:clientlibrarian-ui:zip</include>
+            </includes>
             <useStrictFiltering>true</useStrictFiltering>
         </dependencySet>
         <dependencySet>
@@ -56,8 +67,8 @@
             <useProjectArtifact>false</useProjectArtifact>
             <scope>compile</scope>
             <includes>
-                <include>com.citytechinc.cq.harbor.proper:harbor-proper-api</include>
-                <include>com.citytechinc.cq.harbor.proper:harbor-proper-core</include>
+                <include>com.citytechinc.cq.harbor:harbor-api</include>
+                <include>com.citytechinc.cq.harbor:harbor-core</include>
             </includes>
             <useStrictFiltering>true</useStrictFiltering>
         </dependencySet>
