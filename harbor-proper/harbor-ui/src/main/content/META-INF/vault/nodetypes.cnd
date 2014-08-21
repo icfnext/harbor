@@ -1,0 +1,9 @@
+<'accelerate'='http://www.citytechinc.com/ns/accelerate/'>
+<'cq'='http://www.day.com/jcr/cq/1.0'>
+
+[accelerate:SectionLandingPage]
+  > cq:PageContent
+
+[accelerate:HomePage]
+  > accelerate:SectionLandingPage
+

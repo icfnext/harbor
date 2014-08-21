@@ -36,7 +36,7 @@
     </fileSets>
     <dependencySets>
         <dependencySet>
-            <outputDirectory>/etc/packages/bedrock</outputDirectory>
+            <outputDirectory>jcr_root/etc/packages/bedrock</outputDirectory>
             <useProjectArtifact>false</useProjectArtifact>
             <scope>compile</scope>
             <includes>
@@ -45,7 +45,7 @@
             <useStrictFiltering>true</useStrictFiltering>
         </dependencySet>
         <dependencySet>
-            <outputDirectory>/etc/packages/accelerate</outputDirectory>
+            <outputDirectory>jcr_root/etc/packages/accelerate</outputDirectory>
             <useProjectArtifact>false</useProjectArtifact>
             <scope>compile</scope>
             <includes>
@@ -54,7 +54,7 @@
             <useStrictFiltering>true</useStrictFiltering>
         </dependencySet>
         <dependencySet>
-            <outputDirectory>/etc/packages/clientlibrarian</outputDirectory>
+            <outputDirectory>jcr_root/etc/packages/clientlibrarian</outputDirectory>
             <useProjectArtifact>false</useProjectArtifact>
             <scope>compile</scope>
             <includes>

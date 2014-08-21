@@ -68,11 +68,7 @@ public class ColumnRow extends AbstractComponent {
 	@DialogField(ranking = 3)
 	@DialogFieldSet
 	public Classification getClassification() {
-		Bindings bindings = new SimpleBindings();
-		bindings.put(ComponentBindings.COMPONENT_REQUEST, getComponentRequest());
-		Classification classification = new Classification();
-		classification.init(bindings);
-		return classification;
+        return getComponent(this, Classification.class).orNull();
 	}
 
 }

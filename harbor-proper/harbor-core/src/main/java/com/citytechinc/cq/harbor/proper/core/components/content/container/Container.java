@@ -37,7 +37,7 @@ public class Container extends AbstractComponent {
 	@DialogFieldSet
 	public Classification getClassification() {
 		if (classification == null) {
-			classification = getComponent(getPath(), Classification.class).get();
+            classification = getComponent(this, Classification.class).orNull();
 		}
 
 		return classification;
@@ -45,7 +45,7 @@ public class Container extends AbstractComponent {
 
 	public String getContainerClass() {
 
-		StringBuffer classStringBuffer = new StringBuffer();
+		StringBuilder classStringBuffer = new StringBuilder();
 
 		if (getIsContainerFullWidth()) {
 			classStringBuffer.append(getContainerFullWidthClass());
