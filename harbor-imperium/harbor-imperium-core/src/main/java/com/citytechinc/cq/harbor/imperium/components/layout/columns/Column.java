@@ -1,8 +1,6 @@
 package com.citytechinc.cq.harbor.imperium.components.layout.columns;
 
 import com.citytechinc.aem.bedrock.api.components.annotations.AutoInstantiate;
-import com.citytechinc.aem.bedrock.api.node.ComponentNode;
-import com.citytechinc.aem.bedrock.api.request.ComponentRequest;
 import com.citytechinc.aem.imperium.proper.core.components.layout.AbstractLayoutComponent;
 import com.citytechinc.cq.component.annotations.Component;
 import com.citytechinc.cq.component.annotations.DialogField;
@@ -24,14 +22,6 @@ public class Column extends AbstractLayoutComponent {
 
 	private String colClass;
 	private Classification classification;
-
-	public Column(ComponentRequest request) {
-		super(request);
-	}
-
-	public Column(ComponentNode componentNode, Boolean layoutMode) {
-		super(componentNode, layoutMode);
-	}
 
 	@DialogField(fieldLabel = "Inherit Content?", fieldDescription = "Inherit column content from parent page.")
 	@Selection(type = Selection.CHECKBOX, options = { @Option(text = "", value = "true") })
@@ -67,7 +57,7 @@ public class Column extends AbstractLayoutComponent {
 	public Classification getClassification() {
 
 		if (classification == null) {
-			classification = new Classification(getResource().adaptTo(ComponentNode.class));
+			classification = getComponent(getPath(), Classification.class).get();
 		}
 
 		return classification;

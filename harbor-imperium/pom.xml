@@ -3,11 +3,11 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
-    <parent>
-        <groupId>com.citytechinc.cq.accelerate</groupId>
-        <artifactId>accelerate</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
-    </parent>
+   <parent>
+		<groupId>com.citytechinc.aem.bedrock</groupId>
+		<artifactId>bedrock</artifactId>
+		<version>1.1.1</version>
+	</parent>
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.citytechinc.cq.harbor.imperium</groupId>
@@ -56,8 +56,10 @@
     </distributionManagement>
 
     <properties>
-        <core.artifactId>harbor-imperium-core</core.artifactId>
-
+		<imperium.version>1.0.0-SNAPSHOT</imperium.version>
+		<harbor.version>1.0.0-SNAPSHOT</harbor.version>
+		<accelerate.version>1.0.0-SNAPSHOT</accelerate.version>
+		<clientlibrarian.version>0.5.0-SNAPSHOT</clientlibrarian.version>
         <!-- defaults -->
         <package.skip>true</package.skip>
         <osgi.bundle.status.skip>true</osgi.bundle.status.skip>
@@ -88,7 +90,6 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>versions-maven-plugin</artifactId>
-                <version>1.3.1</version>
                 <configuration>
                     <generateBackupPoms>false</generateBackupPoms>
                 </configuration>
@@ -98,61 +99,55 @@
 
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <groupId>com.citytechinc.cq.library</groupId>
-                <artifactId>cq-library-core</artifactId>
-                <version>${cq.library.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.citytechinc.cq.library</groupId>
-                <artifactId>cq-library-ui</artifactId>
-                <version>${cq.library.version}</version>
-                <type>zip</type>
-            </dependency>
-
-            <!-- Accelerate -->
-            <dependency>
-                <groupId>com.citytechinc.cq.accelerate</groupId>
-                <artifactId>accelerate-api</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
-                <scope>provided</scope>
-            </dependency>
-
             <!-- Harbor -->
             <dependency>
-                <groupId>com.citytechinc.cq.harbor.proper</groupId>
-                <artifactId>harbor-proper-api</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
+                <groupId>com.citytechinc.cq.harbor</groupId>
+                <artifactId>harbor-api</artifactId>
+                <version>${harbor.version}</version>
                 <scope>provided</scope>
             </dependency>
             <dependency>
-                <groupId>com.citytechinc.cq.harbor.proper</groupId>
-                <artifactId>harbor-proper-core</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
+                <groupId>com.citytechinc.cq.harbor</groupId>
+                <artifactId>harbor-core</artifactId>
+                <version>${harbor.version}</version>
                 <scope>provided</scope>
             </dependency>
 
             <!-- Imperium -->
             <dependency>
-                <groupId>com.citytechinc.aem.imperium.proper</groupId>
-                <artifactId>imperium-proper-api</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
+                <groupId>com.citytechinc.aem.imperium</groupId>
+                <artifactId>imperium-api</artifactId>
+                <version>${imperium.version}</version>
                 <scope>provided</scope>
             </dependency>
             <dependency>
-                <groupId>com.citytechinc.aem.imperium.proper</groupId>
-                <artifactId>imperium-proper-core</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
+                <groupId>com.citytechinc.aem.imperium</groupId>
+                <artifactId>imperium-core</artifactId>
+                <version>${imperium.version}</version>
                 <scope>provided</scope>
             </dependency>
-
-            <!-- Client Librarian -->
+            
+            <!-- Accelerate -->
             <dependency>
-                <groupId>com.citytechinc.cq.clientlibs</groupId>
-                <artifactId>clientlibrarian-api</artifactId>
-                <version>0.3.0-SNAPSHOT</version>
-                <scope>provided</scope>
-            </dependency>
+				<groupId>com.citytechinc.cq.accelerate</groupId>
+				<artifactId>accelerate-api</artifactId>
+				<version>${accelerate.version}</version>
+				<scope>provided</scope>
+			</dependency>
+			 <dependency>
+				<groupId>com.citytechinc.cq.accelerate</groupId>
+				<artifactId>accelerate-core</artifactId>
+				<version>${accelerate.version}</version>
+				<scope>provided</scope>
+			
+			<!-- Client Librarian -->
+			<dependency>
+				<groupId>com.citytechinc.cq.clientlibs</groupId>
+				<artifactId>clientlibrarian-api</artifactId>
+				<version>${clientlibrarian.version}</version>
+				<scope>provided</scope>
+			</dependency>
+			
         </dependencies>
     </dependencyManagement>
 </project>
