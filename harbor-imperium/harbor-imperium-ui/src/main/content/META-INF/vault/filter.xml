@@ -7,4 +7,7 @@
     <filter root="/etc/designs/harbor-imperium">
         <exclude pattern="/etc/designs/harbor-imperium/jcr:content(/.*)?"/>
     </filter>
+    <filter root="/etc/packages/harbor/harbor-ui-${harbor.version}.zip"/>
+    <filter root="/etc/packages/imperium/imperium-ui-${imperium.version}.zip"/>
+    <filter root="/etc/packages/clientlibrarian/clientlibrarian-ui-${clientlibrarian.version}.zip"/>
 </workspaceFilter>

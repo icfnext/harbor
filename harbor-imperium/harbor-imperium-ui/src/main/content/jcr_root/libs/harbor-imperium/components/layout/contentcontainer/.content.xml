@@ -11,4 +11,4 @@
         cq:noDecoration="{Boolean}false"
         dependencies="[harbor.bootstrap.layout.scaffolding,imperium.layoutmode.section]"
         jcr:primaryType="accelerate:LayoutComponent"
-        jcr:title="Layout Container"/>
+        jcr:title="Layout Content Container"/>

@@ -35,7 +35,7 @@ public class Container extends AbstractLayoutComponent {
 	@DialogFieldSet
 	public Classification getClassification() {
 		if (classification == null) {
-			classification = getComponent(getPath(), Classification.class).get();
+			classification = getComponent(this, Classification.class).orNull();
 		}
 
 		return classification;

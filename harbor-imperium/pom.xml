@@ -64,6 +64,8 @@
         <package.skip>true</package.skip>
         <osgi.bundle.status.skip>true</osgi.bundle.status.skip>
         <cq.username>admin</cq.username>
+
+        <core.artifactId>harbor-imperium-core</core.artifactId>
     </properties>
 
     <profiles>
@@ -134,12 +136,13 @@
 				<version>${accelerate.version}</version>
 				<scope>provided</scope>
 			</dependency>
-			 <dependency>
+			<dependency>
 				<groupId>com.citytechinc.cq.accelerate</groupId>
 				<artifactId>accelerate-core</artifactId>
 				<version>${accelerate.version}</version>
 				<scope>provided</scope>
-			
+			</dependency>
+
 			<!-- Client Librarian -->
 			<dependency>
 				<groupId>com.citytechinc.cq.clientlibs</groupId>

@@ -133,12 +133,12 @@
                     <transformerName>lower-case</transformerName>
                     <excludeDependencies>
                         <dependency>
-                            <groupId>com.citytechinc.cq.harbor.proper</groupId>
-                            <artifactId>harbor-proper-core</artifactId>
+                            <groupId>com.citytechinc.cq.harbor</groupId>
+                            <artifactId>harbor-core</artifactId>
                         </dependency>
                         <dependency>
-                            <groupId>com.citytechinc.aem.imperium.proper</groupId>
-                            <artifactId>imperium-proper-core</artifactId>
+                            <groupId>com.citytechinc.aem.imperium</groupId>
+                            <artifactId>imperium-core</artifactId>
                         </dependency>
                     </excludeDependencies>
                 </configuration>
@@ -146,6 +146,7 @@
             <plugin>
                 <groupId>com.citytechinc.maven.plugins</groupId>
                 <artifactId>cq-package-maven-plugin</artifactId>
+                <version>0.4.0</version>
                 <executions>
                     <execution>
                         <phase>install</phase>
@@ -160,6 +161,7 @@
                     <username>${cq.username}</username>
                     <password>${cq.password}</password>
                     <skip>${package.skip}</skip>
+                    <installRecursive>true</installRecursive>
                 </configuration>
             </plugin>
             <plugin>
@@ -192,27 +194,18 @@
             <artifactId>${core.artifactId}</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <dependency>
-            <groupId>com.citytechinc.cq.library</groupId>
-            <artifactId>cq-library-ui</artifactId>
-            <type>zip</type>
-        </dependency>
 
         <dependency>
-            <groupId>com.citytechinc.aem.imperium.proper</groupId>
-            <artifactId>imperium-proper-api</artifactId>
+            <groupId>com.citytechinc.aem.imperium</groupId>
+            <artifactId>imperium-ui</artifactId>
+            <type>zip</type>
+            <version>${imperium.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.citytechinc.aem.imperium.proper</groupId>
-            <artifactId>imperium-proper-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.citytechinc.cq.harbor.proper</groupId>
-            <artifactId>harbor-proper-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.citytechinc.cq.harbor.proper</groupId>
-            <artifactId>harbor-proper-core</artifactId>
+            <groupId>com.citytechinc.cq.harbor</groupId>
+            <artifactId>harbor-ui</artifactId>
+            <type>zip</type>
+            <version>${harbor.version}</version>
         </dependency>
     </dependencies>
 </project>

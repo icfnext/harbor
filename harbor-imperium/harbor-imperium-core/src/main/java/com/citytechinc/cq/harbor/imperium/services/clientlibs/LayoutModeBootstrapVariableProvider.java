@@ -2,6 +2,8 @@ package com.citytechinc.cq.harbor.imperium.services.clientlibs;
 
 import java.util.Map;
 
+import com.citytechinc.cq.accelerate.api.ontology.Properties;
+import com.citytechinc.cq.clientlibs.api.services.clientlibs.transformer.VariableProvider;
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Service;
 import org.apache.sling.api.resource.Resource;

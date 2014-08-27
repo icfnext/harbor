@@ -27,6 +27,24 @@
     </fileSets>
     <dependencySets>
         <dependencySet>
+            <outputDirectory>jcr_root/etc/packages/harbor</outputDirectory>
+            <useProjectArtifact>false</useProjectArtifact>
+            <scope>compile</scope>
+            <includes>
+                <include>com.citytechinc.cq.harbor:harbor-ui:zip</include>
+            </includes>
+            <useStrictFiltering>true</useStrictFiltering>
+        </dependencySet>
+        <dependencySet>
+            <outputDirectory>jcr_root/etc/packages/imperium</outputDirectory>
+            <useProjectArtifact>false</useProjectArtifact>
+            <scope>compile</scope>
+            <includes>
+                <include>com.citytechinc.aem.imperium:imperium-ui:zip</include>
+            </includes>
+            <useStrictFiltering>true</useStrictFiltering>
+        </dependencySet>
+        <dependencySet>
             <outputDirectory>jcr_root/libs/harbor-imperium/install</outputDirectory>
             <useProjectArtifact>false</useProjectArtifact>
             <scope>compile</scope>

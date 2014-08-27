@@ -1,1 +1,1 @@
-<%@include file="/apps/cq-library/components/global.jsp"%>
+<%@include file="/apps/bedrock/components/global.jsp"%>
