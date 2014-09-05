@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <ct:title />
+        <bedrock:title />
         <cl:pageLibrary type="both"/>
     </head>
     <body>

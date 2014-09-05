@@ -2,7 +2,7 @@
 <c:set var="curtabs" scope="page" value="${tabs}"/>
 
 <div class="tabs-container" class="tabs" id="${curtabs.uniqueId}-tabs-container">
-    <ul class="nav nav-tabs" data-tabs="tabs">
+    <ul class="nav nav-${curtabs.tabType}" data-tabs="tabs">
         <c:forEach var="curTab" items="${curtabs.tabs}" varStatus="status">
             <c:set var="dataPathString" value="data-path='${curtabs.path}'"/>
             <li id="${curTab.uniqueId}" data-name="${curTab.name}"

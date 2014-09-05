@@ -32,7 +32,7 @@ public class BootstrapMainNavigationRenderingStrategy extends AbstractComponent 
 
 	public Boolean getIsSticky() {
 		if (isSticky == null) {
-			isSticky = get("isSticky", false);
+			isSticky = getInherited("isSticky", false);
 		}
 
 		return isSticky;
@@ -40,7 +40,7 @@ public class BootstrapMainNavigationRenderingStrategy extends AbstractComponent 
 
 	public Boolean getShowBrandLink() {
 		if (showBrandLink == null) {
-			showBrandLink = get("showBrandLink", false);
+			showBrandLink = getInherited("showBrandLink", false);
 		}
 
 		return showBrandLink;
@@ -48,7 +48,7 @@ public class BootstrapMainNavigationRenderingStrategy extends AbstractComponent 
 
 	public String getBrandLinkText() {
 		if (brandLinkText == null) {
-			brandLinkText = get("brandLinkText", StringUtils.EMPTY);
+			brandLinkText = getInherited("brandLinkText", StringUtils.EMPTY);
 		}
 
 		return brandLinkText;

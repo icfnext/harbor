@@ -49,4 +49,7 @@ public class Bootstrap {
 
 	public static final String ACTIVE = "active";
 
+    public static final String TAB_NAVIGATION_TYPE = "tabs";
+    public static final String PILLS_NAVIGATION_TYPE = "pills";
+
 }
