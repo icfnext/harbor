@@ -1,4 +1,4 @@
-package com.citytechinc.cq.harbor.proper.core.components.content.list;
+package com.citytechinc.cq.harbor.proper.api.components.content.list;
 
 import com.citytechinc.cq.harbor.proper.api.lists.RootedItems;
 

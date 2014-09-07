@@ -3,8 +3,8 @@ package com.citytechinc.cq.harbor.proper.core.tags;
 import com.citytechinc.cq.harbor.proper.api.lists.rendering.RenderableItem;
 import org.apache.commons.lang.StringUtils;
 import org.apache.sling.api.SlingHttpServletResponse;
+import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
-import org.apache.sling.api.resource.ResourceUtil;
 import org.apache.sling.api.scripting.SlingBindings;
 import org.apache.sling.api.scripting.SlingScriptHelper;
 import org.apache.sling.api.servlets.ServletResolver;
@@ -70,36 +70,9 @@ public class IncludeListItemsTag extends TagSupport {
         SlingScriptHelper scriptHelper = bindings.getSling();
         ServletResolver servletResolver = scriptHelper.getService(ServletResolver.class);
 
-        // resolve absolute script path
-        String absScriptPath = StringUtils.EMPTY;
-        if (!this.script.startsWith("/")) {
-
-            // this is a relative path, figure out what the absolute path is
-            String parentPath = ResourceUtil.getParent(scriptHelper.getScript().getScriptResource().getPath());
-            for (String searchPath : resourceResolver.getSearchPath()) {
-
-                if (parentPath.startsWith(searchPath)) {
-
-                    // found properly resolved parent path that is the root of the absolute path to relative resource
-                    parentPath = parentPath.substring(searchPath.length());
-                    break;
-
-                }
-
-            }
-
-            // set absolute path to be used for script resolution
-            absScriptPath = parentPath + "/" + this.script;
-
-        } else {
-
-            // this is already an absolute path, just use it as is
-            absScriptPath = this.script;
-
-        }
-
         // get resolved jsp, render it
-        Servlet servlet = servletResolver.resolveServlet(resourceResolver, absScriptPath);
+        Servlet servlet = resolveServletForScript(servletResolver, bindings.getResource(), script);
+
         if (servlet != null) {
 
             try {
@@ -125,22 +98,26 @@ public class IncludeListItemsTag extends TagSupport {
             } catch (ServletException e) {
 
                 // servlet error occurred, throw an error
-                throw new JspException("Error while executing script " + absScriptPath, e);
+                throw new JspException("Error while executing script " + servlet.getServletInfo(), e);
 
             } catch (IOException e) {
 
                 // servlet error occurred, throw an error
-                throw new JspException("Error while executing script " + absScriptPath, e);
+                throw new JspException("Error while executing script " + servlet.getServletInfo(), e);
 
             }
 
         } else {
 
             // could not find jsp, throw an error
-            throw new JspException("Could not find script " + absScriptPath);
+            throw new JspException("Could not find servlet for script " + script);
 
         }
 
+    }
+
+    private Servlet resolveServletForScript(ServletResolver servletResolver, Resource resourceBeingRendered, String script) {
+        return servletResolver.resolveServlet(resourceBeingRendered, script);
     }
 
     /**

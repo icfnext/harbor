@@ -1,6 +1,7 @@
 package com.citytechinc.cq.harbor.proper.core.components.content.list;
 
 import com.citytechinc.aem.bedrock.core.components.AbstractComponent;
+import com.citytechinc.cq.harbor.proper.api.components.content.list.RootedListComponent;
 import com.citytechinc.cq.harbor.proper.api.lists.RootedItems;
 import com.citytechinc.cq.harbor.proper.api.lists.construction.RootedListConstructionStrategy;
 import com.citytechinc.cq.harbor.proper.api.lists.rendering.RootedListRenderingStrategy;

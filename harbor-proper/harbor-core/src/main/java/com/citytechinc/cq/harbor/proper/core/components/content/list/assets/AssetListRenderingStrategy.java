@@ -20,6 +20,7 @@ public class AssetListRenderingStrategy implements
 
 	private static final String PARAM_AS_LINKS = "renderAsLinks";
 	private static final boolean DEFAULT_AS_LINKS = false;
+
 	@DialogField(fieldLabel = "Render as Links", fieldDescription = "Check box to render items as links, otherwise items will be rendered as static text.")
 	@Selection(type = Selection.CHECKBOX, options = @Option(value = "true"))
 	private final boolean renderAsLinks;

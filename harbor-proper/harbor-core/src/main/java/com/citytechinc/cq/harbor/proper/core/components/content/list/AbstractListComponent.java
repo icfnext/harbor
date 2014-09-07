@@ -4,13 +4,14 @@ import java.util.Iterator;
 
 import com.citytechinc.aem.bedrock.core.components.AbstractComponent;
 import com.citytechinc.cq.component.annotations.Component;
+import com.citytechinc.cq.harbor.proper.api.components.content.list.ListComponent;
 import com.citytechinc.cq.harbor.proper.api.constants.dom.Elements;
 import com.citytechinc.cq.harbor.proper.api.lists.construction.ListConstructionStrategy;
 import com.citytechinc.cq.harbor.proper.api.lists.rendering.ListRenderingStrategy;
 
 @Component(value = "Abstract List", group = ".hidden", name = "lists/abstractlist")
 public abstract class AbstractListComponent<T, R extends Iterable<?>> extends AbstractComponent implements
-	ListComponent<R> {
+        ListComponent<R> {
 
 	public static final String RESOURCE_TYPE = "harbor/components/content/lists/abstractlist";
 

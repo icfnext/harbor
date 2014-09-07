@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.jcr.RepositoryException;
 
+import org.apache.commons.lang3.StringUtils;
+import org.apache.sling.api.resource.ResourceUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -49,6 +51,8 @@ public class AssetListConstructionStrategy extends AbstractNodeSearchConstructio
 
 	private List<ConstructionPredicate> constructionPredicates;
 
+    private final ComponentNode componentNode;
+
 	@Override
 	protected Asset transformHit(Hit hit) {
 
@@ -69,6 +73,8 @@ public class AssetListConstructionStrategy extends AbstractNodeSearchConstructio
 
 	public AssetListConstructionStrategy(ComponentNode componentNode) {
 		super(componentNode);
+
+        this.componentNode = componentNode;
 
 		// add author specified path predicate
 		pathConstructionPredicate = new PathConstructionPredicate(componentNode, PROP_PREFIX_PATH_PREDICATE);
@@ -96,5 +102,14 @@ public class AssetListConstructionStrategy extends AbstractNodeSearchConstructio
 		return constructionPredicates;
 
 	}
+
+    @Override
+    protected boolean isReadyToQuery() {
+        return
+                componentNode.getResource() != null &&
+                        !ResourceUtil.isNonExistingResource(componentNode.getResource()) &&
+                        !ResourceUtil.isSyntheticResource(componentNode.getResource()) &&
+                        StringUtils.isNotBlank(pathConstructionPredicate.getPath());
+    }
 
 }

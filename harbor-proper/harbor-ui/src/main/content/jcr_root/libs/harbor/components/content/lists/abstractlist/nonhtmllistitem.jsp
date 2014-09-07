@@ -1,2 +1,2 @@
 
-${renderableItems.renderedItem}
+${renderableItem.renderedItem}

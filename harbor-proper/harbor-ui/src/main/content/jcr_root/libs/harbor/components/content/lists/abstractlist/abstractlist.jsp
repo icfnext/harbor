@@ -13,12 +13,12 @@
 
     <c:when test="${listComponent.isHtmlList}">
 
-        <harbor:includeListItems items="${listComponent.renderableListItems}" script="htmllistitem.jsp" itemVar="renderableItem" />
+        <harbor:includeListItems items="${listComponent.items}" script="htmllistitem.jsp" itemVar="renderableItem" />
 
     </c:when>
     <c:otherwise>
 
-        <harbor:includeListItems items="${listComponent.renderableListItems}" script="nonhtmllistitem.jsp" itemVar="renderableItem" />
+        <harbor:includeListItems items="${listComponent.items}" script="nonhtmllistitem.jsp" itemVar="renderableItem" />
 
     </c:otherwise>
 

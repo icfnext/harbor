@@ -30,6 +30,7 @@ public class QueryParameterConstructionPredicate implements ConstructionPredicat
 	private static final String PARAM_QUERY_LIMIT = "p." + PredicateGroup.PARAM_LIMIT;
 	private static final int DEFAULT_LIMIT = 10;
 	private static final String DEFAULT_LIMIT_STR = "10";
+
 	@DialogField(fieldLabel = "Limit", fieldDescription = "Number of results to return. Set to 0 to return all results. Default is "
 		+ DEFAULT_LIMIT_STR + ".", defaultValue = DEFAULT_LIMIT_STR)
 	@NumberField(allowDecimals = false, allowNegative = false)

@@ -24,7 +24,7 @@ public class PathConstructionPredicate implements ConstructionPredicate {
 
 	private static final String PARAM_PATH = "path";
 	private static final String PARAM_QUERY_PATH = PathPredicateEvaluator.PATH;
-	private static final String DEFAULT_PARAM_PATH = "/";
+	private static final String DEFAULT_PARAM_PATH = "";
 
 	@DialogField(fieldLabel = "Path", fieldDescription = "Path to search for nodes under.")
 	@PathField(rootPath = DEFAULT_PARAM_PATH)

@@ -13,7 +13,7 @@ import com.citytechinc.cq.harbor.proper.api.lists.construction.ListConstructionS
 import com.citytechinc.cq.harbor.proper.api.lists.rendering.ListRenderingStrategy;
 import com.citytechinc.cq.harbor.proper.core.components.content.list.AbstractListComponent;
 
-@Component(value = "Demo Page List", group = "Harbor Lists", resourceSuperType = AbstractListComponent.RESOURCE_TYPE, name = "lists/demopagelist")
+@Component(value = "Page List", group = "Harbor Lists", resourceSuperType = AbstractListComponent.RESOURCE_TYPE, name = "lists/pagelist")
 @AutoInstantiate(instanceName = ListConstants.LIST_PAGE_CONTEXT_NAME)
 public class PageList extends AbstractListComponent<PageDecorator, List<LinkablePageRenderingStrategy.LinkablePage>> {
 
