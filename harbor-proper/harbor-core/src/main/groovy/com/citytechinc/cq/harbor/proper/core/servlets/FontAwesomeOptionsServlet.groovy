@@ -1,5 +1,7 @@
 package com.citytechinc.cq.harbor.proper.core.servlets
 
+import com.citytechinc.aem.bedrock.core.servlets.optionsprovider.Option
+
 import javax.jcr.Node
 import javax.jcr.Property
 
@@ -10,7 +12,6 @@ import org.slf4j.LoggerFactory
 
 import com.citytechinc.aem.bedrock.api.request.ComponentServletRequest
 import com.citytechinc.aem.bedrock.core.servlets.optionsprovider.AbstractOptionsProviderServlet
-import com.citytechinc.cq.component.annotations.Option
 import com.citytechinc.cq.harbor.proper.api.constants.components.ComponentConstants
 import com.day.cq.commons.jcr.JcrConstants
 import com.google.common.base.Charsets

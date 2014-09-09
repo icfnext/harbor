@@ -1,4 +1,4 @@
-package com.citytechinc.cq.harbor.proper.core.components.content.list.nodesearchstrategy;
+package com.citytechinc.cq.harbor.proper.core.lists.construction.nodesearch;
 
 import java.util.ArrayList;
 import java.util.List;

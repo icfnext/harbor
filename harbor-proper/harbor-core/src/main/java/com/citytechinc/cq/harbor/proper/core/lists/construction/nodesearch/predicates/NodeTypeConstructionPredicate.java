@@ -1,4 +1,4 @@
-package com.citytechinc.cq.harbor.proper.core.components.content.list.nodesearchstrategy.predicatewrappers;
+package com.citytechinc.cq.harbor.proper.core.lists.construction.nodesearch.predicates;
 
 import java.util.Map;
 

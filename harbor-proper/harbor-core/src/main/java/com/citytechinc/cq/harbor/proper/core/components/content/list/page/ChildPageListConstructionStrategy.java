@@ -1,4 +1,4 @@
-package com.citytechinc.cq.harbor.proper.core.components.content.list.demo;
+package com.citytechinc.cq.harbor.proper.core.components.content.list.page;
 
 import java.util.List;
 
