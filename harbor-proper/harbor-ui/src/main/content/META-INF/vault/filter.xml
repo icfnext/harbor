@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <workspaceFilter version="1.0">
-    <filter root="/apps/bedrock/components" />
-    <filter root="/apps/bedrock/install" />
-    <filter root="/etc/clientlibs/bedrock" />
-    
     <filter root="/libs/harbor/components" />
     <filter root="/libs/harbor/templates" />
     <filter root="/libs/harbor/install" />

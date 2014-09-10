@@ -44,4 +44,9 @@ public class AssetList extends AbstractListComponent<Asset, List<AssetListRender
 		return renderingStrategy;
 
 	}
+
+    @Override
+    public Boolean getIsUnorderedList() {
+        return true;
+    }
 }

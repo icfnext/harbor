@@ -20,7 +20,7 @@ import com.google.common.collect.Maps;
  */
 public class NodeTypeConstructionPredicate implements ConstructionPredicate {
 
-	private static final String PARAM_NODE_TYPE = "nodeType";
+	private static final String PARAM_NODE_TYPE = "type";
 	private static final String DEFAULT_NODE_TYPE = StringUtils.EMPTY;
 
 	@DialogField(fieldLabel = "Node Type", fieldDescription = "JCR node type to search for.", defaultValue = DEFAULT_NODE_TYPE)
