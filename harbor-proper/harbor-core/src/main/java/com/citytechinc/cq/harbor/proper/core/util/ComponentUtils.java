@@ -10,7 +10,7 @@ public final class ComponentUtils {
 
     }
 
-    public static String getComponentId(final Page currentPage, final Resource resource) {
+    public static String getUniqueIdentifierForResourceInPage(final Page currentPage, final Resource resource) {
         final String pageResourcePath = currentPage.getContentResource().getPath();
 
         return StringUtils.removeStart(resource.getPath(), pageResourcePath).substring(1)

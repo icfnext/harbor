@@ -1,4 +1,4 @@
-package com.citytechinc.cq.harbor.proper.core.components.content.navigation.bootstrapnavigation;
+package com.citytechinc.cq.harbor.proper.core.components.content.navigation.bootstrapnavigation.mainmanualnavigation;
 
 import com.citytechinc.aem.bedrock.api.components.annotations.AutoInstantiate;
 import com.citytechinc.aem.bedrock.core.components.AbstractComponent;
@@ -9,8 +9,14 @@ import com.citytechinc.cq.component.annotations.Option;
 import com.citytechinc.cq.component.annotations.widgets.PathField;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
 
-@Component(value = "Navigation Element", actions = { "text: Navigation Element", "-", "edit", "-", "delete" }, listeners = {
-	@Listener(name = "afterdelete", value = "REFRESH_PARENT"), @Listener(name = "afteredit", value = "REFRESH_PARENT"), }, group = ".hidden")
+@Component(
+        value = "Navigation Element",
+        actions = { "text: Navigation Element", "-", "edit", "-", "delete" },
+        listeners = {@Listener(name = "afterdelete", value = "REFRESH_PARENT"),
+                     @Listener(name = "afteredit", value = "REFRESH_PARENT"), },
+        group = ".hidden",
+        layout = "rollover",
+        path = "content/navigation/bootstrapmainmanualnavigation")
 @AutoInstantiate(instanceName = BootstrapMainNavigationElement.INSTANCE_NAME)
 public class BootstrapMainNavigationElement extends AbstractComponent {
 
@@ -36,4 +42,5 @@ public class BootstrapMainNavigationElement extends AbstractComponent {
 	public String getName() {
 		return this.getResource().getName();
 	}
+
 }

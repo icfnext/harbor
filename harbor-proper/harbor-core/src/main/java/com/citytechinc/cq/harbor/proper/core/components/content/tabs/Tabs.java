@@ -26,7 +26,7 @@ public class Tabs extends AbstractComponent {
 	private List<Tab> tabs;
 
 	public static String constructUniqueId(Page page, Resource r) {
-		return ComponentUtils.getComponentId(page, r);
+		return ComponentUtils.getUniqueIdentifierForResourceInPage(page, r);
 	}
 
 	public String getName() {

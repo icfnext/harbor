@@ -46,7 +46,7 @@ CQ.Ext.override(
 
       var editableIsVisible = this.isVisible();
       var underlyingElementIsVisible = jQuery( this.element.dom ).is( ':visible' );
-      var editableIsNotInContext = this.hasOwnProperty( 'vjInCurrentContext' ) && this.vjInCurrentContext === false;
+      var editableIsNotInContext = this.hasOwnProperty( 'harborInCurrentContext' ) && this.harborInCurrentContext === false;
 
       if ( editableIsVisible && ( !underlyingElementIsVisible || editableIsNotInContext ) ) {
         this.hide(true);
@@ -97,7 +97,7 @@ CQ.Ext.override(
 
       var editableIsVisible = !this.hidden && !this.elementHidden;
       var underlyingElementIsVisible = jQuery( this.element.dom ).is( ':visible' );
-      var editableIsNotInContext = this.hasOwnProperty( 'vjInCurrentContext' ) && this.vjInCurrentContext === false;
+      var editableIsNotInContext = this.hasOwnProperty( 'harborInCurrentContext' ) && this.harborInCurrentContext === false;
 
       if ( editableIsVisible && ( !underlyingElementIsVisible || editableIsNotInContext ) ) {
         this.hide(true);
