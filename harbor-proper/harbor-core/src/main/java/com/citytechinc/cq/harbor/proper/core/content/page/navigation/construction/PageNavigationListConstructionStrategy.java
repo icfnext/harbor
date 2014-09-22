@@ -8,12 +8,12 @@ import com.citytechinc.cq.component.annotations.FieldProperty;
 import com.citytechinc.cq.component.annotations.widgets.NumberField;
 import com.citytechinc.cq.component.annotations.widgets.PathField;
 import com.citytechinc.cq.harbor.proper.api.content.page.navigation.NavigablePage;
-import com.citytechinc.cq.harbor.proper.api.lists.construction.RootedListConstructionStrategy;
+import com.citytechinc.cq.harbor.proper.api.trees.construction.TreeConstructionStrategy;
 import com.citytechinc.cq.harbor.proper.core.content.page.navigation.NavigablePages;
 import com.google.common.base.Optional;
 
 public class PageNavigationListConstructionStrategy extends AbstractComponent implements
-	RootedListConstructionStrategy<NavigablePage> {
+        TreeConstructionStrategy<NavigablePage> {
 
 	private Optional<NavigablePage> navigationRoot;
 	private Integer navigationDepth;

@@ -1,17 +1,17 @@
-package com.citytechinc.cq.harbor.proper.api.lists.construction;
+package com.citytechinc.cq.harbor.proper.api.trees.construction;
 
-import com.citytechinc.cq.harbor.proper.api.lists.RootedItems;
+import com.citytechinc.cq.harbor.proper.api.trees.TreeNode;
 import com.google.common.base.Optional;
 
 /**
- * A Strategy used to construct a Rooted List of elements
+ * A Strategy used to construct a Tree of nodes
  *
  * @param <T>
  */
-public interface RootedListConstructionStrategy<T extends RootedItems> {
+public interface TreeConstructionStrategy<T extends TreeNode> {
 
 	/**
-	 * Construction produces a Parent object representing the rooted list. If
+	 * Construction produces a Parent object representing the rooted tree. If
 	 * construction does not result in a root then an absent Optional is
 	 * returned representing the absence of a list root.
 	 *

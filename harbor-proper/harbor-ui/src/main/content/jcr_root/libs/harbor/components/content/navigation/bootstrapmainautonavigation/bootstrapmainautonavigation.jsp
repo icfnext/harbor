@@ -1,6 +1,6 @@
 <%@include file="/libs/harbor/components/global.jsp" %>
 
-<div <c:choose><c:when test="${bootstrapMainAutoNavigation.root.isSticky}">class="navbar navbar-default navbar-fixed-top"</c:when><c:otherwise>class="navbar navbar-default"</c:otherwise></c:choose> role="navigation">
+<div <c:choose><c:when test="${bootstrapMainAutoNavigation.tree.isSticky}">class="navbar navbar-default navbar-fixed-top"</c:when><c:otherwise>class="navbar navbar-default"</c:otherwise></c:choose> role="navigation">
     <c:choose>
         <c:when test="${bootstrapMainAutoNavigation.hasRoot}">
             <div class="container-fluid">
@@ -11,7 +11,7 @@
         <c:otherwise>
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#">Warning - Unrooted Navigation</a>
+                    <a class="navbar-brand authoring-placeholder" href="#">Warning - Unrooted Navigation</a>
                 </div>
             </div>
         </c:otherwise>

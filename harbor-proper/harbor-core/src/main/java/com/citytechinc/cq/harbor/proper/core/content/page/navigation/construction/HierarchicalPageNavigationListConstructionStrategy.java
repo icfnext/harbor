@@ -22,7 +22,7 @@ public class HierarchicalPageNavigationListConstructionStrategy extends PageNavi
 	public Optional<NavigablePage> getNavigationRoot() {
 		if (navigationRoot == null) {
 			HierarchicalPage currentHierarchicalPage = getCurrentPage().adaptTo(HierarchicalPage.class);
-			String rootTypeSelection = get("navigationRoot", Types.ACCELERATE_HOME_PAGE);
+			String rootTypeSelection = getInherited("navigationRoot", Types.ACCELERATE_HOME_PAGE);
 
 			if (Types.ACCELERATE_SECTION_LANDING_PAGE.equals(rootTypeSelection)) {
 				Optional<SectionLandingPage> sectionLandingPageOptional = currentHierarchicalPage

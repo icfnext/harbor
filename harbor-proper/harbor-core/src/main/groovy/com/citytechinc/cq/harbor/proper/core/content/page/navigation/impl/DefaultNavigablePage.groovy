@@ -52,18 +52,18 @@ class DefaultNavigablePage implements NavigablePage {
 	}
 
 	@Override
-	public boolean getHasItems() {
+	public boolean isHasChildNodes() {
 		return !getNavigableChildren().isEmpty();
 	}
 
 	@Override
-	public Iterable<NavigablePage> getItems() {
+	public Iterable<NavigablePage> getChildNodes() {
 
 		return getNavigableChildren()
 	}
 
 	@Override
-	public Iterator<NavigablePage> getItemsIterator() {
+	public Iterator<NavigablePage> getChildNodesIterator() {
 		return getNavigableChildren().iterator();
 	}
 

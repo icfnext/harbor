@@ -1,13 +1,11 @@
-package com.citytechinc.cq.harbor.proper.core.components.content.navigation.bootstrapnavigation.mainnavigation;
+package com.citytechinc.cq.harbor.proper.core.components.content.navigation.bootstrapnavigation.mainautonavigation;
 
 import com.citytechinc.cq.harbor.proper.api.content.page.navigation.NavigablePage;
-import com.citytechinc.cq.harbor.proper.api.lists.RootedItems;
+import com.citytechinc.cq.harbor.proper.api.trees.Tree;
 import com.google.common.base.Optional;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.Iterator;
-
-public class BootstrapPageNavigableRenderableRoot implements RootedItems<NavigablePage> {
+public class BootstrapPageNavigableRenderableTree implements Tree<NavigablePage> {
 
     private final Boolean isSticky;
 
@@ -19,7 +17,7 @@ public class BootstrapPageNavigableRenderableRoot implements RootedItems<Navigab
 
     private final Optional<String> brandLinkImage;
 
-    public BootstrapPageNavigableRenderableRoot(Boolean sticky, Boolean showBrandLink, String brandLinkText, Optional<String> brandLinkImage, NavigablePage rootPage) {
+    public BootstrapPageNavigableRenderableTree(Boolean sticky, Boolean showBrandLink, String brandLinkText, Optional<String> brandLinkImage, NavigablePage rootPage) {
         this.isSticky = sticky;
         this.showBrandLink = showBrandLink;
         this.brandLinkText = brandLinkText;
@@ -39,27 +37,20 @@ public class BootstrapPageNavigableRenderableRoot implements RootedItems<Navigab
         if (StringUtils.isNotBlank(brandLinkText)) {
             return brandLinkText;
         }
-
-        return rootPage.getLink().getTitle();
-    }
-
-    @Override
-    public Iterable<NavigablePage> getItems() {
-        return rootPage.getItems();
-    }
-
-    @Override
-    public boolean getHasItems() {
-        return rootPage.getHasItems();
-    }
-
-    @Override
-    public Iterator<NavigablePage> getItemsIterator() {
-        return getItems().iterator();
+        else if (rootPage != null) {
+            return rootPage.getLink().getTitle();
+        }
+        else {
+            return "No Brand Text Configured";
+        }
     }
 
     public String getHref() {
-        return rootPage.getHref();
+        if (rootPage != null) {
+            return rootPage.getHref();
+        }
+
+        return "#";
     }
 
     public String getBrandLinkImage() {
@@ -68,5 +59,15 @@ public class BootstrapPageNavigableRenderableRoot implements RootedItems<Navigab
 
     public boolean isHasBrandLinkImage() {
         return brandLinkImage.isPresent();
+    }
+
+    @Override
+    public NavigablePage getRoot() {
+        return rootPage;
+    }
+
+    @Override
+    public boolean isHasRoot() {
+        return rootPage != null;
     }
 }

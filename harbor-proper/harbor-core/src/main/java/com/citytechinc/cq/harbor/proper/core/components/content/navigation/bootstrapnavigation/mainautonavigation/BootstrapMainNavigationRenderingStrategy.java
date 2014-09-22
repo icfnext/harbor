@@ -1,5 +1,6 @@
-package com.citytechinc.cq.harbor.proper.core.components.content.navigation.bootstrapnavigation.mainnavigation;
+package com.citytechinc.cq.harbor.proper.core.components.content.navigation.bootstrapnavigation.mainautonavigation;
 
+import com.citytechinc.cq.harbor.proper.api.trees.rendering.TreeRenderingStrategy;
 import org.apache.commons.lang.StringUtils;
 import org.apache.sling.api.resource.Resource;
 
@@ -9,11 +10,10 @@ import com.citytechinc.cq.component.annotations.Option;
 import com.citytechinc.cq.component.annotations.widgets.Html5SmartFile;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
 import com.citytechinc.cq.harbor.proper.api.content.page.navigation.NavigablePage;
-import com.citytechinc.cq.harbor.proper.api.lists.rendering.RootedListRenderingStrategy;
 import com.google.common.base.Optional;
 
 public class BootstrapMainNavigationRenderingStrategy extends AbstractComponent implements
-	RootedListRenderingStrategy<NavigablePage, BootstrapPageNavigableRenderableRoot> {
+        TreeRenderingStrategy<NavigablePage, BootstrapPageNavigableRenderableTree> {
 
 	@DialogField(fieldLabel = "Enable Sticky Navigation", fieldDescription = "")
 	@Selection(type = Selection.CHECKBOX, options = { @Option(text = "", value = "true") })
@@ -72,8 +72,8 @@ public class BootstrapMainNavigationRenderingStrategy extends AbstractComponent 
 	}
 
 	@Override
-	public BootstrapPageNavigableRenderableRoot toRenderableList(NavigablePage rootedItem) {
-		return new BootstrapPageNavigableRenderableRoot(getIsSticky(), getShowBrandLink(), getBrandLinkText(),
+	public BootstrapPageNavigableRenderableTree toRenderableTree(NavigablePage rootedItem) {
+		return new BootstrapPageNavigableRenderableTree(getIsSticky(), getShowBrandLink(), getBrandLinkText(),
 			getBrandLinkImage(), rootedItem);
 	}
 }
