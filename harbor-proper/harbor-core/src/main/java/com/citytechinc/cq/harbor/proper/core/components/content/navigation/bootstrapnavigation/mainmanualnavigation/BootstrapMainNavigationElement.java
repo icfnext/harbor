@@ -2,10 +2,7 @@ package com.citytechinc.cq.harbor.proper.core.components.content.navigation.boot
 
 import com.citytechinc.aem.bedrock.api.components.annotations.AutoInstantiate;
 import com.citytechinc.aem.bedrock.core.components.AbstractComponent;
-import com.citytechinc.cq.component.annotations.Component;
-import com.citytechinc.cq.component.annotations.DialogField;
-import com.citytechinc.cq.component.annotations.Listener;
-import com.citytechinc.cq.component.annotations.Option;
+import com.citytechinc.cq.component.annotations.*;
 import com.citytechinc.cq.component.annotations.widgets.PathField;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
 
@@ -16,7 +13,8 @@ import com.citytechinc.cq.component.annotations.widgets.Selection;
                      @Listener(name = "afteredit", value = "REFRESH_PARENT"), },
         group = ".hidden",
         layout = "rollover",
-        path = "content/navigation/bootstrapmainmanualnavigation")
+        path = "content/navigation/bootstrapmainmanualnavigation",
+        htmlTag = @HtmlTag(tagName = "li"))
 @AutoInstantiate(instanceName = BootstrapMainNavigationElement.INSTANCE_NAME)
 public class BootstrapMainNavigationElement extends AbstractComponent {
 
