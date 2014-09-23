@@ -129,7 +129,7 @@
                 </executions>
                 <configuration>
                     <componentPathBase>jcr_root/libs/harbor-imperium/components</componentPathBase>
-                    <defaultComponentGroup>Harbor Imperium</defaultComponentGroup>
+                    <defaultComponentGroup>Template Layout Elements</defaultComponentGroup>
                     <transformerName>lower-case</transformerName>
                     <excludeDependencies>
                         <dependency>
