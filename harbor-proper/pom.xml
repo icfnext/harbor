@@ -59,7 +59,7 @@
 		<accelerate.version>1.0.0-SNAPSHOT</accelerate.version>
 		<clientlibrarian.version>0.4.0</clientlibrarian.version>
 		<bedrock.version>1.1.1</bedrock.version>
-        <component.plugin.version>2.7.0-SNAPSHOT</component.plugin.version>
+        <component.plugin.version>2.7.0</component.plugin.version>
 		<maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss.SSSZ</maven.build.timestamp.format>
 		<timestamp>${maven.build.timestamp}</timestamp>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
