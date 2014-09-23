@@ -57,7 +57,7 @@ public class Column extends AbstractLayoutComponent {
 	public Classification getClassification() {
 
 		if (classification == null) {
-			classification = getComponent(this, Classification.class).orNull();
+			classification = getComponent(this, Classification.class);
 		}
 
 		return classification;

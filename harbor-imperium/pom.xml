@@ -6,7 +6,7 @@
    <parent>
 		<groupId>com.citytechinc.aem.bedrock</groupId>
 		<artifactId>bedrock</artifactId>
-		<version>1.1.1</version>
+		<version>2.0.0</version>
 	</parent>
 
     <modelVersion>4.0.0</modelVersion>
@@ -64,7 +64,6 @@
         <package.skip>true</package.skip>
         <osgi.bundle.status.skip>true</osgi.bundle.status.skip>
         <cq.username>admin</cq.username>
-
         <core.artifactId>harbor-imperium-core</core.artifactId>
     </properties>
 

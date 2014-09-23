@@ -53,7 +53,7 @@ public class ColumnRow extends AbstractLayoutComponent {
 			columns = Lists.newArrayList();
 
 			for (ComponentNode currentLayoutColumnComponentNode : getComponentNodes()) {
-				Column column = getComponent(currentLayoutColumnComponentNode, Column.class).get();
+				Column column = getComponent(currentLayoutColumnComponentNode, Column.class);
 				column.setLayoutMode(isLayoutMode());
 				this.columns.add(column);
 			}
@@ -66,7 +66,7 @@ public class ColumnRow extends AbstractLayoutComponent {
 	@DialogFieldSet
 	public Classification getClassification() {
 		if (classification == null) {
-			classification = getComponent(this, Classification.class).orNull();
+			classification = getComponent(this, Classification.class);
 		}
 
 		return classification;
