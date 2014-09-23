@@ -37,7 +37,7 @@ public class BootstrapMainAutoNavigation extends
 	@Override
 	protected TreeConstructionStrategy<NavigablePage> getTreeConstructionStrategy() {
 		if (constructionStrategy == null) {
-			constructionStrategy = getComponent(this, SiteNavigationListConstructionStrategy.class).get();
+			constructionStrategy = getComponent(this, SiteNavigationListConstructionStrategy.class);
 		}
 
 		return constructionStrategy;
@@ -46,7 +46,7 @@ public class BootstrapMainAutoNavigation extends
 	@Override
 	protected TreeRenderingStrategy<NavigablePage, BootstrapPageNavigableRenderableTree> getTreeRenderingStrategy() {
 		if (renderingStrategy == null) {
-			renderingStrategy = getComponent(this, BootstrapMainNavigationRenderingStrategy.class).get();
+			renderingStrategy = getComponent(this, BootstrapMainNavigationRenderingStrategy.class);
 		}
 
 		return renderingStrategy;

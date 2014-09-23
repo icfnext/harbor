@@ -32,7 +32,7 @@ public class BootstrapSecondaryNavigation extends AbstractRootedListComponent<Na
 	@Override
 	public HierarchicalPageNavigationListConstructionStrategy getTreeConstructionStrategy() {
 		if (constructionStrategy == null) {
-			constructionStrategy = getComponent(this, HierarchicalPageNavigationListConstructionStrategy.class).get();
+			constructionStrategy = getComponent(this, HierarchicalPageNavigationListConstructionStrategy.class);
 		}
 
 		return constructionStrategy;

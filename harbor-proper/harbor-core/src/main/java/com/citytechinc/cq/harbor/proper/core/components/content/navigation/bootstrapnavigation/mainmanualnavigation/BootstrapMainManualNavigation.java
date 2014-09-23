@@ -122,7 +122,7 @@ public class BootstrapMainManualNavigation extends AbstractComponent {
             bootstrapMainNavigationElementList = Lists.newArrayList();
 
             for (ComponentNode currentComponentNode : getComponentNodes()) {
-                bootstrapMainNavigationElementList.add(getComponent(currentComponentNode, BootstrapMainNavigationElement.class).get());
+                bootstrapMainNavigationElementList.add(getComponent(currentComponentNode, BootstrapMainNavigationElement.class));
             }
 
         }

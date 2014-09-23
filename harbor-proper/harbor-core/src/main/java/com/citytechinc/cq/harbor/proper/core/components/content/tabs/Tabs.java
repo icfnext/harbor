@@ -49,7 +49,7 @@ public class Tabs extends AbstractComponent {
 			ComponentNode currentComponentNode = componentNodeIterator.next();
 
 			if (currentComponentNode.getResource().isResourceType(Tab.TYPE)) {
-				this.tabs.add(getComponent(currentComponentNode, Tab.class).get());
+				this.tabs.add(getComponent(currentComponentNode, Tab.class));
 			}
 		}
 		return this.tabs;

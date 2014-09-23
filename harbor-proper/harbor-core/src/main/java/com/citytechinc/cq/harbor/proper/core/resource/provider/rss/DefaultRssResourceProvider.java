@@ -36,7 +36,8 @@ public class DefaultRssResourceProvider implements ModifyingResourceProvider, Rs
     private String providerRoot;
     private String absoluteProviderRoot;
 
-    @Property(label = "RSS Feed URL", value = "", description = "This is temporary config.  Point it to the URL of the RSS feed")
+    //TODO: Determine why making the value blank here instead of 'none' causes the maven-bundle-plugin to error on build
+    @Property(label = "RSS Feed URL", value = "none", description = "This is temporary config.  Point it to the URL of the RSS feed")
     private static final String RSS_FEED_URL_PROPERTY = "rssFeedUrl";
     private String rssFeedUrl;
 
@@ -49,7 +50,7 @@ public class DefaultRssResourceProvider implements ModifyingResourceProvider, Rs
     protected void activate(final Map<String, Object> properties) throws Exception {
         this.providerRoot = PropertiesUtil.toString(properties.get(PROVIDER_ROOT_PROPERTY), "");
         this.absoluteProviderRoot = "/" + this.providerRoot;
-        this.rssFeedUrl = PropertiesUtil.toString(properties.get(RSS_FEED_URL_PROPERTY), "");
+        this.rssFeedUrl = PropertiesUtil.toString(properties.get(RSS_FEED_URL_PROPERTY), "none");
         this.rssFeedTitle = PropertiesUtil.toString(properties.get(TITLE_PROPERTY), rssFeedUrl);
     }
 
@@ -68,7 +69,7 @@ public class DefaultRssResourceProvider implements ModifyingResourceProvider, Rs
      */
     @Override
     public Resource getResource(ResourceResolver resourceResolver, String path) {
-        if (StringUtils.isBlank(getRssFeedUrl()) || StringUtils.isBlank(absoluteProviderRoot)) {
+        if (StringUtils.isBlank(getRssFeedUrl()) || "none".equals(getRssFeedUrl()) || StringUtils.isBlank(absoluteProviderRoot)) {
             return null;
         }
 

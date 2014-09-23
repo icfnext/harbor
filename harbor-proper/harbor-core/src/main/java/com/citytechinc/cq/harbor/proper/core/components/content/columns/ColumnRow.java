@@ -1,18 +1,11 @@
 package com.citytechinc.cq.harbor.proper.core.components.content.columns;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
-import javax.script.Bindings;
-import javax.script.SimpleBindings;
-
-import org.apache.sling.api.resource.Resource;
+import com.google.common.collect.Lists;
 
 import com.citytechinc.aem.bedrock.api.components.annotations.AutoInstantiate;
 import com.citytechinc.aem.bedrock.api.node.ComponentNode;
-import com.citytechinc.aem.bedrock.api.request.ComponentRequest;
-import com.citytechinc.aem.bedrock.core.bindings.ComponentBindings;
 import com.citytechinc.aem.bedrock.core.components.AbstractComponent;
 import com.citytechinc.cq.component.annotations.Component;
 import com.citytechinc.cq.component.annotations.ContentProperty;
@@ -34,23 +27,6 @@ public class ColumnRow extends AbstractComponent {
 	@DialogField(xtype = "ddcolumnfield", ranking = 1)
 	private String placeholderColumnConfiguration;
 
-	@Override
-	public void init(ComponentRequest request) {
-
-		this.columns = new ArrayList<Column>();
-
-		Iterator<Resource> columnResourceIterator = request.getResource().listChildren();
-
-		while (columnResourceIterator.hasNext()) {
-			Bindings bindings = new SimpleBindings();
-			bindings.put(ComponentBindings.COMPONENT_NODE, columnResourceIterator.next().adaptTo(ComponentNode.class));
-			bindings.put(ComponentBindings.COMPONENT_REQUEST, request);
-			Column column = new Column();
-			column.init(bindings);
-			this.columns.add(column);
-		}
-	}
-
 	@DialogField(xtype = "selection", fieldLabel = "Grid Options", fieldDescription = "Bootstrap Grid Options", ranking = 2)
 	@Selection(type = Selection.SELECT, options = {
 		@Option(text = "Extra Small Devices (Phones)", value = Bootstrap.GRID_EXTRA_SMALL, qtip = "Never Stacked"),
@@ -62,13 +38,21 @@ public class ColumnRow extends AbstractComponent {
 	}
 
 	public List<Column> getColumns() {
+        if (columns == null) {
+            columns = Lists.newArrayList();
+
+            for (ComponentNode currentColumnComponentNode : getComponentNodes()) {
+                columns.add(getComponent(currentColumnComponentNode, Column.class));
+            }
+        }
+
 		return this.columns;
 	}
 
 	@DialogField(ranking = 3)
 	@DialogFieldSet
 	public Classification getClassification() {
-        return getComponent(this, Classification.class).orNull();
+        return getComponent(this, Classification.class);
 	}
 
 }
