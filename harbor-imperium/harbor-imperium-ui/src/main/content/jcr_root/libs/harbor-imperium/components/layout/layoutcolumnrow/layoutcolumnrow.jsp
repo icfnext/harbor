@@ -10,7 +10,7 @@
 <div class="row" <c:if test="${ColumnRow.classification.hasClassification}">class="${ColumnRow.classification.classificationName}"</c:if>>
     <c:forEach var="curcolumn" items="${curRow.columns}" varStatus="status">
         <c:choose>
-            <c:when test="${ColumnRow.classification.hasClassification}">
+            <c:when test="${curcolumn.classification.hasClassification}">
                 <div class="${curRow.gridSize}${curcolumn.colClass} ${curcolumn.classification.classificationName}" name="${curcolumn.name}">
             </c:when>
             <c:otherwise>

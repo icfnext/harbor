@@ -6,6 +6,7 @@ import com.citytechinc.cq.component.annotations.ContentProperty;
 import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.Listener;
 import com.citytechinc.cq.component.annotations.widgets.DialogFieldSet;
+import com.citytechinc.cq.harbor.proper.api.content.page.HierarchicalPage;
 import com.citytechinc.cq.harbor.proper.api.content.page.navigation.NavigablePage;
 import com.citytechinc.cq.harbor.proper.api.trees.construction.TreeConstructionStrategy;
 import com.citytechinc.cq.harbor.proper.api.trees.rendering.TreeRenderingStrategy;
@@ -51,5 +52,15 @@ public class BootstrapMainAutoNavigation extends
 
 		return renderingStrategy;
 	}
+
+    public boolean isOnStructuralPage() {
+        HierarchicalPage hierarchicalPage = getCurrentPage().adaptTo(HierarchicalPage.class);
+
+        if (hierarchicalPage != null) {
+            return hierarchicalPage.isStructuralPage();
+        }
+
+        return false;
+    }
 
 }

@@ -15,4 +15,6 @@ public interface HierarchicalPage {
 
 	public String getPageIcon();
 
+    public boolean isStructuralPage();
+
 }

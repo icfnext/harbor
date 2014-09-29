@@ -2,7 +2,7 @@
 
 <div <c:choose><c:when test="${bootstrapMainAutoNavigation.tree.isSticky}">class="navbar navbar-default navbar-fixed-top"</c:when><c:otherwise>class="navbar navbar-default"</c:otherwise></c:choose> role="navigation">
     <c:choose>
-        <c:when test="${bootstrapMainAutoNavigation.hasRoot}">
+        <c:when test="${bootstrapMainAutoNavigation.hasRoot && !bootstrapMainAutoNavigation.onStructuralPage}">
             <div class="container-fluid">
                 <cq:include script="navbarheader.jsp" />
                 <cq:include script="navbarcontent.jsp" />

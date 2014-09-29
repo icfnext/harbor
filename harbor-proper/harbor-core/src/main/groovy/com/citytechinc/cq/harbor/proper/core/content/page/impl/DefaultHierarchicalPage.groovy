@@ -1,10 +1,12 @@
 package com.citytechinc.cq.harbor.proper.core.content.page.impl
 import com.citytechinc.aem.bedrock.api.page.PageDecorator
 import com.citytechinc.cq.accelerate.api.ontology.Properties
+import com.citytechinc.cq.accelerate.api.ontology.Types
 import com.citytechinc.cq.harbor.proper.api.content.page.HomePage
 import com.citytechinc.cq.harbor.proper.api.content.page.SectionLandingPage
 import com.citytechinc.cq.harbor.proper.core.content.page.AbstractHierarchicalPage
 import com.google.common.base.Optional
+import javax.jcr.Node as JcrNode
 
 public class DefaultHierarchicalPage extends AbstractHierarchicalPage {
 
@@ -61,4 +63,9 @@ public class DefaultHierarchicalPage extends AbstractHierarchicalPage {
 	public String getPageIcon() {
 		return getProperties().get(Properties.ACCELERATE_ICONIC_REPRESENTATION, "");
 	}
+
+    @Override
+    public boolean isStructuralPage() {
+        return contentResource.adaptTo(JcrNode).isNodeType(Types.ACCELERATE_STRUCTURAL_PAGE)
+    }
 }
