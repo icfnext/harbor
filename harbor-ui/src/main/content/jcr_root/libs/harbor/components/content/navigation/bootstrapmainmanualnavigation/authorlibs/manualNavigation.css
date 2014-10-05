@@ -1,0 +1,4 @@
+/* Author mode fix to hide the div which CQ inserts so that it does not throw off the display */
+.navbar .nav > div {
+    display : none;
+}
