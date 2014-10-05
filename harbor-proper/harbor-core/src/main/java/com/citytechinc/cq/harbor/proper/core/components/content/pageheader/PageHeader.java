@@ -19,4 +19,10 @@ public class PageHeader extends Container {
 	public String getContainerElement() {
 		return Elements.HEADER;
 	}
+
+    @Override
+    public boolean isSection() {
+        return false;
+    }
+
 }

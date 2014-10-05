@@ -20,4 +20,9 @@ public class PageFooter extends Container {
 		return Elements.FOOTER;
 	}
 
+    @Override
+    public boolean isSection() {
+        return false;
+    }
+
 }

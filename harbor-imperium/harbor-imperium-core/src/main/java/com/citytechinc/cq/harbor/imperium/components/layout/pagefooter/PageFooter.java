@@ -26,4 +26,9 @@ public class PageFooter extends Container {
 		return "Footer Container";
 	}
 
+    @Override
+    public boolean isSection() {
+        return false;
+    }
+
 }

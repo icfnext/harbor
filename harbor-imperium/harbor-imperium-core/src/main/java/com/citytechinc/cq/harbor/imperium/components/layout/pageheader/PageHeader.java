@@ -25,4 +25,9 @@ public class PageHeader extends Container {
 	public String getContainerName() {
 		return "Header Container";
 	}
+
+    @Override
+    public boolean isSection() {
+        return false;
+    }
 }

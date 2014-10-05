@@ -11,6 +11,7 @@ import com.citytechinc.cq.harbor.imperium.components.mixins.layout.classifiable.
 import com.citytechinc.cq.harbor.proper.api.constants.bootstrap.Bootstrap;
 import com.citytechinc.cq.harbor.proper.api.constants.dom.Elements;
 import com.google.common.base.Optional;
+import org.apache.commons.lang3.StringUtils;
 
 @Component(value = "Layout Container", description = "A container in which content may be placed.  All content should be placed in a container element.", path = "layout", name = "contentcontainer", layout = "rollover")
 @AutoInstantiate(instanceName = "contentContainer")
@@ -51,13 +52,27 @@ public class Container extends AbstractLayoutComponent {
 			classStringBuffer.append(getContainerDefaultClass());
 		}
 
-		if (getClassification().getHasClassification()) {
-			classStringBuffer.append(" ").append(getClassification().getClassificationName());
-		}
+        if ( !isSection() ) {
+            if (getClassification().getHasClassification()) {
+                classStringBuffer.append(" ").append(getClassification().getClassificationName());
+            }
+        }
 
 		return classStringBuffer.toString();
 
 	}
+
+    public String getSectionClass() {
+
+        if (isSection()) {
+            if (getClassification().getHasClassification()) {
+                return getClassification().getClassificationName();
+            }
+        }
+
+        return StringUtils.EMPTY;
+
+    }
 
 	public String getContainerElement() {
 		return Elements.DIV;
@@ -86,5 +101,15 @@ public class Container extends AbstractLayoutComponent {
 	protected String getContainerDefaultClass() {
 		return Bootstrap.CONTAINER_CLASS;
 	}
+
+    /**
+     * Indicates whether instances of this container constitute a Section of content on a page.
+     * Defaults to true.
+     *
+     * @return true if the container constitutes a Section of content on a page.
+     */
+    public boolean isSection() {
+        return true;
+    }
 
 }

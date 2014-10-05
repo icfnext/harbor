@@ -12,6 +12,7 @@ import com.citytechinc.cq.harbor.proper.api.constants.dom.Elements;
 import com.citytechinc.cq.harbor.proper.core.components.mixins.classifiable.Classification;
 import com.citytechinc.cq.harbor.proper.core.constants.groups.ComponentGroups;
 import com.google.common.base.Optional;
+import org.apache.commons.lang3.StringUtils;
 
 @Component(value = "Container", description = "A container in which content may be placed.  All content should be placed in a container element.", name = "contentcontainer", group = ComponentGroups.HARBOR_SCAFFOLDING)
 @AutoInstantiate(instanceName = Container.INSTANCE_NAME)
@@ -53,13 +54,27 @@ public class Container extends AbstractComponent {
 			classStringBuffer.append(getContainerDefaultClass());
 		}
 
-		if (getClassification().getHasClassification()) {
-			classStringBuffer.append(" ").append(getClassification().getClassificationName());
-		}
+        if (!isSection()) {
+            if (getClassification().getHasClassification()) {
+                classStringBuffer.append(" ").append(getClassification().getClassificationName());
+            }
+        }
 
 		return classStringBuffer.toString();
 
 	}
+
+    public String getSectionClass() {
+
+        if (isSection()) {
+            if (getClassification().getHasClassification()) {
+                return getClassification().getClassificationName();
+            }
+        }
+
+        return StringUtils.EMPTY;
+
+    }
 
 	public String getContainerElement() {
 		return Elements.DIV;
@@ -76,6 +91,16 @@ public class Container extends AbstractComponent {
 	public String getRole() {
 		return getRoleOptional().get();
 	}
+
+    /**
+     * Indicates whether instances of this container constitute a Section of content on a page.
+     * Defaults to true.
+     *
+     * @return true if the container constitutes a Section of content on a page.
+     */
+    public boolean isSection() {
+        return true;
+    }
 
 	protected String getContainerFullWidthClass() {
 		return Bootstrap.CONTAINER_FULL_WIDTH_CLASS;
