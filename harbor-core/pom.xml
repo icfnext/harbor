@@ -113,7 +113,7 @@
         <!-- AEM Namespace -->
         <dependency>
             <groupId>com.citytechinc.aem.namespace</groupId>
-            <artifactId>aem-namespace-api</artifactId>
+            <artifactId>aem-namespace-extension-api</artifactId>
         </dependency>
 
         <!-- Harbor API -->

@@ -49,7 +49,7 @@
             <useProjectArtifact>false</useProjectArtifact>
             <scope>compile</scope>
             <includes>
-                <include>com.citytechinc.aem.namespace:aem-namespace-ui:zip</include>
+                <include>com.citytechinc.aem.namespace:aem-namespace-extension-ui:zip</include>
             </includes>
             <useStrictFiltering>true</useStrictFiltering>
         </dependencySet>

@@ -141,13 +141,13 @@
 			<!-- AEM Namespace -->
 			<dependency>
 				<groupId>com.citytechinc.aem.namespace</groupId>
-				<artifactId>aem-namespace-api</artifactId>
+				<artifactId>aem-namespace-extension-api</artifactId>
 				<version>${aem.namespace.version}</version>
 				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>com.citytechinc.aem.namespace</groupId>
-				<artifactId>aem-namespace-ui</artifactId>
+				<artifactId>aem-namespace-extension-ui</artifactId>
 				<version>${aem.namespace.version}</version>
 				<type>zip</type>
 				<scope>provided</scope>

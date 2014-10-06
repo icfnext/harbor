@@ -6,6 +6,6 @@
     <filter root="/etc/clientlibs/harbor" />
     <filter root="/etc/brands/defaultbootstrapbrand" />
     <filter root="/etc/packages/bedrock/bedrock-ui-${bedrock.version}.zip"/>
-    <filter root="/etc/packages/aemnamespace/aem-namespace-ui-${aem.namespace.version}.zip"/>
+    <filter root="/etc/packages/aemnamespace/aem-namespace-extension-ui-${aem.namespace.version}.zip"/>
     <filter root="/etc/packages/clientlibrarian/clientlibrarian-ui-${clientlibrarian.version}.zip"/>
 </workspaceFilter>
