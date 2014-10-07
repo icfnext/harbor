@@ -20,9 +20,4 @@ public class PageHeader extends Container {
 		return Elements.HEADER;
 	}
 
-    @Override
-    public boolean isSection() {
-        return false;
-    }
-
 }
