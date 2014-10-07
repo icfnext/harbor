@@ -5,6 +5,7 @@ import java.util.List;
 import com.citytechinc.aem.bedrock.api.components.annotations.AutoInstantiate;
 import com.citytechinc.aem.bedrock.api.page.PageDecorator;
 import com.citytechinc.aem.bedrock.api.request.ComponentRequest;
+import com.citytechinc.aem.harbor.core.constants.groups.ComponentGroups;
 import com.citytechinc.cq.component.annotations.Component;
 import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.widgets.DialogFieldSet;
@@ -13,7 +14,7 @@ import com.citytechinc.aem.harbor.api.lists.construction.ListConstructionStrateg
 import com.citytechinc.aem.harbor.api.lists.rendering.ListRenderingStrategy;
 import com.citytechinc.aem.harbor.core.components.content.list.AbstractListComponent;
 
-@Component(value = "Child Page List", group = "Harbor Lists", resourceSuperType = AbstractListComponent.RESOURCE_TYPE, name = "lists/pagelist")
+@Component(value = "Child Page List", group = ComponentGroups.HARBOR_LISTS, resourceSuperType = AbstractListComponent.RESOURCE_TYPE, name = "lists/pagelist")
 @AutoInstantiate(instanceName = ListConstants.LIST_PAGE_CONTEXT_NAME)
 public class PageList extends AbstractListComponent<PageDecorator, List<LinkablePageRenderingStrategy.LinkablePage>> {
 

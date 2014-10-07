@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.citytechinc.aem.bedrock.api.components.annotations.AutoInstantiate;
 import com.citytechinc.aem.bedrock.api.request.ComponentRequest;
+import com.citytechinc.aem.harbor.core.constants.groups.ComponentGroups;
 import com.citytechinc.cq.component.annotations.Component;
 import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.widgets.DialogFieldSet;
@@ -13,7 +14,7 @@ import com.citytechinc.aem.harbor.api.lists.rendering.ListRenderingStrategy;
 import com.citytechinc.aem.harbor.core.components.content.list.AbstractListComponent;
 import com.day.cq.dam.api.Asset;
 
-@Component(value = "Asset List", group = "Harbor Lists", resourceSuperType = AbstractListComponent.RESOURCE_TYPE, name = "lists/assetlist")
+@Component(value = "Asset List", group = ComponentGroups.HARBOR_LISTS, resourceSuperType = AbstractListComponent.RESOURCE_TYPE, name = "lists/assetlist")
 @AutoInstantiate(instanceName = ListConstants.LIST_PAGE_CONTEXT_NAME)
 public class AssetList extends AbstractListComponent<Asset, List<AssetListRenderingStrategy.RenderableAsset>> {
 
