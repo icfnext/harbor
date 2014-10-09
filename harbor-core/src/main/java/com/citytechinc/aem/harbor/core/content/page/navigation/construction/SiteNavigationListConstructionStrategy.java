@@ -18,14 +18,17 @@ public class SiteNavigationListConstructionStrategy extends PageNavigationListCo
 	public Optional<NavigablePage> getNavigationRoot() {
 		if (navigationRoot == null) {
 			HierarchicalPage currentHierarchicalPage = getCurrentPage().adaptTo(HierarchicalPage.class);
-			Optional<HomePage> homePageOptional = currentHierarchicalPage.getHomePage();
 
-			if (homePageOptional.isPresent()) {
-				navigationRoot = Optional.of(NavigablePages.forPageAndDepthAndChildPolicyAndCurrentPage(
-					homePageOptional.get(), getNavigationDepth(), !getIgnoreHideInNavigation(), getCurrentPage()));
-			} else {
-				navigationRoot = Optional.absent();
-			}
+            navigationRoot = Optional.absent();
+
+            if (currentHierarchicalPage != null) {
+                Optional<HomePage> homePageOptional = currentHierarchicalPage.getHomePage();
+
+                if (homePageOptional.isPresent()) {
+                    navigationRoot = Optional.of(NavigablePages.forPageAndDepthAndChildPolicyAndCurrentPage(
+                        homePageOptional.get(), getNavigationDepth(), !getIgnoreHideInNavigation(), getCurrentPage()));
+                }
+            }
 		}
 
 		return navigationRoot;
