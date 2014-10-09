@@ -25,7 +25,7 @@ public class IconUtils {
             }
 
             priorTemplateEnd += TEMPLATE_END_LENGTH;
-            currentTemplateStart = raw.indexOf(raw, priorTemplateEnd);
+            currentTemplateStart = raw.indexOf(TEMPLATE_START, priorTemplateEnd);
         }
 
         iconifiedStringBuilder.append(raw.substring(priorTemplateEnd));
