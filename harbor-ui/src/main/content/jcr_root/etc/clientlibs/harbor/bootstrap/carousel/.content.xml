@@ -5,4 +5,4 @@
         xmlns:jcr="http://www.jcp.org/jcr/1.0"
         jcr:primaryType="cq:ClientLibraryFolder"
         categories="harbor.bootstrap.carousel"
-        dependencies="[harbor.bootstrap.vars,harbor.bootstrap.mixins]"/>
+        dependencies="[harbor.bootstrap.vars,harbor.bootstrap.mixins,harbor.jquery,harbor.bootstrap.transitions]"/>
