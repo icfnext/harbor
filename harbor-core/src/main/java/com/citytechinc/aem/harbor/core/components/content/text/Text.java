@@ -11,7 +11,7 @@ import com.citytechinc.cq.component.annotations.widgets.rte.*;
 
 @Component(
         value = "Text",
-        contentAdditionalProperties = { @ContentProperty(name = "dependencies", value = "[harbor.components.content.linklist,harbor.fontawesome]") }
+        contentAdditionalProperties = { @ContentProperty(name = "dependencies", value = "[harbor.fontawesome]") }
 )
 @AutoInstantiate(instanceName = "textcomponent")
 public class Text extends AbstractComponent {

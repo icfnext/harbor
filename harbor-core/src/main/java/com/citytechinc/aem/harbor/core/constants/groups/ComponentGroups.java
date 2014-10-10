@@ -9,5 +9,6 @@ public class ComponentGroups {
     public static final String HARBOR_SCAFFOLDING = "Harbor Scaffolding";
     public static final String HARBOR_NAVIGATION = "Harbor Navigation";
     public static final String HARBOR_PROJECTIONS = "Harbor Projections";
+    public static final String HARBOR_SEARCH = "Harbor Search";
 
 }

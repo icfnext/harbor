@@ -20,7 +20,7 @@ import com.citytechinc.aem.harbor.api.constants.dom.Headings;
  */
 @Component(
         value = "Heading",
-        contentAdditionalProperties = { @ContentProperty(name = "dependencies", value = "[harbor.components.content.linklist,harbor.fontawesome]") }
+        contentAdditionalProperties = { @ContentProperty(name = "dependencies", value = "[harbor.fontawesome]") }
 )
 @AutoInstantiate(instanceName = Heading.INSTANCE_NAME)
 public class Heading extends AbstractComponent {

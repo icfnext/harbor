@@ -16,7 +16,7 @@ import com.citytechinc.cq.component.annotations.Listener;
             @Listener(name = "afterinsert", value = "REFRESH_PAGE"), @Listener(name = "afteredit", value = "REFRESH_PARENT"),
             @Listener(name = "afterdelete", value = "REFRESH_PARENT") },
         group = ".hidden",
-        contentAdditionalProperties = { @ContentProperty(name = "dependencies", value = "[harbor.components.content.linklist,harbor.fontawesome]") }
+        contentAdditionalProperties = { @ContentProperty(name = "dependencies", value = "[harbor.fontawesome]") }
 )
 @AutoInstantiate(instanceName = "tab")
 public class Tab extends AbstractComponent {

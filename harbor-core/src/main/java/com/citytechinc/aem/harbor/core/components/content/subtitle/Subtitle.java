@@ -18,7 +18,7 @@ import com.citytechinc.aem.harbor.core.components.content.heading.Heading;
 @Component(
         value = "Subtitle",
         resourceSuperType = Heading.RESOURCE_TYPE,
-        contentAdditionalProperties = { @ContentProperty(name = "dependencies", value = "[harbor.components.content.linklist,harbor.fontawesome]") }
+        contentAdditionalProperties = { @ContentProperty(name = "dependencies", value = "[harbor.fontawesome]") }
 )
 @AutoInstantiate(instanceName = Subtitle.INSTANCE_NAME)
 public class Subtitle extends Heading {
