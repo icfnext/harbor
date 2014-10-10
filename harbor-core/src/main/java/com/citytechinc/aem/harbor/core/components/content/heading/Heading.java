@@ -1,5 +1,7 @@
 package com.citytechinc.aem.harbor.core.components.content.heading;
 
+import com.citytechinc.aem.harbor.core.util.icon.IconUtils;
+import com.citytechinc.cq.component.annotations.ContentProperty;
 import org.apache.commons.lang.StringUtils;
 
 import com.citytechinc.aem.bedrock.api.components.annotations.AutoInstantiate;
@@ -16,7 +18,10 @@ import com.citytechinc.aem.harbor.api.constants.dom.Headings;
  * is <em>not</em> intended to represent a page title. The Title component
  * should be used if a Page Title is intended.
  */
-@Component("Heading")
+@Component(
+        value = "Heading",
+        contentAdditionalProperties = { @ContentProperty(name = "dependencies", value = "[harbor.components.content.linklist,harbor.fontawesome]") }
+)
 @AutoInstantiate(instanceName = Heading.INSTANCE_NAME)
 public class Heading extends AbstractComponent {
 
@@ -36,7 +41,7 @@ public class Heading extends AbstractComponent {
 
 	@DialogField(fieldLabel = "Heading Text", fieldDescription = "The textual content of the rendered heading.")
 	public String getText() {
-		return get(TEXT_PROPERTY, StringUtils.EMPTY);
+		return IconUtils.iconify(get(TEXT_PROPERTY, StringUtils.EMPTY));
 	}
 
 }

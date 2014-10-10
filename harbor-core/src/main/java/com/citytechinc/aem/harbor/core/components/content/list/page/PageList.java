@@ -14,13 +14,13 @@ import com.citytechinc.aem.harbor.api.lists.construction.ListConstructionStrateg
 import com.citytechinc.aem.harbor.api.lists.rendering.ListRenderingStrategy;
 import com.citytechinc.aem.harbor.core.components.content.list.AbstractListComponent;
 
-@Component(value = "Child Page List", group = ComponentGroups.HARBOR_LISTS, resourceSuperType = AbstractListComponent.RESOURCE_TYPE, name = "lists/pagelist")
+@Component(value = "Page List", group = ComponentGroups.HARBOR_LISTS, resourceSuperType = AbstractListComponent.RESOURCE_TYPE, name = "lists/pagelist")
 @AutoInstantiate(instanceName = ListConstants.LIST_PAGE_CONTEXT_NAME)
 public class PageList extends AbstractListComponent<PageDecorator, List<LinkablePageRenderingStrategy.LinkablePage>> {
 
 	@DialogField
 	@DialogFieldSet(title = "List Construction")
-	private ChildPageListConstructionStrategy constructionStrategy;
+	private PageListConstructionStrategy constructionStrategy;
 
 	@DialogField
 	@DialogFieldSet(title = "List Rendering")
@@ -28,7 +28,7 @@ public class PageList extends AbstractListComponent<PageDecorator, List<Linkable
 
 	@Override
 	public void init(ComponentRequest request) {
-		constructionStrategy = new ChildPageListConstructionStrategy(this);
+		constructionStrategy = new PageListConstructionStrategy(this);
 		renderingStrategy = new LinkablePageRenderingStrategy(this);
 	}
 

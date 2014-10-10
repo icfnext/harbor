@@ -55,4 +55,12 @@ public class ColumnRow extends AbstractComponent {
         return getComponent(this, Classification.class);
 	}
 
+    public String getCssClass() {
+        if (getClassification().getHasClassification()) {
+            return Bootstrap.GRID_ROW_CLASS + " " + getClassification().getClassificationName();
+        }
+
+        return Bootstrap.GRID_ROW_CLASS;
+    }
+
 }

@@ -44,4 +44,6 @@ public class Bootstrap {
     public static final String TAB_NAVIGATION_TYPE = "tabs";
     public static final String PILLS_NAVIGATION_TYPE = "pills";
 
+    public static final String GRID_ROW_CLASS = "row";
+
 }

@@ -1,5 +1,7 @@
 package com.citytechinc.aem.harbor.core.components.content.subtitle;
 
+import com.citytechinc.aem.harbor.core.util.icon.IconUtils;
+import com.citytechinc.cq.component.annotations.ContentProperty;
 import org.apache.commons.lang.StringUtils;
 
 import com.citytechinc.aem.bedrock.api.components.annotations.AutoInstantiate;
@@ -13,7 +15,11 @@ import com.citytechinc.aem.harbor.core.components.content.heading.Heading;
  * authored page subtitle but can be overridden with static text if necessary. The
  * secondary title of the page is rendered as an H2 DOM element.
  */
-@Component(value = "Subtitle", resourceSuperType = Heading.RESOURCE_TYPE)
+@Component(
+        value = "Subtitle",
+        resourceSuperType = Heading.RESOURCE_TYPE,
+        contentAdditionalProperties = { @ContentProperty(name = "dependencies", value = "[harbor.components.content.linklist,harbor.fontawesome]") }
+)
 @AutoInstantiate(instanceName = Subtitle.INSTANCE_NAME)
 public class Subtitle extends Heading {
 
@@ -27,10 +33,10 @@ public class Subtitle extends Heading {
         String title = get(TEXT_PROPERTY, StringUtils.EMPTY);
 
         if (StringUtils.isNotBlank(title)) {
-            return title;
+            return IconUtils.iconify(title);
         }
 
-        return getCurrentPage().get("subtitle", "");
+        return IconUtils.iconify(getCurrentPage().get("subtitle", ""));
 
     }
 

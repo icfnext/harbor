@@ -1,5 +1,7 @@
 package com.citytechinc.aem.harbor.core.components.content.title;
 
+import com.citytechinc.aem.harbor.core.util.icon.IconUtils;
+import com.citytechinc.cq.component.annotations.ContentProperty;
 import org.apache.commons.lang.StringUtils;
 
 import com.citytechinc.aem.bedrock.api.components.annotations.AutoInstantiate;
@@ -13,7 +15,11 @@ import com.citytechinc.aem.harbor.core.components.content.heading.Heading;
  * authored page title but can be overridden with static text if necessary. The
  * primary title of the page is rendered as an H1 DOM element.
  */
-@Component(value = "Title", resourceSuperType = Heading.RESOURCE_TYPE)
+@Component(
+        value = "Title",
+        resourceSuperType = Heading.RESOURCE_TYPE,
+        contentAdditionalProperties = { @ContentProperty(name = "dependencies", value = "[harbor.components.content.linklist,harbor.fontawesome]") }
+)
 @AutoInstantiate(instanceName = Title.INSTANCE_NAME)
 public class Title extends Heading {
 
@@ -27,14 +33,14 @@ public class Title extends Heading {
 		String title = get(TEXT_PROPERTY, StringUtils.EMPTY);
 
 		if (StringUtils.isNotBlank(title)) {
-			return title;
+			return IconUtils.iconify(title);
 		}
 
 		if (StringUtils.isNotEmpty(getCurrentPage().getPageTitle())) {
-			return getCurrentPage().getPageTitle();
+			return IconUtils.iconify(getCurrentPage().getPageTitle());
 		}
 
-		return getCurrentPage().getTitle();
+		return IconUtils.iconify(getCurrentPage().getTitle());
 
 	}
 

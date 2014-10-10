@@ -6,7 +6,7 @@ Harbor.Components.Carousel = function ( jQuery ) {
             jQuery.post(
                 currentEditable.path + '/*',
                 {
-                    'sling:resourceType': 'harbor/components/content/carousel/carouselslide',
+                    'sling:resourceType': 'harbor/components/content/contentcarousel/carouselslide',
                     'jcr:primaryType': 'nt:unstructured',
                     ':nameHint': 'slide'
                 },

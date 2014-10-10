@@ -1,7 +1,7 @@
 <%@include file="/libs/harbor/components/global.jsp"%>
 
 <c:set var="curRow" scope="page" value="${ColumnRow}" />
-<div class="row" <c:if test="${ColumnRow.classification.hasClassification}">class="${ColumnRow.classification.classificationName}"</c:if>>
+<div class="${ColumnRow.cssClass}">
     <c:forEach var="curcolumn" items="${curRow.columns}" varStatus="status">
     <c:choose>
     <c:when test="${ColumnRow.classification.hasClassification}">

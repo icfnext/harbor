@@ -1,14 +1,20 @@
-package com.citytechinc.aem.harbor.core.components.content.reference;
+package com.citytechinc.aem.harbor.core.components.content.projections.reference;
 
 
 import com.citytechinc.aem.bedrock.api.components.annotations.AutoInstantiate;
 import com.citytechinc.aem.bedrock.core.components.AbstractComponent;
+import com.citytechinc.aem.harbor.core.constants.groups.ComponentGroups;
 import com.citytechinc.cq.component.annotations.Component;
 import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.Tab;
 import org.apache.commons.lang3.StringUtils;
 
-@Component(value = "Reference", tabs = {@Tab(title="Reference"), @Tab(title="Advanced")})
+@Component(
+        value = "Reference",
+        name = "projections/reference",
+        tabs = { @Tab(title="Reference"), @Tab(title="Advanced") },
+        group = ComponentGroups.HARBOR_PROJECTIONS
+)
 @AutoInstantiate(instanceName = "reference")
 public class Reference extends AbstractComponent {
 

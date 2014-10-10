@@ -2,12 +2,17 @@ package com.citytechinc.aem.harbor.core.components.content.text;
 
 import com.citytechinc.aem.bedrock.api.components.annotations.AutoInstantiate;
 import com.citytechinc.aem.bedrock.core.components.AbstractComponent;
+import com.citytechinc.aem.harbor.core.util.icon.IconUtils;
 import com.citytechinc.cq.component.annotations.Component;
+import com.citytechinc.cq.component.annotations.ContentProperty;
 import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.widgets.RichTextEditor;
 import com.citytechinc.cq.component.annotations.widgets.rte.*;
 
-@Component("Text")
+@Component(
+        value = "Text",
+        contentAdditionalProperties = { @ContentProperty(name = "dependencies", value = "[harbor.components.content.linklist,harbor.fontawesome]") }
+)
 @AutoInstantiate(instanceName = "textcomponent")
 public class Text extends AbstractComponent {
 
@@ -25,7 +30,7 @@ public class Text extends AbstractComponent {
             undo = @Undo
     )
     public String getContent() {
-        return get("content", "Enter Text");
+        return IconUtils.iconify(get("content", "Enter Text"));
     }
 
 }
