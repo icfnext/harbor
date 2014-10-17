@@ -28,7 +28,7 @@ public class PageList extends AbstractListComponent<PageDecorator, List<Linkable
 
 	@Override
 	public void init(ComponentRequest request) {
-		constructionStrategy = new PageListConstructionStrategy(this);
+		constructionStrategy = getComponent(this, PageListConstructionStrategy.class);
 		renderingStrategy = new LinkablePageRenderingStrategy(this);
 	}
 

@@ -28,7 +28,7 @@ public class AssetList extends AbstractListComponent<Asset, List<AssetListRender
 
 	@Override
 	public void init(ComponentRequest componentRequest) {
-		constructionStrategy = new AssetListConstructionStrategy(this);
+		constructionStrategy = getComponent(this, AssetListConstructionStrategy.class);
 		renderingStrategy = new AssetListRenderingStrategy(this);
 
 	}

@@ -1,9 +1,10 @@
 package com.citytechinc.aem.harbor.api.lists.construction.search;
 
-import java.util.Map;
+import com.day.cq.search.Predicate;
+import com.google.common.base.Optional;
 
 public interface ConstructionPredicate {
 
-	public Map<String, String> asQueryPredicate();
+	public Optional<Predicate> asPredicate();
 
 }
