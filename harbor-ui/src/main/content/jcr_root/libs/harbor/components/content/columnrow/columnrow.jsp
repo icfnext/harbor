@@ -3,15 +3,17 @@
 <c:set var="curRow" scope="page" value="${ColumnRow}" />
 <div class="${ColumnRow.cssClass}">
     <c:forEach var="curcolumn" items="${curRow.columns}" varStatus="status">
-    <c:choose>
-    <c:when test="${ColumnRow.classification.hasClassification}">
-    <div class="${curRow.gridSize}${curcolumn.colSize} ${curcolumn.classification.classificationName}" name="${curcolumn.name}">
-        </c:when>
-        <c:otherwise>
-        <div class="${curRow.gridSize}${curcolumn.colSize}" name="${curcolumn.name}">
+        <c:choose>
+            <c:when test="${curcolumn.classification.hasClassification}">
+                <div class="${curRow.gridSize}${curcolumn.colSize} ${curcolumn.classification.classificationName}" name="${curcolumn.name}">
+                    <cq:include path="${curcolumn.name}" resourceType="harbor/components/content/column" />
+                </div>
+            </c:when>
+            <c:otherwise>
+                <div class="${curRow.gridSize}${curcolumn.colSize}" name="${curcolumn.name}">
+                    <cq:include path="${curcolumn.name}" resourceType="harbor/components/content/column" />
+                </div>
             </c:otherwise>
-            </c:choose>
-            <cq:include path="${curcolumn.name}" resourceType="harbor/components/content/column" />
-        </div>
-        </c:forEach>
-    </div>
+        </c:choose>
+    </c:forEach>
+</div>
