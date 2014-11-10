@@ -110,6 +110,12 @@ public class BootstrapMainManualNavigation extends AbstractComponent {
 
     }
 
+    public String getBrandLinkImageSrc() {
+
+        return getBrandLinkImage().or("");
+
+    }
+
     public boolean isHasBrandLinkImage() {
         return getBrandLinkImage().isPresent();
     }
@@ -121,7 +127,7 @@ public class BootstrapMainManualNavigation extends AbstractComponent {
 
             bootstrapMainNavigationElementList = Lists.newArrayList();
 
-            for (ComponentNode currentComponentNode : getComponentNodes()) {
+            for (ComponentNode currentComponentNode : getComponentNodes("elements")) {
                 bootstrapMainNavigationElementList.add(getComponent(currentComponentNode, BootstrapMainNavigationElement.class));
             }
 
