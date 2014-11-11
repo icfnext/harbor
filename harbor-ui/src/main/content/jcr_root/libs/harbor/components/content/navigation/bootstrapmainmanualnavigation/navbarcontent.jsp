@@ -6,10 +6,10 @@
         <c:forEach var="currentElement" items="${bootstrapMainManualNavigation.bootstrapMainNavigationElementList}" varStatus="status">
             <c:choose>
                 <c:when test="${currentElement.hasDropdown}">
-                    <cq:include path="${currentElement.name}" resourceType="harbor/components/content/navigation/bootstrapmainmanualnavigation/bootstrapmainnavigationelementwithdropdown" />
+                    <cq:include path="elements/${currentElement.name}" resourceType="harbor/components/content/navigation/bootstrapmainmanualnavigation/bootstrapmainnavigationelementwithdropdown" />
                 </c:when>
                 <c:otherwise>
-                    <cq:include path="${currentElement.name}" resourceType="harbor/components/content/navigation/bootstrapmainmanualnavigation/bootstrapmainnavigationelement" />
+                    <cq:include path="elements/${currentElement.name}" resourceType="harbor/components/content/navigation/bootstrapmainmanualnavigation/bootstrapmainnavigationelement" />
                 </c:otherwise>
             </c:choose>
         </c:forEach>
