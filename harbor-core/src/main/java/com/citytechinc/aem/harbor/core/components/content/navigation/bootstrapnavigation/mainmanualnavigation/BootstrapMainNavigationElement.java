@@ -5,6 +5,8 @@ import com.citytechinc.aem.bedrock.core.components.AbstractComponent;
 import com.citytechinc.cq.component.annotations.*;
 import com.citytechinc.cq.component.annotations.widgets.PathField;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Component(
         value = "Navigation Element",
@@ -22,19 +24,19 @@ public class BootstrapMainNavigationElement extends AbstractComponent {
 
 	@DialogField(fieldLabel = "Element Title")
 	public String getElementTitle() {
-		return get("elementTitle", this.getResource().getName());
+		return getInherited("elementTitle", this.getResource().getName());
 	}
 
 	@DialogField(fieldLabel = "Element Link Target")
 	@PathField
 	public String getElementLinkTarget() {
-		return get("elementLinkTarget", "#");
+		return getInherited("elementLinkTarget", "#");
 	}
 
 	@DialogField(fieldLabel = "Has Dropdown?", fieldDescription = "This navigation element will be a dropdown/flyout element")
 	@Selection(type = Selection.CHECKBOX, options = { @Option(text = "", value = "true") })
 	public Boolean getHasDropdown() {
-		return get("hasDropdown", "").equals("true");
+		return getInherited("hasDropdown", "").equals("true");
 	}
 
 	public String getName() {

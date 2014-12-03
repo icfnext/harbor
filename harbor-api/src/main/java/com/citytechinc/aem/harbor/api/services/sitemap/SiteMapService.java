@@ -5,6 +5,6 @@ import com.citytechinc.aem.harbor.api.domain.sitemap.SiteMap;
 
 public interface SiteMapService {
 
-	SiteMap getSitemapEntryList(PageDecorator root);
+	SiteMap getSitemap(PageDecorator root);
 
 }

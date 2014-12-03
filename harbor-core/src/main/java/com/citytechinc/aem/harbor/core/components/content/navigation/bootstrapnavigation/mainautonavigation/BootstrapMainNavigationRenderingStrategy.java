@@ -19,15 +19,17 @@ public class BootstrapMainNavigationRenderingStrategy extends AbstractComponent 
 	@Selection(type = Selection.CHECKBOX, options = { @Option(text = "", value = "true") })
 	private Boolean isSticky;
 
-	@DialogField(fieldLabel = "Show Brand Link", fieldDescription = "Enable this to display a link to the root path as the first navigation element")
-	@Selection(type = Selection.CHECKBOX, options = { @Option(text = "", value = "true") })
+	@DialogField(fieldLabel = "Brand Link", fieldDescription = "Present a brand link as the first element of the navigation.")
+	@Selection(type = Selection.SELECT, options = {
+			@Option(text = "Show", value = "show"),
+			@Option(text = "Hide", value = "hide")})
 	private Boolean showBrandLink;
 
 	@DialogField(fieldLabel = "Brand Link Text", fieldDescription = "Text to present as the brand of the navigation bar")
 	private String brandLinkText;
 
 	@DialogField(fieldLabel = "Brand Link Image")
-	@Html5SmartFile(fileNameParameter = "./fileName", fileReferenceParameter = "./fileReference")
+	@Html5SmartFile(ddGroups = "media", name="./brandLinkImage", fileNameParameter = "./brandLinkImage/fileName", fileReferenceParameter = "./brandLinkImage/fileReference")
 	private Optional<String> brandLinkImage;
 
 	public Boolean getIsSticky() {
@@ -40,7 +42,7 @@ public class BootstrapMainNavigationRenderingStrategy extends AbstractComponent 
 
 	public Boolean getShowBrandLink() {
 		if (showBrandLink == null) {
-			showBrandLink = getInherited("showBrandLink", false);
+			showBrandLink = getInherited("showBrandLink", "hide").equals("show");
 		}
 
 		return showBrandLink;
@@ -56,16 +58,7 @@ public class BootstrapMainNavigationRenderingStrategy extends AbstractComponent 
 
 	public Optional<String> getBrandLinkImage() {
 		if (brandLinkImage == null) {
-			Resource brandLinkImageResource = getResource().getChild("brandLinkImage");
-
-			// TODO: presumably getImageSource should be usable for this purpose
-			// but for some reason I can't get an instance of the Image class to
-			// return true for hasContent
-			if (brandLinkImageResource != null) {
-				brandLinkImage = Optional.of(brandLinkImageResource.getPath() + ".img.png");
-			} else {
-				brandLinkImage = Optional.absent();
-			}
+			brandLinkImage = getImageReferenceInherited("brandLinkImage");
 		}
 
 		return brandLinkImage;

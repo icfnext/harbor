@@ -1,6 +1,9 @@
 package com.citytechinc.aem.harbor.api.domain.sitemap;
 
 
+import javax.xml.bind.annotation.XmlType;
+
+@XmlType(propOrder = {"loc", "lastmod", "changefreq", "priority"})
 public class SiteMapEntry {
     protected String loc;
     protected String lastmod;

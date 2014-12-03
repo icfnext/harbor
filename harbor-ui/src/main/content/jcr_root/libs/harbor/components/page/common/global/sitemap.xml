@@ -9,17 +9,24 @@
                 collapsible="{Boolean}false"
                 xtype="dialogfieldset">
             <items jcr:primaryType="cq:WidgetCollection">
-                <location_extension
+                <hiddenFromRobots
                         jcr:primaryType="cq:Widget"
-                        fieldLabel="Location Extension"
-                        name="./ct:locExtension"
-                        defaultValue=".html"
-                        xtype="textfield" />
-
+                        fieldLabel="Do Not Index"
+                        fieldDescription="Indicates that attempts should be made to hide the page from robots such as search engine crawl bots."
+                        name="./ct:hiddenFromRobots"
+                        type="checkbox"
+                        xtype="selection">
+                    <options jcr:primaryType="cq:WidgetCollection">
+                        <hideOption
+                            jcr:primaryType="nt:unstructured"
+                            text="Hide"
+                            value="true" />
+                    </options>
+                </hiddenFromRobots>
                 <change_frequency
                         jcr:primaryType="cq:Widget"
                         fieldLabel="Change Frequency"
-                        name="./ct:changefreq"
+                        name="./ct:changeFrequency"
                         type="select"
                         xtype="selection">
 

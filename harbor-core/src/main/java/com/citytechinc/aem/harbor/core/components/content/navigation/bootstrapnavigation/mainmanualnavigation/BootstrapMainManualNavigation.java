@@ -3,6 +3,7 @@ package com.citytechinc.aem.harbor.core.components.content.navigation.bootstrapn
 import java.util.List;
 
 import com.citytechinc.aem.bedrock.api.link.Link;
+import com.citytechinc.aem.bedrock.api.node.BasicNode;
 import com.citytechinc.aem.bedrock.api.node.ComponentNode;
 import com.citytechinc.aem.bedrock.core.link.builders.factory.LinkBuilderFactory;
 import com.citytechinc.cq.component.annotations.*;
@@ -18,6 +19,9 @@ import com.citytechinc.aem.bedrock.core.components.AbstractComponent;
 import com.citytechinc.cq.component.annotations.editconfig.ActionConfig;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
 import com.citytechinc.aem.harbor.core.constants.groups.ComponentGroups;
+import org.apache.sling.api.resource.ResourceUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Component(
         value = "Main Manual Navigation",
@@ -35,6 +39,8 @@ import com.citytechinc.aem.harbor.core.constants.groups.ComponentGroups;
 @AutoInstantiate(instanceName = "bootstrapMainManualNavigation")
 public class BootstrapMainManualNavigation extends AbstractComponent {
 
+    private static final Logger LOG = LoggerFactory.getLogger(BootstrapMainManualNavigation.class);
+
 	private List<BootstrapMainNavigationElement> bootstrapMainNavigationElementList;
 
     @DialogField(fieldLabel = "Enable Sticky Navigation?", fieldDescription = "")
@@ -42,7 +48,9 @@ public class BootstrapMainManualNavigation extends AbstractComponent {
     private Boolean isSticky;
 
     @DialogField(fieldLabel = "Show Brand Link", fieldDescription = "Enable this to display a link to the root path as the first navigation element")
-    @Selection(type = Selection.CHECKBOX, options = { @Option(text = "", value = "true") })
+    @Selection(type = Selection.SELECT, options = {
+            @Option(text = "Show", value = "show"),
+            @Option(text = "Hide", value = "hide") })
     private Boolean showBrandLink;
 
     @DialogField(fieldLabel = "Brand Link Text", fieldDescription = "Text to present as the brand of the navigation bar")
@@ -53,7 +61,7 @@ public class BootstrapMainManualNavigation extends AbstractComponent {
     private Link brandLink;
 
     @DialogField(fieldLabel = "Brand Link Image")
-    @Html5SmartFile(fileNameParameter = "./fileName", fileReferenceParameter = "./fileReference")
+    @Html5SmartFile(ddGroups = "media", name="./brandLinkImage", fileNameParameter = "./brandLinkImage/fileName", fileReferenceParameter = "./brandLinkImage/fileReference")
     private Optional<String> brandLinkImage;
 
 	public Boolean getIsSticky() {
@@ -66,8 +74,7 @@ public class BootstrapMainManualNavigation extends AbstractComponent {
 
     public Boolean getShowBrandLink() {
         if (showBrandLink == null) {
-            //TODO: Refactor this and all these properties names into the bootstrap constants file or the properties file
-            showBrandLink = getInherited("showBrandLink", false);
+            showBrandLink = getInherited("showBrandLink", "hide").equals("show");
         }
 
         return showBrandLink;
@@ -94,16 +101,7 @@ public class BootstrapMainManualNavigation extends AbstractComponent {
     public Optional<String> getBrandLinkImage() {
 
         if (brandLinkImage == null) {
-            Resource brandLinkImageResource = getResource().getChild("brandLinkImage");
-
-            // TODO: presumably getImageSource should be usable for this purpose
-            // but for some reason I can't get an instance of the Image class to
-            // return true for hasContent
-            if (brandLinkImageResource != null) {
-                brandLinkImage = Optional.of(brandLinkImageResource.getPath() + ".img.png");
-            } else {
-                brandLinkImage = Optional.absent();
-            }
+            brandLinkImage = getImageReferenceInherited("brandLinkImage");
         }
 
         return brandLinkImage;
@@ -127,8 +125,9 @@ public class BootstrapMainManualNavigation extends AbstractComponent {
 
             bootstrapMainNavigationElementList = Lists.newArrayList();
 
-            for (ComponentNode currentComponentNode : getComponentNodes("elements")) {
-                bootstrapMainNavigationElementList.add(getComponent(currentComponentNode, BootstrapMainNavigationElement.class));
+            for (BasicNode currentNavigationNode : getNodesInherited("elements")) {
+                LOG.debug("Current Navigation Node Path " + currentNavigationNode.getPath());
+                bootstrapMainNavigationElementList.add(getComponent(currentNavigationNode.getResource().adaptTo(ComponentNode.class), BootstrapMainNavigationElement.class));
             }
 
         }
