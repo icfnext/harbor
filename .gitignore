@@ -9,3 +9,7 @@ target/
 *.ipr
 *.iws
 /nbactions.xml
+.checkstyle
+.externalToolBuilders
+maven-eclipse.xml
+
