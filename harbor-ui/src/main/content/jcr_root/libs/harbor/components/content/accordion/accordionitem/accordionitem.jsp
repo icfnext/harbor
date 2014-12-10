@@ -16,7 +16,7 @@
             </c:choose>
         </h4>
     </div>
-    <div id="${accordionItem.uniqueId}" class="panel-collapse collapse${accordionItemOpen ? ' in' : ''}" role="tabpanel" aria-labelledby="heading-${accordionItem.uniqueId}">
+    <div id="${accordionItem.uniqueId}" class="panel-collapse collapse${isEditMode or isDesignMode or accordionItemOpen ? ' in' : ''}" role="tabpanel" aria-labelledby="heading-${accordionItem.uniqueId}">
         <div class="panel-body">
             <cq:include path="accordionitem-par" resourceType="foundation/components/parsys" />
         </div>
