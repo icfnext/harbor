@@ -16,4 +16,9 @@ public final class ComponentUtils {
         return StringUtils.removeStart(resource.getPath(), pageResourcePath).substring(1)
                 .replaceAll("/", "-");
     }
+
+    public static String sanatizeTextAsDomId(final String text) {
+        //TODO: Full implementation
+        return text.toLowerCase().replace(" ", "-");
+    }
 }

@@ -2,6 +2,7 @@ package com.citytechinc.aem.harbor.core.components.content.subtitle;
 
 import com.citytechinc.aem.harbor.core.util.icon.IconUtils;
 import com.citytechinc.cq.component.annotations.ContentProperty;
+import com.citytechinc.cq.component.annotations.Tab;
 import org.apache.commons.lang.StringUtils;
 
 import com.citytechinc.aem.bedrock.api.components.annotations.AutoInstantiate;
@@ -18,7 +19,11 @@ import com.citytechinc.aem.harbor.core.components.content.heading.Heading;
 @Component(
         value = "Subtitle",
         resourceSuperType = Heading.RESOURCE_TYPE,
-        contentAdditionalProperties = { @ContentProperty(name = "dependencies", value = "[harbor.fontawesome]") }
+        contentAdditionalProperties = { @ContentProperty(name = "dependencies", value = "[harbor.fontawesome]") },
+        tabs = {
+                @Tab(title = "Subtitle"),
+                @Tab(title = "Advanced")
+        }
 )
 @AutoInstantiate(instanceName = Subtitle.INSTANCE_NAME)
 public class Subtitle extends Heading {
@@ -30,13 +35,7 @@ public class Subtitle extends Heading {
     @DialogField(fieldLabel = "Subtitle Text", fieldDescription = "The textual content of the rendered subtitle. If left empty, the page subtitle will be rendered.")
     public String getText() {
 
-        String title = get(TEXT_PROPERTY, StringUtils.EMPTY);
-
-        if (StringUtils.isNotBlank(title)) {
-            return IconUtils.iconify(title);
-        }
-
-        return IconUtils.iconify(getCurrentPage().get("subtitle", ""));
+        return IconUtils.iconify(getRawText());
 
     }
 
@@ -51,4 +50,13 @@ public class Subtitle extends Heading {
         return Headings.H2;
     }
 
+    protected String getRawText() {
+        String title = get(TEXT_PROPERTY, StringUtils.EMPTY);
+
+        if (StringUtils.isNotBlank(title)) {
+            return title;
+        }
+
+        return getCurrentPage().get("subtitle", StringUtils.EMPTY);
+    }
 }
