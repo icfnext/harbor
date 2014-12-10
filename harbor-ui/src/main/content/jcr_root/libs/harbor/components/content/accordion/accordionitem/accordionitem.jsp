@@ -1,7 +1,7 @@
 <%@include file="/libs/harbor/components/global.jsp"%>
 
 <div class="${accordionParentId}-accordion-container">
-<div class="panel panel-default">
+<div class="panel panel-default" data-node-name="${accordionItem.name}">
     <div class="panel-heading" role="tab" id="heading-${accordionItem.uniqueId}">
         <h4 class="panel-title">
             <c:choose>
