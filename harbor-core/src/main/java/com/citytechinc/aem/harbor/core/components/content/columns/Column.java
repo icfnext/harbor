@@ -10,10 +10,16 @@ import com.citytechinc.cq.component.annotations.Tab;
 import com.citytechinc.cq.component.annotations.widgets.DialogFieldSet;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
 import com.citytechinc.aem.harbor.core.components.mixins.classifiable.Classification;
+import org.apache.commons.lang3.StringUtils;
 
-@Component(value = "Column", actions = { "text:Column", "edit", "delete" }, listeners = {
-	@Listener(name = "afterdelete", value = "REFRESH_PARENT"), @Listener(name = "afteredit", value = "REFRESH_PARENT"), }, group = ".hidden", tabs = {
-	@Tab(title = "Column Row"), @Tab(title = "Advanced Configuration") })
+@Component(
+		value = "Column",
+		actions = { "text:Column", "edit", "delete" },
+		listeners = { @Listener(name = "afterdelete", value = "REFRESH_PARENT"), @Listener(name = "afteredit", value = "REFRESH_PARENT") },
+		group = ".hidden",
+		tabs = {
+				@Tab(title = "Column Row"),
+				@Tab(title = "Advanced") })
 @AutoInstantiate(instanceName = Column.INSTANCE_NAME)
 public class Column extends AbstractComponent {
 
@@ -37,5 +43,17 @@ public class Column extends AbstractComponent {
 	@Selection(type = Selection.CHECKBOX, options = { @Option(text = "", value = "true") })
 	public Boolean getIsInherited() {
 		return get("isInherited", "").equals("true");
+	}
+
+	@DialogField(
+			fieldLabel = "ID",
+			fieldDescription = "A unique identifier to apply to the Row element rendered in the page DOM.  If left blank, no id attribute will be applied to the rendered element.",
+			tab = 2)
+	public String getDomId() {
+		return get("domId", StringUtils.EMPTY);
+	}
+
+	public boolean isHasDomId() {
+		return StringUtils.isNotBlank(getDomId());
 	}
 }

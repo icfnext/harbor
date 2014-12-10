@@ -1,14 +1,12 @@
 package com.citytechinc.aem.harbor.core.components.content.heading;
 
+import com.citytechinc.aem.harbor.core.util.ComponentUtils;
 import com.citytechinc.aem.harbor.core.util.icon.IconUtils;
-import com.citytechinc.cq.component.annotations.ContentProperty;
+import com.citytechinc.cq.component.annotations.*;
 import org.apache.commons.lang.StringUtils;
 
 import com.citytechinc.aem.bedrock.api.components.annotations.AutoInstantiate;
 import com.citytechinc.aem.bedrock.core.components.AbstractComponent;
-import com.citytechinc.cq.component.annotations.Component;
-import com.citytechinc.cq.component.annotations.DialogField;
-import com.citytechinc.cq.component.annotations.Option;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
 import com.citytechinc.aem.harbor.api.constants.dom.Headings;
 
@@ -20,7 +18,11 @@ import com.citytechinc.aem.harbor.api.constants.dom.Headings;
  */
 @Component(
         value = "Heading",
-        contentAdditionalProperties = { @ContentProperty(name = "dependencies", value = "[harbor.fontawesome]") }
+        contentAdditionalProperties = { @ContentProperty(name = "dependencies", value = "[harbor.fontawesome]") },
+		tabs = {
+				@Tab(title = "Heading"),
+				@Tab(title = "Advanced")
+		}
 )
 @AutoInstantiate(instanceName = Heading.INSTANCE_NAME)
 public class Heading extends AbstractComponent {
@@ -41,7 +43,24 @@ public class Heading extends AbstractComponent {
 
 	@DialogField(fieldLabel = "Heading Text", fieldDescription = "The textual content of the rendered heading.")
 	public String getText() {
-		return IconUtils.iconify(get(TEXT_PROPERTY, StringUtils.EMPTY));
+		return IconUtils.iconify(getRawText());
 	}
 
+	protected String getRawText() {
+		return get(TEXT_PROPERTY, StringUtils.EMPTY);
+	}
+
+	@DialogField(
+			fieldLabel = "ID",
+			fieldDescription = "A unique identifier to apply to the Title element rendered in the page DOM.  This will default to a sanitized version of the text content of the heading if not overridden.",
+			tab = 2)
+	public String getDomId() {
+		String domId = get("domId", StringUtils.EMPTY);
+
+		if (StringUtils.isNotBlank(domId)) {
+			return domId;
+		}
+
+		return ComponentUtils.sanatizeTextAsDomId(getRawText());
+	}
 }

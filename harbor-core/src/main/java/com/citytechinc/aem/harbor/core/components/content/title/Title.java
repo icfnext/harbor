@@ -2,6 +2,7 @@ package com.citytechinc.aem.harbor.core.components.content.title;
 
 import com.citytechinc.aem.harbor.core.util.icon.IconUtils;
 import com.citytechinc.cq.component.annotations.ContentProperty;
+import com.citytechinc.cq.component.annotations.Tab;
 import org.apache.commons.lang.StringUtils;
 
 import com.citytechinc.aem.bedrock.api.components.annotations.AutoInstantiate;
@@ -18,7 +19,11 @@ import com.citytechinc.aem.harbor.core.components.content.heading.Heading;
 @Component(
         value = "Title",
         resourceSuperType = Heading.RESOURCE_TYPE,
-        contentAdditionalProperties = { @ContentProperty(name = "dependencies", value = "[harbor.fontawesome]") }
+        contentAdditionalProperties = { @ContentProperty(name = "dependencies", value = "[harbor.fontawesome]") },
+		tabs = {
+				@Tab(title = "Title"),
+				@Tab(title = "Advanced")
+		}
 )
 @AutoInstantiate(instanceName = Title.INSTANCE_NAME)
 public class Title extends Heading {
@@ -29,19 +34,7 @@ public class Title extends Heading {
 	@Override
 	@DialogField(fieldLabel = "Title Text", fieldDescription = "The textual content of the rendered title. If left empty, the page title will be rendered.")
 	public String getText() {
-
-		String title = get(TEXT_PROPERTY, StringUtils.EMPTY);
-
-		if (StringUtils.isNotBlank(title)) {
-			return IconUtils.iconify(title);
-		}
-
-		if (StringUtils.isNotEmpty(getCurrentPage().getPageTitle())) {
-			return IconUtils.iconify(getCurrentPage().getPageTitle());
-		}
-
-		return IconUtils.iconify(getCurrentPage().getTitle());
-
+		return IconUtils.iconify(getRawText());
 	}
 
 	/**
@@ -54,6 +47,21 @@ public class Title extends Heading {
 	@Override
 	public String getSize() {
 		return Headings.H1;
+	}
+
+	@Override
+	protected String getRawText() {
+		String title = get(TEXT_PROPERTY, StringUtils.EMPTY);
+
+		if (StringUtils.isNotBlank(title)) {
+			return title;
+		}
+
+		if (StringUtils.isNotBlank(getCurrentPage().getPageTitle())) {
+			return getCurrentPage().getPageTitle();
+		}
+
+		return getCurrentPage().getTitle();
 	}
 
 }

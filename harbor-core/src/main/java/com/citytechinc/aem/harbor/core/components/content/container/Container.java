@@ -5,6 +5,7 @@ import com.citytechinc.aem.bedrock.core.components.AbstractComponent;
 import com.citytechinc.cq.component.annotations.Component;
 import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.Option;
+import com.citytechinc.cq.component.annotations.Tab;
 import com.citytechinc.cq.component.annotations.widgets.DialogFieldSet;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
 import com.citytechinc.aem.harbor.api.constants.bootstrap.Bootstrap;
@@ -14,7 +15,15 @@ import com.citytechinc.aem.harbor.core.constants.groups.ComponentGroups;
 import com.google.common.base.Optional;
 import org.apache.commons.lang3.StringUtils;
 
-@Component(value = "Container", description = "A container in which content may be placed.  All content should be placed in a container element.", name = "contentcontainer", group = ComponentGroups.HARBOR_SCAFFOLDING)
+@Component(
+		value = "Container",
+		description = "A container in which content may be placed.  All content should be placed in a container element.",
+		name = "contentcontainer",
+		group = ComponentGroups.HARBOR_SCAFFOLDING,
+		tabs = {
+				@Tab(title = "Container"),
+				@Tab(title = "Advanced")
+		})
 @AutoInstantiate(instanceName = Container.INSTANCE_NAME)
 public class Container extends AbstractComponent {
 
@@ -101,6 +110,18 @@ public class Container extends AbstractComponent {
     public boolean isSection() {
         return true;
     }
+
+	@DialogField(
+			fieldLabel = "ID",
+			fieldDescription = "A unique identifier to apply to the Container element rendered in the page DOM.  If left blank, no id attribute will be applied to the rendered element.",
+			tab = 2)
+	public String getDomId() {
+		return get("domId", StringUtils.EMPTY);
+	}
+
+	public boolean isHasDomId() {
+		return StringUtils.isNotBlank(getDomId());
+	}
 
 	protected String getContainerFullWidthClass() {
 		return Bootstrap.CONTAINER_FULL_WIDTH_CLASS;
