@@ -1,7 +1,7 @@
 <%@include file="/libs/harbor/components/global.jsp"%>
 
 <div class="${accordionParentId}-accordion-container">
-<div class="panel panel-default">
+<div class="panel panel-default" data-node-name="${accordionItem.name}">
     <div class="panel-heading" role="tab" id="heading-${accordionItem.uniqueId}">
         <h4 class="panel-title">
             <c:choose>
@@ -16,7 +16,7 @@
             </c:choose>
         </h4>
     </div>
-    <div id="${accordionItem.uniqueId}" class="panel-collapse collapse${accordionItemOpen ? ' in' : ''}" role="tabpanel" aria-labelledby="heading-${accordionItem.uniqueId}">
+    <div id="${accordionItem.uniqueId}" class="panel-collapse collapse${isEditMode or isDesignMode or accordionItemOpen ? ' in' : ''}" role="tabpanel" aria-labelledby="heading-${accordionItem.uniqueId}">
         <div class="panel-body">
             <cq:include path="accordionitem-par" resourceType="foundation/components/parsys" />
         </div>
