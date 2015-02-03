@@ -17,7 +17,7 @@ import com.citytechinc.cq.component.annotations.widgets.Selection;
 import com.citytechinc.aem.harbor.api.constants.bootstrap.Bootstrap;
 import com.google.common.base.Optional;
 
-@Component(value = "Call to Action", group = "Harbor", name = "calltoaction", layout = "rollover", contentAdditionalProperties = { @ContentProperty(name = "dependencies", value = "[harbor.bootstrap.modals,harbor.bootstrap.buttons,harbor.author-common]") })
+@Component(value = "Call to Action", group = "Harbor", name = "calltoaction", layout = "rollover", contentAdditionalProperties = { @ContentProperty(name = "dependencies", value = "[harbor.bootstrap.modals,harbor.bootstrap.buttons,harbor.author-common,harbor.components.content.calltoaction]") }, inPlaceEditingEditorType = "harborcta")
 @AutoInstantiate(instanceName = CallToAction.INSTANCE_NAME)
 public class CallToAction extends AbstractComponent {
 

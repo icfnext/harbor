@@ -5,7 +5,7 @@
     * need not maintain this requirement.
 --%>
 
-<div class="modal fade cta-modal" data-keyboard="false" tabindex="-1"  role="dialog" id="${cta.modalId}">
+<div class="modal fade cta-modal" data-keyboard="false" tabindex="-1"  role="dialog" id="${cta.modalId}" <c:if test="${isAuthor}">data-path="${cta.path}"</c:if>>
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-body">
@@ -17,13 +17,16 @@
 
 <c:if test="${isEditMode || isDesignMode}">
     <script type="text/javascript">
-        jQuery( document ).ready( function( $ ) {
-            $( '#${cta.modalId}' ).on('show.bs.modal', function() {
-                Harbor.Components.editables().changeEditableContext( '${cta.path}/container-par-${cta.id}' );
+        //TODO: Rework so this whole block is not included in Touch UI mode
+        if ( typeof CQ !== 'undefined' ) {
+            jQuery( document ).ready( function( $ ) {
+                $( '#${cta.modalId}' ).on('show.bs.modal', function() {
+                    Harbor.Components.editables.changeEditableContext( '${cta.path}/container-par-${cta.id}' );
+                } );
+                $( '#${cta.modalId}' ).on('hide.bs.modal', function() {
+                    Harbor.Components.editables.resetEditableContext();
+                } );
             } );
-            $( '#${cta.modalId}' ).on('hide.bs.modal', function() {
-                Harbor.Components.editables().resetEditableContext();
-            } );
-        } );
+        }
     </script>
 </c:if>
