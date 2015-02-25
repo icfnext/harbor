@@ -64,8 +64,8 @@ public class Container extends AbstractComponent {
 		}
 
         if (!isSection()) {
-            if (getClassification().getHasClassification()) {
-                classStringBuffer.append(" ").append(getClassification().getClassificationName());
+            if (getClassification().getHasClassifications()) {
+                classStringBuffer.append(" ").append(StringUtils.join(getClassification().getClassificationNames(), " "));
             }
         }
 
@@ -76,8 +76,8 @@ public class Container extends AbstractComponent {
     public String getSectionClass() {
 
         if (isSection()) {
-            if (getClassification().getHasClassification()) {
-                return getClassification().getClassificationName();
+            if (getClassification().getHasClassifications()) {
+                return StringUtils.join(getClassification().getClassificationNames(), " ");
             }
         }
 
