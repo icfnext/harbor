@@ -4,6 +4,9 @@
     <filter root="/libs/harbor/templates" />
     <filter root="/libs/harbor/install" />
     <filter root="/etc/clientlibs/harbor" />
+    <filter root="/etc/designs/harbor">
+        <exclude pattern="/etc/designs/harbor/jcr:content(/.*)?"/>
+    </filter>
     <filter root="/etc/brands/defaultbootstrapbrand" />
     <filter root="/etc/packages/bedrock/bedrock-ui-${bedrock.version}.zip"/>
     <filter root="/etc/packages/aemnamespace/aem-namespace-extension-ui-${aem.namespace.version}.zip"/>
