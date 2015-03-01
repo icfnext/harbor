@@ -1,2 +1,2 @@
 <%@include file="/libs/harbor/components/global.jsp" %>
-<cl:pageLibrary type="both"/>
+<cq:includeClientLib categories="harbor.design.default"/>

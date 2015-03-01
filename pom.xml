@@ -113,7 +113,7 @@
 							<jsTestSrcDir>${project.basedir}/harbor-ui/src/test/javascript</jsTestSrcDir>
 							<preloadSources>
 								<source>${project.basedir}/harbor-ui/src/main/content/jcr_root/etc/clientlibs/harbor/namespace/js/namespace.js</source>
-								<source>${project.basedir}/harbor-ui/src/main/content/jcr_root/etc/clientlibs/harbor/author-common/js/searchtree.js</source>
+								<source>${project.basedir}/harbor-ui/src/main/content/jcr_root/etc/clientlibs/harbor/authoroverrides/js/searchtree.js</source>
 							</preloadSources>
 						</configuration>
 					</execution>
@@ -153,21 +153,6 @@
 				<scope>provided</scope>
 			</dependency>
 
-			<!-- Client Librarian -->
-			<dependency>
-				<groupId>com.citytechinc.cq.clientlibs</groupId>
-				<artifactId>clientlibrarian-api</artifactId>
-				<version>${clientlibrarian.version}</version>
-				<scope>provided</scope>
-			</dependency>
-			<dependency>
-				<groupId>com.citytechinc.cq.clientlibs</groupId>
-				<artifactId>clientlibrarian-ui</artifactId>
-				<version>${clientlibrarian.version}</version>
-				<type>zip</type>
-				<scope>provided</scope>
-			</dependency>
-			
 		</dependencies>
 	</dependencyManagement>
 </project>

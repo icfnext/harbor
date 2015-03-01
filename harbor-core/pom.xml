@@ -123,12 +123,6 @@
             <version>${project.version}</version>
             <scope>provided</scope>
         </dependency>
-
-        <!-- Client Librarian -->
-        <dependency>
-            <groupId>com.citytechinc.cq.clientlibs</groupId>
-            <artifactId>clientlibrarian-api</artifactId>
-        </dependency>
         
 	</dependencies>
 </project>

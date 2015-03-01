@@ -6,4 +6,4 @@
         jcr:primaryType="cq:ClientLibraryFolder"
         categories="harbor.authoroverrides"
         dependencies="harbor.namespace"
-        runModes="author" />
+        channels="[extjs]" />

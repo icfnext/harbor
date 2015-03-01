@@ -184,12 +184,5 @@
 			<type>zip</type>
 		</dependency>
 
-		<!-- Client Librarian -->
-		<dependency>
-			<groupId>com.citytechinc.cq.clientlibs</groupId>
-			<artifactId>clientlibrarian-ui</artifactId>
-			<type>zip</type>
-		</dependency>
-		
 	</dependencies>
 </project>
