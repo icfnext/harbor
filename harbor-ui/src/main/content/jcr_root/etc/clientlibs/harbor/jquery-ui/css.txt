@@ -1,3 +1,0 @@
-#base=css
-
-smoothness/jquery-ui-1.10.4.custom.css

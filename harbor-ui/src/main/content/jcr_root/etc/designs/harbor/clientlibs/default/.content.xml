@@ -5,4 +5,4 @@
         xmlns:jcr="http://www.jcp.org/jcr/1.0"
         jcr:primaryType="cq:ClientLibraryFolder"
         categories="harbor.design.default"
-        embed="[harbor.prefix,harbor.bootstrap.default,harbor.bootstrap.default.override,harbor.components,harbor.components.override,harbor.components.custom]" />
+        embed="[harbor.prefix,harbor.bootstrap.default,harbor.bootstrap.default.override,harbor.icons.fontawesome,harbor.icons.override,harbor.icons.custom,harbor.components,harbor.components.override,harbor.components.custom]" />
