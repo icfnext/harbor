@@ -3,7 +3,9 @@
 <html>
     <head>
         <bedrock:title />
-        <cl:pageLibrary type="both"/>
+        <cq:includeClientLib categories="jquery"/>
+        <cq:includeClientLib categories="harbor.bootstrap.default" />
+        <cq:includeClientLib categories="harbor.bootstrapdesign.3.3.2" />
     </head>
     <body>
 

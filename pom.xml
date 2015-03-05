@@ -153,6 +153,13 @@
 				<scope>provided</scope>
 			</dependency>
 
+            <!-- Less 4j -->
+            <dependency>
+                <groupId>com.github.sommeri</groupId>
+                <artifactId>less4j</artifactId>
+                <version>1.8.5</version>
+            </dependency>
+
 		</dependencies>
 	</dependencyManagement>
 </project>

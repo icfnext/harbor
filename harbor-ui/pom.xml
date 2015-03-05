@@ -184,5 +184,12 @@
 			<type>zip</type>
 		</dependency>
 
+        <!-- Less4j Dependency Bundles -->
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+            <version>1.8.3</version>
+        </dependency>
+
 	</dependencies>
 </project>

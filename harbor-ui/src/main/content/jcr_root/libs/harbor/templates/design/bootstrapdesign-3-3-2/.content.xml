@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
+          xmlns:cq="http://www.day.com/jcr/cq/1.0"
+          xmlns:jcr="http://www.jcp.org/jcr/1.0"
+          xmlns:ct="http://www.citytechinc.com/ns/aem/"
+          jcr:primaryType="cq:Template"
+          jcr:title="Bootstrap 3.3.2 Design"
+          allowedPaths="/etc/designs"
+          ranking="0">
+    <jcr:content
+            jcr:primaryType="cq:PageContent"
+            sling:resourceType="harbor/components/design/bootstrapdesign-3-3-2"
+            ct:fallbackClientLibraryCategory="harbor.design.default"
+            ct:clientLibraryCategories="[harbor.prefix,{brand},{brand.override},harbor.icons.fontawesome,harbor.icons.override,harbor.icons.custom,harbor.components,harbor.components.override,harbor.components.custom]"
+            cq:allowedTemplates="/libs/harbor/templates/brand/bootstrapbrand-3-3-2"/>
+</jcr:root>

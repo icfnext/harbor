@@ -123,6 +123,12 @@
             <version>${project.version}</version>
             <scope>provided</scope>
         </dependency>
+
+        <!-- Less 4j -->
+        <dependency>
+            <groupId>com.github.sommeri</groupId>
+            <artifactId>less4j</artifactId>
+        </dependency>
         
 	</dependencies>
 </project>
