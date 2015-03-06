@@ -10,6 +10,6 @@
     <jcr:content
             jcr:primaryType="cq:PageContent"
             sling:resourceType="harbor/components/brand/bootstrapbrandbuilder-3-3-2"
-            ct:bootstrapDirectory="/etc/designs/harbor/clientlibs/bootstrapraw-3-3-2/less"
+            ct:bootstrapDirectory="/etc/designs/harbor/clientlibs/bootstrapraw-3-3-2"
             cq:defaultView="html" />
 </jcr:root>
