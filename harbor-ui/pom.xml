@@ -149,6 +149,8 @@
 							<port>${cq.port}</port>
 							<username>${cq.username}</username>
 							<password>${cq.password}</password>
+                            <retryDelay>5000</retryDelay>
+                            <retryLimit>10</retryLimit>
 						</configuration>
 					</execution>
 				</executions>

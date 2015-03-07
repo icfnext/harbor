@@ -13,7 +13,7 @@ public interface BootstrapDesign extends AuthoredDesign, Adaptable {
 
     public void compileBrand() throws Less4jException, PersistenceException, RepositoryException;
 
-    public void refreshClientLibraryDefinition();
+    public void refreshClientLibraryDefinition() throws PersistenceException, RepositoryException;
 
     public String getBrandCategory();
 
