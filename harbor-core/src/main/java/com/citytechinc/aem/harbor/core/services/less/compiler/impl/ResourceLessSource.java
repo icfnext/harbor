@@ -8,20 +8,22 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.jcr.Node;
-import javax.jcr.PathNotFoundException;
 import javax.jcr.Property;
 import javax.jcr.RepositoryException;
 import java.io.IOException;
 import java.io.StringWriter;
+import java.util.Map;
 
 public class ResourceLessSource extends LessSource.AbstractHierarchicalSource {
 
     private static final Logger LOG = LoggerFactory.getLogger(ResourceLessSource.class);
 
     private final Resource inputResource;
+    private final Map<String, String> bindings;
 
-    public ResourceLessSource(Resource inputResource) {
+    public ResourceLessSource(Resource inputResource, Map<String, String> bindings) {
         this.inputResource = inputResource;
+        this.bindings = bindings;
     }
 
     public Resource getInputResource() {
@@ -45,7 +47,7 @@ public class ResourceLessSource extends LessSource.AbstractHierarchicalSource {
             throw new FileNotFound();
         }
 
-        return new ResourceLessSource(fileResource);
+        return new ResourceLessSource(fileResource, bindings);
 
     }
 
@@ -60,7 +62,7 @@ public class ResourceLessSource extends LessSource.AbstractHierarchicalSource {
 
         Node contentNode = contentResource.adaptTo(Node.class);
 
-        Property data = null;
+        Property data;
         try {
             data = contentNode.getProperty("jcr:data");
         } catch (RepositoryException e) {
@@ -84,7 +86,7 @@ public class ResourceLessSource extends LessSource.AbstractHierarchicalSource {
             throw new CannotReadFile();
         }
 
-        return writer.toString();
+        return applyBindingsToString(writer.toString(), bindings);
     }
 
     @Override
@@ -120,6 +122,20 @@ public class ResourceLessSource extends LessSource.AbstractHierarchicalSource {
         ResourceLessSource other = (ResourceLessSource) obj;
 
         return other.getInputResource().getPath().equals(getInputResource().getPath());
+    }
+
+    private static String applyBindingsToString(String input, Map<String, String> bindings) {
+        if (bindings == null) {
+            return input;
+        }
+
+        String result = input;
+
+        for (String currentBinding : bindings.keySet()) {
+            result = input.replaceAll("<%" + currentBinding + "%>", bindings.get(currentBinding));
+        }
+
+        return result;
     }
 
 }

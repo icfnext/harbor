@@ -84,7 +84,7 @@ public class DefaultBootstrapDesign implements BootstrapDesign {
 
         Resource clientLibraryResource = getOrCreateBrandClientLibrary(brandResource);
 
-        createCssFileForBrandClientLibrary(clientLibraryResource, lessCompilationService.compile(bootstrapLessResource));
+        createCssFileForBrandClientLibrary(clientLibraryResource, lessCompilationService.compile(bootstrapLessResource, getBrandVariableReplacements()));
 
         createCssTxtFileForBrandClientLibrary(clientLibraryResource);
         createJsTxtFileForBrandClientLibrary(clientLibraryResource, bootstrapDirectoryResource);
@@ -121,6 +121,22 @@ public class DefaultBootstrapDesign implements BootstrapDesign {
     @Override
     public <AdapterType> AdapterType adaptTo(Class<AdapterType> aClass) {
         return null;
+    }
+
+    private Map<String, String> getBrandVariableReplacements() {
+        Map<String, String> variableReplacements = Maps.newHashMap();
+
+        if (brandValueMapOptional.isPresent()) {
+            Resource brandProperties = brandResourceOptional.get().getChild("jcr:content/brandproperties");
+
+            if (brandProperties != null) {
+                for (String currentKey : brandProperties.adaptTo(ValueMap.class).keySet()) {
+                    variableReplacements.put(currentKey, brandValueMapOptional.get().get(currentKey, String.class));
+                }
+            }
+        }
+
+        return variableReplacements;
     }
 
     private Resource getOrCreateBrandClientLibrary(Resource brandResource) throws PersistenceException {

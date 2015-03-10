@@ -11,6 +11,8 @@ import org.apache.sling.api.resource.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Map;
+
 @Component
 @Service
 public class DefaultLessCompilationService implements LessCompilationService {
@@ -25,7 +27,12 @@ public class DefaultLessCompilationService implements LessCompilationService {
 
     @Override
     public String compile(Resource lessResource) throws Less4jException {
-        LessSource lessSource = new ResourceLessSource(lessResource);
+        return compile(lessResource, null);
+    }
+
+    @Override
+    public String compile(Resource lessResource, Map<String, String> bindings) throws Less4jException {
+        LessSource lessSource = new ResourceLessSource(lessResource, bindings);
 
         LessCompiler.CompilationResult compilationResult = lessCompiler.compile(lessSource);
 
