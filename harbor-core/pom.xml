@@ -124,10 +124,10 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- Less 4j -->
+        <!-- Authorable Design -->
         <dependency>
-            <groupId>com.github.sommeri</groupId>
-            <artifactId>less4j</artifactId>
+            <groupId>com.citytechinc.aem.designmanager</groupId>
+            <artifactId>authorable-design-manager-api</artifactId>
         </dependency>
         
 	</dependencies>

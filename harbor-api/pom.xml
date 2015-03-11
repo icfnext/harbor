@@ -44,7 +44,7 @@
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
                         <Bundle-Name>${project.name}</Bundle-Name>
                         <Bundle-Vendor>${project.parent.organization.name}</Bundle-Vendor>
-                        <Export-Package>!*.impl,com.citytechinc.aem.harbor.api.*,com.github.sommeri.*,org.antlr.runtime.*</Export-Package>
+                        <Export-Package>!*.impl,com.citytechinc.aem.harbor.api.*</Export-Package>
                         <Import-Package>!com.citytechinc.cq.component.*,!javassist</Import-Package>
                         <DynamicImport-Package>*</DynamicImport-Package>
 
@@ -82,23 +82,5 @@
             <groupId>com.citytechinc.aem.namespace</groupId>
             <artifactId>aem-namespace-extension-api</artifactId>
         </dependency>
-
-        <!-- Less 4j -->
-        <dependency>
-            <groupId>com.github.sommeri</groupId>
-            <artifactId>less4j</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.antlr</groupId>
-            <artifactId>antlr-runtime</artifactId>
-            <version>3.5.2</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.antlr</groupId>
-                    <artifactId>stringtemplate</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
 	</dependencies>
 </project>

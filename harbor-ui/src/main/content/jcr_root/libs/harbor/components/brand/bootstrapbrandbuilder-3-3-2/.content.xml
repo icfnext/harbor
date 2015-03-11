@@ -5,4 +5,4 @@
           cq:isContainer="{Boolean}false"
           jcr:primaryType="cq:Component"
           dependencies="harbor.brands"
-          sling:resourceSuperType="harbor/components/brand/bootstrapbrandbuilder" />
+          sling:resourceSuperType="authorable-design-manager/components/design/brand/authorablebrand" />

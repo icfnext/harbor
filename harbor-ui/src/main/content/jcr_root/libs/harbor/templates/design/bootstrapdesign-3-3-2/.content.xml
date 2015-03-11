@@ -10,7 +10,7 @@
     <jcr:content
             jcr:primaryType="cq:PageContent"
             sling:resourceType="harbor/components/design/bootstrapdesign-3-3-2"
-            ct:fallbackClientLibraryCategory="harbor.design.default"
-            ct:clientLibraryCategories="[harbor.prefix,{brand},{brand.override},harbor.icons.fontawesome,harbor.icons.override,harbor.icons.custom,harbor.components,harbor.components.override,harbor.components.custom]"
-            cq:allowedTemplates="/libs/harbor/templates/brand/bootstrapbrand-3-3-2"/>
+            ct:clientLibraryCategories="[harbor.prefix,{brand},harbor.icons.fontawesome,harbor.icons.override,harbor.icons.custom,harbor.components,harbor.components.override,harbor.components.custom]"
+            cq:allowedTemplates="/libs/harbor/templates/brand/bootstrapbrand-3-3-2"
+            cq:defaultView="html" />
 </jcr:root>

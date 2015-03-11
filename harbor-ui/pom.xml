@@ -186,11 +186,11 @@
 			<type>zip</type>
 		</dependency>
 
-        <!-- Less4j Dependency Bundles -->
+        <!-- Authorable Designs -->
         <dependency>
-            <groupId>commons-beanutils</groupId>
-            <artifactId>commons-beanutils</artifactId>
-            <version>1.8.3</version>
+            <groupId>com.citytechinc.aem.designmanager</groupId>
+            <artifactId>authorable-design-manager-ui</artifactId>
+            <type>zip</type>
         </dependency>
 
 	</dependencies>
