@@ -6,6 +6,8 @@
     <filter root="/etc/clientlibs/harbor" />
     <filter root="/etc/designs/harbor">
         <exclude pattern="/etc/designs/harbor/jcr:content/(.*)?"/>
+        <exclude pattern="/etc/designs/harbor/clientlib(/.*)?"/>
+        <exclude pattern="/etc/designs/harbor/brand/clientlib(/.*)?"/>
     </filter>
     <filter root="/etc/packages/bedrock/bedrock-ui-${bedrock.version}.zip"/>
     <filter root="/etc/packages/aemnamespace/aem-namespace-extension-ui-${aem.namespace.version}.zip"/>

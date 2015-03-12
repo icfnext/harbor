@@ -18,7 +18,6 @@ import com.citytechinc.cq.component.annotations.editconfig.ActionConfig;
     name = "accordion/accordionitem",
     actions = { "text: Accordion Item", "-", "edit", "delete" },
     listeners = {
-        @Listener(name = "afterinsert", value = "REFRESH_PAGE"),
         @Listener(name = "afteredit", value = "REFRESH_SELF"),
         @Listener(name = "afterdelete", value = "REFRESH_PARENT")
     },

@@ -20,7 +20,6 @@ import org.apache.commons.lang3.StringUtils;
 		group = ComponentGroups.HARBOR_SCAFFOLDING,
 		actions = { "text: Column Row", "-", "edit", "-", "copymove", "delete", "-", "insert" },
 		contentAdditionalProperties = { @ContentProperty(name = "dependencies", value = "harbor.components.content.columnrow") },
-		listeners = { @Listener(name = "afterinsert", value = "REFRESH_PAGE") },
 		allowedParents = "*/parsys",
 		resourceSuperType = "foundation/components/parbase",
 		tabs = {

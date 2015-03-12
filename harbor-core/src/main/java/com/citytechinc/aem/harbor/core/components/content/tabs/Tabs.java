@@ -25,7 +25,7 @@ import com.google.common.base.Predicate;
     value = "Tabs",
     group = ComponentGroups.HARBOR_SCAFFOLDING,
     actions = { "text: Tabs", "-", "edit", "-", "copymove", "delete", "-", "insert" },
-    listeners = { @Listener(name = "afterinsert", value = "REFRESH_PAGE") }, actionConfigs = {
+    actionConfigs = {
         @ActionConfig(xtype = "tbseparator"),
         @ActionConfig(text = "Add Tab", handler = "function(){Harbor.Components.Tabs.addTab(this)}")
     },

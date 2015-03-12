@@ -33,7 +33,6 @@ import org.slf4j.LoggerFactory;
 	        @ActionConfig(xtype = "tbseparator"),
 	        @ActionConfig(text = "Add Navigation Item", handler = "function(){ Harbor.Components.GlobalNavigation.addNavigationElement(this) }"),
         },
-        listeners = { @Listener(name = "afterinsert", value = "REFRESH_PAGE") },
         allowedParents = "*/parsys",
         path = "content/navigation")
 @AutoInstantiate(instanceName = "bootstrapMainManualNavigation")

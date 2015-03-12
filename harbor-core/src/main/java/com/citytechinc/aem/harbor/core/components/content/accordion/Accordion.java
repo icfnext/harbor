@@ -20,9 +20,7 @@ import com.google.common.base.Predicate;
 @Component(
     value = "Accordion",
     group = ComponentGroups.HARBOR,
-    //isContainer = true, // when this is set to true, upon editing of the component the HTML structure changes
     actions = { "text: Accordion", "-", "edit", "-", "copymove", "delete", "-", "insert" },
-    listeners = { @Listener(name = "afterinsert", value = "REFRESH_PAGE") },
     actionConfigs = {
         @ActionConfig(xtype = "tbseparator"),
         @ActionConfig(text = "Add Item", handler = "function(){Harbor.Components.Accordion.addItem(this)}")
