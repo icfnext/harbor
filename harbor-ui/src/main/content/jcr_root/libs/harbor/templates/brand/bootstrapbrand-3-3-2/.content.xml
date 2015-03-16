@@ -10,7 +10,7 @@
     <jcr:content
             jcr:primaryType="cq:PageContent"
             sling:resourceType="harbor/components/brand/bootstrapbrandbuilder-3-3-2"
-            ct:brandJavascriptFiles="[/etc/designs/harbor/clientlibs/bootstrapraw-3-3-2/js/bootstrap.js]"
-            ct:brandCssFiles="[/etc/designs/harbor/clientlibs/bootstrapraw-3-3-2/less/bootstrap.less]"
+            ct:brandJavascriptFiles="[/etc/clientlibs/harbor/bootstrapraw-3-3-2/js/bootstrap.js]"
+            ct:brandCssFiles="[/etc/clientlibs/harbor/bootstrapraw-3-3-2/less/bootstrap.less]"
             cq:defaultView="html" />
 </jcr:root>
