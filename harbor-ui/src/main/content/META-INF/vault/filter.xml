@@ -9,7 +9,7 @@
         <exclude pattern="/etc/designs/harbor/clientlib(/.*)?"/>
         <exclude pattern="/etc/designs/harbor/brand/clientlib(/.*)?"/>
     </filter>
-    <filter root="/etc/packages/bedrock/bedrock-ui-${bedrock.version}.zip"/>
-    <filter root="/etc/packages/aemnamespace/aem-namespace-extension-ui-${aem.namespace.version}.zip"/>
-    <filter root="/etc/packages/authorabledesignmanager/authorable-design-manager-ui-${authorable.design.manager.version}.zip"/>
+    <filter root="/etc/packages/bedrock"/>
+    <filter root="/etc/packages/aemnamespace"/>
+    <filter root="/etc/packages/authorabledesignmanager"/>
 </workspaceFilter>
