@@ -74,7 +74,23 @@ public class MetaPage extends AbstractComponent {
     }
     
     public String getCannonicalRef(){
-    	return getCurrentPage().getProperties().get("cannonicalUrl", StringUtils.EMPTY);
+    	String tempCannonical = StringUtils.EMPTY;
+    	String inputCannonicalRef = getCurrentPage().getProperties().get("cannonicalUrl", StringUtils.EMPTY);
+    	//If they input a remote url, then just return that URL
+    	if(inputCannonicalRef.startsWith("http")){
+    		return inputCannonicalRef;
+    	}else{
+    		//If they select a path with the pathfinder, need to externalize it.
+    		try{
+	        	MetadataConfigService metadataConfigService = getService(MetadataConfigService.class);
+	        	ResourceResolver resolver = getComponentRequest().getSlingRequest().getResourceResolver();
+	        	tempCannonical =  metadataConfigService.getExternalUrl(resolver, inputCannonicalRef);
+    		}catch( RepositoryException re){
+        		LOG.error("RepositoryException retreiving fully qualified page string",re);
+        	}
+    	}
+    	
+    	return tempCannonical;
     }
     
     public String getHomePageTitle(){
