@@ -1,27 +1,24 @@
-module.exports = function( grunt , task , tag , baseDir ){
+module.exports = function( tag , baseDir ){
 
-    var bootstrapPath               = grunt.config.data.pkg.options.clientlibsPaths.bootstrap;
-    var repositoriesPath            = grunt.config.data.pkg.options.repositoriesPath;
-    var baseClientLibsCategory      = grunt.config.data.pkg.options.baseCategory;
-    var jqueryCategory              = grunt.config.data.pkg.options.jqueryCategory;
+    var config                      = require('./../../config');
+
+    var harborLessVarsPath          = config.harborLessVarsPath;
+    var repositoriesPath            = config.repositoriesPath;
     var lessVarsFileName            = baseDir + "/" + repositoriesPath + "/bootstrap/less/variables.less";
 
     var checkOutBootstrapTag        = require( "./checkOutBootstrapTag.js" );
     var JSONifyLessVars             = require( "./findAndJSONifyLessVars.js" );
-    var createBootstrapClientLibs   = require( "./createBootstrapClientLibs.js" );
     var Q                           = require( "q" );
-    var done                        = task.async( );
 
 
     var checkOutBootstrapTagFinished    = checkOutBootstrapTag( baseDir , repositoriesPath , tag );
-    var jsonIfyLessVars                 = JSONifyLessVars( baseDir , repositoriesPath , lessVarsFileName );
-    var bootstrapClientLibsCreated      = createBootstrapClientLibs( grunt , baseDir + "/" + repositoriesPath + "/bootstrap" , bootstrapPath , baseClientLibsCategory , jqueryCategory );
+    var jsonIfyLessVars                 = JSONifyLessVars( baseDir , repositoriesPath , lessVarsFileName , harborLessVarsPath, tag);
 
 
 
-    Q.all( [ checkOutBootstrapTagFinished , jsonIfyLessVars, bootstrapClientLibsCreated ] ).spread(function (jsonIfyLessVarsResult, bootstrapClientLibsCreatedResult) {
+    Q.all( [ checkOutBootstrapTagFinished , jsonIfyLessVars ] ).spread(function (jsonIfyLessVarsResult ) {
 
-        done( );
+        // write less file out
 
     });
 
