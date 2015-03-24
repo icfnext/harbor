@@ -10,15 +10,19 @@ module.exports = function( baseDir , repositoriesPath , tag ) {
     var bootstrapRepoExists = fs.existsSync(baseDir + "/" + repositoriesPath + "/bootstrap");
 
 
-    shell.cd(repositoriesPath);
-
     if( bootstrapRepoExists ){
+        shell.cd(repositoriesPath);
         shell.cd("bootstrap");
         shell.exec("git fetch --tags");
         shell.exec("git checkout " + tag);
 
         deferred.resolve( );
     }else{
+
+        shell.mkdir( repositoriesPath );
+
+        shell.cd( repositoriesPath );
+
         console.log( chalk.green("About to download bootstrap lean back and grab a coffee") );
         shell.exec("git clone https://github.com/twbs/bootstrap.git");
 

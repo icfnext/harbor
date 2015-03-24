@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+          jcr:primaryType="cq:Panel"
+          title="SEO Metadata">
+    <items jcr:primaryType="cq:WidgetCollection">
+        <metadata
+                jcr:primaryType="cq:Widget"
+                collapsed="{Boolean}false"
+                collapsible="{Boolean}false"
+                xtype="dialogfieldset">
+            <items jcr:primaryType="cq:WidgetCollection">
+                <disableSchemaOrg
+                        jcr:primaryType="cq:Widget"
+                        fieldLabel="Turn off Google/Schema.org metadata tags"
+                        fieldDescription="Indicates that Google metadata tags name, description, and image will be disabled."
+                        name="./disableSchemaOrg"
+                        type="checkbox"
+                        xtype="selection">
+                    <options jcr:primaryType="cq:WidgetCollection">
+                        <hideOption
+                            jcr:primaryType="nt:unstructured"
+                            text="Disable Google/Schema.org metadata tags"
+                            value="true" />
+                    </options>
+                </disableSchemaOrg>
+                <twitterpubhandle allowBlank="{Boolean}true" fieldLabel="Twitter Publisher Handle" fieldDescription="e.g. @icfi.  If this value is present Twitter metadata will be included on the page" hideLabel="{Boolean}false" jcr:primaryType="cq:Widget" name="./twitterPublisherHandle" xtype="textfield"/>
+                <ogType allowBlank="{Boolean}true" fieldDescription="Select an og:Type value and Open Graph metadata will be included for the page" fieldLabel="Open Graph Type" hideLabel="{Boolean}false" jcr:primaryType="cq:Widget" name="./ogType" type="select" xtype="selection">
+                  <options jcr:primaryType="cq:WidgetCollection">
+                  	<option0 jcr:primaryType="nt:unstructured" text="" value=""/>
+                    <option1 jcr:primaryType="nt:unstructured" text="article" value="article"/>
+                    <option2 jcr:primaryType="nt:unstructured" text="book" value="book"/>
+                    <option3 jcr:primaryType="nt:unstructured" text="profile" value="profile"/>
+                    <option4 jcr:primaryType="nt:unstructured" text="website" value="website"/>
+                    <option5 jcr:primaryType="nt:unstructured" text="video.movie" value="video.movie"/>
+                    <option6 jcr:primaryType="nt:unstructured" text="video.episode" value="video.episode"/>
+                    <option7 jcr:primaryType="nt:unstructured" text="video.tv_show" value="video.tv_show"/>
+                    <option8 jcr:primaryType="nt:unstructured" text="video.other" value="video.other"/>
+                    <option9 jcr:primaryType="nt:unstructured" text="music.song" value="music.song"/>
+                    <option10 jcr:primaryType="nt:unstructured" text="music.album" value="music.album"/>
+                    <option11 jcr:primaryType="nt:unstructured" text="music.playlist" value="music.playlist"/>                                                                                                                                                    
+                    <option12 jcr:primaryType="nt:unstructured" text="music.radio_station" value="music.radio_station"/>  
+                  </options>
+                </ogType>
+                
+				<cannonicalurl allowBlank="{Boolean}true" escapeAmp="{Boolean}false" fieldLabel="Cannonical URL" fieldDescription="Path or URL of the content that this page is a copy of" hideLabel="{Boolean}false" hideTrigger="{Boolean}false" jcr:primaryType="cq:Widget" name="./cannonicalUrl" parBrowse="{Boolean}false" rootPath="/" rootTitle="Websites" showTitleInTree="{Boolean}true" xtype="pathfield"/>
+                
+                <noindex
+                        jcr:primaryType="cq:Widget"
+                        fieldLabel="add NOINDEX metadata tag?"
+                        fieldDescription="This settting requests the automated internet bots avoid indexing this page"
+                        name="./noindex"
+                        type="checkbox"
+                        xtype="selection">
+                    <options jcr:primaryType="cq:WidgetCollection">
+                        <hideOption
+                            jcr:primaryType="nt:unstructured"
+                            text="NOINDEX"
+                            value="true" />
+                    </options>
+                </noindex>
+  
+                <nofollow
+                        jcr:primaryType="cq:Widget"
+                        fieldLabel="add NOFOLLOW metadata tag?"
+                        fieldDescription="This setting instructs some search engines that hyperlinks on this page should not be counted as votes in favor of the linked content"
+                        name="./nofollow"
+                        type="checkbox"
+                        xtype="selection">
+                    <options jcr:primaryType="cq:WidgetCollection">
+                        <hideOption
+                            jcr:primaryType="nt:unstructured"
+                            text="NOFOLLOW"
+                            value="true" />
+                    </options>
+                </nofollow>
+  
+            </items>
+        </metadata>
+    </items>
+</jcr:root>
