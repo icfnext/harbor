@@ -17,7 +17,7 @@
 
         //Disable all editable overlays which do not start with the path of the modal - ie - which are not contained in the modal
         Granite.author.store.forEach( function( currentEditable ) {
-            if ( currentEditable.path.indexOf( editable.path ) !== 0 ) {
+            if ( currentEditable.path.indexOf( editable.path ) !== 0 && !currentEditable.config.isContainer ) {
                 currentEditable.setDisabled( true );
                 currentEditable.overlay.setVisible( false );
                 disabledEditables.push( currentEditable );
@@ -25,6 +25,7 @@
                 console.log( 'Disabling ' + currentEditable.path );
             }
         } );
+
     };
 
     CTAEditor.prototype.tearDown = function( editable ) {
@@ -39,6 +40,7 @@
         } );
 
         disabledEditables = [];
+
     };
 
     Granite.author.editor.register( 'harborcta', new CTAEditor() );
