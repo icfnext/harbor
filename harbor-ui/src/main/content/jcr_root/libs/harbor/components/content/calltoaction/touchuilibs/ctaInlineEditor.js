@@ -1,12 +1,16 @@
 ( function() {
 
-    var disabledEditables = [];
+    var disabledEditables = [],
+        closeButton = null;
 
     var CTAEditor = function() {
 
     };
 
     CTAEditor.prototype.setUp = function( editable ) {
+
+        var currentEditor = this;
+
         console.log( 'setup' );
         console.log( editable );
 
@@ -26,6 +30,27 @@
             }
         } );
 
+        closeButton = jQuery( "<button id=\"Harbor-CTAEditorCloseButton\" class=\"coral-MinimalButton cq-editable-action\" type=\"button\" title=\"Close\"><i class=\"coral-Icon coral-Icon--close coral-Icon--sizeS\" title=\"Close\"></i></button>");
+
+        //TODO: Setup position tracking based on the position of the editable sitting inside
+        jQuery( "#OverlayWrapper" ).append( closeButton );
+
+        closeButton.click( function() {
+            currentEditor.tearDown( editable );
+        } );
+
+        editable.setInactive();
+        jQuery( "#EditableToolbar" ).hide();
+
+        /*
+        editable.setInactive();
+        editable.setDisabled( true );
+        editable.overlay.setVisible( false );
+        disabledEditables.push( editable );
+        */
+
+        window.theEditableInQuestion = editable;
+
     };
 
     CTAEditor.prototype.tearDown = function( editable ) {
@@ -41,7 +66,14 @@
 
         disabledEditables = [];
 
+        closeButton.remove();
+
     };
 
-    Granite.author.editor.register( 'harborcta', new CTAEditor() );
+    var theEditor = new CTAEditor();
+
+    Granite.author.editor.register( 'harborcta', theEditor );
+
+    window.theEditorInQuestion = theEditor;
+
 } )();

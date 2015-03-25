@@ -57,6 +57,6 @@ public class Subtitle extends Heading {
             return title;
         }
 
-        return getCurrentPage().get("subtitle", StringUtils.EMPTY);
+        return getCurrentPage().get("subtitle", "Subtitle");
     }
 }

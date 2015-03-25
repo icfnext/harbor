@@ -8,5 +8,12 @@ jQuery( document ).ready ( function() {
             jQuery( '.modal[data-path="' + path + '"]' ).modal( 'show' );
         };
 
+        aem.authoring.command[ 'harbor-closeModal' ] = function( path, message ) {
+            console.log( path );
+            console.log( message );
+
+            jQuery( '.modal[data-path="' + path + '"]' ).modal( 'hide' );
+        };
+
     }
 } );
