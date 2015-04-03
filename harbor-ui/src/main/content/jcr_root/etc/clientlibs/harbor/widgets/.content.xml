@@ -7,3 +7,4 @@
         dependencies="harbor.namespace"
         categories="harbor.widgets"
         channels="[extjs]" />
+
