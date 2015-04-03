@@ -5,4 +5,5 @@
         xmlns:jcr="http://www.jcp.org/jcr/1.0"
         jcr:primaryType="cq:ClientLibraryFolder"
         dependencies="harbor.namespace"
+        runModes="[author]"
         categories="harbor.widgets"/>
