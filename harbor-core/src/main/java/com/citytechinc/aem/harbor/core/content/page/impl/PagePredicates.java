@@ -26,7 +26,7 @@ public class PagePredicates {
 				Node pageContentNode = page.getContentResource().adaptTo(Node.class);
 				return pageContentNode.isNodeType(SectionLandingPage.RDF_TYPE);
 			} catch (RepositoryException e) {
-				LOG.error("Repository Exception encountered while evaluating Section Landing Page page predicate");
+				LOG.error("Repository Exception encountered while evaluating Section Landing Page page predicate", e);
 				return false;
 			}
 		}
@@ -40,7 +40,7 @@ public class PagePredicates {
 			try {
 				return page.getContentResource().adaptTo(Node.class).isNodeType("cq:PageContent");
 			} catch (RepositoryException e) {
-				LOG.error("Repository Exception encountered while evaluating Hierarchical Page page predicate");
+				LOG.error("Repository Exception encountered while evaluating Hierarchical Page page predicate", e);
 				return false;
 			}
 		}
@@ -55,7 +55,7 @@ public class PagePredicates {
 				Node pageContentNode = page.getContentResource().adaptTo(Node.class);
 				return pageContentNode.isNodeType(HomePage.RDF_TYPE);
 			} catch (RepositoryException e) {
-				LOG.error("Repository Exception encountered while evaluating Section Landing Page page predicate");
+				LOG.error("Repository Exception encountered while evaluating Section Landing Page page predicate", e);
 				return false;
 			}
 		}
