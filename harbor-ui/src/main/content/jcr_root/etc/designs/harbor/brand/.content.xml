@@ -10,7 +10,7 @@
             ct:brandCssFiles="[/etc/clientlibs/harbor/bootstrapraw-3-3-2/less/bootstrap.less]">
         <brandproperties
             jcr:primaryType="nt:unstructured"
-            bootstrap-_x0040_body-bg="#def"
+            bootstrap-_x0040_body-bg="#fff"
             />
     </jcr:content>
 </jcr:root>
