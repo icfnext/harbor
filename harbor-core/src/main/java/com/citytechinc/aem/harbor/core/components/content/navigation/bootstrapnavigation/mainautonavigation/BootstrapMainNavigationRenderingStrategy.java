@@ -15,7 +15,7 @@ import com.google.common.base.Optional;
 public class BootstrapMainNavigationRenderingStrategy extends AbstractComponent implements
         TreeRenderingStrategy<NavigablePage, BootstrapPageNavigableRenderableTree> {
 
-	@DialogField(fieldLabel = "Enable Sticky Navigation", fieldDescription = "")
+	@DialogField(fieldLabel = "Enable Sticky Navigation", fieldDescription = "Disabled in Edit mode. Use Preview mode to view.")
 	@Selection(type = Selection.CHECKBOX, options = { @Option(text = "", value = "true") })
 	private Boolean isSticky;
 
