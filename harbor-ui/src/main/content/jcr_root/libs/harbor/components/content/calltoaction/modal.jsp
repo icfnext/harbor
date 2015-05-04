@@ -5,7 +5,7 @@
     * need not maintain this requirement.
 --%>
 
-<div class="modal fade cta-modal" data-keyboard="false" tabindex="-1"  role="dialog" id="${cta.modalId}" <c:if test="${isAuthor}">data-path="${cta.path}"</c:if>>
+<div class="modal fade cta-modal" data-keyboard="false" role="dialog" id="${cta.modalId}" <c:if test="${isAuthor}">data-path="${cta.path}"</c:if>>
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-body">
