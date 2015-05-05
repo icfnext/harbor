@@ -25,10 +25,10 @@
                 <c:if test="${renderableItem.renderImage}">
                     <c:choose>
                         <c:when test="${renderableItem.renderAsLink}">
-                            <a href="${renderableItem.imageSource}"><img src="${renderableItem.imageSource}" /></a>
+                            <a href="${renderableItem.imageSource}"><img src="${renderableItem.imageSourceRendition}" /></a>
                         </c:when>
                         <c:otherwise>
-                            <img src="${renderableItem.imageSource}" />
+                            <img src="${renderableItem.imageSourceRendition}" />
                         </c:otherwise>
                     </c:choose>
                 </c:if>
@@ -51,10 +51,10 @@
             <c:if test="${renderableItem.renderImage}">
                 <c:choose>
                     <c:when test="${renderableItem.renderAsLink}">
-                        <a href="${renderableItem.imageSource}"><img src="${renderableItem.imageSource}" /></a>
+                        <a href="${renderableItem.imageSource}"><img src="${renderableItem.imageSourceRendition}" /></a>
                     </c:when>
                     <c:otherwise>
-                        <img src="${renderableItem.imageSource}" />
+                        <img src="${renderableItem.imageSourceRendition}" />
                     </c:otherwise>
                 </c:choose>
             </c:if>
