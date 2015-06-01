@@ -5,6 +5,7 @@
             cq:defaultView="html"
             cq:template="/libs/harbor/templates/brand/bootstrapbrandconfig"
             jcr:primaryType="cq:PageContent"
+            jcr:title="Default Brand"
             sling:resourceType="harbor/components/brand/bootstrapbrandconfig">
         <brandproperties
                 jcr:primaryType="nt:unstructured"

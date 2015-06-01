@@ -2,6 +2,7 @@ package com.citytechinc.aem.harbor.core.components.content.subtitle;
 
 import com.citytechinc.aem.harbor.core.util.icon.IconUtils;
 import com.citytechinc.cq.component.annotations.ContentProperty;
+import com.citytechinc.cq.component.annotations.IgnoreDialogField;
 import com.citytechinc.cq.component.annotations.Tab;
 import org.apache.commons.lang.StringUtils;
 
@@ -46,6 +47,7 @@ public class Subtitle extends Heading {
      * @return H2
      */
     @Override
+    @IgnoreDialogField
     public String getSize() {
         return Headings.H2;
     }
@@ -57,6 +59,6 @@ public class Subtitle extends Heading {
             return title;
         }
 
-        return getCurrentPage().get("subtitle", StringUtils.EMPTY);
+        return getCurrentPage().get("subtitle", "Subtitle");
     }
 }

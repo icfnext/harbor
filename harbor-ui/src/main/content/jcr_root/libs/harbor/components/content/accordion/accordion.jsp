@@ -7,15 +7,3 @@
         <cq:include path="${currItem.name}" resourceType="${currItem.resource.resourceType}"/>
     </c:forEach>
 </div>
-<%--
-<c:if test="${isEditMode}">
-    <script type="text/javascript">
-        $(document).ready(
-            function ($) {
-                $(document).ready(function () {
-                    Harbor.Components.Tabs.initTabsSorting("${curtabs.uniqueId}");
-                });
-        });
-    </script>
-</c:if>
---%>

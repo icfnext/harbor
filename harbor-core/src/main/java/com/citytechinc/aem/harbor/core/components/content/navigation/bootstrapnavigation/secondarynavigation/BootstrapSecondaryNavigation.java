@@ -18,7 +18,6 @@ import com.citytechinc.aem.harbor.core.trees.rendering.PassthroughTreeRenderingS
         value = "Secondary Navigation",
         group = ComponentGroups.HARBOR_NAVIGATION,
         path = "content/navigation",
-        listeners = { @Listener(name = "afterinsert", value = "REFRESH_PAGE") },
         contentAdditionalProperties = { @ContentProperty(name = "dependencies", value = "harbor.bootstrap.navs") },
         allowedParents = "*/parsys" )
 @AutoInstantiate(instanceName = "secondaryNavigation")

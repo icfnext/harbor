@@ -20,7 +20,6 @@ import com.citytechinc.aem.harbor.core.content.page.navigation.construction.Site
         actions = {
 	        "text:Main Auto Navigation", "-", "edit", "-", "copymove", "delete" },
         contentAdditionalProperties = { @ContentProperty(name = "dependencies", value = "[harbor.bootstrap.navbar,harbor.navigation.mainnavigation]") },
-        listeners = { @Listener(name = "afterinsert", value = "REFRESH_PAGE") },
         name = "navigation/bootstrapmainautonavigation",
         allowedParents = "*/parsys")
 @AutoInstantiate(instanceName = "bootstrapMainAutoNavigation")

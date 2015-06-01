@@ -33,7 +33,6 @@ import org.slf4j.LoggerFactory;
 	        @ActionConfig(xtype = "tbseparator"),
 	        @ActionConfig(text = "Add Navigation Item", handler = "function(){ Harbor.Components.GlobalNavigation.addNavigationElement(this) }"),
         },
-        listeners = { @Listener(name = "afterinsert", value = "REFRESH_PAGE") },
         allowedParents = "*/parsys",
         path = "content/navigation")
 @AutoInstantiate(instanceName = "bootstrapMainManualNavigation")
@@ -43,7 +42,7 @@ public class BootstrapMainManualNavigation extends AbstractComponent {
 
 	private List<BootstrapMainNavigationElement> bootstrapMainNavigationElementList;
 
-    @DialogField(fieldLabel = "Enable Sticky Navigation?", fieldDescription = "")
+    @DialogField(fieldLabel = "Enable Sticky Navigation?", fieldDescription = "Disabled in Edit mode. Use Preview mode to view.")
     @Selection(type = Selection.CHECKBOX, options = { @Option(text = "", value = "true") })
     private Boolean isSticky;
 

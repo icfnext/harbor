@@ -1,13 +1,10 @@
 package com.citytechinc.aem.harbor.core.components.content.title;
 
 import com.citytechinc.aem.harbor.core.util.icon.IconUtils;
-import com.citytechinc.cq.component.annotations.ContentProperty;
-import com.citytechinc.cq.component.annotations.Tab;
+import com.citytechinc.cq.component.annotations.*;
 import org.apache.commons.lang.StringUtils;
 
 import com.citytechinc.aem.bedrock.api.components.annotations.AutoInstantiate;
-import com.citytechinc.cq.component.annotations.Component;
-import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.aem.harbor.api.constants.dom.Headings;
 import com.citytechinc.aem.harbor.core.components.content.heading.Heading;
 
@@ -45,6 +42,7 @@ public class Title extends Heading {
 	 * @return H1
 	 */
 	@Override
+    @IgnoreDialogField
 	public String getSize() {
 		return Headings.H1;
 	}

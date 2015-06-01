@@ -7,10 +7,10 @@
           jcr:primaryType="cq:Template"
           jcr:title="Section Landing Page Template"
           allowedPaths="/content(/.*)?"
-          ct:brand="/etc/brands/defaultbootstrapbrand/jcr:content"
           ranking="0">
     <jcr:content
             jcr:primaryType="ct:SectionLandingPage"
+            cq:designPath="/etc/designs/harbor"
             sling:resourceType="harbor/components/page/common/master"
             rdf:type="ct:SectionLandingPage" />
 </jcr:root>

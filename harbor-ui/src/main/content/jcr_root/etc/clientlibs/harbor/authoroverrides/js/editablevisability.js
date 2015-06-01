@@ -4,32 +4,34 @@
  * observe visibility to support hiding and
  * showing of editables
  */
-CQ.Ext.override(
-  CQ.wcm.EditBar,
-  {
-    /**
-     * Call the originally defined observe function for
-     * the EditBar
-     * along with visibility and width observations
-     * @private
-     */
-    observe : function( originalFunction ) {
-      return function() {
-        this.observeVisibility();
 
-        originalFunction.apply( this );
+if ( typeof CQ !== 'undefined' ) {
+    CQ.Ext.override(
+        CQ.wcm.EditBar,
+        {
+            /**
+             * Call the originally defined observe function for
+             * the EditBar
+             * along with visibility and width observations
+             * @private
+             */
+            observe: function (originalFunction) {
+                return function () {
+                    this.observeVisibility();
 
-        //this.observeWidth();
+                    originalFunction.apply(this);
 
-      };
-    }( CQ.wcm.EditBar.prototype.observe ),
+                    //this.observeWidth();
 
-    /**
-     * Note - observeWidth is unnecessary if you are
-     * running
-     * CQ5.5+
+                };
+            }(CQ.wcm.EditBar.prototype.observe),
 
-    observeWidth : function() {
+            /**
+             * Note - observeWidth is unnecessary if you are
+             * running
+             * CQ5.5+
+
+             observeWidth : function() {
       var barWidth = this.el.getWidth();
       var elementWidth = this.element.getWidth();
       if (elementWidth != 0 && barWidth != elementWidth) {
@@ -37,74 +39,75 @@ CQ.Ext.override(
       }
     },*/
 
-    /**
-     * Base the visibility of the EditBar on the
-     * visibility of the
-     * element which the EditBar represents editing upon
+            /**
+             * Base the visibility of the EditBar on the
+             * visibility of the
+             * element which the EditBar represents editing upon
+             */
+            observeVisibility: function () {
+
+                var editableIsVisible = this.isVisible();
+                var underlyingElementIsVisible = jQuery(this.element.dom).is(':visible');
+                var editableIsNotInContext = this.hasOwnProperty('harborInCurrentContext') && this.harborInCurrentContext === false;
+
+                if (editableIsVisible && ( !underlyingElementIsVisible || editableIsNotInContext )) {
+                    this.hide(true);
+                }
+                else if (!editableIsVisible && ( !editableIsNotInContext && underlyingElementIsVisible )) {
+                    /*
+                     * When an author moves into preview mode from edit - edit bars end up being shown, because they still exist
+                     * on the page until the page is refreshed.  This check stops that from happening.
+                     */
+                    if (CQ.WCM.isEditMode() || CQ.WCM.isDesignMode()) {
+                        this.show();
+                    }
+                }
+            }
+        }
+    );
+
+    /*
+     * Override the observe method of CQ.wcm.EditRollover
+     * adding an observe visibility to support hiding and
+     * showing of editables
      */
-    observeVisibility : function() {
+    CQ.Ext.override(
+        CQ.wcm.EditRollover,
+        {
+            /**
+             * Call the originally defined observe function
+             * for the EditRollover and then perform the
+             * visibility observation
+             * @private
+             */
+            observe: function (originalFunction) {
+                return function () {
+                    this.observeVisibility();
 
-      var editableIsVisible = this.isVisible();
-      var underlyingElementIsVisible = jQuery( this.element.dom ).is( ':visible' );
-      var editableIsNotInContext = this.hasOwnProperty( 'harborInCurrentContext' ) && this.harborInCurrentContext === false;
+                    originalFunction.apply(this);
 
-      if ( editableIsVisible && ( !underlyingElementIsVisible || editableIsNotInContext ) ) {
-        this.hide(true);
-      }
-      else if ( !editableIsVisible && ( !editableIsNotInContext && underlyingElementIsVisible ) ) {
-    	  /*
-    	   * When an author moves into preview mode from edit - edit bars end up being shown, because they still exist
-    	   * on the page until the page is refreshed.  This check stops that from happening.
-    	   */
-    	  if ( CQ.WCM.isEditMode() || CQ.WCM.isDesignMode() ) {
-    		  this.show();
-          }
-      }
-    }
-  }
-);
-
-/*
- * Override the observe method of CQ.wcm.EditRollover
- * adding an observe visibility to support hiding and
- * showing of editables
- */
-CQ.Ext.override(
-  CQ.wcm.EditRollover,
-  {
-    /**
-     * Call the originally defined observe function
-     * for the EditRollover and then perform the
-     * visibility observation
-     * @private
-     */
-    observe : function( originalFunction ) {
-      return function() {
-        this.observeVisibility();
-
-        originalFunction.apply( this );
-
-      };
-    }( CQ.wcm.EditRollover.prototype.observe ),
+                };
+            }(CQ.wcm.EditRollover.prototype.observe),
 
 
-    /**
-     * Base the visibility of the EditRollover on
-     * the visibility of the element which the
-     * EditRollover represents editing upon
-     */
-    observeVisibility : function() {
+            /**
+             * Base the visibility of the EditRollover on
+             * the visibility of the element which the
+             * EditRollover represents editing upon
+             */
+            observeVisibility: function () {
 
-      var editableIsVisible = !this.hidden && !this.elementHidden;
-      var underlyingElementIsVisible = jQuery( this.element.dom ).is( ':visible' );
-      var editableIsNotInContext = this.hasOwnProperty( 'harborInCurrentContext' ) && this.harborInCurrentContext === false;
+                var editableIsVisible = !this.hidden && !this.elementHidden;
+                var underlyingElementIsVisible = jQuery(this.element.dom).is(':visible');
+                var editableIsNotInContext = this.hasOwnProperty('harborInCurrentContext') && this.harborInCurrentContext === false;
 
-      if ( editableIsVisible && ( !underlyingElementIsVisible || editableIsNotInContext ) ) {
-        this.hide(true);
-      }
-      else if ( this.hidden && ( !editableIsNotInContext && underlyingElementIsVisible ) ) {
-        this.show();
-      }
-    }
-  }
-);
+                if (editableIsVisible && ( !underlyingElementIsVisible || editableIsNotInContext )) {
+                    this.hide(true);
+                }
+                else if (this.hidden && ( !editableIsNotInContext && underlyingElementIsVisible )) {
+                    this.show();
+                }
+            }
+        }
+    );
+}

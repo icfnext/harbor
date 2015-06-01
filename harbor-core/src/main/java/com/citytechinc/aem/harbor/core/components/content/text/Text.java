@@ -30,6 +30,7 @@ public class Text extends AbstractComponent {
             undo = @Undo
     )
     public String getContent() {
+        //TODO: Consider content cleanup such as replacing all &nbsp; which the RTE inserts with spaces as it's incredibly rare that someone actually wants a non-breaking space
         return IconUtils.iconify(get("content", "Enter Text"));
     }
 

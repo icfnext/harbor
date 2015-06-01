@@ -1,7 +1,14 @@
 <%@include file="/libs/harbor/components/global.jsp" %>
 
+<c:set var="noStickAuthor" value="false" />
+<c:if test="${isAuthor && isEditMode}">
+    <c:set var="noStickAuthor" value="true" />
+</c:if>
+
+
+
 <c:choose>
-    <c:when test="${bootstrapMainManualNavigation.isSticky}">
+    <c:when test="${bootstrapMainManualNavigation.isSticky && !noStickAuthor}">
         <div class="navbar navbar-default navbar-fixed-top" role="navigation">
     </c:when>
     <c:otherwise>

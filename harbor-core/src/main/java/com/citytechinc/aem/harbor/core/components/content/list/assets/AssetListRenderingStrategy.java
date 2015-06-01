@@ -1,17 +1,16 @@
 package com.citytechinc.aem.harbor.core.components.content.list.assets;
 
-import java.util.List;
-
-import com.citytechinc.aem.harbor.api.constants.dom.Headings;
-import org.apache.commons.lang.StringUtils;
-
 import com.citytechinc.aem.bedrock.api.node.ComponentNode;
+import com.citytechinc.aem.harbor.api.constants.dom.Headings;
+import com.citytechinc.aem.harbor.api.lists.rendering.ListRenderingStrategy;
 import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.Option;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
-import com.citytechinc.aem.harbor.api.lists.rendering.ListRenderingStrategy;
 import com.day.cq.dam.api.Asset;
 import com.google.common.collect.Lists;
+import org.apache.commons.lang.StringUtils;
+
+import java.util.List;
 
 /**
  * Renders a list of assets as links.
@@ -25,12 +24,24 @@ public class AssetListRenderingStrategy implements
     public static final String FORMAT_PROPERTY = "dc:format";
     public static final String CREATOR_PROPERTY = "dc:creator";
 
+    private static final String RENDITION_THUMNAIL_PATH = "jcr:content/renditions/cq5dam.thumbnail";
+    private static final String RENDITION_THUMNAIL_EXTENSION = "png";
+    private static final String ORIGINAL = "Original";
+
 	private static final String PARAM_AS_LINKS = "renderAsLinks";
 	private static final boolean DEFAULT_AS_LINKS = false;
 
     @DialogField(fieldLabel = "Suppress Images?")
     @Selection(type = Selection.CHECKBOX, options = { @Option(text = "", value = "true") })
     private final boolean suppressImages;
+
+    @DialogField(fieldLabel = "Image Size", fieldDescription = "Render image as original size or thumbnail rendition", defaultValue = ORIGINAL)
+    @Selection(type = Selection.SELECT, options = {
+            @Option(text = ORIGINAL, value = ORIGINAL),
+            @Option(text = "48 x 48", value = "48.48"),
+            @Option(text = "140 x 100", value = "140.100"),
+            @Option(text = "319 x 319", value = "319.319")})
+    private final String imageSize;
 
     @DialogField(fieldLabel = "Render Asset Titles?")
     @Selection(type = Selection.CHECKBOX, options = { @Option(text = "", value = "true") })
@@ -72,6 +83,7 @@ public class AssetListRenderingStrategy implements
 
 		renderAsLinks = componentNode.get(PARAM_AS_LINKS, DEFAULT_AS_LINKS);
         suppressImages = componentNode.get("suppressImages", false);
+        imageSize = componentNode.get("imageSize", ORIGINAL);
         renderTitles = componentNode.get("renderTitles", false);
         renderCreators = componentNode.get("renderCreators", false);
         creatorLabel = componentNode.get("creatorLabel", "By:");
@@ -104,6 +116,7 @@ public class AssetListRenderingStrategy implements
                         new RenderableAsset(
                                 currentAsset,
                                 suppressImages,
+                                imageSize,
                                 renderTitles,
                                 renderCreators,
                                 creatorLabel,
@@ -124,6 +137,7 @@ public class AssetListRenderingStrategy implements
 		private final Asset asset;
 
         private final boolean renderImage;
+        private final String imageSize;
         private final boolean renderTitle;
         private final boolean renderCreator;
         private final String createdByLabel;
@@ -136,6 +150,7 @@ public class AssetListRenderingStrategy implements
 		public RenderableAsset(
                 Asset asset,
                 boolean suppressImage,
+                String imageSize,
                 boolean renderTitle,
                 boolean renderCreator,
                 String createdByLabel,
@@ -146,6 +161,7 @@ public class AssetListRenderingStrategy implements
                 String titleHeadingType) {
 			this.asset = asset;
             this.renderImage = !suppressImage;
+            this.imageSize = imageSize;
             this.renderTitle = renderTitle;
             this.renderCreator = renderCreator;
             this.createdByLabel = createdByLabel;
@@ -162,6 +178,19 @@ public class AssetListRenderingStrategy implements
 
         public String getImageSource() {
             return asset.getPath();
+        }
+
+        public String getImageSourceRendition() {
+            if(StringUtils.isNotBlank(imageSize) && !imageSize.equalsIgnoreCase(ORIGINAL)) {
+                StringBuilder builder = new StringBuilder(asset.getPath());
+                builder.append("/").append(RENDITION_THUMNAIL_PATH);
+                builder.append(".").append(imageSize).append(".");
+                builder.append(RENDITION_THUMNAIL_EXTENSION);
+                return builder.toString();
+            }
+            else {
+                return asset.getPath();
+            }
         }
 
         public String getTitle() {

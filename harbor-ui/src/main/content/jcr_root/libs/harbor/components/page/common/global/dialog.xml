@@ -32,14 +32,17 @@
                         jcr:primaryType="cq:Widget"
                         path="/libs/foundation/components/page/tab_livecopy.infinity.json"
                         xtype="cqinclude" />
-                <!-- TODO: Rework this
                 <icon
                         jcr:primaryType="cq:Widget"
                         path="/libs/harbor/components/page/common/global/icon.infinity.json"
-                        xtype="cqinclude" /> -->
+                        xtype="cqinclude" />
                 <sitemap
                         jcr:primaryType="cq:Widget"
                         path="/libs/harbor/components/page/common/global/sitemap.infinity.json"
+                        xtype="cqinclude" />
+                <metadata
+                        jcr:primaryType="cq:Widget"
+                        path="/libs/harbor/components/page/common/global/metadata.infinity.json"
                         xtype="cqinclude" />
                 <!--TODO: Backlogged
                 iconimage

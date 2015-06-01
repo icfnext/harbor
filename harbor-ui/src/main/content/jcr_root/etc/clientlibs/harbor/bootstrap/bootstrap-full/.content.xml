@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<jcr:root
-        xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
-        xmlns:cq="http://www.day.com/jcr/cq/1.0"
-        xmlns:jcr="http://www.jcp.org/jcr/1.0"
-        jcr:primaryType="cq:ClientLibraryFolder"
-        categories="harbor.bootstrap.layout.full"
-        dependencies="[harbor.bootstrap.vars,harbor.bootstrap.alerts,harbor.bootstrap.badges,harbor.bootstrap.breadcrumbs,harbor.bootstrap.buttongroups,harbor.bootstrap.buttons,harbor.bootstrap.carousel,harbor.bootstrap.close,harbor.bootstrap.code,harbor.bootstrap.componentanimations,harbor.bootstrap.dropdowns,harbor.bootstrap.forms,harbor.bootstrap.grid,harbor.bootstrap.inputgroup,harbor.bootstrap.jumbotron,harbor.bootstrap.labels,harbor.bootstrap.listgroup,harbor.bootstrap.media,harbor.bootstrap.mixins,harbor.bootstrap.modals,harbor.bootstrap.navbar,harbor.bootstrap.navs,harbor.bootstrap.normalize,harbor.bootstrap.pager,harbor.bootstrap.pagination,harbor.bootstrap.panels,harbor.bootstrap.popovers,harbor.bootstrap.print,harbor.bootstrap.progressbars,harbor.bootstrap.responsiveutilities,harbor.bootstrap.scaffolding,harbor.bootstrap.tables,harbor.bootstrap.thumbnails,harbor.bootstrap.tooltip,harbor.bootstrap.type,harbor.bootstrap.utilities,harbor.bootstrap.wells]"/>

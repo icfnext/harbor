@@ -1,6 +1,12 @@
 <%@include file="/libs/harbor/components/global.jsp" %>
 
-<div <c:choose><c:when test="${bootstrapMainAutoNavigation.tree.isSticky}">class="navbar navbar-default navbar-fixed-top"</c:when><c:otherwise>class="navbar navbar-default"</c:otherwise></c:choose> role="navigation">
+<c:set var="noStickAuthor" value="false" />
+<c:if test="${isAuthor && isEditMode}">
+    <c:set var="noStickAuthor" value="true" />
+</c:if>
+
+
+<div <c:choose><c:when test="${bootstrapMainAutoNavigation.tree.isSticky && !noStickAuthor}">class="navbar navbar-default navbar-fixed-top"</c:when><c:otherwise>class="navbar navbar-default"</c:otherwise></c:choose> role="navigation">
     <c:choose>
         <c:when test="${bootstrapMainAutoNavigation.hasRoot && !bootstrapMainAutoNavigation.onStructuralPage}">
             <div class="container-fluid">

@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>com.citytechinc.aem.harbor</groupId>
 		<artifactId>harbor</artifactId>
-		<version>0.3.2</version>
+		<version>0.4.0</version>
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
@@ -149,6 +149,8 @@
 							<port>${cq.port}</port>
 							<username>${cq.username}</username>
 							<password>${cq.password}</password>
+                            <retryDelay>5000</retryDelay>
+                            <retryLimit>10</retryLimit>
 						</configuration>
 					</execution>
 				</executions>
@@ -184,12 +186,12 @@
 			<type>zip</type>
 		</dependency>
 
-		<!-- Client Librarian -->
-		<dependency>
-			<groupId>com.citytechinc.cq.clientlibs</groupId>
-			<artifactId>clientlibrarian-ui</artifactId>
-			<type>zip</type>
-		</dependency>
-		
+        <!-- Authorable Designs -->
+        <dependency>
+            <groupId>com.citytechinc.aem.designmanager</groupId>
+            <artifactId>authorable-design-manager-ui</artifactId>
+            <type>zip</type>
+        </dependency>
+
 	</dependencies>
 </project>
