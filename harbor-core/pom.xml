@@ -124,11 +124,5 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- Authorable Design -->
-        <dependency>
-            <groupId>com.citytechinc.aem.designmanager</groupId>
-            <artifactId>authorable-design-manager-api</artifactId>
-        </dependency>
-        
 	</dependencies>
 </project>

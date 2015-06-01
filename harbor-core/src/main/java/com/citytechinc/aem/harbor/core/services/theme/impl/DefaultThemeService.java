@@ -7,8 +7,6 @@ import org.apache.felix.scr.annotations.Modified;
 import org.apache.felix.scr.annotations.Property;
 import org.apache.felix.scr.annotations.Service;
 import org.apache.sling.commons.osgi.PropertiesUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 
@@ -16,13 +14,11 @@ import java.util.Map;
 @Service
 public class DefaultThemeService implements ThemeService {
 
-    private static final Logger LOG = LoggerFactory.getLogger(DefaultThemeService.class);
-
     @Property(label = "Theme Title", value = "", description = "A title used to identify this Service Instance externally.")
     private static final String TITLE_PROPERTY = "themeTitle";
     private String themeTitle;
 
-    @Property(label = "Theme category", value = "", description = "The category defined for this theme, i.e 'harbor.theme.XXX'")
+    @Property(label = "Theme category", value = "", description = "The Client Library category representing this theme.  Example: 'yourapplication.theme'")
     private static final String THEME_CATEGORY = "themeCategory";
     private String themeCategory;
 

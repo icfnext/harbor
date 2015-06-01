@@ -54,15 +54,6 @@
             <useStrictFiltering>true</useStrictFiltering>
         </dependencySet>
         <dependencySet>
-            <outputDirectory>jcr_root/etc/packages/authorabledesignmanager</outputDirectory>
-            <useProjectArtifact>false</useProjectArtifact>
-            <scope>compile</scope>
-            <includes>
-                <include>com.citytechinc.aem.designmanager:authorable-design-manager-ui:zip</include>
-            </includes>
-            <useStrictFiltering>true</useStrictFiltering>
-        </dependencySet>
-        <dependencySet>
             <outputDirectory>jcr_root/libs/harbor/install</outputDirectory>
             <useProjectArtifact>false</useProjectArtifact>
             <scope>compile</scope>

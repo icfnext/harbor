@@ -124,7 +124,6 @@
 
 	<dependencyManagement>
 		<dependencies>
-
 			<!-- Bedrock -->
 			<dependency>
 				<groupId>com.citytechinc.aem.bedrock</groupId>
@@ -152,21 +151,6 @@
 				<type>zip</type>
 				<scope>provided</scope>
 			</dependency>
-
-            <!-- Authorable Designs -->
-            <dependency>
-                <groupId>com.citytechinc.aem.designmanager</groupId>
-                <artifactId>authorable-design-manager-api</artifactId>
-                <version>${authorable.design.manager.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.citytechinc.aem.designmanager</groupId>
-                <artifactId>authorable-design-manager-ui</artifactId>
-                <version>${authorable.design.manager.version}</version>
-                <type>zip</type>
-                <scope>provided</scope>
-            </dependency>
 		</dependencies>
 	</dependencyManagement>
 </project>

@@ -186,12 +186,5 @@
 			<type>zip</type>
 		</dependency>
 
-        <!-- Authorable Designs -->
-        <dependency>
-            <groupId>com.citytechinc.aem.designmanager</groupId>
-            <artifactId>authorable-design-manager-ui</artifactId>
-            <type>zip</type>
-        </dependency>
-
 	</dependencies>
 </project>

@@ -5,7 +5,6 @@
             cq:doctype="html_5"
             jcr:primaryType="cq:PageContent"
             jcr:title="Harbor Default Design"
-            ct:clientLibraryCategories="[harbor.prefix,{brand},harbor.icons.fontawesome,harbor.icons.override,harbor.icons.custom,harbor.components,harbor.components.override,harbor.components.custom]"
-            sling:resourceType="harbor/components/design/bootstrapdesign-3-3-2"
+            sling:resourceType="wcm/core/components/designer"
             cq:defaultView="html" />
 </jcr:root>
