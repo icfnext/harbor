@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+  jcr:primaryType="cq:Panel"
+  title="Layout">
+  <items jcr:primaryType="cq:WidgetCollection">
+
+    <admin jcr:primaryType="cq:Widget" title="Admin" xtype="panel">
+      <items jcr:primaryType="cq:WidgetCollection">
+        <layouts jcr:primaryType="cq:Widget" fieldLabel="Layout"
+          name="./layoutConfig" type="select" xtype="selection">
+          <options jcr:primaryType="cq:WidgetCollection">
+            <layout0 jcr:primaryType="nt:unstructured" text="Full Width Main Col"
+              value="layout_0" />
+            <layout1 jcr:primaryType="nt:unstructured" text="Left Col, Main Col"
+              value="layout_1" />
+            <layout2 jcr:primaryType="nt:unstructured" text="Main Col, Right Col"
+                value="layout_2" />
+            <layout3 jcr:primaryType="nt:unstructured" text="Left Col, Main Col, Right Col"
+                  value="layout_3" />
+            <layout4 jcr:primaryType="nt:unstructured" text="Main Col, Left Col, Right Col "
+                    value="layout_4" />
+            <layout4 jcr:primaryType="nt:unstructured" text="Left Col, Right Col Main Col"
+                    value="layout_5" />
+            <layout6 jcr:primaryType="nt:unstructured" text="Inherit"
+                      value="inherit" />
+          </options>
+        </layouts>
+      </items>
+    </admin>
+  </items>
+</jcr:root>

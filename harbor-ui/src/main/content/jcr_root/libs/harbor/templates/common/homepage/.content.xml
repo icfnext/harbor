@@ -11,6 +11,6 @@
     <jcr:content
             jcr:primaryType="ct:HomePage"
             cq:designPath="/etc/designs/harbor"
-            sling:resourceType="harbor/components/page/common/master"
+            sling:resourceType="harbor/components/page/common/homepage"
             rdf:type="ct:HomePage" />
 </jcr:root>

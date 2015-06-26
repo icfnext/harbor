@@ -1,3 +1,9 @@
 <%@include file="/libs/harbor/components/global.jsp" %>
 
-<cq:include path="mainpar" resourceType="foundation/components/parsys"/>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12">
+            <cq:include path="content1" resourceType="foundation/components/parsys"/>
+        </div>
+    </div>
+</div>

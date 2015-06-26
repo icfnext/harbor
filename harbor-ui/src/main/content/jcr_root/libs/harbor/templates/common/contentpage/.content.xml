@@ -11,6 +11,7 @@
     <jcr:content
             jcr:primaryType="cq:PageContent"
             cq:designPath="/etc/designs/harbor"
-            sling:resourceType="harbor/components/page/common/master"
+            sling:resourceType="harbor/components/page/common/contentpage"
+            layoutConfig="content_1"
             rdf:type="ct:ContentPage"/>
 </jcr:root>
