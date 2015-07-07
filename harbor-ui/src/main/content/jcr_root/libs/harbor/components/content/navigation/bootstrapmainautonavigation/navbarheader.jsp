@@ -8,7 +8,7 @@
         <span class="icon-bar"></span>
     </button>
     <c:if test="${bootstrapMainAutoNavigation.tree.showBrandLink}">
-        <a class="navbar-brand" href="${bootstrapMainAutoNavigation.tree.href}">
+        <a class="navbar-brand site-title" href="${bootstrapMainAutoNavigation.tree.href}">
            <c:choose>
             <c:when test="${bootstrapMainAutoNavigation.tree.hasBrandLinkImage}">
                 <img src="${bootstrapMainAutoNavigation.tree.brandLinkImage}" title="${bootstrapMainAutoNavigation.tree.brandLinkText}"/>

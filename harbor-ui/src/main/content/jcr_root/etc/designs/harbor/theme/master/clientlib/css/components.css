@@ -1,0 +1,16 @@
+/*
+    COMPONENTS
+*/
+
+
+/* this needs to be targeted to homepage! */
+div.carousel{
+    margin:0;
+}
+
+div.carousel .adaptiveimage img{
+    width:100%;
+    max-width:auto;
+}
+
+

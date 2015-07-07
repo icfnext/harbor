@@ -1,7 +1,9 @@
 <%@include file="/libs/harbor/components/global.jsp" %>
 
 <div class="navbar-collapse collapse" id="${bootstrapMainAutoNavigation.id}">
-    <ul class="nav navbar-nav">
+<nav id="site-navigation" class="main-navigation" role="navigation">
+
+    <ul class="nav navbar-nav meun-primary">
         <c:choose>
             <c:when test="${bootstrapMainAutoNavigation.onStructuralPage}">
                 <li><a href="#">Navigation not rendered on Structural Page</a></li>
@@ -32,4 +34,5 @@
         </c:choose>
 
     </ul>
+</nav>
 </div>
