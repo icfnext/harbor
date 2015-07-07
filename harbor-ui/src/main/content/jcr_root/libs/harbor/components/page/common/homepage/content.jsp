@@ -1,5 +1,6 @@
 <%@include file="/libs/harbor/components/global.jsp" %>
 
+<cq:include path="carousel" resourceType="/libs/harbor/components/content/contentcarousel" />
 
 <div id="content-body">
 
