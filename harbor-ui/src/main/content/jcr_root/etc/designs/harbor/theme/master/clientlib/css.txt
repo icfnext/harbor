@@ -1,4 +1,0 @@
-#base=css
-style.css
-theme.css
-components.css

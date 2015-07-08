@@ -2,7 +2,10 @@
 <'cq'='http://www.day.com/jcr/cq/1.0'>
 
 [ct:SectionLandingPage]
-  > cq:PageContent
+  mixin
 
 [ct:HomePage]
-  > ct:SectionLandingPage
+  mixin
+
+[ct:StructuralPage]
+  mixin
