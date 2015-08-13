@@ -1,0 +1,11 @@
+/*
+ * CSS styles for the OOB Text & Image component /libs/wcm/foundation/components/textimage
+ */
+
+.textimage-right > img {
+    float: right;
+}
+
+.textimage-left > img {
+    float: left;
+}
