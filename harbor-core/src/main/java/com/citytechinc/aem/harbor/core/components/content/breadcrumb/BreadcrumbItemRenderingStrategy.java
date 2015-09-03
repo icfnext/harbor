@@ -72,7 +72,7 @@ public class BreadcrumbItemRenderingStrategy implements ListRenderingStrategy<Tr
 	@Selection(type = Selection.CHECKBOX, options = { @Option(text = "Yes", value = "true") })
 	public Boolean getRenderAsLink() {
 		if (renderAsLink == null) {
-			renderAsLink = componentNode.get("renderAsLink", false);
+			renderAsLink = componentNode.getInherited("renderAsLink", false);
 		}
 
 		return renderAsLink;
@@ -89,7 +89,7 @@ public class BreadcrumbItemRenderingStrategy implements ListRenderingStrategy<Tr
 	@Selection(type = Selection.SELECT, optionsUrl = ComponentConstants.FONT_AWESOME_SERVLET_PATH)
 	public String getIconDelimiter() {
 		if (iconDelimiter == null) {
-			iconDelimiter = componentNode.get("iconDelimiter", DEFAULT_DELIMITER);
+			iconDelimiter = componentNode.getInherited("iconDelimiter", DEFAULT_DELIMITER);
 		}
 
 		return iconDelimiter;
@@ -103,7 +103,7 @@ public class BreadcrumbItemRenderingStrategy implements ListRenderingStrategy<Tr
 	@DialogField(fieldLabel = "Delimiter HTML", ranking = 20, fieldDescription = "Allows for the use of arbitrary HTML as a Breadcrumb Trail Item Delimiter. The delimiter authored in this field will trump the delimiter authored in the icon field.")
 	public String getHtmlDelimiter() {
 		if (htmlDelimiter == null) {
-			htmlDelimiter = componentNode.get("htmlDelimiter", StringUtils.EMPTY);
+			htmlDelimiter = componentNode.getInherited("htmlDelimiter", StringUtils.EMPTY);
 		}
 
 		return htmlDelimiter;

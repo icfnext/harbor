@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>com.citytechinc.aem.bedrock</groupId>
 		<artifactId>bedrock</artifactId>
-		<version>3.1.1</version>
+		<version>3.3.0</version>
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
@@ -57,7 +57,7 @@
 
 	<properties>
 		<aem.namespace.version>0.4.0-SNAPSHOT</aem.namespace.version>
-		<bedrock.version>3.1.1</bedrock.version>
+		<bedrock.version>3.3.0</bedrock.version>
         <authorable.design.manager.version>1.0.0</authorable.design.manager.version>
         <component.plugin.version>3.1.0</component.plugin.version>
 		<maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss.SSSZ</maven.build.timestamp.format>

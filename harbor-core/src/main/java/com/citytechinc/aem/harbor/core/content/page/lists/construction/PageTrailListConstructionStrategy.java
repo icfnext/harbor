@@ -36,6 +36,7 @@ public class PageTrailListConstructionStrategy implements ListConstructionStrate
 	@Selection(type = Selection.CHECKBOX, options = { @Option(text = "Yes", value = "true") })
 	private Boolean includeRootPageInTrail;
 
+	//TODO: Consider allowing for configuration concerning whether to inherit properties
 	public PageTrailListConstructionStrategy(ComponentRequest request) {
 		this.request = request;
 	}
@@ -51,10 +52,13 @@ public class PageTrailListConstructionStrategy implements ListConstructionStrate
 
 			if (isIncludeCurrentPageInTrail()) {
 
-				if (getRootPagePredicate().apply(currentPageInTrail)) {
+				//TODO: Cleanup.  The short circuit here feels messy
+				if (isPageRoot(currentPageInTrail)) {
 					listUnderConstruction.add(TrailPage.forRootCurrentPage(currentPageInTrail));
+                    constructedList = listUnderConstruction;
+                    return constructedList;
 				} else {
-					listUnderConstruction.add(TrailPage.forRootCurrentPage(currentPageInTrail));
+					listUnderConstruction.add(TrailPage.forCurrentPage(currentPageInTrail));
 				}
 
 			}
@@ -88,7 +92,7 @@ public class PageTrailListConstructionStrategy implements ListConstructionStrate
 
 	protected Predicate<PageDecorator> getRootPagePredicate() {
 		if (rootPagePredicate == null) {
-			String rootPageType = request.getComponentNode().get("rootPageType", HomePage.RDF_TYPE);
+			String rootPageType = request.getComponentNode().getInherited("rootPageType", HomePage.RDF_TYPE);
 
 			if (SectionLandingPage.RDF_TYPE.equals(rootPageType)) {
 				rootPagePredicate = PagePredicates.SECTION_LANDING_PAGE_PREDICATE;
@@ -102,7 +106,7 @@ public class PageTrailListConstructionStrategy implements ListConstructionStrate
 
 	protected Boolean isIncludeCurrentPageInTrail() {
 		if (includeCurrentPageInTrail == null) {
-			includeCurrentPageInTrail = request.getComponentNode().get("includeCurrentPageInTrail", false);
+			includeCurrentPageInTrail = request.getComponentNode().getInherited("includeCurrentPageInTrail", false);
 		}
 
 		return includeCurrentPageInTrail;
@@ -110,7 +114,7 @@ public class PageTrailListConstructionStrategy implements ListConstructionStrate
 
 	protected Boolean isIncludeRootPageInTrail() {
 		if (includeRootPageInTrail == null) {
-			includeRootPageInTrail = request.getComponentNode().get("includeRootPageInTrail", false);
+			includeRootPageInTrail = request.getComponentNode().getInherited("includeRootPageInTrail", false);
 		}
 
 		return includeRootPageInTrail;

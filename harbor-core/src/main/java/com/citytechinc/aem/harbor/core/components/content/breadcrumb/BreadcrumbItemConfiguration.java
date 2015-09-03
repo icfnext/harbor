@@ -25,7 +25,7 @@ public class BreadcrumbItemConfiguration {
 	@Selection(type = Selection.CHECKBOX, options = { @Option(text = "", value = "true") })
 	public Boolean getHideIcon() {
 		if (hideIcon == null) {
-			hideIcon = componentNode.get(propertyNamePrefix + HIDE_ICON_PROPERTY_NAME, false);
+			hideIcon = componentNode.getInherited(propertyNamePrefix + HIDE_ICON_PROPERTY_NAME, false);
 		}
 
 		return hideIcon;
@@ -35,7 +35,7 @@ public class BreadcrumbItemConfiguration {
 	@Selection(type = Selection.CHECKBOX, options = { @Option(text = "", value = "true") })
 	public Boolean getHideTitle() {
 		if (hideTitle == null) {
-			hideTitle = componentNode.get(propertyNamePrefix + HIDE_TITLE_PROPERTY_NAME, false);
+			hideTitle = componentNode.getInherited(propertyNamePrefix + HIDE_TITLE_PROPERTY_NAME, false);
 		}
 
 		return hideTitle;
