@@ -18,6 +18,8 @@ import com.google.common.base.Optional;
 		})
 public class PageHeader extends Container {
 
+	public static final String RESOURCE_TYPE = "harbor/components/content/pageheader";
+
 	@Override
 	public Optional<String> getRoleOptional() {
 		return Optional.fromNullable(Roles.PAGE_HEADER);
@@ -27,5 +29,10 @@ public class PageHeader extends Container {
 	public String getContainerElement() {
 		return Elements.HEADER;
 	}
+
+    @Override
+    protected boolean isInherits() {
+        return true;
+    }
 
 }

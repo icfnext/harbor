@@ -38,6 +38,8 @@ import org.slf4j.LoggerFactory;
 @AutoInstantiate(instanceName = "bootstrapMainManualNavigation")
 public class BootstrapMainManualNavigation extends AbstractComponent {
 
+    public static final String RESOURCE_TYPE = "harbor/components/content/navigation/bootstrapmainmanualnavigation";
+
     private static final Logger LOG = LoggerFactory.getLogger(BootstrapMainManualNavigation.class);
 
 	private List<BootstrapMainNavigationElement> bootstrapMainNavigationElementList;

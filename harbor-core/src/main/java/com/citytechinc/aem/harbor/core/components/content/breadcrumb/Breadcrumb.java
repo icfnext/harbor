@@ -13,9 +13,11 @@ import com.citytechinc.aem.harbor.core.components.content.page.TrailPage;
 import com.citytechinc.aem.harbor.core.constants.groups.ComponentGroups;
 import com.citytechinc.aem.harbor.core.content.page.lists.construction.PageTrailListConstructionStrategy;
 
-@Component(value = "Breadcrumb", contentAdditionalProperties = { @ContentProperty(name = "dependencies", value = "[harbor.fontawesome,harbor.bootstrap.breadcrumbs]"), }, group = ComponentGroups.HARBOR_NAVIGATION)
+@Component(value = "Breadcrumb", group = ComponentGroups.HARBOR_NAVIGATION)
 @AutoInstantiate(instanceName = "breadcrumb")
 public class Breadcrumb extends AbstractListComponent<TrailPage, BreadcrumbTrail> {
+
+	public static final String RESOURCE_TYPE = "harbor/components/content/breadcrumb";
 
 	@DialogField(ranking = 2)
 	@DialogFieldSet(border = false, collapsible = false)

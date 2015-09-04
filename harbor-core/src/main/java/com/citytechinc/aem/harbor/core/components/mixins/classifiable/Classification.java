@@ -55,7 +55,7 @@ public class Classification extends AbstractComponent {
 
 		TagManager tagManager = this.getResource().getResourceResolver().adaptTo(TagManager.class);
 
-        for (String currentClassification : getAsList(Properties.CITYTECH_CLASSIFICATION, String.class)) {
+        for (String currentClassification : getClassificationIdStrings()) {
             Tag currentTag = tagManager.resolve(currentClassification);
 
             if (currentTag != null) {
@@ -125,5 +125,9 @@ public class Classification extends AbstractComponent {
 		return !getClassifications().isEmpty();
 
 	}
+
+    protected List<String> getClassificationIdStrings() {
+        return getAsList(Properties.CITYTECH_CLASSIFICATION, String.class);
+    }
 
 }

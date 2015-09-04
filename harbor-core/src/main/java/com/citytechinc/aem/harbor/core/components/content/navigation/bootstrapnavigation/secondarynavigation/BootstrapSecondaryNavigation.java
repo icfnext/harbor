@@ -23,6 +23,8 @@ import com.citytechinc.aem.harbor.core.trees.rendering.PassthroughTreeRenderingS
 @AutoInstantiate(instanceName = "secondaryNavigation")
 public class BootstrapSecondaryNavigation extends AbstractRootedListComponent<NavigablePage, PassthroughTree<NavigablePage>> {
 
+    public static final String RESOURCE_TYPE = "harbor/components/content/navigation/bootstrapsecondarynavigation";
+
 	@DialogField
 	@DialogFieldSet(title = "Secondary Navigation Construction")
 	private HierarchicalPageNavigationListConstructionStrategy constructionStrategy;

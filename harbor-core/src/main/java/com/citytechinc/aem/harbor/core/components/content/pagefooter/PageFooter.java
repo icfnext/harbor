@@ -13,10 +13,12 @@ import com.google.common.base.Optional;
 		group = ComponentGroups.HARBOR_SCAFFOLDING,
 		resourceSuperType = Container.RESOURCE_TYPE,
 		tabs = {
-				@Tab(title = "Page Header"),
+				@Tab(title = "Page Footer"),
 				@Tab(title = "Advanced")
 		})
 public class PageFooter extends Container {
+
+	public static final String RESOURCE_TYPE = "harbor/components/content/pagefooter";
 
 	@Override
 	public Optional<String> getRoleOptional() {
@@ -27,5 +29,10 @@ public class PageFooter extends Container {
 	public String getContainerElement() {
 		return Elements.FOOTER;
 	}
+
+    @Override
+    protected boolean isInherits() {
+        return true;
+    }
 
 }

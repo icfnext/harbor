@@ -26,6 +26,8 @@ import com.citytechinc.aem.harbor.core.content.page.navigation.construction.Site
 public class BootstrapMainAutoNavigation extends
 	AbstractRootedListComponent<NavigablePage, BootstrapPageNavigableRenderableTree> {
 
+	public static final String RESOURCE_TYPE = "harbor/components/content/navigation/bootstrapmainautonavigation";
+
 	@DialogField(ranking = 1)
 	@DialogFieldSet(title = "Page Navigation Construction")
 	private SiteNavigationListConstructionStrategy constructionStrategy;

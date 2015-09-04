@@ -1,7 +1,9 @@
 package com.citytechinc.aem.harbor.core.components.content.container;
 
 import com.citytechinc.aem.bedrock.api.components.annotations.AutoInstantiate;
+import com.citytechinc.aem.bedrock.api.page.PageDecorator;
 import com.citytechinc.aem.bedrock.core.components.AbstractComponent;
+import com.citytechinc.aem.harbor.core.components.mixins.classifiable.InheritedClassification;
 import com.citytechinc.cq.component.annotations.Component;
 import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.Option;
@@ -34,20 +36,25 @@ public class Container extends AbstractComponent {
 
 	public static final String FULL_WIDTH_PROPERTY = "fullWidth";
 
-	@DialogField(fieldLabel = "Full Width", fieldDescription = "When set to true, the container will render across the full width of the browser window", name = "./"
-		+ FULL_WIDTH_PROPERTY)
+	@DialogField(fieldLabel = "Full Width", fieldDescription = "When set to true, the container will render across the full width of the browser window", name = "./" + FULL_WIDTH_PROPERTY)
 	@Selection(options = { @Option(text = "true", value = "true") }, type = Selection.CHECKBOX)
 	public Boolean getIsContainerFullWidth() {
-
+        if (isInherits()) {
+            return getInherited(FULL_WIDTH_PROPERTY, false);
+        }
 		return get(FULL_WIDTH_PROPERTY, false);
-
 	}
 
 	@DialogField
 	@DialogFieldSet
 	public Classification getClassification() {
 		if (classification == null) {
-            classification = getComponent(this, Classification.class);
+            if (isInherits()) {
+                classification = getComponent(this, InheritedClassification.class);
+            }
+            else {
+                classification = getComponent(this, Classification.class);
+            }
 		}
 
 		return classification;
@@ -116,6 +123,9 @@ public class Container extends AbstractComponent {
 			fieldDescription = "A unique identifier to apply to the Container element rendered in the page DOM.  If left blank, no id attribute will be applied to the rendered element.",
 			tab = 2)
 	public String getDomId() {
+        if (isInherits()) {
+            return getInherited("domId", StringUtils.EMPTY);
+        }
 		return get("domId", StringUtils.EMPTY);
 	}
 
@@ -131,4 +141,7 @@ public class Container extends AbstractComponent {
 		return Bootstrap.CONTAINER_CLASS;
 	}
 
+	protected boolean isInherits() {
+        return false;
+    }
 }
