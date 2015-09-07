@@ -15,7 +15,7 @@
         <div class="navbar navbar-default" role="navigation">
     </c:otherwise>
 </c:choose>
-    <div class="container-fluid">
+    <div class="${bootstrapMainManualNavigation.tree.containerClass}">
         <cq:include script="navbarheader.jsp" />
         <cq:include script="navbarcontent.jsp" />
     </div>

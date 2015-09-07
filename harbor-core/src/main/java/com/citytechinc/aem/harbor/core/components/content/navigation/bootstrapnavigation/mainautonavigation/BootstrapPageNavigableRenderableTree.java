@@ -1,5 +1,6 @@
 package com.citytechinc.aem.harbor.core.components.content.navigation.bootstrapnavigation.mainautonavigation;
 
+import com.citytechinc.aem.harbor.api.constants.bootstrap.Bootstrap;
 import com.citytechinc.aem.harbor.api.content.page.navigation.NavigablePage;
 import com.citytechinc.aem.harbor.api.trees.Tree;
 import com.google.common.base.Optional;
@@ -17,12 +18,15 @@ public class BootstrapPageNavigableRenderableTree implements Tree<NavigablePage>
 
     private final Optional<String> brandLinkImage;
 
-    public BootstrapPageNavigableRenderableTree(Boolean sticky, Boolean showBrandLink, String brandLinkText, Optional<String> brandLinkImage, NavigablePage rootPage) {
+    private final boolean fullWidth;
+
+    public BootstrapPageNavigableRenderableTree(Boolean sticky, Boolean showBrandLink, String brandLinkText, Optional<String> brandLinkImage, NavigablePage rootPage, boolean fullWidth) {
         this.isSticky = sticky;
         this.showBrandLink = showBrandLink;
         this.brandLinkText = brandLinkText;
         this.rootPage = rootPage;
         this.brandLinkImage = brandLinkImage;
+        this.fullWidth = fullWidth;
     }
 
     public Boolean getIsSticky() {
@@ -69,5 +73,17 @@ public class BootstrapPageNavigableRenderableTree implements Tree<NavigablePage>
     @Override
     public boolean isHasRoot() {
         return rootPage != null;
+    }
+
+    public boolean isFullWidth() {
+        return fullWidth;
+    }
+
+    public String getContainerClass() {
+        if (isFullWidth()) {
+            return Bootstrap.CONTAINER_FULL_WIDTH_CLASS;
+        }
+
+        return Bootstrap.CONTAINER_CLASS;
     }
 }

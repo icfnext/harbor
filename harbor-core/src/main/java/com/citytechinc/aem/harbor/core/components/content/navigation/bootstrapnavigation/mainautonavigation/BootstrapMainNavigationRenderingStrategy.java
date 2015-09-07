@@ -32,6 +32,13 @@ public class BootstrapMainNavigationRenderingStrategy extends AbstractComponent 
 	@Html5SmartFile(ddGroups = "media", name="./brandLinkImage", fileNameParameter = "./brandLinkImage/fileName", fileReferenceParameter = "./brandLinkImage/fileReference")
 	private Optional<String> brandLinkImage;
 
+    @DialogField(fieldLabel = "Full Width")
+    @Selection(
+            type = Selection.CHECKBOX,
+            options = @Option(text = "Yes", value = "true")
+    )
+    private Boolean fullWidth;
+
 	public Boolean getIsSticky() {
 		if (isSticky == null) {
 			isSticky = getInherited("isSticky", false);
@@ -64,9 +71,18 @@ public class BootstrapMainNavigationRenderingStrategy extends AbstractComponent 
 		return brandLinkImage;
 	}
 
+    public Boolean getFullWidth() {
+        if (fullWidth == null) {
+            fullWidth = getInherited("fullWidth", false);
+        }
+
+        return fullWidth;
+    }
+
 	@Override
 	public BootstrapPageNavigableRenderableTree toRenderableTree(NavigablePage rootedItem) {
 		return new BootstrapPageNavigableRenderableTree(getIsSticky(), getShowBrandLink(), getBrandLinkText(),
-			getBrandLinkImage(), rootedItem);
+			getBrandLinkImage(), rootedItem, getFullWidth());
 	}
+
 }
