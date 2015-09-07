@@ -20,13 +20,16 @@ public class BootstrapPageNavigableRenderableTree implements Tree<NavigablePage>
 
     private final boolean fullWidth;
 
-    public BootstrapPageNavigableRenderableTree(Boolean sticky, Boolean showBrandLink, String brandLinkText, Optional<String> brandLinkImage, NavigablePage rootPage, boolean fullWidth) {
+    private final boolean presentMainNavigationItemInDropDown;
+
+    public BootstrapPageNavigableRenderableTree(Boolean sticky, Boolean showBrandLink, String brandLinkText, Optional<String> brandLinkImage, NavigablePage rootPage, boolean fullWidth, boolean presentMainNavigationItemInDropDown) {
         this.isSticky = sticky;
         this.showBrandLink = showBrandLink;
         this.brandLinkText = brandLinkText;
         this.rootPage = rootPage;
         this.brandLinkImage = brandLinkImage;
         this.fullWidth = fullWidth;
+        this.presentMainNavigationItemInDropDown = presentMainNavigationItemInDropDown;
     }
 
     public Boolean getIsSticky() {
@@ -85,5 +88,9 @@ public class BootstrapPageNavigableRenderableTree implements Tree<NavigablePage>
         }
 
         return Bootstrap.CONTAINER_CLASS;
+    }
+
+    public boolean isPresentMainNavigationItemInDropDown() {
+        return presentMainNavigationItemInDropDown;
     }
 }

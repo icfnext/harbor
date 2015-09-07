@@ -11,12 +11,27 @@
             <c:otherwise>
                 <c:forEach var="currentNode" items="${bootstrapMainAutoNavigation.tree.root.childNodesIterator}" varStatus="status">
                     <c:choose>
-                        <c:when test="${currentNode.hasChildNodes}">
+                        <c:when test="${currentNode.hasChildNodes && bootstrapMainAutoNavigation.tree.presentMainNavigationItemInDropDown}">
+                            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">${currentNode.navigationLink.title} <i class="fa fa-caret-down"></i></a>
+                                <ul class="dropdown-menu pull-right" role="menu">
+                                    <li class="section-link"><a href="${currentNode.href}">${currentNode.navigationLink.title}</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <c:forEach items="${currentNode.childNodesIterator}" var="currentInnerNode">
+                                        <li class="subpage-link"><a href="${currentInnerNode.href}">${currentInnerNode.navigationLink.title}</a>
+                                            <c:if test="${currentInnerNode.hasChildNodes}">
+                                                <ul><harbor:includeListItems items="${currentInnerNode.items}" itemVar="nestedNavigablePage" script="nestednavitems.jsp"/></ul>
+                                            </c:if>
+                                        </li>
+                                    </c:forEach>
+                                </ul>
+                            </li>
+                        </c:when>
+                        <c:when test="${currentNode.hasChildNodes && !bootstrapMainAutoNavigation.tree.presentMainNavigationItemInDropDown}">
                             <li class="dropdown-split-left"><a href="${currentNode.href}">${currentNode.navigationLink.title}</a></li>
                             <li><a href="#" data-toggle="dropdown"><i class="fa fa-caret-down"></i></a>
                                 <ul class="dropdown-menu pull-right" role="menu">
                                     <c:forEach items="${currentNode.childNodesIterator}" var="currentInnerNode">
-                                        <li><a href="${currentInnerNode.href}">${currentInnerNode.navigationLink.title}</a>
+                                        <li class="subpage-link"><a href="${currentInnerNode.href}">${currentInnerNode.navigationLink.title}</a>
                                             <c:if test="${currentInnerNode.hasChildNodes}">
                                                 <ul><harbor:includeListItems items="${currentInnerNode.items}" itemVar="nestedNavigablePage" script="nestednavitems.jsp"/></ul>
                                             </c:if>
