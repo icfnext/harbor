@@ -2,19 +2,21 @@ package com.citytechinc.aem.harbor.core.components.content.text;
 
 import com.citytechinc.aem.bedrock.api.components.annotations.AutoInstantiate;
 import com.citytechinc.aem.bedrock.core.components.AbstractComponent;
+import com.citytechinc.aem.harbor.core.components.mixins.classifiable.Classification;
+import com.citytechinc.aem.harbor.core.components.mixins.classifiable.InheritedClassification;
 import com.citytechinc.aem.harbor.core.util.icon.IconUtils;
 import com.citytechinc.cq.component.annotations.Component;
 import com.citytechinc.cq.component.annotations.ContentProperty;
 import com.citytechinc.cq.component.annotations.DialogField;
+import com.citytechinc.cq.component.annotations.widgets.DialogFieldSet;
 import com.citytechinc.cq.component.annotations.widgets.RichTextEditor;
 import com.citytechinc.cq.component.annotations.widgets.rte.*;
 
-@Component(
-        value = "Text",
-        contentAdditionalProperties = { @ContentProperty(name = "dependencies", value = "[harbor.fontawesome]") }
-)
+@Component("Text")
 @AutoInstantiate(instanceName = "textcomponent")
 public class Text extends AbstractComponent {
+
+    private Classification classification;
 
     @DialogField(fieldLabel = "Content")
     @RichTextEditor(
@@ -32,6 +34,16 @@ public class Text extends AbstractComponent {
     public String getContent() {
         //TODO: Consider content cleanup such as replacing all &nbsp; which the RTE inserts with spaces as it's incredibly rare that someone actually wants a non-breaking space
         return IconUtils.iconify(get("content", "Enter Text"));
+    }
+
+    @DialogField(ranking = 10)
+    @DialogFieldSet
+    public Classification getClassification() {
+        if (classification == null) {
+            classification = getComponent(this, Classification.class);
+        }
+
+        return classification;
     }
 
 }
