@@ -8,6 +8,8 @@ import com.day.cq.wcm.api.components.IncludeOptions;
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Property;
 import org.apache.felix.scr.annotations.Service;
+import org.apache.felix.scr.annotations.sling.SlingFilter;
+import org.apache.felix.scr.annotations.sling.SlingFilterScope;
 import org.apache.sling.api.SlingHttpServletRequest;
 
 import javax.servlet.*;
@@ -18,12 +20,7 @@ import java.util.List;
  * Adds classifications identified by the ct:classification property to the wrapper dom as classes.  Classifications
  * are expected to be Tag identifiers.  The identified tag's names are added as classes to the DOM element.
  */
-@Component
-@Service
-@org.apache.felix.scr.annotations.Properties({
-        @Property(name = "sling.filter.scope", value = "COMPONENT", propertyPrivate = true),
-        @Property(name = "service.ranking", intValue = -201, propertyPrivate = true)
-})
+@SlingFilter(order = 100, scope = SlingFilterScope.COMPONENT)
 public class ComponentClassificationFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {}
