@@ -1,6 +1,7 @@
 <%@include file="/libs/harbor/components/global.jsp" %>
 
-<div id="${carousel.uniqueIdentifier}-carousel" class="${carousel.cssClass}" <c:if test="${isPreviewMode || isPublish}">data-ride="carousel"</c:if>>
+<div id="${carousel.uniqueIdentifier}-carousel" class="${carousel.cssClass}" <c:if test="${isPreviewMode || isPublish}">data-ride="carousel"</c:if> <c:if test="${isEditMode}">data-interval="false"</c:if>>
+
 
     <c:if test="${carousel.showSlideSelectorControls}">
         <cq:include script="slideselectorcontrols.jsp" />
