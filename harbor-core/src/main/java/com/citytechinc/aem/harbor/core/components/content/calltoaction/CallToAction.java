@@ -2,6 +2,7 @@ package com.citytechinc.aem.harbor.core.components.content.calltoaction;
 
 import javax.jcr.RepositoryException;
 
+import com.citytechinc.aem.harbor.core.util.icon.IconUtils;
 import org.apache.commons.lang.StringUtils;
 
 import com.citytechinc.aem.bedrock.api.components.annotations.AutoInstantiate;
@@ -40,7 +41,7 @@ public class CallToAction extends AbstractComponent {
 
 	@DialogField(fieldLabel = "Text", fieldDescription = "Provide the widget's text", ranking = 0)
 	public String getText() {
-		return get(TEXT_PROPERTY, TEXT_DEFAULT);
+		return IconUtils.iconify(get(TEXT_PROPERTY, TEXT_DEFAULT));
 	}
 
 	@DialogField(fieldLabel = "Size", fieldDescription = "Select the widget's size", ranking = 2)
