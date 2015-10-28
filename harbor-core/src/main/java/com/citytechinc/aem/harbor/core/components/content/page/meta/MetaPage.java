@@ -77,7 +77,7 @@ public class MetaPage extends AbstractComponent {
     	String tempCannonical = StringUtils.EMPTY;
     	String inputCannonicalRef = getCurrentPage().getProperties().get("cannonicalUrl", StringUtils.EMPTY);
     	//If they input a remote url, then just return that URL
-    	if(inputCannonicalRef.startsWith("http")){
+    	if(inputCannonicalRef.startsWith("http") || inputCannonicalRef.isEmpty()){
     		return inputCannonicalRef;
     	}else{
     		//If they select a path with the pathfinder, need to externalize it.
