@@ -53,7 +53,7 @@ public class DefaultMetadataConfigService implements MetadataConfigService {
     private boolean isPage(ResourceResolver resolver, String path) throws RepositoryException {
     	Resource r = resolver.getResource(path);
     	boolean isPage = false;
-    	if(r!=null){
+    	if(r!=null && !path.isEmpty()){
     		Node n = r.adaptTo(Node.class);
     		isPage = n.isNodeType("cq:Page");
     	}
