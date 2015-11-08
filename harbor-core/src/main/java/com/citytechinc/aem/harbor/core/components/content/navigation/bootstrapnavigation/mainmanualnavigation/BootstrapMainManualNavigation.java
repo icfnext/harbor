@@ -7,6 +7,7 @@ import com.citytechinc.aem.bedrock.api.node.BasicNode;
 import com.citytechinc.cq.component.annotations.*;
 import com.citytechinc.cq.component.annotations.widgets.Html5SmartFile;
 import com.citytechinc.cq.component.annotations.widgets.PathField;
+import com.citytechinc.cq.component.annotations.widgets.Switch;
 import com.google.common.base.Optional;
 import com.google.common.collect.Lists;
 import org.apache.commons.lang.StringUtils;
@@ -43,7 +44,7 @@ public class BootstrapMainManualNavigation extends AbstractComponent {
 	private List<BootstrapMainNavigationElement> bootstrapMainNavigationElementList;
 
     @DialogField(fieldLabel = "Enable Sticky Navigation?", fieldDescription = "Disabled in Edit mode. Use Preview mode to view.")
-    @Selection(type = Selection.CHECKBOX, options = { @Option(text = "", value = "true") })
+    @Switch(offText = "No", onText = "Yes")
     private Boolean isSticky;
 
     @DialogField(fieldLabel = "Show Brand Link", fieldDescription = "Enable this to display a link to the root path as the first navigation element")

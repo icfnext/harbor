@@ -1,6 +1,7 @@
 package com.citytechinc.aem.harbor.core.components.content.navigation.bootstrapnavigation.mainautonavigation;
 
 import com.citytechinc.aem.harbor.api.trees.rendering.TreeRenderingStrategy;
+import com.citytechinc.cq.component.annotations.widgets.Switch;
 import org.apache.commons.lang.StringUtils;
 import org.apache.sling.api.resource.Resource;
 
@@ -18,7 +19,7 @@ public class BootstrapMainNavigationRenderingStrategy extends AbstractComponent 
         TreeRenderingStrategy<NavigablePage, BootstrapPageNavigableRenderableTree> {
 
 	@DialogField(fieldLabel = "Enable Sticky Navigation", fieldDescription = "Disabled in Edit mode. Use Preview mode to view.", ranking = 0)
-	@Selection(type = Selection.CHECKBOX, options = { @Option(text = "", value = "true") })
+	@Switch(offText = "No", onText = "Yes")
 	private Boolean isSticky;
 
 	@DialogField(fieldLabel = "Brand Link", fieldDescription = "Present a brand link as the first element of the navigation.", ranking = 10)
@@ -35,17 +36,11 @@ public class BootstrapMainNavigationRenderingStrategy extends AbstractComponent 
 	private Optional<String> brandLinkImage;
 
     @DialogField(fieldLabel = "Full Width", ranking = 40)
-    @Selection(
-            type = Selection.CHECKBOX,
-            options = @Option(text = "Yes", value = "true")
-    )
+	@Switch(offText = "No", onText = "Yes")
     private Boolean fullWidth;
 
     @DialogField(fieldLabel = "Present Main Navigation Item in Drop Down", fieldDescription = "In cases of nested navigation elements setting this property to true will render the parent navigation element in the context of the drop down and enable expansion of the dropdown via clicking on the entire navigation element.  Setting this property to false will cause a separate drop down icon to render which must be clicked in order to expand the dropdown.", ranking = 50)
-    @Selection(
-            type = Selection.CHECKBOX,
-            options = @Option(text = "Yes", value = "true")
-    )
+	@Switch(offText = "No", onText = "Yes")
     private Boolean presentMainNavigationItemInDropDown;
 
 	public Boolean getIsSticky() {

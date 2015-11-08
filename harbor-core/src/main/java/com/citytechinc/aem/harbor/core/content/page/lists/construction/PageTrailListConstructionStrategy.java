@@ -12,6 +12,7 @@ import com.citytechinc.aem.harbor.api.content.page.SectionLandingPage;
 import com.citytechinc.aem.harbor.api.lists.construction.ListConstructionStrategy;
 import com.citytechinc.aem.harbor.core.components.content.page.TrailPage;
 import com.citytechinc.aem.harbor.core.content.page.impl.PagePredicates;
+import com.citytechinc.cq.component.annotations.widgets.Switch;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import org.apache.sling.api.resource.Resource;
@@ -33,11 +34,11 @@ public class PageTrailListConstructionStrategy extends AbstractComponent impleme
 	private Predicate<PageDecorator> rootPagePredicate;
 
 	@DialogField(fieldLabel = "Include Current Page In Trail")
-	@Selection(type = Selection.CHECKBOX, options = { @Option(text = "Yes", value = "true") })
+	@Switch(offText = "No", onText = "Yes")
 	private Boolean includeCurrentPageInTrail;
 
 	@DialogField(fieldLabel = "Include Root Page In Trail")
-	@Selection(type = Selection.CHECKBOX, options = { @Option(text = "Yes", value = "true") })
+	@Switch(offText = "No", onText = "Yes")
 	private Boolean includeRootPageInTrail;
 
 	@Override

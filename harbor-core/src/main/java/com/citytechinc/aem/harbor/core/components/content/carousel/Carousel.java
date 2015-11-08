@@ -11,6 +11,7 @@ import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.Option;
 import com.citytechinc.cq.component.annotations.editconfig.ActionConfig;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
+import com.citytechinc.cq.component.annotations.widgets.Switch;
 import com.google.common.collect.Lists;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
@@ -39,7 +40,7 @@ public class Carousel extends AbstractComponent {
     public static final String INDICATORS_CSS_CLASS = "carousel-indicators";
 
     @DialogField(fieldLabel = "Show Previous and Next Controls")
-    @Selection(type = Selection.CHECKBOX, options = {@Option(value = "true")})
+    @Switch(offText = "No", onText = "Yes")
     public boolean isShowPreviousAndNextControls() {
 
         return get("showPreviousAndNextControls", false);
@@ -47,7 +48,7 @@ public class Carousel extends AbstractComponent {
     }
 
     @DialogField(fieldLabel = "Show Slide Selector Controls")
-    @Selection(type = Selection.CHECKBOX, options = {@Option(value = "true")})
+    @Switch(offText = "No", onText = "Yes")
     public boolean isShowSlideSelectorControls() {
 
         return get("showSlideSelectorControls", false);

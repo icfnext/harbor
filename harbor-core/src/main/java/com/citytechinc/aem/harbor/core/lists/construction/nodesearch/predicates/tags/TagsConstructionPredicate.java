@@ -3,6 +3,7 @@ package com.citytechinc.aem.harbor.core.lists.construction.nodesearch.predicates
 import java.util.List;
 
 import com.citytechinc.aem.bedrock.core.components.AbstractComponent;
+import com.citytechinc.cq.component.annotations.widgets.Switch;
 import com.day.cq.search.Predicate;
 import com.day.cq.search.PredicateGroup;
 import com.day.cq.tagging.impl.search.AbstractTagPredicateEvaluator;
@@ -51,7 +52,7 @@ public class TagsConstructionPredicate extends AbstractComponent implements Cons
 	 *         they will be evaluated with OR logic.
 	 */
     @DialogField(fieldLabel = "Use AND Logic", fieldDescription = "Check box to search for tags using AND logic, otherwise search will use OR logic.")
-    @Selection(type = Selection.CHECKBOX, options = @Option(value = "true"))
+    @Switch(offText = "No", onText = "Yes")
 	public boolean getComposeWithAnd() {
 
 		return get(PARAM_COMPOSE_WITH_AND, DEFAULT_COMPOSE_WITH_AND);

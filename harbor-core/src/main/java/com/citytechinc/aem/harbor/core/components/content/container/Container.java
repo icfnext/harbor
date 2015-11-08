@@ -14,6 +14,7 @@ import com.citytechinc.aem.harbor.api.constants.bootstrap.Bootstrap;
 import com.citytechinc.aem.harbor.api.constants.dom.Elements;
 import com.citytechinc.aem.harbor.core.components.mixins.classifiable.Classification;
 import com.citytechinc.aem.harbor.core.constants.groups.ComponentGroups;
+import com.citytechinc.cq.component.annotations.widgets.Switch;
 import com.google.common.base.Optional;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.sling.api.resource.Resource;
@@ -40,7 +41,7 @@ public class Container extends AbstractComponent {
 	public static final String FULL_WIDTH_PROPERTY = "fullWidth";
 
 	@DialogField(fieldLabel = "Full Width", fieldDescription = "When set to true, the container will render across the full width of the browser window", name = "./" + FULL_WIDTH_PROPERTY)
-	@Selection(options = { @Option(text = "true", value = "true") }, type = Selection.CHECKBOX)
+	@Switch(offText = "No", onText = "Yes")
 	public Boolean getIsContainerFullWidth() {
         if (isInherits()) {
             return getInherited(FULL_WIDTH_PROPERTY, false);

@@ -31,7 +31,7 @@ public class ResponsiveContainer extends AbstractComponent {
 	public static final String LARGE_DESCRIPTION = "Large devices such as large desktops or laptops.";
 
 	@DialogField(fieldLabel = "Hide In", fieldDescription = "Device types which the content of the container should be hidden in.")
-	@Selection(type = "checkbox", options = {
+	@Selection(type = Selection.SELECT, multiple = true, options = {
 		@Option(text = "Extra Small", value = DeviceTypes.EXTRA_SMALL, qtip = EXTRA_SMALL_DESCRIPTION),
 		@Option(text = "Small", value = DeviceTypes.SMALL, qtip = SMALL_DESCRIPTION),
 		@Option(text = "Medium", value = DeviceTypes.MEDIUM, qtip = MEDIUM_DESCRIPTION),

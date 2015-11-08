@@ -2,6 +2,7 @@ package com.citytechinc.aem.harbor.core.components.content.breadcrumb;
 
 import java.util.List;
 
+import com.citytechinc.cq.component.annotations.widgets.Switch;
 import org.apache.commons.lang3.StringUtils;
 
 import com.citytechinc.aem.bedrock.api.node.ComponentNode;
@@ -70,7 +71,7 @@ public class BreadcrumbItemRenderingStrategy implements ListRenderingStrategy<Tr
 	}
 
 	@DialogField(fieldLabel = "Render As Link", ranking = 1)
-	@Selection(type = Selection.CHECKBOX, options = { @Option(text = "Yes", value = "true") })
+	@Switch(offText = "No", onText = "Yes")
 	public Boolean getRenderAsLink() {
 		if (renderAsLink == null) {
 			renderAsLink = componentNode.getInherited("renderAsLink", false);

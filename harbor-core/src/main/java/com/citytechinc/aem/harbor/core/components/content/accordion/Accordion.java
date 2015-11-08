@@ -15,6 +15,7 @@ import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.Option;
 import com.citytechinc.cq.component.annotations.editconfig.ActionConfig;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
+import com.citytechinc.cq.component.annotations.widgets.Switch;
 import com.google.common.base.Predicate;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
@@ -48,7 +49,7 @@ public class Accordion extends AbstractComponent {
 
     @DialogField(fieldLabel = "Open first item",
         fieldDescription = "With this checkbox checked, the first accordion item will be open by default when not in edit or design mode.")
-    @Selection(type = Selection.CHECKBOX, options = {@Option(value = "true")})
+    @Switch(offText = "No", onText = "Yes")
     public boolean isOpenFirstItem() {
         return get("openFirstItem", false);
     }

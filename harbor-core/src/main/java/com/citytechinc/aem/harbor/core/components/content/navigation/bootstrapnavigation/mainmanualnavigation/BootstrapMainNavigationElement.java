@@ -5,6 +5,7 @@ import com.citytechinc.aem.bedrock.core.components.AbstractComponent;
 import com.citytechinc.cq.component.annotations.*;
 import com.citytechinc.cq.component.annotations.widgets.PathField;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
+import com.citytechinc.cq.component.annotations.widgets.Switch;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
 import org.slf4j.Logger;
@@ -37,7 +38,7 @@ public class BootstrapMainNavigationElement extends AbstractComponent {
 	}
 
 	@DialogField(fieldLabel = "Has Dropdown?", fieldDescription = "This navigation element will be a dropdown/flyout element")
-	@Selection(type = Selection.CHECKBOX, options = { @Option(text = "", value = "true") })
+	@Switch(offText = "No", onText = "Yes")
 	public Boolean getHasDropdown() {
 		return getInherited("hasDropdown", "").equals("true");
 	}

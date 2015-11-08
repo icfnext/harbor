@@ -57,7 +57,7 @@ public class AssetListRenderingStrategy implements
     private boolean renderTitles;
 
     @DialogField(fieldLabel = "Render Asset Creators?")
-    @Selection(type = Selection.CHECKBOX, options = { @Option(text = "", value = "true") })
+    @Switch(offText = "No", onText = "Yes")
     private boolean renderCreators;
 
     @DialogField(fieldLabel = "Creator Label", fieldDescription = "The text label to render prior to the creator name when the creator name is rendered", defaultValue = "By:")

@@ -10,6 +10,7 @@ import com.citytechinc.cq.component.annotations.Tab;
 import com.citytechinc.cq.component.annotations.widgets.DialogFieldSet;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
 import com.citytechinc.aem.harbor.core.components.mixins.classifiable.Classification;
+import com.citytechinc.cq.component.annotations.widgets.Switch;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
@@ -43,7 +44,7 @@ public class Column extends AbstractComponent {
 	}
 
 	@DialogField(fieldLabel = "Inherit Content?", fieldDescription = "Inherit column content from parent page. The component layout of the child page must exactly match that of the parent page. This Column looks along the same content path in the parent's tree, and will display content from a Column in the parent page at the same content location. If the component structure does not match, paragraph inheritance will not function.", tab = 2)
-	@Selection(type = Selection.CHECKBOX, options = { @Option(text = "", value = "true") })
+	@Switch(offText = "No", onText = "Yes")
 	public Boolean getIsInherited() {
 		return get("isInherited", "").equals("true");
 	}

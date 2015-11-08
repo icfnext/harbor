@@ -4,6 +4,7 @@ import com.citytechinc.aem.bedrock.api.node.ComponentNode;
 import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.Option;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
+import com.citytechinc.cq.component.annotations.widgets.Switch;
 
 public class BreadcrumbItemConfiguration {
 
@@ -22,7 +23,7 @@ public class BreadcrumbItemConfiguration {
 	}
 
 	@DialogField(fieldLabel = "Hide Icon")
-	@Selection(type = Selection.CHECKBOX, options = { @Option(text = "", value = "true") })
+	@Switch(offText = "No", onText = "Yes")
 	public Boolean getHideIcon() {
 		if (hideIcon == null) {
 			hideIcon = componentNode.getInherited(propertyNamePrefix + HIDE_ICON_PROPERTY_NAME, false);
@@ -32,7 +33,7 @@ public class BreadcrumbItemConfiguration {
 	}
 
 	@DialogField(fieldLabel = "Hide Title")
-	@Selection(type = Selection.CHECKBOX, options = { @Option(text = "", value = "true") })
+	@Switch(offText = "No", onText = "Yes")
 	public Boolean getHideTitle() {
 		if (hideTitle == null) {
 			hideTitle = componentNode.getInherited(propertyNamePrefix + HIDE_TITLE_PROPERTY_NAME, false);
