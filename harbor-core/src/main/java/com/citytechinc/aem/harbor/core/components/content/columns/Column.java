@@ -11,6 +11,8 @@ import com.citytechinc.cq.component.annotations.widgets.DialogFieldSet;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
 import com.citytechinc.aem.harbor.core.components.mixins.classifiable.Classification;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.sling.api.resource.Resource;
+import org.apache.sling.models.annotations.Model;
 
 @Component(
 		value = "Column",
@@ -21,6 +23,7 @@ import org.apache.commons.lang3.StringUtils;
 				@Tab(title = "Column Row"),
 				@Tab(title = "Advanced") })
 @AutoInstantiate(instanceName = Column.INSTANCE_NAME)
+@Model(adaptables = Resource.class)
 public class Column extends AbstractComponent {
 
 	public static final String INSTANCE_NAME = "column";
@@ -36,7 +39,7 @@ public class Column extends AbstractComponent {
 	@DialogField(tab = 1)
 	@DialogFieldSet
 	public Classification getClassification() {
-		return getComponent(this, Classification.class);
+		return this.getResource().adaptTo(Classification.class);
 	}
 
 	@DialogField(fieldLabel = "Inherit Content?", fieldDescription = "Inherit column content from parent page. The component layout of the child page must exactly match that of the parent page. This Column looks along the same content path in the parent's tree, and will display content from a Column in the parent page at the same content location. If the component structure does not match, paragraph inheritance will not function.", tab = 2)

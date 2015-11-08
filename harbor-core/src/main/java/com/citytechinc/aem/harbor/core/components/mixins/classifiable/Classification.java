@@ -9,7 +9,8 @@ import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.widgets.TagInputField;
 import com.day.cq.tagging.Tag;
 import com.day.cq.tagging.TagManager;
-import com.google.common.base.Optional;
+import org.apache.sling.api.resource.Resource;
+import org.apache.sling.models.annotations.Model;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,6 +31,7 @@ import java.util.List;
  * "upper-left-panel," "site-sidebar," etc are not good classifications as they have more to do with the
  * position of the content.
  */
+@Model(adaptables = Resource.class)
 public class Classification extends AbstractComponent {
 
     private static final Logger LOG = LoggerFactory.getLogger(Classification.class);

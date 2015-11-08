@@ -15,9 +15,12 @@ import com.citytechinc.aem.harbor.core.util.bootstrap.BootstrapUtils;
 import com.google.common.base.Joiner;
 import com.google.common.base.Optional;
 import com.google.common.collect.Lists;
+import org.apache.sling.api.resource.Resource;
+import org.apache.sling.models.annotations.Model;
 
 @Component(value = "Responsive Container", description = "A content container which can be shown or hidden at various device size breakpoints.", group = ComponentGroups.HARBOR_SCAFFOLDING)
 @AutoInstantiate(instanceName = ResponsiveContainer.INSTANCE_NAME)
+@Model(adaptables = Resource.class)
 public class ResponsiveContainer extends AbstractComponent {
 
 	public static final String INSTANCE_NAME = "responsiveContainer";

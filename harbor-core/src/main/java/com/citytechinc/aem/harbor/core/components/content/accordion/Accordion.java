@@ -5,17 +5,21 @@ import java.util.List;
 
 import com.citytechinc.aem.bedrock.api.components.annotations.AutoInstantiate;
 import com.citytechinc.aem.bedrock.api.node.ComponentNode;
+import com.citytechinc.aem.bedrock.api.page.PageDecorator;
 import com.citytechinc.aem.bedrock.core.components.AbstractComponent;
 import com.citytechinc.aem.harbor.core.constants.groups.ComponentGroups;
 import com.citytechinc.aem.harbor.core.util.ComponentUtils;
 import com.citytechinc.cq.component.annotations.Component;
 import com.citytechinc.cq.component.annotations.ContentProperty;
 import com.citytechinc.cq.component.annotations.DialogField;
-import com.citytechinc.cq.component.annotations.Listener;
 import com.citytechinc.cq.component.annotations.Option;
 import com.citytechinc.cq.component.annotations.editconfig.ActionConfig;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
 import com.google.common.base.Predicate;
+import org.apache.sling.api.resource.Resource;
+import org.apache.sling.models.annotations.Model;
+
+import javax.inject.Inject;
 
 @Component(
     value = "Accordion",
@@ -31,12 +35,16 @@ import com.google.common.base.Predicate;
     }
 )
 @AutoInstantiate(instanceName = "accordion")
+@Model(adaptables = Resource.class)
 public class Accordion extends AbstractComponent {
     private List<AccordionItem> accordionItems;
 
     public String getName() {
         return this.getResource().getName();
     }
+
+    @Inject
+    private PageDecorator currentPage;
 
     @DialogField(fieldLabel = "Open first item",
         fieldDescription = "With this checkbox checked, the first accordion item will be open by default when not in edit or design mode.")
@@ -50,7 +58,7 @@ public class Accordion extends AbstractComponent {
             accordionItems = new ArrayList<AccordionItem>();
 
             for (ComponentNode currentComponentNode : getComponentNodes(new AccordionItemPredicate())) {
-                accordionItems.add(getComponent(currentComponentNode, AccordionItem.class));
+                accordionItems.add(currentComponentNode.getResource().adaptTo(AccordionItem.class));
             }
         }
         return accordionItems;
@@ -61,14 +69,13 @@ public class Accordion extends AbstractComponent {
     }
 
     public String getUniqueId() {
-        return ComponentUtils.getUniqueIdentifierForResourceInPage(getCurrentPage(), getResource());
+        return ComponentUtils.getUniqueIdentifierForResourceInPage(currentPage, getResource());
     }
 
 }
 
 final class AccordionItemPredicate implements Predicate<ComponentNode> {
 
-    @Override
     public boolean apply(ComponentNode input) {
         boolean isAccordionItem = false;
         if (input != null && input.getResource() != null) {

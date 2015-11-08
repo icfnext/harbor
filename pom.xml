@@ -5,14 +5,14 @@
 	<parent>
 		<groupId>com.citytechinc.aem.bedrock</groupId>
 		<artifactId>bedrock</artifactId>
-		<version>3.3.0</version>
+		<version>4.0.3</version>
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.citytechinc.aem.harbor</groupId>
 	<artifactId>harbor</artifactId>
 	<packaging>pom</packaging>
-	<version>0.5.0-SNAPSHOT</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<name>CITYTECH, Inc. Harbor</name>
 
 	<modules>
@@ -57,9 +57,9 @@
 
 	<properties>
 		<aem.namespace.version>0.4.0-SNAPSHOT</aem.namespace.version>
-		<bedrock.version>3.3.0</bedrock.version>
+		<bedrock.version>4.0.0</bedrock.version>
         <authorable.design.manager.version>1.0.0</authorable.design.manager.version>
-        <component.plugin.version>3.1.0</component.plugin.version>
+        <component.plugin.version>4.1.0-SNAPSHOT</component.plugin.version>
 		<maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss.SSSZ</maven.build.timestamp.format>
 		<timestamp>${maven.build.timestamp}</timestamp>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -128,6 +128,16 @@
 			<dependency>
 				<groupId>com.citytechinc.aem.bedrock</groupId>
 				<artifactId>bedrock-core</artifactId>
+				<version>${bedrock.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.citytechinc.aem.bedrock</groupId>
+				<artifactId>bedrock-api</artifactId>
+				<version>${bedrock.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.citytechinc.aem.bedrock</groupId>
+				<artifactId>bedrock-models</artifactId>
 				<version>${bedrock.version}</version>
 			</dependency>
 			<dependency>

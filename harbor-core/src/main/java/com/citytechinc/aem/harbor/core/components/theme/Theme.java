@@ -1,26 +1,22 @@
 package com.citytechinc.aem.harbor.core.components.theme;
 
-import com.citytechinc.aem.bedrock.api.request.ComponentRequest;
-import com.citytechinc.aem.bedrock.core.components.AbstractComponent;
-import org.apache.commons.lang3.StringUtils;
+import com.citytechinc.aem.bedrock.api.page.PageDecorator;
+import org.apache.sling.api.resource.Resource;
+import org.apache.sling.models.annotations.Model;
 
-public class Theme extends AbstractComponent {
+import javax.inject.Inject;
+
+@Model(adaptables = Resource.class)
+public class Theme {
 
 	public static final String THEME_PROPERTY = "ct:theme";
     private static final String DEFAULT_THEME = "harbor.theme.default";
 
-    private String theme;
-
-	@Override
-	public void init(ComponentRequest request) {
-
-        theme =  getCurrentPage().getInherited(THEME_PROPERTY, String.class).orNull();
-        if(StringUtils.isBlank(theme)) {
-            theme = DEFAULT_THEME;
-        }
-	}
+    @Inject
+    private PageDecorator currentPage;
 
     public String getTheme() {
-        return theme;
+        return currentPage.getInherited(THEME_PROPERTY, String.class).or(DEFAULT_THEME);
     }
+
 }

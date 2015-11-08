@@ -1,5 +1,8 @@
 package com.citytechinc.aem.harbor.core.components.content.accordion;
 
+import com.citytechinc.aem.bedrock.api.page.PageDecorator;
+import org.apache.sling.api.resource.Resource;
+import org.apache.sling.models.annotations.Model;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,6 +15,8 @@ import com.citytechinc.cq.component.annotations.ContentProperty;
 import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.Listener;
 import com.citytechinc.cq.component.annotations.editconfig.ActionConfig;
+
+import javax.inject.Inject;
 
 @Component(
     value = "Accordion Item",
@@ -32,9 +37,13 @@ import com.citytechinc.cq.component.annotations.editconfig.ActionConfig;
     contentAdditionalProperties = { @ContentProperty(name = "dependencies", value = "[harbor.fontawesome]") }
 )
 @AutoInstantiate
+@Model(adaptables = Resource.class)
 public class AccordionItem extends AbstractComponent {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AccordionItem.class);
+
+    @Inject
+    private PageDecorator currentPage;
 
     public static final String TYPE = "harbor/components/content/accordion/accordionitem";
 
@@ -60,7 +69,7 @@ public class AccordionItem extends AbstractComponent {
 
     public String getUniqueId() {
         if (uniqueId == null) {
-            uniqueId = ComponentUtils.getUniqueIdentifierForResourceInPage(getCurrentPage(), getResource());
+            uniqueId = ComponentUtils.getUniqueIdentifierForResourceInPage(currentPage, getResource());
         }
         return uniqueId;
     }

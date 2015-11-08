@@ -10,6 +10,8 @@ import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.Option;
 import com.citytechinc.cq.component.annotations.widgets.PathField;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
+import org.apache.sling.api.resource.Resource;
+import org.apache.sling.models.annotations.Model;
 
 @Component(
         value = "Search Widget",
@@ -19,6 +21,7 @@ import com.citytechinc.cq.component.annotations.widgets.Selection;
         layout = "rollover"
 )
 @AutoInstantiate(instanceName = "searchinputwidget")
+@Model(adaptables = Resource.class)
 public class SearchInputWidget extends AbstractComponent {
 
 

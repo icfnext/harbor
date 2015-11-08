@@ -1,20 +1,26 @@
 package com.citytechinc.aem.harbor.core.components.content.list.assets;
 
-import com.citytechinc.aem.bedrock.api.node.ComponentNode;
 import com.citytechinc.aem.harbor.api.constants.dom.Headings;
 import com.citytechinc.aem.harbor.api.lists.rendering.ListRenderingStrategy;
 import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.Option;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
+import com.citytechinc.cq.component.annotations.widgets.Switch;
+import com.citytechinc.cq.component.annotations.widgets.TextField;
 import com.day.cq.dam.api.Asset;
 import com.google.common.collect.Lists;
 import org.apache.commons.lang.StringUtils;
+import org.apache.sling.api.resource.Resource;
+import org.apache.sling.models.annotations.Default;
+import org.apache.sling.models.annotations.Model;
 
+import javax.inject.Inject;
 import java.util.List;
 
 /**
  * Renders a list of assets as links.
  */
+@Model(adaptables = Resource.class)
 public class AssetListRenderingStrategy implements
 	ListRenderingStrategy<Asset, List<AssetListRenderingStrategy.RenderableAsset>> {
 
@@ -32,8 +38,9 @@ public class AssetListRenderingStrategy implements
 	private static final boolean DEFAULT_AS_LINKS = false;
 
     @DialogField(fieldLabel = "Suppress Images?")
-    @Selection(type = Selection.CHECKBOX, options = { @Option(text = "", value = "true") })
-    private final boolean suppressImages;
+    @Switch(offText = "No", onText = "Yes")
+    @Inject @Default(booleanValues = false)
+    private boolean suppressImages;
 
     @DialogField(fieldLabel = "Image Size", fieldDescription = "Render image as original size or thumbnail rendition", defaultValue = ORIGINAL)
     @Selection(type = Selection.SELECT, options = {
@@ -41,33 +48,42 @@ public class AssetListRenderingStrategy implements
             @Option(text = "48 x 48", value = "48.48"),
             @Option(text = "140 x 100", value = "140.100"),
             @Option(text = "319 x 319", value = "319.319")})
-    private final String imageSize;
+    @Inject @Default(values = ORIGINAL)
+    private String imageSize;
 
     @DialogField(fieldLabel = "Render Asset Titles?")
-    @Selection(type = Selection.CHECKBOX, options = { @Option(text = "", value = "true") })
-    private final boolean renderTitles;
+    @Switch(offText = "No", onText = "Yes")
+    @Inject @Default(booleanValues = false)
+    private boolean renderTitles;
 
     @DialogField(fieldLabel = "Render Asset Creators?")
     @Selection(type = Selection.CHECKBOX, options = { @Option(text = "", value = "true") })
-    private final boolean renderCreators;
+    private boolean renderCreators;
 
     @DialogField(fieldLabel = "Creator Label", fieldDescription = "The text label to render prior to the creator name when the creator name is rendered", defaultValue = "By:")
-    private final String creatorLabel;
+    @TextField
+    @Inject @Default(values = "By:")
+    private String creatorLabel;
 
     @DialogField(fieldLabel = "Render Asset Descriptions?")
-    @Selection(type = Selection.CHECKBOX, options = { @Option(text = "", value = "true") })
-    private final boolean renderDescriptions;
+    @Switch(offText = "No", onText = "Yes")
+    @Inject @Default(booleanValues = false)
+    private boolean renderDescriptions;
 
     @DialogField(fieldLabel = "Render Asset Formats?")
-    @Selection(type = Selection.CHECKBOX, options = { @Option(text = "", value = "true") })
-    private final boolean renderFormats;
+    @Switch(offText = "No", onText = "Yes")
+    @Inject @Default(booleanValues = false)
+    private boolean renderFormats;
 
     @DialogField(fieldLabel = "Format Label", fieldDescription = "The text label to render prior to the format denotation when the format is rendered", defaultValue = "Format:")
-    private final String formatLabel;
+    @TextField
+    @Inject @Default(values = "Format:")
+    private String formatLabel;
 
 	@DialogField(fieldLabel = "Render as Links")
-	@Selection(type = Selection.CHECKBOX, options = @Option(value = "true"))
-	private final boolean renderAsLinks;
+	@Switch(offText = "No", onText = "Yes")
+    @Inject @Default(booleanValues = false)
+	private boolean renderAsLinks;
 
     @DialogField(fieldLabel = "Title Heading Type", fieldDescription = "When the Asset Title is rendered in the context of a list, it will be rendered as a heading element.  What level of heading should be used is dependent on how your pages content is structured and specifically whether other headers are present on the page.", defaultValue = Headings.H3)
     @Selection(type = Selection.SELECT, options = {
@@ -75,24 +91,10 @@ public class AssetListRenderingStrategy implements
             @Option(text = Headings.H4_LABEL, value = Headings.H4),
             @Option(text = Headings.H5_LABEL, value = Headings.H5),
             @Option(text = Headings.H6_LABEL, value = Headings.H6)})
-    private final String titleHeadingType;
+    @Inject @Default(values = Headings.H3)
+    private String titleHeadingType;
 
 	private List<RenderableAsset> renderableAssets;
-
-	public AssetListRenderingStrategy(ComponentNode componentNode) {
-
-		renderAsLinks = componentNode.get(PARAM_AS_LINKS, DEFAULT_AS_LINKS);
-        suppressImages = componentNode.get("suppressImages", false);
-        imageSize = componentNode.get("imageSize", ORIGINAL);
-        renderTitles = componentNode.get("renderTitles", false);
-        renderCreators = componentNode.get("renderCreators", false);
-        creatorLabel = componentNode.get("creatorLabel", "By:");
-        renderDescriptions = componentNode.get("renderDescriptions", false);
-        renderFormats = componentNode.get("renderFormats", false);
-        formatLabel = componentNode.get("formatLabel", "Format:");
-        titleHeadingType = componentNode.get("titleHeadingType", Headings.H3);
-
-	}
 
 	/**
 	 * True to render items as links to their resources, otherwise render items

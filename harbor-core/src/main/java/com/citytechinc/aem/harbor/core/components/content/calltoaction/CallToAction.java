@@ -1,7 +1,9 @@
 package com.citytechinc.aem.harbor.core.components.content.calltoaction;
 
+import javax.inject.Inject;
 import javax.jcr.RepositoryException;
 
+import com.citytechinc.aem.bedrock.api.page.PageDecorator;
 import com.citytechinc.aem.harbor.core.util.icon.IconUtils;
 import org.apache.commons.lang.StringUtils;
 
@@ -17,9 +19,12 @@ import com.citytechinc.cq.component.annotations.widgets.PathField;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
 import com.citytechinc.aem.harbor.api.constants.bootstrap.Bootstrap;
 import com.google.common.base.Optional;
+import org.apache.sling.api.resource.Resource;
+import org.apache.sling.models.annotations.Model;
 
 @Component(value = "Call to Action", group = "Harbor", name = "calltoaction", layout = "rollover", contentAdditionalProperties = { @ContentProperty(name = "dependencies", value = "[harbor.bootstrap.modals,harbor.bootstrap.buttons,harbor.author-common,harbor.components.content.calltoaction]") }, inPlaceEditingEditorType = "harborcta")
 @AutoInstantiate(instanceName = CallToAction.INSTANCE_NAME)
+@Model(adaptables = Resource.class)
 public class CallToAction extends AbstractComponent {
 
 	public static final String INSTANCE_NAME = "cta";
@@ -38,6 +43,9 @@ public class CallToAction extends AbstractComponent {
 	public static final String MODAL_ID_PREFIX = "callToActionModal-";
 
 	private Link target;
+
+	@Inject
+	private PageDecorator currentPage;
 
 	@DialogField(fieldLabel = "Text", fieldDescription = "Provide the widget's text", ranking = 0)
 	public String getText() {
@@ -84,7 +92,7 @@ public class CallToAction extends AbstractComponent {
 			if (targetOptional.isPresent()) {
 				target = targetOptional.get();
 			} else {
-				target = LinkBuilderFactory.forPage(getCurrentPage()).build();
+				target = LinkBuilderFactory.forPage(currentPage).build();
 			}
 		}
 

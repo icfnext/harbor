@@ -1,5 +1,6 @@
 package com.citytechinc.aem.harbor.core.components.content.title;
 
+import com.citytechinc.aem.bedrock.api.page.PageDecorator;
 import com.citytechinc.aem.harbor.core.util.icon.IconUtils;
 import com.citytechinc.cq.component.annotations.*;
 import org.apache.commons.lang.StringUtils;
@@ -7,6 +8,8 @@ import org.apache.commons.lang.StringUtils;
 import com.citytechinc.aem.bedrock.api.components.annotations.AutoInstantiate;
 import com.citytechinc.aem.harbor.api.constants.dom.Headings;
 import com.citytechinc.aem.harbor.core.components.content.heading.Heading;
+
+import javax.inject.Inject;
 
 /**
  * Represents the primary title of a page. The text of the title defaults to the
@@ -16,9 +19,8 @@ import com.citytechinc.aem.harbor.core.components.content.heading.Heading;
 @Component(
         value = "Title",
         resourceSuperType = Heading.RESOURCE_TYPE,
-        contentAdditionalProperties = { @ContentProperty(name = "dependencies", value = "[harbor.fontawesome]") },
 		tabs = {
-				@Tab(title = "Title"),
+				@Tab(title = "Heading"),
 				@Tab(title = "Advanced")
 		}
 )
@@ -27,6 +29,9 @@ public class Title extends Heading {
 
 	public static final String RESOURCE_TYPE = "harbor/components/content/title";
 	public static final String INSTANCE_NAME = "titleHeading";
+
+	@Inject
+	private PageDecorator currentPage;
 
 	@Override
 	@DialogField(fieldLabel = "Title Text", fieldDescription = "The textual content of the rendered title. If left empty, the page title will be rendered.")
@@ -55,11 +60,11 @@ public class Title extends Heading {
 			return title;
 		}
 
-		if (StringUtils.isNotBlank(getCurrentPage().getPageTitle())) {
-			return getCurrentPage().getPageTitle();
+		if (StringUtils.isNotBlank(currentPage.getPageTitle())) {
+			return currentPage.getPageTitle();
 		}
 
-		return getCurrentPage().getTitle();
+		return currentPage.getTitle();
 	}
 
 }

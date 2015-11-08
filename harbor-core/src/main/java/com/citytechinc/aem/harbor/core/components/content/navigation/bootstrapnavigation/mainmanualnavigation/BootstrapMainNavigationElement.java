@@ -5,6 +5,8 @@ import com.citytechinc.aem.bedrock.core.components.AbstractComponent;
 import com.citytechinc.cq.component.annotations.*;
 import com.citytechinc.cq.component.annotations.widgets.PathField;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
+import org.apache.sling.api.resource.Resource;
+import org.apache.sling.models.annotations.Model;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,6 +20,7 @@ import org.slf4j.LoggerFactory;
         path = "content/navigation/bootstrapmainmanualnavigation",
         htmlTag = @HtmlTag(tagName = "li"))
 @AutoInstantiate(instanceName = BootstrapMainNavigationElement.INSTANCE_NAME)
+@Model(adaptables = Resource.class)
 public class BootstrapMainNavigationElement extends AbstractComponent {
 
 	public static final String INSTANCE_NAME = "navElement";

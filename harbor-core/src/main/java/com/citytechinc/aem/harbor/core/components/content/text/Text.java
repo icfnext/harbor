@@ -11,9 +11,12 @@ import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.widgets.DialogFieldSet;
 import com.citytechinc.cq.component.annotations.widgets.RichTextEditor;
 import com.citytechinc.cq.component.annotations.widgets.rte.*;
+import org.apache.sling.api.resource.Resource;
+import org.apache.sling.models.annotations.Model;
 
 @Component("Text")
 @AutoInstantiate(instanceName = "textcomponent")
+@Model(adaptables = Resource.class)
 public class Text extends AbstractComponent {
 
     private Classification classification;
@@ -40,7 +43,7 @@ public class Text extends AbstractComponent {
     @DialogFieldSet
     public Classification getClassification() {
         if (classification == null) {
-            classification = getComponent(this, Classification.class);
+            classification = getResource().adaptTo(Classification.class);
         }
 
         return classification;

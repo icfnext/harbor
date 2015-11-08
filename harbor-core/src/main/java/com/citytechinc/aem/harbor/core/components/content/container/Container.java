@@ -16,6 +16,8 @@ import com.citytechinc.aem.harbor.core.components.mixins.classifiable.Classifica
 import com.citytechinc.aem.harbor.core.constants.groups.ComponentGroups;
 import com.google.common.base.Optional;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.sling.api.resource.Resource;
+import org.apache.sling.models.annotations.Model;
 
 @Component(
 		value = "Container",
@@ -27,6 +29,7 @@ import org.apache.commons.lang3.StringUtils;
 				@Tab(title = "Advanced")
 		})
 @AutoInstantiate(instanceName = Container.INSTANCE_NAME)
+@Model(adaptables = Resource.class)
 public class Container extends AbstractComponent {
 
 	private Classification classification;
@@ -50,10 +53,10 @@ public class Container extends AbstractComponent {
 	public Classification getClassification() {
 		if (classification == null) {
             if (isInherits()) {
-                classification = getComponent(this, InheritedClassification.class);
+                classification = this.getResource().adaptTo(InheritedClassification.class);
             }
             else {
-                classification = getComponent(this, Classification.class);
+                classification = this.getResource().adaptTo(Classification.class);
             }
 		}
 
@@ -131,6 +134,10 @@ public class Container extends AbstractComponent {
 
 	public boolean isHasDomId() {
 		return StringUtils.isNotBlank(getDomId());
+	}
+
+	public String getAuthorHelpMessage() {
+		return "Content Section";
 	}
 
 	protected String getContainerFullWidthClass() {

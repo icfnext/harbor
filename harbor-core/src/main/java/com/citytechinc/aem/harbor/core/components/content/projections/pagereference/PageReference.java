@@ -12,6 +12,8 @@ import com.citytechinc.cq.component.annotations.widgets.DialogFieldSet;
 import com.citytechinc.cq.component.annotations.widgets.PathField;
 import com.google.common.base.Optional;
 import com.google.common.collect.Lists;
+import org.apache.sling.api.resource.Resource;
+import org.apache.sling.models.annotations.Model;
 
 import java.util.List;
 
@@ -22,6 +24,7 @@ import java.util.List;
         group = ComponentGroups.HARBOR_PROJECTIONS
 )
 @AutoInstantiate(instanceName = "pagereference")
+@Model(adaptables = Resource.class)
 public class PageReference extends AbstractComponent{
 
     private LinkablePageRenderingStrategy.LinkablePage referencedPage;
@@ -35,7 +38,7 @@ public class PageReference extends AbstractComponent{
     public LinkablePageRenderingStrategy.LinkablePage getPage() {
         if (referencedPage == null) {
             if (renderingStrategy == null) {
-                renderingStrategy = new LinkablePageRenderingStrategy(this);
+                renderingStrategy = getResource().adaptTo(LinkablePageRenderingStrategy.class);
             }
 
             Optional<PageDecorator> pageDecoratorOptional = getAsPage("page");

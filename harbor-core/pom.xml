@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>com.citytechinc.aem.harbor</groupId>
 		<artifactId>harbor</artifactId>
-		<version>0.5.0-SNAPSHOT</version>
+		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
@@ -22,25 +22,8 @@
             </resource>
         </resources>
 		<plugins>
-			<plugin>
+            <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <compilerId>groovy-eclipse-compiler</compilerId>
-                    <source>1.6</source>
-                    <target>1.6</target>
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.codehaus.groovy</groupId>
-                        <artifactId>groovy-eclipse-compiler</artifactId>
-                        <version>2.8.0-01</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.codehaus.groovy</groupId>
-                        <artifactId>groovy-eclipse-batch</artifactId>
-                        <version>2.1.8-01</version>
-                    </dependency>
-                </dependencies>
             </plugin>
 			<plugin>
 				<groupId>org.apache.felix</groupId>
@@ -53,8 +36,9 @@
                         <Bundle-Vendor>${project.parent.organization.name}</Bundle-Vendor>
                         <Export-Package>!*.impl,com.citytechinc.aem.harbor.core.*</Export-Package>
                         <Import-Package>!com.citytechinc.cq.component.*,!javassist</Import-Package>
-                        <DynamicImport-Package>*</DynamicImport-Package>
-
+						<Require-Bundle>org.apache.sling.models.api</Require-Bundle>
+						<Sling-Model-Packages>com.citytechinc.aem.harbor.core</Sling-Model-Packages>
+						<DynamicImport-Package>*</DynamicImport-Package>
                     </instructions>
                 </configuration>
 			</plugin>
@@ -76,11 +60,6 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <includes>
-                        <include>**/*Spec*</include>
-                    </includes>
-                </configuration>
 			</plugin>
 		</plugins>
 	</build>
@@ -100,14 +79,22 @@
         <!-- Bedrock -->
 		<dependency>
 			<groupId>com.citytechinc.aem.bedrock</groupId>
+			<artifactId>bedrock-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.citytechinc.aem.bedrock</groupId>
 			<artifactId>bedrock-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.citytechinc.aem.bedrock</groupId>
+			<artifactId>bedrock-models</artifactId>
 		</dependency>
 
 		<!-- Component Annotation -->
 		<dependency>
 			<groupId>com.citytechinc.cq.cq-component-plugin</groupId>
 			<artifactId>cq-component-annotations</artifactId>
-            <version>${component.plugin.version}</version>
+			<version>${component.plugin.version}</version>
 		</dependency>
 
         <!-- AEM Namespace -->

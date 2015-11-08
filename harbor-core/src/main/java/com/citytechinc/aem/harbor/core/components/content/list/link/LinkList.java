@@ -1,10 +1,8 @@
 package com.citytechinc.aem.harbor.core.components.content.list.link;
 
 import com.citytechinc.aem.bedrock.api.components.annotations.AutoInstantiate;
-import com.citytechinc.aem.bedrock.api.link.Link;
 import com.citytechinc.aem.bedrock.api.node.ComponentNode;
 import com.citytechinc.aem.bedrock.core.components.AbstractComponent;
-import com.citytechinc.aem.bedrock.core.link.builders.factory.LinkBuilderFactory;
 import com.citytechinc.aem.harbor.core.components.mixins.classifiable.Classification;
 import com.citytechinc.aem.harbor.core.constants.groups.ComponentGroups;
 import com.citytechinc.cq.component.annotations.Component;
@@ -14,6 +12,8 @@ import com.citytechinc.cq.component.annotations.editconfig.ActionConfig;
 import com.citytechinc.cq.component.annotations.editconfig.ActionConfigProperty;
 import com.citytechinc.cq.component.annotations.widgets.DialogFieldSet;
 import com.google.common.collect.Lists;
+import org.apache.sling.api.resource.Resource;
+import org.apache.sling.models.annotations.Model;
 
 import java.util.List;
 
@@ -31,6 +31,7 @@ import java.util.List;
                         additionalProperties = {@ActionConfigProperty(name = "icon", value = "coral-Icon--add")})}
 )
 @AutoInstantiate(instanceName = "linklist")
+@Model(adaptables = Resource.class)
 public class LinkList extends AbstractComponent {
 
     private List<ListableLink> links;
@@ -40,7 +41,7 @@ public class LinkList extends AbstractComponent {
     @DialogFieldSet
     public Classification getClassification() {
         if (classification == null) {
-            classification = getComponent(this, Classification.class);
+            classification = this.getResource().adaptTo(Classification.class);
         }
 
         return classification;
@@ -52,7 +53,7 @@ public class LinkList extends AbstractComponent {
             links = Lists.newArrayList();
 
             for(ComponentNode currentLinkNode : getComponentNodes()) {
-                links.add(getComponent(currentLinkNode, ListableLink.class));
+                links.add(currentLinkNode.getResource().adaptTo(ListableLink.class));
             }
         }
 

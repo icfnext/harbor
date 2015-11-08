@@ -14,12 +14,13 @@ import com.citytechinc.aem.harbor.api.constants.bootstrap.Bootstrap;
 import com.citytechinc.aem.harbor.core.components.mixins.classifiable.Classification;
 import com.citytechinc.aem.harbor.core.constants.groups.ComponentGroups;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.sling.api.resource.Resource;
+import org.apache.sling.models.annotations.Model;
 
 @Component(
 		value = "Column Row",
 		group = ComponentGroups.HARBOR_SCAFFOLDING,
 		actions = { "text: Column Row", "-", "edit", "-", "copymove", "delete", "-", "insert" },
-		contentAdditionalProperties = { @ContentProperty(name = "dependencies", value = "harbor.components.content.columnrow") },
 		allowedParents = "*/parsys",
 		resourceSuperType = "foundation/components/parbase",
 		tabs = {
@@ -27,6 +28,7 @@ import org.apache.commons.lang3.StringUtils;
 				@Tab(title = "Advanced")
 		})
 @AutoInstantiate(instanceName = "ColumnRow")
+@Model(adaptables = Resource.class)
 public class ColumnRow extends AbstractComponent {
 	private List<Column> columns;
 
@@ -48,7 +50,7 @@ public class ColumnRow extends AbstractComponent {
             columns = Lists.newArrayList();
 
             for (ComponentNode currentColumnComponentNode : getComponentNodes()) {
-                columns.add(getComponent(currentColumnComponentNode, Column.class));
+                columns.add(currentColumnComponentNode.getResource().adaptTo(Column.class));
             }
         }
 
@@ -58,7 +60,7 @@ public class ColumnRow extends AbstractComponent {
 	@DialogField(ranking = 3)
 	@DialogFieldSet
 	public Classification getClassification() {
-        return getComponent(this, Classification.class);
+        return this.getResource().adaptTo(Classification.class);
 	}
 
     public String getCssClass() {

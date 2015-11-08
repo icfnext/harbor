@@ -9,31 +9,43 @@ import com.citytechinc.cq.component.annotations.Option;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
 import com.citytechinc.aem.harbor.api.constants.dom.Headings;
 import com.citytechinc.aem.harbor.api.lists.rendering.ListRenderingStrategy;
+import com.citytechinc.cq.component.annotations.widgets.Switch;
 import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.sling.api.resource.Resource;
+import org.apache.sling.models.annotations.Default;
+import org.apache.sling.models.annotations.Model;
 
+import javax.inject.Inject;
+
+@Model(adaptables = Resource.class)
 public class LinkablePageRenderingStrategy implements
 	ListRenderingStrategy<PageDecorator, List<LinkablePageRenderingStrategy.LinkablePage>> {
 
     @DialogField(fieldLabel = "Suppress Page Titles?")
-    @Selection(type = Selection.CHECKBOX, options = { @Option(text = "", value = "true") })
-    private final Boolean suppressTitle;
+    @Switch(offText = "No", onText = "Yes")
+    @Inject @Default(booleanValues = false)
+    private Boolean suppressTitle;
 
     @DialogField(fieldLabel = "Render Page Subtitles?")
-    @Selection(type = Selection.CHECKBOX, options = { @Option(text = "", value = "true") })
-    private final Boolean renderSubtitle;
+    @Switch(offText = "No", onText = "Yes")
+    @Inject @Default(booleanValues = false)
+    private Boolean renderSubtitle;
 
     @DialogField(fieldLabel = "Render Page Images?")
-    @Selection(type = Selection.CHECKBOX, options = { @Option(text = "", value = "true") })
-    private final Boolean renderImage;
+    @Switch(offText = "No", onText = "Yes")
+    @Inject @Default(booleanValues = false)
+    private Boolean renderImage;
 
     @DialogField(fieldLabel = "Render Page Descriptions?")
-    @Selection(type = Selection.CHECKBOX, options = { @Option(text = "", value = "true") })
-    private final Boolean renderDescription;
+    @Switch(offText = "No", onText = "Yes")
+    @Inject @Default(booleanValues = false)
+    private Boolean renderDescription;
 
     @DialogField(fieldLabel = "Render as Link?")
-    @Selection(type = Selection.CHECKBOX, options = { @Option(text = "", value = "true") })
-    private final Boolean renderAsLink;
+    @Switch(offText = "No", onText = "Yes")
+    @Inject @Default(booleanValues = false)
+    private Boolean renderAsLink;
 
     @DialogField(fieldLabel = "Title Heading Type", fieldDescription = "When the Page Title is rendered in the context of a list, it will be rendered as a heading element.  What level of heading should be used is dependent on how your pages content is structured and specifically whether other headers are present on the page.", defaultValue = Headings.H3)
     @Selection(type = Selection.SELECT, options = {
@@ -41,19 +53,8 @@ public class LinkablePageRenderingStrategy implements
             @Option(text = Headings.H4_LABEL, value = Headings.H4),
             @Option(text = Headings.H5_LABEL, value = Headings.H5),
             @Option(text = Headings.H6_LABEL, value = Headings.H6)})
-    private final String titleHeadingType;
-
-	public LinkablePageRenderingStrategy(ComponentNode componentNode) {
-
-        suppressTitle = componentNode.get("suppressTitle", false);
-        renderSubtitle = componentNode.get("renderSubtitle", false);
-        renderImage = componentNode.get("renderImage", false);
-        renderDescription = componentNode.get("renderDescription", false);
-        titleHeadingType = componentNode.get("titleHeadingType", Headings.H3);
-
-        renderAsLink = componentNode.get("renderAsLink", false);
-
-	}
+    @Inject @Default(values = Headings.H3)
+    private String titleHeadingType;
 
     public boolean isSuppressTitle() {
         return suppressTitle;

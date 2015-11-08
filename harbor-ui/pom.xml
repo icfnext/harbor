@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>com.citytechinc.aem.harbor</groupId>
 		<artifactId>harbor</artifactId>
-		<version>0.5.0-SNAPSHOT</version>
+		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
@@ -44,9 +44,6 @@
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<encoding>utf-8</encoding>
-				</configuration>
 			</plugin>
 			<plugin>
 				<artifactId>maven-jar-plugin</artifactId>
@@ -109,6 +106,9 @@
 					<componentPathBase>jcr_root/libs/harbor/components</componentPathBase>
 					<defaultComponentGroup>Harbor</defaultComponentGroup>
 					<transformerName>lower-case</transformerName>
+					<additionalFeatures>
+						<additionalFeature>rte-touchui</additionalFeature>
+					</additionalFeatures>
 				</configuration>
 			</plugin>
 			<plugin>

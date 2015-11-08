@@ -1,10 +1,13 @@
 package com.citytechinc.aem.harbor.core.components.content.page.meta;
 
+import javax.inject.Inject;
 import javax.jcr.RepositoryException;
 
+import com.citytechinc.aem.bedrock.api.page.PageDecorator;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
+import org.apache.sling.models.annotations.Model;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,36 +17,40 @@ import com.citytechinc.aem.harbor.api.content.page.HomePage;
 import com.citytechinc.aem.harbor.api.services.meta.MetadataConfigService;
 import com.day.cq.commons.jcr.JcrConstants;
 
-
+@Model(adaptables = Resource.class)
 public class MetaPage extends AbstractComponent {
     private static final Logger LOG = LoggerFactory.getLogger(MetaPage.class);
+
+	@Inject
+	private PageDecorator currentPage;
+
+	@Inject
+	private MetadataConfigService metadataConfigService;
     
     public boolean getDisableSchemaOrg() {
-    	return getCurrentPage().getProperties().get("disableSchemaOrg", false);
+    	return currentPage.getProperties().get("disableSchemaOrg", false);
     }
     
     public String getPageName(){
-    	if(StringUtils.isNotBlank(getCurrentPage().getPageTitle())){
-    		return getCurrentPage().getPageTitle();
+    	if(StringUtils.isNotBlank(currentPage.getPageTitle())){
+    		return currentPage.getPageTitle();
     	}else{
-    		return getCurrentPage().getName();
+    		return currentPage.getName();
     	}
     }
     
     public String getDescription(){
-    	return getCurrentPage().getProperties().get(JcrConstants.JCR_DESCRIPTION, StringUtils.EMPTY);
+    	return currentPage.getProperties().get(JcrConstants.JCR_DESCRIPTION, StringUtils.EMPTY);
     }
     
     public String getFullyQualifiedPageImage() {
     	String temp = StringUtils.EMPTY;
-    	MetadataConfigService metadataConfigService = getService(MetadataConfigService.class);
     	try{
-    		ResourceResolver resolver = getComponentRequest().getSlingRequest().getResourceResolver();
-    		Resource imageResource = getCurrentPage().getContentResource().getChild("image");
+    		Resource imageResource = currentPage.getContentResource().getChild("image");
     		if(imageResource != null){
     			String imageFileRef = imageResource.getValueMap().get("fileReference",StringUtils.EMPTY);       		
     			if(StringUtils.isNotBlank(imageFileRef)) {
-    				temp = metadataConfigService.getExternalUrl(resolver, imageFileRef);
+    				temp = metadataConfigService.getExternalUrl(getResource().getResourceResolver(), imageFileRef);
     			}
     		}
 
@@ -55,10 +62,8 @@ public class MetaPage extends AbstractComponent {
     
     public String getFullyQualifiedPageUrl() {
     	String temp = StringUtils.EMPTY;
-    	MetadataConfigService metadataConfigService = getService(MetadataConfigService.class);
     	try{
-    		ResourceResolver resolver = getComponentRequest().getSlingRequest().getResourceResolver();
-    		temp = metadataConfigService.getExternalUrl(resolver, getCurrentPage().getPath());
+    		temp = metadataConfigService.getExternalUrl(getResource().getResourceResolver(), currentPage.getPath());
     	}catch( RepositoryException re){
     		LOG.error("RepositoryException retreiving fully qualified page string",re);
     	}
@@ -66,25 +71,23 @@ public class MetaPage extends AbstractComponent {
     }
     
     public String getPublisherHandle(){
-    	return getCurrentPage().getProperties().get("twitterPublisherHandle", StringUtils.EMPTY);
+    	return currentPage.getProperties().get("twitterPublisherHandle", StringUtils.EMPTY);
     }
     
     public String getOgType(){
-    	return getCurrentPage().getProperties().get("ogType", StringUtils.EMPTY);
+    	return currentPage.getProperties().get("ogType", StringUtils.EMPTY);
     }
     
     public String getCannonicalRef(){
     	String tempCannonical = StringUtils.EMPTY;
-    	String inputCannonicalRef = getCurrentPage().getProperties().get("cannonicalUrl", StringUtils.EMPTY);
+    	String inputCannonicalRef = currentPage.getProperties().get("cannonicalUrl", StringUtils.EMPTY);
     	//If they input a remote url, then just return that URL
     	if(inputCannonicalRef.startsWith("http") || inputCannonicalRef.isEmpty()){
     		return inputCannonicalRef;
     	}else{
     		//If they select a path with the pathfinder, need to externalize it.
     		try{
-	        	MetadataConfigService metadataConfigService = getService(MetadataConfigService.class);
-	        	ResourceResolver resolver = getComponentRequest().getSlingRequest().getResourceResolver();
-	        	tempCannonical =  metadataConfigService.getExternalUrl(resolver, inputCannonicalRef);
+	        	tempCannonical =  metadataConfigService.getExternalUrl(getResource().getResourceResolver(), inputCannonicalRef);
     		}catch( RepositoryException re){
         		LOG.error("RepositoryException retreiving fully qualified page string",re);
         	}
@@ -95,7 +98,7 @@ public class MetaPage extends AbstractComponent {
     
     public String getHomePageTitle(){
     	String temp = StringUtils.EMPTY;
-    	HierarchicalPage hPage = getCurrentPage().adaptTo(HierarchicalPage.class);
+    	HierarchicalPage hPage = currentPage.adaptTo(HierarchicalPage.class);
     	if(hPage!=null){
         	HomePage homePage = hPage.getHomePage().get();
         	if(StringUtils.isNotEmpty(homePage.getPageTitle() )){
@@ -109,8 +112,8 @@ public class MetaPage extends AbstractComponent {
     
     public String getRobotsContent() {
     	StringBuilder content = new StringBuilder();
-    	boolean noIndexIndicator = getCurrentPage().getProperties().get("noindex", false);
-    	boolean noFollowIndicator = getCurrentPage().getProperties().get("nofollow", false);
+    	boolean noIndexIndicator = currentPage.getProperties().get("noindex", false);
+    	boolean noFollowIndicator = currentPage.getProperties().get("nofollow", false);
     	
     	if(noIndexIndicator){
     		content.append("NOINDEX");

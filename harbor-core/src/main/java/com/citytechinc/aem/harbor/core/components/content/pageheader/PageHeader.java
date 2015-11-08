@@ -9,13 +9,13 @@ import com.citytechinc.cq.component.annotations.Tab;
 import com.google.common.base.Optional;
 
 @Component(
-		value = "Page Header",
-		group = ComponentGroups.HARBOR_SCAFFOLDING,
-		resourceSuperType = Container.RESOURCE_TYPE,
-		tabs = {
-				@Tab(title = "Page Header"),
-				@Tab(title = "Advanced")
-		})
+	value = "Page Header",
+	group = ComponentGroups.HARBOR_SCAFFOLDING,
+	resourceSuperType = Container.RESOURCE_TYPE,
+    tabs = {
+            @Tab(title = "Container"),
+            @Tab(title = "Advanced")
+    })
 public class PageHeader extends Container {
 
 	public static final String RESOURCE_TYPE = "harbor/components/content/pageheader";
@@ -31,8 +31,14 @@ public class PageHeader extends Container {
 	}
 
     @Override
+    public String getAuthorHelpMessage() {
+        return "Page Header";
+    }
+
+    @Override
     protected boolean isInherits() {
         return true;
     }
+
 
 }

@@ -7,6 +7,8 @@ import com.citytechinc.cq.component.annotations.Component;
 import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.HtmlTag;
 import com.citytechinc.cq.component.annotations.widgets.PathField;
+import org.apache.sling.api.resource.Resource;
+import org.apache.sling.models.annotations.Model;
 
 @Component(
         value = "Listable Link",
@@ -16,6 +18,7 @@ import com.citytechinc.cq.component.annotations.widgets.PathField;
         layout = "rollover"
 )
 @AutoInstantiate(instanceName = "listablelink")
+@Model(adaptables = Resource.class)
 public class ListableLink extends AbstractComponent {
 
     @DialogField(fieldLabel = "Path")

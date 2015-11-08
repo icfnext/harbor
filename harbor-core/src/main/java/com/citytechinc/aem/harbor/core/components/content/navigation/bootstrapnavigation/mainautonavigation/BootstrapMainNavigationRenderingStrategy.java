@@ -11,7 +11,9 @@ import com.citytechinc.cq.component.annotations.widgets.Html5SmartFile;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
 import com.citytechinc.aem.harbor.api.content.page.navigation.NavigablePage;
 import com.google.common.base.Optional;
+import org.apache.sling.models.annotations.Model;
 
+@Model(adaptables = Resource.class)
 public class BootstrapMainNavigationRenderingStrategy extends AbstractComponent implements
         TreeRenderingStrategy<NavigablePage, BootstrapPageNavigableRenderableTree> {
 

@@ -10,6 +10,8 @@ import com.citytechinc.cq.component.annotations.widgets.TextField;
 import com.citytechinc.aem.harbor.api.lists.construction.search.ConstructionPredicate;
 import com.day.cq.search.Predicate;
 import com.day.cq.search.PredicateGroup;
+import org.apache.sling.api.resource.Resource;
+import org.apache.sling.models.annotations.Model;
 
 /**
  * Dialog representation of a query parameter predicate. Should be converted to
@@ -20,6 +22,7 @@ import com.day.cq.search.PredicateGroup;
  * Stores and handles all predicates that modify how search results are
  * returned.
  */
+@Model(adaptables = Resource.class)
 public class QueryParameterConstructionPredicate extends AbstractComponent implements ConstructionPredicate {
 
 	private static final String PARAM_LIMIT = "limit";

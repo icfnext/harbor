@@ -9,6 +9,8 @@ import com.citytechinc.aem.bedrock.api.components.annotations.AutoInstantiate;
 import com.citytechinc.aem.bedrock.core.components.AbstractComponent;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
 import com.citytechinc.aem.harbor.api.constants.dom.Headings;
+import org.apache.sling.api.resource.Resource;
+import org.apache.sling.models.annotations.Model;
 
 /**
  * The Heading component is intended to be used to title content sections. The
@@ -18,13 +20,13 @@ import com.citytechinc.aem.harbor.api.constants.dom.Headings;
  */
 @Component(
         value = "Heading",
-        contentAdditionalProperties = { @ContentProperty(name = "dependencies", value = "[harbor.fontawesome]") },
 		tabs = {
 				@Tab(title = "Heading"),
 				@Tab(title = "Advanced")
 		}
 )
 @AutoInstantiate(instanceName = Heading.INSTANCE_NAME)
+@Model(adaptables = Resource.class)
 public class Heading extends AbstractComponent {
 
 	public static final String RESOURCE_TYPE = "harbor/components/content/heading";

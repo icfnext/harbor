@@ -3,6 +3,7 @@ package com.citytechinc.aem.harbor.core.components.content.tabs;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.citytechinc.aem.bedrock.api.page.PageDecorator;
 import org.apache.sling.api.resource.Resource;
 
 import com.citytechinc.aem.bedrock.api.components.annotations.AutoInstantiate;
@@ -20,6 +21,9 @@ import com.citytechinc.cq.component.annotations.editconfig.ActionConfig;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
 import com.day.cq.wcm.api.Page;
 import com.google.common.base.Predicate;
+import org.apache.sling.models.annotations.Model;
+
+import javax.inject.Inject;
 
 @Component(
     value = "Tabs",
@@ -28,11 +32,14 @@ import com.google.common.base.Predicate;
     actionConfigs = {
         @ActionConfig(xtype = "tbseparator"),
         @ActionConfig(text = "Add Tab", handler = "function(){Harbor.Components.Tabs.addTab(this)}")
-    },
-    contentAdditionalProperties = { @ContentProperty(name = "dependencies", value = "[harbor.components.content.tabs]") })
+    })
 @AutoInstantiate(instanceName = "tabs")
+@Model(adaptables = Resource.class)
 public class Tabs extends AbstractComponent {
     private List<Tab> tabs;
+
+    @Inject
+    private PageDecorator currentPage;
 
     public static String constructUniqueId(Page page, Resource r) {
         return ComponentUtils.getUniqueIdentifierForResourceInPage(page, r);
@@ -56,7 +63,7 @@ public class Tabs extends AbstractComponent {
             tabs = new ArrayList<Tab>();
 
             for (ComponentNode currentComponentNode : getComponentNodes(new TabPredicate())) {
-                tabs.add(getComponent(currentComponentNode, Tab.class));
+                tabs.add(currentComponentNode.getResource().adaptTo(Tab.class));
             }
         }
         return tabs;
@@ -67,7 +74,7 @@ public class Tabs extends AbstractComponent {
     }
 
     public String getUniqueId() {
-        return constructUniqueId(getCurrentPage(), getResource());
+        return constructUniqueId(currentPage, getResource());
     }
 
 }

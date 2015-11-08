@@ -11,66 +11,53 @@ import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.widgets.DialogFieldSet;
 import com.day.cq.search.result.Hit;
 import com.google.common.collect.Lists;
+import org.apache.sling.api.resource.Resource;
+import org.apache.sling.models.annotations.Model;
+import org.apache.sling.models.annotations.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.jcr.RepositoryException;
 import java.util.List;
 
+@Model(adaptables = Resource.class)
 public class PageListConstructionStrategy extends AbstractNodeSearchConstructionStrategy<PageDecorator> {
 
     private static final Logger LOG = LoggerFactory.getLogger(PageListConstructionStrategy.class);
 
     @DialogField
     @DialogFieldSet(title = "Path", namePrefix = "pathpredicate/", collapsible = true, collapsed = true)
+    @Inject @Named("pathpredicate") @Optional
     private PathConstructionPredicate pathConstructionPredicate;
 
     @DialogField
     @DialogFieldSet(title = "Tags", namePrefix = "tagspredicate/", collapsible = true, collapsed = true)
+    @Inject @Named("tagspredicate") @Optional
     private PageTagsConstructionPredicate tagsConstructionPredicate;
 
     @DialogField
     @DialogFieldSet(title = "Query Parameters", namePrefix = "queryparameterpredicate/", collapsible = true, collapsed = true)
+    @Inject @Named("queryparameterpredicate") @Optional
     private QueryParameterConstructionPredicate queryParameterConstructionPredicate;
 
     private List<ConstructionPredicate> constructionPredicates;
 
     protected PathConstructionPredicate getPathConstructionPredicate() {
-        if (pathConstructionPredicate == null) {
-            /*
-            Optional<ComponentNode> pathPredicateComponentNodeOptional = getComponentNode("pathpredicate");
-
-            if (pathPredicateComponentNodeOptional.isPresent()) {
-                pathConstructionPredicate = getComponent(pathPredicateComponentNodeOptional.get(), PathConstructionPredicate.class);
-            }
-            else {
-                pathConstructionPredicate = null;
-            }
-            */
-            pathConstructionPredicate = getComponent(getResource().getPath() + "/pathpredicate", PathConstructionPredicate.class).orNull();
-        }
-
         return pathConstructionPredicate;
     }
 
     protected PageTagsConstructionPredicate getTagsConstructionPredicate() {
-        if (tagsConstructionPredicate == null) {
-            tagsConstructionPredicate = getComponent(getResource().getPath() + "/tagspredicate", PageTagsConstructionPredicate.class).orNull();
-        }
-
         return tagsConstructionPredicate;
     }
 
     protected QueryParameterConstructionPredicate getQueryParameterConstructionPredicate() {
-        if (queryParameterConstructionPredicate == null) {
-            queryParameterConstructionPredicate = getComponent(getResource().getPath() + "/queryparameterpredicate", QueryParameterConstructionPredicate.class).orNull();
-        }
-
         return queryParameterConstructionPredicate;
     }
 
     protected PageNodeTypeConstructionPredicate getNodeTypeConstructionPredicate() {
-        return getComponent(this, PageNodeTypeConstructionPredicate.class);
+        return this.getResource().adaptTo(PageNodeTypeConstructionPredicate.class);
     }
 
     @Override

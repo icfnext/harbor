@@ -2,6 +2,7 @@ package com.citytechinc.aem.harbor.core.components.content.carousel;
 
 import com.citytechinc.aem.bedrock.api.components.annotations.AutoInstantiate;
 import com.citytechinc.aem.bedrock.api.node.ComponentNode;
+import com.citytechinc.aem.bedrock.api.page.PageDecorator;
 import com.citytechinc.aem.bedrock.core.components.AbstractComponent;
 import com.citytechinc.aem.harbor.core.util.ComponentUtils;
 import com.citytechinc.cq.component.annotations.Component;
@@ -11,7 +12,10 @@ import com.citytechinc.cq.component.annotations.Option;
 import com.citytechinc.cq.component.annotations.editconfig.ActionConfig;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
 import com.google.common.collect.Lists;
+import org.apache.sling.api.resource.Resource;
+import org.apache.sling.models.annotations.Model;
 
+import javax.inject.Inject;
 import java.util.List;
 
 @Component(
@@ -23,9 +27,13 @@ import java.util.List;
             @ActionConfig(text = "Add Slide", handler = "function(){Harbor.Components.Carousel.addSlide(this)}") },
         contentAdditionalProperties = { @ContentProperty(name = "dependencies", value = "[harbor.components.content.carousel,harbor.bootstrap.carousel]") } )
 @AutoInstantiate(instanceName = "carousel")
+@Model(adaptables = Resource.class)
 public class Carousel extends AbstractComponent {
 
     private List<CarouselSlide> slides;
+
+    @Inject
+    private PageDecorator currentPage;
 
     public static final String CSS_CLASS = "carousel slide";
     public static final String INDICATORS_CSS_CLASS = "carousel-indicators";
@@ -52,7 +60,7 @@ public class Carousel extends AbstractComponent {
             slides = Lists.newArrayList();
 
             for (ComponentNode currentSlideNode : getComponentNodes()) {
-                slides.add(getComponent(currentSlideNode, CarouselSlide.class));
+                slides.add(currentSlideNode.getResource().adaptTo(CarouselSlide.class));
             }
         }
 
@@ -69,7 +77,7 @@ public class Carousel extends AbstractComponent {
     }
 
     public String getUniqueIdentifier() {
-        return ComponentUtils.getUniqueIdentifierForResourceInPage(getCurrentPage(), getResource());
+        return ComponentUtils.getUniqueIdentifierForResourceInPage(currentPage, getResource());
     }
 
 }

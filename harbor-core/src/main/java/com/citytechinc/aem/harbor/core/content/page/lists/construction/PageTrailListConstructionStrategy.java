@@ -3,7 +3,7 @@ package com.citytechinc.aem.harbor.core.content.page.lists.construction;
 import java.util.List;
 
 import com.citytechinc.aem.bedrock.api.page.PageDecorator;
-import com.citytechinc.aem.bedrock.api.request.ComponentRequest;
+import com.citytechinc.aem.bedrock.core.components.AbstractComponent;
 import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.Option;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
@@ -14,13 +14,17 @@ import com.citytechinc.aem.harbor.core.components.content.page.TrailPage;
 import com.citytechinc.aem.harbor.core.content.page.impl.PagePredicates;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
+import org.apache.sling.api.resource.Resource;
+import org.apache.sling.models.annotations.Model;
 
-public class PageTrailListConstructionStrategy implements ListConstructionStrategy<TrailPage> {
+import javax.inject.Inject;
 
-	private final ComponentRequest request;
+@Model(adaptables = Resource.class)
+public class PageTrailListConstructionStrategy extends AbstractComponent implements ListConstructionStrategy<TrailPage> {
 
 	private List<TrailPage> constructedList;
 
+	@Inject
 	private PageDecorator currentPage;
 
 	@DialogField(name = "./rootPageType", fieldLabel = "Breadcrumb Root")
@@ -35,11 +39,6 @@ public class PageTrailListConstructionStrategy implements ListConstructionStrate
 	@DialogField(fieldLabel = "Include Root Page In Trail")
 	@Selection(type = Selection.CHECKBOX, options = { @Option(text = "Yes", value = "true") })
 	private Boolean includeRootPageInTrail;
-
-	//TODO: Consider allowing for configuration concerning whether to inherit properties
-	public PageTrailListConstructionStrategy(ComponentRequest request) {
-		this.request = request;
-	}
 
 	@Override
 	public List<TrailPage> construct() {
@@ -83,16 +82,12 @@ public class PageTrailListConstructionStrategy implements ListConstructionStrate
 	}
 
 	protected PageDecorator getCurrentPage() {
-		if (currentPage == null) {
-			currentPage = request.getCurrentPage();
-		}
-
 		return currentPage;
 	}
 
 	protected Predicate<PageDecorator> getRootPagePredicate() {
 		if (rootPagePredicate == null) {
-			String rootPageType = request.getComponentNode().getInherited("rootPageType", HomePage.RDF_TYPE);
+			String rootPageType = getInherited("rootPageType", HomePage.RDF_TYPE);
 
 			if (SectionLandingPage.RDF_TYPE.equals(rootPageType)) {
 				rootPagePredicate = PagePredicates.SECTION_LANDING_PAGE_PREDICATE;
@@ -106,7 +101,7 @@ public class PageTrailListConstructionStrategy implements ListConstructionStrate
 
 	protected Boolean isIncludeCurrentPageInTrail() {
 		if (includeCurrentPageInTrail == null) {
-			includeCurrentPageInTrail = request.getComponentNode().getInherited("includeCurrentPageInTrail", false);
+			includeCurrentPageInTrail = getInherited("includeCurrentPageInTrail", false);
 		}
 
 		return includeCurrentPageInTrail;
@@ -114,7 +109,7 @@ public class PageTrailListConstructionStrategy implements ListConstructionStrate
 
 	protected Boolean isIncludeRootPageInTrail() {
 		if (includeRootPageInTrail == null) {
-			includeRootPageInTrail = request.getComponentNode().getInherited("includeRootPageInTrail", false);
+			includeRootPageInTrail = getInherited("includeRootPageInTrail", false);
 		}
 
 		return includeRootPageInTrail;

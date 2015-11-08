@@ -13,6 +13,8 @@ import com.citytechinc.aem.harbor.core.constants.groups.ComponentGroups;
 import com.citytechinc.aem.harbor.core.content.page.navigation.construction.HierarchicalPageNavigationListConstructionStrategy;
 import com.citytechinc.aem.harbor.core.trees.rendering.PassthroughTree;
 import com.citytechinc.aem.harbor.core.trees.rendering.PassthroughTreeRenderingStrategy;
+import org.apache.sling.api.resource.Resource;
+import org.apache.sling.models.annotations.Model;
 
 @Component(
         value = "Secondary Navigation",
@@ -21,6 +23,7 @@ import com.citytechinc.aem.harbor.core.trees.rendering.PassthroughTreeRenderingS
         contentAdditionalProperties = { @ContentProperty(name = "dependencies", value = "harbor.bootstrap.navs") },
         allowedParents = "*/parsys" )
 @AutoInstantiate(instanceName = "secondaryNavigation")
+@Model(adaptables = Resource.class)
 public class BootstrapSecondaryNavigation extends AbstractRootedListComponent<NavigablePage, PassthroughTree<NavigablePage>> {
 
     public static final String RESOURCE_TYPE = "harbor/components/content/navigation/bootstrapsecondarynavigation";
@@ -33,7 +36,7 @@ public class BootstrapSecondaryNavigation extends AbstractRootedListComponent<Na
 	@Override
 	public HierarchicalPageNavigationListConstructionStrategy getTreeConstructionStrategy() {
 		if (constructionStrategy == null) {
-			constructionStrategy = getComponent(this, HierarchicalPageNavigationListConstructionStrategy.class);
+			constructionStrategy = this.getResource().adaptTo(HierarchicalPageNavigationListConstructionStrategy.class);
 		}
 
 		return constructionStrategy;

@@ -4,8 +4,6 @@ import java.util.List;
 
 import com.citytechinc.aem.bedrock.api.link.Link;
 import com.citytechinc.aem.bedrock.api.node.BasicNode;
-import com.citytechinc.aem.bedrock.api.node.ComponentNode;
-import com.citytechinc.aem.bedrock.core.link.builders.factory.LinkBuilderFactory;
 import com.citytechinc.cq.component.annotations.*;
 import com.citytechinc.cq.component.annotations.widgets.Html5SmartFile;
 import com.citytechinc.cq.component.annotations.widgets.PathField;
@@ -19,7 +17,7 @@ import com.citytechinc.aem.bedrock.core.components.AbstractComponent;
 import com.citytechinc.cq.component.annotations.editconfig.ActionConfig;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
 import com.citytechinc.aem.harbor.core.constants.groups.ComponentGroups;
-import org.apache.sling.api.resource.ResourceUtil;
+import org.apache.sling.models.annotations.Model;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,7 +26,6 @@ import org.slf4j.LoggerFactory;
         group = ComponentGroups.HARBOR_NAVIGATION,
         actions = {
 	        "text:Main Manual Navigation", "-", "edit", "-", "delete" },
-        contentAdditionalProperties = { @ContentProperty(name = "dependencies", value = "[harbor.components.content.bootstrapmainmanualnavigation,harbor.bootstrap.navbar]") },
         actionConfigs = {
 	        @ActionConfig(xtype = "tbseparator"),
 	        @ActionConfig(text = "Add Navigation Item", handler = "function(){ Harbor.Components.GlobalNavigation.addNavigationElement(this) }"),
@@ -36,6 +33,7 @@ import org.slf4j.LoggerFactory;
         allowedParents = "*/parsys",
         path = "content/navigation")
 @AutoInstantiate(instanceName = "bootstrapMainManualNavigation")
+@Model(adaptables = Resource.class)
 public class BootstrapMainManualNavigation extends AbstractComponent {
 
     public static final String RESOURCE_TYPE = "harbor/components/content/navigation/bootstrapmainmanualnavigation";
@@ -128,7 +126,7 @@ public class BootstrapMainManualNavigation extends AbstractComponent {
 
             for (BasicNode currentNavigationNode : getNodesInherited("elements")) {
                 LOG.debug("Current Navigation Node Path " + currentNavigationNode.getPath());
-                bootstrapMainNavigationElementList.add(getComponent(currentNavigationNode.getResource().adaptTo(ComponentNode.class), BootstrapMainNavigationElement.class));
+                bootstrapMainNavigationElementList.add(currentNavigationNode.getResource().adaptTo(BootstrapMainNavigationElement.class));
             }
 
         }

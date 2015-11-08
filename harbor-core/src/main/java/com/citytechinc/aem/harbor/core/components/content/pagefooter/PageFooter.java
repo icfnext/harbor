@@ -7,15 +7,19 @@ import com.citytechinc.aem.harbor.core.components.content.container.Container;
 import com.citytechinc.aem.harbor.core.constants.groups.ComponentGroups;
 import com.citytechinc.cq.component.annotations.Tab;
 import com.google.common.base.Optional;
+import org.apache.sling.api.resource.Resource;
+import org.apache.sling.models.annotations.Model;
 
 @Component(
 		value = "Page Footer",
 		group = ComponentGroups.HARBOR_SCAFFOLDING,
 		resourceSuperType = Container.RESOURCE_TYPE,
 		tabs = {
-				@Tab(title = "Page Footer"),
+				@Tab(title = "Container"),
 				@Tab(title = "Advanced")
-		})
+		},
+		suppressTouchUIDialog = true)
+@Model(adaptables = Resource.class)
 public class PageFooter extends Container {
 
 	public static final String RESOURCE_TYPE = "harbor/components/content/pagefooter";
@@ -34,5 +38,10 @@ public class PageFooter extends Container {
     protected boolean isInherits() {
         return true;
     }
+
+	@Override
+	public String getAuthorHelpMessage() {
+		return "Page Footer";
+	}
 
 }

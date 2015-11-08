@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 
 import com.citytechinc.aem.bedrock.api.node.ComponentNode;
-import com.citytechinc.aem.bedrock.api.request.ComponentRequest;
 import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.Option;
 import com.citytechinc.cq.component.annotations.widgets.DialogFieldSet;
@@ -14,7 +13,12 @@ import com.citytechinc.aem.harbor.api.constants.components.ComponentConstants;
 import com.citytechinc.aem.harbor.api.lists.rendering.ListRenderingStrategy;
 import com.citytechinc.aem.harbor.core.components.content.page.TrailPage;
 import com.google.common.collect.Lists;
+import org.apache.sling.api.resource.Resource;
+import org.apache.sling.models.annotations.Model;
 
+import javax.inject.Inject;
+
+@Model(adaptables = Resource.class)
 public class BreadcrumbItemRenderingStrategy implements ListRenderingStrategy<TrailPage, BreadcrumbTrail> {
 
 	private static final String DEFAULT_DELIMITER = "fa-bootstrap-slash";
@@ -23,6 +27,7 @@ public class BreadcrumbItemRenderingStrategy implements ListRenderingStrategy<Tr
 	public static final String INTERMEDIATE_ITEM_CONFIGURATION_PREFIX = "intermediateItem";
 	public static final String CURRENT_ITEM_CONFIGURATION_PREFIX = "currentItem";
 
+	@Inject
 	private final ComponentNode componentNode;
 
 	private Boolean renderAsLink;
@@ -35,10 +40,6 @@ public class BreadcrumbItemRenderingStrategy implements ListRenderingStrategy<Tr
 	private BreadcrumbItemConfiguration currentItemConfiguration;
 
 	private BreadcrumbTrail breadcrumbTrail;
-
-	public BreadcrumbItemRenderingStrategy(ComponentRequest componentRequest) {
-		this.componentNode = componentRequest.getComponentNode();
-	}
 
 	public BreadcrumbItemRenderingStrategy(ComponentNode componentNode) {
 		this.componentNode = componentNode;

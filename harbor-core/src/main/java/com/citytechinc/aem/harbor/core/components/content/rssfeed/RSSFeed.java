@@ -8,9 +8,11 @@ import com.citytechinc.cq.component.annotations.Component;
 import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
 import com.google.common.base.Optional;
+import org.apache.sling.models.annotations.Model;
 
 @Component("RSS Feed")
 @AutoInstantiate(instanceName = "rssFeed")
+@Model(adaptables = Resource.class)
 public class RSSFeed extends AbstractComponent {
 
 	public static final String RESOURCE_TYPE = "harbor/components/content/rssfeed";
@@ -37,7 +39,7 @@ public class RSSFeed extends AbstractComponent {
 					"/" + rssChannelPathOptional.get());
 
 				if (rssChannelResource != null) {
-					rssChannelOptional = getComponent(rssChannelResource.getPath(), RSSChannel.class);
+					rssChannelOptional = Optional.fromNullable(rssChannelResource.adaptTo(RSSChannel.class));
 				}
 			}
 

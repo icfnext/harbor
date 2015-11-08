@@ -1,20 +1,15 @@
 package com.citytechinc.aem.harbor.core.lists.construction.nodesearch.predicates.path;
 
-import java.util.Map;
-
 import com.citytechinc.aem.bedrock.core.components.AbstractComponent;
-import com.citytechinc.cq.component.annotations.widgets.TextField;
 import com.day.cq.search.Predicate;
 import com.google.common.base.Optional;
-import org.apache.commons.lang.StringUtils;
 
-import com.citytechinc.aem.bedrock.api.node.ComponentNode;
 import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.widgets.PathField;
 import com.citytechinc.aem.harbor.api.lists.construction.search.ConstructionPredicate;
-import com.day.cq.search.eval.NodenamePredicateEvaluator;
 import com.day.cq.search.eval.PathPredicateEvaluator;
-import com.google.common.collect.Maps;
+import org.apache.sling.api.resource.Resource;
+import org.apache.sling.models.annotations.Model;
 
 /**
  * Dialog representation of a path predicate. Should be converted to a predicate
@@ -24,6 +19,7 @@ import com.google.common.collect.Maps;
  * Stores and handles all predicates that have to do with selecting nodes based
  * on their path in the JCR.
  */
+@Model(adaptables = Resource.class)
 public class PathConstructionPredicate extends AbstractComponent implements ConstructionPredicate {
 
 	public static final String PARAM_PATH = PathPredicateEvaluator.PATH;

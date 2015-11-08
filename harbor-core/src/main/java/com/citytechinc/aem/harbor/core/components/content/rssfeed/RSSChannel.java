@@ -45,7 +45,7 @@ public class RSSChannel extends AbstractComponent {
 			items = Lists.newArrayList();
 
 			for (ComponentNode currentRSSItemComponentNode : getComponentNodes()) {
-				items.add(getComponent(currentRSSItemComponentNode, RSSItem.class));
+				items.add(currentRSSItemComponentNode.getResource().adaptTo(RSSItem.class));
 			}
 		}
 

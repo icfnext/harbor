@@ -43,7 +43,7 @@ public class BootstrapBrands {
 
 	};
 
-	public static Optional<BootstrapBrand> forTemplateResource(Resource resource) {
+	public static Optional<BootstrapBrand> forTemplateResource(Resource resource) throws RepositoryException {
 
 		ComponentNode componentNode = resource.adaptTo(ComponentNode.class);
 
@@ -62,7 +62,7 @@ public class BootstrapBrands {
 
 	}
 
-	public static Optional<BootstrapBrand> forBrandResource(Resource resource) {
+	public static Optional<BootstrapBrand> forBrandResource(Resource resource) throws RepositoryException {
 
 		Resource brandProperties = resource.getChild("brandproperties");
 
