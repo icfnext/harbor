@@ -8,6 +8,8 @@ import org.apache.commons.lang.StringUtils;
 import com.citytechinc.aem.bedrock.api.components.annotations.AutoInstantiate;
 import com.citytechinc.aem.harbor.api.constants.dom.Headings;
 import com.citytechinc.aem.harbor.core.components.content.heading.Heading;
+import org.apache.sling.api.resource.Resource;
+import org.apache.sling.models.annotations.Model;
 
 import javax.inject.Inject;
 
@@ -25,6 +27,7 @@ import javax.inject.Inject;
 		}
 )
 @AutoInstantiate(instanceName = Title.INSTANCE_NAME)
+@Model(adaptables = Resource.class)
 public class Title extends Heading {
 
 	public static final String RESOURCE_TYPE = "harbor/components/content/title";
