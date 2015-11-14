@@ -66,6 +66,12 @@
 
 	<dependencies>
 
+		<!-- Day Rewriter -->
+		<dependency>
+			<groupId>com.day.cq</groupId>
+			<artifactId>cq-rewriter</artifactId>
+		</dependency>
+
         <!-- Sling Scripting -->
         <dependency>
             <groupId>org.apache.sling</groupId>

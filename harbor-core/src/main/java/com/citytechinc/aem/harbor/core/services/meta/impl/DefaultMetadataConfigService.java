@@ -2,17 +2,16 @@ package com.citytechinc.aem.harbor.core.services.meta.impl;
 
 import java.util.Map;
 
-import javax.jcr.Node;
-import javax.jcr.RepositoryException;
-
+import org.apache.commons.lang3.StringUtils;
 import org.apache.felix.scr.annotations.Activate;
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Modified;
 import org.apache.felix.scr.annotations.Property;
 import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.Service;
+import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.Resource;
-import org.apache.sling.api.resource.ResourceResolver;
+import com.day.cq.rewriter.linkchecker.LinkCheckerConfigProvider;
 import org.apache.sling.commons.osgi.PropertiesUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,25 +38,36 @@ public class DefaultMetadataConfigService implements MetadataConfigService {
     @Reference
     private Externalizer externalizer;
 
+	@Reference
+	private LinkCheckerConfigProvider linkCheckerConfigProvider;
+
 	@Override
-	public String getExternalUrl(ResourceResolver resourceResolver,
-			String resourcePath)  throws RepositoryException  {
-		StringBuilder linkBldr = new StringBuilder();
-		linkBldr.append(  this.externalizer.externalLink( resourceResolver, externalizerName,  resourceResolver.map( resourcePath) ) );
-		if(isPage(resourceResolver, resourcePath)){
-			linkBldr.append(".html");
+	public String getExternalUrl(SlingHttpServletRequest requestContext, Resource resource, String extension) {
+		String externalLink = externalizer.externalLink(
+				requestContext.getResourceResolver(),
+				externalizerName,
+				requestContext.getResourceResolver().map(requestContext, resource.getPath()));
+
+		if (StringUtils.isNotBlank(extension)) {
+			return externalLink + "." + extension;
 		}
-		return linkBldr.toString();
+
+		return externalLink;
 	}
-	
-    private boolean isPage(ResourceResolver resolver, String path) throws RepositoryException {
-    	Resource r = resolver.getResource(path);
-    	boolean isPage = false;
-    	if(r!=null && !path.isEmpty()){
-    		Node n = r.adaptTo(Node.class);
-    		isPage = n.isNodeType("cq:Page");
-    	}
-        return isPage;
-    }
+
+	@Override
+	public String getExternalUrlForPage(SlingHttpServletRequest requestContext, Resource resource) {
+		if (linkCheckerConfigProvider.getConfig().isStripHtmlExtension()) {
+			return getExternalUrl(requestContext, resource, null);
+		}
+
+		return getExternalUrl(requestContext, resource, ".html");
+	}
+
+	@Override
+	public String getExternalUrlForImage(SlingHttpServletRequest requestContext, Resource resource) {
+		//TODO: Check on this output
+		return getExternalUrl(requestContext, resource, ".png");
+	}
 
 }

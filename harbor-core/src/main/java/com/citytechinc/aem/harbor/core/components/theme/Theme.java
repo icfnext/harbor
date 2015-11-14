@@ -10,7 +10,7 @@ import javax.inject.Inject;
 public class Theme {
 
 	public static final String THEME_PROPERTY = "ct:theme";
-    private static final String DEFAULT_THEME = "harbor.theme.default";
+    public static final String DEFAULT_THEME = "harbor.theme.default";
 
     @Inject
     private PageDecorator currentPage;
