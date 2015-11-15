@@ -1,16 +1,15 @@
 package com.citytechinc.aem.harbor.core.components.content.heading;
 
-import com.citytechinc.aem.harbor.core.util.ComponentUtils;
-import com.citytechinc.aem.harbor.core.util.icon.IconUtils;
 import com.citytechinc.cq.component.annotations.*;
-import org.apache.commons.lang.StringUtils;
 
 import com.citytechinc.aem.bedrock.api.components.annotations.AutoInstantiate;
-import com.citytechinc.aem.bedrock.core.components.AbstractComponent;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
 import com.citytechinc.aem.harbor.api.constants.dom.Headings;
 import org.apache.sling.api.resource.Resource;
+import org.apache.sling.models.annotations.Default;
 import org.apache.sling.models.annotations.Model;
+
+import javax.inject.Inject;
 
 /**
  * The Heading component is intended to be used to title content sections. The
@@ -20,6 +19,7 @@ import org.apache.sling.models.annotations.Model;
  */
 @Component(
         value = "Heading",
+		resourceSuperType = AbstractHeading.RESOURCE_TYPE,
 		tabs = {
 				@Tab(title = "Heading"),
 				@Tab(title = "Advanced")
@@ -27,42 +27,24 @@ import org.apache.sling.models.annotations.Model;
 )
 @AutoInstantiate(instanceName = Heading.INSTANCE_NAME)
 @Model(adaptables = Resource.class)
-public class Heading extends AbstractComponent {
+public class Heading extends AbstractHeading {
 
 	public static final String RESOURCE_TYPE = "harbor/components/content/heading";
 	public static final String INSTANCE_NAME = "heading";
 
-	public static final String SIZE_PROPERTY = "size";
-	public static final String TEXT_PROPERTY = "text";
-
 	@DialogField(fieldLabel = "Heading Type", fieldDescription = "The type or size of heading to render.")
-	@Selection(type = "select", options = { @Option(text = Headings.H2_LABEL, value = Headings.H2),
-		@Option(text = Headings.H3_LABEL, value = Headings.H3), @Option(text = Headings.H4_LABEL, value = Headings.H4),
-		@Option(text = Headings.H5_LABEL, value = Headings.H5), @Option(text = Headings.H6_LABEL, value = Headings.H6) })
+	@Selection(type = "select", options = {
+			@Option(text = Headings.H2_LABEL, value = Headings.H2),
+			@Option(text = Headings.H3_LABEL, value = Headings.H3),
+			@Option(text = Headings.H4_LABEL, value = Headings.H4),
+			@Option(text = Headings.H5_LABEL, value = Headings.H5),
+			@Option(text = Headings.H6_LABEL, value = Headings.H6)
+	})
+	@Inject @Default(values = Headings.H2)
+	private String size;
+
 	public String getSize() {
-		return get(SIZE_PROPERTY, Headings.H2);
+		return size;
 	}
 
-	@DialogField(fieldLabel = "Heading Text", fieldDescription = "The textual content of the rendered heading.")
-	public String getText() {
-		return IconUtils.iconify(getRawText());
-	}
-
-	protected String getRawText() {
-		return get(TEXT_PROPERTY, StringUtils.EMPTY);
-	}
-
-	@DialogField(
-			fieldLabel = "ID",
-			fieldDescription = "A unique identifier to apply to the Title element rendered in the page DOM.  This will default to a sanitized version of the text content of the heading if not overridden.",
-			tab = 2)
-	public String getDomId() {
-		String domId = get("domId", StringUtils.EMPTY);
-
-		if (StringUtils.isNotBlank(domId)) {
-			return domId;
-		}
-
-		return ComponentUtils.sanatizeTextAsDomId(getRawText());
-	}
 }

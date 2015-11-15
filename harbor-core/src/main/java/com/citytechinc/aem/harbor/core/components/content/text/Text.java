@@ -14,14 +14,14 @@ import com.citytechinc.cq.component.annotations.widgets.rte.*;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
 
-@Component("Text")
+@Component(value = "Text", inPlaceEditingEditorType = "text")
 @AutoInstantiate(instanceName = "textcomponent")
 @Model(adaptables = Resource.class)
 public class Text extends AbstractComponent {
 
     private Classification classification;
 
-    @DialogField(fieldLabel = "Content")
+    @DialogField(fieldLabel = "Content", name = "./text")
     @RichTextEditor(
             edit = @Edit,
             findreplace = @FindReplace,
@@ -36,7 +36,7 @@ public class Text extends AbstractComponent {
     )
     public String getContent() {
         //TODO: Consider content cleanup such as replacing all &nbsp; which the RTE inserts with spaces as it's incredibly rare that someone actually wants a non-breaking space
-        return IconUtils.iconify(get("content", "Enter Text"));
+        return IconUtils.iconify(get("text", "Enter Text"));
     }
 
     @DialogField(ranking = 10)
