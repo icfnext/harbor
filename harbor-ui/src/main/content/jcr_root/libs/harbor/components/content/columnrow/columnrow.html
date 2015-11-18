@@ -1,0 +1,12 @@
+<div data-sly-use.columnrow="${component.properties['className']}" class="${columnrow.cssClass}" data-sly-attribute.id="${columnrow.domId}">
+    <div data-sly-test="${columnrow.columns}"
+         data-sly-repeat.column="${columnrow.columns}"
+         data-sly-attribute.class="${column.columnWidthClasses}"
+         name="${column.name}"
+         data-sly-attribute.id="${column.domId}"
+         data-sly-resource="${column.path @ resourceType='harbor/components/content/column'}">
+    </div>
+    <div data-sly-test="${!columnrow.columns && wcmmode.edit}" class="author-help-message">
+        Column Row - Press the + button in the edit bar to add columns.
+    </div>
+</div>
