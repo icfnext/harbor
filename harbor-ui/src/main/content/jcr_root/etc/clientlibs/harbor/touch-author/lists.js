@@ -17,7 +17,7 @@ Harbor.Lists = function( ns, channel ) {
          * @param item A JSON object representing the list item
          * @param item.sling:resourceType The sling:resourceType of the list item Resource.  Defaults to none
          * @param item.jcr:primaryType The jcr:primaryType of the list item Resource.  Defaults to "nt:unstructured"
-         * @param options.listName The name of the child resource representing the list.  Defaults to "list"
+         * @param options.listName The name of the child resource representing the list.  If not provided list items will be created as a direct child of the editable
          * @param options.listResourceType The sling:ResourceType of the list container Resource.  Defaults to none
          * @param options.listPrimaryType The jcr:primaryType of the list container Resource.  Defaults to "nt:unstructured"
          * @param options.listItemName The name of the new list item to create.  Defaults to "item" + Date.now()
@@ -25,7 +25,7 @@ Harbor.Lists = function( ns, channel ) {
          */
         this.addListItem = function (editable, item, options) {
 
-            var listName = options.listName || 'list';
+            var listNamePath = options.listName ? options.listName + '/' : '';
             var itemName = options.listItemName || ( options.listItemNameBase || 'item' ) + Date.now();
 
             var postData = {
@@ -33,26 +33,30 @@ Harbor.Lists = function( ns, channel ) {
                 "./jcr:primaryType": editable.primaryType //TODO: it seems unlikely that we have this data
             };
 
-            postData["./" + listName + "/jcr:primaryType"] = options.listPrimaryType || 'nt:unstructured';
-            if (options.listResourceType) {
-                postData["./" + listName + "/sling:resourceType"] = options.listResourceType;
+            if ( options.listName ) {
+                postData["./" + listNamePath + "jcr:primaryType"] = options.listPrimaryType || 'nt:unstructured';
+                if (options.listResourceType) {
+                    postData["./" + listNamePath + "sling:resourceType"] = options.listResourceType;
+                }
             }
 
             for (var propertyName in item) {
                 if (item.hasOwnProperty(propertyName)) {
-                    postData["./" + listName + "/" + itemName + "/" + propertyName] = item[propertyName];
+                    postData["./" + listNamePath + itemName + "/" + propertyName] = item[propertyName];
                 }
             }
 
             if (!item['jcr:primaryType']) {
-                postData["./" + listName + "/" + itemName + "/jcr:primaryType"] = 'nt:unstructured';
+                postData["./" + listNamePath + itemName + "/jcr:primaryType"] = 'nt:unstructured';
             }
 
             autopopulatedProperties.forEach(function (currentProperty) {
                 postData["./" + currentProperty] = '';
-                postData["./" + listName + "/" + currentProperty] = '';
+                if ( options.listName ) {
+                    postData["./" + listName + "/" + currentProperty] = '';
+                }
                 if (!item[currentProperty]) {
-                    postData["./" + listName + "/" + itemName + "/" + currentProperty] = '';
+                    postData["./" + listNamePath + itemName + "/" + currentProperty] = '';
                 }
             });
 

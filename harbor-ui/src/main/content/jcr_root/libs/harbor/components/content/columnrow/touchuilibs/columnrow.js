@@ -14,7 +14,7 @@ Harbor.Components.ColumnRow = function( ns, channel ) {
             Harbor.Lists.ListsEditor.addListItem(component, {
                 "sling:resourceType": columnResourceType
             }, {
-                listName: "columns",
+                //listName: "columns",
                 listItemNameBase: "column"
             })
                 .done( function() {

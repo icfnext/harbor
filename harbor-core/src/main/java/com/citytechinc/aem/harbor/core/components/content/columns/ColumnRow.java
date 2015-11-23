@@ -15,9 +15,11 @@ import com.citytechinc.aem.harbor.core.constants.groups.ComponentGroups;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.Optional;
+import org.apache.sling.models.annotations.injectorspecific.ChildResource;
 import org.apache.sling.models.annotations.injectorspecific.Self;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 /**
  * The authoring of content in a flexible set of columns is achieved by the Column Row component.  Each instance of
@@ -56,7 +58,7 @@ import javax.inject.Inject;
 @Model(adaptables = Resource.class)
 public class ColumnRow {
 
-	@Inject @Optional
+	@Inject @Optional @Named(".") @ChildResource
 	private List<Column> columns;
 
 	@DialogField(ranking = 3)
