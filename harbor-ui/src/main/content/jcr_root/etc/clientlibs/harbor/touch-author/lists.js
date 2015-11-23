@@ -65,7 +65,7 @@ Harbor.Lists = function( ns, channel ) {
             })
                 .done(function () {
 
-                    alert("the post happened");
+                    console.log("the post happened");
 
                 })
                 .fail(function (e) {
@@ -77,6 +77,48 @@ Harbor.Lists = function( ns, channel ) {
 
     };
 
-    return new ListsEditor();
+    /**
+     * To be called as a component listener.  The context of the function will be the component editable itself.
+     * Given a component structure
+     *
+     * + Component
+     *   + List
+     *     + List Item
+     *     + List Item
+     *
+     * this function is appropriate for attribution to actions taken on the individual List Items and will call
+     * for a refresh of the Component.  This is to compensate for the fact that the function which is called when
+     * an edit config listener value is "REFRESH_PARENT" only goes up a single resource and attempts to find an
+     * editable at that path to refresh.
+     *
+     * TODO: Consider whether there is a way to do this without necessitating a refresh of the entire row
+     */
+    var refreshListParent = function() {
+        var parentPath = this.getParentPath();
+        var listParentPath = parentPath.substr( 0, parentPath.lastIndexOf( '/' ) );
+        var listParentInspectable = ns.store.find( listParentPath );
+
+        if ( listParentInspectable[ 0 ] ) {
+            ns.edit.actions.doRefresh( listParentInspectable[ 0 ] )
+                .done( function() {
+                    /*
+                     * This additional find is required, because the doRefresh method relies on the editable's
+                     * getChildren method to find child editables to refresh.  This in turn relies on ns.store.find
+                     * to look up any editables at a path one level deeper than the path of the current editable.
+                     * For listed editables such as these this obviously does not work.
+                     */
+                    ns.store.find( {
+                        path: new RegExp( parentPath + '/[^/]+$' )
+                    } ).forEach( function( currentEditable ) {
+                        ns.edit.actions.doRefresh( currentEditable );
+                    } );
+                } );
+        }
+    };
+
+    return {
+        ListsEditor: new ListsEditor(),
+        refreshListParent: refreshListParent
+    };
 
 }( Granite.author, jQuery( document ) );

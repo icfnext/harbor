@@ -19,6 +19,22 @@ import org.apache.sling.models.annotations.injectorspecific.Self;
 
 import javax.inject.Inject;
 
+/**
+ * The authoring of content in a flexible set of columns is achieved by the Column Row component.  Each instance of
+ * the component represents a "row" and each "row" may contain any number of Column components.  Column are added to
+ * the Column Row instance by clicking the "+" button in the instance's edit bar.  Once added each Column is configured
+ * individually and can be removed via deletion.
+ *
+ * This component leverages the Bootstrap grid system which breaks the page into a 12 column grid.  Each column can
+ * be configured to span 1-12 parts of the grid.  Further the amount a given column spans may differ by viewport size.
+ * If the total number of columns spanned by the Column components making up a row is greater than 12 then columns beyond
+ * the 12th column spanned will flow into the next row.
+ *
+ * For more information on authoring individual columns refer to the com.citytechinc.aem.harbor.core.components.content.columns.Column
+ * documentation.
+ *
+ * This component is Classifiable
+ */
 @Component(
 		value = "Column Row",
 		group = ComponentGroups.HARBOR_SCAFFOLDING,

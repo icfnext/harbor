@@ -4,7 +4,7 @@
          data-sly-attribute.class="${column.columnWidthClasses}"
          name="${column.name}"
          data-sly-attribute.id="${column.domId}"
-         data-sly-resource="${column.path @ resourceType='harbor/components/content/column'}">
+         data-sly-resource="${['columns', column.name] @ join='/', resourceType='harbor/components/content/column', decorationTagName='div'}">
     </div>
     <div data-sly-test="${!columnrow.columns && wcmmode.edit}" class="author-help-message">
         Column Row - Press the + button in the edit bar to add columns.

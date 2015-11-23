@@ -26,7 +26,8 @@ import java.util.List;
 @Component(
 		value = "Column",
 		actions = { "text:Column", "edit", "delete" },
-		listeners = { @Listener(name = "afterdelete", value = "REFRESH_PARENT"), @Listener(name = "afteredit", value = "REFRESH_PARENT") },
+		//listeners = { @Listener(name = "afterdelete", value = "Harbor.Lists.refreshListParent"), @Listener(name = "afteredit", value = "Harbor.Lists.refreshListParent") },
+		listeners = { @Listener( name = "afteredit", value = "Harbor.Components.ColumnRow.updateColumn" ) },
 		group = ".hidden",
 		tabs = {
 				@Tab(title = "Column Row"),
