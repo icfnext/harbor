@@ -51,9 +51,8 @@ import javax.inject.Named;
 		allowedParents = "*/parsys",
 		resourceSuperType = "foundation/components/parbase",
 		tabs = {
-				@Tab(title = "Column Row"),
-				@Tab(title = "Advanced")
-		})
+				@Tab(title = "Column Row")
+		} )
 @AutoInstantiate(instanceName = "columnrow")
 @Model(adaptables = Resource.class)
 public class ColumnRow {
@@ -69,7 +68,7 @@ public class ColumnRow {
 	@DialogField(
 			fieldLabel = "ID",
 			fieldDescription = "A unique identifier to apply to the Row element rendered in the page DOM.  If left blank, no id attribute will be applied to the rendered element.",
-			tab = 2)
+			tab = 1)
 	@TextField @Optional
 	private String domId;
 
