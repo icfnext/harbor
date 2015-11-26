@@ -42,7 +42,6 @@ Harbor.Components.ColumnRow = function( ns, channel ) {
                     ns.ContentFrame.executeCommand( editable.path, 'harbor-columnrow-update-column-size', JSON.stringify( bootstrapSizeArray ) );
 
                 } );
-            console.log( this );
         };
 
     };
