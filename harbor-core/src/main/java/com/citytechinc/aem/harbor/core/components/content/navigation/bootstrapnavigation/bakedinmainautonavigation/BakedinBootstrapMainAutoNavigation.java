@@ -15,8 +15,9 @@ import org.apache.sling.models.annotations.Model;
     disableTargeting = true,
     actions = { "text: Main Auto Navigation", "-", "edit" },
     tabs = {
-            @Tab(title = "Main Auto Navigation")
-    })
+            @Tab(title = "Main Auto Navigation", touchUINodeName = BootstrapMainAutoNavigation.TAB_1_NODE_NAME)
+    },
+    suppressFieldInheritanceForTouchUI = true)
 @AutoInstantiate(instanceName = "bootstrapMainAutoNavigation")
 @Model(adaptables = Resource.class)
 public class BakedinBootstrapMainAutoNavigation extends BootstrapMainAutoNavigation {

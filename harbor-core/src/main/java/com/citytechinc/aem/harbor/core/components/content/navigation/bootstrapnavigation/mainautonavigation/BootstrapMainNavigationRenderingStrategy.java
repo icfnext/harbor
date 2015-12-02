@@ -2,6 +2,8 @@ package com.citytechinc.aem.harbor.core.components.content.navigation.bootstrapn
 
 import com.citytechinc.aem.harbor.api.trees.rendering.TreeRenderingStrategy;
 import com.citytechinc.cq.component.annotations.widgets.Switch;
+import com.citytechinc.cq.component.annotations.widgets.TextField;
+import com.day.cq.wcm.api.WCMMode;
 import org.apache.commons.lang.StringUtils;
 import org.apache.sling.api.resource.Resource;
 
@@ -14,9 +16,14 @@ import com.citytechinc.aem.harbor.api.content.page.navigation.NavigablePage;
 import com.google.common.base.Optional;
 import org.apache.sling.models.annotations.Model;
 
+import javax.inject.Inject;
+
 @Model(adaptables = Resource.class)
 public class BootstrapMainNavigationRenderingStrategy extends AbstractComponent implements
         TreeRenderingStrategy<NavigablePage, BootstrapPageNavigableRenderableTree> {
+
+	//@Inject
+	//WCMMode wcmMode;
 
 	@DialogField(fieldLabel = "Enable Sticky Navigation", fieldDescription = "Disabled in Edit mode. Use Preview mode to view.", ranking = 0)
 	@Switch(offText = "No", onText = "Yes")
@@ -29,10 +36,11 @@ public class BootstrapMainNavigationRenderingStrategy extends AbstractComponent 
 	private Boolean showBrandLink;
 
 	@DialogField(fieldLabel = "Brand Link Text", fieldDescription = "Text to present as the brand of the navigation bar", ranking = 20)
+	@TextField
 	private String brandLinkText;
 
-	@DialogField(fieldLabel = "Brand Link Image", ranking = 30)
-	@Html5SmartFile(ddGroups = "media", name="./brandLinkImage", fileNameParameter = "./brandLinkImage/fileName", fileReferenceParameter = "./brandLinkImage/fileReference")
+	@DialogField(fieldLabel = "Brand Link Image", fieldDescription = "Drag and drop an asset or upload an image", ranking = 30)
+	@Html5SmartFile(ddGroups = "media", name="./brandLinkImage", fileNameParameter = "./brandLinkImage/fileName", fileReferenceParameter = "./brandLinkImage/fileReference", title = "Upload")
 	private Optional<String> brandLinkImage;
 
     @DialogField(fieldLabel = "Full Width", ranking = 40)
@@ -48,7 +56,7 @@ public class BootstrapMainNavigationRenderingStrategy extends AbstractComponent 
 			isSticky = getInherited("isSticky", false);
 		}
 
-		return isSticky;
+		return isSticky; // && WCMMode.EDIT != wcmMode;
 	}
 
 	public Boolean getShowBrandLink() {

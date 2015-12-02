@@ -1,0 +1,33 @@
+<template data-sly-template.navigationitem="${@ currentNode, navigationComponent}" data-sly-use.nestednavitemrenderer="nestednavitems.html">
+    <sly data-sly-test="${currentNode.hasChildNodes && navigationComponent.tree.presentMainNavigationItemInDropDown}">
+        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">${currentNode.navigationLink.title} <i class="fa fa-caret-down"></i></a>
+            <ul class="dropdown-menu pull-right" role="menu">
+                <li class="section-link"><a href="${currentNode.href}">${currentNode.navigationLink.title}</a></li>
+                <li role="separator" class="divider"></li>
+                <li data-sly-repeat.currentInnerNode="${currentNode.childNodesIterator}" class="subpage-link"><a href="${currentInnerNode.href}">${currentInnerNode.navigationLink.title}</a>
+                    <ul data-sly-test="${currentInnerNode.hasChildNodes}">
+                        <sly data-sly-repeat.currentNestedInnerNode="${currentInnerNode.items}"
+                             data-sly-call="${nestednavitemrenderer.nestednavitem @ currentNode = currentNestedInnerNode, navigationComponent = navigationComponent}"/>
+                    </ul>
+                </li>
+            </ul>
+        </li>`
+    </sly>
+    <sly data-sly-test="${currentNode.hasChildNodes && !navigationComponent.tree.presentMainNavigationItemInDropDown}">
+        <li class="dropdown-split-left"><a href="${currentNode.href}">${currentNode.navigationLink.title}</a></li>
+        <li><a href="#" data-toggle="dropdown"><i class="fa fa-caret-down"></i></a>
+            <ul class="dropdown-menu pull-right" role="menu">
+                <li data-sly-repeat.currentInnerNode="${currentNode.childNodesIterator}" class="subpage-link"><a href="${currentInnerNode.href}">${currentInnerNode.navigationLink.title}</a>
+                    <ul data-sly-test="${currentInnerNode.hasChildNodes}">
+                        <sly data-sly-repeat.currentNestedInnerNode="${currentInnerNode.items}"
+                             data-sly-call="${nestednavitemrenderer.nestednavitem @ currentNode = currentNestedInnerNode, navigationComponent = navigationComponent}"/>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </sly>
+    <sly data-sly-test="${!currentNode.hasChildNodes}">
+        <li><a href="${currentNode.href}">${currentNode.navigationLink.title}</a></li>
+    </sly>
+</template>
+

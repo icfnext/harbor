@@ -1,0 +1,12 @@
+<div data-sly-use.bootstrapMainAutoNavigation="${component.properties['className']}" class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#${bootstrapMainAutoNavigation.id}">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </button>
+    <a data-sly-test="${bootstrapMainAutoNavigation.tree.showBrandLink}" class="navbar-brand site-title" href="${bootstrapMainAutoNavigation.tree.href}">
+        <img data-sly-test="${bootstrapMainAutoNavigation.tree.hasBrandLinkImage}" src="${bootstrapMainAutoNavigation.tree.brandLinkImage}" title="${bootstrapMainAutoNavigation.tree.brandLinkText}"/>
+        <sly data-sly-test="${!bootstrapMainAutoNavigation.tree.hasBrandLinkImage}">${bootstrapMainAutoNavigation.tree.brandLinkText}</sly>
+    </a>
+</div>

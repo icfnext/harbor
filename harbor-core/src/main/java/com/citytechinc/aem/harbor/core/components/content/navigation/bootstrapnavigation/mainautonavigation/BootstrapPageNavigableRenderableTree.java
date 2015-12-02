@@ -4,7 +4,10 @@ import com.citytechinc.aem.harbor.api.constants.bootstrap.Bootstrap;
 import com.citytechinc.aem.harbor.api.content.page.navigation.NavigablePage;
 import com.citytechinc.aem.harbor.api.trees.Tree;
 import com.google.common.base.Optional;
+import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;
+
+import java.util.List;
 
 public class BootstrapPageNavigableRenderableTree implements Tree<NavigablePage> {
 
@@ -92,5 +95,13 @@ public class BootstrapPageNavigableRenderableTree implements Tree<NavigablePage>
 
     public boolean isPresentMainNavigationItemInDropDown() {
         return presentMainNavigationItemInDropDown;
+    }
+
+    public List<String> getNavbarClasses() {
+        if (isSticky) {
+            return Lists.newArrayList("navbar", "navbar-default", "navbar-fixed-top");
+        }
+
+        return Lists.newArrayList("navbar", "navbar-default");
     }
 }
