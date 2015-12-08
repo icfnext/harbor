@@ -1,0 +1,10 @@
+<sly data-sly-use.contentContainer="${component.properties['className']}">
+    <section data-sly-test="${contentContainer.section}" data-sly-attribute.class="${contentContainer.sectionClass}" data-sly-attribute.id="${contentContainer.domId}">
+        <div data-sly-attribute.class="${contentContainer.containerClass}" data-sly-attribute.data-role="${contentContainer.role}" data-sly-element="${contentContainer.containerElement}">
+            <sly data-sly-include="innercontentcontainer.html"/>
+        </div>
+    </section>
+    <div data-sly-test="${!contentContainer.section}" data-sly-attribute.class="${contentContainer.containerClass}" data-sly-attribute.id="${contentContainer.domId}" data-sly-attribute.data-role="${contentContainer.role}" data-sly-element="${contentContainer.containerElement}">
+        <sly data-sly-include="innercontentcontainer.html"/>
+    </div>
+</sly>

@@ -25,9 +25,9 @@ import javax.inject.Inject;
         value = "Subtitle",
         resourceSuperType = AbstractHeading.RESOURCE_TYPE,
         tabs = {
-                //TODO: Cleanup once touch extension is better handled by the plugin
                 @Tab(title = "Subtitle"),
-                @Tab(title = "Advanced")
+                @Tab(title = "Advanced"),
+                @Tab(title = "Semantics")
         }
 )
 @AutoInstantiate(instanceName = Subtitle.INSTANCE_NAME)

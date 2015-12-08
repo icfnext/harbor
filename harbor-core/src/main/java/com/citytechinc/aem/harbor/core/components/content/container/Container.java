@@ -109,7 +109,7 @@ public class Container extends AbstractComponent {
 	}
 
 	public String getRole() {
-		return getRoleOptional().get();
+		return getRoleOptional().orNull();
 	}
 
     /**
