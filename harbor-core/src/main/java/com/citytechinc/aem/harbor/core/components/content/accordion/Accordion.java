@@ -14,6 +14,7 @@ import com.citytechinc.cq.component.annotations.ContentProperty;
 import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.Option;
 import com.citytechinc.cq.component.annotations.editconfig.ActionConfig;
+import com.citytechinc.cq.component.annotations.editconfig.ActionConfigProperty;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
 import com.citytechinc.cq.component.annotations.widgets.Switch;
 import com.google.common.base.Predicate;
@@ -28,7 +29,10 @@ import javax.inject.Inject;
     actions = { "text: Accordion", "-", "edit", "-", "copymove", "delete", "-", "insert" },
     actionConfigs = {
         @ActionConfig(xtype = "tbseparator"),
-        @ActionConfig(text = "Add Item", handler = "function(){Harbor.Components.Accordion.addItem(this)}")
+        @ActionConfig(
+                text = "Add Item",
+                handler = "function(){Harbor.Components.Accordion.addItem( this, 'harbor/components/content/accordion/accordionitem' )}",
+                additionalProperties = {@ActionConfigProperty(name = "icon", value = "coral-Icon--add")})
     },
     contentAdditionalProperties = {
         @ContentProperty(name = "dependencies",

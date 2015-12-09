@@ -1,0 +1,17 @@
+<div data-sly-use.accordionItem="${component.properties['className']}" class="${accordionItem.accordionUniqueId}-accordion-container accordion-item" data-path="${accordionItem.path}">
+    <div class="panel panel-default" data-node-name="${accordionItem.name}">
+        <div class="panel-heading" role="tab" id="heading-${accordionItem.uniqueId}">
+            <h4 class="panel-title">
+                <sly data-sly-test="${wcmmode.edit || wcmmode.design}">${accordionItem.title}</sly>
+                <a data-sly-test="${!wcmmode.edit && !wcmmode.design}" data-parent=".${accordionItem.accordionUniqueId}-accordion-container" href="#${accordionItem.uniqueId}" aria-expanded="true" aria-controls="${accordionItem.uniqueId}">${accordionItem.title}</a>
+            </h4>
+        </div>
+    </div>
+    <!--/* TODO: Allow for the first item to be open by default */-->
+    <!--/* TODO: Allow for the last open item to remain open */-->
+    <div id="${accordionItem.uniqueId}" data-sly-attribute.class="${wcmmode.edit || wcmmode.design ? 'panel-collapse collapse in' : 'panel-collapse collapse'}" role="tabpanel" aria-labelledby="heading-${accordionItem.uniqueId}">
+        <div class="panel-body">
+            <sly data-sly-resource="${'accordionitem-par' @ resourceType = 'wcm/foundation/components/parsys'}"/>
+        </div>
+    </div>
+</div>

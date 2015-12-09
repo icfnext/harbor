@@ -114,6 +114,35 @@ public class Column {
 	@Inject @Default(values = "default")
 	private String lgSize;
 
+	@DialogField(fieldLabel = "Ordering", ranking = 35)
+	@Selection(type = Selection.SELECT, options = {
+			@Option(text = "Default", value = "default"),
+			@Option(text = "Push 1", value = Bootstrap.GRID_MEDIUM + "push-1"),
+			@Option(text = "Push 2", value = Bootstrap.GRID_MEDIUM + "push-2"),
+			@Option(text = "Push 3", value = Bootstrap.GRID_MEDIUM + "push-3"),
+			@Option(text = "Push 4", value = Bootstrap.GRID_MEDIUM + "push-4"),
+			@Option(text = "Push 5", value = Bootstrap.GRID_MEDIUM + "push-5"),
+			@Option(text = "Push 6", value = Bootstrap.GRID_MEDIUM + "push-6"),
+			@Option(text = "Push 7", value = Bootstrap.GRID_MEDIUM + "push-7"),
+			@Option(text = "Push 8", value = Bootstrap.GRID_MEDIUM + "push-8"),
+			@Option(text = "Push 9", value = Bootstrap.GRID_MEDIUM + "push-9"),
+			@Option(text = "Push 10", value = Bootstrap.GRID_MEDIUM + "push-10"),
+			@Option(text = "Push 11", value = Bootstrap.GRID_MEDIUM + "push-11"),
+			@Option(text = "Pull 1", value = Bootstrap.GRID_MEDIUM + "pull-1"),
+			@Option(text = "Pull 2", value = Bootstrap.GRID_MEDIUM + "pull-2"),
+			@Option(text = "Pull 3", value = Bootstrap.GRID_MEDIUM + "pull-3"),
+			@Option(text = "Pull 4", value = Bootstrap.GRID_MEDIUM + "pull-4"),
+			@Option(text = "Pull 5", value = Bootstrap.GRID_MEDIUM + "pull-5"),
+			@Option(text = "Pull 6", value = Bootstrap.GRID_MEDIUM + "pull-6"),
+			@Option(text = "Pull 7", value = Bootstrap.GRID_MEDIUM + "pull-7"),
+			@Option(text = "Pull 8", value = Bootstrap.GRID_MEDIUM + "pull-8"),
+			@Option(text = "Pull 9", value = Bootstrap.GRID_MEDIUM + "pull-9"),
+			@Option(text = "Pull 10", value = Bootstrap.GRID_MEDIUM + "pull-10"),
+			@Option(text = "Pull 11", value = Bootstrap.GRID_MEDIUM + "pull-11"),
+	})
+	@Inject @Default(values = "default")
+	private String mdOrdering;
+
 	@DialogField(tab = 1, ranking = 40)
 	@DialogFieldSet
 	@Inject @Optional
@@ -157,6 +186,9 @@ public class Column {
 		}
 		if (!"default".equals(lgSize)) {
 			colSizes.add(lgSize);
+		}
+		if (!"default".equals(mdOrdering)) {
+			colSizes.add(mdOrdering);
 		}
 
 		if (colSizes.isEmpty()) {

@@ -1,6 +1,7 @@
 package com.citytechinc.aem.harbor.core.components.content.accordion;
 
 import com.citytechinc.aem.bedrock.api.page.PageDecorator;
+import com.citytechinc.cq.component.annotations.widgets.TextField;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
 import org.slf4j.Logger;
@@ -31,10 +32,9 @@ import javax.inject.Inject;
     layout = "rollover",
     actionConfigs = {
         @ActionConfig(xtype = "tbseparator"),
-        @ActionConfig(text = "Move Up", handler = "function(){Harbor.Components.Accordion.moveUp(this)}"),
-        @ActionConfig(text = "Move Down", handler = "function(){Harbor.Components.Accordion.moveDown(this)}")
-    },
-    contentAdditionalProperties = { @ContentProperty(name = "dependencies", value = "[harbor.fontawesome]") }
+        @ActionConfig(text = "Move Up", handler = "function(){Harbor.Components.Accordion.moveUp( this )}"),
+        @ActionConfig(text = "Move Down", handler = "function(){Harbor.Components.Accordion.moveDown( this )}")
+    }
 )
 @AutoInstantiate
 @Model(adaptables = Resource.class)
@@ -48,9 +48,11 @@ public class AccordionItem extends AbstractComponent {
     public static final String TYPE = "harbor/components/content/accordion/accordionitem";
 
     @DialogField(fieldLabel = "Title", fieldDescription = "The title of the accordion item.")
+    @TextField
     private String title;
 
     private String uniqueId;
+    private String accordionUniqueId;
     private String name;
 
     public String getTitle() {
@@ -70,6 +72,13 @@ public class AccordionItem extends AbstractComponent {
     public String getUniqueId() {
         if (uniqueId == null) {
             uniqueId = ComponentUtils.getUniqueIdentifierForResourceInPage(currentPage, getResource());
+        }
+        return uniqueId;
+    }
+
+    public String getAccordionUniqueId() {
+        if (accordionUniqueId == null) {
+            accordionUniqueId = ComponentUtils.getUniqueIdentifierForResourceInPage(currentPage, getResource().getParent());
         }
         return uniqueId;
     }
