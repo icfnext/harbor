@@ -108,6 +108,7 @@
 					<transformerName>lower-case</transformerName>
 					<additionalFeatures>
 						<additionalFeature>rte-touchui</additionalFeature>
+						<additionalFeature>tagspickerwidget</additionalFeature>
 					</additionalFeatures>
 				</configuration>
 			</plugin>
