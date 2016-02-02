@@ -28,16 +28,14 @@ import javax.inject.Named;
         value = "Text",
         inPlaceEditingEditorType = "text",
         tabs = {
-                @Tab(title = "Content", touchUINodeName = Text.TAB_1_NODE_NAME),
-                @Tab(title = "Semantics", touchUINodeName = Text.TAB_2_NODE_NAME)
+                @Tab(title = "Content", touchUINodeName = Text.TAB_1_NODE_NAME)
         })
 @AutoInstantiate(instanceName = "textcomponent")
 @Model(adaptables = Resource.class)
 public class Text extends AbstractComponent {
 
     public static final String TAB_1_NODE_NAME = "contenttab";
-    public static final String TAB_2_NODE_NAME = "semantictab";
-    
+
     @Inject @Named("text") @Default(values = "Enter Text")
     private String content;
 
@@ -71,10 +69,5 @@ public class Text extends AbstractComponent {
         return classification;
     }
 
-    @DialogField(tab = 2)
-    @DialogFieldSet
-    public Property getRdfaProperty() {
-        return property;
-    }
 
 }
