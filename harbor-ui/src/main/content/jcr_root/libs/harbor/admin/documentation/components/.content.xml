@@ -71,7 +71,7 @@
                         <teezer
                             jcr:primaryType="nt:unstructured"
                             sling:resourceType="granite/ui/components/foundation/container"
-                            class="card-page">
+                            class="foundation-collection-container foundation-layout-util-maximized card mode-selection">
                             <items jcr:primaryType="nt:unstructured">
                                 <title
                                     jcr:primaryType="nt:unstructured"
