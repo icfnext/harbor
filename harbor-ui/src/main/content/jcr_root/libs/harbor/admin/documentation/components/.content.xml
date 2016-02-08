@@ -67,33 +67,35 @@
                 <content
                     jcr:primaryType="nt:unstructured"
                     sling:resourceType="granite/ui/components/foundation/container">
-                    <items jcr:primaryType="nt:unstructured">
-                        <teezer
+                    <items jcr:primaryType="nt:unstructured"
+                           class="foundation-collection-container foundation-layout-util-maximized card mode-selection">
+                        <card
                             jcr:primaryType="nt:unstructured"
                             sling:resourceType="granite/ui/components/foundation/container"
-                            class="foundation-collection-container foundation-layout-util-maximized card mode-selection">
+                            class="grid-4">
                             <items jcr:primaryType="nt:unstructured">
                                 <title
-                                    jcr:primaryType="nt:unstructured"
-                                    sling:resourceType="granite/ui/components/foundation/heading"
-                                    class="coral-Heading coral-Heading--1"
-                                    level="2"
-                                    text="Text"/>
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/heading"
+                                        class="coral-Heading coral-Heading--1"
+                                        level="2"
+                                        text="Text"/>
                                 <description
-                                    jcr:primaryType="nt:unstructured"
-                                    sling:resourceType="screens/ui/components/admin/text"
-                                    line1="The Harbor Text component"
-                                    line2="Group: Harbor"
-                                    />
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="screens/ui/components/admin/text"
+                                        line1="The Harbor Text component"
+                                        line2="Group: Harbor"
+                                        />
                                 <dlbutton
-                                    jcr:primaryType="nt:unstructured"
-                                    sling:resourceType="granite/ui/components/foundation/hyperlink"
-                                    class="coral-Button"
-                                    href_i18n="/libs/harbor/admin/documentation/components/text.html"
-                                    icon="coral-Icon--link"
-                                    text="View Documentation"/>
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/hyperlink"
+                                        class="coral-Button"
+                                        href_i18n="/libs/harbor/admin/documentation/components/text.html"
+                                        icon="coral-Icon--link"
+                                        text="View Documentation"/>
                             </items>
-                        </teezer>
+                        </card>
+                        
                     </items>
                 </content>
             </content>
