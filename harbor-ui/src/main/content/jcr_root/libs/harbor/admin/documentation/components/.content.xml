@@ -53,7 +53,7 @@
                 sling:resourceType="granite/ui/components/endor/layouts/breadcrumbs"/>
             <title
                 jcr:primaryType="nt:unstructured"
-                jcr:title="Screens"
+                jcr:title="Harbor Components"
                 sling:resourceType="screens/ui/components/admin/endor/title"/>
             <header
                 jcr:primaryType="nt:unstructured"
@@ -71,27 +71,27 @@
                         <teezer
                             jcr:primaryType="nt:unstructured"
                             sling:resourceType="granite/ui/components/foundation/container"
-                            class="foundation-Screens-page">
+                            class="card-page">
                             <items jcr:primaryType="nt:unstructured">
                                 <title
                                     jcr:primaryType="nt:unstructured"
                                     sling:resourceType="granite/ui/components/foundation/heading"
                                     class="coral-Heading coral-Heading--1"
                                     level="2"
-                                    text="Welcome to Adobe Experience Manager Screens"/>
+                                    text="Text"/>
                                 <description
                                     jcr:primaryType="nt:unstructured"
                                     sling:resourceType="screens/ui/components/admin/text"
-                                    line1="AEM Screens paves the way to market your products and engage your customers through novel channels."
-                                    line2="From onsite point-of-sale solutions to in-venue digital experiences, Screens will allow you to manage"
-                                    line3="all your customer-facing screens — of any size and in any location — right from AEM."/>
+                                    line1="The Harbor Text component"
+                                    line2="Group: Harbor"
+                                    />
                                 <dlbutton
                                     jcr:primaryType="nt:unstructured"
                                     sling:resourceType="granite/ui/components/foundation/hyperlink"
                                     class="coral-Button"
-                                    href_i18n="http://www.adobe.com/go/aem6_1_docs_screens_en"
-                                    icon="coral-Icon--download"
-                                    text="Learn more about AEM Screens"/>
+                                    href_i18n="/libs/harbor/admin/documentation/components/text/text.html"
+                                    icon="coral-Icon--link"
+                                    text="View Documentation"/>
                             </items>
                         </teezer>
                     </items>
