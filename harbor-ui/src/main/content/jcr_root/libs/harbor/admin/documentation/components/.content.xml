@@ -502,17 +502,7 @@
             </content>
         </body>
     </jcr:content>
-    <properties/>
-    <folderproperties/>
-    <createpagewizard/>
-    <createsitewizard/>
-    <createlaunchwizard/>
-    <createlivecopywizard/>
-    <movepagewizard/>
-    <publishpagewizard/>
-    <unpublishpagewizard/>
-    <promotelaunchwizard/>
-    <editlivecopywizard/>
+    
     <column
         jcr:primaryType="nt:unstructured"
         sling:resourceType="granite/ui/components/foundation/container">
