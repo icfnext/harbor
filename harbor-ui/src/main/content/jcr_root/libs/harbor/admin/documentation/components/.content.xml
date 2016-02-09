@@ -47,7 +47,7 @@
                 jcr:primaryType="nt:unstructured"
                 sling:resourceType="cq/gui/components/siteadmin/admin/endor/breadcrumbs"
                 baseUrl="/sites.html"
-                contentPath="${requestPathInfo.suffix}"
+                contentPath="/libs/harbor/admin/documentation/components"
                 depthAdjustment="{Long}-1"
                 pageTitleTemplate="AEM Sites | {{title}}"
                 rootPageTitle="AEM Sites"
@@ -57,7 +57,7 @@
             <title
                 jcr:primaryType="nt:unstructured"
                 sling:resourceType="cq/gui/components/siteadmin/admin/endor/title"
-                contentPath="${requestPathInfo.suffix}"
+                contentPath="/libs/harbor/admin/documentation/components"
                 rootTitle="Sites"/>
             <header
                 jcr:primaryType="nt:unstructured"
@@ -431,7 +431,7 @@
                                         layoutId="card"
                                         limit="{Long}20"
                                         maximized="{Boolean}true"
-                                        path="${requestPathInfo.suffix}"
+                                        path="/libs/harbor/admin/documentation/components"
                                         selectionMode="${state[&quot;cq.sites.childpages.selectionMode&quot;].boolean}"
                                         src="/libs/wcm/core/content/sites/jcr:content/body/content/content/items/childpages{.offset,limit}.html{+id}"
                                         stateId="cq.sites.childpages"/>
@@ -442,7 +442,7 @@
                                         layoutId="list"
                                         limit="{Long}40"
                                         maximized="{Boolean}true"
-                                        path="${requestPathInfo.suffix}"
+                                        path="/libs/harbor/admin/documentation/components"
                                         src="/libs/wcm/core/content/sites/jcr:content/body/content/content/items/childpages{.offset,limit}.html{+id}"
                                         stateId="cq.sites.childpages">
                                         <headerdatasource
@@ -461,20 +461,20 @@
                                         limit="{Long}40"
                                         loadParents="{Boolean}true"
                                         multiselect="{Boolean}true"
-                                        path="${requestPathInfo.suffix}"
-                                        rootPath="/content"
+                                        path="/libs/harbor/admin/documentation/components"
+                                        rootPath="/libs/harbor/admin/documentation/components"
                                         src="/libs/wcm/core/content/sites/column{.offset,limit}.html{+path}"
                                         stateId="cq.sites.childpages">
                                         <preview
                                             jcr:primaryType="nt:unstructured"
                                             sling:resourceType="cq/gui/components/siteadmin/admin/pagecolumnpreview"
-                                            path="${requestPathInfo.suffix}"/>
+                                            path="/libs/harbor/admin/documentation/components"/>
                                     </columns>
                                 </layouts>
                                 <empty
                                     jcr:primaryType="nt:unstructured"
                                     sling:resourceType="cq/gui/components/common/wcm/layouts/emptychildpages"
-                                    path="${requestPathInfo.suffix}">
+                                    path="/libs/harbor/admin/documentation/components">
                                     <actionspopover
                                         jcr:primaryType="nt:unstructured"
                                         sling:resourceType="granite/ui/components/foundation/container"
@@ -501,7 +501,7 @@
                                                         <rendercondition
                                                             jcr:primaryType="nt:unstructured"
                                                             sling:resourceType="granite/ui/components/foundation/renderconditions/privilege"
-                                                            path="${requestPathInfo.suffix}"
+                                                            path="/libs/harbor/admin/documentation/components"
                                                             privileges="jcr:addChildNodes"/>
                                                     </createpage>
                                                     <createsite
@@ -513,7 +513,7 @@
                                                         <rendercondition
                                                             jcr:primaryType="nt:unstructured"
                                                             sling:resourceType="granite/ui/components/foundation/renderconditions/privilege"
-                                                            path="${requestPathInfo.suffix}"
+                                                            path="/libs/harbor/admin/documentation/components"
                                                             privileges="jcr:addChildNodes"/>
                                                     </createsite>
                                                     <createlivecopy
@@ -524,7 +524,7 @@
                                                         <rendercondition
                                                             jcr:primaryType="nt:unstructured"
                                                             sling:resourceType="granite/ui/components/foundation/renderconditions/privilege"
-                                                            path="${requestPathInfo.suffix}"
+                                                            path="/libs/harbor/admin/documentation/components"
                                                             privileges="jcr:addChildNodes"/>
                                                     </createlivecopy>
                                                     <createlaunch
@@ -551,7 +551,7 @@
                                                         <rendercondition
                                                             jcr:primaryType="nt:unstructured"
                                                             sling:resourceType="granite/ui/components/foundation/renderconditions/privilege"
-                                                            path="${requestPathInfo.suffix}"
+                                                            path="/libs/harbor/admin/documentation/components"
                                                             privileges="jcr:addChildNodes"/>
                                                     </createfolder>
                                                 </items>
@@ -576,7 +576,7 @@
                                 itemResourceType="cq/gui/components/siteadmin/admin/pagecard"
                                 limit="${empty requestPathInfo.selectors[1] ? &quot;20&quot; : requestPathInfo.selectors[1]}"
                                 offset="${requestPathInfo.selectors[0]}"
-                                path="${requestPathInfo.suffix}"/>
+                                path="/libs/harbor/admin/documentation/components"/>
                         </childpages>
                         <createfoldermodal
                             jcr:primaryType="nt:unstructured"
@@ -613,7 +613,7 @@
             jcr:primaryType="nt:unstructured"
             sling:resourceType="granite/ui/components/foundation/layouts/columnview"
             itemResourceType="cq/gui/components/siteadmin/admin/pagecolumnitem"
-            path="${requestPathInfo.suffix}"
+            path="/libs/harbor/admin/documentation/components"
             src="/libs/wcm/core/content/sites/column{.offset,limit}.html{+path}"/>
         <datasource
             jcr:primaryType="nt:unstructured"
@@ -622,10 +622,10 @@
             itemResourceType="cq/gui/components/siteadmin/admin/pagecard"
             limit="${empty requestPathInfo.selectors[1] ? &quot;40&quot; : requestPathInfo.selectors[1]}"
             offset="${requestPathInfo.selectors[0]}"
-            path="${requestPathInfo.suffix}"/>
+            path="/libs/harbor/admin/documentation/components"/>
     </column>
     <previewcolumn
         jcr:primaryType="nt:unstructured"
         sling:resourceType="cq/gui/components/siteadmin/admin/pagecolumnpreview"
-        path="${requestPathInfo.suffix}"/>
+        path="/libs/harbor/admin/documentation/components"/>
 </jcr:root>
