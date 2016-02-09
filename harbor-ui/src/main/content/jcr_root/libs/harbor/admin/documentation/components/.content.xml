@@ -68,17 +68,6 @@
                 <layout
                     jcr:primaryType="nt:unstructured"
                     sling:resourceType="granite/ui/components/endor/layouts/content"/>
-                <aside
-                    jcr:primaryType="nt:unstructured"
-                    sling:resourceType="granite/ui/components/foundation/container">
-                    <layout
-                        jcr:primaryType="nt:unstructured"
-                        sling:resourceType="granite/ui/components/endor/layouts/sidepanels"/>
-                    <items jcr:primaryType="nt:unstructured">
-
-                        
-                    </items>
-                </aside>
                 <header
                     jcr:primaryType="nt:unstructured"
                     sling:resourceType="granite/ui/components/foundation/container">
