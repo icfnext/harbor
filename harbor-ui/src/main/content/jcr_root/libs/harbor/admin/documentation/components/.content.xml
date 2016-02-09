@@ -63,12 +63,13 @@
                 sling:resourceType="granite/ui/components/foundation/container">
                 <layout
                     jcr:primaryType="nt:unstructured"
-                    sling:resourceType="granite/ui/components/endor/layouts/content"/>
+                    sling:resourceType="granite/ui/components/endor/layouts/content"
+                    class="endor-Page-content endor-Panel foundation-content"/>
                 <content
                     jcr:primaryType="nt:unstructured"
                     sling:resourceType="granite/ui/components/foundation/container">
                     <items jcr:primaryType="nt:unstructured"
-                           class="foundation-collection-container foundation-layout-util-maximized card mode-selection">
+                           class="js-endor-scrollarea cq-projects-admin-projects foundation-collection foundation-layout-card grid">
                         <card
                             jcr:primaryType="nt:unstructured"
                             sling:resourceType="granite/ui/components/foundation/container"
@@ -95,7 +96,7 @@
                                         text="View Documentation"/>
                             </items>
                         </card>
-                        
+
                     </items>
                 </content>
             </content>
