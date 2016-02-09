@@ -1,22 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:granite="http://www.adobe.com/jcr/granite/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
     jcr:primaryType="cq:Page">
     <jcr:content
         jcr:mixinTypes="[sling:VanityPath]"
         jcr:primaryType="nt:unstructured"
-        jcr:title="Harbor Components Documentation"
-        sling:redirect="{Boolean}false"
+        jcr:title="AEM Sites"
         sling:resourceType="granite/ui/components/foundation/page"
-        sling:vanityOrder="{Long}1200"
-        sling:vanityPath="/screens">
+        sling:vanityOrder="{Long}301"
+        sling:vanityPath="/sites">
+        
         <head jcr:primaryType="nt:unstructured">
-            <contentchecker
-                jcr:primaryType="nt:unstructured"
-                sling:resourceType="granite/ui/components/foundation/admin/contentchecker"
-                allowed="[.*]"
-                alowEmpty="{Boolean}false"
-                path="${requestPathInfo.suffix}"
-                redirect="/screens.html"/>
             <viewport
                 jcr:primaryType="nt:unstructured"
                 sling:resourceType="granite/ui/components/foundation/admin/page/viewport"/>
@@ -25,17 +18,19 @@
                 sling:resourceType="granite/ui/components/foundation/meta"
                 content="chrome=1"
                 name="X-UA-Compatible"/>
+            <winmode
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="cq/gui/components/siteadmin/admin/page/winmode"/>
             <title
                 jcr:primaryType="nt:unstructured"
-                jcr:title="Adobe Experience Manager Screens"
-                sling:resourceType="screens/ui/components/admin/page/title"/>
+                sling:resourceType="cq/gui/components/siteadmin/admin/page/title"/>
             <favicon
                 jcr:primaryType="nt:unstructured"
                 sling:resourceType="granite/ui/components/foundation/page/favicon"/>
             <clientlibs
                 jcr:primaryType="nt:unstructured"
                 sling:resourceType="granite/ui/components/foundation/includeclientlibs"
-                categories="[granite.ui.foundation,granite.ui.foundation.admin,cq.gui.siteadmin.admin.pages,cq.screens.admin]"/>
+                categories="[coralui2,granite.ui.foundation,granite.ui.foundation.admin,cq.common.wcm,cq.siteadmin.admin,cq.listview.columns.personalization,cq.listview.analytics,cq.siteadmin.admin.pagecard]"/>
         </head>
         <body
             jcr:primaryType="nt:unstructured"
@@ -46,15 +41,24 @@
             <rail
                 jcr:primaryType="nt:unstructured"
                 sling:resourceType="granite/ui/components/endor/navcolumns"
-                currentId="cq-screens"
+                currentId="cq-sites"
                 srcPath="cq/core/content/nav"/>
             <breadcrumbs
                 jcr:primaryType="nt:unstructured"
-                sling:resourceType="granite/ui/components/endor/layouts/breadcrumbs"/>
+                sling:resourceType="cq/gui/components/siteadmin/admin/endor/breadcrumbs"
+                baseUrl="/sites.html"
+                contentPath="${requestPathInfo.suffix}"
+                depthAdjustment="{Long}-1"
+                pageTitleTemplate="AEM Sites | {{title}}"
+                rootPageTitle="AEM Sites"
+                rootTitle="Sites"
+                src="/sites.html{+id}"
+                target=".cq-siteadmin-admin-childpages"/>
             <title
                 jcr:primaryType="nt:unstructured"
-                jcr:title="Harbor Components"
-                sling:resourceType="screens/ui/components/admin/endor/title"/>
+                sling:resourceType="cq/gui/components/siteadmin/admin/endor/title"
+                contentPath="${requestPathInfo.suffix}"
+                rootTitle="Sites"/>
             <header
                 jcr:primaryType="nt:unstructured"
                 srcPath="/mnt/overlay/cq/core/content/header"/>
@@ -63,43 +67,1186 @@
                 sling:resourceType="granite/ui/components/foundation/container">
                 <layout
                     jcr:primaryType="nt:unstructured"
-                    sling:resourceType="granite/ui/components/endor/layouts/content"
-                    class="endor-Page-content endor-Panel foundation-content"/>
+                    sling:resourceType="granite/ui/components/endor/layouts/content"/>
+                <aside
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/foundation/container">
+                    <layout
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/endor/layouts/sidepanels"/>
+                    <items jcr:primaryType="nt:unstructured">
+
+                        <references
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/foundation/container"
+                            id="cq-rail-references">
+                            <items jcr:primaryType="nt:unstructured">
+                                <references
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/references/components/references"
+                                    adminUrl="/sites.html"
+                                    text="References">
+                                    <items jcr:primaryType="nt:unstructured">
+                                        <list
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/contsys"
+                                            class="list">
+                                            <items jcr:primaryType="nt:unstructured">
+                                                <source
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/references/components/group"
+                                                    title="Source">
+                                                    <items jcr:primaryType="nt:unstructured">
+                                                        <blueprint
+                                                            jcr:primaryType="nt:unstructured"
+                                                            sling:resourceType="granite/ui/references/components/type"
+                                                            clientLibs="[cq.gui.common.admin.references.livecopy]"
+                                                            itemResourceType="wcm/msm/components/references/blueprint"
+                                                            title="Blueprint"
+                                                            type="blueprint"/>
+                                                    </items>
+                                                </source>
+                                                <copies
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/references/components/group"
+                                                    title="Copies">
+                                                    <items jcr:primaryType="nt:unstructured">
+                                                        <launches
+                                                            jcr:primaryType="nt:unstructured"
+                                                            sling:resourceType="granite/ui/references/components/type"
+                                                            clientLibs="[cq.gui.common.admin.references.launches]"
+                                                            itemResourceType="launches/components/references/launchcopy"
+                                                            title="Launches"
+                                                            type="launch"/>
+                                                        <liveCopies
+                                                            jcr:primaryType="nt:unstructured"
+                                                            sling:resourceType="granite/ui/references/components/type"
+                                                            clientLibs="[cq.gui.common.admin.references.livecopy]"
+                                                            itemResourceType="wcm/msm/components/references/livecopy"
+                                                            title="Live Copies"
+                                                            type="liveCopy"/>
+                                                        <languageCopies
+                                                            jcr:primaryType="nt:unstructured"
+                                                            sling:resourceType="granite/ui/references/components/type"
+                                                            clientLibs="[cq.gui.common.admin.references.languagecopy]"
+                                                            itemResourceType="wcm/core/components/references/languagecopy"
+                                                            multiSelect="true"
+                                                            title="Language Copies"
+                                                            type="languageCopy">
+                                                            <items jcr:primaryType="nt:unstructured">
+                                                                <start
+                                                                    jcr:primaryType="nt:unstructured"
+                                                                    sling:resourceType="granite/ui/components/foundation/container"
+                                                                    class="detail-toolbar active start"
+                                                                    projectDetails="/projects/details.html"
+                                                                    translationProjectWorkflowModel="/etc/workflow/models/wcm-translation/prepare_translation_project/jcr:content/model"
+                                                                    translationWorkflowModel="/etc/workflow/models/wcm-translation/translate-language-copy/jcr:content/model"
+                                                                    workflowModel="/etc/workflow/models/wcm-translation/create_language_copy/jcr:content/model">
+                                                                    <items jcr:primaryType="nt:unstructured">
+                                                                        <trigger
+                                                                            jcr:primaryType="nt:unstructured"
+                                                                            jcr:title="Create &amp; Translate"
+                                                                            sling:resourceType="granite/ui/components/foundation/container">
+                                                                            <layout
+                                                                                jcr:primaryType="nt:unstructured"
+                                                                                sling:resourceType="granite/ui/components/foundation/layouts/collapsible"
+                                                                                collapsedIcon="icon-chevron-up"
+                                                                                expandedIcon="icon-chevron-down"
+                                                                                variant="block"/>
+                                                                            <items jcr:primaryType="nt:unstructured">
+                                                                                <form
+                                                                                    jcr:primaryType="nt:unstructured"
+                                                                                    sling:resourceType="granite/ui/components/foundation/form">
+                                                                                    <layout
+                                                                                        jcr:primaryType="nt:unstructured"
+                                                                                        sling:resourceType="granite/ui/components/foundation/layouts/form"/>
+                                                                                    <items jcr:primaryType="nt:unstructured">
+                                                                                        <languages
+                                                                                            jcr:primaryType="nt:unstructured"
+                                                                                            sling:resourceType="granite/ui/components/foundation/form/select"
+                                                                                            class="languages"
+                                                                                            emptyText="Select languages"
+                                                                                            fieldLabel="Languages"
+                                                                                            multiple="{Boolean}true"
+                                                                                            name="languages"
+                                                                                            translateOptions="{Boolean}true">
+                                                                                            <datasource
+                                                                                                jcr:primaryType="nt:unstructured"
+                                                                                                sling:resourceType="wcm/core/components/references/languagecopy/datasources/languageroots"/>
+                                                                                        </languages>
+                                                                                        <deep
+                                                                                            jcr:primaryType="nt:unstructured"
+                                                                                            sling:resourceType="granite/ui/components/foundation/form/checkbox"
+                                                                                            checked="{Boolean}true"
+                                                                                            deleteHint="{Boolean}false"
+                                                                                            name="deep"
+                                                                                            text="Select all sub-pages"
+                                                                                            value="true"/>
+                                                                                        <projectType
+                                                                                            jcr:primaryType="nt:unstructured"
+                                                                                            sling:resourceType="granite/ui/components/foundation/form/select"
+                                                                                            class="projectType"
+                                                                                            emptyText="Select a project"
+                                                                                            fieldLabel="Project"
+                                                                                            name="projectType">
+                                                                                            <items jcr:primaryType="nt:unstructured">
+                                                                                                <new
+                                                                                                    jcr:primaryType="nt:unstructured"
+                                                                                                    sling:resourceType="granite/ui/components/foundation/form/option"
+                                                                                                    text="Create a new translation project"
+                                                                                                    value="add_new"/>
+                                                                                                <create_structure
+                                                                                                    jcr:primaryType="nt:unstructured"
+                                                                                                    sling:resourceType="granite/ui/components/foundation/form/option"
+                                                                                                    text="Create structure only"
+                                                                                                    value="add_structure_only"/>
+                                                                                                <existing
+                                                                                                    jcr:primaryType="nt:unstructured"
+                                                                                                    sling:resourceType="granite/ui/components/foundation/form/option"
+                                                                                                    text="Add to existing translation project"
+                                                                                                    value="add_existing"/>
+                                                                                            </items>
+                                                                                        </projectType>
+                                                                                        <projectTitle
+                                                                                            jcr:primaryType="nt:unstructured"
+                                                                                            sling:resourceType="granite/ui/components/foundation/container"
+                                                                                            class="projectTitle"
+                                                                                            hidden="{Boolean}false">
+                                                                                            <items jcr:primaryType="nt:unstructured">
+                                                                                                <title
+                                                                                                    jcr:primaryType="nt:unstructured"
+                                                                                                    sling:resourceType="granite/ui/components/foundation/form/textfield"
+                                                                                                    fieldLabel="Title"
+                                                                                                    name="projectTitle"/>
+                                                                                                <tooltip
+                                                                                                    jcr:primaryType="nt:unstructured"
+                                                                                                    sling:resourceType="granite/ui/components/foundation/text"
+                                                                                                    class="fieldDescription"
+                                                                                                    text="Multiple translation projects will be created"/>
+                                                                                            </items>
+                                                                                        </projectTitle>
+                                                                                        <project
+                                                                                            jcr:primaryType="nt:unstructured"
+                                                                                            sling:resourceType="granite/ui/components/foundation/form/select"
+                                                                                            emptyText="Select a project"
+                                                                                            fieldLabel="Existing translation project"
+                                                                                            name="project"
+                                                                                            renderHidden="{Boolean}true">
+                                                                                            <datasource
+                                                                                                jcr:primaryType="nt:unstructured"
+                                                                                                sling:resourceType="cq/gui/components/projects/admin/datasource/projectselectdatasource"
+                                                                                                projectTemplates="[/libs/cq/core/content/projects/templates/create-translation-project]"/>
+                                                                                        </project>
+                                                                                        <create
+                                                                                            jcr:primaryType="nt:unstructured"
+                                                                                            sling:resourceType="granite/ui/components/foundation/button"
+                                                                                            disabled="{Boolean}true"
+                                                                                            oppositeText="Add"
+                                                                                            role="submit"
+                                                                                            text="Create"
+                                                                                            variant="[primary,block]"/>
+                                                                                    </items>
+                                                                                </form>
+                                                                            </items>
+                                                                        </trigger>
+                                                                    </items>
+                                                                </start>
+                                                                <update
+                                                                    jcr:primaryType="nt:unstructured"
+                                                                    sling:resourceType="granite/ui/components/foundation/container"
+                                                                    class="detail-toolbar hidden update"
+                                                                    workflowModel="/etc/workflow/models/wcm-translation/update_language_copy/jcr:content/model">
+                                                                    <items jcr:primaryType="nt:unstructured">
+                                                                        <trigger
+                                                                            jcr:primaryType="nt:unstructured"
+                                                                            jcr:title="Update language copies"
+                                                                            sling:resourceType="granite/ui/components/foundation/container">
+                                                                            <layout
+                                                                                jcr:primaryType="nt:unstructured"
+                                                                                sling:resourceType="granite/ui/components/foundation/layouts/collapsible"
+                                                                                collapsedIcon="icon-chevron-up"
+                                                                                expandedIcon="icon-chevron-down"
+                                                                                variant="block"/>
+                                                                            <items jcr:primaryType="nt:unstructured">
+                                                                                <form
+                                                                                    jcr:primaryType="nt:unstructured"
+                                                                                    sling:resourceType="granite/ui/components/foundation/form">
+                                                                                    <layout
+                                                                                        jcr:primaryType="nt:unstructured"
+                                                                                        sling:resourceType="granite/ui/components/foundation/layouts/form"/>
+                                                                                    <items jcr:primaryType="nt:unstructured">
+                                                                                        <deep
+                                                                                            jcr:primaryType="nt:unstructured"
+                                                                                            sling:resourceType="granite/ui/components/foundation/include"
+                                                                                            path="wcm/core/content/sites/jcr:content/body/content/aside/items/references/items/references/items/list/items/copies/items/languageCopies/items/start/items/trigger/items/form/items/deep"/>
+                                                                                        <projectType
+                                                                                            jcr:primaryType="nt:unstructured"
+                                                                                            sling:resourceType="granite/ui/components/foundation/form/select"
+                                                                                            class="projectType"
+                                                                                            emptyText="Select a project"
+                                                                                            fieldLabel="Project"
+                                                                                            name="projectType">
+                                                                                            <items jcr:primaryType="nt:unstructured">
+                                                                                                <create_structure
+                                                                                                    jcr:primaryType="nt:unstructured"
+                                                                                                    sling:resourceType="granite/ui/components/foundation/form/option"
+                                                                                                    text="Create structure only"
+                                                                                                    value="add_structure_only"/>
+                                                                                                <new
+                                                                                                    jcr:primaryType="nt:unstructured"
+                                                                                                    sling:resourceType="granite/ui/components/foundation/form/option"
+                                                                                                    text="Create a new translation project"
+                                                                                                    value="add_new"/>
+                                                                                                <existing
+                                                                                                    jcr:primaryType="nt:unstructured"
+                                                                                                    sling:resourceType="granite/ui/components/foundation/form/option"
+                                                                                                    text="Add to existing translation project"
+                                                                                                    value="add_existing"/>
+                                                                                            </items>
+                                                                                        </projectType>
+                                                                                        <projectTitle
+                                                                                            jcr:primaryType="nt:unstructured"
+                                                                                            sling:resourceType="granite/ui/components/foundation/container"
+                                                                                            class="projectTitle"
+                                                                                            hidden="{Boolean}true">
+                                                                                            <items jcr:primaryType="nt:unstructured">
+                                                                                                <title
+                                                                                                    jcr:primaryType="nt:unstructured"
+                                                                                                    sling:resourceType="granite/ui/components/foundation/form/textfield"
+                                                                                                    fieldLabel="Title"
+                                                                                                    name="projectTitle"/>
+                                                                                                <tooltip
+                                                                                                    jcr:primaryType="nt:unstructured"
+                                                                                                    sling:resourceType="granite/ui/components/foundation/text"
+                                                                                                    class="fieldDescription"
+                                                                                                    text="Multiple translation projects will be created"/>
+                                                                                            </items>
+                                                                                        </projectTitle>
+                                                                                        <project
+                                                                                            jcr:primaryType="nt:unstructured"
+                                                                                            sling:resourceType="granite/ui/components/foundation/form/select"
+                                                                                            emptyText="Select a project"
+                                                                                            fieldLabel="Existing translation project"
+                                                                                            name="project"
+                                                                                            renderHidden="{Boolean}true">
+                                                                                            <datasource
+                                                                                                jcr:primaryType="nt:unstructured"
+                                                                                                sling:resourceType="cq/gui/components/projects/admin/datasource/projectselectdatasource"
+                                                                                                projectTemplates="[/libs/cq/core/content/projects/templates/create-translation-project]"/>
+                                                                                        </project>
+                                                                                        <start
+                                                                                            jcr:primaryType="nt:unstructured"
+                                                                                            sling:resourceType="granite/ui/components/foundation/button"
+                                                                                            disabled="{Boolean}true"
+                                                                                            role="submit"
+                                                                                            text="Start"
+                                                                                            variant="[primary,block]"/>
+                                                                                    </items>
+                                                                                </form>
+                                                                            </items>
+                                                                        </trigger>
+                                                                    </items>
+                                                                </update>
+                                                            </items>
+                                                        </languageCopies>
+                                                    </items>
+                                                </copies>
+                                                <links
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/references/components/group"
+                                                    title="Links">
+                                                    <items jcr:primaryType="nt:unstructured">
+                                                        <external
+                                                            jcr:primaryType="nt:unstructured"
+                                                            sling:resourceType="granite/ui/references/components/type"
+                                                            clientLibs="[cq.gui.common.admin.references.externallink]"
+                                                            itemResourceType="wcm/core/components/references/externallink"
+                                                            title="External Links"
+                                                            type="externalLink"/>
+                                                    </items>
+                                                </links>
+                                                <contents
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/references/components/group"
+                                                    title="Content References">
+                                                    <items jcr:primaryType="nt:unstructured">
+                                                        <borrowed
+                                                            jcr:primaryType="nt:unstructured"
+                                                            sling:resourceType="granite/ui/references/components/type"
+                                                            clientLibs="[cq.gui.common.admin.references.borrowedcontent]"
+                                                            itemResourceType="wcm/core/components/references/borrowedcontent"
+                                                            title="Borrowed Content"
+                                                            type="borrowedContent"/>
+                                                        <lent
+                                                            jcr:primaryType="nt:unstructured"
+                                                            sling:resourceType="granite/ui/references/components/type"
+                                                            clientLibs="[cq.gui.common.admin.references.shortenedlinks]"
+                                                            itemResourceType="wcm/core/components/references/lentcontent"
+                                                            title="Lent Content"
+                                                            type="lentContent"/>
+                                                    </items>
+                                                </contents>
+                                            </items>
+                                        </list>
+                                    </items>
+                                </references>
+                            </items>
+                        </references>
+                    </items>
+                </aside>
+                <header
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/foundation/container">
+                    <layout
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/foundation/layouts/mode"
+                        group="cq-siteadmin-admin-childpages"
+                        mode="${state[&quot;cq.sites.childpages.selectionMode&quot;].boolean ? &quot;selection&quot; : &quot;default&quot; }"/>
+                    <items jcr:primaryType="nt:unstructured">
+                        <default
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/foundation/navigation">
+                            <layout
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/endor/layouts/actionbar"/>
+                            <items jcr:primaryType="nt:unstructured">
+                                <search
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/endor/actionbar/innerrailtoggle"
+                                    icon="icon-search"
+                                    targetId="granite-rail-search"
+                                    text="Search"
+                                    title="Search"/>
+                                <timeline
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/endor/actionbar/innerrailtoggle"
+                                    class="cq-common-admin-timeline-activator cq-common-admin-navigationpanel-changemode"
+                                    foundation-mode-group="cq-siteadmin-admin-childpages"
+                                    foundation-mode-value="selection"
+                                    icon="icon-clock"
+                                    targetId="cq-rail-timeline"
+                                    text="Timeline"
+                                    title="Timeline"/>
+                                <references
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/endor/actionbar/innerrailtoggle"
+                                    class="cq-common-admin-navigationpanel-changemode"
+                                    foundation-mode-group="cq-siteadmin-admin-childpages"
+                                    foundation-mode-value="selection"
+                                    icon="icon-unmerge"
+                                    targetId="cq-rail-references"
+                                    text="References"
+                                    title="References"/>
+                                <toggleselectionmode
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/endor/actionbar/button"
+                                    class="foundation-mode-change"
+                                    foundation-mode-group="cq-siteadmin-admin-childpages"
+                                    foundation-mode-value="selection"
+                                    icon="icon-check-circle"
+                                    text="Select"
+                                    title="Select"/>
+                                <create
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/endor/actionbar/pulldownlink"
+                                    icon="icon-add"
+                                    text="Create"
+                                    title="Create">
+                                    <items jcr:primaryType="nt:unstructured">
+                                        <createpage
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="cq/gui/components/siteadmin/admin/endor/createpagehyperlink"
+                                            allowEmptySuffix="{Boolean}true"
+                                            href="/libs/wcm/core/content/sites/createpagewizard.html${granite:encodeURIPath(requestPathInfo.suffix)}"
+                                            rel="cq-siteadmin-admin-createpage"
+                                            suffixMinLevel="{Long}1"
+                                            text="Create Page">
+                                            <rendercondition
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/foundation/renderconditions/privilege"
+                                                path="${requestPathInfo.suffix}"
+                                                privileges="jcr:addChildNodes"/>
+                                        </createpage>
+                                        <createsite
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/hyperlink"
+                                            href="/libs/wcm/core/content/sites/createsitewizard.html${granite:encodeURIPath(requestPathInfo.suffix)}"
+                                            rel="cq-siteadmin-admin-createsite"
+                                            text="Create Site">
+                                            <rendercondition
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/foundation/renderconditions/privilege"
+                                                path="${requestPathInfo.suffix}"
+                                                privileges="jcr:addChildNodes"/>
+                                        </createsite>
+                                        <createlivecopy
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/hyperlink"
+                                            href="/libs/wcm/core/content/sites/createlivecopywizard.html${granite:encodeURIPath(requestPathInfo.suffix)}"
+                                            text="Create Live Copy">
+                                            <rendercondition
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/foundation/renderconditions/privilege"
+                                                path="${requestPathInfo.suffix}"
+                                                privileges="jcr:addChildNodes"/>
+                                        </createlivecopy>
+                                        <createlaunch
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/hyperlink"
+                                            allowEmptySuffix="{Boolean}false"
+                                            href="/libs/wcm/core/content/sites/createlaunchwizard.html${granite:encodeURIPath(requestPathInfo.suffix)}"
+                                            suffixMinLevel="{Long}2"
+                                            text="Create Launch">
+                                            <rendercondition
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/foundation/renderconditions/privilege"
+                                                path="/content/launches"
+                                                privileges="jcr:addChildNodes"/>
+                                        </createlaunch>
+                                        <createcatalog
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/hyperlink"
+                                            href="/libs/commerce/gui/content/catalogs/createcatalogwizard.html${granite:encodeURIPath(requestPathInfo.suffix)}"
+                                            text="Create Catalog">
+                                            <rendercondition
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/foundation/renderconditions/privilege"
+                                                path="${requestPathInfo.suffix}"
+                                                privileges="jcr:addChildNodes"/>
+                                        </createcatalog>
+                                        <createfolder
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="cq/gui/components/siteadmin/admin/endor/createfolderhyperlink"
+                                            href="#create-folder-modal"
+                                            text="Create Folder">
+                                            <granite:data
+                                                jcr:primaryType="nt:unstructured"
+                                                toggle="modal"/>
+                                            <rendercondition
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/foundation/renderconditions/privilege"
+                                                path="${requestPathInfo.suffix}"
+                                                privileges="jcr:addChildNodes"/>
+                                        </createfolder>
+                                        <createexcelreport
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/collection/actionlink"
+                                            action="cq.wcm.export.excel"
+                                            rel="cq-wcm-excel-export-activator"
+                                            text="Create CSV Report">
+                                            <data
+                                                jcr:primaryType="nt:unstructured"
+                                                availableColumns="/libs/wcm/core/content/common/availablecolumns"
+                                                href="${granite:encodeURIPath(requestPathInfo.suffix)}.export.csv"/>
+                                        </createexcelreport>
+                                    </items>
+                                </create>
+                                <pastepage
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/endor/actionbar/button"
+                                    class="cq-wcm-paste-activator"
+                                    hidden="{Boolean}true"
+                                    icon="icon-paste"
+                                    text="Paste"
+                                    title="Paste">
+                                    <granite:data
+                                        jcr:primaryType="nt:unstructured"
+                                        cq-wcm-paste-activator-target=".cq-siteadmin-admin-childpages"/>
+                                </pastepage>
+                                <togglelayout
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/foundation/cyclebuttons"
+                                    active="${state[&quot;cq.sites.childpages.layoutId&quot;].string}">
+                                    <layoutConfig
+                                        jcr:primaryType="nt:unstructured"
+                                        align="right"/>
+                                    <items jcr:primaryType="nt:unstructured">
+                                        <card
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/endor/actionbar/button"
+                                            class="foundation-layout-control"
+                                            icon="icon-view-card"
+                                            text="Card View"
+                                            title="Card View">
+                                            <granite:data
+                                                jcr:primaryType="nt:unstructured"
+                                                foundation-layout-control="\{&quot;action&quot;: &quot;switch&quot;, &quot;target&quot;: &quot;.cq-siteadmin-admin-childpages&quot;, &quot;config&quot;: {&quot;name&quot;: &quot;foundation-layout-card&quot;, &quot;limit&quot;: 20, &quot;stateId&quot;: &quot;cq.sites.childpages&quot;, &quot;layoutId&quot;: &quot;card&quot;, &quot;reload&quot;: &quot;${granite:uritemplate(&quot;/libs/wcm/core/content/sites/jcr:content/body/content/content/items/childpages{.offset,limit}.html{+id}&quot;)}&quot;, &quot;initialSelectionModeDecoration&quot;: true}}"/>
+                                        </card>
+                                        <list
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/endor/actionbar/button"
+                                            class="foundation-layout-control"
+                                            icon="icon-view-list"
+                                            text="List View"
+                                            title="List View">
+                                            <granite:data
+                                                jcr:primaryType="nt:unstructured"
+                                                foundation-layout-control="\{&quot;action&quot;: &quot;switch&quot;, &quot;target&quot;: &quot;.cq-siteadmin-admin-childpages&quot;, &quot;config&quot;: {&quot;name&quot;: &quot;foundation-layout-list&quot;, &quot;limit&quot;: 40, &quot;stateId&quot;: &quot;cq.sites.childpages&quot;, &quot;layoutId&quot;: &quot;list&quot;, &quot;reload&quot;: &quot;${granite:uritemplate(&quot;/libs/wcm/core/content/sites/jcr:content/body/content/content/items/childpages{.offset,limit}.html{+id}&quot;)}&quot;}}"/>
+                                        </list>
+                                        <columns
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/endor/actionbar/button"
+                                            class="foundation-layout-control"
+                                            icon="icon-view-column"
+                                            text="Column View"
+                                            title="Column View">
+                                            <granite:data
+                                                jcr:primaryType="nt:unstructured"
+                                                foundation-layout-control="\{&quot;action&quot;: &quot;switch&quot;, &quot;target&quot;: &quot;.cq-siteadmin-admin-childpages&quot;, &quot;config&quot;: {&quot;name&quot;: &quot;foundation-layout-columns&quot;, &quot;limit&quot;: 40, &quot;multiselect&quot;: true, &quot;stateId&quot;: &quot;cq.sites.childpages&quot;, &quot;layoutId&quot;: &quot;columns&quot;, &quot;reload&quot;: &quot;${granite:uritemplate(&quot;/libs/wcm/core/content/sites/jcr:content/body/content/content/items/childpages{.offset,limit}.html{+id}&quot;)}&quot;}}"/>
+                                        </columns>
+                                    </items>
+                                </togglelayout>
+                                <analyticsTimeFrame
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/foundation/container"
+                                    class="aem-analytics-timeframe-selector">
+                                    <layoutConfig
+                                        jcr:primaryType="nt:unstructured"
+                                        align="right"/>
+                                    <items jcr:primaryType="nt:unstructured">
+                                        <timeFrameSelector
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="cq/gui/components/siteadmin/admin/listview/analytics/timeframeselect">
+                                            <items jcr:primaryType="nt:unstructured">
+                                                <current
+                                                    jcr:primaryType="nt:unstructured"
+                                                    default="true"
+                                                    text="Last 30 days"
+                                                    value="last30Days"/>
+                                                <lastQuarter
+                                                    jcr:primaryType="nt:unstructured"
+                                                    text="Last 90 days"
+                                                    value="last90Days"/>
+                                                <lastYear
+                                                    jcr:primaryType="nt:unstructured"
+                                                    text="This Year"
+                                                    value="thisYear"/>
+                                            </items>
+                                        </timeFrameSelector>
+                                    </items>
+                                </analyticsTimeFrame>
+                            </items>
+                        </default>
+                        <selection
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/foundation/navigation">
+                            <layout
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/endor/layouts/actionbar"/>
+                            <items jcr:primaryType="nt:unstructured">
+                                <search
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/endor/actionbar/innerrailtoggle"
+                                    icon="icon-search"
+                                    targetId="granite-rail-search"
+                                    text="Search"
+                                    title="Search"/>
+                                <timeline
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/endor/actionbar/innerrailtoggle"
+                                    class="cq-common-admin-timeline-activator"
+                                    icon="icon-clock"
+                                    targetId="cq-rail-timeline"
+                                    text="Timeline"
+                                    title="Timeline"/>
+                                <references
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/endor/actionbar/innerrailtoggle"
+                                    icon="icon-unmerge"
+                                    targetId="cq-rail-references"
+                                    text="References"
+                                    title="References"/>
+                                <toggleselectionmode
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/endor/actionbar/button"
+                                    active="{Boolean}true"
+                                    class="foundation-mode-change"
+                                    foundation-mode-group="cq-siteadmin-admin-childpages"
+                                    foundation-mode-value="default"
+                                    icon="icon-close-circle"
+                                    text="Deselect"
+                                    title="Deselect"/>
+                                <create
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/endor/actionbar/pulldownlink"
+                                    class="foundation-collection-action"
+                                    foundation-collection-action="\{&quot;target&quot;: &quot;.cq-siteadmin-admin-childpages&quot;, &quot;activeSelectionCount&quot;: &quot;single&quot;}"
+                                    icon="icon-add"
+                                    rel="cq-siteadmin-admin-actions-create-activator"
+                                    text="Create"
+                                    title="Create">
+                                    <items jcr:primaryType="nt:unstructured">
+                                        <createpage
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/collection/actionlink"
+                                            action="foundation.link"
+                                            rel="cq-siteadmin-admin-createpage-at-activator"
+                                            target=".cq-siteadmin-admin-childpages"
+                                            text="Create Page">
+                                            <data
+                                                jcr:primaryType="nt:unstructured"
+                                                href.uritemplate="/libs/wcm/core/content/sites/createpagewizard.html{+item}"/>
+                                        </createpage>
+                                        <createsite
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/collection/actionlink"
+                                            action="foundation.link"
+                                            rel="cq-siteadmin-admin-createsite-at-activator"
+                                            target=".cq-siteadmin-admin-childpages"
+                                            text="Create Site">
+                                            <data
+                                                jcr:primaryType="nt:unstructured"
+                                                href.uritemplate="/libs/wcm/core/content/sites/createsitewizard.html{+item}"/>
+                                        </createsite>
+                                        <createlivecopy
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/hyperlink"
+                                            href="/libs/wcm/core/content/sites/createlivecopywizard.html${granite:encodeURIPath(requestPathInfo.suffix)}"
+                                            text="Create Live Copy">
+                                            <rendercondition
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/foundation/renderconditions/privilege"
+                                                path="${requestPathInfo.suffix}"
+                                                privileges="jcr:addChildNodes"/>
+                                        </createlivecopy>
+                                        <createlaunch
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/collection/actionlink"
+                                            action="foundation.link"
+                                            target=".cq-siteadmin-admin-childpages"
+                                            text="Create Launch">
+                                            <data
+                                                jcr:primaryType="nt:unstructured"
+                                                href.uritemplate="/libs/wcm/core/content/sites/createlaunchwizard.html${granite:encodeURIPath(requestPathInfo.suffix)}\\#{+item}"/>
+                                            <rendercondition
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/foundation/renderconditions/privilege"
+                                                path="/content/launches"
+                                                privileges="jcr:addChildNodes"/>
+                                        </createlaunch>
+                                        <createcatalog
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/collection/actionlink"
+                                            action="foundation.link"
+                                            rel="cq-siteadmin-admin-createcatalog-at-activator"
+                                            target=".cq-siteadmin-admin-childpages"
+                                            text="Create Catalog">
+                                            <data
+                                                jcr:primaryType="nt:unstructured"
+                                                href.uritemplate="/libs/commerce/gui/content/catalogs/createcatalogwizard.html{+item}"/>
+                                        </createcatalog>
+                                        <createfolder
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/collection/actionlink"
+                                            action="cq.wcm.createfolder"
+                                            rel="cq-siteadmin-admin-createfolder-at-activator"
+                                            target=".cq-siteadmin-admin-childpages"
+                                            text="Create Folder">
+                                            <data
+                                                jcr:primaryType="nt:unstructured"
+                                                action.uritemplate.abs="\{+item}/"/>
+                                        </createfolder>
+                                        <createexcelreport
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/collection/actionlink"
+                                            action="cq.wcm.export.excel"
+                                            rel="cq-wcm-excel-export-activator"
+                                            text="Create CSV Report">
+                                            <data
+                                                jcr:primaryType="nt:unstructured"
+                                                availableColumns="/libs/wcm/core/content/common/availablecolumns"
+                                                href="${granite:encodeURIPath(requestPathInfo.suffix)}.export.csv"/>
+                                        </createexcelreport>
+                                    </items>
+                                </create>
+                                <open
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/foundation/collection/action"
+                                    action="cq.wcm.open"
+                                    activeSelectionCount="multiple"
+                                    icon="icon-edit"
+                                    rel="cq-siteadmin-admin-actions-edit-activator"
+                                    target=".cq-siteadmin-admin-childpages"
+                                    text="Open"
+                                    title="Open"
+                                    variant="[quiet,secondary,actionBar]">
+                                    <data
+                                        jcr:primaryType="nt:unstructured"
+                                        cookiePath.url="/"
+                                        href.uritemplate="/bin/wcmcommand?cmd=open&amp;_charset_=utf-8&amp;path={item}"/>
+                                </open>
+                                <viewproperties
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/foundation/collection/action"
+                                    action="foundation.link"
+                                    activeSelectionCount="multiple"
+                                    icon="icon-info-circle"
+                                    rel="cq-siteadmin-admin-actions-properties-activator"
+                                    target=".cq-siteadmin-admin-childpages"
+                                    text="View Properties"
+                                    title="View Properties"
+                                    variant="[quiet,secondary,actionBar]">
+                                    <data
+                                        jcr:primaryType="nt:unstructured"
+                                        href.uritemplate="/libs/wcm/core/content/sites/properties.html{?item*}"/>
+                                </viewproperties>
+                                <viewfolderproperties
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/foundation/collection/action"
+                                    action="foundation.link"
+                                    activeSelectionCount="single"
+                                    icon="icon-info-circle"
+                                    rel="cq-siteadmin-admin-actions-folderproperties-activator"
+                                    target=".cq-siteadmin-admin-childpages"
+                                    text="View Properties"
+                                    title="View Properties"
+                                    variant="[quiet,secondary,actionBar]">
+                                    <data
+                                        jcr:primaryType="nt:unstructured"
+                                        href.uritemplate="/libs/wcm/core/content/sites/folderproperties.html{+item}"/>
+                                </viewfolderproperties>
+                                <openContentInsight
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/foundation/collection/action"
+                                    action="foundation.link"
+                                    activeSelectionCount="single"
+                                    icon="icon-adobeAnalytics"
+                                    rel="cq-siteadmin-admin-actions-open-content-insight-activator"
+                                    target=".cq-siteadmin-admin-childpages"
+                                    text="Analytics &amp; Recommendations"
+                                    title="Analytics &amp; Recommendations"
+                                    variant="[quiet,secondary,actionBar]">
+                                    <data
+                                        jcr:primaryType="nt:unstructured"
+                                        href.uritemplate="/libs/cq/contentinsight/content/insight.html{+item}"
+                                        target="contentinsight"/>
+                                </openContentInsight>
+                                <lockpage
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/foundation/collection/action"
+                                    action="cq.wcm.lock"
+                                    activeSelectionCount="single"
+                                    icon="icon-lock-on"
+                                    rel="cq-siteadmin-admin-actions-lockpage-activator"
+                                    target=".cq-siteadmin-admin-childpages"
+                                    text="Lock"
+                                    title="Lock"
+                                    variant="[quiet,secondary,actionBar]"/>
+                                <unlockpage
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/foundation/collection/action"
+                                    action="cq.wcm.unlock"
+                                    activeSelectionCount="single"
+                                    icon="icon-lock-off"
+                                    rel="cq-siteadmin-admin-actions-unlockpage-activator"
+                                    target=".cq-siteadmin-admin-childpages"
+                                    text="Unlock"
+                                    title="Unlock"
+                                    variant="[quiet,secondary,actionBar]"/>
+                                <copypage
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/foundation/collection/action"
+                                    action="cq.wcm.copy"
+                                    activeSelectionCount="multiple"
+                                    foundation-mode-group="cq-siteadmin-admin-childpages"
+                                    foundation-mode-value="default"
+                                    icon="icon-copy"
+                                    rel="cq-siteadmin-admin-actions-copy-activator"
+                                    target=".cq-siteadmin-admin-childpages"
+                                    text="Copy"
+                                    title="Copy"
+                                    variant="[quiet,secondary,actionBar]"/>
+                                <movepage
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/foundation/collection/action"
+                                    action="foundation.link"
+                                    activeSelectionCount="single"
+                                    icon="icon-move"
+                                    rel="cq-siteadmin-admin-actions-move-activator"
+                                    target=".cq-siteadmin-admin-childpages"
+                                    text="Move"
+                                    title="Move"
+                                    variant="[quiet,secondary,actionBar]">
+                                    <data
+                                        jcr:primaryType="nt:unstructured"
+                                        href.uritemplate="/libs/wcm/core/content/sites/movepagewizard.html{+item}"/>
+                                </movepage>
+                                <publish
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/endor/actionbar/pulldownlink"
+                                    class="foundation-collection-action"
+                                    foundation-collection-action="\{&quot;target&quot;: &quot;.cq-siteadmin-admin-childpages&quot;, &quot;activeSelectionCount&quot;: &quot;multiple&quot;}"
+                                    icon="icon-globe"
+                                    rel="cq-siteadmin-admin-actions-publish-activator"
+                                    text="Publish"
+                                    title="Publish">
+                                    <items jcr:primaryType="nt:unstructured">
+                                        <now
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/collection/actionlink"
+                                            action="cq.wcm.publish"
+                                            target=".cq-siteadmin-admin-childpages"
+                                            text="Publish">
+                                            <data
+                                                jcr:primaryType="nt:unstructured"
+                                                referenceSrc.url="/libs/wcm/core/content/reference.json?_charset_=utf-8{&amp;path*}"
+                                                wizardSrc.uritemplate="/libs/wcm/core/content/sites/publishpagewizard.html?_charset_=utf-8{&amp;item*}"/>
+                                        </now>
+                                        <later
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/collection/actionlink"
+                                            action="foundation.link"
+                                            target=".cq-siteadmin-admin-childpages"
+                                            text="Publish later">
+                                            <data
+                                                jcr:primaryType="nt:unstructured"
+                                                href.uritemplate="/libs/wcm/core/content/sites/publishpagewizard.html?later&amp;_charset_=utf-8{&amp;item*}"/>
+                                        </later>
+                                    </items>
+                                </publish>
+                                <unpublish
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/endor/actionbar/pulldownlink"
+                                    class="foundation-collection-action"
+                                    foundation-collection-action="\{&quot;target&quot;: &quot;.cq-siteadmin-admin-childpages&quot;, &quot;activeSelectionCount&quot;: &quot;multiple&quot;}"
+                                    icon="icon-globe-remove"
+                                    rel="cq-siteadmin-admin-actions-unpublish-activator"
+                                    text="Unpublish"
+                                    title="Unpublish">
+                                    <items jcr:primaryType="nt:unstructured">
+                                        <now
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/collection/actionlink"
+                                            action="cq.wcm.unpublish"
+                                            target=".cq-siteadmin-admin-childpages"
+                                            text="Unpublish"/>
+                                        <later
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/collection/actionlink"
+                                            action="foundation.link"
+                                            target=".cq-siteadmin-admin-childpages"
+                                            text="Unpublish later">
+                                            <data
+                                                jcr:primaryType="nt:unstructured"
+                                                href.uritemplate="/libs/wcm/core/content/sites/unpublishpagewizard.html?later&amp;_charset_=utf-8{&amp;item*}"/>
+                                        </later>
+                                    </items>
+                                </unpublish>
+                                <deletepage
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/foundation/collection/action"
+                                    action="cq.wcm.delete"
+                                    activeSelectionCount="multiple"
+                                    icon="icon-delete"
+                                    rel="cq-siteadmin-admin-actions-delete-activator"
+                                    target=".cq-siteadmin-admin-childpages"
+                                    text="Delete"
+                                    title="Delete"
+                                    variant="[quiet,secondary,actionBar]"/>
+                                <togglelayout
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/foundation/cyclebuttons"
+                                    active="${state[&quot;cq.sites.childpages.layoutId&quot;].string}">
+                                    <layoutConfig
+                                        jcr:primaryType="nt:unstructured"
+                                        align="right"/>
+                                    <items jcr:primaryType="nt:unstructured">
+                                        <card
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/endor/actionbar/button"
+                                            class="foundation-layout-control"
+                                            icon="icon-view-card"
+                                            text="Card View"
+                                            title="Card View">
+                                            <granite:data
+                                                jcr:primaryType="nt:unstructured"
+                                                foundation-layout-control="\{&quot;action&quot;: &quot;switch&quot;, &quot;target&quot;: &quot;.cq-siteadmin-admin-childpages&quot;, &quot;config&quot;: {&quot;name&quot;: &quot;foundation-layout-card&quot;, &quot;limit&quot;: 20, &quot;stateId&quot;: &quot;cq.sites.childpages&quot;, &quot;layoutId&quot;: &quot;card&quot;, &quot;reload&quot;: &quot;${granite:uritemplate(&quot;/libs/wcm/core/content/sites/jcr:content/body/content/content/items/childpages{.offset,limit}.html{+id}&quot;)}&quot;, &quot;initialSelectionModeDecoration&quot;: true}}"/>
+                                        </card>
+                                        <list
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/endor/actionbar/button"
+                                            class="foundation-layout-control"
+                                            icon="icon-view-list"
+                                            text="List View"
+                                            title="List View">
+                                            <granite:data
+                                                jcr:primaryType="nt:unstructured"
+                                                foundation-layout-control="\{&quot;action&quot;: &quot;switch&quot;, &quot;target&quot;: &quot;.cq-siteadmin-admin-childpages&quot;, &quot;config&quot;: {&quot;name&quot;: &quot;foundation-layout-list&quot;, &quot;limit&quot;: 40, &quot;stateId&quot;: &quot;cq.sites.childpages&quot;, &quot;layoutId&quot;: &quot;list&quot;, &quot;reload&quot;: &quot;${granite:uritemplate(&quot;/libs/wcm/core/content/sites/jcr:content/body/content/content/items/childpages{.offset,limit}.html{+id}&quot;)}&quot;}}"/>
+                                        </list>
+                                        <columns
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/endor/actionbar/button"
+                                            class="foundation-layout-control"
+                                            icon="icon-view-column"
+                                            text="Column View"
+                                            title="Column View">
+                                            <granite:data
+                                                jcr:primaryType="nt:unstructured"
+                                                foundation-layout-control="\{&quot;action&quot;: &quot;switch&quot;, &quot;target&quot;: &quot;.cq-siteadmin-admin-childpages&quot;, &quot;config&quot;: {&quot;name&quot;: &quot;foundation-layout-columns&quot;, &quot;limit&quot;: 40, &quot;multiselect&quot;: true, &quot;stateId&quot;: &quot;cq.sites.childpages&quot;, &quot;layoutId&quot;: &quot;columns&quot;, &quot;reload&quot;: &quot;${granite:uritemplate(&quot;/libs/wcm/core/content/sites/jcr:content/body/content/content/items/childpages{.offset,limit}.html{+id}&quot;)}&quot;}}"/>
+                                        </columns>
+                                    </items>
+                                </togglelayout>
+                                <analyticsTimeFrame
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/foundation/container"
+                                    class="aem-analytics-timeframe-selector">
+                                    <layoutConfig
+                                        jcr:primaryType="nt:unstructured"
+                                        align="right"/>
+                                    <items jcr:primaryType="nt:unstructured">
+                                        <timeFrameSelector
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="cq/gui/components/siteadmin/admin/listview/analytics/timeframeselect">
+                                            <items jcr:primaryType="nt:unstructured">
+                                                <current
+                                                    jcr:primaryType="nt:unstructured"
+                                                    default="true"
+                                                    text="Last 30 days"
+                                                    value="last30Days"/>
+                                                <lastQuarter
+                                                    jcr:primaryType="nt:unstructured"
+                                                    text="Last 90 days"
+                                                    value="last90Days"/>
+                                                <lastYear
+                                                    jcr:primaryType="nt:unstructured"
+                                                    text="This Year"
+                                                    value="thisYear"/>
+                                            </items>
+                                        </timeFrameSelector>
+                                    </items>
+                                </analyticsTimeFrame>
+                                <selectionstatus
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/endor/actionbar/selectionstatus"
+                                    target=".cq-siteadmin-admin-childpages">
+                                    <layoutConfig
+                                        jcr:primaryType="nt:unstructured"
+                                        align="right"/>
+                                </selectionstatus>
+                            </items>
+                        </selection>
+                    </items>
+                </header>
                 <content
                     jcr:primaryType="nt:unstructured"
                     sling:resourceType="granite/ui/components/foundation/container">
-                    <items jcr:primaryType="nt:unstructured"
-                           class="js-endor-scrollarea cq-projects-admin-projects foundation-collection foundation-layout-card grid">
-                        <card
+                    <items jcr:primaryType="nt:unstructured">
+                        <childpages
+                            granite:rel="cq-siteadmin-admin-childpages"
                             jcr:primaryType="nt:unstructured"
                             sling:resourceType="granite/ui/components/foundation/container"
-                            class="grid-4">
-                            <items jcr:primaryType="nt:unstructured">
-                                <title
+                            itemscope="{Boolean}true">
+                            <granite:data
+                                jcr:primaryType="nt:unstructured"
+                                foundation-mode-group="cq-siteadmin-admin-childpages"/>
+                            <layout
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/foundation/layouts/multilayouts"
+                                layout="${state[&quot;cq.sites.childpages.layoutId&quot;].string}"
+                                skipEmpty="columns">
+                                <layouts jcr:primaryType="nt:unstructured">
+                                    <card
                                         jcr:primaryType="nt:unstructured"
-                                        sling:resourceType="granite/ui/components/foundation/heading"
-                                        class="coral-Heading coral-Heading--1"
-                                        level="2"
-                                        text="Text"/>
-                                <description
+                                        sling:resourceType="granite/ui/components/foundation/layouts/cardview"
+                                        itemprop="item"
+                                        layoutId="card"
+                                        limit="{Long}20"
+                                        maximized="{Boolean}true"
+                                        path="${requestPathInfo.suffix}"
+                                        selectionMode="${state[&quot;cq.sites.childpages.selectionMode&quot;].boolean}"
+                                        src="/libs/wcm/core/content/sites/jcr:content/body/content/content/items/childpages{.offset,limit}.html{+id}"
+                                        stateId="cq.sites.childpages"/>
+                                    <list
                                         jcr:primaryType="nt:unstructured"
-                                        sling:resourceType="screens/ui/components/admin/text"
-                                        line1="The Harbor Text component"
-                                        line2="Group: Harbor"
-                                        />
-                                <dlbutton
+                                        sling:resourceType="granite/ui/components/foundation/layouts/listview"
+                                        itemprop="item"
+                                        layoutId="list"
+                                        limit="{Long}40"
+                                        maximized="{Boolean}true"
+                                        path="${requestPathInfo.suffix}"
+                                        src="/libs/wcm/core/content/sites/jcr:content/body/content/content/items/childpages{.offset,limit}.html{+id}"
+                                        stateId="cq.sites.childpages">
+                                        <headerdatasource
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="cq/gui/components/siteadmin/admin/listview/columns/datasources/columndatasource"
+                                            class="card-page"
+                                            moveable="{Boolean}true"
+                                            selectable="{Boolean}true"/>
+                                    </list>
+                                    <columns
                                         jcr:primaryType="nt:unstructured"
-                                        sling:resourceType="granite/ui/components/foundation/hyperlink"
-                                        class="coral-Button"
-                                        href_i18n="/libs/harbor/admin/documentation/components/text.html"
-                                        icon="coral-Icon--link"
-                                        text="View Documentation"/>
-                            </items>
-                        </card>
-
+                                        sling:resourceType="granite/ui/components/foundation/layouts/columnview"
+                                        itemprop="item"
+                                        itemResourceType="cq/gui/components/siteadmin/admin/pagecolumnitem"
+                                        layoutId="columns"
+                                        limit="{Long}40"
+                                        loadParents="{Boolean}true"
+                                        multiselect="{Boolean}true"
+                                        path="${requestPathInfo.suffix}"
+                                        rootPath="/content"
+                                        src="/libs/wcm/core/content/sites/column{.offset,limit}.html{+path}"
+                                        stateId="cq.sites.childpages">
+                                        <preview
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="cq/gui/components/siteadmin/admin/pagecolumnpreview"
+                                            path="${requestPathInfo.suffix}"/>
+                                    </columns>
+                                </layouts>
+                                <empty
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="cq/gui/components/common/wcm/layouts/emptychildpages"
+                                    path="${requestPathInfo.suffix}">
+                                    <actionspopover
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/container"
+                                        id="empty-actions-popover">
+                                        <layout
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/layouts/popover"/>
+                                        <items jcr:primaryType="nt:unstructured">
+                                            <list
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/foundation/container">
+                                                <layout
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/foundation/layouts/list"/>
+                                                <items jcr:primaryType="nt:unstructured">
+                                                    <createpage
+                                                        jcr:primaryType="nt:unstructured"
+                                                        sling:resourceType="cq/gui/components/siteadmin/admin/endor/createpagehyperlink"
+                                                        allowEmptySuffix="{Boolean}true"
+                                                        href="/libs/wcm/core/content/sites/createpagewizard.html${granite:encodeURIPath(requestPathInfo.suffix)}"
+                                                        rel="cq-siteadmin-admin-createpage"
+                                                        suffixMinLevel="{Long}1"
+                                                        text="Create Page">
+                                                        <rendercondition
+                                                            jcr:primaryType="nt:unstructured"
+                                                            sling:resourceType="granite/ui/components/foundation/renderconditions/privilege"
+                                                            path="${requestPathInfo.suffix}"
+                                                            privileges="jcr:addChildNodes"/>
+                                                    </createpage>
+                                                    <createsite
+                                                        jcr:primaryType="nt:unstructured"
+                                                        sling:resourceType="granite/ui/components/foundation/hyperlink"
+                                                        href="/libs/wcm/core/content/sites/createsitewizard.html${granite:encodeURIPath(requestPathInfo.suffix)}"
+                                                        rel="cq-siteadmin-admin-createsite"
+                                                        text="Create Site">
+                                                        <rendercondition
+                                                            jcr:primaryType="nt:unstructured"
+                                                            sling:resourceType="granite/ui/components/foundation/renderconditions/privilege"
+                                                            path="${requestPathInfo.suffix}"
+                                                            privileges="jcr:addChildNodes"/>
+                                                    </createsite>
+                                                    <createlivecopy
+                                                        jcr:primaryType="nt:unstructured"
+                                                        sling:resourceType="granite/ui/components/foundation/hyperlink"
+                                                        href="/libs/wcm/core/content/sites/createlivecopywizard.html${granite:encodeURIPath(requestPathInfo.suffix)}"
+                                                        text="Create Live Copy">
+                                                        <rendercondition
+                                                            jcr:primaryType="nt:unstructured"
+                                                            sling:resourceType="granite/ui/components/foundation/renderconditions/privilege"
+                                                            path="${requestPathInfo.suffix}"
+                                                            privileges="jcr:addChildNodes"/>
+                                                    </createlivecopy>
+                                                    <createlaunch
+                                                        jcr:primaryType="nt:unstructured"
+                                                        sling:resourceType="granite/ui/components/foundation/hyperlink"
+                                                        allowEmptySuffix="{Boolean}false"
+                                                        href="/libs/wcm/core/content/sites/createlaunchwizard.html${granite:encodeURIPath(requestPathInfo.suffix)}"
+                                                        suffixMinLevel="{Long}2"
+                                                        text="Create Launch">
+                                                        <rendercondition
+                                                            jcr:primaryType="nt:unstructured"
+                                                            sling:resourceType="granite/ui/components/foundation/renderconditions/privilege"
+                                                            path="/content/launches"
+                                                            privileges="jcr:addChildNodes"/>
+                                                    </createlaunch>
+                                                    <createfolder
+                                                        jcr:primaryType="nt:unstructured"
+                                                        sling:resourceType="cq/gui/components/siteadmin/admin/endor/createfolderhyperlink"
+                                                        href="#create-folder-modal"
+                                                        text="Create Folder">
+                                                        <granite:data
+                                                            jcr:primaryType="nt:unstructured"
+                                                            toggle="modal"/>
+                                                        <rendercondition
+                                                            jcr:primaryType="nt:unstructured"
+                                                            sling:resourceType="granite/ui/components/foundation/renderconditions/privilege"
+                                                            path="${requestPathInfo.suffix}"
+                                                            privileges="jcr:addChildNodes"/>
+                                                    </createfolder>
+                                                </items>
+                                            </list>
+                                        </items>
+                                    </actionspopover>
+                                    <actions
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/endor/actionbar/hyperlink"
+                                        hideText="{Boolean}true"
+                                        href="#empty-actions-popover"
+                                        icon="icon-add"
+                                        text="Create"
+                                        title="Create"
+                                        toggle="popover"/>
+                                </empty>
+                            </layout>
+                            <datasource
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="cq/gui/components/common/wcm/datasources/childpages"
+                                exclude="/content/(catalogs|dam|launches|mac|publications|usergenerated|communities|community-components|community-templates|forms|projects|phonegap)(/.*)*"
+                                itemResourceType="cq/gui/components/siteadmin/admin/pagecard"
+                                limit="${empty requestPathInfo.selectors[1] ? &quot;20&quot; : requestPathInfo.selectors[1]}"
+                                offset="${requestPathInfo.selectors[0]}"
+                                path="${requestPathInfo.suffix}"/>
+                        </childpages>
+                        <createfoldermodal
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/foundation/include"
+                            path="/libs/wcm/core/content/common/createfoldermodal/content"/>
+                        <configureColumnsModal
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/foundation/include"
+                            path="/libs/wcm/core/content/common/configurecolumnsmodal/content"/>
+                        <customAnalyticsColumnsModal
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/foundation/include"
+                            path="/libs/wcm/core/content/common/customanalyticscolumns/content"/>
                     </items>
                 </content>
             </content>
         </body>
     </jcr:content>
+    <properties/>
+    <folderproperties/>
+    <createpagewizard/>
+    <createsitewizard/>
+    <createlaunchwizard/>
+    <createlivecopywizard/>
+    <movepagewizard/>
+    <publishpagewizard/>
+    <unpublishpagewizard/>
+    <promotelaunchwizard/>
+    <editlivecopywizard/>
+    <column
+        jcr:primaryType="nt:unstructured"
+        sling:resourceType="granite/ui/components/foundation/container">
+        <layout
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="granite/ui/components/foundation/layouts/columnview"
+            itemResourceType="cq/gui/components/siteadmin/admin/pagecolumnitem"
+            path="${requestPathInfo.suffix}"
+            src="/libs/wcm/core/content/sites/column{.offset,limit}.html{+path}"/>
+        <datasource
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="cq/gui/components/common/wcm/datasources/childpages"
+            exclude="/content/(catalogs|dam|launches|mac|publications|usergenerated|communities|community-components|community-templates|forms|projects|phonegap)(/.*)*"
+            itemResourceType="cq/gui/components/siteadmin/admin/pagecard"
+            limit="${empty requestPathInfo.selectors[1] ? &quot;40&quot; : requestPathInfo.selectors[1]}"
+            offset="${requestPathInfo.selectors[0]}"
+            path="${requestPathInfo.suffix}"/>
+    </column>
+    <previewcolumn
+        jcr:primaryType="nt:unstructured"
+        sling:resourceType="cq/gui/components/siteadmin/admin/pagecolumnpreview"
+        path="${requestPathInfo.suffix}"/>
 </jcr:root>
