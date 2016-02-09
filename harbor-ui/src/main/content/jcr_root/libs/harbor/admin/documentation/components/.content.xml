@@ -475,89 +475,7 @@
                                     jcr:primaryType="nt:unstructured"
                                     sling:resourceType="cq/gui/components/common/wcm/layouts/emptychildpages"
                                     path="/libs/harbor/admin/documentation/components">
-                                    <actionspopover
-                                        jcr:primaryType="nt:unstructured"
-                                        sling:resourceType="granite/ui/components/foundation/container"
-                                        id="empty-actions-popover">
-                                        <layout
-                                            jcr:primaryType="nt:unstructured"
-                                            sling:resourceType="granite/ui/components/foundation/layouts/popover"/>
-                                        <items jcr:primaryType="nt:unstructured">
-                                            <list
-                                                jcr:primaryType="nt:unstructured"
-                                                sling:resourceType="granite/ui/components/foundation/container">
-                                                <layout
-                                                    jcr:primaryType="nt:unstructured"
-                                                    sling:resourceType="granite/ui/components/foundation/layouts/list"/>
-                                                <items jcr:primaryType="nt:unstructured">
-                                                    <createpage
-                                                        jcr:primaryType="nt:unstructured"
-                                                        sling:resourceType="cq/gui/components/siteadmin/admin/endor/createpagehyperlink"
-                                                        allowEmptySuffix="{Boolean}true"
-                                                        href="/libs/wcm/core/content/sites/createpagewizard.html${granite:encodeURIPath(requestPathInfo.suffix)}"
-                                                        rel="cq-siteadmin-admin-createpage"
-                                                        suffixMinLevel="{Long}1"
-                                                        text="Create Page">
-                                                        <rendercondition
-                                                            jcr:primaryType="nt:unstructured"
-                                                            sling:resourceType="granite/ui/components/foundation/renderconditions/privilege"
-                                                            path="/libs/harbor/admin/documentation/components"
-                                                            privileges="jcr:addChildNodes"/>
-                                                    </createpage>
-                                                    <createsite
-                                                        jcr:primaryType="nt:unstructured"
-                                                        sling:resourceType="granite/ui/components/foundation/hyperlink"
-                                                        href="/libs/wcm/core/content/sites/createsitewizard.html${granite:encodeURIPath(requestPathInfo.suffix)}"
-                                                        rel="cq-siteadmin-admin-createsite"
-                                                        text="Create Site">
-                                                        <rendercondition
-                                                            jcr:primaryType="nt:unstructured"
-                                                            sling:resourceType="granite/ui/components/foundation/renderconditions/privilege"
-                                                            path="/libs/harbor/admin/documentation/components"
-                                                            privileges="jcr:addChildNodes"/>
-                                                    </createsite>
-                                                    <createlivecopy
-                                                        jcr:primaryType="nt:unstructured"
-                                                        sling:resourceType="granite/ui/components/foundation/hyperlink"
-                                                        href="/libs/wcm/core/content/sites/createlivecopywizard.html${granite:encodeURIPath(requestPathInfo.suffix)}"
-                                                        text="Create Live Copy">
-                                                        <rendercondition
-                                                            jcr:primaryType="nt:unstructured"
-                                                            sling:resourceType="granite/ui/components/foundation/renderconditions/privilege"
-                                                            path="/libs/harbor/admin/documentation/components"
-                                                            privileges="jcr:addChildNodes"/>
-                                                    </createlivecopy>
-                                                    <createlaunch
-                                                        jcr:primaryType="nt:unstructured"
-                                                        sling:resourceType="granite/ui/components/foundation/hyperlink"
-                                                        allowEmptySuffix="{Boolean}false"
-                                                        href="/libs/wcm/core/content/sites/createlaunchwizard.html${granite:encodeURIPath(requestPathInfo.suffix)}"
-                                                        suffixMinLevel="{Long}2"
-                                                        text="Create Launch">
-                                                        <rendercondition
-                                                            jcr:primaryType="nt:unstructured"
-                                                            sling:resourceType="granite/ui/components/foundation/renderconditions/privilege"
-                                                            path="/content/launches"
-                                                            privileges="jcr:addChildNodes"/>
-                                                    </createlaunch>
-                                                    <createfolder
-                                                        jcr:primaryType="nt:unstructured"
-                                                        sling:resourceType="cq/gui/components/siteadmin/admin/endor/createfolderhyperlink"
-                                                        href="#create-folder-modal"
-                                                        text="Create Folder">
-                                                        <granite:data
-                                                            jcr:primaryType="nt:unstructured"
-                                                            toggle="modal"/>
-                                                        <rendercondition
-                                                            jcr:primaryType="nt:unstructured"
-                                                            sling:resourceType="granite/ui/components/foundation/renderconditions/privilege"
-                                                            path="/libs/harbor/admin/documentation/components"
-                                                            privileges="jcr:addChildNodes"/>
-                                                    </createfolder>
-                                                </items>
-                                            </list>
-                                        </items>
-                                    </actionspopover>
+
                                     <actions
                                         jcr:primaryType="nt:unstructured"
                                         sling:resourceType="granite/ui/components/endor/actionbar/hyperlink"
@@ -578,18 +496,7 @@
                                 offset="${requestPathInfo.selectors[0]}"
                                 path="/libs/harbor/admin/documentation/components"/>
                         </childpages>
-                        <createfoldermodal
-                            jcr:primaryType="nt:unstructured"
-                            sling:resourceType="granite/ui/components/foundation/include"
-                            path="/libs/wcm/core/content/common/createfoldermodal/content"/>
-                        <configureColumnsModal
-                            jcr:primaryType="nt:unstructured"
-                            sling:resourceType="granite/ui/components/foundation/include"
-                            path="/libs/wcm/core/content/common/configurecolumnsmodal/content"/>
-                        <customAnalyticsColumnsModal
-                            jcr:primaryType="nt:unstructured"
-                            sling:resourceType="granite/ui/components/foundation/include"
-                            path="/libs/wcm/core/content/common/customanalyticscolumns/content"/>
+
                     </items>
                 </content>
             </content>
