@@ -109,23 +109,6 @@
                                         selectionMode="${state[&quot;cq.sites.childpages.selectionMode&quot;].boolean}"
                                         src="/libs/wcm/core/content/sites/jcr:content/body/content/content/items/childpages{.offset,limit}.html{+id}"
                                         stateId="cq.sites.childpages"/>
-                                    <list
-                                        jcr:primaryType="nt:unstructured"
-                                        sling:resourceType="granite/ui/components/foundation/layouts/listview"
-                                        itemprop="item"
-                                        layoutId="list"
-                                        limit="{Long}40"
-                                        maximized="{Boolean}true"
-                                        path="/libs/harbor/admin/documentation/components"
-                                        src="/libs/wcm/core/content/sites/jcr:content/body/content/content/items/childpages{.offset,limit}.html{+id}"
-                                        stateId="cq.sites.childpages">
-                                        <headerdatasource
-                                            jcr:primaryType="nt:unstructured"
-                                            sling:resourceType="cq/gui/components/siteadmin/admin/listview/columns/datasources/columndatasource"
-                                            class="card-page"
-                                            moveable="{Boolean}true"
-                                            selectable="{Boolean}true"/>
-                                    </list>
                                     <columns
                                         jcr:primaryType="nt:unstructured"
                                         sling:resourceType="granite/ui/components/foundation/layouts/columnview"
