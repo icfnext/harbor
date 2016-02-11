@@ -184,7 +184,17 @@
         </div><%
         }
         %>
-        <a href="<%= xssAPI.getValidHref(request.getContextPath() + getAdminUrl(resource, currentPage)) %>" itemprop="admin" x-cq-linkchecker="skip"><%
+
+    <% if (getAdminUrl(resource, currentPage).indexOf("harbor") >= 0) { %>
+    <a href="<%= xssAPI.getValidHref(resource.getPath() + ".html") %>"  x-cq-linkchecker="skip">
+    <%
+        } else {
+    %>
+        <a href="<%= xssAPI.getValidHref(request.getContextPath() + getAdminUrl(resource, currentPage)) %>" itemprop="admin" x-cq-linkchecker="skip">
+    <%
+        }
+    %>
+            <%
             if (isNew) {
                 %><span class="flag info"><%= i18n.get("New") %></span><%
             }
@@ -364,7 +374,17 @@
             }
         %></div><%
     } else {
-        %><a href="<%= xssAPI.getValidHref(request.getContextPath() + getAdminUrl(resource, currentPage)) %>" itemprop="admin" x-cq-linkchecker="skip">
+        %>
+        <% if (getAdminUrl(resource, currentPage).indexOf("harbor") >= 0) { %>
+        <a href="<%= xssAPI.getValidHref(resource.getPath() + ".html") %>"  x-cq-linkchecker="skip">
+                <%
+            } else {
+        %>
+            <a href="<%= xssAPI.getValidHref(request.getContextPath() + getAdminUrl(resource, currentPage)) %>" itemprop="admin" x-cq-linkchecker="skip">
+                    <%
+            }
+        %>
+
             <span class="image">
                 <img itemprop="thumbnail" width="192" src="<%= xssAPI.getValidHref(request.getContextPath() + Text.escapePath(resource.getPath()) + ".folderthumbnail.jpg") %>" alt="">
                 <i class="show-list coral-Icon coral-Icon--sizeXS coral-Icon--folder"></i>

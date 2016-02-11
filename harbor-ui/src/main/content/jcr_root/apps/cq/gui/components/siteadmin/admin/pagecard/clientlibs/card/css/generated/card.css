@@ -1,0 +1,18 @@
+/** General card styles **/
+.card-page .coral-Icon--info-notice {
+  color: #fad782;
+}
+.card-page .coral-Icon--info-help {
+  color: #96c8ff;
+}
+.card-page .info-inline {
+  display: inline-block;
+  padding: 0 0.125rem;
+}
+.card-page .published.not-published .date {
+  font-style: italic;
+}
+/** Card view specific styles **/
+.grid .card-page .list-only {
+  display: none;
+}
