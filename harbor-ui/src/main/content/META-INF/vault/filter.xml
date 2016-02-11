@@ -5,6 +5,7 @@
     <filter root="/libs/harbor/templates" />
     <filter root="/libs/harbor/install" />
     <filter root="/apps/cq/core/content/nav/harbor" />
+    <filter root="/apps/cq/gui/components/siteadmin/admin/pagecard" />
     <filter root="/etc/clientlibs/harbor" />
     <filter root="/etc/designs/harbor">
         <exclude pattern="/etc/designs/harbor/jcr:content/(.*)?"/>
