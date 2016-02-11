@@ -231,7 +231,7 @@
                             </span><%
                         }
                     %></p>
-                    <p class="modified" title="<%= i18n.get("Modified") %>">
+                    <p class="modified" <%= (getAdminUrl(resource, currentPage).contains("harbor"))?"style='display:none;'":""  %> %>%>title="<%= i18n.get("Modified") %>">
                         <i class="coral-Icon coral-Icon--edit"></i><%
                         if (cqPage.getLastModified() != null) {
                             %><span class="date" itemprop="lastmodified" data-timestamp="<%= cqPage.getLastModified().getTimeInMillis() %>">
@@ -271,7 +271,7 @@
                         publishStatusStyle = "not-published";
                     }
 
-                %><p class="published <%= publishStatusStyle %>" title="<%= publishStatus %>">
+                %><p class="published <%= publishStatusStyle %>" <%= (getAdminUrl(resource, currentPage).contains("harbor"))?"style='display:none;'":""  %> title="<%= publishStatus %>">
                         <i class="<%= publishIcon %>"></i>
                         <span class="date" itemprop="published" data-timestamp="<%= publishedDate.getTimeInMillis() %>">
                             <%= (publishedDate.getTimeInMillis() != 0 && !deactivated) ?
