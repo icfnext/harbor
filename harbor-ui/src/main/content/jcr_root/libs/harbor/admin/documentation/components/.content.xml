@@ -75,7 +75,9 @@
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="granite/ui/components/foundation/layouts/mode"
                         group="cq-siteadmin-admin-childpages"
-                        mode="${state[&quot;cq.sites.childpages.selectionMode&quot;].boolean ? &quot;selection&quot; : &quot;default&quot; }"/>
+                        selectionMode="{Boolean}false"
+                        initialSelectionModeDecoration="{Boolean}false"
+                        mode="{Boolean}false"/>
                     <items jcr:primaryType="nt:unstructured">
 
                     </items>
@@ -88,14 +90,20 @@
                             granite:rel="cq-siteadmin-admin-childpages"
                             jcr:primaryType="nt:unstructured"
                             sling:resourceType="granite/ui/components/foundation/container"
+                            selectionMode="{Boolean}false"
+                            initialSelectionModeDecoration="{Boolean}false"
                             itemscope="{Boolean}true">
                             <granite:data
                                 jcr:primaryType="nt:unstructured"
+                                selectionMode="{Boolean}false"
+                                initialSelectionModeDecoration="{Boolean}false"
                                 foundation-mode-group="cq-siteadmin-admin-childpages"/>
                             <layout
                                 jcr:primaryType="nt:unstructured"
                                 sling:resourceType="granite/ui/components/foundation/layouts/multilayouts"
                                 layout="${state[&quot;cq.sites.childpages.layoutId&quot;].string}"
+                                selectionMode="{Boolean}false"
+                                initialSelectionModeDecoration="{Boolean}false"
                                 skipEmpty="columns">
                                 <layouts jcr:primaryType="nt:unstructured">
                                     <card
@@ -106,8 +114,8 @@
                                         limit="{Long}20"
                                         maximized="{Boolean}true"
                                         path="/libs/harbor/admin/documentation/components"
-                                        selectionMode="${state[&quot;cq.sites.childpages.selectionMode&quot;].boolean}"
-                                        src="/libs/wcm/core/content/sites/jcr:content/body/content/content/items/childpages{.offset,limit}.html{+id}"
+                                        selectionMode="{Boolean}false"
+                                        src="{+id}.html"
                                         stateId="cq.sites.childpages"/>
                                     <columns
                                         jcr:primaryType="nt:unstructured"
@@ -117,10 +125,12 @@
                                         layoutId="columns"
                                         limit="{Long}40"
                                         loadParents="{Boolean}true"
-                                        multiselect="{Boolean}true"
+                                        multiselect="{Boolean}false"
+                                        selectionMode="{Boolean}false"
+                                        initialSelectionModeDecoration="{Boolean}false"
                                         path="/libs/harbor/admin/documentation/components"
                                         rootPath="/libs/harbor/admin/documentation/components"
-                                        src="/libs/wcm/core/content/sites/column{.offset,limit}.html{+path}"
+                                        src="{+path}.html"
                                         stateId="cq.sites.childpages">
                                         <preview
                                             jcr:primaryType="nt:unstructured"
@@ -168,7 +178,7 @@
             sling:resourceType="granite/ui/components/foundation/layouts/columnview"
             itemResourceType="cq/gui/components/siteadmin/admin/pagecolumnitem"
             path="/libs/harbor/admin/documentation/components"
-            src="/libs/wcm/core/content/sites/column{.offset,limit}.html{+path}"/>
+            src="{+path}.html"/>
         <datasource
             jcr:primaryType="nt:unstructured"
             sling:resourceType="cq/gui/components/common/wcm/datasources/childpages"
