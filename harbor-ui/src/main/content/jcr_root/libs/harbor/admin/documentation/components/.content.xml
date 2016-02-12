@@ -128,21 +128,6 @@
                                             path="/libs/harbor/admin/documentation/components"/>
                                     </columns>
                                 </layouts>
-                                <empty
-                                    jcr:primaryType="nt:unstructured"
-                                    sling:resourceType="cq/gui/components/common/wcm/layouts/emptychildpages"
-                                    path="/libs/harbor/admin/documentation/components">
-
-                                    <actions
-                                        jcr:primaryType="nt:unstructured"
-                                        sling:resourceType="granite/ui/components/endor/actionbar/hyperlink"
-                                        hideText="{Boolean}true"
-                                        href="#empty-actions-popover"
-                                        icon="icon-add"
-                                        text="Create"
-                                        title="Create"
-                                        toggle="popover"/>
-                                </empty>
                             </layout>
                             <datasource
                                 jcr:primaryType="nt:unstructured"
