@@ -240,9 +240,9 @@
                         <br/>
                         <p class="modified"> <%= cqPage.getProperties().get("jcr:description")==null?"":cqPage.getProperties().get("jcr:description") %> </p>
                     <%
-                        }
+                        } else { //otherwise displayed modified and published information
                     %>
-                    <p class="modified" <%= (isHarbor(resource))?"style='display:none;'":""  %> title="<%= i18n.get("Modified") %>">
+                    <p class="modified" title="<%= i18n.get("Modified") %>">
                         <i class="coral-Icon coral-Icon--edit"></i><%
                         if (cqPage.getLastModified() != null) {
                             %><span class="date" itemprop="lastmodified" data-timestamp="<%= cqPage.getLastModified().getTimeInMillis() %>">
@@ -261,7 +261,9 @@
                             %></span>
                             <span class="user" itemprop="lastmodifiedby"><%= xssAPI.encodeForHTML(AuthorizableUtil.getFormattedName(resourceResolver, cqPage.getLastModifiedBy())) %></span><%
                         }
-                    %></p><%
+                    %></p>
+
+                    <%
                     String publishStatus = "";
                     String publishIcon = "";
                     String publishStatusStyle = "";
@@ -282,7 +284,7 @@
                         publishStatusStyle = "not-published";
                     }
 
-                %><p class="published <%= publishStatusStyle %>" <%= (isHarbor(resource))?"style='display:none;'":""  %> title="<%= publishStatus %>">
+                %><p class="published <%= publishStatusStyle %>" title="<%= publishStatus %>">
                         <i class="<%= publishIcon %>"></i>
                         <span class="date" itemprop="published" data-timestamp="<%= publishedDate.getTimeInMillis() %>">
                             <%= (publishedDate.getTimeInMillis() != 0 && !deactivated) ?
@@ -317,7 +319,11 @@
                             %></span>
                         <span class="user" itemprop="publishedby"><%= publishedBy != null && !deactivated ? xssAPI.encodeForHTML(publishedBy) : "" %></span>
 
-                </p><%
+                </p>
+                <%
+                    } //end isHarbor else
+                %>
+                    <%
 
                     // add the custom data
                     PageInfoAggregator piAggregatorService = sling.getService(PageInfoAggregator.class);
@@ -356,6 +362,7 @@
                 %></div>
             </div>
         </a>
+        <% if (!isHarbor(resource)) { //only display quickactions if not harbor %>
         <div class="foundation-collection-quickactions" data-foundation-collection-quickactions-rel="<%= StringUtils.join(getActionRels(resource, acm, hasAnalytics), " ") %>"><%
             if (hasPermission(acm, resource, Privilege.JCR_READ)) {
                 %><button class="foundation-collection-action" data-foundation-collection-action='{"action": "cq.wcm.open", "data": {"cookiePath":"<%= request.getContextPath() %>/","href":"<%= request.getContextPath() %>/bin/wcmcommand?cmd=open&_charset_=utf-8&path={item}"}}'
@@ -383,7 +390,11 @@
                           type="button" autocomplete="off" title="<%= i18n.get("Publish") %>"
                     ><i class="coral-Icon coral-Icon--globe coral-Icon--sizeXS"></i></button><%
             }
-        %></div><%
+        %></div>
+        <%
+            } //end !isHarbor
+        %>
+        <%
     } else {
         %>
         <% if (isHarbor(resource)) { %>
