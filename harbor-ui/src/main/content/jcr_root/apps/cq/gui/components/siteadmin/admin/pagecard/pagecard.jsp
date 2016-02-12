@@ -235,6 +235,7 @@
                     %></p>
                     <% if (isHarbor(resource)) { %>
                         <p class="modified"> <%= cqPage.getProperties().get("jcr:subtitle")==null?"":cqPage.getProperties().get("jcr:subtitle") %> </p>
+                        <br/>
                         <p class="modified"> <%= cqPage.getProperties().get("jcr:description")==null?"":cqPage.getProperties().get("jcr:description") %> </p>
                     <%
                         }
@@ -439,9 +440,11 @@
 
         return created != null && twentyFourHoursAgo.before(created);
 	}
+
     private boolean isHarbor(Resource resource) {
         return resource.getPath().contains("harbor");
     }
+
     private int getSortWeight(int sortWeight, boolean isNew, boolean hasWorkItem) {
         if (isNew) {
             sortWeight += 10;
