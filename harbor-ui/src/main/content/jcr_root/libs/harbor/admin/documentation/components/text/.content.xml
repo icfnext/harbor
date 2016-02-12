@@ -73,7 +73,7 @@
                         <teezer
                             jcr:primaryType="nt:unstructured"
                             sling:resourceType="granite/ui/components/foundation/container"
-                            class="card-page">
+                            class="foundation-Screens-page">
                             <items jcr:primaryType="nt:unstructured">
                                 <title
                                     jcr:primaryType="nt:unstructured"
@@ -91,9 +91,9 @@
                                     jcr:primaryType="nt:unstructured"
                                     sling:resourceType="granite/ui/components/foundation/hyperlink"
                                     class="coral-Button"
-                                    href_i18n="/libs/harbor/admin/documentation/components/text.html"
+                                    href_i18n="/libs/harbor/admin/documentation/components.html"
                                     icon="coral-Icon--link"
-                                    text="View Documentation"/>
+                                    text="Back to Components"/>
                             </items>
                         </teezer>
                     </items>
