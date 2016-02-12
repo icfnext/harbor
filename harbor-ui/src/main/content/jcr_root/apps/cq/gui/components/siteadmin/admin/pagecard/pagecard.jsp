@@ -242,7 +242,7 @@
                     <%
                         }
                     %>
-                    <p class="modified" <%= (isHarbor(resource))?"style='display:none;'":""  %> %>%>title="<%= i18n.get("Modified") %>">
+                    <p class="modified" <%= (isHarbor(resource))?"style='display:none;'":""  %> title="<%= i18n.get("Modified") %>">
                         <i class="coral-Icon coral-Icon--edit"></i><%
                         if (cqPage.getLastModified() != null) {
                             %><span class="date" itemprop="lastmodified" data-timestamp="<%= cqPage.getLastModified().getTimeInMillis() %>">
