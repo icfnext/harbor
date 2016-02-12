@@ -59,6 +59,7 @@
                   java.util.List,
                   java.util.Locale,
                   java.util.HashMap,
+                  java.util.regex.Pattern,
                   java.util.Map" %><%
 %><%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %><%
 %><%@taglib prefix="cq" uri="http://www.day.com/taglibs/cq/1.0" %><%
@@ -154,7 +155,13 @@
             pageContext.setAttribute("movable", node.getPrimaryNodeType().hasOrderableChildNodes());
         }
     }
-%><article <%= attrs.build() %>>
+    String htmlAttrs = attrs.build();
+   
+    if (resource.getPath().contains("harbor")) {
+        //htmlAttrs = htmlAttrs.replaceAll(Pattern.quote("foundation-collection-item"),"");
+        htmlAttrs = htmlAttrs.replaceAll("(?<=\\w)-(?=\\w)-(?=\\w)","");
+    }
+%><article <%=  htmlAttrs %>>
     <i class="select"></i>
     <c:if test="${movable}">
         <i class="move"></i>
