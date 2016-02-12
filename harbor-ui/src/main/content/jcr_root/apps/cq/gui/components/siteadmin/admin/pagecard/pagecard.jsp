@@ -187,7 +187,7 @@
         }
         %>
 
-    <% if (resource.getPath().contains("harbor")) { %>
+    <% if (isHarbor(resource)) { %>
     <a href="<%= xssAPI.getValidHref(resource.getPath() + ".html") %>"  onclick="window.location.href='<%= xssAPI.getValidHref(resource.getPath() + ".html") %>'" x-cq-linkchecker="skip">
     <%
         } else {
@@ -233,13 +233,13 @@
                             </span><%
                         }
                     %></p>
-                    <% if (resource.getPath().contains("harbor")) { %>
+                    <% if (isHarbor(resource)) { %>
                         <p class="modified"> <%= cqPage.getProperties().get("jcr:subtitle")==null?"":cqPage.getProperties().get("jcr:subtitle") %> </p>
                         <p class="modified"> <%= cqPage.getProperties().get("jcr:description")==null?"":cqPage.getProperties().get("jcr:description") %> </p>
                     <%
                         }
                     %>
-                    <p class="modified" <%= (resource.getPath().contains("harbor"))?"style='display:none;'":""  %> %>%>title="<%= i18n.get("Modified") %>">
+                    <p class="modified" <%= (isHarbor(resource))?"style='display:none;'":""  %> %>%>title="<%= i18n.get("Modified") %>">
                         <i class="coral-Icon coral-Icon--edit"></i><%
                         if (cqPage.getLastModified() != null) {
                             %><span class="date" itemprop="lastmodified" data-timestamp="<%= cqPage.getLastModified().getTimeInMillis() %>">
@@ -279,7 +279,7 @@
                         publishStatusStyle = "not-published";
                     }
 
-                %><p class="published <%= publishStatusStyle %>" <%= (resource.getPath().contains("harbor"))?"style='display:none;'":""  %> title="<%= publishStatus %>">
+                %><p class="published <%= publishStatusStyle %>" <%= (isHarbor(resource))?"style='display:none;'":""  %> title="<%= publishStatus %>">
                         <i class="<%= publishIcon %>"></i>
                         <span class="date" itemprop="published" data-timestamp="<%= publishedDate.getTimeInMillis() %>">
                             <%= (publishedDate.getTimeInMillis() != 0 && !deactivated) ?
@@ -383,7 +383,7 @@
         %></div><%
     } else {
         %>
-        <% if (resource.getPath().contains("harbor")) { %>
+        <% if (isHarbor(resource)) { %>
         <a href="<%= xssAPI.getValidHref(resource.getPath() + ".html") %>" onclick="window.location.href='<%= xssAPI.getValidHref(resource.getPath() + ".html") %>'"  x-cq-linkchecker="skip">
                 <%
             } else {
@@ -439,7 +439,9 @@
 
         return created != null && twentyFourHoursAgo.before(created);
 	}
-
+    private boolean isHarbor(Resource resource) {
+        return resource.getPath().contains("harbor");
+    }
     private int getSortWeight(int sortWeight, boolean isNew, boolean hasWorkItem) {
         if (isNew) {
             sortWeight += 10;
