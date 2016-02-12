@@ -233,6 +233,12 @@
                             </span><%
                         }
                     %></p>
+                    <% if (resource.getPath().contains("harbor")) { %>
+                        <p class="modified"> <%= cqPage.getProperties().get("jcr:subtitle")==null?"":cqPage.getProperties().get("jcr:subtitle") %> </p>
+                        <p class="modified"> <%= cqPage.getProperties().get("jcr:description")==null?"":cqPage.getProperties().get("jcr:description") %> </p>
+                    <%
+                        }
+                    %>
                     <p class="modified" <%= (resource.getPath().contains("harbor"))?"style='display:none;'":""  %> %>%>title="<%= i18n.get("Modified") %>">
                         <i class="coral-Icon coral-Icon--edit"></i><%
                         if (cqPage.getLastModified() != null) {

@@ -5,6 +5,8 @@
         jcr:mixinTypes="[sling:VanityPath]"
         jcr:primaryType="nt:unstructured"
         jcr:title="Harbor Text Component"
+        jcr:subtitle="Group: Harbor"
+        jcr:description="Basic Rich Text Editor"
         sling:redirect="{Boolean}false"
         sling:resourceType="granite/ui/components/foundation/page"
         sling:vanityOrder="{Long}1200"
