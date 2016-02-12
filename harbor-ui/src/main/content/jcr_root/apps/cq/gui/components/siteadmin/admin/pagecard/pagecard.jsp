@@ -188,7 +188,7 @@
         %>
 
     <% if (resource.getPath().contains("harbor")) { %>
-    <a href="<%= xssAPI.getValidHref(resource.getPath() + ".html") %>"  x-cq-linkchecker="skip">
+    <a href="<%= xssAPI.getValidHref(resource.getPath() + ".html") %>"  onclick="window.location.href='<%= xssAPI.getValidHref(resource.getPath() + ".html") %>'" x-cq-linkchecker="skip">
     <%
         } else {
     %>
@@ -378,7 +378,7 @@
     } else {
         %>
         <% if (resource.getPath().contains("harbor")) { %>
-        <a href="<%= xssAPI.getValidHref(resource.getPath() + ".html") %>"  x-cq-linkchecker="skip">
+        <a href="<%= xssAPI.getValidHref(resource.getPath() + ".html") %>" onclick="window.location.href='<%= xssAPI.getValidHref(resource.getPath() + ".html") %>'"  x-cq-linkchecker="skip">
                 <%
             } else {
         %>
