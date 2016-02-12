@@ -157,7 +157,9 @@
     }
 
 %><article <%= attrs.build() %>>
+<% if (!isHarbor(resource)) { %>
     <i class="select"></i>
+<% } %>
     <c:if test="${movable}">
         <i class="move"></i>
     </c:if> <%
@@ -234,7 +236,7 @@
                         }
                     %></p>
                     <% if (isHarbor(resource)) { %>
-                        <p class="modified"> <%= cqPage.getProperties().get("jcr:subtitle")==null?"":cqPage.getProperties().get("jcr:subtitle") %> </p>
+                        <p class="modified"><b><%= cqPage.getProperties().get("jcr:subtitle")==null?"":cqPage.getProperties().get("jcr:subtitle") %> </b></p>
                         <br/>
                         <p class="modified"> <%= cqPage.getProperties().get("jcr:description")==null?"":cqPage.getProperties().get("jcr:description") %> </p>
                     <%
