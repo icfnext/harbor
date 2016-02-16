@@ -29,7 +29,7 @@
                 name="X-UA-Compatible"/>
             <title
                 jcr:primaryType="nt:unstructured"
-                jcr:title="Adobe Experience Manager Screens"
+                jcr:title="Harbor Text Component"
                 sling:resourceType="screens/ui/components/admin/page/title"/>
             <favicon
                 jcr:primaryType="nt:unstructured"
@@ -48,7 +48,7 @@
             <rail
                 jcr:primaryType="nt:unstructured"
                 sling:resourceType="granite/ui/components/endor/navcolumns"
-                currentId="cq-screens"
+                currentId="harbor-admin-documentation-components"
                 srcPath="cq/core/content/nav"/>
             <breadcrumbs
                 jcr:primaryType="nt:unstructured"
@@ -63,41 +63,27 @@
             <content
                 jcr:primaryType="nt:unstructured"
                 sling:resourceType="granite/ui/components/foundation/container">
-                <layout
-                    jcr:primaryType="nt:unstructured"
-                    sling:resourceType="granite/ui/components/endor/layouts/content"/>
-                <content
-                    jcr:primaryType="nt:unstructured"
-                    sling:resourceType="granite/ui/components/foundation/container">
                     <items jcr:primaryType="nt:unstructured">
-                        <teezer
+                        <title
                             jcr:primaryType="nt:unstructured"
-                            sling:resourceType="granite/ui/components/foundation/container"
-                            class="foundation-Screens-page">
-                            <items jcr:primaryType="nt:unstructured">
-                                <title
-                                    jcr:primaryType="nt:unstructured"
-                                    sling:resourceType="granite/ui/components/foundation/heading"
-                                    class="coral-Heading coral-Heading--1"
-                                    level="2"
-                                    text="Text"/>
-                                <description
-                                    jcr:primaryType="nt:unstructured"
-                                    sling:resourceType="screens/ui/components/admin/text"
-                                    line1="The Harbor Text component"
-                                    line2="Group: Harbor"
-                                    />
-                                <dlbutton
-                                    jcr:primaryType="nt:unstructured"
-                                    sling:resourceType="granite/ui/components/foundation/hyperlink"
-                                    class="coral-Button"
-                                    href_i18n="/libs/harbor/admin/documentation/components.html"
-                                    icon="coral-Icon--link"
-                                    text="Back to Components"/>
-                            </items>
-                        </teezer>
+                            sling:resourceType="granite/ui/components/foundation/heading"
+                            class="coral-Heading coral-Heading--1"
+                            level="2"
+                            text="Text"/>
+                        <description
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="screens/ui/components/admin/text"
+                            line1="The Harbor Text component"
+                            line2="Group: Harbor"
+                            />
+                        <dlbutton
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/foundation/hyperlink"
+                            class="coral-Button"
+                            href_i18n="/libs/harbor/admin/documentation/components.html"
+                            icon="coral-Icon--link"
+                            text="Back to Components"/>
                     </items>
-                </content>
             </content>
         </body>
     </jcr:content>
