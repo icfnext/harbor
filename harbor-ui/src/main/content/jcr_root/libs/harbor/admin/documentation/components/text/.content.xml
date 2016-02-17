@@ -63,26 +63,37 @@
             <content
                 jcr:primaryType="nt:unstructured"
                 sling:resourceType="granite/ui/components/foundation/container">
+                <layout
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType = "granite/ui/components/foundation/layouts/tabs"
+                    type="large"/>
                     <items jcr:primaryType="nt:unstructured">
-                        <title
+                        <tab1
                             jcr:primaryType="nt:unstructured"
-                            sling:resourceType="granite/ui/components/foundation/heading"
-                            class="coral-Heading coral-Heading--1"
-                            level="2"
-                            text="Text"/>
-                        <description
-                            jcr:primaryType="nt:unstructured"
-                            sling:resourceType="screens/ui/components/admin/text"
-                            line1="The Harbor Text component"
-                            line2="Group: Harbor"
-                            />
-                        <dlbutton
-                            jcr:primaryType="nt:unstructured"
-                            sling:resourceType="granite/ui/components/foundation/hyperlink"
-                            class="coral-Button"
-                            href_i18n="/libs/harbor/admin/documentation/components.html"
-                            icon="coral-Icon--link"
-                            text="Back to Components"/>
+                            sling:resourceType = "granite/ui/components/foundation/container"
+                            jcr:title="Author Guide">
+                            <items jcr:primaryType="nt:unstructured">
+                                <title
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/foundation/heading"
+                                    class="coral-Heading coral-Heading--1"
+                                    level="2"
+                                    text="Harbor Text Component"/>
+                                <description
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="screens/ui/components/admin/text"
+                                    line1="The Harbor Text component"
+                                    line2="Group: Harbor"
+                                    />
+                                <dlbutton
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/foundation/hyperlink"
+                                    class="coral-Button"
+                                    href_i18n="/libs/harbor/admin/documentation/components.html"
+                                    icon="coral-Icon--link"
+                                    text="Back to Components"/>
+                            </items>
+                        </tab1>
                     </items>
             </content>
         </body>
