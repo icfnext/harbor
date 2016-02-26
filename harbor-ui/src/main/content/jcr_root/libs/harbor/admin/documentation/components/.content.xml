@@ -70,16 +70,16 @@
                             skipEmpty="columns">
                             <layouts jcr:primaryType="nt:unstructured">
                                 <card
-                                    jcr:primaryType="nt:unstructured"
-                                    sling:resourceType="granite/ui/components/foundation/layouts/cardview"
-                                    itemprop="item"
-                                    layoutId="card"
-                                    limit="{Long}20"
-                                    maximized="{Boolean}true"
-                                    path="/libs/harbor/admin/documentation/components"
-                                    selectionMode="{Boolean}false"
-                                    src="{+id}.html"
-                                    stateId="cq.sites.childpages"/>
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/layouts/cardview"
+                                        itemprop="item"
+                                        layoutId="card"
+                                        limit="{Long}20"
+                                        maximized="{Boolean}true"
+                                        path="/libs/harbor/admin/documentation/components"
+                                        selectionMode="{Boolean}false"
+                                        src="/libs/wcm/core/content/sites/jcr:content/body/content/content/items/childpages{.offset,limit}.html{+id}"
+                                        stateId="cq.sites.childpages"/>
                             </layouts>
                         </layout>
                         <datasource
