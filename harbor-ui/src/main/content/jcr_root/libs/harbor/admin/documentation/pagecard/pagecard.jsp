@@ -177,17 +177,7 @@
             </div>
         </a>
 
-        <a href="<%= xssAPI.getValidHref(resource.getPath() + ".html") %>" onclick="window.location.href='<%= xssAPI.getValidHref(resource.getPath() + ".html") %>'"  x-cq-linkchecker="skip">
-
-
-            <span class="image">
-                <img itemprop="thumbnail" width="192" src="<%= xssAPI.getValidHref(request.getContextPath() + Text.escapePath(resource.getPath()) + ".folderthumbnail.jpg") %>" alt="">
-                <i class="show-list coral-Icon coral-Icon--sizeXS coral-Icon--folder"></i>
-            </span>
-            <div class="label">
-                <h4 class="foundation-collection-item-title" itemprop="title"><%= xssAPI.encodeForHTML(title) %></h4>
-            </div>
-        </a>
+        
 
 </article><%!
     private boolean isNew(Page page) {
