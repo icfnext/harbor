@@ -86,7 +86,7 @@
                             jcr:primaryType="nt:unstructured"
                             sling:resourceType="cq/gui/components/common/wcm/datasources/childpages"
                             exclude="/content/(catalogs|dam|launches|mac|publications|usergenerated|communities|community-components|community-templates|forms|projects|phonegap)(/.*)*"
-                            itemResourceType="cq/gui/components/siteadmin/admin/pagecard"
+                            itemResourceType="harbor/admin/documentation/pagecard"
                             limit="${empty requestPathInfo.selectors[1] ? &quot;20&quot; : requestPathInfo.selectors[1]}"
                             offset="${requestPathInfo.selectors[0]}"
                             path="/libs/harbor/admin/documentation/components"/>
