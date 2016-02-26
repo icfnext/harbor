@@ -157,255 +157,28 @@
     }
 
 %><article <%= attrs.build() %>>
-<% if (!isHarbor(resource)) { %>
-    <i class="select"></i>
-<% } %>
-    <c:if test="${movable}">
-        <i class="move"></i>
-    </c:if> <%
 
-    if (cqPage != null) {
-        Map<String, Integer> wfTitles = new HashMap<String, Integer>();
 
-        for (WorkItem item : workItems) {
-            String wfTitle = i18n.getVar(item.getNode().getTitle());
-
-            if(!wfTitles.containsKey(wfTitle)) {
-                wfTitles.put(wfTitle, 1);
-            }
-            else {
-                wfTitles.put(wfTitle, wfTitles.get(wfTitle) + 1);
-            }
-        }
-
-        for (Map.Entry<String, Integer> entry : wfTitles.entrySet()) {
-        %><div class="coral-Alert coral-Alert--notice">
-            <i class="coral-Alert-typeIcon coral-Icon coral-Icon--sizeS coral-Icon--alert"></i>
-            <div class="coral-Alert-message"><%= xssAPI.encodeForHTMLAttr(entry.getKey()) %></div>
-            <% if(entry.getValue() > 1) { %>
-            <span class="u-coral-pullRight coral-Badge coral-Badge--notice"><%= xssAPI.encodeForHTMLAttr(Integer.toString(entry.getValue())) %></span><%
-            }%>
-        </div><%
-        }
-        %>
-
-    <% if (isHarbor(resource)) { %>
     <a href="<%= xssAPI.getValidHref(resource.getPath() + ".html") %>"  onclick="window.location.href='<%= xssAPI.getValidHref(resource.getPath() + ".html") %>'" x-cq-linkchecker="skip">
-    <%
-        } else {
-    %>
-        <a href="<%= xssAPI.getValidHref(request.getContextPath() + getAdminUrl(resource, currentPage)) %>" itemprop="admin" x-cq-linkchecker="skip">
-    <%
-        }
-    %>
-            <%
-            if (isNew) {
-                %><span class="flag info"><%= i18n.get("New") %></span><%
-            }
-            %><span class="image"><img itemprop="thumbnail" width="192" src="<%= xssAPI.getValidHref(request.getContextPath() + getThumbnailUrl(cqPage)) %>" alt=""></span>
+
+            <span class="image"><img itemprop="thumbnail" width="192" src="<%= xssAPI.getValidHref(request.getContextPath() + getThumbnailUrl(cqPage)) %>" alt=""></span>
             <div class="label">
-                <div class="main"><%
-                    if (isLanguageCopy) {
-                        %><p class="descriptor" title="<%= i18n.get("Page is a Language Copy") %>"><%= i18n.get("Language Copy") %></p><%
-                    }
-                    if (LaunchUtils.isLaunchResourcePath(cqPage.getPath())) {
-                        %><p class="descriptor" title="<%= i18n.get("Page is a Launch Copy") %>"><%= i18n.get("Launch Copy") %></p><%
-                    }
-                    if (liveRelationshipManager.hasLiveRelationship(resource)) {
-                        %><p class="descriptor" title="<%= i18n.get("Page is a Live Copy") %>"><%= i18n.get("Live Copy") %></p><%
-                    }
-                %><h4 class="foundation-collection-item-title" itemprop="title"><%= xssAPI.encodeForHTML(title) %></h4>
+                <div class="main"><h4 class="foundation-collection-item-title" itemprop="title"><%= xssAPI.encodeForHTML(title) %></h4>
                 </div>
                 <div class="info">
-                    <p class="meta-info"><%
-                        if (cqPage.isHideInNav()) {
-                            %><span class="hideinnav">
-                                <i class="coral-Icon coral-Icon--viewOff" title="<%= i18n.get("Hidden in Navigation") %>"></i>
-                            </span><%
-                        }
-                        if (cqPage.isLocked()) {
-                            %><span class="islocked">
-                                <i class="coral-Icon coral-Icon--lockOn" title="<%= i18n.get("Locked") %>"></i>
-                            </span><%
-                        }
-                        if (commentCount > 0) {
-                            %><span class="comments" title="<%= i18n.get("Comments") %>">
-                                <i class="coral-Icon coral-Icon--comment"></i>
-                                <span class="comment-number"><%= commentCount %></span>
-                            </span><%
-                        }
-                    %></p>
-                    <% if (isHarbor(resource)) { %>
+
+
                         <p class="modified"><b><%= cqPage.getProperties().get("jcr:subtitle")==null?"":cqPage.getProperties().get("jcr:subtitle") %> </b></p>
                         <br/>
                         <p class="modified"> <%= cqPage.getProperties().get("jcr:description")==null?"":cqPage.getProperties().get("jcr:description") %> </p>
-                    <%
-                        } else { //otherwise displayed modified and published information
-                    %>
-                    <p class="modified" title="<%= i18n.get("Modified") %>">
-                        <i class="coral-Icon coral-Icon--edit"></i><%
-                        if (cqPage.getLastModified() != null) {
-                            %><span class="date" itemprop="lastmodified" data-timestamp="<%= cqPage.getLastModified().getTimeInMillis() %>">
-                            <%= xssAPI.encodeForHTML(formatRelativeDate(cqPage.getLastModified(), rtf)) %><%
-                                String modifiedAfterPublishIcon = "";
-                                String modifiedAfterPublishStatus = "";
 
-                                if (publishedDate != null && publishedDate.before(cqPage.getLastModified())) {
-                                    modifiedAfterPublishIcon = "coral-Icon coral-Icon--alert";
-                                    modifiedAfterPublishStatus = i18n.get("Modified since last publication");
 
-                                %><span class="coral-Icon--info-notice info-inline list-only modifiedafterpublish-info <%= modifiedAfterPublishIcon %> coral-Icon--sizeXS"
-                                    itemprop="modifiedafterpublish-info"
-                                    title="<%= xssAPI.encodeForHTMLAttr(modifiedAfterPublishStatus) %>"></span><%
-                                    }
-                            %></span>
-                            <span class="user" itemprop="lastmodifiedby"><%= xssAPI.encodeForHTML(AuthorizableUtil.getFormattedName(resourceResolver, cqPage.getLastModifiedBy())) %></span><%
-                        }
-                    %></p>
-
-                    <%
-                    String publishStatus = "";
-                    String publishIcon = "";
-                    String publishStatusStyle = "";
-                    if (publishedDate != null) {
-                        if (!deactivated) {
-                            publishStatus = i18n.get("Published");
-                            publishIcon = "coral-Icon coral-Icon--globe";
-                        } else {
-                            publishStatus = i18n.get("Not published");
-                            publishIcon = "coral-Icon coral-Icon--globeRemove";
-                            publishStatusStyle = "not-published";
-                        }
-                    } else {
-                        publishedDate = Calendar.getInstance();
-                        publishedDate.setTimeInMillis(0);
-                        publishStatus = i18n.get("Not published");
-                        publishIcon = "coral-Icon coral-Icon--globeRemove";
-                        publishStatusStyle = "not-published";
-                    }
-
-                %><p class="published <%= publishStatusStyle %>" title="<%= publishStatus %>">
-                        <i class="<%= publishIcon %>"></i>
-                        <span class="date" itemprop="published" data-timestamp="<%= publishedDate.getTimeInMillis() %>">
-                            <%= (publishedDate.getTimeInMillis() != 0 && !deactivated) ?
-                                    xssAPI.encodeForHTML(formatRelativeDate(publishedDate, rtf)) : publishStatus %>
-                            <%
-                            // (Un-)Publication is pending in queue?
-                            String queueStatus = getPendingPublicationQuicktip(replicationStatus, i18n);
-                            if (queueStatus.length() > 0) {
-                                %><span
-                                    class="coral-Icon--info-notice info-inline list-only queue-info coral-Icon coral-Icon--pending coral-Icon--sizeXS"
-                                    itemprop="queue-info"
-                                    title="<%= xssAPI.encodeForHTMLAttr(queueStatus) %>"></span><%
-                            }
-
-                            // On-/OffTime
-                            String onOffTimeStatus = getOnOffTimeStatus(resourceProperties, i18n, request.getLocale());
-                            if (onOffTimeStatus.length() > 0) {
-                                String onOffTimeIcon = "coral-Icon coral-Icon--clock";
-                            %><span class="coral-Icon--info-help info-inline list-only onofftime-info <%= onOffTimeIcon %> coral-Icon--sizeXS"
-                                itemprop="onofftime-info"
-                                title="<%= xssAPI.encodeForHTMLAttr(onOffTimeStatus) %>"></span><%
-                            }
-
-                            // scheduled activation ((de-)activate later)
-                            List<Workflow> scheduledWorkflows = getScheduledWorkflows(workflowStatus);
-                            String scheduledIcon = (scheduledWorkflows.size() > 0) ? "coral-Icon coral-Icon--calendar" : "";
-                            if (scheduledWorkflows.size() > 0 && !deactivated) {
-                            %><span class="coral-Icon--info-help info-inline list-only scheduledpublication-info <%= scheduledIcon %> coral-Icon--sizeXS"
-                                    itemprop="scheduledpublication-info"
-                                    title="<%= xssAPI.encodeForHTMLAttr(getScheduledStatus(scheduledWorkflows, i18n, request.getLocale(), resourceResolver)) %>"></span><%
-                            }
-                            %></span>
-                        <span class="user" itemprop="publishedby"><%= publishedBy != null && !deactivated ? xssAPI.encodeForHTML(publishedBy) : "" %></span>
-
-                </p>
-                <%
-                    } //end isHarbor else
-                %>
-                    <%
-
-                    // add the custom data
-                    PageInfoAggregator piAggregatorService = sling.getService(PageInfoAggregator.class);
-                    LinkedHashMap<String, List<String>> showColumnInfo = (LinkedHashMap<String, List<String>>) request.getAttribute("sites.listView.info.providers");
-
-                    if (piAggregatorService != null
-                            && showColumnInfo != null) {
-
-                        Map<String, Object> customPageData = piAggregatorService.getAggregatedPageInfo(slingRequest, resource);
-
-                        for (Map.Entry<String, List<String>> columnInfoEntry : showColumnInfo.entrySet()) {
-                            String providerName = columnInfoEntry.getKey();
-                            Map<String, Object> providerCustomProperties = (Map<String, Object>) customPageData.get(providerName);
-
-                            if (providerCustomProperties != null) {
-                                for (String columnProviderProperty : columnInfoEntry.getValue()) {
-                                    Object propValue = providerCustomProperties.get(columnProviderProperty);
-                                    Object trendInfo = providerCustomProperties.get(columnProviderProperty + "trend");
-                                    if (propValue != null) {
-                                        request.setAttribute("sites.listView.info.render.provider", providerName);
-                                        request.setAttribute("sites.listView.info.render.providerProperty", columnProviderProperty);
-                                        request.setAttribute("sites.listView.info.render.value", propValue.toString());
-                                        request.setAttribute("sites.listView.info.render.trend", trendInfo);
-                                    %>
-                                    <cq:include path="<%=resource.getPath()%>" resourceType="cq/gui/components/siteadmin/admin/listview/columns/analyticscolumnrenderer"/>
-                                    <%
-                                    }
-                                }
-                            } else {
-                                log.warn("No custom information found for provider '" + providerName + "'!");
-                            }
-                        }
-                    } else {
-                        log.debug("No PageInfoAggregator service found and/or no column information found on request attributes, no custom data will be available!");
-                    }
-                %></div>
+                   </div>
             </div>
         </a>
-        <% if (!isHarbor(resource)) { //only display quickactions if not harbor %>
-        <div class="foundation-collection-quickactions" data-foundation-collection-quickactions-rel="<%= StringUtils.join(getActionRels(resource, acm, hasAnalytics), " ") %>"><%
-            if (hasPermission(acm, resource, Privilege.JCR_READ)) {
-                %><button class="foundation-collection-action" data-foundation-collection-action='{"action": "cq.wcm.open", "data": {"cookiePath":"<%= request.getContextPath() %>/","href":"<%= request.getContextPath() %>/bin/wcmcommand?cmd=open&_charset_=utf-8&path={item}"}}'
-                    type="button" autocomplete="off" title="<%= i18n.get("Open") %>"
-                    ><i class="coral-Icon coral-Icon--edit coral-Icon--sizeXS"></i>
-                </button>
 
-                <a title="<%= i18n.get("View Properties") %>" x-cq-linkchecker="skip"
-                   href="<%= xssAPI.getValidHref(request.getContextPath() + "/libs/wcm/core/content/sites/properties.html" + Text.escapePath(cqPage.getPath())) %>"
-                    ><i class="coral-Icon coral-Icon--infoCircle coral-Icon--sizeXS"></i></a>
-
-                <button class="foundation-collection-action" data-foundation-collection-action='{"action": "cq.wcm.copy"}'
-                        type="button" autocomplete="off" title="<%= i18n.get("Copy") %>"
-                    ><i class="coral-Icon coral-Icon--copy coral-Icon--sizeXS"></i></button><%
-            }
-
-            if (hasPermission(acm, resource, Privilege.JCR_REMOVE_NODE)) {
-                %><a title="<%= i18n.get("Move") %>" x-cq-linkchecker="skip"
-                     href="<%= xssAPI.getValidHref(request.getContextPath() + "/libs/wcm/core/content/sites/movepagewizard.html" + parentPath + "?item=" + Text.escapePath(cqPage.getPath()) + "&_charset_=utf-8") %>"
-                    ><i class="coral-Icon coral-Icon--move coral-Icon--sizeXS"></i></a><%
-            }
-
-            if (hasPermission(acm, resource, "crx:replicate")) {
-                %><button class="foundation-collection-action" data-foundation-collection-action='{"action": "cq.wcm.publish", "data": {"referenceSrc": "<%= request.getContextPath() %>/libs/wcm/core/content/reference.json?_charset_=utf-8{&path*}", "wizardSrc": "<%= request.getContextPath() %>/libs/wcm/core/content/sites/publishpagewizard.html?_charset_=utf-8{&item*}"}}'
-                          type="button" autocomplete="off" title="<%= i18n.get("Publish") %>"
-                    ><i class="coral-Icon coral-Icon--globe coral-Icon--sizeXS"></i></button><%
-            }
-        %></div>
-        <%
-            } //end !isHarbor
-        %>
-        <%
-    } else {
-        %>
-        <% if (isHarbor(resource)) { %>
         <a href="<%= xssAPI.getValidHref(resource.getPath() + ".html") %>" onclick="window.location.href='<%= xssAPI.getValidHref(resource.getPath() + ".html") %>'"  x-cq-linkchecker="skip">
-                <%
-            } else {
-        %>
-            <a href="<%= xssAPI.getValidHref(request.getContextPath() + getAdminUrl(resource, currentPage)) %>" itemprop="admin" x-cq-linkchecker="skip">
-                    <%
-            }
-        %>
+
 
             <span class="image">
                 <img itemprop="thumbnail" width="192" src="<%= xssAPI.getValidHref(request.getContextPath() + Text.escapePath(resource.getPath()) + ".folderthumbnail.jpg") %>" alt="">
@@ -415,30 +188,7 @@
                 <h4 class="foundation-collection-item-title" itemprop="title"><%= xssAPI.encodeForHTML(title) %></h4>
             </div>
         </a>
-        <div class="foundation-collection-quickactions" data-foundation-collection-quickactions-rel="<%= StringUtils.join(getActionRels(resource, acm, hasAnalytics), " ") %>"><%
-            if (hasPermission(acm, resource, Privilege.JCR_READ)) {
-                %><a title="<%= i18n.get("View Properties") %>" x-cq-linkchecker="skip"
-                    href="<%= xssAPI.getValidHref(request.getContextPath() + "/libs/wcm/core/content/sites/folderproperties.html" + Text.escapePath(resource.getPath())) %>"
-                    ><i class="coral-Icon coral-Icon--infoCircle coral-Icon--sizeXS"></i></a>
 
-                <button class="foundation-collection-action" data-foundation-collection-action='{"action": "cq.wcm.copy"}'
-                    type="button" autocomplete="off" title="<%= i18n.get("Copy") %>"
-                    ><i class="coral-Icon coral-Icon--copy coral-Icon--sizeXS"></i></button><%
-            }
-
-            if (hasPermission(acm, resource, Privilege.JCR_REMOVE_NODE)) {
-                %><a title="<%= i18n.get("Move") %>" x-cq-linkchecker="skip"
-                    href="<%= xssAPI.getValidHref(request.getContextPath() + "/libs/wcm/core/content/sites/movepagewizard.html" + parentPath + "?item=" + Text.escapePath(resource.getPath()) + "&_charset_=utf-8") %>"
-                    ><i class="coral-Icon coral-Icon--move coral-Icon--sizeXS"></i></a><%
-            }
-
-            if (hasPermission(acm, resource, "crx:replicate")) {
-                %><button class="foundation-collection-action" data-foundation-collection-action='{"action": "cq.wcm.publish", "data": {"referenceSrc": "<%= request.getContextPath() %>/libs/wcm/core/content/reference.json?_charset_=utf-8{&path*}", "wizardSrc": "<%= request.getContextPath() %>/libs/wcm/core/content/sites/publishpagewizard.html?_charset_=utf-8{&item*}"}}'
-                    type="button" autocomplete="off" title="<%= i18n.get("Publish") %>"
-                    ><i class="coral-Icon coral-Icon--globe coral-Icon--sizeXS"></i></button><%
-            }
-        %></div><%
-    } %>
 </article><%!
     private boolean isNew(Page page) {
 	    Calendar created = page.getProperties().get("jcr:created", Calendar.class);
@@ -453,10 +203,6 @@
 
         return created != null && twentyFourHoursAgo.before(created);
 	}
-
-    private boolean isHarbor(Resource resource) {
-        return resource.getPath().contains("harbor");
-    }
 
     private int getSortWeight(int sortWeight, boolean isNew, boolean hasWorkItem) {
         if (isNew) {
