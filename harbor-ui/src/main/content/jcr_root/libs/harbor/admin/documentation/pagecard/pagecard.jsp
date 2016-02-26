@@ -92,7 +92,6 @@
     ValueMap resourceProperties;
     boolean isLanguageCopy = false; // TODO: Determine if page is a language copy. Maybe LanguageManager helps.
     int commentCount = 0;
-    boolean isNew = false;
     int sortWeight = 0;
 
     String title;
@@ -100,7 +99,6 @@
         resourceProperties = cqPage.getProperties();
         title = cqPage.getTitle();
         commentCount = getCommentCount(cqPage);
-        isNew = isNew(cqPage);
 
         if (cqPage.isHideInNav()) {
             sortWeight += -5;
@@ -111,7 +109,7 @@
         title = getFolderTitle(resource);
     }
 
-    sortWeight = getSortWeight(sortWeight, isNew, !workItems.isEmpty());
+    sortWeight = getSortWeight(sortWeight, !workItems.isEmpty());
 
     Calendar publishedDate = resourceProperties.get("cq:lastReplicated", Calendar.class);
     Calendar rolloutDate = resourceProperties.get("cq:lastRolledout", Calendar.class);
@@ -180,24 +178,9 @@
         
 
 </article><%!
-    private boolean isNew(Page page) {
-	    Calendar created = page.getProperties().get("jcr:created", Calendar.class);
-	    Calendar lastModified = page.getLastModified();
 
-	    Calendar twentyFourHoursAgo = Calendar.getInstance();
-	    twentyFourHoursAgo.add(Calendar.DATE, -1);
 
-	    if (created == null || (lastModified != null && lastModified.before(created))) {
-	        created = lastModified;
-	    }
-
-        return created != null && twentyFourHoursAgo.before(created);
-	}
-
-    private int getSortWeight(int sortWeight, boolean isNew, boolean hasWorkItem) {
-        if (isNew) {
-            sortWeight += 10;
-        }
+    private int getSortWeight(int sortWeight, boolean hasWorkItem) {
         if (hasWorkItem) {
             sortWeight += 20;
         }
