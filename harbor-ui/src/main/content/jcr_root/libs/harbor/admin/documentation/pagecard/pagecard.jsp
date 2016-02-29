@@ -74,12 +74,10 @@
     }
 
     Page cqPage = resource.adaptTo(Page.class);
-    ValueMap resourceProperties;
     int sortWeight = 0;
 
     String title;
     if (cqPage != null) {
-        resourceProperties = cqPage.getProperties();
         title = cqPage.getTitle();
 
         if (cqPage.isHideInNav()) {
@@ -87,7 +85,6 @@
         }
     } else {
         // if it is not a page it is a folder
-        resourceProperties = ResourceUtil.getValueMap(resource);
         title = getFolderTitle(resource);
     }
 
@@ -128,13 +125,9 @@
                 <div class="main"><h4 class="foundation-collection-item-title" itemprop="title"><%= xssAPI.encodeForHTML(title) %></h4>
                 </div>
                 <div class="info">
-
-
                         <p class="modified"><b><%= cqPage.getProperties().get("jcr:subtitle")==null?"":cqPage.getProperties().get("jcr:subtitle") %> </b></p>
                         <br/>
                         <p class="modified"> <%= cqPage.getProperties().get("jcr:description")==null?"":cqPage.getProperties().get("jcr:description") %> </p>
-
-
                    </div>
             </div>
         </a>
