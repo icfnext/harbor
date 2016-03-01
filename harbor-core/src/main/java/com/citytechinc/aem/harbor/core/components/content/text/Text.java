@@ -3,11 +3,8 @@ package com.citytechinc.aem.harbor.core.components.content.text;
 import com.citytechinc.aem.bedrock.api.components.annotations.AutoInstantiate;
 import com.citytechinc.aem.bedrock.core.components.AbstractComponent;
 import com.citytechinc.aem.harbor.core.components.mixins.classifiable.Classification;
-import com.citytechinc.aem.harbor.core.components.mixins.classifiable.InheritedClassification;
-import com.citytechinc.aem.harbor.core.components.mixins.semantics.Property;
 import com.citytechinc.aem.harbor.core.util.icon.IconUtils;
 import com.citytechinc.cq.component.annotations.Component;
-import com.citytechinc.cq.component.annotations.ContentProperty;
 import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.Tab;
 import com.citytechinc.cq.component.annotations.widgets.DialogFieldSet;
@@ -41,9 +38,6 @@ public class Text extends AbstractComponent {
 
     @Inject @Self
     private Classification classification;
-
-    @Inject @Self
-    private Property property;
 
     @DialogField(fieldLabel = "Content", name = "./text")
     @RichTextEditor(

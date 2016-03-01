@@ -1,15 +1,11 @@
 package com.citytechinc.aem.harbor.core.components.content.heading;
 
-import com.citytechinc.aem.harbor.core.components.mixins.semantics.Property;
 import com.citytechinc.aem.harbor.core.util.ComponentUtils;
 import com.citytechinc.aem.harbor.core.util.icon.IconUtils;
 import com.citytechinc.cq.component.annotations.DialogField;
-import com.citytechinc.cq.component.annotations.widgets.DialogFieldSet;
 import com.citytechinc.cq.component.annotations.widgets.TextField;
 import org.apache.commons.lang.StringUtils;
-import org.apache.sling.models.annotations.Default;
 import org.apache.sling.models.annotations.Optional;
-import org.apache.sling.models.annotations.injectorspecific.Self;
 
 import javax.inject.Inject;
 
@@ -29,11 +25,6 @@ public abstract class AbstractHeading {
     @Inject @Optional
     protected String domId;
 
-    @DialogField(tab = 3)
-    @DialogFieldSet
-    @Inject @Self
-    protected Property property;
-
     public String getText() {
         if (StringUtils.isNotBlank(text)) {
             return IconUtils.iconify(text);
@@ -52,10 +43,6 @@ public abstract class AbstractHeading {
         }
 
         return "";
-    }
-
-    public Property getProperty() {
-        return property;
     }
 
     public abstract String getSize();
