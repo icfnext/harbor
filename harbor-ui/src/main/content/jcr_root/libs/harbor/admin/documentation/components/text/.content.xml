@@ -86,15 +86,10 @@
                                     line2="Group: Harbor"
                                     />
                                 <image
-                                        jcr:created="{Date}2013-11-04T12:22:45.936-05:00"
-                                        jcr:createdBy="admin"
-                                        jcr:lastModified="{Date}2013-11-04T12:45:28.284-05:00"
-                                        jcr:lastModifiedBy="admin"
-                                        jcr:primaryType="nt:unstructured"
-                                        sling:resourceType="harbor/admin/documentation/screenshot"
-                                        imageRotate="0"
-                                        width="300"
-                                        fileReference="/libs/harbor/admin/documentation/components/text/text-screenshot.png"/>
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="harbor/admin/documentation/image"
+                                    width="300"
+                                    fileReference="/libs/harbor/admin/documentation/components/text/text-add.png"/>
                                 <dlbutton
                                     jcr:primaryType="nt:unstructured"
                                     sling:resourceType="granite/ui/components/foundation/hyperlink"
