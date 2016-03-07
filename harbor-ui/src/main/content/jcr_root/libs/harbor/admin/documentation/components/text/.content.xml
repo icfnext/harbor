@@ -108,13 +108,18 @@
                                         />
                                 <content-options
                                         jcr:primaryType="nt:unstructured"
-                                        sling:resourceType="harbor/admin/documentation/table"
-                                        line1="     'A' button - Bold, Italics, or Underline"
-                                        line2="     'Alignment' button - Right Justify, Center, or Left Justify"
-                                        line3="     'List' button - Bulleted List or Numbered List"
-                                        line4="     'Link' button - Add URL and text displayed"
-                                        line5="     'Un-Link' button - Remove link"
+                                        sling:resourceType="harbor/admin/documentation/table">
+                                        <header1
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/heading"
+                                            text="Formatting Option"
                                         />
+                                        <header2
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/heading"
+                                            text="Description"
+                                        />
+                                </content-options>
                                 <image
                                     jcr:primaryType="nt:unstructured"
                                     sling:resourceType="harbor/admin/documentation/image"

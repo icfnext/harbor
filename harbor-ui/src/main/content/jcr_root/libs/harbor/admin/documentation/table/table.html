@@ -1,9 +1,12 @@
 <table class="coral-Table coral-Table--bordered">
     <thead>
     <tr class="coral-Table-row">
-        <th class="coral-Table-headerCell">Pet Name</th>
-        <th class="coral-Table-headerCell">Type</th>
-        <th class="coral-Table-headerCell">Good/Bad</th>
+    <sly data-sly-list.child="${resource.listChildren}">
+        <th class="coral-Table-headerCell" data-sly-test="${child.resourceType == 'granite/ui/components/foundation/heading'}">
+            ${child.text}
+        </th>
+    </sly>
+
     </tr>
     </thead>
     <tbody>
