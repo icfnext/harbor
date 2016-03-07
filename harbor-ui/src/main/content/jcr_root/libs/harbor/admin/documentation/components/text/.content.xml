@@ -82,14 +82,44 @@
                                 <description
                                     jcr:primaryType="nt:unstructured"
                                     sling:resourceType="screens/ui/components/admin/text"
-                                    line1="The Harbor Text component"
-                                    line2="Group: Harbor"
+                                    line1="The Harbor Text component will allow the author to compose text within a Rich Text Editor. This will allow the author to style the text. The author can also choose to tag to classify the component."
                                     />
+                                <author-instructions
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/heading"
+                                        class="coral-Heading coral-Heading--1"
+                                        level="3"
+                                        text="Authoring Instructions"/>
+                                <instructions
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="screens/ui/components/admin/text"
+                                        line1="Switch to Design Mode and highlight the parsys that you wish to include a Text component.  Ensure that the Group 'Harbor' is checked as 'Allowed Components'.  Switch back into 'Edit' mode and drag a Text component into the parsys.  Click on the gear icon to launch the dialog window."
+                                        />
+                                <screenshot-title
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/heading"
+                                        class="coral-Heading coral-Heading--1"
+                                        level="3"
+                                        text="Author Dialog"/>
+                                <screenshot-desc
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="screens/ui/components/admin/text"
+                                        line1="Below is a screenshot of the Dialog window that appears when you click on the 'gear' icon.  You can also edit the text by clicking on the 'pencil' icon. Enter your text in the 'content' field.  Below is a list of the formatting options: "
+                                        />
+                                <content-options
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="harbor/admin/documentation/table"
+                                        line1="     'A' button - Bold, Italics, or Underline"
+                                        line2="     'Alignment' button - Right Justify, Center, or Left Justify"
+                                        line3="     'List' button - Bulleted List or Numbered List"
+                                        line4="     'Link' button - Add URL and text displayed"
+                                        line5="     'Un-Link' button - Remove link"
+                                        />
                                 <image
                                     jcr:primaryType="nt:unstructured"
                                     sling:resourceType="harbor/admin/documentation/image"
                                     width="300"
-                                    fileReference="/libs/harbor/admin/documentation/components/text/text-add.png"/>
+                                    fileReference="/libs/harbor/admin/documentation/components/text/text-dialog.png"/>
                                 <dlbutton
                                     jcr:primaryType="nt:unstructured"
                                     sling:resourceType="granite/ui/components/foundation/hyperlink"
