@@ -119,6 +119,21 @@
                                             sling:resourceType="granite/ui/components/foundation/heading"
                                             text="Description"
                                         />
+                                        <row1
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/container">
+                                            <row1col1
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/foundation/text"
+                                                    text="'A' button"
+                                            />
+                                            <row1col2
+                                                    jcr:primaryType="nt:unstructured"
+                                                    sling:resourceType="granite/ui/components/foundation/text"
+                                                    text="Bold, Italics, or Underline"
+                                            />
+                                        </row1>
+
                                 </content-options>
                                 <image
                                     jcr:primaryType="nt:unstructured"

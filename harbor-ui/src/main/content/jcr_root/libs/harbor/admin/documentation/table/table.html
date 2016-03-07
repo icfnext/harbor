@@ -10,22 +10,12 @@
     </tr>
     </thead>
     <tbody>
-    <tr class="coral-Table-row">
-        <td class="coral-Table-cell">Hopper</td>
-        <td class="coral-Table-cell">Frog</td>
-        <td class="coral-Table-cell">Good</td>
-
-    </tr><tr class="coral-Table-row">
-        <td class="coral-Table-cell">Pokey</td>
-        <td class="coral-Table-cell">Porcupine</td>
-        <td class="coral-Table-cell">Good</td>
-    </tr>
-
-
-    <tr class="coral-Table-row">
-        <td class="coral-Table-cell">Mr. Snuggles</td>
-        <td class="coral-Table-cell">Snake</td>
-        <td class="coral-Table-cell">Bad</td>
-    </tr>
+    <sly data-sly-list.row="${resource.listChildren}">
+        <tr class="coral-Table-row" data-sly-test="${row.resourceType == 'granite/ui/components/foundation/container'}">
+            <sly data-sly-list.cell="${row.listChildren}">
+                <td class="coral-Table-cell">${cell.text}</td>
+            </sly>
+        </tr>
+    </sly>
     </tbody>
 </table>
