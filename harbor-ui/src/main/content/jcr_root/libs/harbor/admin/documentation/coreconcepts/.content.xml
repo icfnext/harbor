@@ -41,7 +41,7 @@
             <rail
                 jcr:primaryType="nt:unstructured"
                 sling:resourceType="granite/ui/components/endor/navcolumns"
-                currentId="harbor-admin-documentation-aboutharbor"
+                currentId="harbor-admin-documentation-coreconcepts"
                 srcPath="cq/core/content/nav"/>
             <breadcrumbs
                     jcr:primaryType="nt:unstructured"
@@ -60,28 +60,21 @@
                             sling:resourceType="granite/ui/components/foundation/container"
                             jcr:title="Author Guide">
                         <items jcr:primaryType="nt:unstructured">
-                            <title
-                                    jcr:primaryType="nt:unstructured"
-                                    sling:resourceType="granite/ui/components/foundation/heading"
-                                    class="coral-Heading coral-Heading--1"
-                                    level="2"
-                                    text="About Harbor"/>
-                            <description
-                                    jcr:primaryType="nt:unstructured"
-                                    sling:resourceType="screens/ui/components/admin/text"
-                                    line1="Harbor was created by ICF Olson in 2015. It consists of a series of reusable AEM Components that can be used by ICF Olson projects.  The Harbor components represent basic components that are typically needed for each AEM project."
-                                    />
                             <core-concepts
                                     jcr:primaryType="nt:unstructured"
                                     sling:resourceType="granite/ui/components/foundation/heading"
                                     class="coral-Heading coral-Heading--1"
-                                    level="3"
+                                    level="1"
                                     text="Core Concepts"/>
+                            <core-concepts-desc
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/foundation/text"
+                                    text="This guide explains concepts that are found within each Harbor component."/>
                             <classification-title
                                     jcr:primaryType="nt:unstructured"
                                     sling:resourceType="granite/ui/components/foundation/heading"
-                                    class="coral-Heading coral-Heading--1"
-                                    level="4"
+                                    class="coral-Heading coral-Heading--2"
+                                    level="2"
                                     text="Classification"/>
                             <classification-desc
                                     jcr:primaryType="nt:unstructured"
