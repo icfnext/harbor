@@ -197,13 +197,7 @@
                                     sling:resourceType="harbor/admin/documentation/image"
                                     width="300"
                                     fileReference="/libs/harbor/admin/documentation/components/text/text-dialog.png"/>
-                            <dlbutton
-                                    jcr:primaryType="nt:unstructured"
-                                    sling:resourceType="granite/ui/components/foundation/hyperlink"
-                                    class="coral-Button"
-                                    href_i18n="/libs/harbor/admin/documentation/components.html"
-                                    icon="coral-Icon--link"
-                                    text="Back to Components"/>
+
                         </items>
                     </tab1>
                 </items>
