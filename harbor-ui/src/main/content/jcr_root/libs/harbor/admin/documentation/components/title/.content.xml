@@ -55,7 +55,7 @@
                 sling:resourceType="granite/ui/components/endor/layouts/breadcrumbs"/>
             <title
                 jcr:primaryType="nt:unstructured"
-                jcr:title="Harbor Components"
+                jcr:title="Harbor Title Component"
                 sling:resourceType="screens/ui/components/admin/endor/title"/>
             <header
                 jcr:primaryType="nt:unstructured"

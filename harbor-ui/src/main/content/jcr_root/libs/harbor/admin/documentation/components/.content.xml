@@ -4,7 +4,7 @@
     <jcr:content
         jcr:mixinTypes="[sling:VanityPath]"
         jcr:primaryType="nt:unstructured"
-        jcr:title="Harbor Documentation"
+        jcr:title="Harbor Components"
         sling:resourceType="granite/ui/components/foundation/page"
         sling:vanityOrder="{Long}301"
         sling:vanityPath="">
