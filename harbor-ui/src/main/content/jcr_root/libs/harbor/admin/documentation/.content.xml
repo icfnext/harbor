@@ -46,9 +46,9 @@
             <breadcrumbs
                     jcr:primaryType="nt:unstructured"
                     sling:resourceType="cq/gui/components/siteadmin/admin/endor/breadcrumbs"
-                    baseUrl="/launches.html"
+                    baseUrl="/libs/harbor/admin/documentation.html"
                     contentPath="${empty param.item ? requestPathInfo.suffix : param.item}"
-                    rootTitle="Launches"/>
+                    rootTitle="Harbor Documentation"/>
             <title
                     jcr:primaryType="nt:unstructured"
                     sling:resourceType="cq/gui/components/siteadmin/admin/endor/title"
@@ -68,33 +68,13 @@
                                     sling:resourceType="granite/ui/components/foundation/heading"
                                     class="coral-Heading coral-Heading--1"
                                     level="2"
-                                    text="About Harbor"/>
+                                    text="Harbor Documentation"/>
                             <description
                                     jcr:primaryType="nt:unstructured"
                                     sling:resourceType="granite/ui/components/foundation/text"
-                                    text="Harbor was created by ICF Olson in 2015. It consists of a series of reusable AEM Components that can be used by ICF Olson projects.  The Harbor components represent basic components that are typically needed for each AEM project."
+                                    text="Welcome to Harbor Documentation. These pages will provide information about the Harbor project as well as detailed documentation on the Harbor components.  Authors can find step-by-step instructions on authoring the components.  Developers will also find pertinent technical information. "
                                     />
-                            <core-concepts
-                                    jcr:primaryType="nt:unstructured"
-                                    sling:resourceType="granite/ui/components/foundation/heading"
-                                    class="coral-Heading coral-Heading--1"
-                                    level="1"
-                                    text="Core Concepts"/>
-                            <core-concepts-desc
-                                    jcr:primaryType="nt:unstructured"
-                                    sling:resourceType="granite/ui/components/foundation/text"
-                                    text="This guide explains concepts that are found within each Harbor component."/>
-                            <classification-title
-                                    jcr:primaryType="nt:unstructured"
-                                    sling:resourceType="granite/ui/components/foundation/heading"
-                                    class="coral-Heading coral-Heading--2"
-                                    level="2"
-                                    text="Classification"/>
-                            <classification-desc
-                                    jcr:primaryType="nt:unstructured"
-                                    sling:resourceType="screens/ui/components/admin/text"
-                                    line1="There is a 'Classification' field that is found on all Harbor components.  The author can tag a component.  This is helpful when you need to assign a CSS class to a set of components.  For example, if you wanted to ensure that every component with this tag displayed all text in Navy Blue, you could create a 'navyblue' tag and then assign this tag to any component."
-                                    />
+
                         </items>
                     </tab1>
 
