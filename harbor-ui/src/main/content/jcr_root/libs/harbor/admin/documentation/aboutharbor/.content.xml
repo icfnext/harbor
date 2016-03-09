@@ -100,6 +100,150 @@
                                     />
                         </items>
                     </tab1>
+                    <tab2
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/foundation/container"
+                            jcr:title="Developer Guide">
+                        <items jcr:primaryType="nt:unstructured">
+                            <title
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/foundation/heading"
+                                    class="coral-Heading coral-Heading--1"
+                                    level="2"
+                                    text="The Code"/>
+                            <description
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/foundation/text"
+                                    text="Below is a list of the code repositories used in Harbor and a description of each."
+                                    />
+                            <repo-list
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="harbor/admin/documentation/table">
+                                <header1
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/heading"
+                                        text="Repository Name"
+                                        />
+                                <header2
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/heading"
+                                        text="Description"
+                                        />
+                                <header3
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/heading"
+                                        text="URL"
+                                        />
+                                <row1
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/container">
+                                    <row1col1
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="Harbor"
+                                            />
+                                    <row1col2
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="Main code repository"
+                                            />
+                                    <row1col3
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="https://github.com/Citytechinc/harbor"
+                                            />
+                                </row1>
+                                <row2
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/container">
+                                    <row2col1
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="Harbor Theme"
+                                            />
+                                    <row2col2
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="Theme Project for Harbor"
+                                            />
+                                    <row2col3
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="https://github.com/Citytechinc/harbor-theme"
+                                            />
+                                </row2>
+                                <row3
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/container">
+                                    <row3col1
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="AEM Namespace Extension"
+                                            />
+                                    <row3col2
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="Allows for customization of AEM namespace"
+                                            />
+                                    <row3col3
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="https://github.com/Citytechinc/aem-namespace-extension"
+                                            />
+                                </row3>
+                                <row4
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/container">
+                                    <row4col1
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="Bedrock"
+                                            />
+                                    <row4col2
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="Bedrock contains common utilities, decorators, abstract classes, tag libraries, and JavaScript modules for bootstrapping and simplifying AEM (Adobe CQ) projects."
+                                            />
+                                    <row4col3
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="https://github.com/Citytechinc/bedrock"
+                                            />
+                                </row4>
+                                <row5
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/container">
+                                    <row5col1
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="CQ Component Plugin"
+                                            />
+                                    <row5col2
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="The CQ Component Plugin generates many of the artifacts necessary for the creation of a CQ Component based on the information provided by the Component's backing Java Class."
+                                            />
+                                    <row5col3
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="https://github.com/Citytechinc/cq-component-maven-plugin"
+                                            />
+                                </row5>
+
+                            </repo-list>
+                            <build
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/foundation/heading"
+                                    class="coral-Heading coral-Heading--1"
+                                    level="2"
+                                    text="Building your environment"/>
+                            <build-desc
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/foundation/text"
+                                    text="Below is a list of instructions on building your environment from scratch."
+                                    />
+                        </items>
+                    </tab2>
 
                 </items>
             </content>
