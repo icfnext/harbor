@@ -53,10 +53,9 @@
                     srcPath="cq/core/content/nav"/>
             <breadcrumbs
                     jcr:primaryType="nt:unstructured"
-                    sling:resourceType="cq/gui/components/siteadmin/admin/endor/breadcrumbs"
-                    baseUrl="/libs/harbor/admin/documentation.html"
-                    contentPath="${empty param.item ? requestPathInfo.suffix : param.item}"
-                    rootTitle="Harbor Documentation"/>
+                    sling:resourceType="harbor/admin/documentation/breadcrumb"
+                    href="/libs/harbor/admin/documentation/components.html"
+                    title="Harbor Components"/>
             <title
                     jcr:primaryType="nt:unstructured"
                     jcr:title="Harbor Text Component"
