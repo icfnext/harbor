@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:granite="http://www.adobe.com/jcr/granite/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="cq:Page">
+    <jcr:content
+        jcr:mixinTypes="[sling:VanityPath]"
+        jcr:primaryType="nt:unstructured"
+        jcr:title="About Harbor"
+        sling:resourceType="granite/ui/components/foundation/page"
+        sling:vanityOrder="{Long}301"
+        sling:vanityPath="">
+
+        <head jcr:primaryType="nt:unstructured">
+            <viewport
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/foundation/admin/page/viewport"/>
+            <meta
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/foundation/meta"
+                content="chrome=1"
+                name="X-UA-Compatible"/>
+            <winmode
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="cq/gui/components/siteadmin/admin/page/winmode"/>
+            <title
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="cq/gui/components/siteadmin/admin/page/title"/>
+            <favicon
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/foundation/page/favicon"/>
+            <clientlibs
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/foundation/includeclientlibs"
+                categories="[coralui2,granite.ui.foundation,granite.ui.foundation.admin,cq.common.wcm,cq.siteadmin.admin,cq.listview.columns.personalization,cq.listview.analytics,cq.siteadmin.admin.pagecard]"/>
+        </head>
+        <body
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="granite/ui/components/foundation/page/body">
+            <layout
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/endor/layouts/page"/>
+            <rail
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/endor/navcolumns"
+                currentId="harbor-admin-documentation-aboutharbor"
+                srcPath="cq/core/content/nav"/>
+            <breadcrumbs
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="harbor/admin/documentation/breadcrumb"
+                    href="/apps/harbor/admin/documentation.html"
+                    title="Harbor Documentation"/>
+            <title
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="cq/gui/components/siteadmin/admin/endor/title"
+                contentPath="/apps/harbor/admin/documentation/aboutharbor"
+                rootTitle="Harbor"/>
+            <content
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/foundation/container">
+                <layout
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/foundation/layouts/tabs"
+                        type="large"/>
+                <items jcr:primaryType="nt:unstructured">
+                    <tab1
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/foundation/container"
+                            jcr:title="Author Guide">
+                        <items jcr:primaryType="nt:unstructured">
+                            <title
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/foundation/heading"
+                                    class="coral-Heading coral-Heading--1"
+                                    level="2"
+                                    text="About Harbor"/>
+                            <description
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/foundation/text"
+                                    text="Harbor was created by ICF Olson. It consists of a series of reusable AEM Components that can be used by ICF Olson projects.  The Harbor components represent basic components that are typically needed for each AEM project."
+                                    />
+                            <core-concepts
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/foundation/heading"
+                                    class="coral-Heading coral-Heading--1"
+                                    level="1"
+                                    text="Core Concepts"/>
+                            <core-concepts-desc
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/foundation/text"
+                                    text="This guide explains concepts that are found within each Harbor component."/>
+                            <classification-title
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/foundation/heading"
+                                    class="coral-Heading coral-Heading--2"
+                                    level="2"
+                                    text="Classification"/>
+                            <classification-desc
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="screens/ui/components/admin/text"
+                                    line1="There is a 'Classification' field that is found on all Harbor components.  The author can tag a component.  This is helpful when you need to assign a CSS class to a set of components.  For example, if you wanted to ensure that every component with this tag displayed all text in Navy Blue, you could create a 'navyblue' tag and then assign this tag to any component."
+                                    />
+                        </items>
+                    </tab1>
+                    <tab2
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/foundation/container"
+                            jcr:title="Developer Guide">
+                        <items jcr:primaryType="nt:unstructured">
+                            <title
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/foundation/heading"
+                                    class="coral-Heading coral-Heading--1"
+                                    level="2"
+                                    text="The Code"/>
+                            <description
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/foundation/text"
+                                    text="Below is a list of the code repositories used in Harbor and a description of each."
+                                    />
+                            <repo-list
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="harbor/admin/documentation/table">
+                                <header1
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/heading"
+                                        text="Repository Name"
+                                        />
+                                <header2
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/heading"
+                                        text="Description"
+                                        />
+                                <header3
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/heading"
+                                        text="URL"
+                                        />
+                                <row1
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/container">
+                                    <row1col1
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="Harbor"
+                                            />
+                                    <row1col2
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="Main code repository"
+                                            />
+                                    <row1col3
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="https://github.com/Citytechinc/harbor"
+                                            />
+                                </row1>
+                                <row2
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/container">
+                                    <row2col1
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="Harbor Theme"
+                                            />
+                                    <row2col2
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="Theme Project for Harbor"
+                                            />
+                                    <row2col3
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="https://github.com/Citytechinc/harbor-theme"
+                                            />
+                                </row2>
+                                <row3
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/container">
+                                    <row3col1
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="AEM Namespace Extension"
+                                            />
+                                    <row3col2
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="Allows for customization of AEM namespace"
+                                            />
+                                    <row3col3
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="https://github.com/Citytechinc/aem-namespace-extension"
+                                            />
+                                </row3>
+                                <row4
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/container">
+                                    <row4col1
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="Bedrock"
+                                            />
+                                    <row4col2
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="Bedrock contains common utilities, decorators, abstract classes, tag libraries, and JavaScript modules for bootstrapping and simplifying AEM (Adobe CQ) projects."
+                                            />
+                                    <row4col3
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="https://github.com/Citytechinc/bedrock"
+                                            />
+                                </row4>
+                                <row5
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/container">
+                                    <row5col1
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="CQ Component Plugin"
+                                            />
+                                    <row5col2
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="The CQ Component Plugin generates many of the artifacts necessary for the creation of a CQ Component based on the information provided by the Component's backing Java Class."
+                                            />
+                                    <row5col3
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="https://github.com/Citytechinc/cq-component-maven-plugin"
+                                            />
+                                </row5>
+
+                            </repo-list>
+                            <build
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/foundation/heading"
+                                    class="coral-Heading coral-Heading--1"
+                                    level="2"
+                                    text="Building your environment"/>
+                            <build-desc
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/foundation/text"
+                                    text="Below is a list of instructions on building your environment from scratch."
+                                    />
+                        </items>
+                    </tab2>
+
+                </items>
+            </content>
+        </body>
+    </jcr:content>
+</jcr:root>

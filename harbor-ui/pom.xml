@@ -103,7 +103,7 @@
 					</execution>
 				</executions>
 				<configuration>
-					<componentPathBase>jcr_root/libs/harbor/components</componentPathBase>
+					<componentPathBase>jcr_root/apps/harbor/components</componentPathBase>
 					<defaultComponentGroup>Harbor</defaultComponentGroup>
 					<transformerName>lower-case</transformerName>
 					<additionalFeatures>

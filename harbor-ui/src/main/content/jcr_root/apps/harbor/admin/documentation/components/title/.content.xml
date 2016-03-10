@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="cq:Page">
+    <jcr:content
+        jcr:mixinTypes="[sling:VanityPath]"
+        jcr:primaryType="nt:unstructured"
+        jcr:title="Harbor Title Component"
+        jcr:subtitle="Group: Harbor"
+        jcr:description="Basic Title"
+        sling:redirect="{Boolean}false"
+        sling:resourceType="granite/ui/components/foundation/page"
+        sling:vanityOrder="{Long}1200"
+        sling:vanityPath="/screens">
+        <head jcr:primaryType="nt:unstructured">
+            <contentchecker
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/foundation/admin/contentchecker"
+                allowed="[.*]"
+                alowEmpty="{Boolean}false"
+                path="${requestPathInfo.suffix}"
+                redirect="/screens.html"/>
+            <viewport
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/foundation/admin/page/viewport"/>
+            <meta
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/foundation/meta"
+                content="chrome=1"
+                name="X-UA-Compatible"/>
+            <title
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Harbor Title Component"
+                sling:resourceType="screens/ui/components/admin/page/title"/>
+            <favicon
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/foundation/page/favicon"/>
+            <clientlibs
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/foundation/includeclientlibs"
+                categories="[granite.ui.foundation,granite.ui.foundation.admin,cq.gui.siteadmin.admin.pages,cq.screens.admin]"/>
+        </head>
+        <body
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="granite/ui/components/foundation/page/body">
+            <layout
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/endor/layouts/page"/>
+            <rail
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/endor/navcolumns"
+                currentId="harbor-admin-documentation-components"
+                srcPath="cq/core/content/nav"/>
+            <breadcrumbs
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="harbor/admin/documentation/breadcrumb"
+                    href="/apps/harbor/admin/documentation/components.html"
+                    title="Harbor Components"/>
+            <title
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Harbor Title Component"
+                sling:resourceType="screens/ui/components/admin/endor/title"/>
+            <header
+                jcr:primaryType="nt:unstructured"
+                srcPath="/mnt/overlay/cq/core/content/header"/>
+            <content
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/foundation/container">
+                <layout
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType = "granite/ui/components/foundation/layouts/tabs"
+                    type="large"/>
+                    <items jcr:primaryType="nt:unstructured">
+                        <tab1
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType = "granite/ui/components/foundation/container"
+                            jcr:title="Author Guide">
+                            <items jcr:primaryType="nt:unstructured">
+                                <title
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/foundation/heading"
+                                    class="coral-Heading coral-Heading--1"
+                                    level="2"
+                                    text="Harbor Text Component"/>
+                                <description
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="screens/ui/components/admin/text"
+                                    line1="The Harbor Text component"
+                                    line2="Group: Harbor"
+                                    />
+                                <image
+                                        jcr:lastModified="{Date}2013-06-11T13:57:19.593+01:00"
+                                        jcr:mixinTypes="[cq:CatalogSyncAction,cq:LiveRelationship]"
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="commerce/components/product/image"
+                                        fileReference="/content/dam/geometrixx-outdoors/products/coat/Calgary.jpg"/>
+                                <dlbutton
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/foundation/hyperlink"
+                                    class="coral-Button"
+                                    href_i18n="/apps/harbor/admin/documentation/components.html"
+                                    icon="coral-Icon--link"
+                                    text="Back to Components"/>
+                            </items>
+                        </tab1>
+                    </items>
+            </content>
+        </body>
+    </jcr:content>
+</jcr:root>

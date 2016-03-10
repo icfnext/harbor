@@ -15,7 +15,7 @@
             <excludes>
                 <exclude>**/.DS_Store</exclude>
                 <exclude>/etc/clientlibs/harbor/**</exclude>
-                <exclude>/libs/harbor/admin/documentation/components/**</exclude>
+                <exclude>/apps/harbor/admin/documentation/components/**</exclude>
             </excludes>
             <filtered>true</filtered>
         </fileSet>
@@ -27,8 +27,8 @@
             </excludes>
         </fileSet>
         <fileSet>
-            <directory>${basedir}/src/main/content/jcr_root/libs/harbor/admin/documentation/components</directory>
-            <outputDirectory>jcr_root/libs/harbor/admin/documentation/components</outputDirectory>
+            <directory>${basedir}/src/main/content/jcr_root/apps/harbor/admin/documentation/components</directory>
+            <outputDirectory>jcr_root/apps/harbor/admin/documentation/components</outputDirectory>
             <excludes>
                 <exclude>**/.DS_Store</exclude>
             </excludes>
@@ -63,7 +63,7 @@
             <useStrictFiltering>true</useStrictFiltering>
         </dependencySet>
         <dependencySet>
-            <outputDirectory>jcr_root/libs/harbor/install</outputDirectory>
+            <outputDirectory>jcr_root/apps/harbor/install</outputDirectory>
             <useProjectArtifact>false</useProjectArtifact>
             <scope>compile</scope>
             <includes>
