@@ -10,6 +10,7 @@ import com.citytechinc.aem.bedrock.api.components.annotations.AutoInstantiate;
 import com.citytechinc.aem.harbor.api.constants.dom.Headings;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
+import org.apache.xpath.operations.String;
 
 import javax.inject.Inject;
 
@@ -23,8 +24,7 @@ import javax.inject.Inject;
         resourceSuperType = AbstractHeading.RESOURCE_TYPE,
 		tabs = {
 				@Tab(title = "Title"),
-				@Tab(title = "Advanced"),
-				@Tab(title = "Semantics")
+				@Tab(title = "Advanced")
 		}
 )
 @AutoInstantiate(instanceName = Title.INSTANCE_NAME)
