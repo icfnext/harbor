@@ -22,8 +22,7 @@ import javax.inject.Inject;
 		resourceSuperType = AbstractHeading.RESOURCE_TYPE,
 		tabs = {
 				@Tab(title = "Heading"),
-				@Tab(title = "Advanced"),
-				@Tab(title = "Semantics")
+				@Tab(title = "Advanced")
 		}
 )
 @AutoInstantiate(instanceName = Heading.INSTANCE_NAME)

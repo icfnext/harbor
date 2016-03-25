@@ -79,27 +79,61 @@
                                     jcr:primaryType="nt:unstructured"
                                     sling:resourceType="granite/ui/components/foundation/heading"
                                     class="coral-Heading coral-Heading--1"
-                                    level="2"
-                                    text="Harbor Text Component"/>
+                                    level="1"
+                                    text="Harbor Title Component"/>
                                 <description
                                     jcr:primaryType="nt:unstructured"
                                     sling:resourceType="screens/ui/components/admin/text"
-                                    line1="The Harbor Text component"
-                                    line2="Group: Harbor"
-                                    />
-                                <image
-                                        jcr:lastModified="{Date}2013-06-11T13:57:19.593+01:00"
-                                        jcr:mixinTypes="[cq:CatalogSyncAction,cq:LiveRelationship]"
+                                    line1="Presents the Page Title of the current page in an H1 DOM element.  The output H1 element will have an id attribute set to a sanitized version of the title text allowing for fragment linking.  Both the title text and element id may be overridden by authors."
+                                    line2="Group: Harbor"/>
+                                <authorabilityTitle
                                         jcr:primaryType="nt:unstructured"
-                                        sling:resourceType="commerce/components/product/image"
-                                        fileReference="/content/dam/geometrixx-outdoors/products/coat/Calgary.jpg"/>
-                                <dlbutton
-                                    jcr:primaryType="nt:unstructured"
-                                    sling:resourceType="granite/ui/components/foundation/hyperlink"
-                                    class="coral-Button"
-                                    href_i18n="/apps/harbor/admin/documentation/components.html"
-                                    icon="coral-Icon--link"
-                                    text="Back to Components"/>
+                                        sling:resourceType="granite/ui/components/foundation/heading"
+                                        class="coral-Heading coral-Heading--2"
+                                        level="2"
+                                        text="Authorability"/>
+                                <dialog-options
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="harbor/admin/documentation/table">
+                                    <header1
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/heading"
+                                            text="Dialog Field"
+                                            />
+                                    <header2
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/heading"
+                                        text="Description"
+                                        />
+                                    <row1
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/container">
+                                        <row1col1
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/foundation/text"
+                                                text="Text"
+                                                />
+                                        <row1col2
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/foundation/text"
+                                                text="Sets the rendered title text.  When left empty, the title text will default to the page's Page Title."
+                                                />
+                                    </row1>
+                                    <row2
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/container">
+                                        <row2col1
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/foundation/text"
+                                                text="ID"
+                                                />
+                                        <row2col2
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/foundation/text"
+                                                text="Sets the string ID to be attributed to the H1 element rendered for the title.  When left empty, the ID will be produced by sanitizing the title text."
+                                                />
+                                    </row2>
+                                </dialog-options>
                             </items>
                         </tab1>
                     </items>

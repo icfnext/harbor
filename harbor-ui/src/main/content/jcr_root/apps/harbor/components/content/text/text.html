@@ -1,3 +1,4 @@
-<sly data-sly-use.textComponent="com.citytechinc.aem.harbor.core.components.content.text.Text">
+<div data-sly-use.textComponent="com.citytechinc.aem.harbor.core.components.content.text.Text"
+     data-sly-attribute.class="${textComponent.classifications @ join = ' '}">
     ${textComponent.content @ context='html'}
-</sly>
+</div>

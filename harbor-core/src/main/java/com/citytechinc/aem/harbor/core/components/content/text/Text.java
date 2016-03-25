@@ -33,13 +33,7 @@ public class Text extends AbstractComponent {
 
     public static final String TAB_1_NODE_NAME = "contenttab";
 
-    @Inject @Named("text") @Default(values = "Enter Text")
-    private String content;
-
-    @Inject @Self
-    private Classification classification;
-
-    @DialogField(fieldLabel = "Content", name = "./text")
+    @DialogField(fieldLabel = "Content", name = "./text", suppressTouchUI = true)
     @RichTextEditor(
             edit = @Edit,
             findreplace = @FindReplace,
@@ -52,16 +46,21 @@ public class Text extends AbstractComponent {
             table = @Table,
             undo = @Undo
     )
+    @Inject @Named("text") @Default(values = "Enter Text")
+    private String content;
+
+    @DialogField(ranking = 10)
+    @DialogFieldSet
+    @Inject @Self
+    private Classification classification;
+
     public String getContent() {
         //TODO: Consider content cleanup such as replacing all &nbsp; which the RTE inserts with spaces as it's incredibly rare that someone actually wants a non-breaking space
         return IconUtils.iconify(content);
     }
 
-    @DialogField(ranking = 10)
-    @DialogFieldSet
     public Classification getClassification() {
         return classification;
     }
-
 
 }

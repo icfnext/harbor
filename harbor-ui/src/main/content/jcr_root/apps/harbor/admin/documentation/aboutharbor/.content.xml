@@ -80,7 +80,7 @@
                             <core-concepts
                                     jcr:primaryType="nt:unstructured"
                                     sling:resourceType="granite/ui/components/foundation/heading"
-                                    class="coral-Heading coral-Heading--1"
+                                    class="coral-Heading coral-Heading--2"
                                     level="1"
                                     text="Core Concepts"/>
                             <core-concepts-desc
@@ -90,7 +90,7 @@
                             <classification-title
                                     jcr:primaryType="nt:unstructured"
                                     sling:resourceType="granite/ui/components/foundation/heading"
-                                    class="coral-Heading coral-Heading--2"
+                                    class="coral-Heading coral-Heading--3"
                                     level="2"
                                     text="Classification"/>
                             <classification-desc
