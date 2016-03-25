@@ -46,7 +46,7 @@ public class Text extends AbstractComponent {
             table = @Table,
             undo = @Undo
     )
-    @Inject @Named("text") @Default(values = "Enter Text")
+    @Inject @Named("text") @Default(values = "")
     private String content;
 
     @DialogField(ranking = 10)

@@ -1,4 +1,7 @@
 <div data-sly-use.textComponent="com.citytechinc.aem.harbor.core.components.content.text.Text"
-     data-sly-attribute.class="${textComponent.classifications @ join = ' '}">
+     data-sly-attribute.class="${textComponent.classification.classificationNames @ join = ' '}">
+    <div data-sly-test="${!textComponent.content}" class="author-help-message">
+        Enter Text
+    </div>
     ${textComponent.content @ context='html'}
 </div>
