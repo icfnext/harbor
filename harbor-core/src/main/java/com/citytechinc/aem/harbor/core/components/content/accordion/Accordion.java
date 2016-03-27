@@ -28,7 +28,6 @@ import javax.inject.Inject;
     group = ComponentGroups.HARBOR,
     actions = { "text: Accordion", "-", "edit", "-", "copymove", "delete", "-", "insert" },
     actionConfigs = {
-        @ActionConfig(xtype = "tbseparator"),
         @ActionConfig(
                 text = "Add Item",
                 handler = "function(){Harbor.Components.Accordion.addItem( this, 'harbor/components/content/accordion/accordionitem' )}",

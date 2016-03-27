@@ -80,6 +80,6 @@ public class AccordionItem extends AbstractComponent {
         if (accordionUniqueId == null) {
             accordionUniqueId = ComponentUtils.getUniqueIdentifierForResourceInPage(currentPage, getResource().getParent());
         }
-        return uniqueId;
+        return accordionUniqueId;
     }
 }

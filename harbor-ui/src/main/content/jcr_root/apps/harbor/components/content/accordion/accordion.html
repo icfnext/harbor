@@ -1,7 +1,11 @@
-<div data-sly-use.accordion="${component.properties['className']}" class="panel-group" role="tablist" aria-multiselectable="true">
+<div data-sly-use.accordion="${component.properties['className']}"
+     class="panel-group"
+     role="tablist"
+     aria-multiselectable="true"
+     id="${accordion.uniqueId}-accordion-container">
     <sly data-sly-test="${accordion.items}"
          data-sly-repeat.currentItem="${accordion.items}"
-         data-sly-resource="${currentItem.path @ resourceType='harbor/components/content/accordion/accordionitem', decorationTagName='div'}"/>
+         data-sly-resource="${currentItem.path @ resourceType='harbor/components/content/accordion/accordionitem', cssClassName='panel panel-default', decorationTagName='div'}"/>
     <div data-sly-test="${!accordion.items}" class="${accordion.uniqueId}-accordion-container accordion-item" data-path="${resource.path}">
         <div class="panel panel-default" data-node-name="empty-accordion-placeholder">
             <div class="panel-heading" role="tab" id="heading-${accordion.uniqueId}-empty">
