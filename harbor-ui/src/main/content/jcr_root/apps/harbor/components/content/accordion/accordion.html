@@ -6,17 +6,7 @@
     <sly data-sly-test="${accordion.items}"
          data-sly-repeat.currentItem="${accordion.items}"
          data-sly-resource="${currentItem.path @ resourceType='harbor/components/content/accordion/accordionitem', cssClassName='panel panel-default', decorationTagName='div'}"/>
-    <div data-sly-test="${!accordion.items}" class="${accordion.uniqueId}-accordion-container accordion-item" data-path="${resource.path}">
-        <div class="panel panel-default" data-node-name="empty-accordion-placeholder">
-            <div class="panel-heading" role="tab" id="heading-${accordion.uniqueId}-empty">
-                <h4 class="panel-title">
-                    Empty Accordion
-                </h4>
-            </div>
-        </div>
-        <div id="${accordion.uniqueId}-panel" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-${accordion.uniqueId}-empty">
-            <div class="panel-body">
-            </div>
-        </div>
+    <div data-sly-test="${!accordion.items}" class="author-help-message">
+        Add Accordion Items Using the + Button
     </div>
 </div>
