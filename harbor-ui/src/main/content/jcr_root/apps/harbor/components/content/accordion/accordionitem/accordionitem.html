@@ -14,7 +14,7 @@
     <!--/* TODO: Allow for the first item to be open by default */-->
     <!--/* TODO: Allow for the last open item to remain open */-->
     <div id="${accordionItem.uniqueId}"
-         data-sly-attribute.class="${!wcmmode.disabled && !wcmmode.preview ? 'panel-collapse collapse in' : 'panel-collapse collapse'}"
+         data-sly-attribute.class="${ ( !wcmmode.disabled && !wcmmode.preview ) || accordionItem.open ? 'panel-collapse collapse in' : 'panel-collapse collapse'}"
          role="tabpanel"
          aria-labelledby="heading-${accordionItem.uniqueId}">
         <div class="panel-body">

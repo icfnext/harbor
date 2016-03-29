@@ -55,6 +55,7 @@ public class AccordionItem extends AbstractComponent {
     private String uniqueId;
     private String accordionUniqueId;
     private String name;
+    private Boolean open;
 
     public String getTitle() {
         if (title == null) {
@@ -82,5 +83,16 @@ public class AccordionItem extends AbstractComponent {
             accordionUniqueId = ComponentUtils.getUniqueIdentifierForResourceInPage(currentPage, getResource().getParent());
         }
         return accordionUniqueId;
+    }
+
+    public boolean isOpen() {
+        if (open != null) {
+            return open;
+        }
+
+        open = getResource().getParent().getChildren().iterator().next().getPath().equals(getResource().getPath()) &&
+                getResource().getParent().adaptTo(Accordion.class).isOpenFirstItem();
+
+        return open;
     }
 }
