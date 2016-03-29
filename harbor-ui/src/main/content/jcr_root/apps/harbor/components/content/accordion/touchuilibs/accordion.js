@@ -18,13 +18,19 @@ Harbor.Components.Accordion = function ( ns, channel ) {
 
         this.moveUp = function( component ) {
 
-            console.log( 'Move Up Called' );
+            Harbor.Lists.ListsEditor.moveBackward( component )
+                .then( function() {
+                    ns.edit.actions.doRefresh( component.getParent() );
+                } );
 
         };
 
         this.moveDown = function( component ) {
 
-            console.log( 'Move Down Called' );
+            Harbor.Lists.ListsEditor.moveForward( component )
+                .then( function() {
+                    ns.edit.actions.doRefresh( component.getParent() );
+                } );
 
         };
 

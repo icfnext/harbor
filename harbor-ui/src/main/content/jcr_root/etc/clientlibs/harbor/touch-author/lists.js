@@ -79,6 +79,87 @@ Harbor.Lists = function( ns, channel ) {
 
         };
 
+        /**
+         * Looks up the Path of the nearest sibling Resource to the editable provided.
+         *
+         * @param editable
+         * @param direction 1 for next sibling, -1 for prior sibling
+         * @return jQuery Deferred promise of sibling path.  Promise will resolve to null if no such sibling exists
+         */
+        this.findSiblingPath = function( editable, direction ) {
+            return ns.persistence.readParagraphContent( { path: editable.getParentPath() + '.1' } )
+                .then( function( paragraph ) {
+                    var paragraphObject = JSON.parse( paragraph );
+                    var siblings = [];
+
+                    for ( var key in paragraphObject ) {
+                        if ( paragraphObject.hasOwnProperty( key ) ) {
+                            if ( typeof paragraphObject[ key ] === 'object' ) {
+                                siblings.push( editable.getParentPath() + '/' + key );
+                            }
+                        }
+                    }
+
+                    var siblingIndex = siblings.indexOf( editable.path ) + direction;
+
+                    if ( siblingIndex < 0 || siblingIndex >= siblings.length ) {
+                        return null;
+                    }
+
+                    return siblings[ siblingIndex ];
+                } );
+        };
+
+        this.findPriorSiblingPath = function( editable ) {
+            return this.findSiblingPath( editable, -1 );
+        };
+
+        this.findNextSiblingPath = function( editable ) {
+            return this.findSiblingPath( editable, 1 );
+        };
+
+        /**
+         * Sends a request to Sling to reorder the editable amongst its siblings, advancing it by one amongst its siblings.
+         *
+         * @param editable
+         * @returns A jQuery promise of the move
+         */
+        this.moveForward = function( editable ) {
+            return this.findNextSiblingPath( editable )
+                .then( function( path ) {
+                    if ( path ) {
+                        return $.ajax( {
+                            type: "POST",
+                            url: editable.path,
+                            data: {
+                                ":order": "after " + path.substring( path.lastIndexOf( '/' ) + 1 )
+                            }
+                        } );
+                    }
+                } );
+        };
+
+        /**
+         * Sends a request to Sling to reorder the editable amongst its siblings, moving it back by one amongst its siblings.
+         *
+         * @param editable
+         * @returns A jQuery promise of the move
+         */
+        this.moveBackward = function( editable ) {
+            return this.findPriorSiblingPath( editable )
+                .then( function( path ) {
+                    if ( path ) {
+                        return $.ajax( {
+                            type: "POST",
+                            url: editable.path,
+                            data: {
+                                ":order": "before " + path.substring( path.lastIndexOf( '/' ) + 1 )
+                            }
+                        } );
+                    }
+                } );
+        };
+
     };
 
     /**

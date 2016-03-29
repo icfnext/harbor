@@ -1,6 +1,7 @@
 package com.citytechinc.aem.harbor.core.components.content.accordion;
 
 import com.citytechinc.aem.bedrock.api.page.PageDecorator;
+import com.citytechinc.cq.component.annotations.editconfig.ActionConfigProperty;
 import com.citytechinc.cq.component.annotations.widgets.TextField;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
@@ -32,8 +33,8 @@ import javax.inject.Inject;
     layout = "rollover",
     actionConfigs = {
         @ActionConfig(xtype = "tbseparator"),
-        @ActionConfig(text = "Move Up", handler = "function(){Harbor.Components.Accordion.moveUp( this )}"),
-        @ActionConfig(text = "Move Down", handler = "function(){Harbor.Components.Accordion.moveDown( this )}")
+        @ActionConfig(text = "Move Up", handler = "function(){Harbor.Components.Accordion.moveUp( this )}", additionalProperties = {@ActionConfigProperty(name = "icon", value = "coral-Icon--accordionUp")}),
+        @ActionConfig(text = "Move Down", handler = "function(){Harbor.Components.Accordion.moveDown( this )}", additionalProperties = {@ActionConfigProperty(name = "icon", value = "coral-Icon--accordionDown")})
     }
 )
 @AutoInstantiate
