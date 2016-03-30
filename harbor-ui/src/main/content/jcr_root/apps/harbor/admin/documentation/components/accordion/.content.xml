@@ -4,9 +4,9 @@
     <jcr:content
         jcr:mixinTypes="[sling:VanityPath]"
         jcr:primaryType="nt:unstructured"
-        jcr:title="Harbor Heading Component"
+        jcr:title="Harbor Accordion Group Component"
         jcr:subtitle="Group: Harbor"
-        jcr:description="Content section heading"
+        jcr:description="Collapsable Accordion Group."
         sling:redirect="{Boolean}false"
         sling:resourceType="granite/ui/components/foundation/page"
         sling:vanityOrder="{Long}1200"
@@ -29,7 +29,7 @@
                 name="X-UA-Compatible"/>
             <title
                 jcr:primaryType="nt:unstructured"
-                jcr:title="Harbor Heading Component"
+                jcr:title="Harbor Accordion Group Component"
                 sling:resourceType="screens/ui/components/admin/page/title"/>
             <favicon
                 jcr:primaryType="nt:unstructured"
@@ -57,7 +57,7 @@
                     title="Harbor Components"/>
             <title
                 jcr:primaryType="nt:unstructured"
-                jcr:title="Harbor Heading Component"
+                jcr:title="Harbor Accordion Group Component"
                 sling:resourceType="screens/ui/components/admin/endor/title"/>
             <header
                 jcr:primaryType="nt:unstructured"
@@ -80,74 +80,115 @@
                                     sling:resourceType="granite/ui/components/foundation/heading"
                                     class="coral-Heading coral-Heading--1"
                                     level="1"
-                                    text="Harbor Heading Component"/>
+                                    text="Harbor Accordion Group Component"/>
                                 <description
                                     jcr:primaryType="nt:unstructured"
                                     sling:resourceType="screens/ui/components/admin/text"
-                                    line1="Presents a heading element appropriate for titling sections of content.  This component is NOT meant to be used as the principal title for content and as such only exposes heading options H2-H6.  If an H1 element is desired, the Title component should be used."
+                                    line1="Presents a group of Accordion Items allowing for the ad-hoc addition of new items.  Each Accordion Item exposes a Paragraph System into which any number of components may be placed."
                                     line2="Group: Harbor"/>
                                 <authorabilityTitle
                                         jcr:primaryType="nt:unstructured"
                                         sling:resourceType="granite/ui/components/foundation/heading"
                                         class="coral-Heading coral-Heading--2"
                                         level="2"
-                                        text="Authorability"/>
+                                        text="Accordion Group Authorability"/>
+                                <addNewAccordionItemTitle
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/heading"
+                                        class="coral-Heading coral-Heading--3"
+                                        level="3"
+                                        text="Add New Accordion Item"/>
+                                <addNewAccordionItemDescription
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="screens/ui/components/admin/text"
+                                        line1="New Accordion Items are added using the '+' button presented in the Accordion Group component's Toolbar."/>
+                                <accordionGroupConfiguration
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/heading"
+                                        class="coral-Heading coral-Heading--3"
+                                        level="3"
+                                        text="Accordion Group Component Configuration"/>
                                 <dialog-options
                                         jcr:primaryType="nt:unstructured"
                                         sling:resourceType="harbor/admin/documentation/table">
                                     <header1
                                             jcr:primaryType="nt:unstructured"
                                             sling:resourceType="granite/ui/components/foundation/heading"
-                                            text="Dialog Field"
-                                            />
+                                            text="Dialog Field"/>
                                     <header2
                                         jcr:primaryType="nt:unstructured"
                                         sling:resourceType="granite/ui/components/foundation/heading"
-                                        text="Description"
-                                        />
+                                        text="Description"/>
                                     <row1
                                             jcr:primaryType="nt:unstructured"
                                             sling:resourceType="granite/ui/components/foundation/container">
                                         <row1col1
                                                 jcr:primaryType="nt:unstructured"
                                                 sling:resourceType="granite/ui/components/foundation/text"
-                                                text="Size"
-                                                />
+                                                text="Open First Item"/>
                                         <row1col2
                                                 jcr:primaryType="nt:unstructured"
                                                 sling:resourceType="granite/ui/components/foundation/text"
-                                                text="Establishes the size or level of the Heading.  Available sizes include H2 - H6.  If an H1 element is desired the Title component should be used instead."
-                                                />
+                                                text="Indicates whether the first Accordion Item in the Accordion Group whould be opened by default."/>
                                     </row1>
-                                    <row2
-                                            jcr:primaryType="nt:unstructured"
-                                            sling:resourceType="granite/ui/components/foundation/container">
-                                        <row2col1
-                                                jcr:primaryType="nt:unstructured"
-                                                sling:resourceType="granite/ui/components/foundation/text"
-                                                text="Text"
-                                                />
-                                        <row2col2
-                                                jcr:primaryType="nt:unstructured"
-                                                sling:resourceType="granite/ui/components/foundation/text"
-                                                text="Sets the rendered heading text."
-                                                />
-                                    </row2>
-                                    <row3
-                                            jcr:primaryType="nt:unstructured"
-                                            sling:resourceType="granite/ui/components/foundation/container">
-                                        <row3col1
-                                                jcr:primaryType="nt:unstructured"
-                                                sling:resourceType="granite/ui/components/foundation/text"
-                                                text="ID"
-                                                />
-                                        <row3col2
-                                                jcr:primaryType="nt:unstructured"
-                                                sling:resourceType="granite/ui/components/foundation/text"
-                                                text="Sets the string ID to be attributed to the rendered heading element.  When left empty, the ID will be produced by sanitizing the heading text."
-                                                />
-                                    </row3>
                                 </dialog-options>
+                                <accordionItemAuthorabilityTitle
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/heading"
+                                        class="coral-Heading coral-Heading--2"
+                                        level="2"
+                                        text="Accordion Item Authorability"/>
+                                <addContentToAccordionItems
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/heading"
+                                        class="coral-Heading coral-Heading--3"
+                                        level="3"
+                                        text="Adding Content to Accordion Items"/>
+                                <addContentToAccordionItemsDescription
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="screens/ui/components/admin/text"
+                                        line1="Each Accordion Item in an Accordion Group exposes its own Paragraph System to which any number of components may be added using normal authoring practices.  While authoring all Accordion Items will be opened to allow for modification.  When in Preview or Publish mode the Accordion Group will operate as a collection of collapsible elements."/>
+                                <addContentToAccordionItems
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/heading"
+                                        class="coral-Heading coral-Heading--3"
+                                        level="3"
+                                        text="Ordering Accordion Items"/>
+                                <addContentToAccordionItemsDescription
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="screens/ui/components/admin/text"
+                                        line1="The order of established Accordion Items may be modified using the up and down arrows presented in the Toolbar of a given Accordion Item.  Pressing the up button for the first Accordion Item in an Accordion Group or the down button for the last Accordion Item in an Accordion Group will have no effect."/>
+
+                                <accordionItemConfiguration
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/heading"
+                                        class="coral-Heading coral-Heading--3"
+                                        level="3"
+                                        text="Accordion Item Configuration"/>
+                                <accordionItemdialog-options
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="harbor/admin/documentation/table">
+                                    <header1
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/heading"
+                                            text="Dialog Field"/>
+                                    <header2
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/heading"
+                                            text="Description"/>
+                                    <row1
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/container">
+                                        <row1col1
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/foundation/text"
+                                                text="Title"/>
+                                        <row1col2
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/foundation/text"
+                                                text="Text title to present for the Accordion Item."/>
+                                    </row1>
+                                </accordionItemdialog-options>
                             </items>
                         </tab1>
                     </items>

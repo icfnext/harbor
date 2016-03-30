@@ -24,7 +24,7 @@ import org.apache.sling.models.annotations.Model;
 import javax.inject.Inject;
 
 @Component(
-    value = "Accordion",
+    value = "Accordion Group",
     group = ComponentGroups.HARBOR,
     actions = { "text: Accordion", "-", "edit", "-", "copymove", "delete", "-", "insert" },
     actionConfigs = {
@@ -50,8 +50,8 @@ public class Accordion extends AbstractComponent {
     @Inject
     private PageDecorator currentPage;
 
-    @DialogField(fieldLabel = "Open first item",
-        fieldDescription = "With this checkbox checked, the first accordion item will be open by default when not in edit or design mode.")
+    @DialogField(fieldLabel = "Open First Item",
+        fieldDescription = "Whether the first Accordion Item in the Accordion Group should be opened by default.")
     @Switch(offText = "No", onText = "Yes")
     public boolean isOpenFirstItem() {
         return get("openFirstItem", false);
