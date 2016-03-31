@@ -148,17 +148,26 @@
                                         jcr:primaryType="nt:unstructured"
                                         sling:resourceType="screens/ui/components/admin/text"
                                         line1="Each Accordion Item in an Accordion Group exposes its own Paragraph System to which any number of components may be added using normal authoring practices.  While authoring all Accordion Items will be opened to allow for modification.  When in Preview or Publish mode the Accordion Group will operate as a collection of collapsible elements."/>
-                                <addContentToAccordionItems
+                                <reorderAccordionItems
                                         jcr:primaryType="nt:unstructured"
                                         sling:resourceType="granite/ui/components/foundation/heading"
                                         class="coral-Heading coral-Heading--3"
                                         level="3"
                                         text="Ordering Accordion Items"/>
-                                <addContentToAccordionItemsDescription
+                                <reorderAccordionItemsDescription
                                         jcr:primaryType="nt:unstructured"
                                         sling:resourceType="screens/ui/components/admin/text"
                                         line1="The order of established Accordion Items may be modified using the up and down arrows presented in the Toolbar of a given Accordion Item.  Pressing the up button for the first Accordion Item in an Accordion Group or the down button for the last Accordion Item in an Accordion Group will have no effect."/>
-
+                                <removeAccordionItems
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/heading"
+                                        class="coral-Heading coral-Heading--3"
+                                        level="3"
+                                        text="Removing Accordion Items"/>
+                                <removeAccordionItemsDescription
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="screens/ui/components/admin/text"
+                                        line1="Accordion Items may be removed completely by deleting them using the Delete option presented in the Toolbar for the individual Accordion Item."/>
                                 <accordionItemConfiguration
                                         jcr:primaryType="nt:unstructured"
                                         sling:resourceType="granite/ui/components/foundation/heading"
