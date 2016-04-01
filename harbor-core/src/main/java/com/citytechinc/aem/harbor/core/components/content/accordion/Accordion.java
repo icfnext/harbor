@@ -81,12 +81,6 @@ public class Accordion extends AbstractComponent {
 final class AccordionItemPredicate implements Predicate<ComponentNode> {
 
     public boolean apply(ComponentNode input) {
-        boolean isAccordionItem = false;
-        if (input != null && input.getResource() != null) {
-            final String resourceType = input.getResource().getResourceType();
-            isAccordionItem = AccordionItem.TYPE.equals(resourceType)
-                || "wcm/msm/components/ghost".equals(resourceType);
-        }
-        return isAccordionItem;
+        return input != null && input.getResource() != null && input.getResource().isResourceType(AccordionItem.TYPE);
     }
 }
