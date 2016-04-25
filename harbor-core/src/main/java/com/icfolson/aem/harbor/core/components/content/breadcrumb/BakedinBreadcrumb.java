@@ -8,7 +8,7 @@ import org.apache.sling.models.annotations.Model;
 @Component(
         value = "Bakedin Breadcrumb",
         group = ".hidden",
-        resourceSuperType = Breadcrumb.RESOURCE_TYPE,
+        resourceSuperType = BreadcrumbComponent.RESOURCE_TYPE,
         disableTargeting = true,
         actions = { "text: Breadcrumb", "-", "edit" },
         suppressTouchUIDialog = true

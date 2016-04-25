@@ -95,7 +95,7 @@ public class BreadcrumbItemRenderingStrategy implements ListRenderingStrategy<Tr
 	/**
 	 * A dialog field which allows the user to enter any HTML string they wish.
 	 *
-	 * @return The {@link Breadcrumb} HTML delimiter.
+	 * @return The {@link BreadcrumbComponent} HTML delimiter.
 	 */
 	@DialogField(fieldLabel = "Delimiter HTML", ranking = 20, fieldDescription = "Allows for the use of arbitrary HTML as a Breadcrumb Trail Item Delimiter. The delimiter authored in this field will trump the delimiter authored in the icon field.")
 	public String getHtmlDelimiter() {

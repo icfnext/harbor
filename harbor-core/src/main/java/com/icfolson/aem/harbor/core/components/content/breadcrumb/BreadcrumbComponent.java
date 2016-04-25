@@ -17,9 +17,9 @@ import javax.inject.Inject;
 
 @Component(value = "Breadcrumb", group = ComponentGroups.HARBOR_NAVIGATION)
 @Model(adaptables = Resource.class)
-public class Breadcrumb extends AbstractListComponent<TrailPage, BreadcrumbTrail> {
+public class BreadcrumbComponent extends AbstractListComponent<TrailPage, BreadcrumbTrail> {
 
-	public static final String RESOURCE_TYPE = "harbor/components/content/breadcrumb";
+	public static final String RESOURCE_TYPE = "harbor/components/content/breadcrumbcomponent";
 
 	@DialogField(ranking = 2)
 	@DialogFieldSet(border = false, collapsible = false)

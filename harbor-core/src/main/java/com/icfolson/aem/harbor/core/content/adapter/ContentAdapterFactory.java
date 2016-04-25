@@ -23,10 +23,10 @@ import com.day.cq.wcm.api.Page;
 @Properties({
 	@Property(name = Constants.SERVICE_DESCRIPTION, value = "CQ Library Content API Adapter Factory"),
 	@Property(name = "adaptables", value = { "org.apache.sling.api.resource.Resource",
-		"com.citytechinc.cq.library.content.page.PageDecorator", "com.day.cq.wcm.api.Page" }),
-	@Property(name = "adapters", value = { "com.citytechinc.aem.harbor.api.content.page.HierarchicalPage",
-		"com.citytechinc.aem.harbor.api.content.page.SectionLandingPage",
-		"com.citytechinc.aem.harbor.api.content.page.HomePage" }) })
+		"com.icfolson.cq.library.content.page.PageDecorator", "com.day.cq.wcm.api.Page" }),
+	@Property(name = "adapters", value = { "com.icfolson.aem.harbor.api.content.page.HierarchicalPage",
+		"com.icfolson.aem.harbor.api.content.page.SectionLandingPage",
+		"com.icfolson.aem.harbor.api.content.page.HomePage" }) })
 public class ContentAdapterFactory implements AdapterFactory {
 
 	@Override

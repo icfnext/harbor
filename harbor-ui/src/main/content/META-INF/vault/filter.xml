@@ -12,7 +12,7 @@
         <exclude pattern="/etc/designs/harbor/clientlib(/.*)?"/>
         <exclude pattern="/etc/designs/harbor/brand/clientlib(/.*)?"/>
     </filter>
-    <filter root="/etc/packages/bedrock"/>
+    <filter root="/etc/packages/aem-library"/>
     <filter root="/etc/packages/aemnamespace"/>
     <filter root="/etc/packages/authorabledesignmanager"/>
 </workspaceFilter>
