@@ -3,6 +3,7 @@ package com.icfolson.aem.harbor.core.components.content.breadcrumb;
 import java.util.List;
 
 import com.citytechinc.cq.component.annotations.widgets.Switch;
+import com.citytechinc.cq.component.annotations.widgets.TextField;
 import org.apache.commons.lang3.StringUtils;
 
 import com.icfolson.aem.library.api.node.ComponentNode;
@@ -98,6 +99,7 @@ public class BreadcrumbItemRenderingStrategy implements ListRenderingStrategy<Tr
 	 * @return The {@link BreadcrumbComponent} HTML delimiter.
 	 */
 	@DialogField(fieldLabel = "Delimiter HTML", ranking = 20, fieldDescription = "Allows for the use of arbitrary HTML as a Breadcrumb Trail Item Delimiter. The delimiter authored in this field will trump the delimiter authored in the icon field.")
+	@TextField
 	public String getHtmlDelimiter() {
 		if (htmlDelimiter == null) {
 			htmlDelimiter = isInherits() ? componentNode.getInherited("htmlDelimiter", StringUtils.EMPTY) : componentNode.get("htmlDelimiter", StringUtils.EMPTY);
