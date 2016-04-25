@@ -66,7 +66,7 @@ public class PageTrailListConstructionStrategy extends AbstractComponent impleme
 			currentPageInTrail = currentPageInTrail.getParent();
 
 			while (currentPageInTrail != null && !isPageRoot(currentPageInTrail)) {
-				listUnderConstruction.add(TrailPage.forCurrentPage(currentPageInTrail));
+				listUnderConstruction.add(TrailPage.forPage(currentPageInTrail));
 				currentPageInTrail = currentPageInTrail.getParent();
 			}
 

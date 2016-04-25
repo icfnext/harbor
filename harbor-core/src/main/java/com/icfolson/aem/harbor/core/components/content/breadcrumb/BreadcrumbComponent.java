@@ -1,5 +1,6 @@
 package com.icfolson.aem.harbor.core.components.content.breadcrumb;
 
+import com.citytechinc.cq.component.annotations.Tab;
 import com.icfolson.aem.harbor.core.content.page.lists.construction.PageTrailListConstructionStrategy;
 import com.citytechinc.cq.component.annotations.Component;
 import com.citytechinc.cq.component.annotations.DialogField;
@@ -15,7 +16,7 @@ import org.apache.sling.models.annotations.injectorspecific.Self;
 
 import javax.inject.Inject;
 
-@Component(value = "Breadcrumb", group = ComponentGroups.HARBOR_NAVIGATION)
+@Component(value = "Breadcrumb", group = ComponentGroups.HARBOR_NAVIGATION, tabs = {@Tab(title = "Breadcrumb", touchUINodeName = "breadcrumb")})
 @Model(adaptables = Resource.class)
 public class BreadcrumbComponent extends AbstractListComponent<TrailPage, BreadcrumbTrail> {
 

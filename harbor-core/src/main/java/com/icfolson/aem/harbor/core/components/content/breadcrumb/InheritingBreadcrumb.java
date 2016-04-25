@@ -2,6 +2,7 @@ package com.icfolson.aem.harbor.core.components.content.breadcrumb;
 
 import com.citytechinc.cq.component.annotations.Component;
 import com.citytechinc.cq.component.annotations.DialogField;
+import com.citytechinc.cq.component.annotations.Tab;
 import com.citytechinc.cq.component.annotations.widgets.DialogFieldSet;
 import com.icfolson.aem.harbor.api.lists.construction.ListConstructionStrategy;
 import com.icfolson.aem.harbor.api.lists.rendering.ListRenderingStrategy;
@@ -15,7 +16,7 @@ import org.apache.sling.models.annotations.injectorspecific.Self;
 
 import javax.inject.Inject;
 
-@Component(value = "Inheriting Breadcrumb", group = ComponentGroups.HARBOR_NAVIGATION, resourceSuperType = BreadcrumbComponent.RESOURCE_TYPE, suppressTouchUIDialog = true)
+@Component(value = "Inheriting Breadcrumb", group = ComponentGroups.HARBOR_NAVIGATION, resourceSuperType = BreadcrumbComponent.RESOURCE_TYPE, suppressFieldInheritanceForTouchUI = true, tabs = {@Tab(title = "Breadcrumb", touchUINodeName = "breadcrumb")})
 @AutoInstantiate(instanceName = "breadcrumb")
 @Model(adaptables = Resource.class)
 public class InheritingBreadcrumb extends BreadcrumbComponent {
