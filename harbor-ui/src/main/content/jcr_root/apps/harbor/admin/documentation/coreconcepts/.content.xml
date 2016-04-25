@@ -91,15 +91,19 @@
                                     text="Lists"/>
                             <description-p1
                                     jcr:primaryType="nt:unstructured"
-                                    sling:resourceType="granite/ui/components/foundation/text"
-                                    text="The functionality of many of the Components created for a particular project can be distilled down to the presentation of a List of items.  Lists therefore are central to Harbor and enabled by Interfaces and Abstract Classes suggesting a pattern to follow in List Component development."
+                                    sling:resourceType="screens/ui/components/admin/text"
+                                    line1="The functionality of many of the Components created for a particular project can be distilled down to the presentation of a List of items.  Lists therefore are central to Harbor and enabled by Interfaces and Abstract Classes suggesting a pattern to follow in List Component development."
                                     />
                             <description-p2
                                     jcr:primaryType="nt:unstructured"
-                                    sling:resourceType="granite/ui/components/foundation/text"
-                                    text="List Components are a composition of a List Construction Strategy and a List Rendering Strategy.  The List Construction Strategy is responsible for the creation of a list of item based on the logic of the strategy.  These items are passed to the List Rendering Strategy which has an opportunity to add additional properties germane to the rendering of a particular component.  Construction and Rendering Strategies may be mixed and matched within the context of concrete List Component implementations allowing reuse of both across multiple component types."
+                                    sling:resourceType="screens/ui/components/admin/text"
+                                    line1="List Components are a composition of a List Construction Strategy and a List Rendering Strategy.  The List Construction Strategy is responsible for the creation of a list of items based on the logic of the strategy.  These items are passed to the List Rendering Strategy which has an opportunity to add additional properties germane to the rendering of a particular component.  Construction and Rendering Strategies may be mixed and matched within the context of concrete List Component implementations allowing reuse of both across multiple component types."
                                     />
-
+                            <description-p3
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="screens/ui/components/admin/text"
+                                    line1="TODO: Insert example of reuse from the various page listing components"
+                                    />
 
                             <listcomponent-title
                                     jcr:primaryType="nt:unstructured"
@@ -109,8 +113,8 @@
                                     text="com.icfolson.aem.harbor.api.components.content.list.ListComponent&lt;T extends Iterable&gt;"/>
                             <listcomponent-description
                                     jcr:primaryType="nt:unstructured"
-                                    sling:resourceType="granite/ui/components/foundation/text"
-                                    text="A ListComponent is a component type which intends to hold and manage an ordered collection of components."
+                                    sling:resourceType="screens/ui/components/admin/text"
+                                    line1="A ListComponent is a component type which intends to hold and manage an ordered collection of items for rendering."
                                     />
                             <listcomponent-method-table
                                     jcr:primaryType="nt:unstructured"
@@ -136,7 +140,7 @@
                                     <row1col2
                                             jcr:primaryType="nt:unstructured"
                                             sling:resourceType="granite/ui/components/foundation/text"
-                                            text=""
+                                            text="Returns the Iterable containing the list items along with any properties necessary for rendering of the component as a whole."
                                             />
                                 </row1>
                                 <row2
@@ -164,8 +168,8 @@
                                     text="com.icfolson.aem.harbor.api.lists.construction.ListConstructionStrategy&lt;T&gt;"/>
                             <listconstructionstrategy-description
                                     jcr:primaryType="nt:unstructured"
-                                    sling:resourceType="granite/ui/components/foundation/text"
-                                    text="Represents an implementation of a mechanism for the building up of a list of items of type T."
+                                    sling:resourceType="screens/ui/components/admin/text"
+                                    line1="Represents an implementation of a mechanism for the building up of a list of items of type T."
                                     />
                             <listconstructionstrategy-method-table
                                     jcr:primaryType="nt:unstructured"
@@ -191,7 +195,7 @@
                                     <row1col2
                                             jcr:primaryType="nt:unstructured"
                                             sling:resourceType="granite/ui/components/foundation/text"
-                                            text=""
+                                            text="Produces a list of items.  Implementations should focus on the construction of a suitable item list and should not include in the business logic of the method any consideration of the list's presentation as this is the responsibility of the rendering strategy."
                                             />
                                 </row1>
                             </listconstructionstrategy-method-table>
@@ -205,8 +209,8 @@
                                     text="com.icfolson.aem.harbor.api.lists.rendering.ListRenderingStrategy&lt;T, R extends Iterable&lt;?&gt;&gt;"/>
                             <listrenderingstrategy-description
                                     jcr:primaryType="nt:unstructured"
-                                    sling:resourceType="granite/ui/components/foundation/text"
-                                    text="A List Rendering Strategy is able to take an Iterable of type T and produce a new Iterable imbued with any properties which are germane specifically to the rendering of the items in the list."
+                                    sling:resourceType="screens/ui/components/admin/text"
+                                    line1="A List Rendering Strategy is able to take an Iterable of type T and produce a new Iterable imbued with any properties which are germane specifically to the rendering of the items in the list."
                                     />
                             <listrenderingstrategy-method-table
                                     jcr:primaryType="nt:unstructured"
@@ -232,10 +236,79 @@
                                     <row1col2
                                             jcr:primaryType="nt:unstructured"
                                             sling:resourceType="granite/ui/components/foundation/text"
-                                            text=""
+                                            text="Transforms a list of items into an Iterable suitable for rendering."
                                             />
                                 </row1>
                             </listrenderingstrategy-method-table>
+
+
+                            <abstractlistcomponent-title
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/foundation/heading"
+                                    class="coral-Heading coral-Heading--3"
+                                    level="3"
+                                    text="com.icfolson.aem.harbor.core.components.content.list.AbstractListComponent&lt;T, R extends Iterable&lt;?&gt;&gt;"/>
+                            <abstractlistcomponent-description
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="screens/ui/components/admin/text"
+                                    line1="The AbstractListComponent class embodies the common pattern for the usage of ListConstructionStrategies and ListRenderingStrategies within the context of a concrete list component within its implementation of the getItems method."
+                                    />
+                            <abstractlistcomponent-method-table
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="harbor/admin/documentation/table">
+                                <header1
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/heading"
+                                        text="Method Signature"
+                                        />
+                                <header2
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/heading"
+                                        text="Description"
+                                        />
+                                <row1
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/container">
+                                    <row1col1
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="public R getItems()"
+                                            />
+                                    <row1col2
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="Calls upon the component's ListConstructionStrategy to produce an item list.  This item list is then passed to the component's ListRenderingStrategy and the result is returned."
+                                            />
+                                </row1>
+                                <row2
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/container">
+                                    <row2col1
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="protected abstract ListConstructionStrategy&lt;T&gt; getListConstructionStrategy()"
+                                            />
+                                    <row2col2
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="List Component implementations should use this method to return a ListConstructionStrategy germane to the requirements of the concrete component."
+                                            />
+                                </row2>
+                                <row3
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/container">
+                                    <row3col1
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="protected abstract ListRenderingStrategy&lt;T, R&gt; getListRenderingStrategy()"
+                                            />
+                                    <row3col2
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="List Component implementations should use this method to return a ListRenderingStrategy germane to the requirements of the concrete component."
+                                            />
+                                </row3>
+                            </abstractlistcomponent-method-table>
 
                         </items>
                     </tab2>
