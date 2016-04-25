@@ -1,0 +1,14 @@
+<ol class="breadcrumb" data-sly-use.breadcrumb="${component.properties['className']}">
+    <li data-sly-repeat.currentTrailItem="${breadcrumb.items}">
+        <sly data-sly-test="${!currentTrailItemList.first && breadcrumb.items.hasHtmlDelimiter}">${breadcrumb.items.htmlDelimiter}</sly>
+        <i data-sly-test="${!currentTrailItemList.first && breadcrumb.items.hasIconDelimiter}" class='fa ${breadcrumb.items.iconDelimiter}'></i>
+        <a data-sly-test="${breadcrumb.items.renderAsLink}" href="${currentTrailItem.href}">
+            <sly data-sly-test="${!currentTrailItem.hideIcon}">${currentTrailItem.pageIcon}</sly>
+            <sly data-sly-test="${!currentTrailItem.hideTitle}">${currentTrailItem.title}</sly>
+        </a>
+        <sly data-sly-test="${!breadcrumb.items.renderAsLink}">
+            <sly data-sly-test="${!currentTrailItem.hideIcon}">${currentTrailItem.pageIcon}</sly>
+            <sly data-sly-test="${!currentTrailItem.hideTitle}">${currentTrailItem.title}</sly>
+        </sly>
+    </li>
+</ol>

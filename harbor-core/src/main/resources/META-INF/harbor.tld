@@ -5,12 +5,12 @@
 
     <tlib-version>1.0</tlib-version>
     <short-name>harbor</short-name>
-    <uri>http://www.citytechinc.com/taglibs/harbor</uri>
+    <uri>http://www.icfolson.com/taglibs/harbor</uri>
 
     <tag>
 
         <name>includeListItems</name>
-        <tag-class>com.citytechinc.aem.harbor.core.tags.IncludeListItemsTag</tag-class>
+        <tag-class>com.icfolson.aem.harbor.core.tags.IncludeListItemsTag</tag-class>
 
         <attribute>
             <name>items</name>

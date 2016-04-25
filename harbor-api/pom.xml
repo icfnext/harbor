@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<parent>
-		<groupId>com.citytechinc.aem.harbor</groupId>
+		<groupId>com.icfolson.aem.harbor</groupId>
 		<artifactId>harbor</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
@@ -11,7 +11,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>harbor-api</artifactId>
 	<packaging>bundle</packaging>
-	<name>CITYTECH, Inc. Harbor API</name>
+	<name>Harbor API</name>
 
 	<build>
 		<plugins>
@@ -27,10 +27,10 @@
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
                         <Bundle-Name>${project.name}</Bundle-Name>
                         <Bundle-Vendor>${project.parent.organization.name}</Bundle-Vendor>
-                        <Export-Package>!*.impl,com.citytechinc.aem.harbor.api.*</Export-Package>
+                        <Export-Package>!*.impl,com.icfolson.aem.harbor.api.*</Export-Package>
                         <Import-Package>!com.citytechinc.cq.component.*,!javassist</Import-Package>
 						<Require-Bundle>org.apache.sling.models.api</Require-Bundle>
-						<Sling-Model-Packages>com.citytechinc.aem.harbor.api</Sling-Model-Packages>
+						<Sling-Model-Packages>com.icfolson.aem.harbor.api</Sling-Model-Packages>
 						<DynamicImport-Package>*</DynamicImport-Package>
                     </instructions>
                 </configuration>
@@ -55,10 +55,10 @@
 	</build>
 
 	<dependencies>
-        <!-- Bedrock -->
+        <!-- AEM Library -->
 		<dependency>
-			<groupId>com.citytechinc.aem.bedrock</groupId>
-			<artifactId>bedrock-core</artifactId>
+			<groupId>com.icfolson.aem.library</groupId>
+			<artifactId>aem-library-core</artifactId>
 		</dependency>
 
         <!-- AEM Namespace -->

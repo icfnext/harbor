@@ -1,0 +1,44 @@
+package com.icfolson.aem.harbor.core.components.content.list.page;
+
+import java.util.List;
+
+import com.icfolson.aem.library.api.node.ComponentNode;
+import com.icfolson.aem.library.api.page.PageDecorator;
+import com.icfolson.aem.library.api.page.PageManagerDecorator;
+import com.citytechinc.cq.component.annotations.DialogField;
+import com.citytechinc.cq.component.annotations.widgets.PathField;
+import com.icfolson.aem.harbor.api.lists.construction.ListConstructionStrategy;
+import com.google.common.base.Optional;
+import com.google.common.collect.Lists;
+
+public class ChildPageListConstructionStrategy implements ListConstructionStrategy<PageDecorator> {
+
+	@DialogField(fieldLabel = "Start Page", name = "./startPagePath")
+	@PathField
+	private final Optional<PageDecorator> startPageOptional;
+
+	public ChildPageListConstructionStrategy(ComponentNode componentNode) {
+		PageManagerDecorator pageManagerDecorator = componentNode.getResource().getResourceResolver()
+			.adaptTo(PageManagerDecorator.class);
+
+		Optional<String> startPagePathOptional = componentNode.get("startPagePath", String.class);
+
+		if (startPagePathOptional.isPresent()) {
+			startPageOptional = Optional.fromNullable(pageManagerDecorator.getContainingPage(startPagePathOptional
+				.get()));
+		} else {
+			startPageOptional = Optional.absent();
+		}
+	}
+
+	@Override
+	public List<PageDecorator> construct() {
+
+		if (startPageOptional.isPresent()) {
+			return startPageOptional.get().getChildren();
+		}
+
+		return Lists.newArrayList();
+
+	}
+}
