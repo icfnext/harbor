@@ -45,18 +45,4 @@ public class LinkList extends AbstractComponent {
         return classification;
     }
 
-    public List<ListableLink> getLinks() {
-
-        if (links == null) {
-            links = Lists.newArrayList();
-
-            for(ComponentNode currentLinkNode : getComponentNodes()) {
-                links.add(currentLinkNode.getResource().adaptTo(ListableLink.class));
-            }
-        }
-
-        return links;
-
-    }
-
 }
