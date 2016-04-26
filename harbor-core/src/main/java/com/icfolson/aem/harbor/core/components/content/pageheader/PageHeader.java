@@ -7,6 +7,8 @@ import com.icfolson.aem.harbor.core.components.content.container.Container;
 import com.icfolson.aem.harbor.core.constants.groups.ComponentGroups;
 import com.citytechinc.cq.component.annotations.Tab;
 import com.google.common.base.Optional;
+import org.apache.sling.api.resource.Resource;
+import org.apache.sling.models.annotations.Model;
 
 @Component(
 	value = "Page Header",
@@ -16,6 +18,7 @@ import com.google.common.base.Optional;
             @Tab(title = "Container"),
             @Tab(title = "Advanced")
     })
+@Model(adaptables = Resource.class)
 public class PageHeader extends Container {
 
 	public static final String RESOURCE_TYPE = "harbor/components/content/pageheader";

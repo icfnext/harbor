@@ -17,7 +17,6 @@ import org.apache.sling.models.annotations.Model;
     resourceSuperType = Container.RESOURCE_TYPE,
     disableTargeting = true,
     actions = { "text: Content Container", "-", "edit" })
-@AutoInstantiate(instanceName = Container.INSTANCE_NAME)
 @Model(adaptables = Resource.class)
 public class BakedinContainer extends Container {
 

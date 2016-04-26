@@ -3,7 +3,6 @@ package com.icfolson.aem.harbor.core.components.content.container;
 import com.citytechinc.cq.component.annotations.widgets.TextField;
 import com.icfolson.aem.harbor.core.components.mixins.classifiable.Classification;
 import com.icfolson.aem.harbor.core.components.mixins.classifiable.InheritedClassification;
-import com.icfolson.aem.library.api.components.annotations.AutoInstantiate;
 import com.icfolson.aem.library.core.components.AbstractComponent;
 import com.citytechinc.cq.component.annotations.Component;
 import com.citytechinc.cq.component.annotations.DialogField;
@@ -27,7 +26,6 @@ import org.apache.sling.models.annotations.Model;
 				@Tab(title = "Container"),
 				@Tab(title = "Advanced")
 		})
-@AutoInstantiate(instanceName = Container.INSTANCE_NAME)
 @Model(adaptables = Resource.class)
 public class Container extends AbstractComponent {
 
