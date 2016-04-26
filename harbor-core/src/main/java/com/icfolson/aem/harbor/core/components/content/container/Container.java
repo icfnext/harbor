@@ -1,5 +1,6 @@
 package com.icfolson.aem.harbor.core.components.content.container;
 
+import com.citytechinc.cq.component.annotations.widgets.TextField;
 import com.icfolson.aem.harbor.core.components.mixins.classifiable.Classification;
 import com.icfolson.aem.harbor.core.components.mixins.classifiable.InheritedClassification;
 import com.icfolson.aem.library.api.components.annotations.AutoInstantiate;
@@ -123,6 +124,7 @@ public class Container extends AbstractComponent {
 			fieldLabel = "ID",
 			fieldDescription = "A unique identifier to apply to the Container element rendered in the page DOM.  If left blank, no id attribute will be applied to the rendered element.",
 			tab = 2)
+	@TextField
 	public String getDomId() {
         if (isInherits()) {
             return getInherited("domId", StringUtils.EMPTY);

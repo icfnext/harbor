@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="cq:Page">
+    <jcr:content
+        jcr:mixinTypes="[sling:VanityPath]"
+        jcr:primaryType="nt:unstructured"
+        jcr:title="Harbor Container Component"
+        jcr:subtitle="Group: Harbor Scaffolding"
+        jcr:description="A configurable container for child content"
+        sling:redirect="{Boolean}false"
+        sling:resourceType="granite/ui/components/foundation/page"
+        sling:vanityOrder="{Long}1200"
+        sling:vanityPath="/screens">
+        <head jcr:primaryType="nt:unstructured">
+            <contentchecker
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/foundation/admin/contentchecker"
+                allowed="[.*]"
+                alowEmpty="{Boolean}false"
+                path="${requestPathInfo.suffix}"
+                redirect="/screens.html"/>
+            <viewport
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/foundation/admin/page/viewport"/>
+            <meta
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/foundation/meta"
+                content="chrome=1"
+                name="X-UA-Compatible"/>
+            <title
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Harbor Container Component"
+                sling:resourceType="screens/ui/components/admin/page/title"/>
+            <favicon
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/foundation/page/favicon"/>
+            <clientlibs
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/foundation/includeclientlibs"
+                categories="[granite.ui.foundation,granite.ui.foundation.admin,cq.gui.siteadmin.admin.pages,cq.screens.admin]"/>
+        </head>
+        <body
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="granite/ui/components/foundation/page/body">
+            <layout
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/endor/layouts/page"/>
+            <rail
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/endor/navcolumns"
+                currentId="harbor-admin-documentation-components"
+                srcPath="cq/core/content/nav"/>
+            <breadcrumbs
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="harbor/admin/documentation/breadcrumb"
+                    href="/apps/harbor/admin/documentation/components.html"
+                    title="Harbor Components"/>
+            <title
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Harbor Container Component"
+                sling:resourceType="screens/ui/components/admin/endor/title"/>
+            <header
+                jcr:primaryType="nt:unstructured"
+                srcPath="/mnt/overlay/cq/core/content/header"/>
+            <content
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/foundation/container">
+                <layout
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType = "granite/ui/components/foundation/layouts/tabs"
+                    type="large"/>
+                    <items jcr:primaryType="nt:unstructured">
+                        <tab1
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType = "granite/ui/components/foundation/container"
+                            jcr:title="Author Guide">
+                            <items jcr:primaryType="nt:unstructured">
+                                <title
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/foundation/heading"
+                                    class="coral-Heading coral-Heading--1"
+                                    level="1"
+                                    text="Harbor Container Component"/>
+                                <description
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="screens/ui/components/admin/text"
+                                    line1="A container for child content.  Each container exposes its own paragraph system.  Containers should NOT be nested."
+                                    line2="Group: Harbor Scaffolding"/>
+                                <authorabilityTitle
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/heading"
+                                        class="coral-Heading coral-Heading--2"
+                                        level="2"
+                                        text="Authorability"/>
+                                <dialog-options
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="harbor/admin/documentation/table">
+                                    <header1
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/heading"
+                                            text="Dialog Field"
+                                            />
+                                    <header2
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/heading"
+                                        text="Description"
+                                        />
+                                    <row1
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/container">
+                                        <row1col1
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/foundation/text"
+                                                text="Full Width"
+                                                />
+                                        <row1col2
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/foundation/text"
+                                                text="Indicates whether the container DOM should span the full width of its parent element or whether it should operate at a fixed width."
+                                                />
+                                    </row1>
+                                    <row2
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/container">
+                                        <row2col1
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/foundation/text"
+                                                text="Classification"
+                                                />
+                                        <row2col2
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/foundation/text"
+                                                text="Input field for tag bassed classification.  See Classification under Core Concepts."
+                                                />
+                                    </row2>
+                                    <row3
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/container">
+                                        <row3col1
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/foundation/text"
+                                                text="ID"
+                                                />
+                                        <row3col2
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/foundation/text"
+                                                text="Allows for identification of the container.  In the rendered DOM this ID is reflected as the id attribute of the container's section element."
+                                                />
+                                    </row3>
+                                </dialog-options>
+                                <bakedInVariantTitle
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/heading"
+                                        class="coral-Heading coral-Heading--2"
+                                        level="2"
+                                        text="Baked In Container"/>
+                                <bakedInVariantDescription
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="screens/ui/components/admin/text"
+                                        line1="When baking a Container into a page's template code, the Baked In Container variant, identified by resource type harbor/components/content/bakedincontentcontainer, should be used. This component is not available from the sidekick and disallows copying, moving, pasting, and insertion."/>
+
+                            </items>
+                        </tab1>
+                        <tab2
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType = "granite/ui/components/foundation/container"
+                                jcr:title="Developer Guide">
+                            <items jcr:primaryType="nt:unstructured">
+                                <contentContainerComponentTitle
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/heading"
+                                        class="coral-Heading coral-Heading--2"
+                                        level="2"
+                                        text="Container Component"/>
+                                <contentContainerComponentDescription
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="screens/ui/components/admin/text"
+                                        line1=""/>
+                                <contentContainerAspects
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="harbor/admin/documentation/table">
+                                    <header1
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/heading"
+                                            text="Aspect"/>
+                                    <header2
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/heading"
+                                            text="Value"/>
+                                    <row1
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/container">
+                                        <row1col1
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/foundation/text"
+                                                text="Resource Type"/>
+                                        <row1col2
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/foundation/text"
+                                                text="harbor/components/content/contentcontainer"/>
+                                    </row1>
+                                    <row2
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/container">
+                                        <row2col1
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/foundation/text"
+                                                text="Component Group"/>
+                                        <row2col2
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/foundation/text"
+                                                text="Harbor Scaffolding"/>
+                                    </row2>
+                                    <row3
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/container">
+                                        <row3col1
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/foundation/text"
+                                                text="Backing Class"/>
+                                        <row3col2
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/foundation/text"
+                                                text="com.icfolson.aem.harbor.core.components.content.container.Container"/>
+                                    </row3>
+                                </contentContainerAspects>
+
+                                <bakedInContainerComponentTitle
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/heading"
+                                        class="coral-Heading coral-Heading--3"
+                                        level="3"
+                                        text="Baked In Container Component"/>
+                                <bakedInContainerComponentDescription
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="screens/ui/components/admin/text"
+                                        line1="The Baked In Container restricts the editability of the component disallowing movement and insertion.  This component is suitable for inclusion in Sightly or JSP as part of a template or other containing component implementation."/>
+                                <bakedInContentContainerAspects
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="harbor/admin/documentation/table">
+                                    <header1
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/heading"
+                                            text="Aspect"/>
+                                    <header2
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/heading"
+                                            text="Value"/>
+                                    <row1
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/container">
+                                        <row1col1
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/foundation/text"
+                                                text="Resource Type"/>
+                                        <row1col2
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/foundation/text"
+                                                text="harbor/components/content/bakedincontentcontainer"/>
+                                    </row1>
+                                    <row2
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/container">
+                                        <row2col1
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/foundation/text"
+                                                text="Resource Super Type"/>
+                                        <row2col2
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/foundation/text"
+                                                text="harbor/components/content/contentcontainer"/>
+                                    </row2>
+                                    <row3
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/container">
+                                        <row3col1
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/foundation/text"
+                                                text="Component Group"/>
+                                        <row3col2
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/foundation/text"
+                                                text=".hidden"/>
+                                    </row3>
+                                    <row4
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/container">
+                                        <row4col1
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/foundation/text"
+                                                text="Backing Class"/>
+                                        <row4col2
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/foundation/text"
+                                                text="com.icfolson.aem.harbor.core.components.content.container.BakedinContainer"/>
+                                    </row4>
+                                </bakedInContentContainerAspects>
+                            </items>
+                        </tab2>
+                    </items>
+            </content>
+        </body>
+    </jcr:content>
+</jcr:root>
