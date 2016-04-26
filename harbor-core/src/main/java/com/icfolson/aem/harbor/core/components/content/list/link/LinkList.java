@@ -1,7 +1,6 @@
 package com.icfolson.aem.harbor.core.components.content.list.link;
 
 import com.icfolson.aem.harbor.core.components.mixins.classifiable.Classification;
-import com.icfolson.aem.library.api.components.annotations.AutoInstantiate;
 import com.icfolson.aem.library.api.node.ComponentNode;
 import com.icfolson.aem.library.core.components.AbstractComponent;
 import com.icfolson.aem.harbor.core.constants.groups.ComponentGroups;
@@ -27,10 +26,9 @@ import java.util.List;
                 @ActionConfig(xtype = "tbseparator"),
                 @ActionConfig(
                         text = "Add Link",
-                        handler = "function() { Harbor.Components.LinkList.addLink( this ); }",
+                        handler = "function() { Harbor.Components.LinkList.addLink( this, '" + ListableLink.RESOURCE_TYPE + "' ); }",
                         additionalProperties = {@ActionConfigProperty(name = "icon", value = "coral-Icon--add")})}
 )
-@AutoInstantiate(instanceName = "linklist")
 @Model(adaptables = Resource.class)
 public class LinkList extends AbstractComponent {
 
