@@ -72,6 +72,18 @@
 			<artifactId>cq-rewriter</artifactId>
 		</dependency>
 
+		<!-- Search -->
+		<dependency>
+			<groupId>com.day.cq</groupId>
+			<artifactId>cq-search</artifactId>
+		</dependency>
+
+		<!-- DAM -->
+		<dependency>
+			<groupId>com.day.cq.dam</groupId>
+			<artifactId>cq-dam-api</artifactId>
+		</dependency>
+
         <!-- Sling Scripting -->
         <dependency>
             <groupId>org.apache.sling</groupId>

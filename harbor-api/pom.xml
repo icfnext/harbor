@@ -55,6 +55,12 @@
 	</build>
 
 	<dependencies>
+		<!-- Search -->
+		<dependency>
+			<groupId>com.day.cq</groupId>
+			<artifactId>cq-search</artifactId>
+		</dependency>
+
         <!-- AEM Library -->
 		<dependency>
 			<groupId>com.icfolson.aem.library</groupId>
