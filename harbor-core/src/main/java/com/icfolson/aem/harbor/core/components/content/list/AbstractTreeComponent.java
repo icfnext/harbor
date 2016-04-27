@@ -8,7 +8,7 @@ import com.icfolson.aem.harbor.api.trees.construction.TreeConstructionStrategy;
 import com.icfolson.aem.harbor.api.trees.rendering.TreeRenderingStrategy;
 import com.google.common.base.Optional;
 
-public abstract class AbstractRootedListComponent<T extends TreeNode, R extends Tree> extends
+public abstract class AbstractTreeComponent<T extends TreeNode, R extends Tree> extends
 	AbstractComponent implements TreeComponent<R> {
 
 	private Optional<R> renderableTreeOptional;

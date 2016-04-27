@@ -1,6 +1,6 @@
 package com.icfolson.aem.harbor.core.components.content.navigation.bootstrapnavigation.mainautonavigation;
 
-import com.icfolson.aem.harbor.core.components.content.list.AbstractRootedListComponent;
+import com.icfolson.aem.harbor.core.components.content.list.AbstractTreeComponent;
 import com.icfolson.aem.harbor.core.content.page.navigation.construction.SiteNavigationListConstructionStrategy;
 import com.icfolson.aem.library.api.components.annotations.AutoInstantiate;
 import com.icfolson.aem.library.api.page.PageDecorator;
@@ -29,7 +29,7 @@ import javax.inject.Inject;
 @AutoInstantiate(instanceName = "bootstrapMainAutoNavigation")
 @Model(adaptables = Resource.class)
 public class BootstrapMainAutoNavigation extends
-		AbstractRootedListComponent<NavigablePage, BootstrapPageNavigableRenderableTree> {
+		AbstractTreeComponent<NavigablePage, BootstrapPageNavigableRenderableTree> {
 
 	public static final String RESOURCE_TYPE = "harbor/components/content/navigation/bootstrapmainautonavigation";
 	public static final String TAB_1_NODE_NAME = "mainnavigation";
