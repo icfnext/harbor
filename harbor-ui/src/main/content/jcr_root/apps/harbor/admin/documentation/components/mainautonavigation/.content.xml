@@ -4,9 +4,9 @@
     <jcr:content
         jcr:mixinTypes="[sling:VanityPath]"
         jcr:primaryType="nt:unstructured"
-        jcr:title="Harbor Secondary Navigation Component"
+        jcr:title="Harbor Main Auto Navigation Component"
         jcr:subtitle="Group: Harbor Navigation"
-        jcr:description="A rooted tree navigation of arbitrary depth"
+        jcr:description="A site wide nested navigation"
         sling:redirect="{Boolean}false"
         sling:resourceType="granite/ui/components/foundation/page"
         sling:vanityOrder="{Long}1200"
@@ -29,7 +29,7 @@
                 name="X-UA-Compatible"/>
             <title
                 jcr:primaryType="nt:unstructured"
-                jcr:title="Harbor Secondary Navigation Component"
+                jcr:title="Harbor Main Auto Navigation Component"
                 sling:resourceType="screens/ui/components/admin/page/title"/>
             <favicon
                 jcr:primaryType="nt:unstructured"
@@ -57,7 +57,7 @@
                     title="Harbor Components"/>
             <title
                 jcr:primaryType="nt:unstructured"
-                jcr:title="Harbor Secondary Navigation Component"
+                jcr:title="Harbor Main Auto Navigation Component"
                 sling:resourceType="screens/ui/components/admin/endor/title"/>
             <header
                 jcr:primaryType="nt:unstructured"
@@ -80,11 +80,11 @@
                                     sling:resourceType="granite/ui/components/foundation/heading"
                                     class="coral-Heading coral-Heading--1"
                                     level="1"
-                                    text="Harbor Secondary Navigation Component"/>
+                                    text="Harbor Main Auto Navigation Component"/>
                                 <description
                                     jcr:primaryType="nt:unstructured"
                                     sling:resourceType="screens/ui/components/admin/text"
-                                    line1="Presents a navigation tree to an arbitrary depth starting from a configurable root.  The current page is highlighted in the tree and its children are expanded if they are not beyond the depth of the navigation.  This component intends to cover the common case of sidebar navigations though as an arbitrary list element could be styled to fit a number of layout designs."
+                                    line1="The Main Auto Navigation presents a site navigation rooted at a site's Home Page.  The navigable elements are based on the content tree respecting Hide in Navigation settings at a page level."
                                     line2="Group: Harbor Navigation"/>
                                 <authorabilityTitle
                                         jcr:primaryType="nt:unstructured"
@@ -111,12 +111,12 @@
                                         <row1col1
                                                 jcr:primaryType="nt:unstructured"
                                                 sling:resourceType="granite/ui/components/foundation/text"
-                                                text="Root Page Type"
+                                                text="Navigation Depth"
                                                 />
                                         <row1col2
                                                 jcr:primaryType="nt:unstructured"
                                                 sling:resourceType="granite/ui/components/foundation/text"
-                                                text="Allows navigation to be rooted at the containing Home Page or the closest containing Section Landing Page."
+                                                text="Indicates how many levels of the page tree under the root page should be presented in the navigation."
                                                 />
                                     </row1>
                                     <row2
@@ -125,25 +125,95 @@
                                         <row2col1
                                                 jcr:primaryType="nt:unstructured"
                                                 sling:resourceType="granite/ui/components/foundation/text"
-                                                text="Navigation Depth"
+                                                text="Enable Sticky Navigation"
                                                 />
                                         <row2col2
                                                 jcr:primaryType="nt:unstructured"
                                                 sling:resourceType="granite/ui/components/foundation/text"
-                                                text="Indicates how many levels of the page tree under the root page should be presented in the navigation."
+                                                text="When enabled the site navigation will stick to the top of the browser viewport during page scrolling.  Note, navigation stickyness will only be enabled in preview and publish mode.  Further in preview mode, while stickyness will be enabled the results may not be visible in the Touch UI due to how the interface is rendered.  To test the results fully remove editor.html from the browser's address bar.  Also, when enabling stickyness ensure your design accounts for this and adds margin to the elements below the navigation otherwise these will render behind the navigation."
                                                 />
                                     </row2>
+                                    <row3
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/container">
+                                        <row3col1
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/foundation/text"
+                                                text="Brand Link"
+                                                />
+                                        <row3col2
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/foundation/text"
+                                                text="Indicates whether a Brand Link should be presented.  A Brand Link appears as a link to the Home Page of the site with text defaulted to the site's title."
+                                                />
+                                    </row3>
+                                    <row4
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/container">
+                                        <row4col1
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/foundation/text"
+                                                text="Brand Link Text"
+                                                />
+                                        <row4col2
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/foundation/text"
+                                                text="Text to present in the Brand Link when shown."
+                                                />
+                                    </row4>
+                                    <row5
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/container">
+                                        <row5col1
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/foundation/text"
+                                                text="Brand Link Image"
+                                                />
+                                        <row5col2
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/foundation/text"
+                                                text="Image Asset to present in the Brand Link when shown."
+                                                />
+                                    </row5>
+                                    <row6
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/container">
+                                        <row6col1
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/foundation/text"
+                                                text="Full Width"
+                                                />
+                                        <row6col2
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/foundation/text"
+                                                text="Indicates whether the navigation should span the full width of the browser or operate at a fixed width."
+                                                />
+                                    </row6>
+                                    <row7
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/container">
+                                        <row7col1
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/foundation/text"
+                                                text="Present Main Navigation Item in Drop Down"
+                                                />
+                                        <row7col2
+                                                jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="granite/ui/components/foundation/text"
+                                                text="When more than a single level of navigation is presented, nested items appear in drop downs under each top level item.  In this case a decision must be made concerning whether clicking on the top level navigation item should open the drop down or whether it should take the user to the associated page.  Enabling this option will cause the click to open the dropdown and the link to the associated page will be re-presented within the dropdown.  When disabled clicking a top level navigation item will route the user to the associated page and users will have to click a toggle icon next to the menu item text to open the drop down."
+                                                />
+                                    </row7>
                                 </dialog-options>
                                 <bakedInVariantTitle
                                         jcr:primaryType="nt:unstructured"
                                         sling:resourceType="granite/ui/components/foundation/heading"
                                         class="coral-Heading coral-Heading--2"
                                         level="2"
-                                        text="Baked In Secondary Navigation"/>
+                                        text="Baked In Main Auto Navigation"/>
                                 <bakedInVariantDescription
                                         jcr:primaryType="nt:unstructured"
                                         sling:resourceType="screens/ui/components/admin/text"
-                                        line1="When baking a Secondary Navigation into a page's template code, the Baked In Secondary Navigation variant, identified by resource type harbor/components/content/navigation/bakedinbootstrapsecondarynavigation, should be used. This component is not available from the sidekick and disallows copying, moving, pasting, and insertion."/>
+                                        line1="When baking a Main Auto Navigation into a page's template code, the Baked In Main Auto Navigation variant, identified by resource type harbor/components/content/navigation/bakedinbootstrapmainautonavigation, should be used. This component is not available from the sidekick and disallows copying, moving, pasting, and insertion."/>
                             </items>
                         </tab1>
 
@@ -154,17 +224,17 @@
                                 sling:resourceType = "granite/ui/components/foundation/container"
                                 jcr:title="Developer Guide">
                             <items jcr:primaryType="nt:unstructured">
-                                <secondaryNavigationComponentTitle
+                                <mainAutoNavigationComponentTitle
                                         jcr:primaryType="nt:unstructured"
                                         sling:resourceType="granite/ui/components/foundation/heading"
                                         class="coral-Heading coral-Heading--2"
                                         level="2"
-                                        text="Secondary Navigation Component"/>
-                                <secondaryNavigationComponentDescription
+                                        text="Main Auto Navigation Component"/>
+                                <mainAutoNavigationComponentDescription
                                         jcr:primaryType="nt:unstructured"
                                         sling:resourceType="screens/ui/components/admin/text"
-                                        line1="The Secondary Navigation is an implementation of the TreeComponent as defined in Core Concepts."/>
-                                <secondaryNavigationAspects
+                                        line1="The Main Auto Navigation is an implementation of the TreeComponent as defined in Core Concepts which presents a site navigation rooted at a site's Home Page."/>
+                                <mainAutoNavigationAspects
                                         jcr:primaryType="nt:unstructured"
                                         sling:resourceType="harbor/admin/documentation/table">
                                     <header1
@@ -185,7 +255,7 @@
                                         <row1col2
                                                 jcr:primaryType="nt:unstructured"
                                                 sling:resourceType="granite/ui/components/foundation/text"
-                                                text="harbor/components/content/navigation/bootstrapsecondarynavigation"/>
+                                                text="harbor/components/content/navigation/bootstrapmainautonavigation"/>
                                     </row1>
                                     <row2
                                             jcr:primaryType="nt:unstructured"
@@ -209,7 +279,7 @@
                                         <row3col2
                                                 jcr:primaryType="nt:unstructured"
                                                 sling:resourceType="granite/ui/components/foundation/text"
-                                                text="com.icfolson.aem.harbor.core.components.content.navigation.bootstrapnavigation.secondarynavigation.BootstrapSecondaryNavigation"/>
+                                                text="com.icfolson.aem.harbor.core.components.content.navigation.bootstrapnavigation.mainautonavigation.BootstrapMainAutoNavigation extends AbstractTreeComponent&lt;NavigablePage, BootstrapPageNavigableRenderableTree&gt;"/>
                                     </row3>
                                     <row4
                                             jcr:primaryType="nt:unstructured"
@@ -221,7 +291,7 @@
                                         <row4col2
                                                 jcr:primaryType="nt:unstructured"
                                                 sling:resourceType="granite/ui/components/foundation/text"
-                                                text="com.icfolson.aem.harbor.core.content.page.navigation.construction.HierarchicalPageNavigationListConstructionStrategy extends com.icfolson.aem.harbor.core.content.page.navigation.construction.PageNavigationListConstructionStrategy"/>
+                                                text="com.icfolson.aem.harbor.core.content.page.navigation.construction.SiteNavigationListConstructionStrategy extends com.icfolson.aem.harbor.core.content.page.navigation.construction.PageNavigationListConstructionStrategy"/>
                                     </row4>
                                     <row5
                                             jcr:primaryType="nt:unstructured"
@@ -233,20 +303,20 @@
                                         <row5col2
                                                 jcr:primaryType="nt:unstructured"
                                                 sling:resourceType="granite/ui/components/foundation/text"
-                                                text="com.icfolson.aem.harbor.core.trees.rendering.PassthroughTreeRenderingStrategy&lt;T extends TreeNode&gt; The Passthrough Tree Rendering Strategy produces a com.icfolson.aem.harbor.core.trees.rendering.PassthroughTree.  This strategy and tree type are appropriate for use when the tree constructed by a TreeConstructionStrategy requires no augmentation prior to presentation."/>
+                                                text="com.icfolson.aem.harbor.core.components.content.navigation.bootstrapnavigation.mainautonavigation.BootstrapMainNavigationRenderingStrategy implements TreeRenderingStrategy&lt;NavigablePage, BootstrapPageNavigableRenderableTree&gt;"/>
                                     </row5>
-                                </secondaryNavigationAspects>
-                                <bakedInSecondaryNavigationComponentTitle
+                                </mainAutoNavigationAspects>
+                                <bakedInMainAutoNavigationComponentTitle
                                         jcr:primaryType="nt:unstructured"
                                         sling:resourceType="granite/ui/components/foundation/heading"
                                         class="coral-Heading coral-Heading--3"
                                         level="3"
-                                        text="Baked In Secondary Navigation Component"/>
-                                <bakedInSecondaryNavigationComponentDescription
+                                        text="Baked In Main Auto Navigation Component"/>
+                                <bakedInMainAutoNavigationComponentDescription
                                         jcr:primaryType="nt:unstructured"
                                         sling:resourceType="screens/ui/components/admin/text"
-                                        line1="The Baked In Secondary Navigation restricts the editability of the component disallowing movement and insertion.  This component is suitable for inclusion in Sightly or JSP as part of a template or other containing component implementation."/>
-                                <bakedInSecondaryNavigationAspects
+                                        line1="The Baked In Main Auto Navigation restricts the editability of the component disallowing movement and insertion.  This component is suitable for inclusion in Sightly or JSP as part of a template or other containing component implementation."/>
+                                <bakedInMainAutoNavigationAspects
                                         jcr:primaryType="nt:unstructured"
                                         sling:resourceType="harbor/admin/documentation/table">
                                     <header1
@@ -267,7 +337,7 @@
                                         <row1col2
                                                 jcr:primaryType="nt:unstructured"
                                                 sling:resourceType="granite/ui/components/foundation/text"
-                                                text="harbor/components/content/navigation/bakedinbootstrapsecondarynavigation"/>
+                                                text="harbor/components/content/navigation/bakedinbootstrapmainautonavigation"/>
                                     </row1>
                                     <row2
                                             jcr:primaryType="nt:unstructured"
@@ -279,7 +349,7 @@
                                         <row2col2
                                                 jcr:primaryType="nt:unstructured"
                                                 sling:resourceType="granite/ui/components/foundation/text"
-                                                text="harbor/components/content/navigation/bootstrapsecondarynavigation"/>
+                                                text="harbor/components/content/navigation/bootstrapmainautonavigation"/>
                                     </row2>
                                     <row3
                                             jcr:primaryType="nt:unstructured"
@@ -303,9 +373,9 @@
                                         <row4col2
                                                 jcr:primaryType="nt:unstructured"
                                                 sling:resourceType="granite/ui/components/foundation/text"
-                                                text="com.icfolson.aem.harbor.core.components.content.navigation.bootstrapnavigation.secondarynavigation.BakedinBootstrapSecondaryNavigation"/>
+                                                text="com.icfolson.aem.harbor.core.components.content.navigation.bootstrapnavigation.mainautonavigation.BakedinBootstrapMainAutoNavigation"/>
                                     </row4>
-                                </bakedInSecondaryNavigationAspects>
+                                </bakedInMainAutoNavigationAspects>
                             </items>
                         </tab2>
                     </items>

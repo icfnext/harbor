@@ -59,7 +59,7 @@ public class PageNavigationListConstructionStrategy extends AbstractComponent im
 	}
 
 	@DialogField(fieldLabel = "Navigation Depth", fieldDescription = "The depth to which the navigation will search for child pages", additionalProperties = { @Property(name = "emptyText", value = "1") })
-	@NumberField
+	@NumberField(allowDecimals = false, allowNegative = false, min = "1")
 	public Integer getNavigationDepth() {
 		return navigationDepth;
 	}

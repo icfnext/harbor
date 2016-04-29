@@ -98,10 +98,10 @@ public class BootstrapPageNavigableRenderableTree implements Tree<NavigablePage>
     }
 
     public List<String> getNavbarClasses() {
-        if (isSticky) {
-            return Lists.newArrayList("navbar", "navbar-default", "navbar-fixed-top");
-        }
-
         return Lists.newArrayList("navbar", "navbar-default");
+    }
+
+    public List<String> getStickyNavbarClasses() {
+        return Lists.newArrayList("navbar", "navbar-default", "navbar-fixed-top");
     }
 }
