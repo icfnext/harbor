@@ -57,9 +57,12 @@ public class DefaultMetadataConfigService implements MetadataConfigService {
 
 	@Override
 	public String getExternalUrlForPage(SlingHttpServletRequest requestContext, Resource resource) {
+		//TODO: Fix externalization - for some reason the .getConfig() call started erroring appropo of nothing
+		/*
 		if (linkCheckerConfigProvider.getConfig().isStripHtmlExtension()) {
 			return getExternalUrl(requestContext, resource, null);
 		}
+		*/
 
 		return getExternalUrl(requestContext, resource, ".html");
 	}
