@@ -1,0 +1,33 @@
+<div data-sly-use.tabs="${component.properties['className']}" class="tabs-container tabs" id="${tabs.uniqueId}-tabs-container">
+    <sly data-sly-test="${wcmmode.preview || wcmmode.disabled}">
+        <ul class="nav nav-${tabs.tabType}" data-tabs="tabs">
+            <li data-sly-repeat.currentTab="${tabs.tabs}" id="${currentTab.uniqueId}" data-name="${currentTab.name}" data-sly-attribute.class="${currentTabList.first ? 'active' : ''}">
+                <a href="#tab-${currentTab.uniqueId}" data-toggle="tab">${currentTab.title @ context='html'}</a>
+            </li>
+        </ul>
+
+        <div class="tab-content">
+            <div data-sly-repeat.currentTab="${tabs.tabs}" id="tab-${currentTab.uniqueId}" data-sly-attribute.class="${currentTabList.first ? 'tab-pane active' : 'tab-pane'}">
+                <section data-sly-resource="${currentTab.name @ resourceType=currentTab.resource.resourceType, decorationTagName='div'}">
+                </section>
+            </div>
+        </div>
+    </sly>
+    <sly data-sly-test="${!wcmmode.preview && !wcmmode.disabled}" data-sly-repeat.currentTab="${tabs.tabs}" class="nav nav-${curtabs.tabType}">
+        <ul class="nav nav-${tabs.tabType}" data-tabs="tabs">
+            <li id="${currentTab.uniqueId}" data-name="${currentTab.name}" class="active">
+                <a href="#tab-${currentTab.uniqueId}" data-toggle="tab">${currentTab.title @ context='html'}</a>
+            </li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="tab-${currentTab.uniqueId}" class="tab-pane active">
+                <section class="tab-par-author" data-sly-resource="${currentTab.name @ resourceType=currentTab.resource.resourceType, decorationTagName='div'}">
+                </section>
+            </div>
+        </div>
+    </sly>
+    <div data-sly-test="${!tabs.tabs}" class="author-help-message">
+        Add Tabs Using the + Button
+    </div>
+</div>

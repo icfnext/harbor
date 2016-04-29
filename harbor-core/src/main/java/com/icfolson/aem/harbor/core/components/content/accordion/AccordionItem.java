@@ -45,7 +45,7 @@ public class AccordionItem extends AbstractComponent {
     @Inject
     private PageDecorator currentPage;
 
-    public static final String TYPE = "harbor/components/content/accordion/accordionitem";
+    public static final String RESOURCE_TYPE = "harbor/components/content/accordion/accordionitem";
 
     @DialogField(fieldLabel = "Title", fieldDescription = "The title of the accordion item.")
     @TextField
