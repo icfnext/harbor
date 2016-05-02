@@ -1,5 +1,9 @@
 package com.icfolson.aem.harbor.api.services.theme;
 
+/*
+ * TODO: Remove when removing legacy theme engine
+ */
+@Deprecated
 public interface ThemeService {
 
     /**

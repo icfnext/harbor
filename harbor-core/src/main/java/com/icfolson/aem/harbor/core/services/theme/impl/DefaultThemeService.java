@@ -10,8 +10,12 @@ import org.apache.sling.commons.osgi.PropertiesUtil;
 
 import java.util.Map;
 
+/**
+ * TODO: Remove when removing legacy Theme Engine
+ */
 @Component(label = "Harbor Theme Service", metatype = true, configurationFactory = true)
 @Service
+@Deprecated
 public class DefaultThemeService implements ThemeService {
 
     @Property(label = "Theme Title", value = "", description = "A title used to identify this Service Instance externally.")
