@@ -36,7 +36,7 @@ public class Container extends AbstractComponent {
 
 	public static final String FULL_WIDTH_PROPERTY = "fullWidth";
 
-	@DialogField(fieldLabel = "Full Width", fieldDescription = "When set to true, the container will render across the full width of the browser window", name = "./" + FULL_WIDTH_PROPERTY)
+	@DialogField(fieldLabel = "Full Width", fieldDescription = "When set to true, the container will render across the full width of the browser window", name = "./" + FULL_WIDTH_PROPERTY, ranking = 0)
 	@Switch(offText = "No", onText = "Yes")
 	public Boolean getIsContainerFullWidth() {
         if (isInherits()) {
@@ -45,7 +45,7 @@ public class Container extends AbstractComponent {
 		return get(FULL_WIDTH_PROPERTY, false);
 	}
 
-	@DialogField
+	@DialogField(ranking = 20)
 	@DialogFieldSet
 	public Classification getClassification() {
 		if (classification == null) {
@@ -138,6 +138,16 @@ public class Container extends AbstractComponent {
 		return "Content Section";
 	}
 
+	@DialogField(fieldLabel = "Container Inheritance", fieldDescription = "When enabled, an inheriting paragraph system is produced for this container instance.", ranking = 10)
+	@Switch(offText = "No", onText = "Yes")
+	public boolean isParsysInherits() {
+		if (isInherits()) {
+			return getInherited("parsysInherits", false);
+		}
+
+		return get("parsysInherits", false);
+	}
+
 	protected String getContainerFullWidthClass() {
 		return Bootstrap.CONTAINER_FULL_WIDTH_CLASS;
 	}
@@ -146,7 +156,14 @@ public class Container extends AbstractComponent {
 		return Bootstrap.CONTAINER_CLASS;
 	}
 
+	/**
+	 * Indicates whether the author configured properties of a container component instance should
+	 * inherit from parent pages
+	 *
+	 * @return boolean
+	 */
 	protected boolean isInherits() {
         return false;
     }
+
 }
