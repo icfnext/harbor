@@ -43,6 +43,26 @@
 	<build>
 		<plugins>
 			<plugin>
+				<groupId>com.github.warmuuh</groupId>
+				<artifactId>libsass-maven-plugin</artifactId>
+				<version>0.1.6-libsass_3.2.4</version>
+				<executions>
+					<execution>
+						<id>compile-sass</id>
+						<goals>
+							<goal>compile</goal>
+						</goals>
+						<configuration>
+							<inputPath>${project.basedir}/src/main/design/designs</inputPath>
+							<includePath>${project.basedir}/src/main/design/sass</includePath>
+							<outputPath>${project.basedir}/src/main/content/jcr_root/etc/designs</outputPath>
+							<outputStyle>compressed</outputStyle>
+							<generateSourceMap>false</generateSourceMap>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 			</plugin>
 			<plugin>

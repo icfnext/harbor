@@ -1,0 +1,18 @@
+/*
+ * For manual navigations - style the a elements such that the padding on the drop down does not double the padding
+ * of the entire navigation element
+ */
+.nav.manual-navigation > li.dropdown > a {
+
+    display : inline-block;
+    padding-right : 8px;
+
+}
+
+.nav.manual-navigation > li.dropdown > a.dropdown-toggle {
+
+    display : inline-block;
+    padding-left : 0px;
+    padding-right : 15px;
+
+}

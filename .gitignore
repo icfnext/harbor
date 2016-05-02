@@ -15,3 +15,5 @@ maven-eclipse.xml
 
 node_modules
 front-end-repositories
+
+/harbor-ui/src/main/content/jcr_root/etc/designs/**/*.css
