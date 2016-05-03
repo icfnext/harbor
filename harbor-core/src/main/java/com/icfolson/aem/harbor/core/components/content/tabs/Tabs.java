@@ -3,10 +3,10 @@ package com.icfolson.aem.harbor.core.components.content.tabs;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.citytechinc.cq.component.annotations.editconfig.ActionConfigProperty;
 import com.icfolson.aem.library.api.page.PageDecorator;
 import org.apache.sling.api.resource.Resource;
 
-import com.icfolson.aem.library.api.components.annotations.AutoInstantiate;
 import com.icfolson.aem.library.api.node.ComponentNode;
 import com.icfolson.aem.library.core.components.AbstractComponent;
 import com.icfolson.aem.harbor.api.constants.bootstrap.Bootstrap;
@@ -29,9 +29,11 @@ import javax.inject.Inject;
     actions = { "text: Tabs", "-", "edit", "-", "copymove", "delete", "-", "insert" },
     actionConfigs = {
         @ActionConfig(xtype = "tbseparator"),
-        @ActionConfig(text = "Add Tab", handler = "function(){Harbor.Components.Tabs.addTab(this)}")
+        @ActionConfig(
+                text = "Add Tab",
+                handler = "function(){Harbor.Components.Tabs.addTab( this, '" + Tab.RESOURCE_TYPE + "' ) }",
+                additionalProperties = {@ActionConfigProperty(name = "icon", value = "coral-Icon--add")})
     })
-@AutoInstantiate(instanceName = "tabs")
 @Model(adaptables = Resource.class)
 public class Tabs extends AbstractComponent {
     private List<Tab> tabs;
@@ -81,11 +83,7 @@ final class TabPredicate implements Predicate<ComponentNode> {
 
     @Override
     public boolean apply(ComponentNode input) {
-        boolean isTab = false;
-        if (input != null && input.getResource() != null) {
-            final String resourceType = input.getResource().getResourceType();
-            isTab = Tab.TYPE.equals(resourceType) || "wcm/msm/components/ghost".equals(resourceType);
-        }
-        return isTab;
+        return input != null && input.getResource() != null && input.getResource().isResourceType(Tab.RESOURCE_TYPE);
     }
+
 }

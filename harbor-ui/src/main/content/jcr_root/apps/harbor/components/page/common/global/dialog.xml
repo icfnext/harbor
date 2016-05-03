@@ -44,10 +44,6 @@
                         jcr:primaryType="cq:Widget"
                         path="/apps/harbor/components/page/common/global/metadata.infinity.json"
                         xtype="cqinclude" />
-                <theme
-                        jcr:primaryType="cq:Widget"
-                        path="/apps/harbor/components/page/common/global/theme.infinity.json"
-                        xtype="cqinclude" />
                 <!--TODO: Backlogged
                 iconimage
                         jcr:primaryType="cq:Widget"

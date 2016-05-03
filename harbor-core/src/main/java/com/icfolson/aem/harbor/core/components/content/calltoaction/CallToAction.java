@@ -3,6 +3,7 @@ package com.icfolson.aem.harbor.core.components.content.calltoaction;
 import javax.inject.Inject;
 import javax.jcr.RepositoryException;
 
+import com.citytechinc.cq.component.annotations.widgets.TextField;
 import com.icfolson.aem.library.api.page.PageDecorator;
 import com.icfolson.aem.harbor.core.util.icon.IconUtils;
 import org.apache.commons.lang.StringUtils;
@@ -48,6 +49,7 @@ public class CallToAction extends AbstractComponent {
 	private PageDecorator currentPage;
 
 	@DialogField(fieldLabel = "Text", fieldDescription = "Provide the widget's text", ranking = 0)
+	@TextField
 	public String getText() {
 		return IconUtils.iconify(get(TEXT_PROPERTY, TEXT_DEFAULT));
 	}
@@ -76,9 +78,9 @@ public class CallToAction extends AbstractComponent {
 
 	@DialogField(fieldLabel = "Action", fieldDescription = "Select the widget's action upon being clicked", ranking = 4)
 	@Selection(type = Selection.SELECT, options = {
-		@Option(text = "Open as a Modal", qtip = "Opens an authored modal on button click.", value = OPEN_MODAL),
-		@Option(text = "Open in a New Window/Tab", qtip = "Opens link to specified path in a new window or tab.", value = LINK_IN_WINDOW),
-		@Option(text = "Open in the Current Window", qtip = "Opens link to specified path in current window.", value = LINK_IN_CURRENT) })
+			@Option(text = "Open in the Current Window", qtip = "Opens link to specified path in current window.", value = LINK_IN_CURRENT),
+			@Option(text = "Open in a New Window/Tab", qtip = "Opens link to specified path in a new window or tab.", value = LINK_IN_WINDOW),
+			@Option(text = "Open as a Modal", qtip = "Opens an authored modal on button click.", value = OPEN_MODAL)})
 	public String getAction() {
 		return get(ACTION_PROPERTY, StringUtils.EMPTY);
 	}

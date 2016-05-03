@@ -1,0 +1,8 @@
+<template data-sly-template.headlibs="${@ designPath}"
+          data-sly-use.clientLib="${'/libs/granite/sightly/templates/clientlib.html'}"
+          data-sly-use.head="${'headlibs.js' @ designPath=designPath}">
+    <sly data-sly-call="${clientLib.all @ categories='cq.foundation-main'}" />
+    <link data-sly-test="${head.staticDesign}" href="${head.staticDesign}" rel="stylesheet" type="text/css" />
+    <link data-sly-test="${head.design}" href="${head.design}" rel="stylesheet" type="text/css" />
+    <script src="${designPath}/static.js"></script>
+</template>

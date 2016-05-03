@@ -17,8 +17,7 @@ import org.apache.sling.models.annotations.Model;
 		tabs = {
 				@Tab(title = "Container"),
 				@Tab(title = "Advanced")
-		},
-		suppressTouchUIDialog = true)
+		})
 @Model(adaptables = Resource.class)
 public class PageFooter extends Container {
 
