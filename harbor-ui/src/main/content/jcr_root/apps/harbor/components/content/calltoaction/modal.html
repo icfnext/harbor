@@ -1,18 +1,12 @@
-<%@include file="/apps/harbor/components/global.jsp"%>
-
-<%--
-    * The CTA modal.jsp script expects an object named 'cta' to be in the current page context.  Overriding implementations
-    * need not maintain this requirement.
---%>
 
 <div class="modal fade cta-modal" data-keyboard="false" role="dialog" id="${cta.modalId}" <c:if test="${isAuthor}">data-path="${cta.path}"</c:if>>
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-body">
-                <cq:include path="container-par-${cta.id}" resourceType="foundation/components/parsys"/>
-            </div>
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-body">
+            <cq:include path="container-par-${cta.id}" resourceType="foundation/components/parsys"/>
         </div>
     </div>
+</div>
 </div>
 
 <c:if test="${isEditMode || isDesignMode}">
