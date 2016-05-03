@@ -6,7 +6,6 @@
         <items jcr:primaryType="nt:unstructured">
           <sitemappedpage xmlns:cq="http://www.day.com/jcr/cq/1.0" cq:showOnCreate="{Boolean}true" jcr:primaryType="nt:unstructured" path="harbor/components/page/common/global/touch-sitemap/content/items/SitemappedPage" resourceType="granite/ui/components/foundation/section" sling:resourceType="granite/ui/components/foundation/include"/>
           <metapage xmlns:cq="http://www.day.com/jcr/cq/1.0" cq:showOnCreate="{Boolean}true" jcr:primaryType="nt:unstructured" path="harbor/components/page/common/global/touch-metadata/content/items/MetaPage" resourceType="granite/ui/components/foundation/section" sling:resourceType="granite/ui/components/foundation/include"/>
-          <themedpage xmlns:cq="http://www.day.com/jcr/cq/1.0" cq:showOnCreate="{Boolean}true" jcr:primaryType="nt:unstructured" path="harbor/components/page/common/global/touch-theme/content/items/ThemedPage" resourceType="granite/ui/components/foundation/section" sling:resourceType="granite/ui/components/foundation/include"/>
         </items>
       </tabs>
     </items>
