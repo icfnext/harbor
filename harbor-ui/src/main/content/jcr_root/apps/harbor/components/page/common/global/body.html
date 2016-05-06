@@ -1,4 +1,11 @@
-<sly data-sly-include="content.html" />
-<sly data-sly-resource="${'cloudservices' @ resourceType='cq/cloudserviceconfigs/components/servicecomponents'}" />
-<sly data-sly-include="customfooterlibs.html" />
+
+<sly data-sly-test="${!currentPage.template.hasStructureSupport}"
+     data-sly-include="content.html" />
+<sly data-sly-test="${currentPage.template.hasStructureSupport}">
+    <sly data-sly-use.templatedContainer="com.day.cq.wcm.foundation.TemplatedContainer"
+        data-sly-repeat.child="${templatedContainer.structureResources}"
+        data-sly-resource="${child.path @ resourceType=child.resourceType, decorationTagName='div'}"/>
+</sly>
+<div data-sly-resource="${'cloudservices' @ resourceType='cq/cloudserviceconfigs/components/servicecomponents'}" data-sly-unwrap></div>
+<sly data-sly-include="footerlibs.html" />
 

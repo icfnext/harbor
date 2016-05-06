@@ -32,7 +32,7 @@ import javax.inject.Inject;
         @ActionConfig(
                 text = "Add Tab",
                 handler = "function(){Harbor.Components.Tabs.addTab( this, '" + Tab.RESOURCE_TYPE + "' ) }",
-                additionalProperties = {@ActionConfigProperty(name = "icon", value = "coral-Icon--add")})
+                additionalProperties = {@ActionConfigProperty(name = "icon", value = "coral-Icon--experienceAdd")})
     })
 @Model(adaptables = Resource.class)
 public class Tabs extends AbstractComponent {
