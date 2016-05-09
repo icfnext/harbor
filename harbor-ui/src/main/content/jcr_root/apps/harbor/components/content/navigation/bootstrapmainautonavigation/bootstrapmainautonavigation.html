@@ -5,7 +5,7 @@
         <sly data-sly-include="navbarheader.html"/>
         <sly data-sly-include="navbarcontent.html"/>
     </div>
-    <div data-sly-include="${!bootstrapMainAutoNavigation.hasRoot || bootstrapMainAutoNavigation.onStructuralPage}" class="${bootstrapMainAutoNavigation.tree.containerClass}">
+    <div data-sly-test="${!bootstrapMainAutoNavigation.hasRoot || bootstrapMainAutoNavigation.onStructuralPage}" class="${bootstrapMainAutoNavigation.tree.containerClass}">
         <div class="navbar-header">
             <a class="navbar-brand authoring-placeholder" href="#">Warning - Unrooted Navigation</a>
         </div>
