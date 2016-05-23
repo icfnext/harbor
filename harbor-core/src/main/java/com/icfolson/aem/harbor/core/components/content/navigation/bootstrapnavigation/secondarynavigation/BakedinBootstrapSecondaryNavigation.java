@@ -11,8 +11,7 @@ import org.apache.sling.models.annotations.Model;
     path = "content/navigation",
     resourceSuperType = BootstrapSecondaryNavigation.RESOURCE_TYPE,
     disableTargeting = true,
-    actions = { "text: Secondary Navigation", "-", "edit" },
-    suppressTouchUIDialog = true)
+    actions = { "text: Secondary Navigation", "-", "edit" })
 @Model(adaptables = Resource.class)
 public class BakedinBootstrapSecondaryNavigation extends BootstrapSecondaryNavigation {
 
