@@ -24,6 +24,7 @@ import javax.inject.Named;
 @Component(
         value = "Text",
         inPlaceEditingEditorType = "text",
+        inPlaceEditingConfigPath = "../../dialog/items/tabs/items/Content/items/content",
         tabs = {
                 @Tab(title = "Content", touchUINodeName = Text.TAB_1_NODE_NAME)
         })
