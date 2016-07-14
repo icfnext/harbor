@@ -1,7 +1,7 @@
 package com.icfolson.aem.harbor.core.tags;
 
 import com.icfolson.aem.harbor.api.lists.rendering.RenderableItem;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.sling.api.SlingHttpServletResponse;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;

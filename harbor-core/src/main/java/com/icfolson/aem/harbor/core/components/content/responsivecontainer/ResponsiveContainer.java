@@ -50,7 +50,7 @@ public class ResponsiveContainer extends AbstractComponent {
 	 * Utility Classes are used. This can be overridden in extending classes by
 	 * overriding the protected #getHiddenInClassForDeviceType method.
 	 *
-	 * {@link "http://getbootstrap.com/css/#responsive-utilities-classes"}
+	 * http://getbootstrap.com/css/#responsive-utilities-classes
 	 *
 	 * @return A list of CSS classes representing the responsive configuration
 	 *         of this container

@@ -3,7 +3,7 @@ package com.icfolson.aem.harbor.core.components.content.navigation.bootstrapnavi
 import com.icfolson.aem.harbor.api.trees.rendering.TreeRenderingStrategy;
 import com.citytechinc.cq.component.annotations.widgets.Switch;
 import com.citytechinc.cq.component.annotations.widgets.TextField;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.sling.api.resource.Resource;
 
 import com.icfolson.aem.library.core.components.AbstractComponent;

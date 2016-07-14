@@ -6,7 +6,7 @@ import javax.jcr.RepositoryException;
 import com.citytechinc.cq.component.annotations.widgets.TextField;
 import com.icfolson.aem.library.api.page.PageDecorator;
 import com.icfolson.aem.harbor.core.util.icon.IconUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import com.icfolson.aem.library.api.components.annotations.AutoInstantiate;
 import com.icfolson.aem.library.api.link.Link;

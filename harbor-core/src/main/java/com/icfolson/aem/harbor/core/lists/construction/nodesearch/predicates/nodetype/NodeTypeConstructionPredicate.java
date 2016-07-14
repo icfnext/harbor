@@ -4,7 +4,7 @@ import com.icfolson.aem.library.core.components.AbstractComponent;
 import com.day.cq.search.Predicate;
 import com.day.cq.search.eval.TypePredicateEvaluator;
 import com.google.common.base.Optional;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.widgets.TextField;

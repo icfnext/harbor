@@ -4,7 +4,7 @@ import com.icfolson.aem.harbor.core.components.content.heading.AbstractHeading;
 import com.icfolson.aem.harbor.core.util.icon.IconUtils;
 import com.icfolson.aem.library.api.page.PageDecorator;
 import com.citytechinc.cq.component.annotations.*;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import com.icfolson.aem.library.api.components.annotations.AutoInstantiate;
 import com.icfolson.aem.harbor.api.constants.dom.Headings;

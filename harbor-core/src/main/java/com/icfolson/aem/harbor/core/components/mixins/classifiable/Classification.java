@@ -1,7 +1,7 @@
 package com.icfolson.aem.harbor.core.components.mixins.classifiable;
 
 import com.google.common.collect.Lists;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import com.icfolson.aem.library.core.components.AbstractComponent;
 import com.citytechinc.aem.namespace.api.ontology.Properties;

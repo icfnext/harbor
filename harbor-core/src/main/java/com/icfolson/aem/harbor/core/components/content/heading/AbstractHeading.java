@@ -4,7 +4,7 @@ import com.icfolson.aem.harbor.core.util.ComponentUtils;
 import com.icfolson.aem.harbor.core.util.icon.IconUtils;
 import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.widgets.TextField;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.sling.models.annotations.Optional;
 
 import javax.inject.Inject;
