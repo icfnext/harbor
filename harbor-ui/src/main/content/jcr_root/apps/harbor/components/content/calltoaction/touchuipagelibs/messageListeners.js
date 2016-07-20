@@ -1,4 +1,10 @@
-jQuery( document ).ready ( function() {
+( function modalMessageListenerInitialization ( jQuery ) {
+
+    if ( !jQuery ) {
+        return;
+    }
+    
+    jQuery( document ).ready ( function() {
     if ( typeof aem !== 'undefined' && aem.authoring && aem.authoring.command ) {
 
         aem.authoring.command[ 'harbor-openModal' ] = function( path, message ) {
@@ -16,4 +22,4 @@ jQuery( document ).ready ( function() {
         };
 
     }
-} );
+} ) } )( window.jQuery );
