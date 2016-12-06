@@ -1,6 +1,6 @@
 package com.icfolson.aem.harbor.api.constants.bootstrap;
 
-public class Bootstrap {
+public final class Bootstrap {
 
 	public static final String GRID_EXTRA_SMALL = "col-xs-";
 	public static final String GRID_SMALL = "col-sm-";
@@ -46,4 +46,7 @@ public class Bootstrap {
 
     public static final String GRID_ROW_CLASS = "row";
 
+    private Bootstrap() {
+
+    }
 }

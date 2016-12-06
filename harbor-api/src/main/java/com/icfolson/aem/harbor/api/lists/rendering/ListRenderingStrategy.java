@@ -16,6 +16,6 @@ import com.icfolson.aem.harbor.api.lists.construction.ListConstructionStrategy;
  */
 public interface ListRenderingStrategy<T, R extends Iterable<?>> {
 
-	public R toRenderableList(Iterable<T> itemIterable);
+    R toRenderableList(Iterable<T> itemIterable);
 
 }

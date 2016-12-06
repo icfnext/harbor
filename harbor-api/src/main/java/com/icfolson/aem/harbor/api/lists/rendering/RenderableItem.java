@@ -5,6 +5,6 @@ package com.icfolson.aem.harbor.api.lists.rendering;
  */
 public interface RenderableItem {
 
-	public String render();
+    String render();
 
 }

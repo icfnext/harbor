@@ -2,23 +2,23 @@ package com.icfolson.aem.harbor.api.content.rss;
 
 public interface RSSItem {
 
-	public String getTitle();
+    String getTitle();
 
-	public String getLink();
+    String getLink();
 
-	public String getDescription();
+    String getDescription();
 
-	public String getAuthor();
+    String getAuthor();
 
-	// TODO: Categories
+    // TODO: Categories
 
-	public String getComments();
+    String getComments();
 
-	// TODO: enclosure
-	// TODO: guid
+    // TODO: enclosure
+    // TODO: guid
 
-	public String getPubDate();
+    String getPubDate();
 
-	public String getSource();
+    String getSource();
 
 }

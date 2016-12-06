@@ -5,16 +5,15 @@ import com.google.common.base.Optional;
 
 public interface HierarchicalPage {
 
-	public static final String RDF_TYPE = Types.CITYTECH_HIERARCHICAL_PAGE;
+    String RDF_TYPE = Types.CITYTECH_HIERARCHICAL_PAGE;
 
-	public Optional<SectionLandingPage> getSectionLandingPage();
+    Optional<SectionLandingPage> getSectionLandingPage();
 
-	public Optional<HomePage> getHomePage();
+    Optional<HomePage> getHomePage();
 
-	// TODO: on backlog public String getPageIconImage();
+    // TODO: on backlog public String getPageIconImage();
 
-	public String getPageIcon();
+    String getPageIcon();
 
-    public boolean isStructuralPage();
-
+    boolean isStructuralPage();
 }

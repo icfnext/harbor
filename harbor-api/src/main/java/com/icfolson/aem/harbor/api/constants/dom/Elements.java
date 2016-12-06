@@ -1,6 +1,6 @@
 package com.icfolson.aem.harbor.api.constants.dom;
 
-public class Elements {
+public final class Elements {
 
 	public static final String DIV = "div";
 	public static final String HEADER = "header";
@@ -10,4 +10,8 @@ public class Elements {
 	public static final String LI = "li";
 	public static final String A = "a";
 	public static final String B = "b";
+
+	private Elements() {
+
+	}
 }
