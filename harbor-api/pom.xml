@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
-	<parent>
-		<groupId>com.icfolson.aem.harbor</groupId>
-		<artifactId>harbor</artifactId>
-		<version>1.0.0-SNAPSHOT</version>
-	</parent>
+    <parent>
+        <groupId>com.icfolson.aem.harbor</groupId>
+        <artifactId>harbor</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
 
-	<modelVersion>4.0.0</modelVersion>
-	<artifactId>harbor-api</artifactId>
-	<packaging>bundle</packaging>
-	<name>Harbor API</name>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>harbor-api</artifactId>
+    <packaging>bundle</packaging>
+    <name>Harbor API</name>
 
-	<build>
-		<plugins>
+    <build>
+        <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
             </plugin>
-			<plugin>
-				<groupId>org.apache.felix</groupId>
-				<artifactId>maven-bundle-plugin</artifactId>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
@@ -29,48 +29,48 @@
                         <Bundle-Vendor>${project.parent.organization.name}</Bundle-Vendor>
                         <Export-Package>!*.impl,com.icfolson.aem.harbor.api.*</Export-Package>
                         <Import-Package>!com.citytechinc.cq.component.*,!javassist</Import-Package>
-						<Require-Bundle>org.apache.sling.models.api</Require-Bundle>
-						<Sling-Model-Packages>com.icfolson.aem.harbor.api</Sling-Model-Packages>
-						<DynamicImport-Package>*</DynamicImport-Package>
+                        <Require-Bundle>org.apache.sling.models.api</Require-Bundle>
+                        <Sling-Model-Packages>com.icfolson.aem.harbor.api</Sling-Model-Packages>
+                        <DynamicImport-Package>*</DynamicImport-Package>
                     </instructions>
                 </configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.felix</groupId>
-				<artifactId>maven-scr-plugin</artifactId>
-				<extensions>true</extensions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-scr-plugin</artifactId>
+                <extensions>true</extensions>
                 <configuration>
                     <scanClasses>true</scanClasses>
                 </configuration>
-				<executions>
-					<execution>
-						<id>generate-scr-scrdescriptor</id>
-						<goals>
-							<goal>scr</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
+                <executions>
+                    <execution>
+                        <id>generate-scr-scrdescriptor</id>
+                        <goals>
+                            <goal>scr</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
-	<dependencies>
-		<!-- Search -->
-		<dependency>
-			<groupId>com.day.cq</groupId>
-			<artifactId>cq-search</artifactId>
-		</dependency>
+    <dependencies>
+        <dependency>
+            <groupId>com.adobe.aem</groupId>
+            <artifactId>uber-jar</artifactId>
+            <classifier>apis</classifier>
+        </dependency>
 
         <!-- AEM Library -->
-		<dependency>
-			<groupId>com.icfolson.aem.library</groupId>
-			<artifactId>aem-library-core</artifactId>
-		</dependency>
+        <dependency>
+            <groupId>com.icfolson.aem.library</groupId>
+            <artifactId>aem-library-core</artifactId>
+        </dependency>
 
         <!-- AEM Namespace -->
         <dependency>
             <groupId>com.citytechinc.aem.namespace</groupId>
             <artifactId>aem-namespace-extension-api</artifactId>
         </dependency>
-	</dependencies>
+    </dependencies>
 </project>

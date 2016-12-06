@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
-	<parent>
-		<groupId>com.icfolson.aem.harbor</groupId>
-		<artifactId>harbor</artifactId>
-		<version>1.0.0-SNAPSHOT</version>
-	</parent>
+    <parent>
+        <groupId>com.icfolson.aem.harbor</groupId>
+        <artifactId>harbor</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
 
-	<modelVersion>4.0.0</modelVersion>
-	<artifactId>harbor-core</artifactId>
-	<packaging>bundle</packaging>
-	<name>Harbor Core</name>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>harbor-core</artifactId>
+    <packaging>bundle</packaging>
+    <name>Harbor Core</name>
 
-	<build>
+    <build>
         <resources>
             <resource>
                 <directory>src/main/resources/META-INF</directory>
@@ -21,13 +21,13 @@
                 <filtering>true</filtering>
             </resource>
         </resources>
-		<plugins>
+        <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
             </plugin>
-			<plugin>
-				<groupId>org.apache.felix</groupId>
-				<artifactId>maven-bundle-plugin</artifactId>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
@@ -36,114 +36,78 @@
                         <Bundle-Vendor>${project.parent.organization.name}</Bundle-Vendor>
                         <Export-Package>!*.impl,com.icfolson.aem.harbor.core.*</Export-Package>
                         <Import-Package>!com.citytechinc.cq.component.*,!javassist</Import-Package>
-						<Require-Bundle>org.apache.sling.models.api</Require-Bundle>
-						<Sling-Model-Packages>com.icfolson.aem.harbor.core</Sling-Model-Packages>
-						<DynamicImport-Package>*</DynamicImport-Package>
+                        <Require-Bundle>org.apache.sling.models.api</Require-Bundle>
+                        <Sling-Model-Packages>com.icfolson.aem.harbor.core</Sling-Model-Packages>
+                        <DynamicImport-Package>*</DynamicImport-Package>
                     </instructions>
                 </configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.felix</groupId>
-				<artifactId>maven-scr-plugin</artifactId>
-				<extensions>true</extensions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-scr-plugin</artifactId>
+                <extensions>true</extensions>
                 <configuration>
                     <scanClasses>true</scanClasses>
                 </configuration>
-				<executions>
-					<execution>
-						<id>generate-scr-scrdescriptor</id>
-						<goals>
-							<goal>scr</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<artifactId>maven-surefire-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
+                <executions>
+                    <execution>
+                        <id>generate-scr-scrdescriptor</id>
+                        <goals>
+                            <goal>scr</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 
-	<dependencies>
-
-		<!-- Day Rewriter -->
-		<dependency>
-			<groupId>com.day.cq</groupId>
-			<artifactId>cq-rewriter</artifactId>
-		</dependency>
-
-		<!-- Search -->
-		<dependency>
-			<groupId>com.day.cq</groupId>
-			<artifactId>cq-search</artifactId>
-		</dependency>
-
-		<!-- DAM -->
-		<dependency>
-			<groupId>com.day.cq.dam</groupId>
-			<artifactId>cq-dam-api</artifactId>
-		</dependency>
-
-        <!-- Sling Scripting -->
+    <dependencies>
         <dependency>
-            <groupId>org.apache.sling</groupId>
-            <artifactId>org.apache.sling.scripting.jsp</artifactId>
+            <groupId>com.adobe.aem</groupId>
+            <artifactId>uber-jar</artifactId>
+            <classifier>apis</classifier>
         </dependency>
-		<dependency>
-			<groupId>org.apache.sling</groupId>
-			<artifactId>org.apache.sling.scripting.jsp.taglib</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.sling</groupId>
-			<artifactId>org.apache.sling.models.api</artifactId>
-		</dependency>
 
-		<dependency>
-			<groupId>org.codehaus.groovy</groupId>
-			<artifactId>groovy-all</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-annotations</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>javax.inject</groupId>
-			<artifactId>javax.inject</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.sling</groupId>
-			<artifactId>org.apache.sling.commons.json</artifactId>
-		</dependency>
+        <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-all</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
 
         <!-- AEM Library -->
-		<dependency>
-			<groupId>com.icfolson.aem.library</groupId>
-			<artifactId>aem-library-api</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.icfolson.aem.library</groupId>
-			<artifactId>aem-library-core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.icfolson.aem.library</groupId>
-			<artifactId>aem-library-models</artifactId>
-		</dependency>
+        <dependency>
+            <groupId>com.icfolson.aem.library</groupId>
+            <artifactId>aem-library-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.icfolson.aem.library</groupId>
+            <artifactId>aem-library-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.icfolson.aem.library</groupId>
+            <artifactId>aem-library-models</artifactId>
+        </dependency>
 
-		<!-- Component Annotation -->
-		<dependency>
-			<groupId>com.citytechinc.cq.cq-component-plugin</groupId>
-			<artifactId>cq-component-annotations</artifactId>
-			<version>${component.plugin.version}</version>
-		</dependency>
+        <!-- Component Annotation -->
+        <dependency>
+            <groupId>com.citytechinc.cq.cq-component-plugin</groupId>
+            <artifactId>cq-component-annotations</artifactId>
+            <version>${component.plugin.version}</version>
+        </dependency>
 
         <!-- AEM Namespace -->
         <dependency>
@@ -158,6 +122,5 @@
             <version>${project.version}</version>
             <scope>provided</scope>
         </dependency>
-
-	</dependencies>
+    </dependencies>
 </project>
