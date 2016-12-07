@@ -2,10 +2,10 @@ package com.icfolson.aem.harbor.api.services.rss;
 
 public interface RssResourceProvider {
 
-	public String getTitle();
+    String getTitle();
 
-	public String getProviderRoot();
+    String getProviderRoot();
 
-	public String getRssFeedUrl();
+    String getRssFeedUrl();
 
 }

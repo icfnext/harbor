@@ -5,6 +5,6 @@ package com.icfolson.aem.harbor.api.content.rss;
  */
 public interface RSSFeed {
 
-	public RSSChannel getChannel();
+    RSSChannel getChannel();
 
 }

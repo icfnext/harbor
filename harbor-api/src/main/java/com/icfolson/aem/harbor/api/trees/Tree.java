@@ -2,8 +2,8 @@ package com.icfolson.aem.harbor.api.trees;
 
 public interface Tree<T extends TreeNode> {
 
-    public T getRoot();
+    T getRoot();
 
-    public boolean isHasRoot();
+    boolean isHasRoot();
 
 }

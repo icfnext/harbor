@@ -5,6 +5,6 @@ import com.google.common.base.Optional;
 
 public interface ConstructionPredicate {
 
-	public Optional<Predicate> asPredicate();
+    Optional<Predicate> asPredicate();
 
 }

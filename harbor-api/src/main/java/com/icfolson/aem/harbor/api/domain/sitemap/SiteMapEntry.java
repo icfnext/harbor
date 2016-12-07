@@ -3,14 +3,20 @@ package com.icfolson.aem.harbor.api.domain.sitemap;
 
 import javax.xml.bind.annotation.XmlType;
 
-@XmlType(propOrder = {"loc", "lastmod", "changefreq", "priority"})
+@XmlType(propOrder = { "loc", "lastmod", "changefreq", "priority" })
 public class SiteMapEntry {
+
     protected String loc;
+
     protected String lastmod;
+
     protected String changefreq;
+
     protected String priority;
 
-    public SiteMapEntry() {}
+    public SiteMapEntry() {
+
+    }
 
     public SiteMapEntry(final String loc, final String lastmod, final String changefreq, final String priority) {
         this.loc = loc;

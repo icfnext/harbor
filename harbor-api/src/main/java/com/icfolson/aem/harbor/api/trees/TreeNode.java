@@ -11,10 +11,10 @@ import java.util.Iterator;
  */
 public interface TreeNode<T> {
 
-	public Iterable<T> getChildNodes();
+    Iterable<T> getChildNodes();
 
-	public boolean isHasChildNodes();
+    boolean isHasChildNodes();
 
-	public Iterator<T> getChildNodesIterator();
+    Iterator<T> getChildNodesIterator();
 
 }

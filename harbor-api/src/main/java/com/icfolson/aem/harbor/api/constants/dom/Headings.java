@@ -1,6 +1,6 @@
 package com.icfolson.aem.harbor.api.constants.dom;
 
-public class Headings {
+public final class Headings {
 
 	public static final String H1 = "h1";
 	public static final String H2 = "h2";
@@ -16,4 +16,7 @@ public class Headings {
 	public static final String H5_LABEL = "Heading 5";
 	public static final String H6_LABEL = "Heading 6";
 
+	private Headings() {
+
+	}
 }

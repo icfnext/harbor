@@ -9,7 +9,7 @@ import static com.google.common.collect.Lists.newArrayList;
 @XmlRootElement(name = "urlset", namespace = "http://www.sitemaps.org/schemas/sitemap/0.9")
 public class SiteMap {
 
-    @XmlElement(name="url")
+    @XmlElement(name = "url")
     final List<SiteMapEntry> siteMapEntries;
 
     public SiteMap() {

@@ -4,10 +4,10 @@ import javax.jcr.Node;
 
 public interface PageHit {
 
-	public String getPagePath();
+    String getPagePath();
 
-	public Node getPageNode();
+    Node getPageNode();
 
-	public String getExcerpt();
+    String getExcerpt();
 
 }

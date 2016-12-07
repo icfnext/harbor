@@ -23,7 +23,7 @@ Implementations of the ListConstructionStrategy cover Step 1 of the list workflo
 ```java
 public interface ListConstructionStrategy <T> {
 
-    public Iterable<T> construct();
+    Iterable<T> construct();
 
 }
 ```
