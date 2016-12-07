@@ -65,12 +65,14 @@
     </build>
 
     <dependencies>
+        <!-- uber jar -->
         <dependency>
             <groupId>com.adobe.aem</groupId>
             <artifactId>uber-jar</artifactId>
             <classifier>apis</classifier>
         </dependency>
 
+        <!-- third party -->
         <dependency>
             <groupId>org.codehaus.groovy</groupId>
             <artifactId>groovy-all</artifactId>
