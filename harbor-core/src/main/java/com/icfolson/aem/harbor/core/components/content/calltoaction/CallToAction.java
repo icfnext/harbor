@@ -4,8 +4,10 @@ import javax.inject.Inject;
 import javax.jcr.RepositoryException;
 
 import com.citytechinc.cq.component.annotations.widgets.TextField;
+import com.icfolson.aem.harbor.core.constants.groups.ComponentGroups;
 import com.icfolson.aem.library.api.page.PageDecorator;
 import com.icfolson.aem.harbor.core.util.icon.IconUtils;
+import com.icfolson.aem.library.core.constants.PathConstants;
 import org.apache.commons.lang3.StringUtils;
 
 import com.icfolson.aem.library.api.components.annotations.AutoInstantiate;
@@ -23,7 +25,10 @@ import com.google.common.base.Optional;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
 
-@Component(value = "Call to Action", group = "Harbor", name = "calltoaction", layout = "rollover", contentAdditionalProperties = { @ContentProperty(name = "dependencies", value = "[harbor.bootstrap.modals,harbor.bootstrap.buttons,harbor.author-common,harbor.components.content.calltoaction]") }, inPlaceEditingEditorType = "harborcta")
+@Component(value = "Call to Action", group = ComponentGroups.HARBOR, name = "calltoaction", layout = "rollover",
+	contentAdditionalProperties = { @ContentProperty(name = "dependencies",
+        value = "[harbor.bootstrap.modals,harbor.bootstrap.buttons,harbor.author-common,harbor.components.content.calltoaction]") },
+    inPlaceEditingEditorType = "harborcta")
 @AutoInstantiate(instanceName = CallToAction.INSTANCE_NAME)
 @Model(adaptables = Resource.class)
 public class CallToAction extends AbstractComponent {
@@ -42,6 +47,7 @@ public class CallToAction extends AbstractComponent {
 
 	public static final String BUTTON_ID_PREFIX = "callToActionButton-";
 	public static final String MODAL_ID_PREFIX = "callToActionModal-";
+    public static final String CONTAINER_PAR_ID_PREFIX = "container-par-";
 
 	private Link target;
 
@@ -86,28 +92,26 @@ public class CallToAction extends AbstractComponent {
 	}
 
 	@DialogField(fieldLabel = "Link Target", fieldDescription = "URL path this button leads to", ranking = 2)
-	@PathField
+	@PathField(rootPath = PathConstants.PATH_CONTENT)
 	public Link getLinkTarget() {
 		if (target == null) {
-			Optional<Link> targetOptional = getAsLink(PATH_PROPERTY);
-
-			if (targetOptional.isPresent()) {
-				target = targetOptional.get();
-			} else {
-				target = LinkBuilderFactory.forPage(currentPage).build();
-			}
+			target = getAsLink(PATH_PROPERTY).or(LinkBuilderFactory.forPage(currentPage).build());
 		}
 
 		return target;
 	}
 
-	public String getButtonId() throws RepositoryException {
+	public String getButtonId() {
 		return BUTTON_ID_PREFIX + getId();
 	}
 
-	public String getModalId() throws RepositoryException {
+	public String getModalId() {
 		return MODAL_ID_PREFIX + getId();
 	}
+
+	public String getContainerParId() {
+        return CONTAINER_PAR_ID_PREFIX + getId();
+    }
 
 	public Boolean getOpensInNewWindow() {
 		return StringUtils.equalsIgnoreCase(getAction(), LINK_IN_WINDOW);
@@ -120,5 +124,4 @@ public class CallToAction extends AbstractComponent {
 	public Boolean getOpensAsModal() {
 		return StringUtils.equalsIgnoreCase(getAction(), OPEN_MODAL);
 	}
-
 }

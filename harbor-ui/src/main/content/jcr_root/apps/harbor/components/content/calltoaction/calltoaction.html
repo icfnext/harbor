@@ -1,4 +1,4 @@
-<sly data-sly-use.cta="${component.properties['className']}">
+<sly data-sly-use.cta="com.icfolson.aem.harbor.core.components.content.calltoaction.CallToAction">
     <a data-sly-test="${cta.opensAsModal}" id="${cta.buttonId}" role="button" class="btn ${cta.size} ${cta.style} cta-btn" data-toggle="modal" data-target="#${cta.modalId}">
         ${cta.text @ context='html'}
     </a>
@@ -10,4 +10,4 @@
     </a>
 </sly>
 
-<!--/* <sly data-sly-test="${cta.opensAsModal}" data-sly-include="modal.html"/> */-->
+<sly data-sly-test="${cta.opensAsModal}" data-sly-include="modal.html"/>

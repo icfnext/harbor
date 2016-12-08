@@ -1,26 +1,28 @@
+<div data-sly-use.cta="com.icfolson.aem.harbor.core.components.content.calltoaction.CallToAction"
+     class="modal fade cta-modal"
+     data-keyboard="false"
+     role="dialog"
+     id="${cta.modalId}"
+     data-sly-attribute.data-path="${isAuthor ? cta.path : ''}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body" data-sly-resource="${cta.containerParId @ resourceType='wcm/foundation/components/parsys'}">
 
-<div class="modal fade cta-modal" data-keyboard="false" role="dialog" id="${cta.modalId}" <c:if test="${isAuthor}">data-path="${cta.path}"</c:if>>
-<div class="modal-dialog">
-    <div class="modal-content">
-        <div class="modal-body">
-            <cq:include path="container-par-${cta.id}" resourceType="foundation/components/parsys"/>
+            </div>
         </div>
     </div>
 </div>
-</div>
 
-<c:if test="${isEditMode || isDesignMode}">
-    <script type="text/javascript">
-        //TODO: Rework so this whole block is not included in Touch UI mode
-        if ( typeof CQ !== 'undefined' ) {
-            jQuery( document ).ready( function( $ ) {
-                $( '#${cta.modalId}' ).on('show.bs.modal', function() {
-                    Harbor.Components.editables.changeEditableContext( '${cta.path}/container-par-${cta.id}' );
-                } );
-                $( '#${cta.modalId}' ).on('hide.bs.modal', function() {
-                    Harbor.Components.editables.resetEditableContext();
-                } );
-            } );
-        }
-    </script>
-</c:if>
+<script type="text/javascript" data-sly-test="${isEditMode || isDesignMode}">
+    // TODO: Rework so this whole block is not included in Touch UI mode
+    if (typeof CQ !== 'undefined') {
+        jQuery(document).ready(function ($) {
+            $('#${cta.modalId @ context="scriptString"}').on('show.bs.modal', function () {
+                Harbor.Components.editables.changeEditableContext('${cta.path @ context="scriptString"}/${cta.containerParId @ context="scriptString"}');
+            });
+            $('#${cta.modalId @ context="scriptString"}').on('hide.bs.modal', function () {
+                Harbor.Components.editables.resetEditableContext();
+            });
+        });
+    }
+</script>
