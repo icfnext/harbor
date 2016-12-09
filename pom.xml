@@ -21,6 +21,28 @@
         <module>harbor-ui</module>
     </modules>
 
+	<repositories>
+		<repository>
+			<id>citytech-public</id>
+			<url>http://nexus.citytech.ctmsp.com/content/groups/public</url>
+		</repository>
+		<repository>
+			<id>citytech-private</id>
+			<url>http://nexus.citytech.ctmsp.com/content/groups/CITYTECH-Private/</url>
+		</repository>
+	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>citytech-public</id>
+			<url>http://nexus.citytech.ctmsp.com/content/groups/public</url>
+		</pluginRepository>
+		<pluginRepository>
+			<id>citytech-private</id>
+			<url>http://nexus.citytech.ctmsp.com/content/groups/CITYTECH-Private/</url>
+		</pluginRepository>
+	</pluginRepositories>
+
     <distributionManagement>
         <repository>
             <id>citytech-private-releases</id>
