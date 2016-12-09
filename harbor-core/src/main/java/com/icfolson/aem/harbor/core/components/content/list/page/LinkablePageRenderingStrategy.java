@@ -145,11 +145,11 @@ public class LinkablePageRenderingStrategy implements
         }
 
         public boolean isRenderImage() {
-            return renderImage && getPageDecorator().isHasImage();
+            return renderImage;
         }
 
         public String getImageSource() {
-            return getPageDecorator().getImageSource().or("");
+            return getPageDecorator().getLinkBuilder().addSelector("thumb").setExtension("png").build().getHref();
         }
 
         public boolean isRenderDescription() {
