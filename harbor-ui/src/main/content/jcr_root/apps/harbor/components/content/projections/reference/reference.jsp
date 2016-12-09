@@ -2,7 +2,7 @@
 
 <c:choose>
     <c:when test="${reference.hasParagraphPath}">
-        <bedrock:disableAuthor>
+        <aem-library:disableAuthor>
             <c:choose>
                 <c:when test="${reference.hasRenderingSelector}">
                     <c:choose>
@@ -21,7 +21,7 @@
                     <sling:include path="${reference.paragraphPath}" />
                 </c:otherwise>
             </c:choose>
-        </bedrock:disableAuthor>
+        </aem-library:disableAuthor>
     </c:when>
     <c:otherwise>
         <c:if test="${isEditMode}">

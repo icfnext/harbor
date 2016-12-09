@@ -1,0 +1,13 @@
+<article data-sly-use.pageReference="com.icfolson.aem.harbor.core.components.content.projections.pagereference.PageReference"
+         data-sly-unwrap="${!pagereference.page.isArticle}">
+    <header data-sly-unwrap="${!pagereference.page.isArticle}">
+        <div data-sly-test="${pagereference.page.renderTitle}" data-sly-element="${pagereference.page.titleHeadingType}">
+            <a data-sly-unwrap="${!pagereference.page.renderAsLink}" href="${pagereference.page.href}">${pagereference.page.title}</a>
+        </div>
+        <p data-sly-test="${pagereference.page.renderSubtitle}" class="subtitle">${pagereference.page.subtitle}</p>
+    </header>
+    <img data-sly-test="${pagereference.page.renderImage}" src="${pagereference.page.imageSource}" />
+    <p data-sly-test="${pagereference.page.renderDescription}">${pagereference.page.description}</p>
+</article>
+
+<sly data-sly-test="${!pagereference.page.isArticle && !pagereference.page.renderTitle}">Warning! Nothing has been selected to be presented for this page.</sly>
