@@ -1,8 +1,110 @@
-# Harbor Proper
+# Harbor 
 
-The API, Components, Templates, and Services which constitute the core of Harbor. 
+Harbor is a collection of content and page components, services, and patterns constituting a common starting point for projects.  From both an author and developer enablement perspective Harbor follows these tennants: 
 
-_More Documentation Coming_
+* Composability
+* Extensibility
+* Cohesion
+* David
+
+## Components
+
+### Harbor Title Component
+
+* Group: Harbor
+
+Presents the Page Title of the current page in an H1 DOM element.  The output H1 element will have an id attribute set to a sanitized version of the title text allowing for fragment linking.  Both the title text and element id may be overridden by authors.
+
+#### Authorability
+
+| Dialog Field | Description |
+| ------------ | ----------- |
+| Text         | Sets the rendered title text.  When left empty, the title text will default to the page's Page Title. |
+| ID           | Sets the string ID to be attributed to the H1 element rendered for the title.  When left empty, the ID will be produced by sanitizing the title text. Indended to allow anchor linking to title elements. |
+
+### Harbor Subtitle Component
+
+* Group: Harbor
+
+Presents the Page Subtitle of the current page in an H2 DOM element.  The output H2 element will have an id attribute set to a sanitized version of the subtitle text allowing for fragment linking.  Both the subtitle text and element id may be overridden by authors.
+
+#### Authorability
+
+| Dialog Field | Description |
+| ------------ | ----------- |
+| Text         | Sets the rendered subtitle text.  When left empty, the subtitle text will default to the page's Page Subtitle. |
+| ID           | Sets the string ID to be attributed to the H1 element rendered for the subtitle.  When left empty, the ID will be produced by sanitizing the subtitle text. |
+
+### Harbor Heading Component
+
+* Group: Harbor
+
+Presents a heading element appropriate for titling sections of content.  This component is NOT meant to be used as the principal title for content and as such only exposes heading options H2-H6.  If an H1 element is desired, the Title component should be used.
+
+#### Authorability
+
+| Dialog Field | Description |
+| ------------ | ----------- |
+| Size         | Establishes the size or level of the Heading.  Available sizes include H2 - H6.  If an H1 element is desired the Title component should be used instead. |
+| Text         | Sets the rendered heading text. |
+| ID           | Sets the string ID to be attributed to the rendered heading element.  When left empty, the ID will be produced by sanitizing the heading text. |
+
+### Harbor Text Component
+
+* Group: Harbor
+* Classifiable
+
+The Harbor Text component will allow the author to compose text within a Rich Text Editor configured to enable commonly used plugins.
+
+#### Authorability
+
+Text is edited via the text in-place editor.
+
+| Dialog Field | Description |
+| ------------ | ----------- |
+| Classification | Input support for classifiability of the text component instance. |
+
+
+
+
+
+
+## Core Concepts
+
+### End User Core Concepts
+
+_To be written_
+
+### Developer Core Concepts
+
+#### Lists
+
+The functionality of many of the Components created for a particular project can be distilled down to the presentation of a List of items.  Lists therefore are central to Harbor and enabled by Interfaces and Abstract Classes suggesting a pattern to follow in List Component development.
+
+List Components are a composition of a List Construction Strategy and a List Rendering Strategy.  The List Construction Strategy is responsible for the creation of a list of items based on the logic of the strategy.  These items are passed to the List Rendering Strategy which has an opportunity to add additional properties germane to the rendering of a particular component.  Construction and Rendering Strategies may be mixed and matched within the context of concrete List Component implementations allowing reuse of both across multiple component types.
+
+TODO: Insert example of reuse from the various page listing components
+
+TODO: Link to Javadocs where appropriate
+
+#### Trees
+
+Similar to Lists, Trees pair a Construction Strategy with a Rendering Strategy allowing for reusability and extention via composition.
+
+A Tree has a single TreeNode instance as its root.  A TreeNode may in turn have any number of child TreeNodes of the same type.
+
+Tree Components are in turn components which intend to manage a Tree data structure's construction and presentation.
+
+TODO: Link to Javadocs where appropriate
+
+
+
+
+
+
+
+
+#OLD
 
 ## Lists
 
