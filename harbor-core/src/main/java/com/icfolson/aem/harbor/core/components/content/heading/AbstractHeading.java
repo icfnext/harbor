@@ -39,7 +39,7 @@ public abstract class AbstractHeading {
         }
 
         if (text != null) {
-            return ComponentUtils.sanatizeTextAsDomId(text);
+            return ComponentUtils.sanitizeTextAsDomId(text);
         }
 
         return "";

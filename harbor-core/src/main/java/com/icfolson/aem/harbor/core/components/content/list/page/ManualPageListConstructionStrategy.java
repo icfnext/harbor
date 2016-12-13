@@ -1,19 +1,19 @@
 package com.icfolson.aem.harbor.core.components.content.list.page;
 
-import java.util.List;
-
-import com.icfolson.aem.library.api.page.PageDecorator;
-import com.icfolson.aem.library.api.page.PageManagerDecorator;
-import com.icfolson.aem.library.core.components.AbstractComponent;
-import com.icfolson.aem.harbor.api.lists.construction.ListConstructionStrategy;
 import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.widgets.MultiField;
 import com.citytechinc.cq.component.annotations.widgets.PathField;
-import com.google.common.collect.Lists;
+import com.icfolson.aem.harbor.api.lists.construction.ListConstructionStrategy;
+import com.icfolson.aem.library.api.page.PageDecorator;
+import com.icfolson.aem.library.api.page.PageManagerDecorator;
+import com.icfolson.aem.library.core.components.AbstractComponent;
+import com.icfolson.aem.library.core.constants.PathConstants;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
 
 import javax.inject.Inject;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Model(adaptables = Resource.class)
 public class ManualPageListConstructionStrategy extends AbstractComponent implements ListConstructionStrategy<PageDecorator> {
@@ -22,9 +22,9 @@ public class ManualPageListConstructionStrategy extends AbstractComponent implem
 
     @Inject
     private PageManagerDecorator pageManagerDecorator;
-    
-    @DialogField(name="./paths", fieldLabel = "Paths", fieldDescription = "Path to search for nodes under.")
-    @PathField(rootPath="/content")
+
+    @DialogField(name = "./paths", fieldLabel = "Paths", fieldDescription = "Path to search for nodes under.")
+    @PathField(rootPath = PathConstants.PATH_CONTENT)
     @MultiField
     public List<String> getPaths() {
         return getAsList("paths", String.class);
@@ -32,19 +32,13 @@ public class ManualPageListConstructionStrategy extends AbstractComponent implem
 
     @Override
     public Iterable<PageDecorator> construct() {
-
         if (pages == null) {
-            pages = Lists.newArrayList();
-
-            List<String> pagePathList = getPaths();
-
-            for (String currentPagePath : pagePathList) {
-                pages.add(pageManagerDecorator.getPage(currentPagePath));
-            }
+            pages = getPaths()
+                .stream()
+                .map(path -> pageManagerDecorator.getPage(path))
+                .collect(Collectors.toList());
         }
 
         return pages;
-
     }
-
 }

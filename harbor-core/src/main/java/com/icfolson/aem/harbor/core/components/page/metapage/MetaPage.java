@@ -12,6 +12,7 @@ import com.citytechinc.cq.component.annotations.widgets.Switch;
 import com.citytechinc.cq.component.annotations.widgets.TextField;
 import com.google.common.base.Optional;
 import com.google.common.collect.Lists;
+import com.icfolson.aem.library.core.constants.PathConstants;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.Resource;
@@ -53,11 +54,11 @@ public class MetaPage {
     		return currentPage.getName();
     	}
     }
-    
+
     public String getDescription(){
     	return currentPage.getDescription();
     }
-    
+
     public String getFullyQualifiedPageImage() {
 
 		if (currentPage.isHasImage()) {
@@ -67,7 +68,7 @@ public class MetaPage {
 		return StringUtils.EMPTY;
 
     }
-    
+
     public String getFullyQualifiedPageUrl() {
 		return metadataConfigService.getExternalUrlForPage(request, currentPage.adaptTo(Resource.class));
     }
@@ -104,7 +105,7 @@ public class MetaPage {
     }
 
 	@DialogField(fieldLabel = "Canonical Url", fieldDescription = "Canonical Url of the content of this page", ranking = 30)
-	@PathField
+	@PathField(rootPath = PathConstants.PATH_CONTENT)
     public String getCanonicalUrl() {
 		Optional<String> canonicalUrlOptional = currentPage.get("canonicalUrl", String.class);
 
@@ -119,7 +120,7 @@ public class MetaPage {
 
     	return StringUtils.EMPTY;
     }
-    
+
     public String getHomePageTitle() {
 		HierarchicalPage hierarchicalPage = currentPage.adaptTo(HierarchicalPage.class);
 
@@ -166,7 +167,7 @@ public class MetaPage {
     	StringBuilder content = new StringBuilder();
     	boolean noIndexIndicator = currentPage.getProperties().get("noindex", false);
     	boolean noFollowIndicator = currentPage.getProperties().get("nofollow", false);
-    	
+
     	if(noIndexIndicator){
     		content.append("NOINDEX");
     		if(noFollowIndicator){
@@ -179,7 +180,7 @@ public class MetaPage {
     			content.append("INDEX, NOFOLLOW");
     		}
     	}
-    	
+
     	return content.toString();
     }
 }

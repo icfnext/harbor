@@ -1,18 +1,18 @@
 package com.icfolson.aem.harbor.core.components.content.container;
 
-import com.icfolson.aem.library.api.components.annotations.AutoInstantiate;
 import com.citytechinc.cq.component.annotations.Component;
 import com.citytechinc.cq.component.annotations.Tab;
+import com.icfolson.aem.library.core.constants.ComponentConstants;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
 
 @Component(
     value = "Bakedin Container",
     name = "bakedincontentcontainer",
-    group = ".hidden",
+    group = ComponentConstants.GROUP_HIDDEN,
     tabs = {
-            @Tab(title = "Container"),
-            @Tab(title = "Advanced")
+        @Tab(title = "Container"),
+        @Tab(title = "Advanced")
     },
     resourceSuperType = Container.RESOURCE_TYPE,
     disableTargeting = true,
@@ -26,5 +26,4 @@ public class BakedinContainer extends Container {
     protected boolean isInherits() {
         return true;
     }
-
 }

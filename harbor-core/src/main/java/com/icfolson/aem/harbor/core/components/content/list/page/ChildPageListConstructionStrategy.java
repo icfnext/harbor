@@ -10,11 +10,12 @@ import com.citytechinc.cq.component.annotations.widgets.PathField;
 import com.icfolson.aem.harbor.api.lists.construction.ListConstructionStrategy;
 import com.google.common.base.Optional;
 import com.google.common.collect.Lists;
+import com.icfolson.aem.library.core.constants.PathConstants;
 
 public class ChildPageListConstructionStrategy implements ListConstructionStrategy<PageDecorator> {
 
 	@DialogField(fieldLabel = "Start Page", name = "./startPagePath")
-	@PathField
+	@PathField(rootPath = PathConstants.PATH_CONTENT)
 	private final Optional<PageDecorator> startPageOptional;
 
 	public ChildPageListConstructionStrategy(ComponentNode componentNode) {

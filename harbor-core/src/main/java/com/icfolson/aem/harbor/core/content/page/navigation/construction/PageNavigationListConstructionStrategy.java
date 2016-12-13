@@ -10,6 +10,7 @@ import com.icfolson.aem.harbor.api.trees.construction.TreeConstructionStrategy;
 import com.icfolson.aem.harbor.core.content.page.navigation.NavigablePages;
 import com.icfolson.aem.library.api.page.PageDecorator;
 import com.icfolson.aem.library.core.components.AbstractComponent;
+import com.icfolson.aem.library.core.constants.PathConstants;
 import com.icfolson.aem.library.models.annotations.InheritInject;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Default;
@@ -37,7 +38,7 @@ public class PageNavigationListConstructionStrategy extends AbstractComponent
     private PageDecorator currentPage;
 
     @DialogField(fieldLabel = "Navigation Root", fieldDescription = "The page at which the Navigation will start")
-    @PathField
+    @PathField(rootPath = PathConstants.PATH_CONTENT)
     public Optional<NavigablePage> getNavigationRoot() {
         if (navigationRoot == null) {
             PageDecorator rootPage = getRootPage();

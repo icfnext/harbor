@@ -1,5 +1,5 @@
 <div data-sly-use.bootstrapMainAutoNavigation="${component.properties['className']}"
-     class="${( bootstrapMainAutoNavigation.tree.isSticky && ( wcmmode.disabled || wcmmode.preview ) ) ? bootstrapMainAutoNavigation.tree.stickyNavbarClasses : bootstrapMainAutoNavigation.tree.navbarClasses @ join=' ' }"
+     class="${(bootstrapMainAutoNavigation.tree.sticky && (wcmmode.disabled || wcmmode.preview)) ? bootstrapMainAutoNavigation.tree.stickyNavbarClasses : bootstrapMainAutoNavigation.tree.navbarClasses @ join=' '}"
      role="navigation">
     <div data-sly-test="${bootstrapMainAutoNavigation.hasRoot && !bootstrapMainAutoNavigation.onStructuralPage}" class="${bootstrapMainAutoNavigation.tree.containerClass}">
         <sly data-sly-include="navbarheader.html"/>

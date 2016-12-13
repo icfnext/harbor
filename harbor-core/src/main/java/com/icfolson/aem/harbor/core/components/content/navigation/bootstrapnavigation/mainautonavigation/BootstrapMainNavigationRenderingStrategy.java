@@ -19,9 +19,6 @@ import org.apache.sling.models.annotations.Model;
 public class BootstrapMainNavigationRenderingStrategy extends AbstractComponent implements
         TreeRenderingStrategy<NavigablePage, BootstrapPageNavigableRenderableTree> {
 
-	//@Inject
-	//WCMMode wcmMode;
-
 	@DialogField(fieldLabel = "Enable Sticky Navigation", fieldDescription = "Disabled in Edit mode. Use Preview mode to view.", ranking = 0)
 	@Switch(offText = "No", onText = "Yes")
 	private Boolean isSticky;

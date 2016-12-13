@@ -1,14 +1,15 @@
 package com.icfolson.aem.harbor.core.components.content.navigation.bootstrapnavigation.bakedinmainmanualnavigation;
 
-import com.icfolson.aem.library.api.components.annotations.AutoInstantiate;
-import com.icfolson.aem.harbor.core.components.content.navigation.bootstrapnavigation.mainmanualnavigation.BootstrapMainManualNavigation;
 import com.citytechinc.cq.component.annotations.Component;
+import com.icfolson.aem.harbor.core.components.content.navigation.bootstrapnavigation.mainmanualnavigation.BootstrapMainManualNavigation;
+import com.icfolson.aem.library.api.components.annotations.AutoInstantiate;
+import com.icfolson.aem.library.core.constants.ComponentConstants;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
 
 @Component(
     value = "Bakedin Bootstrap Main Manual Navigation",
-    group = ".hidden",
+    group = ComponentConstants.GROUP_HIDDEN,
     path = "content/navigation",
     resourceSuperType = BootstrapMainManualNavigation.RESOURCE_TYPE,
     disableTargeting = true,

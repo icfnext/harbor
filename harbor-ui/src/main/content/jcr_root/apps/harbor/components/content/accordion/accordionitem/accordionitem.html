@@ -1,22 +1,22 @@
 <sly data-sly-use.accordionItem="${component.properties['className']}">
-    <div class="panel-heading" role="tab" id="heading-${accordionItem.uniqueId}">
+    <div class="panel-heading" role="tab" id="heading-${accordionItem.id}">
         <h4 class="panel-title">
             <sly data-sly-test="${!wcmmode.disabled && !wcmmode.preview}">${accordionItem.title}</sly>
             <a data-sly-test="${wcmmode.disabled || wcmmode.preview}"
                role="button"
                data-parent="#${accordionItem.accordionUniqueId}-accordion-container"
-               href="#${accordionItem.uniqueId}"
+               href="#${accordionItem.id}"
                aria-expanded="true"
-               aria-controls="${accordionItem.uniqueId}"
+               aria-controls="${accordionItem.id}"
                data-toggle="collapse">${accordionItem.title}</a>
         </h4>
     </div>
     <!--/* TODO: Allow for the first item to be open by default */-->
     <!--/* TODO: Allow for the last open item to remain open */-->
-    <div id="${accordionItem.uniqueId}"
+    <div id="${accordionItem.id}"
          data-sly-attribute.class="${ ( !wcmmode.disabled && !wcmmode.preview ) || accordionItem.open ? 'panel-collapse collapse in' : 'panel-collapse collapse'}"
          role="tabpanel"
-         aria-labelledby="heading-${accordionItem.uniqueId}">
+         aria-labelledby="heading-${accordionItem.id}">
         <div class="panel-body">
             <sly data-sly-resource="${'accordionitem-par' @ resourceType = 'wcm/foundation/components/parsys'}"/>
         </div>

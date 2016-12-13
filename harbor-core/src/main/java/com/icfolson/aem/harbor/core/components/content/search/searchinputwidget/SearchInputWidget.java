@@ -7,6 +7,7 @@ import com.icfolson.aem.harbor.core.util.icon.IconUtils;
 import com.citytechinc.cq.component.annotations.Component;
 import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.widgets.PathField;
+import com.icfolson.aem.library.core.constants.PathConstants;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
 
@@ -28,7 +29,7 @@ public class SearchInputWidget extends AbstractComponent {
     }
 
     @DialogField(fieldLabel = "Search Results Page", ranking = 10)
-    @PathField(rootPath = "/content/")
+    @PathField(rootPath = PathConstants.PATH_CONTENT)
     public String getSearchPageHref() {
         return getAsHref("searchPageHref").or("#");
     }

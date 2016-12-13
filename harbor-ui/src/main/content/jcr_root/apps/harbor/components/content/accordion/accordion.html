@@ -2,7 +2,7 @@
      class="panel-group"
      role="tablist"
      aria-multiselectable="true"
-     id="${accordion.uniqueId}-accordion-container">
+     id="${accordion.id}-accordion-container">
     <sly data-sly-test="${accordion.items}"
          data-sly-repeat.currentItem="${accordion.items}"
          data-sly-resource="${currentItem.path @ resourceType='harbor/components/content/accordion/accordionitem', cssClassName='panel panel-default', decorationTagName='div'}"/>

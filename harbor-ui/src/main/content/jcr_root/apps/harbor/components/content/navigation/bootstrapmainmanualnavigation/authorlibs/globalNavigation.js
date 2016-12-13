@@ -1,4 +1,4 @@
-Harbor.Components.GlobalNavigation = function($){
+Harbor.Components.GlobalNavigation = function ($) {
 
     var navigationElement = {
         'sling:resourceType': '/harbor/components/content/bootstrapmainnavigationelement',
@@ -6,18 +6,18 @@ Harbor.Components.GlobalNavigation = function($){
         ':nameHint': 'nav_element'
     };
 
-    var sendNavElementAddPost = function(path, data, success){
+    var sendNavElementAddPost = function (path, data, success) {
         return $.post(
-                path, data, success
-            ).then(function(data){
-                return data;
-            });
+            path, data, success
+        ).then(function (data) {
+            return data;
+        });
     };
 
     return {
-        addNavigationElement: function(editableContext){
+        addNavigationElement: function (editableContext) {
             sendNavElementAddPost(editableContext.path + '/elements/*', navigationElement,
-                function( data ){
+                function (data) {
                     editableContext.refreshSelf();
                 });
         }

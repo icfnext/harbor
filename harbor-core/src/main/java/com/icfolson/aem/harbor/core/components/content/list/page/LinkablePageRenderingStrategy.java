@@ -137,7 +137,7 @@ public class LinkablePageRenderingStrategy implements
         }
 
         public boolean isRenderSubtitle() {
-            return renderSubtitle && StringUtils.isNotBlank(getPageDecorator().get("subtitle", ""));
+            return renderSubtitle && StringUtils.isNotBlank(getSubtitle());
         }
 
         public String getSubtitle() {
@@ -153,7 +153,7 @@ public class LinkablePageRenderingStrategy implements
         }
 
         public boolean isRenderDescription() {
-            return renderDescription && StringUtils.isNotBlank(getPageDecorator().getDescription());
+            return renderDescription && StringUtils.isNotBlank(getDescription());
         }
 
         public String getDescription() {

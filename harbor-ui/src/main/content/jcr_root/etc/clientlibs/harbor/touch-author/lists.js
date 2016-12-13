@@ -53,7 +53,7 @@ Harbor.Lists = function( ns, channel ) {
             autopopulatedProperties.forEach(function (currentProperty) {
                 postData["./" + currentProperty] = '';
                 if ( options.listName ) {
-                    postData["./" + listName + "/" + currentProperty] = '';
+                    postData["./" + options.listName + "/" + currentProperty] = '';
                 }
                 if (!item[currentProperty]) {
                     postData["./" + listNamePath + itemName + "/" + currentProperty] = '';
