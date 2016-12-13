@@ -15,7 +15,6 @@ import com.icfolson.aem.library.api.link.Link;
 import com.icfolson.aem.library.api.page.PageDecorator;
 import com.icfolson.aem.library.core.components.AbstractComponent;
 import com.icfolson.aem.library.core.constants.PathConstants;
-import com.icfolson.aem.library.core.link.builders.factory.LinkBuilderFactory;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
@@ -55,8 +54,6 @@ public class CallToAction extends AbstractComponent {
     public static final String MODAL_ID_PREFIX = "callToActionModal-";
 
     public static final String CONTAINER_PAR_ID_PREFIX = "container-par-";
-
-    private Link target;
 
     @Inject
     private PageDecorator currentPage;
@@ -111,11 +108,7 @@ public class CallToAction extends AbstractComponent {
     @DialogField(fieldLabel = "Link Target", fieldDescription = "URL path this button leads to", ranking = 2)
     @PathField(rootPath = PathConstants.PATH_CONTENT)
     public Link getLinkTarget() {
-        if (target == null) {
-            target = getAsLink(PATH_PROPERTY).or(LinkBuilderFactory.forPage(currentPage).build());
-        }
-
-        return target;
+        return getAsLink(PATH_PROPERTY).or(currentPage.getLink());
     }
 
     public String getButtonId() {

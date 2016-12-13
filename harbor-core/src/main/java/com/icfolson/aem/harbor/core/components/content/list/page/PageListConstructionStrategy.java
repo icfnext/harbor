@@ -1,16 +1,16 @@
 package com.icfolson.aem.harbor.core.components.content.list.page;
 
-import com.icfolson.aem.harbor.core.lists.construction.nodesearch.AbstractNodeSearchConstructionStrategy;
-import com.icfolson.aem.harbor.core.lists.construction.nodesearch.predicates.nodetype.PageNodeTypeConstructionPredicate;
-import com.icfolson.aem.harbor.core.lists.construction.nodesearch.predicates.path.PathConstructionPredicate;
-import com.icfolson.aem.harbor.core.lists.construction.nodesearch.predicates.tags.PageTagsConstructionPredicate;
-import com.icfolson.aem.library.api.page.PageDecorator;
-import com.icfolson.aem.harbor.api.lists.construction.search.ConstructionPredicate;
-import com.icfolson.aem.harbor.core.lists.construction.nodesearch.predicates.queryparameters.QueryParameterConstructionPredicate;
 import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.widgets.DialogFieldSet;
 import com.day.cq.search.result.Hit;
 import com.google.common.collect.Lists;
+import com.icfolson.aem.harbor.api.lists.construction.search.ConstructionPredicate;
+import com.icfolson.aem.harbor.core.lists.construction.nodesearch.AbstractNodeSearchConstructionStrategy;
+import com.icfolson.aem.harbor.core.lists.construction.nodesearch.predicates.nodetype.PageNodeTypeConstructionPredicate;
+import com.icfolson.aem.harbor.core.lists.construction.nodesearch.predicates.path.PathConstructionPredicate;
+import com.icfolson.aem.harbor.core.lists.construction.nodesearch.predicates.queryparameters.QueryParameterConstructionPredicate;
+import com.icfolson.aem.harbor.core.lists.construction.nodesearch.predicates.tags.PageTagsConstructionPredicate;
+import com.icfolson.aem.library.api.page.PageDecorator;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.Optional;
@@ -29,17 +29,24 @@ public class PageListConstructionStrategy extends AbstractNodeSearchConstruction
 
     @DialogField
     @DialogFieldSet(title = "Path", namePrefix = "pathpredicate/", collapsible = true, collapsed = true)
-    @Inject @Named("pathpredicate") @Optional
+    @Inject
+    @Named("pathpredicate")
+    @Optional
     private PathConstructionPredicate pathConstructionPredicate;
 
     @DialogField
     @DialogFieldSet(title = "Tags", namePrefix = "tagspredicate/", collapsible = true, collapsed = true)
-    @Inject @Named("tagspredicate") @Optional
+    @Inject
+    @Named("tagspredicate")
+    @Optional
     private PageTagsConstructionPredicate tagsConstructionPredicate;
 
     @DialogField
-    @DialogFieldSet(title = "Query Parameters", namePrefix = "queryparameterpredicate/", collapsible = true, collapsed = true)
-    @Inject @Named("queryparameterpredicate") @Optional
+    @DialogFieldSet(title = "Query Parameters", namePrefix = "queryparameterpredicate/", collapsible = true,
+        collapsed = true)
+    @Inject
+    @Named("queryparameterpredicate")
+    @Optional
     private QueryParameterConstructionPredicate queryParameterConstructionPredicate;
 
     private List<ConstructionPredicate> constructionPredicates;
@@ -62,7 +69,6 @@ public class PageListConstructionStrategy extends AbstractNodeSearchConstruction
 
     @Override
     protected PageDecorator transformHit(Hit hit) {
-
         PageDecorator pageDecorator = null;
 
         try {
@@ -72,12 +78,10 @@ public class PageListConstructionStrategy extends AbstractNodeSearchConstruction
         }
 
         return pageDecorator;
-
     }
 
     @Override
     protected List<ConstructionPredicate> getConstructionPredicates() {
-
         if (constructionPredicates == null) {
             constructionPredicates = Lists.newArrayList();
 
@@ -90,10 +94,10 @@ public class PageListConstructionStrategy extends AbstractNodeSearchConstruction
             if (getQueryParameterConstructionPredicate() != null) {
                 constructionPredicates.add(getQueryParameterConstructionPredicate());
             }
+
             if (getTagsConstructionPredicate() != null) {
                 constructionPredicates.add(getTagsConstructionPredicate());
             }
-
         }
 
         return constructionPredicates;
@@ -101,9 +105,6 @@ public class PageListConstructionStrategy extends AbstractNodeSearchConstruction
 
     @Override
     protected boolean isReadyToQuery() {
-        return
-                getPathConstructionPredicate() != null &&
-                getPathConstructionPredicate().getSearchPath().isPresent();
+        return getPathConstructionPredicate() != null && getPathConstructionPredicate().getSearchPath().isPresent();
     }
-
 }

@@ -1,6 +1,5 @@
 package com.icfolson.aem.harbor.core.components.content.list;
 
-import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import com.icfolson.aem.harbor.api.components.content.list.TreeComponent;
 import com.icfolson.aem.harbor.api.trees.Tree;
@@ -25,12 +24,8 @@ public abstract class AbstractTreeComponent<T extends TreeNode, R extends Tree> 
         if (renderableTreeOptional == null) {
             Optional<T> requestedRawItemsOptional = getRawItemsOptional();
 
-            renderableTreeOptional = requestedRawItemsOptional.transform(new Function<T, R>() {
-                @Override
-                public R apply(final T items) {
-                    return getTreeRenderingStrategy().toRenderableTree(items);
-                }
-            });
+            renderableTreeOptional = requestedRawItemsOptional
+                .transform(items -> getTreeRenderingStrategy().toRenderableTree(items));
         }
 
         return renderableTreeOptional.orNull();

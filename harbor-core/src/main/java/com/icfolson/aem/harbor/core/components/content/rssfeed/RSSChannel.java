@@ -1,55 +1,38 @@
 package com.icfolson.aem.harbor.core.components.content.rssfeed;
 
-import java.util.List;
-
 import com.icfolson.aem.library.api.link.Link;
-import com.icfolson.aem.library.api.node.ComponentNode;
 import com.icfolson.aem.library.core.components.AbstractComponent;
 import com.icfolson.aem.library.core.link.builders.factory.LinkBuilderFactory;
-import com.google.common.collect.Lists;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class RSSChannel extends AbstractComponent {
 
-	private String title;
-	private String description;
-	private Link link;
-	private List<RSSItem> items;
+    private List<RSSItem> items;
 
-	public String getTitle() {
-		if (title == null) {
-			title = get("title", "");
-		}
+    public String getTitle() {
+        return get("title", "");
+    }
 
-		return title;
-	}
+    public String getDescription() {
+        return get("description", "");
+    }
 
-	public String getDescription() {
-		if (description == null) {
-			description = get("description", "");
-		}
+    @Override
+    public Link getLink() {
+        return getAsLink("link").or(LinkBuilderFactory.forPath("#").build());
+    }
 
-		return description;
-	}
+    public List<RSSItem> getItems() {
+        if (items == null) {
+            items = getComponentNodes()
+                .stream()
+                .map(componentNode -> componentNode.getResource().adaptTo(RSSItem.class))
+                .collect(Collectors.toList());
+        }
 
-	@Override
-	public Link getLink() {
-		if (link == null) {
-			link = getAsLink("link").or(LinkBuilderFactory.forPath("#").build());
-		}
-
-		return link;
-	}
-
-	public List<RSSItem> getItems() {
-		if (items == null) {
-			items = Lists.newArrayList();
-
-			for (ComponentNode currentRSSItemComponentNode : getComponentNodes()) {
-				items.add(currentRSSItemComponentNode.getResource().adaptTo(RSSItem.class));
-			}
-		}
-
-		return items;
-	}
+        return items;
+    }
 
 }

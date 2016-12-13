@@ -25,7 +25,7 @@ public class PageFooter extends Container {
 
 	@Override
 	public Optional<String> getRoleOptional() {
-		return Optional.fromNullable(Roles.PAGE_FOOTER);
+		return Optional.of(Roles.PAGE_FOOTER);
 	}
 
 	@Override

@@ -17,26 +17,26 @@ class TrailPage implements PageDecorator {
     }
 
     Boolean isRoot() {
-        return root
+        root
     }
 
     Boolean isCurrent() {
-        return current
+        current
     }
 
     static TrailPage forRootPage(PageDecorator pageDecorator) {
-        return new TrailPage(pageDecorator, true, false)
+        new TrailPage(pageDecorator, true, false)
     }
 
     static TrailPage forCurrentPage(PageDecorator pageDecorator) {
-        return new TrailPage(pageDecorator, false, true)
+        new TrailPage(pageDecorator, false, true)
     }
 
     static TrailPage forPage(PageDecorator pageDecorator) {
-        return new TrailPage(pageDecorator, false, false)
+        new TrailPage(pageDecorator, false, false)
     }
 
     static TrailPage forRootCurrentPage(PageDecorator pageDecorator) {
-        return new TrailPage(pageDecorator, true, true)
+        new TrailPage(pageDecorator, true, true)
     }
 }

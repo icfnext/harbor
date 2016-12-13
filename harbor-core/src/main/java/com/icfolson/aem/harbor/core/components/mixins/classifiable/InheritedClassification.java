@@ -13,5 +13,4 @@ public class InheritedClassification extends Classification {
     protected List<String> getClassificationIdStrings() {
         return getAsListInherited(Properties.CITYTECH_CLASSIFICATION, String.class);
     }
-
 }

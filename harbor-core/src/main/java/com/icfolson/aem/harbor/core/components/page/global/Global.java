@@ -13,9 +13,10 @@ import com.citytechinc.cq.component.annotations.Tab;
         @Tab(touchUIPath = "foundation/components/page/cq:dialog/content/items/tabs/items/blueprint"),
         @Tab(touchUIPath = "foundation/components/page/cq:dialog/content/items/tabs/items/livecopy"),
         */
-        @Tab(touchUIPath = "harbor/components/page/common/global/touch-sitemap/content/items/SitemappedPage"),
-        @Tab(touchUIPath = "harbor/components/page/common/global/touch-metadata/content/items/MetaPage"),
-        @Tab(touchUIPath = "harbor/components/page/common/global/touch-theme/content/items/ThemedPage")
+    @Tab(touchUIPath = "harbor/components/page/common/global/touch-sitemap/content/items/SitemappedPage"),
+    @Tab(touchUIPath = "harbor/components/page/common/global/touch-metadata/content/items/MetaPage"),
+    @Tab(touchUIPath = "harbor/components/page/common/global/touch-theme/content/items/ThemedPage")
 })
 public class Global {
+
 }

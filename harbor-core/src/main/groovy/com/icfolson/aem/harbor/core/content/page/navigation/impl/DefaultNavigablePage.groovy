@@ -1,6 +1,5 @@
 package com.icfolson.aem.harbor.core.content.page.navigation.impl
 
-import com.google.common.collect.Lists
 import com.icfolson.aem.harbor.api.content.page.navigation.NavigablePage
 import com.icfolson.aem.harbor.core.content.page.navigation.NavigablePages
 import com.icfolson.aem.harbor.core.content.page.navigation.NavigationElementConfiguration
@@ -11,6 +10,7 @@ class DefaultNavigablePage implements NavigablePage {
 
     @Delegate
     private final PageDecorator pageDecorator
+
     private final NavigationElementConfiguration navigationElementConfiguration
 
     private List<NavigablePage> navigablePageList
@@ -22,59 +22,56 @@ class DefaultNavigablePage implements NavigablePage {
 
     @Override
     List<NavigablePage> getNavigableChildren() {
-
         if (navigablePageList == null) {
-            navigablePageList = Lists.newArrayList()
+            navigablePageList = []
 
             if (navigationElementConfiguration.navigationDepth > 0) {
                 pageDecorator.getChildren(navigationElementConfiguration.respectHideInNavigation).each {
                     PageDecorator currentPageDecorator ->
-
                         if (navigationElementConfiguration.currentPage.isPresent()) {
                             this.navigablePageList.add(
                                 NavigablePages.forPageAndDepthAndChildPolicyAndCurrentPage(
                                     currentPageDecorator,
-                                    navigationElementConfiguration.getNavigationDepth() - 1,
-                                    navigationElementConfiguration.getRespectHideInNavigation(),
-                                    navigationElementConfiguration.getCurrentPage().get()))
+                                    navigationElementConfiguration.navigationDepth - 1,
+                                    navigationElementConfiguration.respectHideInNavigation,
+                                    navigationElementConfiguration.currentPage.get()))
                         } else {
                             this.navigablePageList.add(
                                 NavigablePages.forPageAndDepthAndChildPolicy(
                                     currentPageDecorator,
-                                    navigationElementConfiguration.getNavigationDepth() - 1,
-                                    navigationElementConfiguration.getRespectHideInNavigation()))
+                                    navigationElementConfiguration.navigationDepth - 1,
+                                    navigationElementConfiguration.respectHideInNavigation))
                         }
                 }
             }
         }
 
-        return navigablePageList
+        navigablePageList
     }
 
     @Override
     boolean isHasChildNodes() {
-        return !getNavigableChildren().isEmpty()
+        navigableChildren as Boolean
     }
 
     @Override
     Iterable<NavigablePage> getChildNodes() {
-
-        return getNavigableChildren()
+        navigableChildren
     }
 
     @Override
     Iterator<NavigablePage> getChildNodesIterator() {
-        return getNavigableChildren().iterator()
+        navigableChildren.iterator()
     }
 
     @Override
     NavigationLink getNavigationLink() {
-        if (navigationElementConfiguration.getCurrentPage().isPresent()) {
+        if (navigationElementConfiguration.currentPage.present) {
             if (navigationElementConfiguration.currentPage.get().path.startsWith(pageDecorator.path)) {
                 return pageDecorator.getNavigationLink(true)
             }
         }
 
-        return pageDecorator.getNavigationLink()
+        pageDecorator.navigationLink
     }
 }

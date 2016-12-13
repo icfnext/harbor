@@ -9,33 +9,16 @@ import org.apache.sling.models.annotations.Model;
 @Model(adaptables = Resource.class)
 public class RSSItem extends AbstractComponent {
 
-	public String title;
-	public String description;
-	public Link link;
+    public String getTitle() {
+        return get("title", "");
+    }
 
-	public String getTitle() {
-		if (title == null) {
-			title = get("title", "");
-		}
+    public String getDescription() {
+        return get("description", "");
+    }
 
-		return title;
-	}
-
-	public String getDescription() {
-		if (description == null) {
-			description = get("description", "");
-		}
-
-		return description;
-	}
-
-	@Override
-	public Link getLink() {
-		if (link == null) {
-			link = getAsLink("link").or(LinkBuilderFactory.forPath("#").build());
-		}
-
-		return link;
-	}
-
+    @Override
+    public Link getLink() {
+        return getAsLink("link").or(LinkBuilderFactory.forPath("#").build());
+    }
 }

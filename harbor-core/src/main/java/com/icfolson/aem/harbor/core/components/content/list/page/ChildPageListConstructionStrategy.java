@@ -1,45 +1,32 @@
 package com.icfolson.aem.harbor.core.components.content.list.page;
 
-import java.util.List;
-
-import com.icfolson.aem.library.api.node.ComponentNode;
-import com.icfolson.aem.library.api.page.PageDecorator;
-import com.icfolson.aem.library.api.page.PageManagerDecorator;
 import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.widgets.PathField;
-import com.icfolson.aem.harbor.api.lists.construction.ListConstructionStrategy;
 import com.google.common.base.Optional;
 import com.google.common.collect.Lists;
+import com.icfolson.aem.harbor.api.lists.construction.ListConstructionStrategy;
+import com.icfolson.aem.library.api.node.ComponentNode;
+import com.icfolson.aem.library.api.page.PageDecorator;
 import com.icfolson.aem.library.core.constants.PathConstants;
+
+import java.util.List;
 
 public class ChildPageListConstructionStrategy implements ListConstructionStrategy<PageDecorator> {
 
-	@DialogField(fieldLabel = "Start Page", name = "./startPagePath")
-	@PathField(rootPath = PathConstants.PATH_CONTENT)
-	private final Optional<PageDecorator> startPageOptional;
+    private final ComponentNode componentNode;
 
-	public ChildPageListConstructionStrategy(ComponentNode componentNode) {
-		PageManagerDecorator pageManagerDecorator = componentNode.getResource().getResourceResolver()
-			.adaptTo(PageManagerDecorator.class);
+    public ChildPageListConstructionStrategy(ComponentNode componentNode) {
+        this.componentNode = componentNode;
+    }
 
-		Optional<String> startPagePathOptional = componentNode.get("startPagePath", String.class);
+    @DialogField(fieldLabel = "Start Page", name = "./startPagePath")
+    @PathField(rootPath = PathConstants.PATH_CONTENT)
+    public Optional<PageDecorator> getStartPage() {
+        return componentNode.getAsPage("startPagePath");
+    }
 
-		if (startPagePathOptional.isPresent()) {
-			startPageOptional = Optional.fromNullable(pageManagerDecorator.getContainingPage(startPagePathOptional
-				.get()));
-		} else {
-			startPageOptional = Optional.absent();
-		}
-	}
-
-	@Override
-	public List<PageDecorator> construct() {
-
-		if (startPageOptional.isPresent()) {
-			return startPageOptional.get().getChildren();
-		}
-
-		return Lists.newArrayList();
-
-	}
+    @Override
+    public List<PageDecorator> construct() {
+        return getStartPage().transform(PageDecorator:: getChildren).or(Lists.newArrayList());
+    }
 }
