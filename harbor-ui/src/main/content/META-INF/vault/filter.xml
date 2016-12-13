@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <workspaceFilter version="1.0">
-    <filter root="/apps/harbor/admin" />
-    <filter root="/apps/harbor/components" />
-    <filter root="/apps/harbor/templates" />
-    <filter root="/apps/harbor/install" />
-    <filter root="/apps/cq/core/content/nav/harbor" />
-    <filter root="/apps/cq/gui/components/siteadmin/admin/pagecard" />
-    <filter root="/etc/clientlibs/harbor" />
+    <filter root="/apps/harbor/admin"/>
+    <filter root="/apps/harbor/components"/>
+    <filter root="/apps/harbor/templates"/>
+    <filter root="/apps/harbor/install"/>
+    <filter root="/apps/cq/core/content/nav/harbor"/>
+    <filter root="/apps/cq/gui/components/siteadmin/admin/pagecard"/>
+    <filter root="/etc/clientlibs/harbor"/>
     <filter root="/etc/designs/harbor">
         <exclude pattern="/etc/designs/harbor/jcr:content/(.*)?"/>
         <exclude pattern="/etc/designs/harbor/clientlib(/.*)?"/>
@@ -15,4 +15,5 @@
     <filter root="/etc/packages/aem-library"/>
     <filter root="/etc/packages/aemnamespace"/>
     <filter root="/etc/packages/authorabledesignmanager"/>
+    <filter root="/etc/packages/multicompositeaddon"/>
 </workspaceFilter>

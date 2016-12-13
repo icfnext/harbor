@@ -205,5 +205,13 @@
             <artifactId>aem-library-ui</artifactId>
             <type>zip</type>
         </dependency>
+
+        <!-- multicomposite addon -->
+        <dependency>
+            <groupId>com.citytechinc.aem</groupId>
+            <artifactId>multicomposite-addon</artifactId>
+            <version>${multicompositeaddon.version}</version>
+            <type>zip</type>
+        </dependency>
     </dependencies>
 </project>

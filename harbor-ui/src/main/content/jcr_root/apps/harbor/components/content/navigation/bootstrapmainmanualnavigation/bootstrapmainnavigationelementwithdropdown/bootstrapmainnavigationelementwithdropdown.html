@@ -1,20 +1,7 @@
-<!--/* TODO: When in author mode, cause dropdown to only close when the drop down arrow is clicked to allow for better authorability */-->
-
 <sly data-sly-use.navElement="com.icfolson.aem.harbor.core.components.content.navigation.bootstrapnavigation.mainmanualnavigation.BootstrapMainNavigationElementWithDropdown">
-    <a href="${navElement.elementLink.href}">${navElement.elementLink.title}</a><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-caret-down"></i></a>
-    <ul class="dropdown-menu" id="${navElement.id}-dropdown">
-        <li data-sly-resource="${'navpar' @ resourceType='foundation/components/parsys'}"></li>
+    <a href="${navElement.link.href}">${navElement.link.title}</a><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-caret-down"></i></a>
+    <ul class="dropdown-menu" id="${navElement.id}-dropdown" data-sly-list.child="${navElement.links}">
+        <li data-sly-test="${child.addDivider}" role="separator" class="divider"></li>
+        <li><a href="${child.link.href}">${child.link.title}</a></li>
     </ul>
-
-    <script data-sly-test="${isEditMode || isDesignMode}">
-        jQuery(document).ready(function ($) {
-            $('#${navElement.id @ context="scriptString"}-dropdown').parent().on('shown.bs.dropdown', function () {
-                Harbor.Components.editables.changeEditableContext('${navElement.path @ context="scriptString"}/navpar');
-            });
-
-            $('#${navElement.id @ context="scriptString"}-dropdown').parent().on('hidden.bs.dropdown', function () {
-                Harbor.Components.editables.resetEditableContext();
-            });
-        });
-    </script>
 </sly>
