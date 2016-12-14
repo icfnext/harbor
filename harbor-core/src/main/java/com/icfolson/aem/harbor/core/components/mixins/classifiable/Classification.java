@@ -86,8 +86,10 @@ public class Classification extends AbstractComponent {
      * @return A list of the names of all the classifications associated with this Resource.
      */
     public List<String> getClassificationNames() {
-        return getClassifications().stream().map(Tag:: getName).collect(Collectors.toList());
-
+        return getClassifications()
+            .stream()
+            .map(Tag:: getName)
+            .collect(Collectors.toList());
     }
 
     /**
@@ -97,8 +99,10 @@ public class Classification extends AbstractComponent {
      * @return A list of the IDs of all the classifications associated with this Resource.
      */
     public List<String> getClassificationIds() {
-        return getClassifications().stream().map(Tag:: getTagID).collect(Collectors.toList());
-
+        return getClassifications()
+            .stream()
+            .map(Tag:: getTagID)
+            .collect(Collectors.toList());
     }
 
     /**
