@@ -1,20 +1,17 @@
 package com.icfolson.aem.harbor.core.components.content.page
 
 import com.icfolson.aem.library.api.page.PageDecorator
+import groovy.transform.TupleConstructor
 
+@TupleConstructor
 class TrailPage implements PageDecorator {
 
     @Delegate
-    private final PageDecorator pageDecorator
+    PageDecorator pageDecorator
 
-    private final Boolean root
-    private final Boolean current
+    Boolean root
 
-    protected TrailPage(PageDecorator pageDecorator, Boolean root, Boolean current) {
-        this.pageDecorator = pageDecorator
-        this.root = root
-        this.current = current
-    }
+    Boolean current
 
     Boolean isRoot() {
         root

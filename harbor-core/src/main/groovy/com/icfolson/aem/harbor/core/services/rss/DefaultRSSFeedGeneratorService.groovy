@@ -9,24 +9,19 @@ import org.apache.felix.scr.annotations.Component
 import org.apache.felix.scr.annotations.Service
 
 import javax.xml.bind.JAXBContext
-import javax.xml.bind.Unmarshaller
 
 @Service
 @Component(label = "RSS Feed Generator Service", immediate = true)
 @Slf4j("LOG")
 class DefaultRSSFeedGeneratorService implements RSSFeedGeneratorService {
 
-    private JAXBContext jaxbContext
-
-    DefaultRSSFeedGeneratorService() {
-        jaxbContext = JAXBContext.newInstance(DefaultRSSFeed)
-    }
+    private final JAXBContext jaxbContext = JAXBContext.newInstance(DefaultRSSFeed)
 
     @Override
     Optional<RSSFeed> getRSSFeed(String feedUrl) {
         //TODO: Exception handling surrounding things like invalid URL - unable to dereference - etc
-        Unmarshaller unmarshaller = jaxbContext.createUnmarshaller()
-        Object unmarshalledRssChannelObject = unmarshaller.unmarshal(feedUrl.toURL())
+        def unmarshaller = jaxbContext.createUnmarshaller()
+        def unmarshalledRssChannelObject = unmarshaller.unmarshal(feedUrl.toURL())
 
         Optional.fromNullable((RSSFeed) unmarshalledRssChannelObject)
     }
