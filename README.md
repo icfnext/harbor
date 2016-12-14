@@ -33,7 +33,7 @@ Presents the Page Subtitle of the current page in an H2 DOM element.  The output
 | Dialog Field | Description |
 | ------------ | ----------- |
 | Text         | Sets the rendered subtitle text.  When left empty, the subtitle text will default to the page's Page Subtitle. |
-| ID           | Sets the string ID to be attributed to the H1 element rendered for the subtitle.  When left empty, the ID will be produced by sanitizing the subtitle text. |
+| ID           | Sets the string ID to be attributed to the H2 element rendered for the subtitle.  When left empty, the ID will be produced by sanitizing the subtitle text. |
 
 ### Harbor Heading Component
 
@@ -65,7 +65,47 @@ Text is edited via the text in-place editor.
 | Classification | Input support for classifiability of the text component instance. |
 
 
+### Harbor Link List Component
 
+* Group: Harbor Lists
+* Classifiable
+
+Presents an author composed lists of links.  Links may be references to internal AEM pages or to external URLs.
+
+#### Authorability
+
+The addition of new list items is enabled by the "+" button in the toolbar of the Link List component.
+
+When adding new items to an already populated list you will commonly need to tap on a list item, choose the "select parent" option from the toolbar, and then choose the Link List component from the dropdown list in order to be presented with the edit bar for the list itself.
+
+##### List
+
+| Dialog Field | Description |
+| ------------ | ----------- |
+| Classification | Input support for classifiability of the list component instance.  Classifies the entire list |
+
+##### List Item
+
+Each item in the list is rendered and authored as its own component.
+
+Items in the list can be moved up or down in the list via the up and down buttons in the List Item's Toolbar.
+
+| Dialog Field | Description |
+| ------------ | ----------- |
+| Title        | Presentable title to associated with the item in the list. |
+| Path         | The path to an internal AEM page or the URL to an external page which the item in the list should link to. |
+
+#### Developer Guide
+
+The Link List component maintains a collection of List Items as direct child Resources.  Author-only Javascript under the namespace `Harbor.Components.LinkList` facilitates the addition and movement of List Items.
+
+| Aspect | Value |
+| ------------ | ----------- |
+| Resource Type | harbor/components/content/lists/linklist |
+| Component Group | Harbor Lists |
+| Backing Class | com.icfolson.aem.harbor.core.components.content.list.link.LinkList |
+| List Item Resource Type | harbor/components/content/lists/linklist/listablelink |
+| List Item Backing Class | com.icfolson.aem.harbor.core.components.content.list.link.ListableLink |
 
 
 
