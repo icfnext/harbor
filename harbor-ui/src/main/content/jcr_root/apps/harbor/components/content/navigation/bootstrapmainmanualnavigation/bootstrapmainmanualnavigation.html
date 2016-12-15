@@ -1,4 +1,4 @@
-<div data-sly-use.bootstrapMainManualNavigation="com.icfolson.aem.harbor.core.components.content.navigation.bootstrapnavigation.mainmanualnavigation.BootstrapMainManualNavigation" class="navbar navbar-default ${bootstrapMainManualNavigation.sticky && !isEditMode ? 'navbar-fixed-top' : ''}" role="navigation">
+<div data-sly-use.bootstrapMainManualNavigation="com.icfolson.aem.harbor.core.components.content.navigation.bootstrapnavigation.mainmanualnavigation.BootstrapMainManualNavigation" class="navbar navbar-default ${(bootstrapMainManualNavigation.sticky && !isEditMode) ? 'navbar-fixed-top' : ''}" role="navigation">
     <div class="${bootstrapMainManualNavigation.containerClass}">
         <sly data-sly-include="navbarheader.html"/>
         <sly data-sly-include="navbarcontent.html"/>
