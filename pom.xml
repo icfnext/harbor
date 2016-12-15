@@ -59,7 +59,7 @@
         <aem.namespace.version>0.4.0-SNAPSHOT</aem.namespace.version>
         <aem-library.version>8.0.0</aem-library.version>
         <authorable.design.manager.version>1.0.0</authorable.design.manager.version>
-        <component.plugin.version>4.1.2</component.plugin.version>
+        <component.plugin.version>4.1.3</component.plugin.version>
         <multicompositeaddon.version>2.1.3</multicompositeaddon.version>
         <package.skip>true</package.skip>
         <osgi.bundle.status.skip>true</osgi.bundle.status.skip>

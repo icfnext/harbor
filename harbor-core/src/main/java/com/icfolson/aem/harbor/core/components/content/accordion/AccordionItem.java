@@ -54,7 +54,7 @@ public class AccordionItem extends AbstractComponent {
         return getResource().getParent().adaptTo(Accordion.class).getId();
     }
 
-    public boolean isOpen() {
+    public Boolean isOpen() {
         if (open == null) {
             open = getResource().getParent().getChildren().iterator().next().getPath().equals(
                 getResource().getPath()) && getResource().getParent().adaptTo(Accordion.class).isOpenFirstItem();

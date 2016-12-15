@@ -45,7 +45,7 @@ public class Accordion extends AbstractComponent {
     @DialogField(fieldLabel = "Open First Item",
         fieldDescription = "Whether the first Accordion Item in the Accordion Group should be opened by default.")
     @Switch(offText = "No", onText = "Yes")
-    public boolean isOpenFirstItem() {
+    public Boolean isOpenFirstItem() {
         return get("openFirstItem", false);
     }
 
@@ -60,7 +60,7 @@ public class Accordion extends AbstractComponent {
         return accordionItems;
     }
 
-    public boolean isHasItems() {
+    public Boolean isHasItems() {
         return !getItems().isEmpty();
     }
 }
