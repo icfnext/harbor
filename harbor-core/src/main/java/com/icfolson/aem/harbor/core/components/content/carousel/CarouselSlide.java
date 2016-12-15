@@ -11,7 +11,7 @@ import org.apache.sling.models.annotations.Model;
     value = "Carousel Slide",
     group = ComponentConstants.GROUP_HIDDEN,
     name = "carousel/carouselslide",
-    actions = { "text: Slide", "-", "delete" })
+    actions = { "text: Carousel Slide", "-", "delete" })
 @AutoInstantiate
 @Model(adaptables = Resource.class)
 public class CarouselSlide extends AbstractComponent {

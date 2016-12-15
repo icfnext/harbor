@@ -1,25 +1,20 @@
-jQuery( document ).ready( function( $ ) {
+jQuery(document).ready(function ($) {
 
     //TODO: Look into ensuring behavior is attached as the widget is edited in author mode
-    $( 'form[data-form-purpose="search"]' ).submit( function( e ) {
+    $('form[data-form-purpose="search"]').submit(function (e) {
+        var currentForm = $(this);
 
-        var currentForm = $( this );
-
-        if ( currentForm.data( 'submission-type' ) === 'asynchronous' ) {
-
+        if (currentForm.data('submission-type') === 'asynchronous') {
             e.preventDefault();
 
-            var searchPage = currentForm.attr( 'action' );
-        	var queryString = $( 'input[name="query"]', this ).val();
+            var searchPage = currentForm.attr('action');
+            var queryString = $('input[name="query"]', this).val();
 
-            if ( searchPage !== '#' ) {
+            if (searchPage !== '#') {
                 searchPage = searchPage + '#';
             }
 
             window.location = searchPage + queryString;
-
         }
-
-    } )
-
-} );
+    })
+});
