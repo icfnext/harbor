@@ -1,0 +1,9 @@
+<div data-sly-use.carousel="com.icfolson.aem.harbor.core.components.content.carousel.Carousel"
+     id="${carousel.id}-carousel" class="${carousel.cssClass}"
+     data-ride="${(isPreviewMode || isPublish) ? 'carousel' : ''}"
+     data-interval="${isEditMode ? 'false' : ''}">
+    <p data-sly-test="${isEditMode && !carousel.slides}" class="authoring-placeholder">Carousel</p>
+    <sly data-sly-test="${carousel.showSlideSelectorControls}" data-sly-include="slideselectorcontrols.html"></sly>
+    <sly data-sly-include="slides.html"></sly>
+    <sly data-sly-test="${carousel.showPreviousAndNextControls}" data-sly-include="previousandnextcontrols.html"></sly>
+</div>

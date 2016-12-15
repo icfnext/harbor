@@ -5,7 +5,6 @@ import com.citytechinc.cq.component.annotations.ContentProperty;
 import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.editconfig.ActionConfig;
 import com.citytechinc.cq.component.annotations.widgets.Switch;
-import com.icfolson.aem.library.api.components.annotations.AutoInstantiate;
 import com.icfolson.aem.library.core.components.AbstractComponent;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
@@ -15,14 +14,12 @@ import java.util.stream.Collectors;
 
 @Component(
     value = "Carousel",
-    name = "contentcarousel",
     actions = { "text: Carousel", "edit", "-", "copymove", "delete", "-", "insert" },
     actionConfigs = {
         @ActionConfig(xtype = "tbseparator"),
-        @ActionConfig(text = "Add Slide", handler = "function(){Harbor.Components.Carousel.addSlide(this)}") },
+        @ActionConfig(text = "Add Slide", handler = "function() { Harbor.Components.Carousel.addSlide(this) }") },
     contentAdditionalProperties = { @ContentProperty(name = "dependencies",
         value = "[harbor.components.content.carousel,harbor.bootstrap.carousel]") })
-@AutoInstantiate(instanceName = "carousel")
 @Model(adaptables = Resource.class)
 public class Carousel extends AbstractComponent {
 
