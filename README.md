@@ -1,11 +1,18 @@
 # Harbor 
 
-Harbor is a collection of content and page components, services, and patterns constituting a common starting point for projects.  From both an author and developer enablement perspective Harbor follows these tennants: 
+Harbor is a collection of content and page components, services, and patterns constituting a common starting point for projects embodying a consistent philosophy of development.  From both an author and developer enablement perspective Harbor follows these tenets: 
 
-* Composability
-* Extensibility
 * Cohesion
-* David
+* Semantics
+* Extensibility
+
+## Internal Promotional Videos
+
+The following videos were developed (poorly) to promote Harbor internally.
+
+* General Information: https://drive.google.com/open?id=0B2FwTcEm5yJ6dWh4LUZJS2pYcnM
+* Enabling Content Reusability: https://drive.google.com/open?id=0B2FwTcEm5yJ6SzRTTUhUdlhkUXM
+* Enabling Experience Reusability: https://drive.google.com/open?id=0B2FwTcEm5yJ6VjdZOHJrMU5zcUk
 
 ## Components
 
