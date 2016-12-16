@@ -4,6 +4,7 @@ import com.citytechinc.cq.component.annotations.Component;
 import com.citytechinc.cq.component.annotations.ContentProperty;
 import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.editconfig.ActionConfig;
+import com.citytechinc.cq.component.annotations.widgets.NumberField;
 import com.citytechinc.cq.component.annotations.widgets.Switch;
 import com.icfolson.aem.library.core.components.AbstractComponent;
 import org.apache.sling.api.resource.Resource;
@@ -29,16 +30,45 @@ public class Carousel extends AbstractComponent {
 
     public static final String INDICATORS_CSS_CLASS = "carousel-indicators";
 
-    @DialogField(fieldLabel = "Show Previous and Next Controls")
+    @DialogField(fieldLabel = "Show Previous and Next Controls", ranking = 1)
     @Switch(offText = "No", onText = "Yes")
     public boolean isShowPreviousAndNextControls() {
         return get("showPreviousAndNextControls", false);
     }
 
-    @DialogField(fieldLabel = "Show Slide Selector Controls")
+    @DialogField(fieldLabel = "Show Slide Selector Controls", ranking = 2)
     @Switch(offText = "No", onText = "Yes")
     public boolean isShowSlideSelectorControls() {
         return get("showSlideSelectorControls", false);
+    }
+
+    @DialogField(fieldLabel = "Interval",
+        fieldDescription = "The amount of time to delay between automatically cycling an item.  Defaults to 5000.  If set to 0, automatic cycling will be disabled.",
+        ranking = 3)
+    @NumberField(allowDecimals = false, allowNegative = false)
+    public Integer getInterval() {
+        return get("interval", 5000);
+    }
+
+    @DialogField(fieldLabel = "Pause on Hover?",
+        fieldDescription = "Whether cycling of the carousel should pause on mouse hover.", ranking = 4)
+    @Switch(offText = "No", onText = "Yes")
+    public boolean isPauseOnHover() {
+        return get("pauseOnHover", false);
+    }
+
+    @DialogField(fieldLabel = "Wrap?",
+        fieldDescription = "Whether the carousel should cycle continuously or have hard stops.", ranking = 5)
+    @Switch(offText = "No", onText = "Yes")
+    public boolean isWrap() {
+        return get("wrap", false);
+    }
+
+    @DialogField(fieldLabel = "Keyboard?",
+        fieldDescription = "Whether the carousel should react to keyboard events.", ranking = 6)
+    @Switch(offText = "No", onText = "Yes")
+    public boolean isKeyboard() {
+        return get("keyboard", false);
     }
 
     public List<CarouselSlide> getSlides() {

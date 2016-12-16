@@ -1,5 +1,5 @@
 <sly data-sly-use.contentContainer="${component.properties['className']}">
-    <div data-sly-test="${!wcmmode.disabled && !wcmmode.preview}" class="author-help-message">
+    <div data-sly-test="${isEditMode}" class="author-help-message">
         <p>${contentContainer.authorHelpMessage}</p>
     </div>
     <sly data-sly-test="${!contentContainer.parsysInherits}"

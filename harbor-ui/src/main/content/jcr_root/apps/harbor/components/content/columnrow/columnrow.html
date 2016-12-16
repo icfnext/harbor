@@ -6,7 +6,7 @@
          data-sly-attribute.id="${column.domId}"
          data-sly-resource="${column.name @ resourceType='harbor/components/content/column', decorationTagName='div'}">
     </div>
-    <div data-sly-test="${!columnrow.columns && wcmmode.edit}" class="author-help-message">
+    <div data-sly-test="${!columnrow.columns && isEditMode}" class="author-help-message">
         Column Row - Press the + button in the edit bar to add columns.
     </div>
 </div>

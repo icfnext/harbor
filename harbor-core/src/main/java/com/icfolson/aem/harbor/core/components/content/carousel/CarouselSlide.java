@@ -16,4 +16,7 @@ import org.apache.sling.models.annotations.Model;
 @Model(adaptables = Resource.class)
 public class CarouselSlide extends AbstractComponent {
 
+    public String getDisplayIndex() {
+        return String.valueOf(getIndex() + 1);
+    }
 }
