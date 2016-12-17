@@ -1,3 +1,11 @@
-<p data-sly-use.carouselSlide="com.icfolson.aem.harbor.core.components.content.carousel.CarouselSlide" data-sly-test="${isEditMode}" class="author-help-message">Slide ${carouselSlide.displayIndex}</p>
+<p data-sly-use.carouselSlide="com.icfolson.aem.harbor.core.components.content.carousel.CarouselSlide"
+   data-sly-test="${isEditMode}" class="author-help-message">Slide ${carouselSlide.displayIndex}</p>
 
 <sly data-sly-resource="${'slide-par' @ resourceType='wcm/foundation/components/parsys'}"></sly>
+
+<div class="carousel-caption" data-sly-test="${carouselSlide.captionHeading || carouselSlide.captionText}">
+    <h3 data-sly-test="${carouselSlide.captionHeading}" data-sly-element="${carouselSlide.captionHeadingType}">
+        ${carouselSlide.captionHeading}
+    </h3>
+    <p data-sly-test="${carouselSlide.captionText}">${carouselSlide.captionText @ context='html'}</p>
+</div>
