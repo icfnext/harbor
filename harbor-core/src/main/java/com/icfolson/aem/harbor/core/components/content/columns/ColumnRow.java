@@ -45,7 +45,7 @@ import javax.inject.Named;
 				@ActionConfig(
 						handler = "function() { Harbor.Components.ColumnRow.addColumn( this, 'harbor/components/content/column' ); }",
 						text = "Add Column",
-						additionalProperties = {@ActionConfigProperty(name = "icon", value = "coral-Icon--add")}
+						additionalProperties = {@ActionConfigProperty(name = "icon", value = "coral-Icon--experienceAdd")}
 				)
 		},
 		allowedParents = "*/parsys",

@@ -1,3 +1,3 @@
-<span data-sly-test="${isEditMode}" class="author-help-message">Column</span>
+<div data-sly-test="${isEditMode}" class="author-help-message">Column</div>
 <sly data-sly-use.column="${component.properties['className']}"
-     data-sly-resource="${'column-par' @ resourceType = column.paragraphResourceType}"/>
+     data-sly-resource="${'column-par' @ resourceType = column.paragraphResourceType, decorationTagName='div'}"/>

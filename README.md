@@ -10,9 +10,9 @@ Harbor is a collection of content and page components, services, and patterns co
 
 The following videos were developed (poorly) to promote Harbor internally.
 
-* General Information: https://drive.google.com/open?id=0B2FwTcEm5yJ6dWh4LUZJS2pYcnM
-* Enabling Content Reusability: https://drive.google.com/open?id=0B2FwTcEm5yJ6SzRTTUhUdlhkUXM
-* Enabling Experience Reusability: https://drive.google.com/open?id=0B2FwTcEm5yJ6VjdZOHJrMU5zcUk
+* [General Information](https://drive.google.com/open?id=0B2FwTcEm5yJ6dWh4LUZJS2pYcnM)
+* [Enabling Content Reusability](https://drive.google.com/open?id=0B2FwTcEm5yJ6SzRTTUhUdlhkUXM)
+* [Enabling Experience Reusability](https://drive.google.com/open?id=0B2FwTcEm5yJ6VjdZOHJrMU5zcUk)
 
 ## Components
 
@@ -71,6 +71,49 @@ Text is edited via the text in-place editor.
 | ------------ | ----------- |
 | Classification | Input support for classifiability of the text component instance. |
 
+### Harbor Column Row Component
+
+* Group: Harbor Scaffolding
+* Classifiable
+
+The Harbor Column Row component lets authors flexibly create and layout any number of columns using the Bootstrap grid system.
+
+Columns MUST be placed in a Container component.  See Containers under Core Concepts for more information.
+
+#### Authorability
+
+New columns are added using the "Add Experience" button in the toolbar of the Column Row component.  When in edit mode an author help message will appear indicating this and making it easy to select the Column Row in Touch UI.
+
+Responsiveness of the columns as defined by the Bootstrap grid system can be tested either using the AEM Device emulation mode, the AEM Layout mode, or by resizing your browser window.
+
+##### Row Authoring
+
+| Dialog Field | Description | 
+| ------------ | ----------- |
+| ID           | A unique identifier for the Row.  If no ID is set no id attribute will be rendered |
+| Classification | Input support for classifiability of the row component instance.  Classifies the entire row |
+
+##### Column Authoring
+
+Each Column in a Row is authored independently.  
+
+Many of the inputs control the width and positioning of  the column.  See the Bootstrap documentation concerning the [Grid System](http://getbootstrap.com/css/#grid) for more information on these inputs.
+
+The rendered content of a column is a Paragraph System into which arbitrary components may be placed.  
+
+While it is not recommended due to the various complexities it introduces in authorability, Column Row components may be nested inside Columns allowing extremely complex layouts.
+
+| Dialog Field | Description | 
+| ------------ | ----------- |
+| Extra Small Device Width | Width of column when presented on extra small devices.  Defaults to none. |
+| Small Device Width | Width of column when presented on a small device.  Defaults to none. |
+| Medium Device Width | Width of column when presented on a medium device. Defaults to none. |
+| Large Device Width | Width of column when presented on a large device.  Defaults to none. |
+| Ordering | Indicates whether to push or pull the column to force a certain ordering.  Defaults to none. |
+| Classification | Input support for classifiability of the column component instance.  Classifies the single column within the row. |
+| Inherit Content | When set to Yes the Paragraph System for the column will be rendered as an Inheriting Paragraph System | 
+| ID | A unique identifier for the Column.  If no ID is set no id attribute will be rendered |
+
 
 ### Harbor Link List Component
 
@@ -120,7 +163,13 @@ The Link List component maintains a collection of List Items as direct child Res
 
 ### End User Core Concepts
 
-_To be written_
+#### Containers
+
+Many of the elements of Bootstrap require placement within a Container.  In Harbor there are numerous Container Components which produce such a Container suitable for placing other components within.  These are identified by the `Container` demarcation in the documentation.  
+
+For example, the Content Container Component is a basic Container.
+
+General information about Containers in Bootstrap can be found [in the Bootstrap Container documentation](http://getbootstrap.com/css/#overview-container).
 
 ### Developer Core Concepts
 
