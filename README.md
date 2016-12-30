@@ -56,7 +56,7 @@ Presents a heading element appropriate for titling sections of content.  This co
 | Text         | Sets the rendered heading text. |
 | ID           | Sets the string ID to be attributed to the rendered heading element.  When left empty, the ID will be produced by sanitizing the heading text. |
 
-### Harbor Text Component
+### Text Component
 
 * Group: Harbor
 * Classifiable
@@ -70,6 +70,26 @@ Text is edited via the text in-place editor.
 | Dialog Field | Description |
 | ------------ | ----------- |
 | Classification | Input support for classifiability of the text component instance. |
+
+### Call to Action Component
+
+* Group: Harbor
+
+Presents a Call to Action button which, when pressed, directs the user to a specified page path or external URL.
+
+#### Authorability 
+
+| Dialog Field | Description |
+| ------------ | ----------- |
+| Text         | Text to present as the button label |
+| Link Target  | The page path or external URL the user should be directed to upon clicking the button |
+| Size         | The button size |
+| Style        | The button style - see [Button Options](http://getbootstrap.com/css/#buttons-options) for more information | 
+| Action       | Selection of whether to present the new page in the same window or a new window then the button is clicked |
+
+### Modal Call to Action Component
+
+* Group: Harbor
 
 ### Harbor Column Row Component
 

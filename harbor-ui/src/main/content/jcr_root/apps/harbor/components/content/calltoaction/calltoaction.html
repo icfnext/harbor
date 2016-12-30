@@ -1,13 +1,8 @@
 <sly data-sly-use.cta="com.icfolson.aem.harbor.core.components.content.calltoaction.CallToAction">
-    <a data-sly-test="${cta.opensAsModal}" id="${cta.buttonId}" role="button" class="btn ${cta.size} ${cta.style} cta-btn" data-toggle="modal" data-target="#${cta.modalId}">
-        ${cta.text @ context='html'}
-    </a>
     <a data-sly-test="${cta.opensInCurrentWindow || cta.opensInNewWindow}" id="${cta.buttonId}" role="button" class="btn ${cta.size} ${cta.style} cta-btn" href="${cta.linkTarget.href}" data-sly-attribute.target="${cta.opensInNewWindow ? '_blank' : ''}">
         ${cta.text @ context='html'}
     </a>
-    <a data-sly-test="${!cta.opensAsModal && !cta.opensInCurrentWindow && !cta.opensInNewWindow}" id="${cta.buttonId}" role="button" class="btn ${cta.size} ${cta.style} cta-btn">
+    <a data-sly-test="${!cta.opensInCurrentWindow && !cta.opensInNewWindow}" id="${cta.buttonId}" role="button" class="btn ${cta.size} ${cta.style} cta-btn">
         ${cta.text @ context='html'}
     </a>
 </sly>
-
-<sly data-sly-test="${cta.opensAsModal}" data-sly-include="modal.html"/>
