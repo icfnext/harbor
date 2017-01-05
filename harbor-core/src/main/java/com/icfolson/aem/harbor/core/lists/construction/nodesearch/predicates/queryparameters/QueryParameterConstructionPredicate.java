@@ -95,11 +95,7 @@ public class QueryParameterConstructionPredicate extends AbstractComponent imple
         return predicateOptional;
     }
 
-    private Predicate createPredicate(String type, String value) {
-        final Predicate predicate = new Predicate(type);
-
-        predicate.set(type, value);
-
-        return predicate;
+    private Predicate createPredicate(final String type, final String value) {
+        return new Predicate(type).set(type, value);
     }
 }

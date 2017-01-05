@@ -1,8 +1,7 @@
-<p data-sly-test="${isEditMode}" class="authoring-placeholder">Page List</p>
+<p data-sly-test="${isEditMode}" class="authoring-placeholder">${component.title}</p>
 
-<ul data-sly-use.listComponent="com.icfolson.aem.harbor.core.components.content.list.page.PageList"
-    data-sly-test="${listComponent.hasListElement}"
-    data-sly-list.renderableItem="${listComponent.items}">
+<ul data-sly-use.pageList="${component.properties['className']}"
+    data-sly-list.renderableItem="${pageList.items}">
     <li>
         <article data-sly-test="${renderableItem.article}">
             <header>

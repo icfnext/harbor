@@ -11,6 +11,7 @@ import com.icfolson.aem.harbor.core.constants.groups.ComponentGroups;
 import com.icfolson.aem.library.core.components.AbstractComponent;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
+import org.apache.sling.models.annotations.injectorspecific.Self;
 
 import javax.inject.Inject;
 
@@ -36,6 +37,7 @@ import javax.inject.Inject;
 public class LinkList extends AbstractComponent {
 
     @Inject
+    @Self
     private Classification classification;
 
     @DialogField

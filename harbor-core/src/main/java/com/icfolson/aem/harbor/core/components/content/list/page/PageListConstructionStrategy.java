@@ -28,21 +28,21 @@ public class PageListConstructionStrategy extends AbstractNodeSearchConstruction
     private static final Logger LOG = LoggerFactory.getLogger(PageListConstructionStrategy.class);
 
     @DialogField
-    @DialogFieldSet(title = "Path", namePrefix = "pathpredicate/", collapsible = true, collapsed = true)
+    @DialogFieldSet(title = "Path", namePrefix = "./pathpredicate/", collapsible = true, collapsed = true)
     @Inject
     @Named("pathpredicate")
     @Optional
     private PathConstructionPredicate pathConstructionPredicate;
 
     @DialogField
-    @DialogFieldSet(title = "Tags", namePrefix = "tagspredicate/", collapsible = true, collapsed = true)
+    @DialogFieldSet(title = "Tags", namePrefix = "./tagspredicate/", collapsible = true, collapsed = true)
     @Inject
     @Named("tagspredicate")
     @Optional
     private PageTagsConstructionPredicate tagsConstructionPredicate;
 
     @DialogField
-    @DialogFieldSet(title = "Query Parameters", namePrefix = "queryparameterpredicate/", collapsible = true,
+    @DialogFieldSet(title = "Query Parameters", namePrefix = "./queryparameterpredicate/", collapsible = true,
         collapsed = true)
     @Inject
     @Named("queryparameterpredicate")
@@ -64,7 +64,7 @@ public class PageListConstructionStrategy extends AbstractNodeSearchConstruction
     }
 
     protected PageNodeTypeConstructionPredicate getNodeTypeConstructionPredicate() {
-        return this.getResource().adaptTo(PageNodeTypeConstructionPredicate.class);
+        return getResource().adaptTo(PageNodeTypeConstructionPredicate.class);
     }
 
     @Override

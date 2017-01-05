@@ -6,6 +6,7 @@ import com.citytechinc.cq.component.annotations.widgets.TagInputField;
 import com.citytechinc.cq.component.annotations.widgets.TextField;
 import com.day.cq.search.Predicate;
 import com.day.cq.search.PredicateGroup;
+import com.day.cq.search.eval.JcrPropertyPredicateEvaluator;
 import com.day.cq.tagging.Tag;
 import com.day.cq.tagging.TagManager;
 import com.google.common.base.Optional;
@@ -116,8 +117,8 @@ public class TagsConstructionPredicate extends AbstractComponent implements Cons
         return predicateOptional;
     }
 
-    private Predicate createTagPredicate(Tag tag) {
-        final Predicate predicate = new Predicate("tagId");
+    private Predicate createTagPredicate(final Tag tag) {
+        final Predicate predicate = new Predicate(JcrPropertyPredicateEvaluator.PROPERTY);
 
         if (getRelPath().isPresent()) {
             predicate.set("property", getRelPath().get());

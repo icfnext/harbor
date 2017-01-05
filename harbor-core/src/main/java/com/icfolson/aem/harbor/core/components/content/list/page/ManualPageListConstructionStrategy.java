@@ -23,7 +23,7 @@ public class ManualPageListConstructionStrategy extends AbstractComponent implem
 
     private List<PageDecorator> pages;
 
-    @DialogField(name = "./paths", fieldLabel = "Paths", fieldDescription = "Path to search for nodes under.")
+    @DialogField(fieldLabel = "Paths", fieldDescription = "Path to search for nodes under.")
     @PathField(rootPath = PathConstants.PATH_CONTENT)
     @MultiField
     public List<String> getPaths() {

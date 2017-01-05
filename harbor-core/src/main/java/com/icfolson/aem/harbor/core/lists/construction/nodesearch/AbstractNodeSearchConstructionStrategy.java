@@ -1,10 +1,12 @@
 package com.icfolson.aem.harbor.core.lists.construction.nodesearch;
 
+import com.day.cq.search.Predicate;
 import com.day.cq.search.PredicateGroup;
 import com.day.cq.search.Query;
 import com.day.cq.search.QueryBuilder;
 import com.day.cq.search.result.Hit;
 import com.day.cq.search.result.SearchResult;
+import com.google.common.base.Optional;
 import com.google.common.base.Stopwatch;
 import com.icfolson.aem.harbor.api.lists.construction.ListConstructionStrategy;
 import com.icfolson.aem.harbor.api.lists.construction.search.ConstructionPredicate;
@@ -27,7 +29,7 @@ public abstract class AbstractNodeSearchConstructionStrategy<T> extends Abstract
 
     private static final Logger LOG = LoggerFactory.getLogger(AbstractNodeSearchConstructionStrategy.class);
 
-    private PredicateGroup predicate;
+    private PredicateGroup predicateGroup;
 
     private List<T> results;
 
@@ -45,20 +47,22 @@ public abstract class AbstractNodeSearchConstructionStrategy<T> extends Abstract
     protected abstract List<ConstructionPredicate> getConstructionPredicates();
 
     protected PredicateGroup getPredicateGroup() {
-        if (predicate == null) {
-            predicate = new PredicateGroup();
-            predicate.setAllRequired(true);
+        if (predicateGroup == null) {
+            predicateGroup = new PredicateGroup();
+            predicateGroup.setAllRequired(true);
 
-            for (ConstructionPredicate currentConstructionPredicate : getConstructionPredicates()) {
-                if (currentConstructionPredicate.asPredicate().isPresent()) {
-                    predicate.add(currentConstructionPredicate.asPredicate().get());
+            for (ConstructionPredicate constructionPredicate : getConstructionPredicates()) {
+                final Optional<Predicate> predicate = constructionPredicate.asPredicate();
+
+                if (predicate.isPresent()) {
+                    predicateGroup.add(predicate.get());
                 }
             }
 
-            LOG.info("predicate group = {}", predicate);
+            LOG.info("predicate group = {}", predicateGroup);
         }
 
-        return predicate;
+        return predicateGroup;
     }
 
     /**

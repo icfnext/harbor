@@ -11,9 +11,6 @@ public class AssetNodeTypeConstructionPredicate extends NodeTypeConstructionPred
     private static final Optional<String> NODE_TYPE_OPTIONAL = Optional.of(DamConstants.NT_DAM_ASSET);
 
     public Optional<String> getNodeType() {
-
         return NODE_TYPE_OPTIONAL;
-
     }
-
 }
