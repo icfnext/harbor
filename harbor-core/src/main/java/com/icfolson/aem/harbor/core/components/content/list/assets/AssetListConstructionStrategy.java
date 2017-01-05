@@ -12,8 +12,8 @@ import com.icfolson.aem.harbor.core.lists.construction.nodesearch.predicates.pat
 import com.icfolson.aem.harbor.core.lists.construction.nodesearch.predicates.queryparameters.QueryParameterConstructionPredicate;
 import com.icfolson.aem.harbor.core.lists.construction.nodesearch.predicates.tags.AssetTagsConstructionPredicate;
 import org.apache.sling.api.resource.Resource;
+import org.apache.sling.models.annotations.DefaultInjectionStrategy;
 import org.apache.sling.models.annotations.Model;
-import org.apache.sling.models.annotations.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,31 +27,28 @@ import java.util.List;
  * <p>
  * Contains a hard-coded predicate restricting search to only asset nodes.
  */
-@Model(adaptables = Resource.class)
+@Model(adaptables = Resource.class, defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
 public class AssetListConstructionStrategy extends AbstractNodeSearchConstructionStrategy<Asset> {
 
     private static final Logger LOG = LoggerFactory.getLogger(AssetListConstructionStrategy.class);
 
     @DialogField
-    @DialogFieldSet(title = "Path", namePrefix = "pathpredicate/", collapsible = true, collapsed = true)
+    @DialogFieldSet(title = "Path", namePrefix = "./pathpredicate/", collapsible = true, collapsed = true)
     @Inject
     @Named("pathpredicate")
-    @Optional
     private PathConstructionPredicate pathConstructionPredicate;
 
     @DialogField
-    @DialogFieldSet(title = "Tags", namePrefix = "tagspredicate/", collapsible = true, collapsed = true)
+    @DialogFieldSet(title = "Tags", namePrefix = "./tagspredicate/", collapsible = true, collapsed = true)
     @Inject
     @Named("tagspredicate")
-    @Optional
     private AssetTagsConstructionPredicate tagsConstructionPredicate;
 
     @DialogField
-    @DialogFieldSet(title = "Query Parameters", namePrefix = "queryparameterpredicate/", collapsible = true,
+    @DialogFieldSet(title = "Query Parameters", namePrefix = "./queryparameterpredicate/", collapsible = true,
         collapsed = true)
     @Inject
     @Named("queryparameterpredicate")
-    @Optional
     private QueryParameterConstructionPredicate queryParameterConstructionPredicate;
 
     private List<ConstructionPredicate> constructionPredicates;

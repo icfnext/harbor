@@ -29,7 +29,7 @@ public class PathConstructionPredicate extends AbstractComponent implements Cons
     /**
      * @return path to search for nodes under.
      */
-    @DialogField(fieldLabel = "Path", fieldDescription = "Path to search for nodes under.")
+    @DialogField(fieldLabel = "Path", fieldDescription = "Path to search for nodes under.", name = "searchPath")
     @PathField(rootPath = PathConstants.PATH_CONTENT)
     public Optional<String> getSearchPath() {
         return get("searchPath", String.class);
@@ -37,21 +37,18 @@ public class PathConstructionPredicate extends AbstractComponent implements Cons
 
     @Override
     public Optional<Predicate> asPredicate() {
-
         if (predicateOptional == null) {
-
             if (getSearchPath().isPresent()) {
-                Predicate predicate = new Predicate(PARAM_PATH);
+                final Predicate predicate = new Predicate(PARAM_PATH);
+
                 predicate.set(PARAM_PATH, getSearchPath().get());
 
                 predicateOptional = Optional.of(predicate);
             } else {
                 predicateOptional = Optional.absent();
             }
-
         }
 
         return predicateOptional;
-
     }
 }

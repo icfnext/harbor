@@ -1,0 +1,28 @@
+<p data-sly-test="${isEditMode}" class="authoring-placeholder">Page List</p>
+
+<ul data-sly-use.listComponent="com.icfolson.aem.harbor.core.components.content.list.page.PageList"
+    data-sly-test="${listComponent.hasListElement}"
+    data-sly-list.renderableItem="${listComponent.items}">
+    <li>
+        <article data-sly-test="${renderableItem.article}">
+            <header>
+                <h3 data-sly-test="${renderableItem.renderTitle}" data-sly-element="${renderableItem.titleHeadingType}">
+                    <a data-sly-unwrap="${!renderableItem.renderAsLink}" href="${renderableItem.href}">${renderableItem.title}</a>
+                </h3>
+
+                <p data-sly-test="${renderableItem.renderSubtitle}" class="subtitle">${renderableItem.subtitle}</p>
+            </header>
+
+            <img data-sly-test="${renderableItem.renderImage}" src="${renderableItem.imageSource}">
+            <p data-sly-test="${renderableItem.renderDescription}">${renderableItem.description}</p>
+        </article>
+
+        <sly data-sly-test="${!renderableItem.article}">
+            <h3 data-sly-test="${renderableItem.renderTitle}" data-sly-element="${renderableItem.titleHeadingType}">
+                <a data-sly-unwrap="${!renderableItem.renderAsLink}" href="${renderableItem.href}">${renderableItem.title}</a>
+            </h3>
+
+            <p data-sly-test="${!renderableItem.renderTitle}">Warning! Nothing has been selected to be presented for this page list.</p>
+        </sly>
+    </li>
+</ul>

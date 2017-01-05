@@ -33,7 +33,7 @@ public abstract class AbstractTreeComponent<T extends TreeNode, R extends Tree> 
 
     @Override
     public boolean isHasRoot() {
-        R tree = getTree();
+        final R tree = getTree();
 
         return tree != null && tree.isHasRoot();
     }

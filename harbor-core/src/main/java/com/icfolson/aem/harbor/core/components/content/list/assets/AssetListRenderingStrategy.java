@@ -6,6 +6,7 @@ import com.citytechinc.cq.component.annotations.widgets.Selection;
 import com.citytechinc.cq.component.annotations.widgets.Switch;
 import com.citytechinc.cq.component.annotations.widgets.TextField;
 import com.day.cq.dam.api.Asset;
+import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
 import com.icfolson.aem.harbor.api.constants.dom.Headings;
 import com.icfolson.aem.harbor.api.lists.rendering.ListRenderingStrategy;
@@ -16,6 +17,7 @@ import org.apache.sling.models.annotations.Model;
 
 import javax.inject.Inject;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Renders a list of assets as links.
@@ -24,7 +26,7 @@ import java.util.List;
 public class AssetListRenderingStrategy implements
     ListRenderingStrategy<Asset, List<AssetListRenderingStrategy.RenderableAsset>> {
 
-    //TODO: Move into a Constants object elsewhere
+    // TODO: Move into a Constants object elsewhere
     public static final String TITLE_PROPERTY = "dc:title";
 
     public static final String DESCRIPTION_PROPERTY = "dc:description";
@@ -39,14 +41,9 @@ public class AssetListRenderingStrategy implements
 
     private static final String ORIGINAL = "Original";
 
-    private static final String PARAM_AS_LINKS = "renderAsLinks";
-
-    private static final boolean DEFAULT_AS_LINKS = false;
-
     @DialogField(fieldLabel = "Suppress Images?")
     @Switch(offText = "No", onText = "Yes")
     @Inject
-    @Default(booleanValues = false)
     private boolean suppressImages;
 
     @DialogField(fieldLabel = "Image Size", fieldDescription = "Render image as original size or thumbnail rendition",
@@ -63,11 +60,11 @@ public class AssetListRenderingStrategy implements
     @DialogField(fieldLabel = "Render Asset Titles?")
     @Switch(offText = "No", onText = "Yes")
     @Inject
-    @Default(booleanValues = false)
     private boolean renderTitles;
 
     @DialogField(fieldLabel = "Render Asset Creators?")
     @Switch(offText = "No", onText = "Yes")
+    @Inject
     private boolean renderCreators;
 
     @DialogField(fieldLabel = "Creator Label",
@@ -81,13 +78,11 @@ public class AssetListRenderingStrategy implements
     @DialogField(fieldLabel = "Render Asset Descriptions?")
     @Switch(offText = "No", onText = "Yes")
     @Inject
-    @Default(booleanValues = false)
     private boolean renderDescriptions;
 
     @DialogField(fieldLabel = "Render Asset Formats?")
     @Switch(offText = "No", onText = "Yes")
     @Inject
-    @Default(booleanValues = false)
     private boolean renderFormats;
 
     @DialogField(fieldLabel = "Format Label",
@@ -101,7 +96,6 @@ public class AssetListRenderingStrategy implements
     @DialogField(fieldLabel = "Render as Links")
     @Switch(offText = "No", onText = "Yes")
     @Inject
-    @Default(booleanValues = false)
     private boolean renderAsLinks;
 
     @DialogField(fieldLabel = "Title Heading Type",
@@ -129,23 +123,20 @@ public class AssetListRenderingStrategy implements
     @Override
     public List<RenderableAsset> toRenderableList(Iterable<Asset> itemIterable) {
         if (renderableAssets == null) {
-            renderableAssets = Lists.newArrayList();
-
-            for (Asset currentAsset : itemIterable) {
-                renderableAssets.add(
-                    new RenderableAsset(
-                        currentAsset,
-                        suppressImages,
-                        imageSize,
-                        renderTitles,
-                        renderCreators,
-                        creatorLabel,
-                        renderDescriptions,
-                        renderFormats,
-                        formatLabel,
-                        getRenderAsLinks(),
-                        titleHeadingType));
-            }
+            renderableAssets = Lists.newArrayList(itemIterable)
+                .stream()
+                .map(asset -> new RenderableAsset(asset,
+                    suppressImages,
+                    imageSize,
+                    renderTitles,
+                    renderCreators,
+                    creatorLabel,
+                    renderDescriptions,
+                    renderFormats,
+                    formatLabel,
+                    getRenderAsLinks(),
+                    titleHeadingType))
+                .collect(Collectors.toList());
         }
 
         return renderableAssets;
@@ -210,10 +201,12 @@ public class AssetListRenderingStrategy implements
 
         public String getImageSourceRendition() {
             if (StringUtils.isNotBlank(imageSize) && !imageSize.equalsIgnoreCase(ORIGINAL)) {
-                StringBuilder builder = new StringBuilder(asset.getPath());
+                final StringBuilder builder = new StringBuilder(asset.getPath());
+
                 builder.append("/").append(RENDITION_THUMBNAIL_PATH);
                 builder.append(".").append(imageSize).append(".");
                 builder.append(RENDITION_THUMBNAIL_EXTENSION);
+
                 return builder.toString();
             } else {
                 return asset.getPath();
@@ -229,11 +222,7 @@ public class AssetListRenderingStrategy implements
         }
 
         public String getCreatedByLabel() {
-            if (StringUtils.isNotBlank(createdByLabel)) {
-                return createdByLabel + " ";
-            }
-
-            return "";
+            return StringUtils.isNotBlank(createdByLabel) ? createdByLabel + " " : "";
         }
 
         public String getDescription() {
@@ -245,11 +234,7 @@ public class AssetListRenderingStrategy implements
         }
 
         public String getFormatLabel() {
-            if (StringUtils.isNotBlank(formatLabel)) {
-                return formatLabel + " ";
-            }
-
-            return "";
+            return StringUtils.isNotBlank(formatLabel) ? formatLabel + " " : "";
         }
 
         public String getTitleHeadingType() {
@@ -286,8 +271,30 @@ public class AssetListRenderingStrategy implements
          * 1: Both the Title and Image are to be rendered
          * 2: Any of the additional meta is to be presented
          */
-        public boolean getIsArticle() {
+        public boolean isArticle() {
             return (isRenderImage() && isRenderTitle()) || isRenderDescription() || isRenderFormat() || isRenderCreator();
+        }
+
+        @Override
+        public String toString() {
+            return Objects.toStringHelper(this)
+                .add("imageSource", getImageSource())
+                .add("imageSourceRendition", getImageSourceRendition())
+                .add("title", getTitle())
+                .add("creator", getCreator())
+                .add("createdByLabel", getCreatedByLabel())
+                .add("description", getDescription())
+                .add("format", getFormat())
+                .add("formatLabel", getFormatLabel())
+                .add("titleHeadingType", getTitleHeadingType())
+                .add("renderAsLink", isRenderAsLink())
+                .add("renderFormat", isRenderFormat())
+                .add("renderDescription", isRenderDescription())
+                .add("renderCreator", isRenderCreator())
+                .add("renderTitle", isRenderTitle())
+                .add("renderImage", isRenderImage())
+                .add("article", isArticle())
+                .toString();
         }
     }
 }

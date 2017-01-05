@@ -185,7 +185,7 @@ public class LinkablePageRenderingStrategy implements
             return titleHeadingType;
         }
 
-        public boolean getIsArticle() {
+        public boolean isArticle() {
             return isRenderSubtitle() || isRenderDescription() || isRenderImage();
         }
     }

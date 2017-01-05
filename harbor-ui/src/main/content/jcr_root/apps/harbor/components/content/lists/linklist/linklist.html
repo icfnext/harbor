@@ -1,4 +1,4 @@
-<ul data-sly-use.linklist="${component.properties['className']}" data-sly-attribute.class="${linklist.classification.classNames}">
+<ul data-sly-use.linkList="com.icfolson.aem.harbor.core.components.content.list.link.LinkList" data-sly-attribute.class="${linkList.classification.classNames}">
     <li class="author-help-message" data-sly-test="${isEditMode && !resource.listChildren}">Press '+' to Add a List Item</li>
     <sly data-sly-repeat="${resource.listChildren}" data-sly-resource="${item.path @ resourceType=item.resourceType, decorationTagName='li'}"/>
 </ul>

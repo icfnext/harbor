@@ -11,9 +11,6 @@ public class PageTagsConstructionPredicate extends TagsConstructionPredicate {
 
     @Override
     public Optional<String> getRelPath() {
-
         return RELATIVE_PATH;
-
     }
-
 }

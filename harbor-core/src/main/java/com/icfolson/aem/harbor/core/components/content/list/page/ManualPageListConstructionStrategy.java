@@ -18,10 +18,10 @@ import java.util.stream.Collectors;
 @Model(adaptables = Resource.class)
 public class ManualPageListConstructionStrategy extends AbstractComponent implements ListConstructionStrategy<PageDecorator> {
 
-    private List<PageDecorator> pages;
-
     @Inject
     private PageManagerDecorator pageManagerDecorator;
+
+    private List<PageDecorator> pages;
 
     @DialogField(name = "./paths", fieldLabel = "Paths", fieldDescription = "Path to search for nodes under.")
     @PathField(rootPath = PathConstants.PATH_CONTENT)

@@ -3,12 +3,10 @@ package com.icfolson.aem.harbor.core.components.content.list.page;
 import com.citytechinc.cq.component.annotations.Component;
 import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.widgets.DialogFieldSet;
-import com.icfolson.aem.harbor.api.constants.lists.ListConstants;
 import com.icfolson.aem.harbor.api.lists.construction.ListConstructionStrategy;
 import com.icfolson.aem.harbor.api.lists.rendering.ListRenderingStrategy;
 import com.icfolson.aem.harbor.core.components.content.list.AbstractListComponent;
 import com.icfolson.aem.harbor.core.constants.groups.ComponentGroups;
-import com.icfolson.aem.library.api.components.annotations.AutoInstantiate;
 import com.icfolson.aem.library.api.page.PageDecorator;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
@@ -17,13 +15,7 @@ import org.apache.sling.models.annotations.injectorspecific.Self;
 import javax.inject.Inject;
 import java.util.List;
 
-@Component(
-    value = "Manual Page List",
-    group = ComponentGroups.HARBOR_LISTS,
-    resourceSuperType = AbstractListComponent.RESOURCE_TYPE,
-    //TODO: Consider having this extend PageList as the jsp for both is basically the same
-    name = "lists/manualpagelist")
-@AutoInstantiate(instanceName = ListConstants.LIST_PAGE_CONTEXT_NAME)
+@Component(value = "Manual Page List", group = ComponentGroups.HARBOR_LISTS, name = "lists/manualpagelist")
 @Model(adaptables = Resource.class)
 public class ManualPageList extends AbstractListComponent<PageDecorator, List<LinkablePageRenderingStrategy.LinkablePage>> {
 
@@ -47,10 +39,5 @@ public class ManualPageList extends AbstractListComponent<PageDecorator, List<Li
     @Override
     protected ListRenderingStrategy<PageDecorator, List<LinkablePageRenderingStrategy.LinkablePage>> getListRenderingStrategy() {
         return renderingStrategy;
-    }
-
-    @Override
-    public Boolean getIsUnorderedList() {
-        return true;
     }
 }

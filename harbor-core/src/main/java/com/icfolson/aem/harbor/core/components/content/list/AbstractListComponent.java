@@ -1,16 +1,15 @@
 package com.icfolson.aem.harbor.core.components.content.list;
 
-import com.citytechinc.cq.component.annotations.Component;
+import com.google.common.collect.Lists;
 import com.icfolson.aem.harbor.api.components.content.list.ListComponent;
-import com.icfolson.aem.harbor.api.constants.dom.Elements;
 import com.icfolson.aem.harbor.api.lists.construction.ListConstructionStrategy;
 import com.icfolson.aem.harbor.api.lists.rendering.ListRenderingStrategy;
+import com.icfolson.aem.harbor.api.lists.rendering.RenderableItem;
 import com.icfolson.aem.library.core.components.AbstractComponent;
-import com.icfolson.aem.library.core.constants.ComponentConstants;
 
 import java.util.Iterator;
+import java.util.List;
 
-@Component(value = "Abstract List", group = ComponentConstants.GROUP_HIDDEN, name = "lists/abstractlist")
 public abstract class AbstractListComponent<T, R extends Iterable<?>> extends AbstractComponent implements
     ListComponent<R> {
 
@@ -19,6 +18,8 @@ public abstract class AbstractListComponent<T, R extends Iterable<?>> extends Ab
     protected Iterable<T> rawListItems;
 
     protected R listItems;
+
+    protected List<RenderableItemWrapper> renderableItems;
 
     protected abstract ListConstructionStrategy<T> getListConstructionStrategy();
 
@@ -38,57 +39,18 @@ public abstract class AbstractListComponent<T, R extends Iterable<?>> extends Ab
         return getItems().iterator();
     }
 
+    public List<RenderableItemWrapper> getRenderableItems() {
+        if (renderableItems == null) {
+            renderableItems = Lists.newArrayList();
 
-    @Deprecated
-    public String getListElement() {
-        if (getIsOrderedList()) {
-            return Elements.OL;
+            for (Object item : getItems()) {
+                if (item instanceof RenderableItem) {
+                    renderableItems.add(new RenderableItemWrapper((RenderableItem) item));
+                }
+            }
         }
 
-        if (getIsUnorderedList()) {
-            return Elements.UL;
-        }
-
-        return null;
-    }
-
-    @Deprecated
-    public Boolean getHasListElement() {
-        return getListElement() != null;
-    }
-
-    @Deprecated
-    public Boolean getIsOrderedList() {
-        return false;
-    }
-
-    @Deprecated
-    public Boolean getIsUnorderedList() {
-        return false;
-    }
-
-    /**
-     * Indicates whether this list should be rendered as one of the two primary
-     * HTML list types, ol and ul
-     *
-     * @return True if this list should be rendered as either an ordered or unordered list, false otherwise
-     */
-    @Deprecated
-    public Boolean getIsHtmlList() {
-        return getIsOrderedList() || getIsUnorderedList();
-    }
-
-    @Deprecated
-    public Boolean getIsReversed() {
-        return false;
-    }
-
-    public Integer getStart() {
-        return null;
-    }
-
-    public Boolean getHasStart() {
-        return getStart() != null;
+        return renderableItems;
     }
 
     protected Iterable<T> getRawListItems() {
@@ -97,5 +59,22 @@ public abstract class AbstractListComponent<T, R extends Iterable<?>> extends Ab
         }
 
         return rawListItems;
+    }
+
+    /**
+     * Wrapper to expose the render method of a renderable item in a template-friendly manner (i.e. using Java bean
+     * getter conventions).
+     */
+    public static class RenderableItemWrapper {
+
+        private final RenderableItem item;
+
+        public RenderableItemWrapper(final RenderableItem item) {
+            this.item = item;
+        }
+
+        public String getRendered() {
+            return item.render();
+        }
     }
 }

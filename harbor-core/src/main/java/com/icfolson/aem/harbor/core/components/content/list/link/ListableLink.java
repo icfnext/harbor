@@ -20,7 +20,7 @@ import org.apache.sling.models.annotations.Model;
     name = "lists/linklist/listablelink",
     htmlTag = { @HtmlTag(tagName = "li") },
     layout = "rollover",
-    actions = { "text: Accordion Item", "-", "edit", "delete" },
+    actions = { "text: Listable Link", "-", "edit", "delete" },
     actionConfigs = {
         @ActionConfig(xtype = "tbseparator"),
         @ActionConfig(text = "Move Up", handler = "function(){Harbor.Components.LinkList.moveUp( this )}",

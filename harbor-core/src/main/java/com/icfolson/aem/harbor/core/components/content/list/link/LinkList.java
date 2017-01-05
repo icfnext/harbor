@@ -12,7 +12,7 @@ import com.icfolson.aem.library.core.components.AbstractComponent;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
 
-import java.util.List;
+import javax.inject.Inject;
 
 @Component(
     value = "Link List",
@@ -35,17 +35,12 @@ import java.util.List;
 @Model(adaptables = Resource.class)
 public class LinkList extends AbstractComponent {
 
-    private List<ListableLink> links;
-
+    @Inject
     private Classification classification;
 
     @DialogField
     @DialogFieldSet
     public Classification getClassification() {
-        if (classification == null) {
-            classification = getResource().adaptTo(Classification.class);
-        }
-
         return classification;
     }
 }
