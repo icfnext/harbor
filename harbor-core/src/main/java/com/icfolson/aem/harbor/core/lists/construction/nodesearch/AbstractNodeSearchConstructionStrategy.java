@@ -71,7 +71,7 @@ public abstract class AbstractNodeSearchConstructionStrategy<T> extends Abstract
                     .set(Predicate.PARAM_SORT, queryParameters.getSortType()));
             }
 
-            LOG.info("predicate group = {}", predicateGroup);
+            LOG.debug("predicate group = {}", predicateGroup);
         }
 
         return predicateGroup;
@@ -85,7 +85,7 @@ public abstract class AbstractNodeSearchConstructionStrategy<T> extends Abstract
     protected List<T> doQuery() {
         if (results == null) {
             if (isReadyToQuery()) {
-                LOG.info("Executing query");
+                LOG.debug("Executing query");
 
                 final Stopwatch stopwatch = Stopwatch.createStarted();
 
@@ -96,7 +96,7 @@ public abstract class AbstractNodeSearchConstructionStrategy<T> extends Abstract
 
                 final SearchResult result = query.getResult();
 
-                LOG.info("Query executed in {}ms", stopwatch.elapsed(TimeUnit.MILLISECONDS));
+                LOG.debug("Query executed in {}ms", stopwatch.elapsed(TimeUnit.MILLISECONDS));
 
                 results = result.getHits()
                     .stream()
@@ -104,11 +104,11 @@ public abstract class AbstractNodeSearchConstructionStrategy<T> extends Abstract
                     .filter(Objects:: nonNull)
                     .collect(Collectors.toList());
 
-                LOG.info("returning {} results", results.size());
+                LOG.debug("returning {} results", results.size());
             } else {
                 results = Collections.emptyList();
 
-                LOG.info("not ready to query, returning empty result set");
+                LOG.debug("not ready to query, returning empty result set");
             }
         }
 
