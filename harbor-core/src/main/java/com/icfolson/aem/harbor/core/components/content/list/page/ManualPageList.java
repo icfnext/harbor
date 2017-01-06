@@ -16,11 +16,7 @@ import javax.inject.Inject;
 @Component(value = "Manual Page List",
     group = ComponentGroups.HARBOR_LISTS,
     resourceSuperType = PageList.RESOURCE_TYPE,
-    name = "lists/manualpagelist",
-    listeners = {
-        @Listener(name = "afteredit", value = "REFRESH_PAGE"),
-        @Listener(name = "afterdelete", value = "REFRESH_PAGE")
-    })
+    name = "lists/manualpagelist")
 @Model(adaptables = Resource.class)
 public class ManualPageList extends AbstractPageList {
 

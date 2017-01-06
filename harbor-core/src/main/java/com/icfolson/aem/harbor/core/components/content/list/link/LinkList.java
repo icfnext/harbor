@@ -34,6 +34,7 @@ import javax.inject.Inject;
             })
     },
     listeners = {
+        @Listener(name = "afterinsert", value = "REFRESH_PAGE"),
         @Listener(name = "afteredit", value = "REFRESH_PAGE"),
         @Listener(name = "afterdelete", value = "REFRESH_PAGE")
     }
