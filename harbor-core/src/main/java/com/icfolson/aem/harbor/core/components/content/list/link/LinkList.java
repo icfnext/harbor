@@ -3,6 +3,7 @@ package com.icfolson.aem.harbor.core.components.content.list.link;
 import com.citytechinc.cq.component.annotations.Component;
 import com.citytechinc.cq.component.annotations.ContentProperty;
 import com.citytechinc.cq.component.annotations.DialogField;
+import com.citytechinc.cq.component.annotations.Listener;
 import com.citytechinc.cq.component.annotations.editconfig.ActionConfig;
 import com.citytechinc.cq.component.annotations.editconfig.ActionConfigProperty;
 import com.citytechinc.cq.component.annotations.widgets.DialogFieldSet;
@@ -31,6 +32,10 @@ import javax.inject.Inject;
             additionalProperties = {
                 @ActionConfigProperty(name = "icon", value = "coral-Icon--add")
             })
+    },
+    listeners = {
+        @Listener(name = "afteredit", value = "REFRESH_PAGE"),
+        @Listener(name = "afterdelete", value = "REFRESH_PAGE")
     }
 )
 @Model(adaptables = Resource.class)

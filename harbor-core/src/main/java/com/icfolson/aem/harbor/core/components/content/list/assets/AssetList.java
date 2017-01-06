@@ -2,6 +2,7 @@ package com.icfolson.aem.harbor.core.components.content.list.assets;
 
 import com.citytechinc.cq.component.annotations.Component;
 import com.citytechinc.cq.component.annotations.DialogField;
+import com.citytechinc.cq.component.annotations.Listener;
 import com.citytechinc.cq.component.annotations.widgets.DialogFieldSet;
 import com.day.cq.dam.api.Asset;
 import com.icfolson.aem.harbor.api.lists.construction.ListConstructionStrategy;
@@ -15,7 +16,13 @@ import org.apache.sling.models.annotations.injectorspecific.Self;
 import javax.inject.Inject;
 import java.util.List;
 
-@Component(value = "Asset List", group = ComponentGroups.HARBOR_LISTS, name = "lists/assetlist")
+@Component(value = "Asset List",
+    group = ComponentGroups.HARBOR_LISTS,
+    name = "lists/assetlist",
+    listeners = {
+        @Listener(name = "afteredit", value = "REFRESH_PAGE"),
+        @Listener(name = "afterdelete", value = "REFRESH_PAGE")
+    })
 @Model(adaptables = Resource.class)
 public class AssetList extends AbstractListComponent<Asset, List<AssetListRenderingStrategy.RenderableAsset>> {
 
