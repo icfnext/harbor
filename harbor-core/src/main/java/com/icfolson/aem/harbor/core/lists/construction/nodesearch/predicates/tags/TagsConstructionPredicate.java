@@ -9,6 +9,7 @@ import com.day.cq.search.PredicateGroup;
 import com.day.cq.search.eval.JcrPropertyPredicateEvaluator;
 import com.day.cq.tagging.Tag;
 import com.day.cq.tagging.TagManager;
+import com.day.cq.wcm.api.NameConstants;
 import com.google.common.base.Optional;
 import com.icfolson.aem.harbor.api.lists.construction.search.ConstructionPredicate;
 import com.icfolson.aem.library.core.components.AbstractComponent;
@@ -33,7 +34,7 @@ public class TagsConstructionPredicate extends AbstractComponent implements Cons
 
     private static final String PARAM_COMPOSE_WITH_AND = "composeWithAnd";
 
-    private static final String PARAM_REL_PATH = "relPath";
+    private static final String PARAM_RELATIVE_PATH = "relativePath";
 
     private static final String PARAM_TAGS = "tags";
 
@@ -66,8 +67,8 @@ public class TagsConstructionPredicate extends AbstractComponent implements Cons
     @DialogField(fieldLabel = "Property Relative Path",
         fieldDescription = "Relative path from nodes being searched to the node where their tag property is stored. For example, if searching for dam:Assets, you would set this field to 'jcr:content/metadata'. Leave blank to search for tags on result nodes themselves.")
     @TextField
-    public Optional<String> getRelPath() {
-        return get(PARAM_REL_PATH, String.class);
+    public Optional<String> getRelativePath() {
+        return get(PARAM_RELATIVE_PATH, String.class);
     }
 
     /**
@@ -118,14 +119,8 @@ public class TagsConstructionPredicate extends AbstractComponent implements Cons
     }
 
     private Predicate createTagPredicate(final Tag tag) {
-        final Predicate predicate = new Predicate(JcrPropertyPredicateEvaluator.PROPERTY);
-
-        if (getRelPath().isPresent()) {
-            predicate.set("property", getRelPath().get());
-        }
-
-        predicate.set("tagid", tag.getTagID());
-
-        return predicate;
+        return new Predicate(JcrPropertyPredicateEvaluator.PROPERTY)
+            .set(JcrPropertyPredicateEvaluator.PROPERTY, getRelativePath().or(NameConstants.PN_TAGS))
+            .set(JcrPropertyPredicateEvaluator.VALUE, tag.getTagID());
     }
 }

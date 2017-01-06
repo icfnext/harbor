@@ -9,7 +9,7 @@ import com.icfolson.aem.harbor.api.lists.construction.search.ConstructionPredica
 import com.icfolson.aem.harbor.core.lists.construction.nodesearch.AbstractNodeSearchConstructionStrategy;
 import com.icfolson.aem.harbor.core.lists.construction.nodesearch.predicates.nodetype.AssetNodeTypeConstructionPredicate;
 import com.icfolson.aem.harbor.core.lists.construction.nodesearch.predicates.path.PathConstructionPredicate;
-import com.icfolson.aem.harbor.core.lists.construction.nodesearch.predicates.queryparameters.QueryParameterConstructionPredicate;
+import com.icfolson.aem.harbor.core.lists.construction.nodesearch.predicates.queryparameters.QueryParameters;
 import com.icfolson.aem.harbor.core.lists.construction.nodesearch.predicates.tags.AssetTagsConstructionPredicate;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.DefaultInjectionStrategy;
@@ -45,11 +45,10 @@ public class AssetListConstructionStrategy extends AbstractNodeSearchConstructio
     private AssetTagsConstructionPredicate tagsConstructionPredicate;
 
     @DialogField
-    @DialogFieldSet(title = "Query Parameters", namePrefix = "./queryparameterpredicate/", collapsible = true,
-        collapsed = true)
+    @DialogFieldSet(title = "Query Parameters", namePrefix = "./queryparameters/", collapsible = true, collapsed = true)
     @Inject
-    @Named("queryparameterpredicate")
-    private QueryParameterConstructionPredicate queryParameterConstructionPredicate;
+    @Named("queryparameters")
+    private QueryParameters queryParameters;
 
     private List<ConstructionPredicate> constructionPredicates;
 
@@ -61,12 +60,13 @@ public class AssetListConstructionStrategy extends AbstractNodeSearchConstructio
         return tagsConstructionPredicate;
     }
 
-    protected QueryParameterConstructionPredicate getQueryParameterConstructionPredicate() {
-        return queryParameterConstructionPredicate;
-    }
-
     protected AssetNodeTypeConstructionPredicate getNodeTypeConstructionPredicate() {
         return getResource().adaptTo(AssetNodeTypeConstructionPredicate.class);
+    }
+
+    @Override
+    protected QueryParameters getQueryParameters() {
+        return queryParameters;
     }
 
     @Override
@@ -95,10 +95,6 @@ public class AssetListConstructionStrategy extends AbstractNodeSearchConstructio
 
             if (getTagsConstructionPredicate() != null) {
                 constructionPredicates.add(getTagsConstructionPredicate());
-            }
-
-            if (getQueryParameterConstructionPredicate() != null) {
-                constructionPredicates.add(getQueryParameterConstructionPredicate());
             }
         }
 

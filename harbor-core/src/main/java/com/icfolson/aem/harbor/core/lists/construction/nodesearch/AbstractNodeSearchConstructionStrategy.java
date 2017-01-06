@@ -10,6 +10,7 @@ import com.google.common.base.Optional;
 import com.google.common.base.Stopwatch;
 import com.icfolson.aem.harbor.api.lists.construction.ListConstructionStrategy;
 import com.icfolson.aem.harbor.api.lists.construction.search.ConstructionPredicate;
+import com.icfolson.aem.harbor.core.lists.construction.nodesearch.predicates.queryparameters.QueryParameters;
 import com.icfolson.aem.library.core.components.AbstractComponent;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.slf4j.Logger;
@@ -46,6 +47,8 @@ public abstract class AbstractNodeSearchConstructionStrategy<T> extends Abstract
 
     protected abstract List<ConstructionPredicate> getConstructionPredicates();
 
+    protected abstract QueryParameters getQueryParameters();
+
     protected PredicateGroup getPredicateGroup() {
         if (predicateGroup == null) {
             predicateGroup = new PredicateGroup();
@@ -57,6 +60,15 @@ public abstract class AbstractNodeSearchConstructionStrategy<T> extends Abstract
                 if (predicate.isPresent()) {
                     predicateGroup.add(predicate.get());
                 }
+            }
+
+            final QueryParameters queryParameters = getQueryParameters();
+
+            if (queryParameters != null) {
+                predicateGroup.set(Predicate.PARAM_LIMIT, queryParameters.getLimit());
+                predicateGroup.add(new Predicate(Predicate.ORDER_BY)
+                    .set(Predicate.ORDER_BY, queryParameters.getOrderBy())
+                    .set(Predicate.PARAM_SORT, queryParameters.getSortType()));
             }
 
             LOG.info("predicate group = {}", predicateGroup);

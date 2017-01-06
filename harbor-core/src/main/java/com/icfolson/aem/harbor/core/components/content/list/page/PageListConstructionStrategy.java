@@ -8,12 +8,12 @@ import com.icfolson.aem.harbor.api.lists.construction.search.ConstructionPredica
 import com.icfolson.aem.harbor.core.lists.construction.nodesearch.AbstractNodeSearchConstructionStrategy;
 import com.icfolson.aem.harbor.core.lists.construction.nodesearch.predicates.nodetype.PageNodeTypeConstructionPredicate;
 import com.icfolson.aem.harbor.core.lists.construction.nodesearch.predicates.path.PathConstructionPredicate;
-import com.icfolson.aem.harbor.core.lists.construction.nodesearch.predicates.queryparameters.QueryParameterConstructionPredicate;
+import com.icfolson.aem.harbor.core.lists.construction.nodesearch.predicates.queryparameters.QueryParameters;
 import com.icfolson.aem.harbor.core.lists.construction.nodesearch.predicates.tags.PageTagsConstructionPredicate;
 import com.icfolson.aem.library.api.page.PageDecorator;
 import org.apache.sling.api.resource.Resource;
+import org.apache.sling.models.annotations.DefaultInjectionStrategy;
 import org.apache.sling.models.annotations.Model;
-import org.apache.sling.models.annotations.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,7 +22,7 @@ import javax.inject.Named;
 import javax.jcr.RepositoryException;
 import java.util.List;
 
-@Model(adaptables = Resource.class)
+@Model(adaptables = Resource.class, defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
 public class PageListConstructionStrategy extends AbstractNodeSearchConstructionStrategy<PageDecorator> {
 
     private static final Logger LOG = LoggerFactory.getLogger(PageListConstructionStrategy.class);
@@ -31,23 +31,19 @@ public class PageListConstructionStrategy extends AbstractNodeSearchConstruction
     @DialogFieldSet(title = "Path", namePrefix = "./pathpredicate/", collapsible = true, collapsed = true)
     @Inject
     @Named("pathpredicate")
-    @Optional
     private PathConstructionPredicate pathConstructionPredicate;
 
     @DialogField
     @DialogFieldSet(title = "Tags", namePrefix = "./tagspredicate/", collapsible = true, collapsed = true)
     @Inject
     @Named("tagspredicate")
-    @Optional
     private PageTagsConstructionPredicate tagsConstructionPredicate;
 
     @DialogField
-    @DialogFieldSet(title = "Query Parameters", namePrefix = "./queryparameterpredicate/", collapsible = true,
-        collapsed = true)
+    @DialogFieldSet(title = "Query Parameters", namePrefix = "./queryparameters/", collapsible = true, collapsed = true)
     @Inject
-    @Named("queryparameterpredicate")
-    @Optional
-    private QueryParameterConstructionPredicate queryParameterConstructionPredicate;
+    @Named("queryparameters")
+    private QueryParameters queryParameters;
 
     private List<ConstructionPredicate> constructionPredicates;
 
@@ -59,12 +55,13 @@ public class PageListConstructionStrategy extends AbstractNodeSearchConstruction
         return tagsConstructionPredicate;
     }
 
-    protected QueryParameterConstructionPredicate getQueryParameterConstructionPredicate() {
-        return queryParameterConstructionPredicate;
-    }
-
     protected PageNodeTypeConstructionPredicate getNodeTypeConstructionPredicate() {
         return getResource().adaptTo(PageNodeTypeConstructionPredicate.class);
+    }
+
+    @Override
+    protected QueryParameters getQueryParameters() {
+        return queryParameters;
     }
 
     @Override
@@ -89,10 +86,6 @@ public class PageListConstructionStrategy extends AbstractNodeSearchConstruction
 
             if (getPathConstructionPredicate() != null) {
                 constructionPredicates.add(getPathConstructionPredicate());
-            }
-
-            if (getQueryParameterConstructionPredicate() != null) {
-                constructionPredicates.add(getQueryParameterConstructionPredicate());
             }
 
             if (getTagsConstructionPredicate() != null) {

@@ -10,7 +10,7 @@ public class AssetTagsConstructionPredicate extends TagsConstructionPredicate {
     private static Optional<String> RELATIVE_PATH = Optional.of("jcr:content/metadata/cq:tags");
 
     @Override
-    public Optional<String> getRelPath() {
+    public Optional<String> getRelativePath() {
         return RELATIVE_PATH;
     }
 }
