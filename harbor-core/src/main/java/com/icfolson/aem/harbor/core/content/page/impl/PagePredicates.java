@@ -16,57 +16,37 @@ public class PagePredicates {
 
     private static final Logger LOG = LoggerFactory.getLogger(PagePredicates.class);
 
-    public static final Predicate<PageDecorator> SECTION_LANDING_PAGE_PREDICATE = new Predicate<PageDecorator>() {
-
-        @Override
-        public boolean apply(final PageDecorator page) {
-            try {
-                Node pageContentNode = page.getContentResource().adaptTo(Node.class);
-                return pageContentNode.isNodeType(SectionLandingPage.RDF_TYPE);
-            } catch (RepositoryException e) {
-                LOG.error("Repository Exception encountered while evaluating Section Landing Page page predicate", e);
-                return false;
-            }
-        }
-
-    };
-
-    public static final Predicate<PageDecorator> CONTENT_PAGE_PREDICATE = new Predicate<PageDecorator>() {
-
-        @Override
-        public boolean apply(final PageDecorator page) {
-            try {
-                return page.getContentResource().adaptTo(Node.class).isNodeType("cq:PageContent");
-            } catch (RepositoryException e) {
-                LOG.error("Repository Exception encountered while evaluating Hierarchical Page page predicate", e);
-                return false;
-            }
-        }
-
-    };
-
-    public static final Predicate<PageDecorator> HOME_PAGE_PREDICATE = new Predicate<PageDecorator>() {
-
-        @Override
-        public boolean apply(final PageDecorator page) {
-            try {
-                Node pageContentNode = page.getContentResource().adaptTo(Node.class);
-                return pageContentNode.isNodeType(HomePage.RDF_TYPE);
-            } catch (RepositoryException e) {
-                LOG.error("Repository Exception encountered while evaluating Section Landing Page page predicate", e);
-                return false;
-            }
-        }
-
-    };
-
-    public static final Predicate<PageDecorator> INCLUDE_ALL_CHILD_PAGE_TYPES = new Predicate<PageDecorator>() {
-        @Override
-        public boolean apply(final PageDecorator page) {
-            return PagePredicates.SECTION_LANDING_PAGE_PREDICATE.apply(page)
-                || PagePredicates.CONTENT_PAGE_PREDICATE.apply(page);
+    public static final Predicate<PageDecorator> SECTION_LANDING_PAGE_PREDICATE = page -> {
+        try {
+            Node pageContentNode = page.getContentResource().adaptTo(Node.class);
+            return pageContentNode.isNodeType(SectionLandingPage.RDF_TYPE);
+        } catch (RepositoryException e) {
+            LOG.error("Repository Exception encountered while evaluating Section Landing Page page predicate", e);
+            return false;
         }
     };
+
+    public static final Predicate<PageDecorator> CONTENT_PAGE_PREDICATE = page -> {
+        try {
+            return page.getContentResource().adaptTo(Node.class).isNodeType("cq:PageContent");
+        } catch (RepositoryException e) {
+            LOG.error("Repository Exception encountered while evaluating Hierarchical Page page predicate", e);
+            return false;
+        }
+    };
+
+    public static final Predicate<PageDecorator> HOME_PAGE_PREDICATE = page -> {
+        try {
+            Node pageContentNode = page.getContentResource().adaptTo(Node.class);
+            return pageContentNode.isNodeType(HomePage.RDF_TYPE);
+        } catch (RepositoryException e) {
+            LOG.error("Repository Exception encountered while evaluating Section Landing Page page predicate", e);
+            return false;
+        }
+    };
+
+    public static final Predicate<PageDecorator> INCLUDE_ALL_CHILD_PAGE_TYPES = page -> PagePredicates.SECTION_LANDING_PAGE_PREDICATE.apply(page)
+        || PagePredicates.CONTENT_PAGE_PREDICATE.apply(page);
 
     public static final Map<String, Predicate<PageDecorator>> PREDICATE_MAP;
 

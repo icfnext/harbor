@@ -12,6 +12,9 @@ import com.icfolson.aem.harbor.core.trees.rendering.PassthroughTree;
 import com.icfolson.aem.harbor.core.trees.rendering.PassthroughTreeRenderingStrategy;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
+import org.apache.sling.models.annotations.injectorspecific.Self;
+
+import javax.inject.Inject;
 
 @Component(
     value = "Secondary Navigation",
@@ -25,25 +28,19 @@ public class BootstrapSecondaryNavigation extends AbstractTreeComponent<Navigabl
 
     @DialogField
     @DialogFieldSet
+    @Inject
+    @Self
     private HierarchicalPageNavigationListConstructionStrategy constructionStrategy;
 
-    private TreeRenderingStrategy<NavigablePage, PassthroughTree<NavigablePage>> renderingStrategy;
+    private final TreeRenderingStrategy<NavigablePage, PassthroughTree<NavigablePage>> renderingStrategy = new PassthroughTreeRenderingStrategy<>();
 
     @Override
     public HierarchicalPageNavigationListConstructionStrategy getTreeConstructionStrategy() {
-        if (constructionStrategy == null) {
-            constructionStrategy = getResource().adaptTo(HierarchicalPageNavigationListConstructionStrategy.class);
-        }
-
         return constructionStrategy;
     }
 
     @Override
     protected TreeRenderingStrategy<NavigablePage, PassthroughTree<NavigablePage>> getTreeRenderingStrategy() {
-        if (renderingStrategy == null) {
-            renderingStrategy = new PassthroughTreeRenderingStrategy<>();
-        }
-
         return renderingStrategy;
     }
 }

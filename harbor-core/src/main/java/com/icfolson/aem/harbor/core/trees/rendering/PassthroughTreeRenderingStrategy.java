@@ -7,7 +7,7 @@ public class PassthroughTreeRenderingStrategy<T extends TreeNode> implements Tre
 
     @Override
     public PassthroughTree<T> toRenderableTree(T rootNode) {
-        return new PassthroughTree<T>(rootNode);
+        return new PassthroughTree<>(rootNode);
     }
 
 }

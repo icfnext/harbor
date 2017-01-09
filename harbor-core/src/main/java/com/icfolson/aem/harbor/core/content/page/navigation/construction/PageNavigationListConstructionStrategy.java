@@ -46,7 +46,7 @@ public class PageNavigationListConstructionStrategy extends AbstractComponent
             if (rootPage != null) {
                 navigationRoot = Optional.of(NavigablePages
                     .forPageAndDepthAndChildPolicyAndCurrentPage(rootPage, getNavigationDepth(),
-                        !getIgnoreHideInNavigation(), currentPage));
+                        !isIgnoreHideInNavigation(), currentPage));
             } else {
                 navigationRoot = Optional.absent();
             }
@@ -67,7 +67,7 @@ public class PageNavigationListConstructionStrategy extends AbstractComponent
         return navigationDepth;
     }
 
-    public Boolean getIgnoreHideInNavigation() {
+    public Boolean isIgnoreHideInNavigation() {
         return ignoreHideInNavigation;
     }
 

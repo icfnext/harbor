@@ -22,7 +22,7 @@ public class NavigationElementConfiguration {
 		this.currentPage = currentPage;
 	}
 
-	public Boolean getRespectHideInNavigation() {
+	public Boolean isRespectHideInNavigation() {
 		return respectHideInNavigation;
 	}
 

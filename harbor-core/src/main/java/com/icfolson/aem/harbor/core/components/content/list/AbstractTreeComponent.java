@@ -22,10 +22,8 @@ public abstract class AbstractTreeComponent<T extends TreeNode, R extends Tree> 
     @Override
     public R getTree() {
         if (renderableTreeOptional == null) {
-            Optional<T> requestedRawItemsOptional = getRawItemsOptional();
-
-            renderableTreeOptional = requestedRawItemsOptional
-                .transform(items -> getTreeRenderingStrategy().toRenderableTree(items));
+            renderableTreeOptional = getRawItemsOptional().transform(items -> getTreeRenderingStrategy()
+                .toRenderableTree(items));
         }
 
         return renderableTreeOptional.orNull();

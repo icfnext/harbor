@@ -37,7 +37,7 @@ public class SiteNavigationListConstructionStrategy extends PageNavigationListCo
 
                 if (homePageOptional.isPresent()) {
                     navigationRoot = Optional.of(NavigablePages.forPageAndDepthAndChildPolicyAndCurrentPage(
-                        homePageOptional.get(), getNavigationDepth(), !getIgnoreHideInNavigation(), currentPage));
+                        homePageOptional.get(), getNavigationDepth(), !isIgnoreHideInNavigation(), currentPage));
                 }
             }
 		}

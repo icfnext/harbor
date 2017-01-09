@@ -22,26 +22,21 @@ class DefaultNavigablePage implements NavigablePage {
 
     @Override
     List<NavigablePage> getNavigableChildren() {
-        if (navigablePageList == null) {
+        if (!navigablePageList) {
             navigablePageList = []
 
             if (navigationElementConfiguration.navigationDepth > 0) {
-                pageDecorator.getChildren(navigationElementConfiguration.respectHideInNavigation).each {
-                    PageDecorator currentPageDecorator ->
-                        if (navigationElementConfiguration.currentPage.isPresent()) {
-                            this.navigablePageList.add(
-                                NavigablePages.forPageAndDepthAndChildPolicyAndCurrentPage(
-                                    currentPageDecorator,
-                                    navigationElementConfiguration.navigationDepth - 1,
-                                    navigationElementConfiguration.respectHideInNavigation,
-                                    navigationElementConfiguration.currentPage.get()))
-                        } else {
-                            this.navigablePageList.add(
-                                NavigablePages.forPageAndDepthAndChildPolicy(
-                                    currentPageDecorator,
-                                    navigationElementConfiguration.navigationDepth - 1,
-                                    navigationElementConfiguration.respectHideInNavigation))
-                        }
+                pageDecorator.getChildren(navigationElementConfiguration.respectHideInNavigation).each { page ->
+                    if (navigationElementConfiguration.currentPage.isPresent()) {
+                        navigablePageList.add(NavigablePages.forPageAndDepthAndChildPolicyAndCurrentPage(page,
+                            navigationElementConfiguration.navigationDepth - 1,
+                            navigationElementConfiguration.respectHideInNavigation,
+                            navigationElementConfiguration.currentPage.get()))
+                    } else {
+                        navigablePageList.add(NavigablePages.forPageAndDepthAndChildPolicy(page,
+                            navigationElementConfiguration.navigationDepth - 1,
+                            navigationElementConfiguration.respectHideInNavigation))
+                    }
                 }
             }
         }

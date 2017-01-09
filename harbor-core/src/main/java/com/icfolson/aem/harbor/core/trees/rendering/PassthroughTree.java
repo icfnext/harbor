@@ -20,5 +20,4 @@ public class PassthroughTree<T extends TreeNode> implements Tree<T> {
     public boolean isHasRoot() {
         return root != null;
     }
-
 }
