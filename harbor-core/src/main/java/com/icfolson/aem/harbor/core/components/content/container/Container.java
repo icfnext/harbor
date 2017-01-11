@@ -17,6 +17,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
 
+import javax.annotation.PostConstruct;
+
 @Component(
     value = "Container",
     description = "A container in which content may be placed.  All content should be placed in a container element.",
@@ -29,13 +31,20 @@ import org.apache.sling.models.annotations.Model;
 @Model(adaptables = Resource.class)
 public class Container extends AbstractComponent {
 
-    private Classification classification;
-
     public static final String RESOURCE_TYPE = "harbor/components/content/contentcontainer";
 
-    public static final String INSTANCE_NAME = "contentContainer";
-
     public static final String FULL_WIDTH_PROPERTY = "fullWidth";
+
+    private Classification classification;
+
+    @PostConstruct
+    public void init() {
+        if (isInherits()) {
+            classification = getResource().adaptTo(InheritedClassification.class);
+        } else {
+            classification = getResource().adaptTo(Classification.class);
+        }
+    }
 
     @DialogField(fieldLabel = "Full Width",
         fieldDescription = "When set to true, the container will render across the full width of the browser window",
@@ -45,25 +54,41 @@ public class Container extends AbstractComponent {
         if (isInherits()) {
             return getInherited(FULL_WIDTH_PROPERTY, false);
         }
+
         return get(FULL_WIDTH_PROPERTY, false);
+    }
+
+    @DialogField(fieldLabel = "Container Inheritance",
+        fieldDescription = "When enabled, an inheriting paragraph system is produced for this container instance.",
+        ranking = 10)
+    @Switch(offText = "No", onText = "Yes")
+    public boolean isParsysInherits() {
+        if (isInherits()) {
+            return getInherited("parsysInherits", false);
+        }
+
+        return get("parsysInherits", false);
     }
 
     @DialogField(ranking = 20)
     @DialogFieldSet
     public Classification getClassification() {
-        if (classification == null) {
-            if (isInherits()) {
-                classification = this.getResource().adaptTo(InheritedClassification.class);
-            } else {
-                classification = this.getResource().adaptTo(Classification.class);
-            }
-        }
-
         return classification;
     }
 
+    @DialogField(fieldLabel = "ID",
+        fieldDescription = "A unique identifier to apply to the Container element rendered in the page DOM.  If left blank, no id attribute will be applied to the rendered element.", tab = 2)
+    @TextField
+    public String getDomId() {
+        if (isInherits()) {
+            return getInherited("domId", StringUtils.EMPTY);
+        }
+
+        return get("domId", StringUtils.EMPTY);
+    }
+
     public String getContainerClass() {
-        StringBuilder classStringBuffer = new StringBuilder();
+        final StringBuilder classStringBuffer = new StringBuilder();
 
         if (getIsContainerFullWidth()) {
             classStringBuffer.append(getContainerFullWidthClass());
@@ -72,9 +97,8 @@ public class Container extends AbstractComponent {
         }
 
         if (!isSection()) {
-            if (getClassification().getHasClassifications()) {
-                classStringBuffer.append(" ").append(
-                    StringUtils.join(getClassification().getClassificationNames(), " "));
+            if (classification.getHasClassifications()) {
+                classStringBuffer.append(" ").append(StringUtils.join(classification.getClassificationNames(), " "));
             }
         }
 
@@ -83,8 +107,8 @@ public class Container extends AbstractComponent {
 
     public String getSectionClass() {
         if (isSection()) {
-            if (getClassification().getHasClassifications()) {
-                return StringUtils.join(getClassification().getClassificationNames(), " ");
+            if (classification.getHasClassifications()) {
+                return StringUtils.join(classification.getClassificationNames(), " ");
             }
         }
 
@@ -117,37 +141,12 @@ public class Container extends AbstractComponent {
         return true;
     }
 
-    @DialogField(
-        fieldLabel = "ID",
-        fieldDescription = "A unique identifier to apply to the Container element rendered in the page DOM.  If left blank, no id attribute will be applied to the rendered element.",
-        tab = 2)
-    @TextField
-    public String getDomId() {
-        if (isInherits()) {
-            return getInherited("domId", StringUtils.EMPTY);
-        }
-
-        return get("domId", StringUtils.EMPTY);
-    }
-
     public boolean isHasDomId() {
         return StringUtils.isNotBlank(getDomId());
     }
 
     public String getAuthorHelpMessage() {
         return "Content Section";
-    }
-
-    @DialogField(fieldLabel = "Container Inheritance",
-        fieldDescription = "When enabled, an inheriting paragraph system is produced for this container instance.",
-        ranking = 10)
-    @Switch(offText = "No", onText = "Yes")
-    public boolean isParsysInherits() {
-        if (isInherits()) {
-            return getInherited("parsysInherits", false);
-        }
-
-        return get("parsysInherits", false);
     }
 
     protected String getContainerFullWidthClass() {

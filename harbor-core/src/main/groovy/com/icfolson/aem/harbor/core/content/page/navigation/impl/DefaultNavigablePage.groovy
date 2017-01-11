@@ -1,5 +1,6 @@
 package com.icfolson.aem.harbor.core.content.page.navigation.impl
 
+import com.google.common.base.Function
 import com.icfolson.aem.harbor.api.content.page.navigation.NavigablePage
 import com.icfolson.aem.harbor.core.content.page.navigation.NavigablePages
 import com.icfolson.aem.harbor.core.content.page.navigation.NavigationElementConfiguration
@@ -61,12 +62,15 @@ class DefaultNavigablePage implements NavigablePage {
 
     @Override
     NavigationLink getNavigationLink() {
-        if (navigationElementConfiguration.currentPage.present) {
-            if (navigationElementConfiguration.currentPage.get().path.startsWith(pageDecorator.path)) {
-                return pageDecorator.getNavigationLink(true)
+        def currentPagePath = navigationElementConfiguration.currentPage.transform(new Function<PageDecorator, String>() {
+            @Override
+            String apply(PageDecorator page) {
+                page.path
             }
-        }
+        }).orNull()
 
-        pageDecorator.navigationLink
+        def isActive = currentPagePath && currentPagePath.startsWith(pageDecorator.path)
+
+        pageDecorator.getNavigationLink(isActive)
     }
 }
