@@ -42,9 +42,9 @@ public class BootstrapMainNavigationRenderingStrategy extends AbstractComponent 
         return getInherited("brandLinkText", StringUtils.EMPTY);
     }
 
-    @DialogField(fieldLabel = "Brand Link Image", fieldDescription = "Drag and drop an asset or upload an image",
+    @DialogField(fieldLabel = "Brand Link Image", fieldDescription = "Brand Link Image",
         ranking = 30)
-    @Html5SmartImage(tab = false)
+    @Html5SmartImage(tab = false, allowUpload = false, uploadUrl = "", title = "Drag & Drop Image")
     public Optional<String> getBrandLinkImage() {
         return getImageReferenceInherited("brandLinkImage");
     }

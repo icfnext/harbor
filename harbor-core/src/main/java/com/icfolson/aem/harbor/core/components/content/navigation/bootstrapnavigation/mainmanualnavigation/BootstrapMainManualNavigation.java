@@ -48,8 +48,8 @@ public class BootstrapMainManualNavigation extends AbstractComponent {
         return getInherited("sticky", false);
     }
 
-    @DialogField(fieldLabel = "Brand Link Image", ranking = 2)
-    @Html5SmartImage(tab = false)
+    @DialogField(fieldLabel = "Brand Link Image", fieldDescription = "Brand Link Image", ranking = 2)
+    @Html5SmartImage(tab = false, allowUpload = false, uploadUrl = "", title = "Drag & Drop Image")
     public Optional<String> getBrandLinkImage() {
         return getImageSourceInherited("brandLinkImage");
     }
