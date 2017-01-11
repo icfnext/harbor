@@ -4,7 +4,7 @@
     <li>
         <article data-sly-test="${item.article}">
             <header>
-                <h3 data-sly-element="${item.titleHeadingType}">
+                <h3 data-sly-test="${item.renderTitle}" data-sly-element="${item.titleHeadingType}">
                     <a data-sly-unwrap="${!item.renderAsLink}" href="${item.imageSource}">${item.title}</a>
                 </h3>
                 <span data-sly-test="${item.renderCreator}" class="creator">${item.createdByLabel}${item.creator}</span>
