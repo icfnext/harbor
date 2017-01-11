@@ -28,7 +28,7 @@ public class PathConstructionPredicate extends AbstractComponent implements Cons
     /**
      * @return path to search for nodes under.
      */
-    @DialogField(fieldLabel = "Path", fieldDescription = "Path to search for nodes under.", name = "searchPath")
+    @DialogField(fieldLabel = "Path", fieldDescription = "Path to search for nodes under.")
     @PathField(rootPath = PathConstants.PATH_CONTENT)
     public Optional<String> getSearchPath() {
         return get("searchPath", String.class);

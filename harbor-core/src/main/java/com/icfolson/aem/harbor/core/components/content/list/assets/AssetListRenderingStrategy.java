@@ -12,6 +12,7 @@ import com.icfolson.aem.harbor.api.constants.dom.Headings;
 import com.icfolson.aem.harbor.api.lists.rendering.ListRenderingStrategy;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.sling.api.resource.Resource;
+import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.models.annotations.Default;
 import org.apache.sling.models.annotations.DefaultInjectionStrategy;
 import org.apache.sling.models.annotations.Model;
@@ -201,6 +202,8 @@ public class AssetListRenderingStrategy implements
         }
 
         public String getImageSourceRendition() {
+            final String imageSourceRendition;
+
             if (StringUtils.isNotBlank(imageSize) && !imageSize.equalsIgnoreCase(ORIGINAL)) {
                 final StringBuilder builder = new StringBuilder(asset.getPath());
 
@@ -208,10 +211,12 @@ public class AssetListRenderingStrategy implements
                 builder.append(".").append(imageSize).append(".");
                 builder.append(RENDITION_THUMBNAIL_EXTENSION);
 
-                return builder.toString();
+                imageSourceRendition = builder.toString();
             } else {
-                return asset.getPath();
+                imageSourceRendition = asset.getPath();
             }
+
+            return imageSourceRendition;
         }
 
         public String getTitle() {
@@ -263,7 +268,9 @@ public class AssetListRenderingStrategy implements
         }
 
         public boolean isRenderImage() {
-            return renderImage;
+            final ResourceResolver resourceResolver = asset.adaptTo(Resource.class).getResourceResolver();
+
+            return renderImage && resourceResolver.getResource(getImageSourceRendition()) != null;
         }
 
         /*
