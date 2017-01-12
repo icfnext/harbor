@@ -33,6 +33,13 @@
         </repository>
     </repositories>
 
+    <pluginRepositories>
+        <pluginRepository>
+            <id>citytech-public</id>
+            <url>http://nexus.citytech.ctmsp.com/content/groups/public</url>
+        </pluginRepository>
+    </pluginRepositories>
+
     <distributionManagement>
         <snapshotRepository>
             <id>sonatype-nexus-staging</id>
