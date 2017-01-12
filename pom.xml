@@ -26,6 +26,13 @@
         <url>http://www.icfolson.com</url>
     </organization>
 
+    <repositories>
+        <repository>
+            <id>citytech-public</id>
+            <url>http://nexus.citytech.ctmsp.com/content/groups/public</url>
+        </repository>
+    </repositories>
+
     <distributionManagement>
         <snapshotRepository>
             <id>sonatype-nexus-staging</id>
