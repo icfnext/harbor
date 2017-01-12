@@ -2,7 +2,6 @@ package com.icfolson.aem.harbor.core.components.content.list.page;
 
 import com.citytechinc.cq.component.annotations.Component;
 import com.citytechinc.cq.component.annotations.DialogField;
-import com.citytechinc.cq.component.annotations.Listener;
 import com.citytechinc.cq.component.annotations.widgets.DialogFieldSet;
 import com.icfolson.aem.harbor.api.lists.construction.ListConstructionStrategy;
 import com.icfolson.aem.harbor.core.constants.groups.ComponentGroups;
@@ -15,7 +14,7 @@ import javax.inject.Inject;
 
 @Component(value = "Manual Page List",
     group = ComponentGroups.HARBOR_LISTS,
-    resourceSuperType = PageList.RESOURCE_TYPE,
+    resourceSuperType = AbstractPageList.RESOURCE_TYPE,
     name = "lists/manualpagelist")
 @Model(adaptables = Resource.class)
 public class ManualPageList extends AbstractPageList {

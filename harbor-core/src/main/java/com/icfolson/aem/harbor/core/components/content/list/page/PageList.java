@@ -14,11 +14,10 @@ import javax.inject.Inject;
 
 @Component(value = "Page List",
     group = ComponentGroups.HARBOR_LISTS,
+    resourceSuperType = AbstractPageList.RESOURCE_TYPE,
     name = "lists/pagelist")
 @Model(adaptables = Resource.class)
 public class PageList extends AbstractPageList {
-
-    public static final String RESOURCE_TYPE = "harbor/components/content/lists/pagelist";
 
     @DialogField(ranking = 1)
     @DialogFieldSet(title = "List Construction")

@@ -12,6 +12,8 @@ import java.util.List;
 
 public abstract class AbstractPageList extends AbstractListComponent<PageDecorator, List<LinkablePageRenderingStrategy.LinkablePage>> {
 
+    public static final String RESOURCE_TYPE = "harbor/components/content/lists/abstractpagelist";
+
     @DialogField(ranking = 2)
     @DialogFieldSet(title = "List Rendering")
     @Inject
