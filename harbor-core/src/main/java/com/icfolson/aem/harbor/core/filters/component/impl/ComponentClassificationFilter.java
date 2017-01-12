@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Adds classifications identified by the ct:classification property to the wrapper dom as classes.  Classifications
+ * Adds classifications identified by the icf:classification property to the wrapper dom as classes.  Classifications
  * are expected to be Tag identifiers.  The identified tag's names are added as classes to the DOM element.
  * <p>
  * TODO: Consider for removal - for now I am commenting this out under the presumption that it will be removed

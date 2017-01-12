@@ -20,10 +20,10 @@ public class SitemappedPage {
 
     @DialogField(fieldLabel = "Disable Indexing",
         fieldDescription = "Indicates that attempts should be made to hide the page from robots such as search engine crawl bots.",
-        name = "./ct:hiddenFromRobots", ranking = 0)
+        name = "./icf:hiddenFromRobots", ranking = 0)
     @Switch(offText = "No", onText = "Yes")
     @Inject
-    @Named("ct:hiddenFromRobots")
+    @Named("icf:hiddenFromRobots")
     @Default(booleanValues = false)
     private boolean hiddenFromRobots;
 
@@ -38,7 +38,7 @@ public class SitemappedPage {
         @Option(text = "Never", value = "never")
     })
     @Inject
-    @Named("ct:changeFrequency")
+    @Named("icf:changeFrequency")
     @Optional
     private String changeFrequency;
 
@@ -57,7 +57,7 @@ public class SitemappedPage {
         @Option(text = "0.0", value = "0.0")
     })
     @Inject
-    @Named("ct:priority")
+    @Named("icf:priority")
     @Default(values = "0.5")
     private String priority;
 

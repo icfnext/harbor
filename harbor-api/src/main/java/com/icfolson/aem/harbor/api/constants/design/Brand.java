@@ -6,6 +6,6 @@ public final class Brand {
 
     }
 
-    public static final String BOOTSTRAP_DIRECTORY = "ct:bootstrapDirectory";
+    public static final String BOOTSTRAP_DIRECTORY = "icf:bootstrapDirectory";
 
 }
