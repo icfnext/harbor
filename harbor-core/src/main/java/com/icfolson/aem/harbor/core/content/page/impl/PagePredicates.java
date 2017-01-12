@@ -18,8 +18,7 @@ public class PagePredicates {
 
     public static final Predicate<PageDecorator> SECTION_LANDING_PAGE_PREDICATE = page -> {
         try {
-            Node pageContentNode = page.getContentResource().adaptTo(Node.class);
-            return pageContentNode.isNodeType(SectionLandingPage.RDF_TYPE);
+            return page.getContentResource().adaptTo(Node.class).isNodeType(SectionLandingPage.RDF_TYPE);
         } catch (RepositoryException e) {
             LOG.error("Repository Exception encountered while evaluating Section Landing Page page predicate", e);
             return false;
@@ -37,8 +36,7 @@ public class PagePredicates {
 
     public static final Predicate<PageDecorator> HOME_PAGE_PREDICATE = page -> {
         try {
-            Node pageContentNode = page.getContentResource().adaptTo(Node.class);
-            return pageContentNode.isNodeType(HomePage.RDF_TYPE);
+            return page.getContentResource().adaptTo(Node.class).isNodeType(HomePage.RDF_TYPE);
         } catch (RepositoryException e) {
             LOG.error("Repository Exception encountered while evaluating Section Landing Page page predicate", e);
             return false;

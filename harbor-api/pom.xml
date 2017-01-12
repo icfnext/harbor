@@ -28,7 +28,7 @@
                         <Bundle-Name>${project.name}</Bundle-Name>
                         <Bundle-Vendor>${project.parent.organization.name}</Bundle-Vendor>
                         <Export-Package>!*.impl,com.icfolson.aem.harbor.api.*</Export-Package>
-                        <Import-Package>!com.citytechinc.cq.component.*,!javassist</Import-Package>
+                        <Import-Package>!com.citytechinc.aem.component.*,!javassist</Import-Package>
                         <Require-Bundle>org.apache.sling.models.api</Require-Bundle>
                         <Sling-Model-Packages>com.icfolson.aem.harbor.api</Sling-Model-Packages>
                         <DynamicImport-Package>*</DynamicImport-Package>
@@ -69,7 +69,7 @@
 
         <!-- AEM Namespace -->
         <dependency>
-            <groupId>com.citytechinc.aem.namespace</groupId>
+            <groupId>com.icfolson.aem.namespace</groupId>
             <artifactId>aem-namespace-extension-api</artifactId>
         </dependency>
     </dependencies>

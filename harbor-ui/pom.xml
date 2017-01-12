@@ -145,10 +145,10 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <host>${cq.host}</host>
-                    <port>${cq.port}</port>
-                    <username>${cq.username}</username>
-                    <password>${cq.password}</password>
+                    <host>${aem.host}</host>
+                    <port>${aem.port}</port>
+                    <username>${aem.username}</username>
+                    <password>${aem.password}</password>
                     <skip>${package.skip}</skip>
                     <installRecursive>true</installRecursive>
                 </configuration>
@@ -166,10 +166,10 @@
                             <bundleNames>
                                 <bundleName>${core.name}</bundleName>
                             </bundleNames>
-                            <host>${cq.host}</host>
-                            <port>${cq.port}</port>
-                            <username>${cq.username}</username>
-                            <password>${cq.password}</password>
+                            <host>${aem.host}</host>
+                            <port>${aem.port}</port>
+                            <username>${aem.username}</username>
+                            <password>${aem.password}</password>
                             <retryDelay>5000</retryDelay>
                             <retryLimit>10</retryLimit>
                         </configuration>
@@ -194,7 +194,7 @@
 
         <!-- AEM Namespace -->
         <dependency>
-            <groupId>com.citytechinc.aem.namespace</groupId>
+            <groupId>com.icfolson.aem.namespace</groupId>
             <artifactId>aem-namespace-extension-ui</artifactId>
             <type>zip</type>
         </dependency>

@@ -1,95 +1,88 @@
 package com.icfolson.aem.harbor.core.domain.brand.bootstrap;
 
-import java.util.List;
-import java.util.Map;
-
-import javax.jcr.Property;
-import javax.jcr.RepositoryException;
-
+import com.google.common.base.Optional;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Maps;
 import com.icfolson.aem.harbor.core.domain.brand.bootstrap.impl.DefaultBootstrapBrand;
+import com.icfolson.aem.library.api.node.ComponentNode;
+import com.icfolson.aem.namespace.api.ontology.Properties;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.icfolson.aem.library.api.node.ComponentNode;
-import com.citytechinc.aem.namespace.api.ontology.Properties;
-import com.google.common.base.Optional;
-import com.google.common.base.Predicate;
-import com.google.common.collect.Maps;
+import javax.jcr.Property;
+import javax.jcr.RepositoryException;
+import java.util.List;
+import java.util.Map;
 
-public class BootstrapBrands {
+public final class BootstrapBrands {
 
-	private static final Logger LOG = LoggerFactory.getLogger(BootstrapBrands.class);
+    private static final Logger LOG = LoggerFactory.getLogger(BootstrapBrands.class);
 
-	private BootstrapBrands() {
-	}
+    private BootstrapBrands() {
 
-	public static final String BOOTSTRAP_PROPERTY_PREFIX = "bootstrap-";
-	public static final Integer BOOTSTRAP_PROPERTY_PREFIX_LENGTH = BOOTSTRAP_PROPERTY_PREFIX.length();
+    }
 
-	public static final Predicate<Property> BOOTSTRAP_PROPERTY_PREDICATE = new Predicate<Property>() {
+    public static final String BOOTSTRAP_PROPERTY_PREFIX = "bootstrap-";
 
-		@Override
-		public boolean apply(Property property) {
-			try {
-				return property.getName().startsWith(BOOTSTRAP_PROPERTY_PREFIX);
-			} catch (RepositoryException e) {
-				LOG.error("Repository Exception encountered checking property name");
-				return false;
-			}
-		}
+    public static final Integer BOOTSTRAP_PROPERTY_PREFIX_LENGTH = BOOTSTRAP_PROPERTY_PREFIX.length();
 
-	};
+    public static final Predicate<Property> BOOTSTRAP_PROPERTY_PREDICATE = property -> {
+        try {
+            return property.getName().startsWith(BOOTSTRAP_PROPERTY_PREFIX);
+        } catch (RepositoryException e) {
+            LOG.error("Repository Exception encountered checking property name");
 
-	public static Optional<BootstrapBrand> forTemplateResource(Resource resource) throws RepositoryException {
+            return false;
+        }
+    };
 
-		ComponentNode componentNode = resource.adaptTo(ComponentNode.class);
+    public static Optional<BootstrapBrand> forTemplateResource(final Resource resource) throws RepositoryException {
+        final Optional<String> brandPath = resource.adaptTo(ComponentNode.class).get(Properties.ICF_OLSON_BRAND,
+            String.class);
 
-		Optional<String> brandPath = componentNode.get(Properties.CITYTECH_BRAND, String.class);
+        if (brandPath.isPresent() && StringUtils.isNotBlank(brandPath.get())) {
+            final ResourceResolver resourceResolver = resource.getResourceResolver();
+            final Resource brandResource = resourceResolver.getResource(brandPath.get());
 
-		if (brandPath.isPresent() && StringUtils.isNotBlank(brandPath.get())) {
-			ResourceResolver resourceResolver = resource.getResourceResolver();
-			Resource brandResource = resourceResolver.getResource(brandPath.get());
+            if (brandResource != null) {
+                return forBrandResource(brandResource);
+            }
+        }
 
-			if (brandResource != null) {
-				return forBrandResource(brandResource);
-			}
-		}
+        return Optional.absent();
 
-		return Optional.absent();
+    }
 
-	}
+    public static Optional<BootstrapBrand> forBrandResource(final Resource resource) throws RepositoryException {
+        final Resource brandProperties = resource.getChild("brandproperties");
 
-	public static Optional<BootstrapBrand> forBrandResource(Resource resource) throws RepositoryException {
+        if (brandProperties != null) {
+            final List<Property> bootstrapPropertyList = brandProperties.adaptTo(ComponentNode.class).getProperties(
+                BOOTSTRAP_PROPERTY_PREDICATE);
 
-		Resource brandProperties = resource.getChild("brandproperties");
+            final Map<String, String> bootstrapPropertyValueMap = Maps.newHashMap();
 
-		if (brandProperties != null) {
-			ComponentNode componentNode = brandProperties.adaptTo(ComponentNode.class);
+            for (final Property currentProperty : bootstrapPropertyList) {
+                try {
+                    final String propertyName = currentProperty.getName();
 
-			List<Property> bootstrapPropertyList = componentNode.getProperties(BOOTSTRAP_PROPERTY_PREDICATE);
+                    bootstrapPropertyValueMap.put(propertyName.substring(BOOTSTRAP_PROPERTY_PREFIX_LENGTH),
+                        currentProperty.getString());
+                } catch (RepositoryException e) {
+                    LOG.error("error processing bootstrap brand properties during construction of Bootstrap Brand domain object", e);
+                }
+            }
 
-			Map<String, String> bootstrapPropertyValueMap = Maps.newHashMap();
+            if (!bootstrapPropertyValueMap.isEmpty()) {
+                final BootstrapBrand newBootstrapBrand = new DefaultBootstrapBrand(bootstrapPropertyValueMap);
 
-			for (Property currentProperty : bootstrapPropertyList) {
-				try {
-					String propertyName = currentProperty.getName();
-					bootstrapPropertyValueMap.put(propertyName.substring(BOOTSTRAP_PROPERTY_PREFIX_LENGTH),
-						currentProperty.getString());
-				} catch (RepositoryException e) {
-					LOG.error("Repository Exception encountered attempting to process bootstrap brand properties during construction of Bootstrap Brand domain object");
-				}
-			}
+                return Optional.of(newBootstrapBrand);
+            }
+        }
 
-			if (!bootstrapPropertyValueMap.isEmpty()) {
-				BootstrapBrand newBootstrapBrand = new DefaultBootstrapBrand(bootstrapPropertyValueMap);
-				return Optional.of(newBootstrapBrand);
-			}
-		}
-
-		return Optional.absent();
-
-	}
+        return Optional.absent();
+    }
 }

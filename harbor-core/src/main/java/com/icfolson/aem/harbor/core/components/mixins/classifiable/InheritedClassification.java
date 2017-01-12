@@ -1,6 +1,6 @@
 package com.icfolson.aem.harbor.core.components.mixins.classifiable;
 
-import com.citytechinc.aem.namespace.api.ontology.Properties;
+import com.icfolson.aem.namespace.api.ontology.Properties;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
 
@@ -11,6 +11,6 @@ public class InheritedClassification extends Classification {
 
     @Override
     protected List<String> getClassificationIdStrings() {
-        return getAsListInherited(Properties.CITYTECH_CLASSIFICATION, String.class);
+        return getAsListInherited(Properties.ICF_OLSON_CLASSIFICATION, String.class);
     }
 }

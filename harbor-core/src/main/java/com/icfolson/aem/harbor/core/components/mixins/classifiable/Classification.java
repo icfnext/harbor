@@ -1,12 +1,12 @@
 package com.icfolson.aem.harbor.core.components.mixins.classifiable;
 
-import com.citytechinc.aem.namespace.api.ontology.Properties;
 import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.widgets.TagInputField;
 import com.day.cq.tagging.Tag;
 import com.day.cq.tagging.TagManager;
 import com.google.common.collect.Lists;
 import com.icfolson.aem.library.core.components.AbstractComponent;
+import com.icfolson.aem.namespace.api.ontology.Properties;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
@@ -49,7 +49,7 @@ public class Classification extends AbstractComponent {
      *
      * @return A list of the Tag based classifications associated with this Resource.
      */
-    @DialogField(fieldLabel = CLASSIFICATION_FIELD_LABEL, name = "./" + Properties.CITYTECH_CLASSIFICATION)
+    @DialogField(fieldLabel = CLASSIFICATION_FIELD_LABEL, name = "./" + Properties.ICF_OLSON_CLASSIFICATION)
     @TagInputField
     public List<Tag> getClassifications() {
         if (classifications == null) {
@@ -115,6 +115,6 @@ public class Classification extends AbstractComponent {
     }
 
     protected List<String> getClassificationIdStrings() {
-        return getAsList(Properties.CITYTECH_CLASSIFICATION, String.class);
+        return getAsList(Properties.ICF_OLSON_CLASSIFICATION, String.class);
     }
 }

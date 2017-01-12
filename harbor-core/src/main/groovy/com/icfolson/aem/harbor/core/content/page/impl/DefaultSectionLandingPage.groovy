@@ -11,15 +11,11 @@ class DefaultSectionLandingPage extends DefaultHierarchicalPage implements Secti
 
     @Override
     boolean isSubSectionLandingPage() {
-        return sectionLandingPage.isPresent()
+        sectionLandingPage.present
     }
 
     @Override
     List<SectionLandingPage> getSectionLandingPages() {
-        def sectionLandingPageList = pageManager.findPages(getPath(), PagePredicates.SECTION_LANDING_PAGE_PREDICATE)
-
-        sectionLandingPageList.collect { page ->
-            page.adaptTo(SectionLandingPage)
-        }
+        pageManager.findPages(path, PagePredicates.SECTION_LANDING_PAGE_PREDICATE)*.adaptTo(SectionLandingPage)
     }
 }

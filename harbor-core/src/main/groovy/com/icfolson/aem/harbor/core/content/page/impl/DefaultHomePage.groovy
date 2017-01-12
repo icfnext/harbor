@@ -11,6 +11,6 @@ class DefaultHomePage extends DefaultSectionLandingPage implements HomePage {
 
     @Override
     boolean isSubSectionLandingPage() {
-        return false
+        false
     }
 }

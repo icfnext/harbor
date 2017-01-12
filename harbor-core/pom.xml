@@ -113,7 +113,7 @@
 
         <!-- AEM Namespace -->
         <dependency>
-            <groupId>com.citytechinc.aem.namespace</groupId>
+            <groupId>com.icfolson.aem.namespace</groupId>
             <artifactId>aem-namespace-extension-api</artifactId>
         </dependency>
 

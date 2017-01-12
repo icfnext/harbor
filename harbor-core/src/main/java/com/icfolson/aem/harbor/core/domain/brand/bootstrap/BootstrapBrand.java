@@ -4,6 +4,6 @@ import java.util.Map;
 
 public interface BootstrapBrand {
 
-    public Map<String, String> getVariables();
+    Map<String, String> getVariables();
 
 }

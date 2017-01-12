@@ -178,7 +178,6 @@ The Link List component maintains a collection of List Items as direct child Res
 | List Item Backing Class | com.icfolson.aem.harbor.core.components.content.list.link.ListableLink |
 
 
-
 ## Core Concepts
 
 ### End User Core Concepts
@@ -318,7 +317,7 @@ Using these APIs, new List components are made of a composition of a `ListConstr
 composition approach also allows for the creation of an authoring dialog via composition.  By attributing a `@DialogFieldSet` annotation
 to both the `ListConstructionStrategy` and the `ListRenderingStrategy` and further annotating the members of these strategies with
 appropriate `@DialogField` annotations, both your component and your authoring can be composed.  The
-`com.citytechinc.aem.harbor.core.components.content.navigation.bootstrapnavigation.mainnavigation.BootstrapMainAutoNavigation`
+`com.icfolson.aem.harbor.core.components.content.navigation.bootstrapnavigation.mainnavigation.BootstrapMainAutoNavigation`
 component is a reasonable exemplar of this type of implementation.
 
 ### The ListComponent and AbstractListComponent

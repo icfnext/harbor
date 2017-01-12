@@ -32,7 +32,7 @@ import javax.inject.Named;
  * If the total number of columns spanned by the Column components making up a row is greater than 12 then columns beyond
  * the 12th column spanned will flow into the next row.
  *
- * For more information on authoring individual columns refer to the com.citytechinc.aem.harbor.core.components.content.columns.Column
+ * For more information on authoring individual columns refer to the com.icfolson.aem.harbor.core.components.content.columns.Column
  * documentation.
  *
  * This component is Classifiable

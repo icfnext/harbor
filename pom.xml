@@ -21,38 +21,20 @@
         <module>harbor-ui</module>
     </modules>
 
-	<repositories>
-		<repository>
-			<id>citytech-public</id>
-			<url>http://nexus.citytech.ctmsp.com/content/groups/public</url>
-		</repository>
-		<repository>
-			<id>citytech-private</id>
-			<url>http://nexus.citytech.ctmsp.com/content/groups/CITYTECH-Private/</url>
-		</repository>
-	</repositories>
-
-	<pluginRepositories>
-		<pluginRepository>
-			<id>citytech-public</id>
-			<url>http://nexus.citytech.ctmsp.com/content/groups/public</url>
-		</pluginRepository>
-		<pluginRepository>
-			<id>citytech-private</id>
-			<url>http://nexus.citytech.ctmsp.com/content/groups/CITYTECH-Private/</url>
-		</pluginRepository>
-	</pluginRepositories>
+    <organization>
+        <name>ICF Olson</name>
+        <url>http://www.icfolson.com</url>
+    </organization>
 
     <distributionManagement>
-        <repository>
-            <id>citytech-private-releases</id>
-            <url>http://nexus.citytech.ctmsp.com/content/repositories/releases</url>
-        </repository>
         <snapshotRepository>
-            <id>citytech-private-snapshots</id>
-            <url>http://nexus.citytech.ctmsp.com/content/repositories/snapshots</url>
-            <uniqueVersion>false</uniqueVersion>
+            <id>sonatype-nexus-staging</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
         </snapshotRepository>
+        <repository>
+            <id>sonatype-nexus-staging</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
     </distributionManagement>
 
     <properties>
@@ -77,10 +59,10 @@
             <properties>
                 <package.skip>false</package.skip>
                 <osgi.bundle.status.skip>false</osgi.bundle.status.skip>
-                <cq.host>localhost</cq.host>
-                <cq.port>4502</cq.port>
-                <cq.username>admin</cq.username>
-                <cq.password>admin</cq.password>
+                <aem.host>localhost</aem.host>
+                <aem.port>4502</aem.port>
+                <aem.username>admin</aem.username>
+                <aem.password>admin</aem.password>
             </properties>
         </profile>
         <profile>
@@ -93,10 +75,10 @@
             <properties>
                 <package.skip>false</package.skip>
                 <osgi.bundle.status.skip>false</osgi.bundle.status.skip>
-                <cq.host>localhost</cq.host>
-                <cq.port>4502</cq.port>
-                <cq.username>admin</cq.username>
-                <cq.password>admin</cq.password>
+                <aem.host>localhost</aem.host>
+                <aem.port>4502</aem.port>
+                <aem.username>admin</aem.username>
+                <aem.password>admin</aem.password>
             </properties>
         </profile>
     </profiles>
@@ -181,13 +163,13 @@
 
             <!-- AEM Namespace -->
             <dependency>
-                <groupId>com.citytechinc.aem.namespace</groupId>
+                <groupId>com.icfolson.aem.namespace</groupId>
                 <artifactId>aem-namespace-extension-api</artifactId>
                 <version>${aem.namespace.version}</version>
                 <scope>provided</scope>
             </dependency>
             <dependency>
-                <groupId>com.citytechinc.aem.namespace</groupId>
+                <groupId>com.icfolson.aem.namespace</groupId>
                 <artifactId>aem-namespace-extension-ui</artifactId>
                 <version>${aem.namespace.version}</version>
                 <type>zip</type>
