@@ -43,8 +43,7 @@ public class Carousel extends AbstractComponent {
     }
 
     @DialogField(fieldLabel = "Interval",
-        fieldDescription = "The amount of time to delay between automatically cycling an item.  Defaults to 5000.  If set to 0, automatic cycling will be disabled.",
-        ranking = 3)
+        fieldDescription = "The amount of time to delay between automatically cycling an item.  Defaults to 5000.  If set to 0, automatic cycling will be disabled.", value = "5000", ranking = 3)
     @NumberField(allowDecimals = false, allowNegative = false)
     public Integer getInterval() {
         return get("interval", 5000);
