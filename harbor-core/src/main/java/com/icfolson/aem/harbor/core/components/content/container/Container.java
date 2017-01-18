@@ -77,7 +77,8 @@ public class Container extends AbstractComponent {
     }
 
     @DialogField(fieldLabel = "ID",
-        fieldDescription = "A unique identifier to apply to the Container element rendered in the page DOM.  If left blank, no id attribute will be applied to the rendered element.", tab = 2)
+        fieldDescription = "A unique identifier to apply to the Container element rendered in the page DOM.  If left blank, no id attribute will be applied to the rendered element.",
+        tab = 2)
     @TextField
     public String getDomId() {
         if (isInherits()) {
@@ -96,20 +97,16 @@ public class Container extends AbstractComponent {
             classStringBuffer.append(getContainerDefaultClass());
         }
 
-        if (!isSection()) {
-            if (classification.getHasClassifications()) {
-                classStringBuffer.append(" ").append(StringUtils.join(classification.getClassificationNames(), " "));
-            }
+        if (!isSection() && classification.isHasClassifications()) {
+            classStringBuffer.append(" ").append(StringUtils.join(classification.getClassificationNames(), " "));
         }
 
         return classStringBuffer.toString();
     }
 
     public String getSectionClass() {
-        if (isSection()) {
-            if (classification.getHasClassifications()) {
-                return StringUtils.join(classification.getClassificationNames(), " ");
-            }
+        if (isSection() && classification.isHasClassifications()) {
+            return StringUtils.join(classification.getClassificationNames(), " ");
         }
 
         return StringUtils.EMPTY;
@@ -123,7 +120,7 @@ public class Container extends AbstractComponent {
         return Optional.absent();
     }
 
-    public Boolean getHasRole() {
+    public Boolean isHasRole() {
         return getRoleOptional().isPresent();
     }
 

@@ -1,15 +1,24 @@
 package com.icfolson.aem.harbor.core.components.content.text;
 
-import com.icfolson.aem.harbor.core.components.mixins.classifiable.Classification;
-import com.icfolson.aem.library.api.components.annotations.AutoInstantiate;
-import com.icfolson.aem.library.core.components.AbstractComponent;
-import com.icfolson.aem.harbor.core.util.icon.IconUtils;
 import com.citytechinc.cq.component.annotations.Component;
 import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.Tab;
 import com.citytechinc.cq.component.annotations.widgets.DialogFieldSet;
 import com.citytechinc.cq.component.annotations.widgets.RichTextEditor;
-import com.citytechinc.cq.component.annotations.widgets.rte.*;
+import com.citytechinc.cq.component.annotations.widgets.rte.Edit;
+import com.citytechinc.cq.component.annotations.widgets.rte.FindReplace;
+import com.citytechinc.cq.component.annotations.widgets.rte.Format;
+import com.citytechinc.cq.component.annotations.widgets.rte.Image;
+import com.citytechinc.cq.component.annotations.widgets.rte.Justify;
+import com.citytechinc.cq.component.annotations.widgets.rte.Links;
+import com.citytechinc.cq.component.annotations.widgets.rte.SpellCheck;
+import com.citytechinc.cq.component.annotations.widgets.rte.SubSuperscript;
+import com.citytechinc.cq.component.annotations.widgets.rte.Table;
+import com.citytechinc.cq.component.annotations.widgets.rte.Undo;
+import com.icfolson.aem.harbor.core.components.mixins.classifiable.Classification;
+import com.icfolson.aem.harbor.core.util.icon.IconUtils;
+import com.icfolson.aem.library.api.components.annotations.AutoInstantiate;
+import com.icfolson.aem.library.core.components.AbstractComponent;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Default;
 import org.apache.sling.models.annotations.Model;
@@ -22,12 +31,12 @@ import javax.inject.Named;
  * Exposes authoring for a general block of text.
  */
 @Component(
-        value = "Text",
-        inPlaceEditingEditorType = "text",
-        inPlaceEditingConfigPath = "../../dialog/items/tabs/items/Content/items/content",
-        tabs = {
-                @Tab(title = "Content", touchUINodeName = Text.TAB_1_NODE_NAME)
-        })
+    value = "Text",
+    inPlaceEditingEditorType = "text",
+    inPlaceEditingConfigPath = "../../dialog/items/tabs/items/Content/items/content",
+    tabs = {
+        @Tab(title = "Content", touchUINodeName = Text.TAB_1_NODE_NAME)
+    })
 @AutoInstantiate(instanceName = "textcomponent")
 @Model(adaptables = Resource.class)
 public class Text extends AbstractComponent {
@@ -36,23 +45,25 @@ public class Text extends AbstractComponent {
 
     @DialogField(fieldLabel = "Content", name = "./text", suppressTouchUI = true)
     @RichTextEditor(
-            edit = @Edit,
-            findreplace = @FindReplace,
-            format = @Format,
-            image = @Image,
-            justify = @Justify,
-            links = @Links,
-            spellcheck = @SpellCheck,
-            subsuperscript = @SubSuperscript,
-            table = @Table,
-            undo = @Undo
+        edit = @Edit,
+        findreplace = @FindReplace,
+        format = @Format,
+        image = @Image,
+        justify = @Justify,
+        links = @Links,
+        spellcheck = @SpellCheck,
+        subsuperscript = @SubSuperscript,
+        table = @Table,
+        undo = @Undo
     )
-    @Inject @Named("text") @Default(values = "")
+    @Inject
+    @Named("text")
+    @Default(values = "")
     private String content;
 
     @DialogField(ranking = 10)
     @DialogFieldSet
-    @Inject @Self
+    @Self
     private Classification classification;
 
     public String getContent() {

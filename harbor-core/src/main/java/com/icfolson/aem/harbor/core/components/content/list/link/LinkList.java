@@ -14,8 +14,6 @@ import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.injectorspecific.Self;
 
-import javax.inject.Inject;
-
 @Component(
     value = "Link List",
     group = ComponentGroups.HARBOR_LISTS,
@@ -42,7 +40,6 @@ import javax.inject.Inject;
 @Model(adaptables = Resource.class)
 public class LinkList extends AbstractComponent {
 
-    @Inject
     @Self
     private Classification classification;
 

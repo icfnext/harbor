@@ -110,7 +110,7 @@ public class Classification extends AbstractComponent {
      *
      * @return True if one or more classifications is associated with this Resource, false otherwise.
      */
-    public boolean getHasClassifications() {
+    public boolean isHasClassifications() {
         return !getClassifications().isEmpty();
     }
 

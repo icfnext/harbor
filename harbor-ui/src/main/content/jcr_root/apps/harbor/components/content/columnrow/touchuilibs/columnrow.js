@@ -1,4 +1,4 @@
-Harbor.Components.ColumnRow = function( ns, channel ) {
+Harbor.Components.ColumnRow = function (ns, channel) {
 
     var bootstrapSizeProperties = [
         "xsSize",
@@ -7,7 +7,7 @@ Harbor.Components.ColumnRow = function( ns, channel ) {
         "lgSize"
     ];
 
-    var ColumnRowEditor = function() {
+    var ColumnRowEditor = function () {
 
         this.addColumn = function (component, columnResourceType) {
 
@@ -16,36 +16,34 @@ Harbor.Components.ColumnRow = function( ns, channel ) {
             }, {
                 //listName: "columns",
                 listItemNameBase: "column"
-            })
-                .done( function() {
-                    //TODO: Consider following the model of manual injection of the content so as to not necessitate a refresh of the entire row
-                    ns.edit.actions.doRefresh( component );
-                } );
+            }).done(function () {
+                //TODO: Consider following the model of manual injection of the content so as to not necessitate a refresh of the entire row
+                ns.edit.actions.doRefresh(component);
+            });
 
         };
 
-        this.updateColumn = function() {
+        this.updateColumn = function () {
             var editable = this;
 
-            ns.persistence.readParagraphContent( { path: editable.path } )
-                .done( function( content ) {
+            ns.persistence.readParagraphContent({path: editable.path})
+                .done(function (content) {
 
-                    var contentObject = JSON.parse( content );
+                    var contentObject = JSON.parse(content);
                     var bootstrapSizeArray = [];
 
-                    bootstrapSizeProperties.forEach( function( currentSizeProperty ) {
-                        if ( contentObject[ currentSizeProperty ] && contentObject[ currentSizeProperty ] !== 'default' ) {
-                            bootstrapSizeArray.push( contentObject[ currentSizeProperty ] );
+                    bootstrapSizeProperties.forEach(function (currentSizeProperty) {
+                        if (contentObject[currentSizeProperty] && contentObject[currentSizeProperty] !== 'default') {
+                            bootstrapSizeArray.push(contentObject[currentSizeProperty]);
                         }
-                    } );
+                    });
 
-                    ns.ContentFrame.executeCommand( editable.path, 'harbor-columnrow-update-column-size', JSON.stringify( bootstrapSizeArray ) );
-
-                } );
+                    ns.ContentFrame.executeCommand(editable.path, 'harbor-columnrow-update-column-size', JSON.stringify(bootstrapSizeArray));
+                });
         };
 
     };
 
     return new ColumnRowEditor();
 
-}( Granite.author, jQuery( document ) );
+}(Granite.author, jQuery(document));

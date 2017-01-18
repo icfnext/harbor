@@ -12,7 +12,6 @@ import com.citytechinc.cq.component.annotations.widgets.TextField;
 import com.google.common.collect.Lists;
 import com.icfolson.aem.harbor.api.constants.bootstrap.Bootstrap;
 import com.icfolson.aem.harbor.core.components.mixins.classifiable.Classification;
-import com.icfolson.aem.library.api.components.annotations.AutoInstantiate;
 import com.icfolson.aem.library.core.constants.ComponentConstants;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.sling.api.resource.Resource;
@@ -27,18 +26,16 @@ import java.util.List;
 @Component(
     value = "Column",
     actions = { "text:Column", "edit", "delete" },
-    //listeners = { @Listener(name = "afterdelete", value = "Harbor.Lists.refreshListParent"), @Listener(name = "afteredit", value = "Harbor.Lists.refreshListParent") },
-    listeners = { @Listener(name = "afteredit", value = "Harbor.Components.ColumnRow.updateColumn") },
+    listeners = {
+        @Listener(name = "afteredit", value = "REFRESH_PAGE")
+    },
     group = ComponentConstants.GROUP_HIDDEN,
     tabs = {
         @Tab(title = "Column Row"),
         @Tab(title = "Advanced")
     })
-@AutoInstantiate(instanceName = Column.INSTANCE_NAME)
 @Model(adaptables = Resource.class)
 public class Column {
-
-    public static final String INSTANCE_NAME = "column";
 
     @DialogField(fieldLabel = "Extra Small Device Width", ranking = 0)
     @Selection(type = Selection.SELECT, options = {
@@ -152,7 +149,7 @@ public class Column {
 
     @DialogField(tab = 1, ranking = 40)
     @DialogFieldSet
-    @Inject
+    @Self
     @Optional
     private Classification classification;
 
@@ -210,7 +207,6 @@ public class Column {
 
         return StringUtils.join(colSizes, " ");
     }
-
 
     public Classification getClassification() {
         return classification;
