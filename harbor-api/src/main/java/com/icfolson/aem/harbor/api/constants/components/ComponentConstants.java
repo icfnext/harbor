@@ -2,7 +2,7 @@ package com.icfolson.aem.harbor.api.constants.components;
 
 public final class ComponentConstants {
 
-    public final static String FONT_AWESOME_CSS_FILE_PATH = "/etc/clientlibs/harbor/fontawesome/css/font-awesome.css";
+    public static final String ICON_OPTIONS_URL = "/etc/acs-commons/lists/font-awesome-icons/_jcr_content.list.json";
 
-    public final static String FONT_AWESOME_SERVLET_PATH = "/bin/fontawesomeservlet";
+    public static final String ICON_DATASOURCE_PATH = "/etc/acs-commons/lists/font-awesome-icons";
 }

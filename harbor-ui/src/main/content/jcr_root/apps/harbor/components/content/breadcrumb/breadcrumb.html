@@ -1,4 +1,4 @@
-<ol class="breadcrumb" data-sly-use.breadcrumb="com.icfolson.aem.harbor.core.components.content.breadcrumb.BreadcrumbComponent">
+<ol class="breadcrumb" data-sly-use.breadcrumb="com.icfolson.aem.harbor.core.components.content.breadcrumb.Breadcrumb">
     <li data-sly-repeat.currentTrailItem="${breadcrumb.items}">
         <sly data-sly-test="${!currentTrailItemList.first && breadcrumb.items.hasHtmlDelimiter}">${breadcrumb.items.htmlDelimiter}</sly>
         <i data-sly-test="${!currentTrailItemList.first && breadcrumb.items.hasIconDelimiter}" class='fa ${breadcrumb.items.iconDelimiter}'></i>

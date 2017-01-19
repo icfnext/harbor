@@ -9,46 +9,41 @@
         <tabs jcr:primaryType="cq:TabPanel">
             <items jcr:primaryType="cq:WidgetCollection">
                 <basic
-                        jcr:primaryType="cq:Widget"
-                        path="/libs/foundation/components/page/tab_basic.infinity.json"
-                        xtype="cqinclude" />
+                    jcr:primaryType="cq:Widget"
+                    path="/libs/foundation/components/page/tab_basic.infinity.json"
+                    xtype="cqinclude"/>
                 <advanced
-                        jcr:primaryType="cq:Widget"
-                        path="/libs/foundation/components/page/tab_advanced.infinity.json"
-                        xtype="cqinclude" />
+                    jcr:primaryType="cq:Widget"
+                    path="/libs/foundation/components/page/tab_advanced.infinity.json"
+                    xtype="cqinclude"/>
                 <image
-                        jcr:primaryType="cq:Widget"
-                        path="/libs/foundation/components/page/tab_image.infinity.json"
-                        xtype="cqinclude" />
-                <cloudservices
-                        jcr:primaryType="cq:Widget"
-                        path="/libs/foundation/components/page/tab_cloudservices.infinity.json"
-                        xtype="cqinclude" />
-                <blueprint
-                        jcr:primaryType="cq:Widget"
-                        path="/libs/foundation/components/page/tab_blueprint.infinity.json"
-                        xtype="cqinclude" />
-                <livecopy
-                        jcr:primaryType="cq:Widget"
-                        path="/libs/foundation/components/page/tab_livecopy.infinity.json"
-                        xtype="cqinclude" />
+                    jcr:primaryType="cq:Widget"
+                    path="/libs/foundation/components/page/tab_image.infinity.json"
+                    xtype="cqinclude"/>
                 <icon
-                        jcr:primaryType="cq:Widget"
-                        path="/apps/harbor/components/page/common/global/icon.infinity.json"
-                        xtype="cqinclude" />
+                    jcr:primaryType="cq:Widget"
+                    path="/apps/harbor/components/page/common/global/icon.infinity.json"
+                    xtype="cqinclude"/>
                 <sitemap
-                        jcr:primaryType="cq:Widget"
-                        path="/apps/harbor/components/page/common/global/sitemap.infinity.json"
-                        xtype="cqinclude" />
+                    jcr:primaryType="cq:Widget"
+                    path="/apps/harbor/components/page/common/global/sitemap.infinity.json"
+                    xtype="cqinclude"/>
                 <metadata
-                        jcr:primaryType="cq:Widget"
-                        path="/apps/harbor/components/page/common/global/metadata.infinity.json"
-                        xtype="cqinclude" />
-                <!--TODO: Backlogged
-                iconimage
-                        jcr:primaryType="cq:Widget"
-                        path="/apps/harbor/components/page/common/global/iconimage.infinity.json"
-                        xtype="cqinclude" /-->
+                    jcr:primaryType="cq:Widget"
+                    path="/apps/harbor/components/page/common/global/metadata.infinity.json"
+                    xtype="cqinclude"/>
+                <cloudservices
+                    jcr:primaryType="cq:Widget"
+                    path="/libs/foundation/components/page/tab_cloudservices.infinity.json"
+                    xtype="cqinclude"/>
+                <blueprint
+                    jcr:primaryType="cq:Widget"
+                    path="/libs/foundation/components/page/tab_blueprint.infinity.json"
+                    xtype="cqinclude"/>
+                <livecopy
+                    jcr:primaryType="cq:Widget"
+                    path="/libs/foundation/components/page/tab_livecopy.infinity.json"
+                    xtype="cqinclude"/>
             </items>
         </tabs>
     </items>

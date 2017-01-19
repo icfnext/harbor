@@ -16,10 +16,10 @@ import org.apache.sling.models.annotations.injectorspecific.Self;
 
 import javax.inject.Inject;
 
-@Component(value = "Inheriting Breadcrumb", group = ComponentGroups.HARBOR_NAVIGATION, resourceSuperType = BreadcrumbComponent.RESOURCE_TYPE, suppressFieldInheritanceForTouchUI = true, tabs = {@Tab(title = "Breadcrumb", touchUINodeName = "breadcrumb")})
+@Component(value = "Inheriting Breadcrumb", group = ComponentGroups.HARBOR_NAVIGATION, resourceSuperType = Breadcrumb.RESOURCE_TYPE, suppressFieldInheritanceForTouchUI = true, tabs = {@Tab(title = "Breadcrumb", touchUINodeName = "breadcrumb")})
 @AutoInstantiate(instanceName = "breadcrumb")
 @Model(adaptables = Resource.class)
-public class InheritingBreadcrumb extends BreadcrumbComponent {
+public class InheritingBreadcrumb extends Breadcrumb {
 
     public static final String RESOURCE_TYPE = "harbor/components/content/inheritingbreadcrumb";
 

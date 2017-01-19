@@ -4,18 +4,17 @@
           title="Icon">
     <items jcr:primaryType="cq:WidgetCollection">
         <icon
-                jcr:primaryType="cq:Widget"
-                collapsed="{Boolean}false"
-                collapsible="{Boolean}false"
-                xtype="dialogfieldset">
+            jcr:primaryType="cq:Widget"
+            collapsed="{Boolean}false"
+            collapsible="{Boolean}false"
+            xtype="dialogfieldset">
             <items jcr:primaryType="cq:WidgetCollection">
                 <icons
-                        jcr:primaryType="cq:Widget"
-                        fieldLabel="Icon"
-                        name="./harboricon"
-                        xtype="selection"
-                        type="select"
-                        options="/bin/fontawesomeservlet" />
+                    jcr:primaryType="cq:Widget"
+                    fieldLabel="Icon"
+                    name="./icon"
+                    xtype="graphiciconselection"
+                    options="/etc/acs-commons/lists/font-awesome-icons/_jcr_content.list.json"/>
             </items>
         </icon>
     </items>

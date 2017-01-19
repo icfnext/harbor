@@ -7,10 +7,8 @@ import com.citytechinc.cq.component.annotations.widgets.PathField;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
 import com.citytechinc.cq.component.annotations.widgets.Switch;
 import com.citytechinc.cq.component.annotations.widgets.TextField;
-import com.google.common.base.Optional;
 import com.google.common.collect.Lists;
 import com.icfolson.aem.harbor.api.content.page.HierarchicalPage;
-import com.icfolson.aem.harbor.api.content.page.HomePage;
 import com.icfolson.aem.harbor.api.services.meta.MetadataConfigService;
 import com.icfolson.aem.library.api.page.PageDecorator;
 import com.icfolson.aem.library.core.constants.PathConstants;
@@ -18,18 +16,14 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import java.util.List;
 
-@Component(value = "Meta Page", editConfig = false, path = "/page/common", name = "global",
+@Component(value = "SEO Metadata", editConfig = false, path = "/page/common", name = "global",
     touchFileName = "touch-metadata")
 @Model(adaptables = SlingHttpServletRequest.class)
 public class MetaPage {
-
-    private static final Logger LOG = LoggerFactory.getLogger(MetaPage.class);
 
     @Inject
     private PageDecorator currentPage;
@@ -50,11 +44,7 @@ public class MetaPage {
     }
 
     public String getPageName() {
-        if (StringUtils.isNotBlank(currentPage.getPageTitle())) {
-            return currentPage.getPageTitle();
-        } else {
-            return currentPage.getName();
-        }
+        return StringUtils.isNotBlank(currentPage.getPageTitle()) ? currentPage.getPageTitle() : currentPage.getName();
     }
 
     public String getDescription() {
@@ -62,12 +52,8 @@ public class MetaPage {
     }
 
     public String getFullyQualifiedPageImage() {
-        if (currentPage.isHasImage()) {
-            //TODO: See what this actually returns - it might need externalization
-            return currentPage.getImageSource().get();
-        }
-
-        return StringUtils.EMPTY;
+        //TODO: See what this actually returns - it might need externalization
+        return currentPage.isHasImage() ? currentPage.getImageSource().or("") : "";
     }
 
     public String getFullyQualifiedPageUrl() {
@@ -113,37 +99,33 @@ public class MetaPage {
         ranking = 30)
     @PathField(rootPath = PathConstants.PATH_CONTENT)
     public String getCanonicalUrl() {
-        Optional<String> canonicalUrlOptional = currentPage.get("canonicalUrl", String.class);
+        return currentPage.get("canonicalUrl", String.class).transform(canonicalUrl -> {
+            final String url;
 
-        if (canonicalUrlOptional.isPresent()) {
-            if (canonicalUrlOptional.get().startsWith("http:") || canonicalUrlOptional.get().startsWith("https:")) {
-                return canonicalUrlOptional.get();
+            if (canonicalUrl.startsWith("http:") || canonicalUrl.startsWith("https:")) {
+                url = canonicalUrl;
             } else {
-                return metadataConfigService.getExternalUrlForPage(request, currentPage.adaptTo(Resource.class));
+                url = metadataConfigService.getExternalUrlForPage(request, currentPage.adaptTo(Resource.class));
             }
-        }
 
-        return StringUtils.EMPTY;
+            return url;
+        }).or("");
     }
 
     public String getHomePageTitle() {
-        HierarchicalPage hierarchicalPage = currentPage.adaptTo(HierarchicalPage.class);
+        final HierarchicalPage hierarchicalPage = currentPage.adaptTo(HierarchicalPage.class);
+
+        String title = "";
 
         if (hierarchicalPage != null) {
-            Optional<HomePage> homePageOptional = hierarchicalPage.getHomePage();
+            title = hierarchicalPage.getHomePage().transform(homePage -> {
+                final String pageTitle = homePage.getPageTitle();
 
-            if (homePageOptional.isPresent()) {
-                HomePage homePage = homePageOptional.get();
-
-                if (StringUtils.isNotBlank(homePage.getPageTitle())) {
-                    return homePage.getPageTitle();
-                }
-
-                return homePage.getName();
-            }
+                return StringUtils.isNotBlank(pageTitle) ? pageTitle : homePage.getName();
+            }).or("");
         }
 
-        return StringUtils.EMPTY;
+        return title;
     }
 
     @DialogField(fieldLabel = "Add NOINDEX metadata tag",
@@ -162,7 +144,7 @@ public class MetaPage {
     }
 
     public List<String> getRobotsTags() {
-        List<String> robotsTags = Lists.newArrayList();
+        final List<String> robotsTags = Lists.newArrayList();
 
         if (isNoIndex()) {
             robotsTags.add("NOINDEX");
@@ -176,17 +158,14 @@ public class MetaPage {
     }
 
     public String getRobotsContent() {
-        StringBuilder content = new StringBuilder();
-        boolean noIndexIndicator = currentPage.getProperties().get("noindex", false);
-        boolean noFollowIndicator = currentPage.getProperties().get("nofollow", false);
+        final StringBuilder content = new StringBuilder();
+
+        final boolean noIndexIndicator = currentPage.get("noindex", false);
+        final boolean noFollowIndicator = currentPage.get("nofollow", false);
 
         if (noIndexIndicator) {
             content.append("NOINDEX");
-            if (noFollowIndicator) {
-                content.append(", NOFOLLOW");
-            } else {
-                content.append(", FOLLOW");
-            }
+            content.append(noFollowIndicator ? ", NOFOLLOW" : ", FOLLOW");
         } else {
             if (noFollowIndicator) {
                 content.append("INDEX, NOFOLLOW");
