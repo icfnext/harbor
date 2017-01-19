@@ -91,6 +91,44 @@ Presents a Call to Action button which, when pressed, directs the user to a spec
 
 * Group: Harbor
 
+### Accordion Group Component
+
+* Group: Harbor
+
+Presents a group of Accordion Items allowing for the ad-hoc addition of new items.  Each Accordion Item exposes a Paragraph System into which any number of components may be placed.  When in edit mode an author help message will appear indicating this and making it easy to select the Accordion Group in Touch UI.
+
+#### Authorability
+
+Accordion items are added using the "Add Experience" button in the toolbar of the Accordion Group Component.
+  
+When viewed in a non Preview / Publish mode, all Accordion Items will be expanded to expose their content to authors.
+
+##### Accordion Group Authoring
+
+| Dialog Field | Description | 
+| ------------ | ----------- |
+| Open First Item | Indicates whether the first Accordion Item in the Accordion Group whould be opened by default. |
+
+##### Accordion Item Authoring
+
+Each Accordion Item in an Accordion Group exposes its own Paragraph System to which any number of components may be added using normal authoring practices.  While authoring all Accordion Items will be opened to allow for modification.  When in Preview or Publish mode the Accordion Group will operate as a collection of collapsible elements.
+
+The order of established Accordion Items may be modified using the up and down arrows presented in the Toolbar of a given Accordion Item.  Pressing the up button for the first Accordion Item in an Accordion Group or the down button for the last Accordion Item in an Accordion Group will have no effect.
+
+Accordion Items may be removed completely by deleting them using the Delete option presented in the Toolbar for the individual Accordion Item.
+
+| Dialog Field | Description | 
+| ------------ | ----------- |
+| Title | Text title to present for the Accordion Item. |
+
+### Container Component
+
+* Group: Harbor Scaffolding
+* Classifiable
+* Container
+
+
+
 ### Harbor Column Row Component
 
 * Group: Harbor Scaffolding
@@ -190,6 +228,16 @@ For example, the Content Container Component is a basic Container.
 
 General information about Containers in Bootstrap can be found [in the Bootstrap Container documentation](http://getbootstrap.com/css/#overview-container).
 
+#### Classification
+
+Many components in Harbor are "Classifiable".  This allows for the application of semantics to an 
+otherwise general component.  For example, if you are producing a recipe, you might classify your 
+Container component using a `Recipe` tag.  Systematically, for most components, this classification 
+simply applies an additional class attribute to the rendered HTML for the component which allows 
+for extended usage such as targeting of styles or unique indexability.
+
+Classifications are always authored as Tags.
+
 ### Developer Core Concepts
 
 #### Lists
@@ -211,6 +259,18 @@ A Tree has a single TreeNode instance as its root.  A TreeNode may in turn have 
 Tree Components are in turn components which intend to manage a Tree data structure's construction and presentation.
 
 TODO: Link to Javadocs where appropriate
+
+#### Classification
+
+Components are Classifiable if they contain an `icf:classification` input which is of type Tag Field. 
+What a component does with the classification is up to the needs and requirements of the component. 
+For all current Harbor components, classification causes additional class attributes to be written 
+to the rendered HTML of the component.  This allows for the application of style and functionality 
+to sections of a site without the need to built numerous custom components.  For example, a Recipe 
+component could be made up of a Content Container with an appropriate classification.  Anything 
+under that container then is semantically considered to be part of the recipe.  It may be appropriate 
+to further classify child elements such as Recipe Step or Ingredient depending on the granular 
+needs of the site and system.
 
 
 
@@ -293,23 +353,6 @@ An implementation of `RenderableItem` exposes a single `render` method which is 
 of the item.  If appropriate, an implementation of this interface may be returned as the members of the Iterable produced
 by the `ListRenderingStrategy`'s `toRenderableList` method after which rendering mechanisms may simply call the `render` method
 on each item to produce a rendering.
-
-#### The harbor:includeListItems JSP Tag
-
-The `harbor:includeListItems` tag is provided as a rendering convenience for those components using .jsp as their
-rendering mechanism.
-
-Attribute Name | Attribute Type | Required | Description
--------------- | -------------- | -------- | -----------
-items          | Iterable<?>    | true     | The Iterable of items generally produced by a `ListRenderingStrategy`
-itemVar        | String         | false    | If using a script for rendering, this is the variable name by which the current item may be referred to
-script         | String         | false    | A relative reference to a .jsp script which should be used to render each item.  This is required if your items do not implement `RenderableItem`.
-
-The tag will iterate over all items in the Iterable provided rendering each in turn.  If a `script` attribute is specified,
-the tag will use the specified .jsp script to render the individual items.  Within the context of said script the item's name
-is the name provided in the `itemVar` attribute of the `harbor:includeListItems` tag.  If your list items themselves implement
-the `RenderableItem` interface then you need not include a `script` or `itemVar` attribute, the tag will simply use the
-`render` method exposed by `RenderableItem` to produce a rendering of the item.
 
 ### List APIs and the Component Plugin
 
