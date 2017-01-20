@@ -53,16 +53,9 @@ class DefaultHierarchicalPage extends AbstractHierarchicalPage {
         homePage
     }
 
-    /*
-     * TODO: in backlog
-     *
-     * @Override public String getPageIconImage() { return
-     * this.getImageSource(Properties.PAGE_ICON_IMAGE).or(""); }
-     */
-
     @Override
     String getPageIcon() {
-        properties.get(Properties.ICF_OLSON_ICONIC_REPRESENTATION, "")
+        get(Properties.ICF_OLSON_ICONIC_REPRESENTATION, "")
     }
 
     @Override

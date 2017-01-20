@@ -13,7 +13,7 @@ import org.apache.sling.models.annotations.Optional;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-@Component(value = "Sitemapped Page", editConfig = false, path = "/page/common", name = "global",
+@Component(value = "Sitemap", editConfig = false, path = "/page/common", name = "global",
     touchFileName = "touch-sitemap")
 @Model(adaptables = Resource.class)
 public class SitemappedPage {
@@ -27,7 +27,7 @@ public class SitemappedPage {
     @Default(booleanValues = false)
     private boolean hiddenFromRobots;
 
-    @DialogField(fieldLabel = "Change Frequency", name = "./ct:changeFrequency", ranking = 10)
+    @DialogField(fieldLabel = "Change Frequency", name = "./icf:changeFrequency", ranking = 10)
     @Selection(type = Selection.SELECT, options = {
         @Option(text = "Always", value = "always"),
         @Option(text = "Hourly", value = "hourly"),
@@ -42,7 +42,7 @@ public class SitemappedPage {
     @Optional
     private String changeFrequency;
 
-    @DialogField(fieldLabel = "Priority", name = "./ct:priority", defaultValue = "0.5", ranking = 20)
+    @DialogField(fieldLabel = "Priority", name = "./icf:priority", defaultValue = "0.5", ranking = 20)
     @Selection(type = Selection.SELECT, options = {
         @Option(text = "1.0", value = "1.0"),
         @Option(text = "0.9", value = "0.9"),
@@ -72,5 +72,4 @@ public class SitemappedPage {
     public String getPriority() {
         return priority;
     }
-
 }

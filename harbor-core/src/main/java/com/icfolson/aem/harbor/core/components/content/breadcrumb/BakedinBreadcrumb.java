@@ -10,7 +10,7 @@ import org.apache.sling.models.annotations.Model;
 @Component(
     value = "Bakedin Breadcrumb",
     group = ComponentConstants.GROUP_HIDDEN,
-    resourceSuperType = BreadcrumbComponent.RESOURCE_TYPE,
+    resourceSuperType = Breadcrumb.RESOURCE_TYPE,
     disableTargeting = true,
     actions = { "text: Breadcrumb", "-", "edit" },
     suppressFieldInheritanceForTouchUI = true,

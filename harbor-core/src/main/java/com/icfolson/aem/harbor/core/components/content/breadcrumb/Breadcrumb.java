@@ -19,9 +19,9 @@ import javax.inject.Inject;
 @Component(value = "Breadcrumb", group = ComponentGroups.HARBOR_NAVIGATION,
     tabs = { @Tab(title = "Breadcrumb", touchUINodeName = "breadcrumb") })
 @Model(adaptables = Resource.class)
-public class BreadcrumbComponent extends AbstractListComponent<TrailPage, BreadcrumbTrail> {
+public class Breadcrumb extends AbstractListComponent<TrailPage, BreadcrumbTrail> {
 
-    public static final String RESOURCE_TYPE = "harbor/components/content/breadcrumbcomponent";
+    public static final String RESOURCE_TYPE = "harbor/components/content/breadcrumb";
 
     @DialogField(ranking = 1)
     @DialogFieldSet(border = false)
@@ -44,5 +44,4 @@ public class BreadcrumbComponent extends AbstractListComponent<TrailPage, Breadc
     protected ListRenderingStrategy<TrailPage, BreadcrumbTrail> getListRenderingStrategy() {
         return breadcrumbItemListRenderingStrategy;
     }
-
 }

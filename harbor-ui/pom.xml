@@ -213,5 +213,13 @@
             <version>${multicompositeaddon.version}</version>
             <type>zip</type>
         </dependency>
+
+        <!-- ACS AEM Commons -->
+        <dependency>
+            <groupId>com.adobe.acs</groupId>
+            <artifactId>acs-aem-commons-content</artifactId>
+            <version>${acs.aem.commons.version}</version>
+            <type>zip</type>
+        </dependency>
     </dependencies>
 </project>

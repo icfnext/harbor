@@ -2,23 +2,22 @@ package com.icfolson.aem.harbor.core.components.content.breadcrumb;
 
 import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.widgets.DialogFieldSet;
-import com.citytechinc.cq.component.annotations.widgets.Selection;
 import com.citytechinc.cq.component.annotations.widgets.Switch;
 import com.citytechinc.cq.component.annotations.widgets.TextField;
 import com.google.common.collect.Lists;
+import com.icfolson.aem.harbor.api.annotations.IconPicker;
 import com.icfolson.aem.harbor.api.constants.components.ComponentConstants;
 import com.icfolson.aem.harbor.api.lists.rendering.ListRenderingStrategy;
 import com.icfolson.aem.harbor.core.components.content.page.TrailPage;
-import com.icfolson.aem.library.api.node.ComponentNode;
+import com.icfolson.aem.library.core.components.AbstractComponent;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
 
-import javax.inject.Inject;
 import java.util.List;
 
 @Model(adaptables = Resource.class)
-public class BreadcrumbItemRenderingStrategy implements ListRenderingStrategy<TrailPage, BreadcrumbTrail> {
+public class BreadcrumbItemRenderingStrategy extends AbstractComponent implements ListRenderingStrategy<TrailPage, BreadcrumbTrail> {
 
     private static final String DEFAULT_DELIMITER = "fa-bootstrap-slash";
 
@@ -28,27 +27,12 @@ public class BreadcrumbItemRenderingStrategy implements ListRenderingStrategy<Tr
 
     public static final String CURRENT_ITEM_CONFIGURATION_PREFIX = "currentItem";
 
-    @Inject
-    private ComponentNode componentNode;
-
-    private Boolean renderAsLink;
-
-    private String iconDelimiter;
-
-    private String htmlDelimiter;
-
-    private BreadcrumbItemConfiguration rootItemConfiguration;
-
-    private BreadcrumbItemConfiguration intermediateItemConfiguration;
-
-    private BreadcrumbItemConfiguration currentItemConfiguration;
-
     private BreadcrumbTrail breadcrumbTrail;
 
     @Override
     public BreadcrumbTrail toRenderableList(Iterable<TrailPage> itemIterable) {
         if (breadcrumbTrail == null) {
-            List<BreadcrumbItem> renderableList = Lists.newArrayList();
+            final List<BreadcrumbItem> renderableList = Lists.newArrayList();
 
             for (TrailPage currentBreadcrumbPage : itemIterable) {
                 final BreadcrumbItemConfiguration configuration;
@@ -75,12 +59,7 @@ public class BreadcrumbItemRenderingStrategy implements ListRenderingStrategy<Tr
     @DialogField(fieldLabel = "Render As Link", ranking = 1)
     @Switch(offText = "No", onText = "Yes")
     public Boolean getRenderAsLink() {
-        if (renderAsLink == null) {
-            renderAsLink = isInherits() ? componentNode.getInherited("renderAsLink", false) : componentNode.get(
-                "renderAsLink", false);
-        }
-
-        return renderAsLink;
+        return isInherits() ? getInherited("renderAsLink", false) : get("renderAsLink", false);
     }
 
     /**
@@ -90,69 +69,48 @@ public class BreadcrumbItemRenderingStrategy implements ListRenderingStrategy<Tr
      * @return a string representing the font awesome icon class the user has selected.
      */
     @DialogField(fieldLabel = "Delimiter Icon", ranking = 10)
-    @Selection(type = Selection.SELECT, optionsUrl = ComponentConstants.FONT_AWESOME_SERVLET_PATH)
+    @IconPicker(path = ComponentConstants.ICON_DATASOURCE_PATH)
     public String getIconDelimiter() {
-        if (iconDelimiter == null) {
-            iconDelimiter = isInherits() ? componentNode.getInherited("iconDelimiter",
-                DEFAULT_DELIMITER) : componentNode.get("iconDelimiter", DEFAULT_DELIMITER);
-        }
-
-        return iconDelimiter;
+        return isInherits() ? getInherited("iconDelimiter", DEFAULT_DELIMITER) : get("iconDelimiter",
+            DEFAULT_DELIMITER);
     }
 
     /**
      * A dialog field which allows the user to enter any HTML string they wish.
      *
-     * @return The {@link BreadcrumbComponent} HTML delimiter.
+     * @return The {@link Breadcrumb} HTML delimiter.
      */
     @DialogField(fieldLabel = "Delimiter HTML", ranking = 20,
         fieldDescription = "Allows for the use of arbitrary HTML as a Breadcrumb Trail Item Delimiter. The delimiter authored in this field will trump the delimiter authored in the icon field.")
     @TextField
     public String getHtmlDelimiter() {
-        if (htmlDelimiter == null) {
-            htmlDelimiter = isInherits() ? componentNode.getInherited("htmlDelimiter",
-                StringUtils.EMPTY) : componentNode.get("htmlDelimiter", StringUtils.EMPTY);
-        }
-
-        return htmlDelimiter;
+        return isInherits() ? getInherited("htmlDelimiter", StringUtils.EMPTY) : get("htmlDelimiter",
+            StringUtils.EMPTY);
     }
 
     @DialogField(ranking = 30)
     @DialogFieldSet(title = "Root Item Configuration", namePrefix = ROOT_ITEM_CONFIGURATION_PREFIX)
     public BreadcrumbItemConfiguration getRootItemConfiguration() {
-        if (rootItemConfiguration == null) {
-            rootItemConfiguration = getItemConfiguration(ROOT_ITEM_CONFIGURATION_PREFIX);
-        }
-
-        return rootItemConfiguration;
+        return getItemConfiguration(ROOT_ITEM_CONFIGURATION_PREFIX);
     }
 
     @DialogField(ranking = 40)
     @DialogFieldSet(title = "Intermediate Item Configuration", namePrefix = INTERMEDIATE_ITEM_CONFIGURATION_PREFIX)
     public BreadcrumbItemConfiguration getIntermediateItemConfiguration() {
-        if (intermediateItemConfiguration == null) {
-            intermediateItemConfiguration = getItemConfiguration(INTERMEDIATE_ITEM_CONFIGURATION_PREFIX);
-        }
-
-        return intermediateItemConfiguration;
+        return getItemConfiguration(INTERMEDIATE_ITEM_CONFIGURATION_PREFIX);
     }
 
     @DialogField(ranking = 50)
     @DialogFieldSet(title = "Current Item Configuration", namePrefix = CURRENT_ITEM_CONFIGURATION_PREFIX)
     public BreadcrumbItemConfiguration getCurrentItemConfiguration() {
-        if (currentItemConfiguration == null) {
-            currentItemConfiguration = getItemConfiguration(CURRENT_ITEM_CONFIGURATION_PREFIX);
-        }
-
-        return currentItemConfiguration;
+        return getItemConfiguration(CURRENT_ITEM_CONFIGURATION_PREFIX);
     }
 
     protected BreadcrumbItemConfiguration getItemConfiguration(String prefix) {
-        return new BreadcrumbItemConfiguration(componentNode, prefix, isInherits());
+        return new BreadcrumbItemConfiguration(this, prefix, isInherits());
     }
 
     protected boolean isInherits() {
         return false;
     }
-
 }

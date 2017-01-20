@@ -16,4 +16,5 @@
     <filter root="/etc/packages/aemnamespace"/>
     <filter root="/etc/packages/authorabledesignmanager"/>
     <filter root="/etc/packages/multicompositeaddon"/>
+    <filter root="/etc/packages/acs-aem-commons"/>
 </workspaceFilter>
