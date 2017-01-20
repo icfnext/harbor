@@ -59,11 +59,11 @@
                     </icon>
                     <sitemap
                         jcr:primaryType="nt:unstructured"
-                        path="harbor/components/page/common/global/touch-sitemap/content/items/SitemappedPage"
+                        path="harbor/components/page/common/global/touch-sitemap/content/items/Sitemap"
                         sling:resourceType="granite/ui/components/foundation/include"/>
                     <meta
                         jcr:primaryType="nt:unstructured"
-                        path="harbor/components/page/common/global/touch-metadata/content/items/MetaPage"
+                        path="harbor/components/page/common/global/touch-metadata/content/items/SEOMetadata"
                         sling:resourceType="granite/ui/components/foundation/include"/>
                     <cloudservices
                         jcr:primaryType="nt:unstructured"
