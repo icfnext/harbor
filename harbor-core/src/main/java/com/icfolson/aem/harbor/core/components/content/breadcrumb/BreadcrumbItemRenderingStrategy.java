@@ -27,18 +27,6 @@ public class BreadcrumbItemRenderingStrategy extends AbstractComponent implement
 
     public static final String CURRENT_ITEM_CONFIGURATION_PREFIX = "currentItem";
 
-    private Boolean renderAsLink;
-
-    private String iconDelimiter;
-
-    private String htmlDelimiter;
-
-    private BreadcrumbItemConfiguration rootItemConfiguration;
-
-    private BreadcrumbItemConfiguration intermediateItemConfiguration;
-
-    private BreadcrumbItemConfiguration currentItemConfiguration;
-
     private BreadcrumbTrail breadcrumbTrail;
 
     @Override
@@ -71,11 +59,7 @@ public class BreadcrumbItemRenderingStrategy extends AbstractComponent implement
     @DialogField(fieldLabel = "Render As Link", ranking = 1)
     @Switch(offText = "No", onText = "Yes")
     public Boolean getRenderAsLink() {
-        if (renderAsLink == null) {
-            renderAsLink = isInherits() ? getInherited("renderAsLink", false) : get("renderAsLink", false);
-        }
-
-        return renderAsLink;
+        return isInherits() ? getInherited("renderAsLink", false) : get("renderAsLink", false);
     }
 
     /**
@@ -87,12 +71,8 @@ public class BreadcrumbItemRenderingStrategy extends AbstractComponent implement
     @DialogField(fieldLabel = "Delimiter Icon", ranking = 10)
     @IconPicker(path = ComponentConstants.ICON_DATASOURCE_PATH)
     public String getIconDelimiter() {
-        if (iconDelimiter == null) {
-            iconDelimiter = isInherits() ? getInherited("iconDelimiter", DEFAULT_DELIMITER) : get("iconDelimiter",
-                DEFAULT_DELIMITER);
-        }
-
-        return iconDelimiter;
+        return isInherits() ? getInherited("iconDelimiter", DEFAULT_DELIMITER) : get("iconDelimiter",
+            DEFAULT_DELIMITER);
     }
 
     /**
@@ -104,42 +84,26 @@ public class BreadcrumbItemRenderingStrategy extends AbstractComponent implement
         fieldDescription = "Allows for the use of arbitrary HTML as a Breadcrumb Trail Item Delimiter. The delimiter authored in this field will trump the delimiter authored in the icon field.")
     @TextField
     public String getHtmlDelimiter() {
-        if (htmlDelimiter == null) {
-            htmlDelimiter = isInherits() ? getInherited("htmlDelimiter", StringUtils.EMPTY) : get("htmlDelimiter",
-                StringUtils.EMPTY);
-        }
-
-        return htmlDelimiter;
+        return isInherits() ? getInherited("htmlDelimiter", StringUtils.EMPTY) : get("htmlDelimiter",
+            StringUtils.EMPTY);
     }
 
     @DialogField(ranking = 30)
     @DialogFieldSet(title = "Root Item Configuration", namePrefix = ROOT_ITEM_CONFIGURATION_PREFIX)
     public BreadcrumbItemConfiguration getRootItemConfiguration() {
-        if (rootItemConfiguration == null) {
-            rootItemConfiguration = getItemConfiguration(ROOT_ITEM_CONFIGURATION_PREFIX);
-        }
-
-        return rootItemConfiguration;
+        return getItemConfiguration(ROOT_ITEM_CONFIGURATION_PREFIX);
     }
 
     @DialogField(ranking = 40)
     @DialogFieldSet(title = "Intermediate Item Configuration", namePrefix = INTERMEDIATE_ITEM_CONFIGURATION_PREFIX)
     public BreadcrumbItemConfiguration getIntermediateItemConfiguration() {
-        if (intermediateItemConfiguration == null) {
-            intermediateItemConfiguration = getItemConfiguration(INTERMEDIATE_ITEM_CONFIGURATION_PREFIX);
-        }
-
-        return intermediateItemConfiguration;
+        return getItemConfiguration(INTERMEDIATE_ITEM_CONFIGURATION_PREFIX);
     }
 
     @DialogField(ranking = 50)
     @DialogFieldSet(title = "Current Item Configuration", namePrefix = CURRENT_ITEM_CONFIGURATION_PREFIX)
     public BreadcrumbItemConfiguration getCurrentItemConfiguration() {
-        if (currentItemConfiguration == null) {
-            currentItemConfiguration = getItemConfiguration(CURRENT_ITEM_CONFIGURATION_PREFIX);
-        }
-
-        return currentItemConfiguration;
+        return getItemConfiguration(CURRENT_ITEM_CONFIGURATION_PREFIX);
     }
 
     protected BreadcrumbItemConfiguration getItemConfiguration(String prefix) {

@@ -44,5 +44,4 @@ public class Breadcrumb extends AbstractListComponent<TrailPage, BreadcrumbTrail
     protected ListRenderingStrategy<TrailPage, BreadcrumbTrail> getListRenderingStrategy() {
         return breadcrumbItemListRenderingStrategy;
     }
-
 }

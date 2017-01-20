@@ -47,7 +47,7 @@
                                 <items jcr:primaryType="nt:unstructured">
                                     <icon
                                         jcr:primaryType="nt:unstructured"
-                                        fieldLabel="Icon" name="./icon"
+                                        fieldLabel="Icon" name="./icf:iconicRepresentation"
                                         sling:resourceType="acs-commons/components/authoring/graphiciconselect">
                                         <datasource jcr:primaryType="nt:unstructured"
                                                     path="/etc/acs-commons/lists/font-awesome-icons"

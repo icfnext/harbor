@@ -6,9 +6,10 @@ import com.icfolson.aem.harbor.core.components.content.page.TrailPage;
 public class BreadcrumbItem {
 
     private final TrailPage page;
+
     private final BreadcrumbItemConfiguration itemConfiguration;
 
-    public BreadcrumbItem(TrailPage page, BreadcrumbItemConfiguration breadcrumbItemConfiguration) {
+    public BreadcrumbItem(final TrailPage page, final BreadcrumbItemConfiguration breadcrumbItemConfiguration) {
         this.page = page;
         this.itemConfiguration = breadcrumbItemConfiguration;
     }
@@ -37,12 +38,11 @@ public class BreadcrumbItem {
         return getPage().adaptTo(HierarchicalPage.class).getPageIcon();
     }
 
-    public boolean isRoot(){
+    public boolean isRoot() {
         return page.isRoot();
     }
 
     public boolean isCurrentPage() {
         return page.isCurrent();
     }
-
 }

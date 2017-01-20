@@ -10,8 +10,6 @@ import com.citytechinc.cq.component.touchuidialog.widget.maker.TouchUIWidgetMake
 import com.icfolson.aem.harbor.api.annotations.IconPicker;
 
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 
 public class IconPickerWidgetMaker extends AbstractTouchUIWidgetMaker<IconPickerWidgetParameters> {
 
@@ -35,12 +33,7 @@ public class IconPickerWidgetMaker extends AbstractTouchUIWidgetMaker<IconPicker
         final DataSourceParameters dataSourceParameters = new DataSourceParameters();
 
         dataSourceParameters.setResourceType(DATASOURCE_RESOURCE_TYPE);
-
-        final Map<String, String> additionalProperties = new HashMap<>();
-
-        additionalProperties.put("path", iconPicker.path());
-
-        dataSourceParameters.setAdditionalProperties(additionalProperties);
+        dataSourceParameters.setAdditionalProperties(Collections.singletonMap("path", iconPicker.path()));
 
         return new DataSource(dataSourceParameters);
     }
