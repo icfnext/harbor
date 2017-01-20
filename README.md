@@ -240,6 +240,13 @@ Classifications are always authored as Tags.
 
 ### Developer Core Concepts
 
+#### Namespace
+
+Numerous properties with consistent semantics unique to Harbor are namespaced under the `icf` namespace deployed by 
+the included `com.icfolson.aem.namespace:aem-namespace-extension` module.  This module also exposes String constants 
+for notable properties, namespace prefixes, and URIs.  A key element of cohesion across Harbor is the use of consistent 
+semantics in the creation of a data space defining the content presentation Harbor affords within AEM.  
+
 #### Lists
 
 The functionality of many of the Components created for a particular project can be distilled down to the presentation of a List of items.  Lists therefore are central to Harbor and enabled by Interfaces and Abstract Classes suggesting a pattern to follow in List Component development.
@@ -272,7 +279,19 @@ under that container then is semantically considered to be part of the recipe.  
 to further classify child elements such as Recipe Step or Ingredient depending on the granular 
 needs of the site and system.
 
+Classifiability is implemented via the `com.icfolson.aem.harbor.core.components.mixins.classifiable.Classification` 
+Component class and it's inheriting counterpart `com.icfolson.aem.harbor.core.components.mixins.classifiable.InheritedClassification`.
+These are intended to be added as sub-components of classifiable components.  An example of such usage is the 
+`com.icfolson.aem.harbor.core.components.content.columns` class. It includes Classification as a Dialog Field Set and an 
+injected component
 
+```
+    @DialogField(tab = 1, ranking = 40) @DialogFieldSet
+    @Self @Optional
+    private Classification classification;
+```
+
+It then uses Classification's `classNames()` method to output a space delimited set of class names in the accompanying Sightly. 
 
 
 

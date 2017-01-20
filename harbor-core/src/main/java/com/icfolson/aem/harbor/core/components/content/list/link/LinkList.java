@@ -28,7 +28,7 @@ import org.apache.sling.models.annotations.injectorspecific.Self;
             text = "Add Link",
             handler = "function() { Harbor.Components.LinkList.addLink( this, '" + ListableLink.RESOURCE_TYPE + "' ); }",
             additionalProperties = {
-                @ActionConfigProperty(name = "icon", value = "coral-Icon--add")
+                @ActionConfigProperty(name = "icon", value = "coral-Icon--experienceAdd")
             })
     },
     listeners = {
