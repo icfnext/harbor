@@ -12,7 +12,6 @@ import com.icfolson.aem.harbor.api.trees.rendering.TreeRenderingStrategy;
 import com.icfolson.aem.harbor.core.components.content.list.AbstractTreeComponent;
 import com.icfolson.aem.harbor.core.constants.groups.ComponentGroups;
 import com.icfolson.aem.harbor.core.content.page.navigation.construction.SiteNavigationListConstructionStrategy;
-import com.icfolson.aem.library.api.components.annotations.AutoInstantiate;
 import com.icfolson.aem.library.api.page.PageDecorator;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
@@ -33,7 +32,6 @@ import javax.inject.Inject;
     tabs = {
         @Tab(title = "Main Auto Navigation", touchUINodeName = BootstrapMainAutoNavigation.TAB_1_NODE_NAME)
     })
-@AutoInstantiate(instanceName = "bootstrapMainAutoNavigation")
 @Model(adaptables = Resource.class)
 public class BootstrapMainAutoNavigation extends
     AbstractTreeComponent<NavigablePage, BootstrapPageNavigableRenderableTree> {

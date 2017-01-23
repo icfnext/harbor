@@ -17,7 +17,6 @@ import com.citytechinc.cq.component.annotations.widgets.rte.Table;
 import com.citytechinc.cq.component.annotations.widgets.rte.Undo;
 import com.icfolson.aem.harbor.core.components.mixins.classifiable.Classification;
 import com.icfolson.aem.harbor.core.util.icon.IconUtils;
-import com.icfolson.aem.library.api.components.annotations.AutoInstantiate;
 import com.icfolson.aem.library.core.components.AbstractComponent;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Default;
@@ -37,7 +36,6 @@ import javax.inject.Named;
     tabs = {
         @Tab(title = "Content", touchUINodeName = Text.TAB_1_NODE_NAME)
     })
-@AutoInstantiate(instanceName = "textcomponent")
 @Model(adaptables = Resource.class)
 public class Text extends AbstractComponent {
 

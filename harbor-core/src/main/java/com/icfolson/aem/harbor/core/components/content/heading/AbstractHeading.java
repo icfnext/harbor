@@ -13,8 +13,6 @@ public abstract class AbstractHeading {
 
     public static final String RESOURCE_TYPE = "harbor/components/content/abstractheading";
 
-    public static final String INSTANCE_NAME = "heading";
-
     @DialogField(fieldLabel = "Text", fieldDescription = "The textual content of the rendered heading.")
     @TextField
     @Inject @Optional

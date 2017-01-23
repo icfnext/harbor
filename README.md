@@ -216,6 +216,37 @@ The Link List component maintains a collection of List Items as direct child Res
 | List Item Backing Class | com.icfolson.aem.harbor.core.components.content.list.link.ListableLink |
 
 
+### Breadcrumb Component
+
+* Group: Harbor Navigation
+
+#### Authorability
+
+Page icons are authored in the "Icon" tab of page properties for a given page.  By default, the page icon is rendered alongside the page title/link if an icon has been authored for a page in the current breadcrumb trail.
+
+| Dialog Field | Description |
+| ------------ | ----------- |
+| Breadcrumb Root | Indicates the starting point of the trail. Breadcrumb trails may be rooted at either the containing Home Page or the nearest containing Section Landing Page. |
+| Include Current Page in Trail | Indicates whether the current page should be included as the terminal item in the Breadcrumb trail. |
+| Include Root Page in Trail | Indicates whether the root page should be included as the first item in the Breadcrumb trail. |
+| Render as Link | Indicates whether the items in the Breadcrumb trail should be live links to the pages they represent. |
+| Root Item Configuration - Hide Icon | Indicates whether the page icon should be hidden for the root page when presented in the Breadcrumb trail. |
+| Root Item Configuration - Hide Title | Indicates whether the page title should be hidden for the root page when presented in the Breadcrumb trail. |
+| Intermediate Item Configuration - Hide Icon | Indicates whether the page icon should be hidden for all intermediate pages in the Breadcrumb trail. |
+| Intermediate Item Configuration - Hide Title | Indicates whether the page title should be hidden for all intermediate pages in the Breadcrumb trail. |
+| Current Item Configuration - Hide Icon | Indicates whether the page icon should be hidden for the current page when presented in the Breadcrumb trail. |
+| Current Item Configuration - Hide Title | Indicates whether the page title should be hidden for the current page when presented in the Breadcrumb trail. |
+
+##### Inheriting Breadcrumb
+
+The Inheriting Breadcrumb component is an extension of the base Breadcrumb component that provides inheritance of configured properties from ancestor pages.  Inheritance capabilities are dependent on instances of this component having an identical relative path on 
+
+##### Baked-In Breadcrumb
+
+The Baked-In Breadcrumb component further extends the Inheriting Breadcrumb for static inclusion in a page component.
+
+`<sly data-sly-resource="${'breadcrumb' @ resourceType = 'harbor/components/content/bakedinbreadcrumb'}"></sly>`
+
 ## Core Concepts
 
 ### End User Core Concepts

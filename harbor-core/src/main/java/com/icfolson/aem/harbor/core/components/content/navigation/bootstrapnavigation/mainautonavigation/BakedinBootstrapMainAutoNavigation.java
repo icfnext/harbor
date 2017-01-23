@@ -7,7 +7,7 @@ import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
 
 @Component(
-    value = "Bakedin Bootstrap Main Auto Navigation",
+    value = "Baked-In Bootstrap Main Auto Navigation",
     group = ComponentConstants.GROUP_HIDDEN,
     path = "content/navigation",
     resourceSuperType = BootstrapMainAutoNavigation.RESOURCE_TYPE,

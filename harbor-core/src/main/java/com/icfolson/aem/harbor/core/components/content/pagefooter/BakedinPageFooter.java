@@ -7,7 +7,7 @@ import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
 
 @Component(
-    value = "Bakedin Page Footer",
+    value = "Baked-In Page Footer",
     group = ComponentConstants.GROUP_HIDDEN,
     tabs = {
         @Tab(title = "Container"),

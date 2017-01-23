@@ -7,7 +7,6 @@ import com.citytechinc.cq.component.annotations.editconfig.ActionConfig;
 import com.citytechinc.cq.component.annotations.editconfig.ActionConfigProperty;
 import com.citytechinc.cq.component.annotations.widgets.TextField;
 import com.icfolson.aem.harbor.core.util.icon.IconUtils;
-import com.icfolson.aem.library.api.components.annotations.AutoInstantiate;
 import com.icfolson.aem.library.core.components.AbstractComponent;
 import com.icfolson.aem.library.core.constants.ComponentConstants;
 import org.apache.sling.api.resource.Resource;
@@ -32,7 +31,6 @@ import org.apache.sling.models.annotations.Model;
             additionalProperties = { @ActionConfigProperty(name = "icon", value = "coral-Icon--accordionDown") })
     }
 )
-@AutoInstantiate
 @Model(adaptables = Resource.class)
 public class AccordionItem extends AbstractComponent {
 

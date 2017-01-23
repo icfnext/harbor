@@ -7,7 +7,7 @@ import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
 
 @Component(
-    value = "Bakedin Container",
+    value = "Baked-In Container",
     name = "bakedincontentcontainer",
     group = ComponentConstants.GROUP_HIDDEN,
     tabs = {

@@ -6,7 +6,6 @@ import com.citytechinc.cq.component.annotations.Option;
 import com.citytechinc.cq.component.annotations.Tab;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
 import com.icfolson.aem.harbor.api.constants.dom.Headings;
-import com.icfolson.aem.library.api.components.annotations.AutoInstantiate;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Default;
 import org.apache.sling.models.annotations.Model;
@@ -27,13 +26,10 @@ import javax.inject.Inject;
         @Tab(title = "Advanced")
     }
 )
-@AutoInstantiate(instanceName = Heading.INSTANCE_NAME)
 @Model(adaptables = Resource.class)
 public class Heading extends AbstractHeading {
 
     public static final String RESOURCE_TYPE = "harbor/components/content/heading";
-
-    public static final String INSTANCE_NAME = "heading";
 
     @DialogField(fieldLabel = "Heading Type", fieldDescription = "The type or size of heading to render.")
     @Selection(type = "select", options = {

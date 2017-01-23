@@ -1,19 +1,13 @@
 package com.icfolson.aem.harbor.core.components.content.calltoaction;
 
 import com.citytechinc.cq.component.annotations.Component;
-import com.citytechinc.cq.component.annotations.ContentProperty;
 import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.Option;
 import com.citytechinc.cq.component.annotations.widgets.PathField;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
-import com.citytechinc.cq.component.annotations.widgets.TextField;
-import com.icfolson.aem.harbor.api.constants.bootstrap.Bootstrap;
 import com.icfolson.aem.harbor.core.constants.groups.ComponentGroups;
-import com.icfolson.aem.harbor.core.util.icon.IconUtils;
-import com.icfolson.aem.library.api.components.annotations.AutoInstantiate;
 import com.icfolson.aem.library.api.link.Link;
 import com.icfolson.aem.library.api.page.PageDecorator;
-import com.icfolson.aem.library.core.components.AbstractComponent;
 import com.icfolson.aem.library.core.constants.PathConstants;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.sling.api.resource.Resource;
@@ -26,6 +20,7 @@ import javax.inject.Inject;
 public class CallToAction extends AbstractCallToAction {
 
     private static final String LINK_IN_WINDOW = "window";
+
     private static final String LINK_IN_CURRENT = "current";
 
     @Inject
@@ -54,5 +49,4 @@ public class CallToAction extends AbstractCallToAction {
     public Boolean getOpensInCurrentWindow() {
         return StringUtils.equalsIgnoreCase(getAction(), LINK_IN_CURRENT);
     }
-
 }

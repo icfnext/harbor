@@ -28,8 +28,10 @@ public class PageTrailListConstructionStrategy extends AbstractComponent impleme
     private PageDecorator currentPage;
 
     @DialogField(name = "./rootPageType", fieldLabel = "Breadcrumb Root")
-    @Selection(type = Selection.SELECT, options = { @Option(text = "Home Page", value = HomePage.RDF_TYPE),
-        @Option(text = "Section Landing Page", value = SectionLandingPage.RDF_TYPE) })
+    @Selection(type = Selection.SELECT, options = {
+        @Option(text = "Home Page", value = HomePage.RDF_TYPE),
+        @Option(text = "Section Landing Page", value = SectionLandingPage.RDF_TYPE)
+    })
     private Predicate<PageDecorator> rootPagePredicate;
 
     @DialogField(fieldLabel = "Include Current Page In Trail")

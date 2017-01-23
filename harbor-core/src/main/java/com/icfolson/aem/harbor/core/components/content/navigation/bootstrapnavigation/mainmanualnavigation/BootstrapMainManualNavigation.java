@@ -12,7 +12,6 @@ import com.citytechinc.cq.component.annotations.widgets.TextField;
 import com.google.common.base.Optional;
 import com.icfolson.aem.harbor.api.constants.bootstrap.Bootstrap;
 import com.icfolson.aem.harbor.core.constants.groups.ComponentGroups;
-import com.icfolson.aem.library.api.components.annotations.AutoInstantiate;
 import com.icfolson.aem.library.api.link.Link;
 import com.icfolson.aem.library.core.components.AbstractComponent;
 import com.icfolson.aem.library.core.constants.PathConstants;
@@ -33,7 +32,6 @@ import java.util.stream.Collectors;
     },
     allowedParents = "*/parsys",
     path = "content/navigation")
-@AutoInstantiate(instanceName = "bootstrapMainManualNavigation")
 @Model(adaptables = Resource.class)
 public class BootstrapMainManualNavigation extends AbstractComponent {
 

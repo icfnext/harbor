@@ -8,7 +8,6 @@ import com.citytechinc.cq.component.annotations.editconfig.ActionConfigProperty;
 import com.citytechinc.cq.component.annotations.widgets.Switch;
 import com.google.common.base.Predicate;
 import com.icfolson.aem.harbor.core.constants.groups.ComponentGroups;
-import com.icfolson.aem.library.api.components.annotations.AutoInstantiate;
 import com.icfolson.aem.library.api.node.ComponentNode;
 import com.icfolson.aem.library.core.components.AbstractComponent;
 import org.apache.sling.api.resource.Resource;
@@ -32,7 +31,6 @@ import java.util.stream.Collectors;
             value = "[harbor.components.content.accordion,harbor.components.content.accordion.author]")
     }
 )
-@AutoInstantiate
 @Model(adaptables = Resource.class)
 public class Accordion extends AbstractComponent {
 
