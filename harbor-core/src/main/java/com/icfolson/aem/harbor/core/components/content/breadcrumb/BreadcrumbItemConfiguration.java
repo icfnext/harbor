@@ -19,7 +19,7 @@ public final class BreadcrumbItemConfiguration {
     public BreadcrumbItemConfiguration(final ComponentNode componentNode, final String propertyNamePrefix,
         final boolean inherits) {
         this.componentNode = componentNode;
-        this.propertyNamePrefix = propertyNamePrefix;
+        this.propertyNamePrefix = propertyNamePrefix.substring(2);
         this.inherits = inherits;
     }
 
