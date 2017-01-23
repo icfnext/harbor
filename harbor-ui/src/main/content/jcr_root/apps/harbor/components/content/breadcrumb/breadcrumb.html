@@ -1,4 +1,4 @@
-<ol class="breadcrumb" data-sly-use.breadcrumb="com.icfolson.aem.harbor.core.components.content.breadcrumb.Breadcrumb">
+<ol class="breadcrumb" data-sly-use.breadcrumb="${component.properties['className']}">
     <li data-sly-repeat.currentTrailItem="${breadcrumb.items}">
         <a data-sly-unwrap="${!breadcrumb.items.renderAsLink}" href="${currentTrailItem.href}">
             <i data-sly-test="${!currentTrailItem.hideIcon}" class="${currentTrailItem.pageIcon}"></i>

@@ -15,11 +15,11 @@ public class BreadcrumbItem {
     }
 
     public boolean isHideIcon() {
-        return itemConfiguration.getHideIcon();
+        return itemConfiguration.isHideIcon();
     }
 
     public boolean isHideTitle() {
-        return itemConfiguration.getHideTitle();
+        return itemConfiguration.isHideTitle();
     }
 
     public String getHref() {

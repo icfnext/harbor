@@ -10,5 +10,4 @@ public class InheritingBreadcrumbItemRenderingStrategy extends BreadcrumbItemRen
     protected boolean isInherits() {
         return true;
     }
-
 }

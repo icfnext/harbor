@@ -9,5 +9,4 @@ public class InheritingPageTrailListConstructionStrategy extends PageTrailListCo
     protected boolean isInherits() {
         return true;
     }
-
 }

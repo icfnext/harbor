@@ -9,30 +9,33 @@ import com.icfolson.aem.harbor.api.lists.rendering.ListRenderingStrategy;
 import com.icfolson.aem.harbor.core.components.content.page.TrailPage;
 import com.icfolson.aem.harbor.core.constants.groups.ComponentGroups;
 import com.icfolson.aem.harbor.core.content.page.lists.construction.InheritingPageTrailListConstructionStrategy;
-import com.icfolson.aem.library.api.components.annotations.AutoInstantiate;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.injectorspecific.Self;
 
 import javax.inject.Inject;
 
-@Component(value = "Inheriting Breadcrumb", group = ComponentGroups.HARBOR_NAVIGATION, resourceSuperType = Breadcrumb.RESOURCE_TYPE, suppressFieldInheritanceForTouchUI = true, tabs = {@Tab(title = "Breadcrumb", touchUINodeName = "breadcrumb")})
-@AutoInstantiate(instanceName = "breadcrumb")
+@Component(value = "Inheriting Breadcrumb", group = ComponentGroups.HARBOR_NAVIGATION,
+    resourceSuperType = Breadcrumb.RESOURCE_TYPE, suppressFieldInheritanceForTouchUI = true,
+    tabs = {
+        @Tab(title = "Breadcrumb", touchUINodeName = "breadcrumb")
+    })
 @Model(adaptables = Resource.class)
 public class InheritingBreadcrumb extends Breadcrumb {
 
     public static final String RESOURCE_TYPE = "harbor/components/content/inheritingbreadcrumb";
 
-    @DialogField(ranking = 2)
-    @DialogFieldSet(border = false, collapsible = false)
+    @DialogField(ranking = 1)
+    @DialogFieldSet(border = false)
     @Inject
     @Self
-    InheritingBreadcrumbItemRenderingStrategy breadcrumbItemListRenderingStrategy;
+    private InheritingPageTrailListConstructionStrategy breadcrumbItemListConstructionStrategy;
 
-    @DialogField(ranking = 1)
-    @DialogFieldSet(border = false, collapsible = false)
-    @Inject @Self
-    InheritingPageTrailListConstructionStrategy breadcrumbItemListConstructionStrategy;
+    @DialogField(ranking = 2)
+    @DialogFieldSet(border = false)
+    @Inject
+    @Self
+    private InheritingBreadcrumbItemRenderingStrategy breadcrumbItemListRenderingStrategy;
 
     @Override
     protected ListConstructionStrategy<TrailPage> getListConstructionStrategy() {

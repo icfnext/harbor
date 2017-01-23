@@ -25,14 +25,14 @@ public final class BreadcrumbItemConfiguration {
 
     @DialogField(fieldLabel = "Hide Icon")
     @Switch(offText = "No", onText = "Yes")
-    public Boolean getHideIcon() {
+    public Boolean isHideIcon() {
         return inherits ? componentNode.getInherited(propertyNamePrefix + HIDE_ICON_PROPERTY_NAME,
             false) : componentNode.get(propertyNamePrefix + HIDE_ICON_PROPERTY_NAME, false);
     }
 
     @DialogField(fieldLabel = "Hide Title")
     @Switch(offText = "No", onText = "Yes")
-    public Boolean getHideTitle() {
+    public Boolean isHideTitle() {
         return inherits ? componentNode.getInherited(propertyNamePrefix + HIDE_TITLE_PROPERTY_NAME,
             false) : componentNode.get(propertyNamePrefix + HIDE_TITLE_PROPERTY_NAME, false);
     }
