@@ -5,6 +5,8 @@ import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.Option;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
 import com.citytechinc.cq.component.annotations.widgets.Switch;
+import com.icfolson.aem.harbor.api.domain.sitemap.ChangeFrequency;
+import com.icfolson.aem.library.api.page.PageDecorator;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Default;
 import org.apache.sling.models.annotations.Model;
@@ -18,6 +20,9 @@ import javax.inject.Named;
 @Model(adaptables = Resource.class)
 public class SitemappedPage {
 
+    @Inject
+    private PageDecorator page;
+
     @DialogField(fieldLabel = "Disable Indexing",
         fieldDescription = "Indicates that attempts should be made to hide the page from robots such as search engine crawl bots.",
         name = "./icf:hiddenFromRobots", ranking = 0)
@@ -28,19 +33,11 @@ public class SitemappedPage {
     private boolean hiddenFromRobots;
 
     @DialogField(fieldLabel = "Change Frequency", name = "./icf:changeFrequency", ranking = 10)
-    @Selection(type = Selection.SELECT, options = {
-        @Option(text = "Always", value = "always"),
-        @Option(text = "Hourly", value = "hourly"),
-        @Option(text = "Daily", value = "daily"),
-        @Option(text = "Weekly", value = "weekly"),
-        @Option(text = "Monthly", value = "monthly"),
-        @Option(text = "Yearly", value = "yearly"),
-        @Option(text = "Never", value = "never")
-    })
+    @Selection(type = Selection.SELECT)
     @Inject
     @Named("icf:changeFrequency")
     @Optional
-    private String changeFrequency;
+    private ChangeFrequency changeFrequency;
 
     @DialogField(fieldLabel = "Priority", name = "./icf:priority", defaultValue = "0.5", ranking = 20)
     @Selection(type = Selection.SELECT, options = {
@@ -65,11 +62,15 @@ public class SitemappedPage {
         return hiddenFromRobots;
     }
 
-    public String getChangeFrequency() {
+    public ChangeFrequency getChangeFrequency() {
         return changeFrequency;
     }
 
     public String getPriority() {
         return priority;
+    }
+
+    public PageDecorator getPage() {
+        return page;
     }
 }

@@ -5,8 +5,8 @@ import com.google.common.collect.Lists;
 import com.icfolson.aem.harbor.api.domain.sitemap.ChangeFrequency;
 import com.icfolson.aem.harbor.api.domain.sitemap.SiteMapEntry;
 import com.icfolson.aem.harbor.api.services.sitemap.SiteMapEntryProvider;
+import com.icfolson.aem.harbor.core.components.page.sitemappedpage.SitemappedPage;
 import com.icfolson.aem.library.api.page.PageDecorator;
-import com.icfolson.aem.namespace.api.ontology.Properties;
 import org.apache.felix.scr.annotations.Activate;
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Modified;
@@ -17,8 +17,6 @@ import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.api.resource.ValueMap;
 import org.apache.sling.commons.osgi.PropertiesUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.jcr.query.Query;
 import java.text.SimpleDateFormat;
@@ -29,14 +27,10 @@ import java.util.Map;
 
 import static com.day.cq.commons.jcr.JcrConstants.JCR_CREATED;
 import static com.day.cq.wcm.api.NameConstants.PN_PAGE_LAST_MOD;
-import static com.icfolson.aem.namespace.api.ontology.Properties.ICF_OLSON_SITEMAP_CHANGE_FREQUENCY;
-import static com.icfolson.aem.namespace.api.ontology.Properties.ICF_OLSON_SITEMAP_PRIORITY;
 
 @Service
 @Component
 public class ChildPageSiteMapEntryProvider implements SiteMapEntryProvider {
-
-    private static final Logger LOG = LoggerFactory.getLogger(ChildPageSiteMapEntryProvider.class);
 
     private static final String PAGES_WHICH_CAN_BE_MAPPED_QUERY = "SELECT * FROM [cq:Page] WHERE ISDESCENDANTNODE('{rootpath}')";
 
@@ -57,28 +51,26 @@ public class ChildPageSiteMapEntryProvider implements SiteMapEntryProvider {
 
     @Override
     public List<SiteMapEntry> getEntries(final PageDecorator root) {
-        List<SiteMapEntry> entries = Lists.newArrayList();
+        final List<SiteMapEntry> entries = Lists.newArrayList();
 
-        if (disabled) {
-            return entries;
-        }
+        if (!disabled) {
+            final ResourceResolver resourceResolver = root.getContentResource().getResourceResolver();
 
-        ResourceResolver resourceResolver = root.getContentResource().getResourceResolver();
+            final Iterator<Resource> resources = resourceResolver.findResources(
+                PAGES_WHICH_CAN_BE_MAPPED_QUERY.replace("{rootpath}", root.getPath()), Query.JCR_SQL2);
 
-        Iterator<Resource> pageResourceIterator = resourceResolver.findResources(
-            PAGES_WHICH_CAN_BE_MAPPED_QUERY.replace("{rootpath}", root.getPath()), Query.JCR_SQL2);
+            final SitemappedPage rootSitemappedPage = root.getContentResource().adaptTo(SitemappedPage.class);
 
-        if (!root.getProperties().get(Properties.ICF_OLSON_HIDDEN_FROM_ROBOTS, false)) {
-            entries.add(getSiteMapEntryForPage(root));
-        }
+            if (!rootSitemappedPage.isHiddenFromRobots()) {
+                entries.add(getSiteMapEntryForPage(rootSitemappedPage));
+            }
 
-        while (pageResourceIterator.hasNext()) {
-            Resource currentPageResource = pageResourceIterator.next();
+            while (resources.hasNext()) {
+                final SitemappedPage sitemappedPage = resources.next().adaptTo(SitemappedPage.class);
 
-            PageDecorator currentPage = currentPageResource.adaptTo(PageDecorator.class);
-
-            if (!currentPage.getProperties().get(Properties.ICF_OLSON_HIDDEN_FROM_ROBOTS, false)) {
-                entries.add(getSiteMapEntryForPage(currentPage));
+                if (!sitemappedPage.isHiddenFromRobots()) {
+                    entries.add(getSiteMapEntryForPage(sitemappedPage));
+                }
             }
         }
 
@@ -92,48 +84,36 @@ public class ChildPageSiteMapEntryProvider implements SiteMapEntryProvider {
         disabled = PropertiesUtil.toBoolean(properties.get(PROVIDER_DISABLED), true);
     }
 
-    private SiteMapEntry getSiteMapEntryForPage(final PageDecorator page) {
+    private SiteMapEntry getSiteMapEntryForPage(final SitemappedPage sitemappedPage) {
         return new SiteMapEntry(
-            determineLocForPage(page),
-            determineLastModForPage(page),
-            determineChangeFrequencyForPage(page),
-            determinePriorityForPage(page));
+            determineLocForPage(sitemappedPage),
+            determineLastModForPage(sitemappedPage),
+            determineChangeFrequencyForPage(sitemappedPage),
+            determinePriorityForPage(sitemappedPage));
     }
 
-    private String determineLocForPage(final PageDecorator page) {
+    private String determineLocForPage(final SitemappedPage sitemappedPage) {
+        final PageDecorator page = sitemappedPage.getPage();
         final ResourceResolver resourceResolver = page.getContentResource().getResourceResolver();
 
-        return this.externalizer.externalLink(resourceResolver, externalizerName,
-            resourceResolver.map(page.getPath())) + ".html";
+        return externalizer.externalLink(resourceResolver, externalizerName, resourceResolver.map(page.getHref()));
     }
 
-    private String determineLastModForPage(final PageDecorator page) {
-        final ValueMap pageProperties = page.getProperties();
+    private String determineLastModForPage(final SitemappedPage sitemappedPage) {
+        final ValueMap pageProperties = sitemappedPage.getPage().getProperties();
         final Calendar lastModified = pageProperties.get(PN_PAGE_LAST_MOD,
             pageProperties.get(JCR_CREATED, Calendar.class));
 
         return lastModified == null ? null : ISO_DATE_FORMATTER.format(lastModified.getTime());
-
     }
 
-    private String determineChangeFrequencyForPage(final PageDecorator page) {
-        final String changeFrequencyValue = page.getProperties().get(ICF_OLSON_SITEMAP_CHANGE_FREQUENCY, String.class);
+    private String determineChangeFrequencyForPage(final SitemappedPage sitemappedPage) {
+        final ChangeFrequency changeFrequency = sitemappedPage.getChangeFrequency();
 
-        if (changeFrequencyValue != null) {
-            try {
-                return ChangeFrequency.valueOf(changeFrequencyValue).name();
-            } catch (IllegalArgumentException e) {
-                LOG.error("Invalid Change Frequency of " + changeFrequencyValue + " found for page " + page.getPath());
-                return null;
-            }
-        }
-
-        return null;
+        return changeFrequency == null ? null : changeFrequency.name().toLowerCase();
     }
 
-    private String determinePriorityForPage(final PageDecorator page) {
-        final Double priorityValue = page.getProperties().get(ICF_OLSON_SITEMAP_PRIORITY, Double.class);
-
-        return priorityValue != null ? priorityValue.toString() : null;
+    private String determinePriorityForPage(final SitemappedPage sitemappedPage) {
+        return sitemappedPage.getPriority();
     }
 }

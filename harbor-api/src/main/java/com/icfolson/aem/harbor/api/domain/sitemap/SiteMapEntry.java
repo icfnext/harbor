@@ -1,5 +1,6 @@
 package com.icfolson.aem.harbor.api.domain.sitemap;
 
+import com.google.common.base.Objects;
 
 import javax.xml.bind.annotation.XmlType;
 
@@ -55,5 +56,15 @@ public class SiteMapEntry {
 
     public void setPriority(String priority) {
         this.priority = priority;
+    }
+
+    @Override
+    public String toString() {
+        return Objects.toStringHelper(this)
+            .add("loc", getLoc())
+            .add("lastmod", getLastmod())
+            .add("changefreq", getChangefreq())
+            .add("priority", getPriority())
+            .toString();
     }
 }
