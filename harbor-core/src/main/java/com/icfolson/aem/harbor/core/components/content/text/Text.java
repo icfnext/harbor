@@ -11,13 +11,15 @@ import com.citytechinc.cq.component.annotations.widgets.rte.Format;
 import com.citytechinc.cq.component.annotations.widgets.rte.Image;
 import com.citytechinc.cq.component.annotations.widgets.rte.Justify;
 import com.citytechinc.cq.component.annotations.widgets.rte.Links;
+import com.citytechinc.cq.component.annotations.widgets.rte.Lists;
+import com.citytechinc.cq.component.annotations.widgets.rte.MiscTools;
+import com.citytechinc.cq.component.annotations.widgets.rte.ParaFormat;
 import com.citytechinc.cq.component.annotations.widgets.rte.SpellCheck;
 import com.citytechinc.cq.component.annotations.widgets.rte.SubSuperscript;
 import com.citytechinc.cq.component.annotations.widgets.rte.Table;
 import com.citytechinc.cq.component.annotations.widgets.rte.Undo;
 import com.icfolson.aem.harbor.core.components.mixins.classifiable.Classification;
 import com.icfolson.aem.harbor.core.util.icon.IconUtils;
-import com.icfolson.aem.library.core.components.AbstractComponent;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Default;
 import org.apache.sling.models.annotations.Model;
@@ -37,7 +39,7 @@ import javax.inject.Named;
         @Tab(title = "Content", touchUINodeName = Text.TAB_1_NODE_NAME)
     })
 @Model(adaptables = Resource.class)
-public class Text extends AbstractComponent {
+public class Text {
 
     public static final String TAB_1_NODE_NAME = "contenttab";
 
@@ -49,6 +51,17 @@ public class Text extends AbstractComponent {
         image = @Image,
         justify = @Justify,
         links = @Links,
+        lists = @Lists,
+        misctools = @MiscTools(sourceedit = false),
+        paraformat = {
+            @ParaFormat(tag = "h1", description = "Heading 1"),
+            @ParaFormat(tag = "h2", description = "Heading 2"),
+            @ParaFormat(tag = "h3", description = "Heading 3"),
+            @ParaFormat(tag = "h4", description = "Heading 4"),
+            @ParaFormat(tag = "h5", description = "Heading 5"),
+            @ParaFormat(tag = "h6", description = "Heading 6"),
+            @ParaFormat(tag = "p", description = "Paragraph")
+        },
         spellcheck = @SpellCheck,
         subsuperscript = @SubSuperscript,
         table = @Table,
@@ -65,12 +78,11 @@ public class Text extends AbstractComponent {
     private Classification classification;
 
     public String getContent() {
-        //TODO: Consider content cleanup such as replacing all &nbsp; which the RTE inserts with spaces as it's incredibly rare that someone actually wants a non-breaking space
+        // TODO: Consider content cleanup such as replacing all &nbsp; which the RTE inserts with spaces as it's incredibly rare that someone actually wants a non-breaking space
         return IconUtils.iconify(content);
     }
 
     public Classification getClassification() {
         return classification;
     }
-
 }
