@@ -239,7 +239,9 @@ Page icons are authored in the "Icon" tab of page properties for a given page.  
 
 ##### Inheriting Breadcrumb
 
-The Inheriting Breadcrumb component is an extension of the base Breadcrumb component that provides inheritance of configured properties from ancestor pages.  Inheritance capabilities are dependent on instances of this component having an identical relative path on 
+The Inheriting Breadcrumb component is an extension of the base Breadcrumb component that provides inheritance of configured properties from ancestor pages.
+
+Inheritance capabilities are dependent on instances of this component having an identical relative path on descendant pages.
 
 ##### Baked-In Breadcrumb
 
