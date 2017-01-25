@@ -95,7 +95,7 @@ public class AssetListRenderingStrategy implements
     @Default(values = "Format:")
     private String formatLabel;
 
-    @DialogField(fieldLabel = "Render as Links")
+    @DialogField(fieldLabel = "Render as Links?")
     @Switch(offText = "No", onText = "Yes")
     @Inject
     private boolean renderAsLinks;

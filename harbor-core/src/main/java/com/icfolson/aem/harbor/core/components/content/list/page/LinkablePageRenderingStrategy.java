@@ -62,43 +62,19 @@ public class LinkablePageRenderingStrategy implements
     @Default(values = Headings.H3)
     private String titleHeadingType;
 
-    public boolean isSuppressTitle() {
-        return suppressTitle;
-    }
-
-    public boolean isRenderSubtitle() {
-        return renderSubtitle;
-    }
-
-    public boolean isRenderImage() {
-        return renderImage;
-    }
-
-    public boolean isRenderDescription() {
-        return renderDescription;
-    }
-
-    public boolean isRenderAsLink() {
-        return renderAsLink;
-    }
-
-    public String getTitleHeadingType() {
-        return titleHeadingType;
-    }
-
     @Override
     public List<LinkablePage> toRenderableList(Iterable<PageDecorator> itemIterable) {
-        List<LinkablePage> retList = Lists.newArrayList();
+        final List<LinkablePage> retList = Lists.newArrayList();
 
-        for (PageDecorator currentPageDecorator : itemIterable) {
+        for (final PageDecorator currentPageDecorator : itemIterable) {
             retList.add(new LinkablePage(
                 currentPageDecorator,
-                !isSuppressTitle(),
-                isRenderSubtitle(),
-                isRenderImage(),
-                isRenderDescription(),
-                isRenderAsLink(),
-                getTitleHeadingType()));
+                !suppressTitle,
+                renderSubtitle,
+                renderImage,
+                renderDescription,
+                renderAsLink,
+                titleHeadingType));
         }
 
         return retList;

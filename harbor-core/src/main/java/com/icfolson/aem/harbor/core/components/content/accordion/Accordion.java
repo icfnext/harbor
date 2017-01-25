@@ -24,7 +24,9 @@ import java.util.stream.Collectors;
         @ActionConfig(
             text = "Add Item",
             handler = "function(){Harbor.Components.Accordion.addItem( this, 'harbor/components/content/accordion/accordionitem' )}",
-            additionalProperties = { @ActionConfigProperty(name = "icon", value = "coral-Icon--experienceAdd") })
+            additionalProperties = {
+                @ActionConfigProperty(name = "icon", value = "coral-Icon--experienceAdd")
+            })
     },
     contentAdditionalProperties = {
         @ContentProperty(name = "dependencies",

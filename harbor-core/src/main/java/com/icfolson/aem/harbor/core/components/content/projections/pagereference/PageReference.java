@@ -38,11 +38,11 @@ public class PageReference extends AbstractComponent {
                 renderingStrategy = getResource().adaptTo(LinkablePageRenderingStrategy.class);
             }
 
-            Optional<PageDecorator> pageDecoratorOptional = getAsPage("page");
+            final Optional<PageDecorator> pageDecoratorOptional = getAsPage("page");
 
             if (pageDecoratorOptional.isPresent()) {
-                List<LinkablePageRenderingStrategy.LinkablePage> linkablePageList = renderingStrategy.toRenderableList(
-                    Lists.newArrayList(pageDecoratorOptional.get()));
+                final List<LinkablePageRenderingStrategy.LinkablePage> linkablePageList = renderingStrategy
+                    .toRenderableList(Lists.newArrayList(pageDecoratorOptional.get()));
 
                 if (linkablePageList.size() > 0) {
                     referencedPage = linkablePageList.get(0);
