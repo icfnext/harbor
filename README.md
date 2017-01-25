@@ -155,7 +155,7 @@ Assets are assembled by configuring the **List Construction** properties in the 
 | Render Asset Descriptions? | If checked, render asset description |
 | Render Asset Formats? | If checked, render asset formats |
 | Format Label | Label to render as prefix for format value |
-| Render as Links | If checked, asset title/image will be wrapped in a link to the image |
+| Render as Links? | If checked, asset title/image will be wrapped in a link to the image |
 | Title Heading Type | Heading type to render for asset title (when Render Asset Titles? is checked) |
 
 ### Link List Component
@@ -204,9 +204,59 @@ The Link List component maintains a collection of List Items as direct child Res
 
 * Group: Harbor Lists
 
+Render a list of pages constructed from a list of individual page paths.
+
+#### Authorability
+
+##### List Construction
+
+| Dialog Field | Description |
+| ------------ | ----------- |
+| Paths | List of page paths to include in the list |
+
+##### List Rendering
+
+| Dialog Field | Description |
+| ------------ | ----------- |
+| Suppress Page Titles? | If checked, page titles will not be rendered |
+| Render Page Subtitles? | If checked, page subtitles will be rendered beneath the heading and/or link |
+| Render Page Images? | If checked, the page thumbnail image will be rendered beneath the header |
+| Render Page Descriptions? | If checked, the page description will be rendered beneath the header |
+| Render As Link? | If checked, the page title will be wrapped in a link to the page |
+| Title Heading Type | Heading type to render for page title |
+
 ### Page List Component
 
 * Group: Harbor Lists
+
+Render a list of pages constructed from a search query.
+
+#### Authorability
+
+Pages are assembled by configuring the **List Construction** properties in the component dialog.  These properties are used to build a search query and resulting hits are transformed into a renderable list based on the configuration of the **List Rendering** dialog properties.
+
+##### List Construction
+
+| Dialog Field | Description |
+| ------------ | ----------- |
+| Path | Path to search for pages |
+| Tags | Tags to filter pages |
+| Use AND Logic | If checked, tags will use AND logic rather than OR logic to filter pages |
+| Property Relative Path | Relative path from page node to tags property |
+| Limit | Number of pages to return.  Defaults to 10. |
+| Order By | Property name to order page results |
+| Sort | Direction to sort by (ascending/descending) |
+
+##### List Rendering
+
+| Dialog Field | Description |
+| ------------ | ----------- |
+| Suppress Page Titles? | If checked, page titles will not be rendered |
+| Render Page Subtitles? | If checked, page subtitles will be rendered beneath the heading and/or link |
+| Render Page Images? | If checked, the page thumbnail image will be rendered beneath the header |
+| Render Page Descriptions? | If checked, the page description will be rendered beneath the header |
+| Render As Link? | If checked, the page title will be wrapped in a link to the page |
+| Title Heading Type | Heading type to render for page title |
 
 ### Container Component
 
