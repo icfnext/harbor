@@ -16,7 +16,7 @@ The following videos were developed (poorly) to promote Harbor internally.
 
 ## Components
 
-### Harbor Title Component
+### Title Component
 
 * Group: Harbor
 
@@ -29,7 +29,7 @@ Presents the Page Title of the current page in an H1 DOM element.  The output H1
 | Text         | Sets the rendered title text.  When left empty, the title text will default to the page's Page Title. |
 | ID           | Sets the string ID to be attributed to the H1 element rendered for the title.  When left empty, the ID will be produced by sanitizing the title text. Indended to allow anchor linking to title elements. |
 
-### Harbor Subtitle Component
+### Subtitle Component
 
 * Group: Harbor
 
@@ -42,7 +42,7 @@ Presents the Page Subtitle of the current page in an H2 DOM element.  The output
 | Text         | Sets the rendered subtitle text.  When left empty, the subtitle text will default to the page's Page Subtitle. |
 | ID           | Sets the string ID to be attributed to the H2 element rendered for the subtitle.  When left empty, the ID will be produced by sanitizing the subtitle text. |
 
-### Harbor Heading Component
+### Heading Component
 
 * Group: Harbor
 
@@ -121,59 +121,44 @@ Accordion Items may be removed completely by deleting them using the Delete opti
 | ------------ | ----------- |
 | Title | Text title to present for the Accordion Item. |
 
-### Container Component
+### Asset List Component
 
-* Group: Harbor Scaffolding
-* Classifiable
-* Container
+* Group: Harbor Lists
 
-
-
-### Harbor Column Row Component
-
-* Group: Harbor Scaffolding
-* Classifiable
-
-The Harbor Column Row component lets authors flexibly create and layout any number of columns using the Bootstrap grid system.
-
-Columns MUST be placed in a Container component.  See Containers under Core Concepts for more information.
+Render a list of assets (with optional metadata) constructed from a search query.
 
 #### Authorability
 
-New columns are added using the "Add Experience" button in the toolbar of the Column Row component.  When in edit mode an author help message will appear indicating this and making it easy to select the Column Row in Touch UI.
+Assets are assembled by configuring the **List Construction** properties in the component dialog.  These properties are used to build a search query and resulting hits are transformed into a renderable list based on the configuration of the **List Rendering** dialog properties.
 
-Responsiveness of the columns as defined by the Bootstrap grid system can be tested either using the AEM Device emulation mode, the AEM Layout mode, or by resizing your browser window.
+##### List Construction
 
-##### Row Authoring
-
-| Dialog Field | Description | 
+| Dialog Field | Description |
 | ------------ | ----------- |
-| ID           | A unique identifier for the Row.  If no ID is set no id attribute will be rendered |
-| Classification | Input support for classifiability of the row component instance.  Classifies the entire row |
+| Path | Path to search for assets |
+| Tags | Tags to filter assets |
+| Use AND Logic | If checked, tags will use AND logic rather than OR logic to filter assets |
+| Property Relative Path | Relative path from asset node to tags property |
+| Limit | Number of assets to return.  Defaults to 10. |
+| Order By | Property name to order asset results |
+| Sort | Direction to sort by (ascending/descending) |
 
-##### Column Authoring
+##### List Rendering
 
-Each Column in a Row is authored independently.  
-
-Many of the inputs control the width and positioning of  the column.  See the Bootstrap documentation concerning the [Grid System](http://getbootstrap.com/css/#grid) for more information on these inputs.
-
-The rendered content of a column is a Paragraph System into which arbitrary components may be placed.  
-
-While it is not recommended due to the various complexities it introduces in authorability, Column Row components may be nested inside Columns allowing extremely complex layouts.
-
-| Dialog Field | Description | 
+| Dialog Field | Description |
 | ------------ | ----------- |
-| Extra Small Device Width | Width of column when presented on extra small devices.  Defaults to none. |
-| Small Device Width | Width of column when presented on a small device.  Defaults to none. |
-| Medium Device Width | Width of column when presented on a medium device. Defaults to none. |
-| Large Device Width | Width of column when presented on a large device.  Defaults to none. |
-| Ordering | Indicates whether to push or pull the column to force a certain ordering.  Defaults to none. |
-| Classification | Input support for classifiability of the column component instance.  Classifies the single column within the row. |
-| Inherit Content | When set to Yes the Paragraph System for the column will be rendered as an Inheriting Paragraph System | 
-| ID | A unique identifier for the Column.  If no ID is set no id attribute will be rendered |
+| Suppress Images? | If checked, images will not be rendered |
+| Image Size | Render image as original size or thumbnail rendition |
+| Render Asset Titles? | If checked, render asset titles |
+| Render Asset Creators? | If checked, render asset creator metadata |
+| Creator Label | Label to render as prefix for creator value |
+| Render Asset Descriptions? | If checked, render asset description |
+| Render Asset Formats? | If checked, render asset formats |
+| Format Label | Label to render as prefix for format value |
+| Render as Links | If checked, asset title/image will be wrapped in a link to the image |
+| Title Heading Type | Heading type to render for asset title (when Render Asset Titles? is checked) |
 
-
-### Harbor Link List Component
+### Link List Component
 
 * Group: Harbor Lists
 * Classifiable
@@ -215,6 +200,62 @@ The Link List component maintains a collection of List Items as direct child Res
 | List Item Resource Type | harbor/components/content/lists/linklist/listablelink |
 | List Item Backing Class | com.icfolson.aem.harbor.core.components.content.list.link.ListableLink |
 
+### Manual Page List Component
+
+* Group: Harbor Lists
+
+### Page List Component
+
+* Group: Harbor Lists
+
+### Container Component
+
+* Group: Harbor Scaffolding
+* Classifiable
+* Container
+
+### Column Row Component
+
+* Group: Harbor Scaffolding
+* Classifiable
+
+The Harbor Column Row component lets authors flexibly create and layout any number of columns using the Bootstrap grid system.
+
+Columns MUST be placed in a Container component.  See Containers under Core Concepts for more information.
+
+#### Authorability
+
+New columns are added using the "Add Experience" button in the toolbar of the Column Row component.  When in edit mode an author help message will appear indicating this and making it easy to select the Column Row in Touch UI.
+
+Responsiveness of the columns as defined by the Bootstrap grid system can be tested either using the AEM Device emulation mode, the AEM Layout mode, or by resizing your browser window.
+
+##### Row Authoring
+
+| Dialog Field | Description | 
+| ------------ | ----------- |
+| ID           | A unique identifier for the Row.  If no ID is set no id attribute will be rendered |
+| Classification | Input support for classifiability of the row component instance.  Classifies the entire row |
+
+##### Column Authoring
+
+Each Column in a Row is authored independently.  
+
+Many of the inputs control the width and positioning of  the column.  See the Bootstrap documentation concerning the [Grid System](http://getbootstrap.com/css/#grid) for more information on these inputs.
+
+The rendered content of a column is a Paragraph System into which arbitrary components may be placed.  
+
+While it is not recommended due to the various complexities it introduces in authorability, Column Row components may be nested inside Columns allowing extremely complex layouts.
+
+| Dialog Field | Description | 
+| ------------ | ----------- |
+| Extra Small Device Width | Width of column when presented on extra small devices.  Defaults to none. |
+| Small Device Width | Width of column when presented on a small device.  Defaults to none. |
+| Medium Device Width | Width of column when presented on a medium device. Defaults to none. |
+| Large Device Width | Width of column when presented on a large device.  Defaults to none. |
+| Ordering | Indicates whether to push or pull the column to force a certain ordering.  Defaults to none. |
+| Classification | Input support for classifiability of the column component instance.  Classifies the single column within the row. |
+| Inherit Content | When set to Yes the Paragraph System for the column will be rendered as an Inheriting Paragraph System | 
+| ID | A unique identifier for the Column.  If no ID is set no id attribute will be rendered |
 
 ### Breadcrumb Component
 

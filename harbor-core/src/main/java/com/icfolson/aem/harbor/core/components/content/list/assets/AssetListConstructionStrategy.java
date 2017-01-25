@@ -99,7 +99,6 @@ public class AssetListConstructionStrategy extends AbstractNodeSearchConstructio
         }
 
         return constructionPredicates;
-
     }
 
     @Override
