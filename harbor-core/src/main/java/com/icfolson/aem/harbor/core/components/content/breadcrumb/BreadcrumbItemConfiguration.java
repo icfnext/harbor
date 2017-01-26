@@ -4,7 +4,7 @@ import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.widgets.Switch;
 import com.icfolson.aem.library.api.node.ComponentNode;
 
-public final class BreadcrumbItemConfiguration {
+public class BreadcrumbItemConfiguration {
 
     public static final String HIDE_ICON_PROPERTY_NAME = "hideIcon";
 
