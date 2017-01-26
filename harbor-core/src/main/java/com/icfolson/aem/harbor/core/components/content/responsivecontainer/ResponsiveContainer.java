@@ -36,11 +36,14 @@ public class ResponsiveContainer extends AbstractComponent {
         @Option(text = "Extra Small", value = DeviceTypes.EXTRA_SMALL, qtip = EXTRA_SMALL_DESCRIPTION),
         @Option(text = "Small", value = DeviceTypes.SMALL, qtip = SMALL_DESCRIPTION),
         @Option(text = "Medium", value = DeviceTypes.MEDIUM, qtip = MEDIUM_DESCRIPTION),
-        @Option(text = "Large", value = DeviceTypes.LARGE, qtip = LARGE_DESCRIPTION) })
+        @Option(text = "Large", value = DeviceTypes.LARGE, qtip = LARGE_DESCRIPTION)
+    })
     public List<DeviceType> getHiddenInDeviceTypes() {
-        final List<String> deviceTypeStrings = getAsList("hiddenInDeviceTypes", String.class);
-
-        return transformDeviceTypeIdentifiers(deviceTypeStrings);
+        return getAsList("hiddenInDeviceTypes", String.class).stream()
+            .map(DeviceType:: forIdentifier)
+            .filter(Optional:: isPresent)
+            .map(Optional:: get)
+            .collect(Collectors.toList());
     }
 
     /**
@@ -79,13 +82,5 @@ public class ResponsiveContainer extends AbstractComponent {
 
     protected Optional<String> getShownInClassForDeviceType(final DeviceType type) {
         return BootstrapUtils.getShownInClassForDeviceType(type);
-    }
-
-    protected List<DeviceType> transformDeviceTypeIdentifiers(final List<String> typeIdentifiers) {
-        return typeIdentifiers.stream()
-            .map(DeviceType:: forIdentifier)
-            .filter(Optional:: isPresent)
-            .map(Optional:: get)
-            .collect(Collectors.toList());
     }
 }

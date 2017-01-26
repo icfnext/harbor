@@ -26,15 +26,20 @@ import java.util.stream.Collectors;
         @ActionConfig(
             text = "Add Tab",
             handler = "function(){Harbor.Components.Tabs.addTab( this, '" + Tab.RESOURCE_TYPE + "' ) }",
-            additionalProperties = { @ActionConfigProperty(name = "icon", value = "coral-Icon--experienceAdd") })
+            additionalProperties = {
+                @ActionConfigProperty(name = "icon", value = "coral-Icon--experienceAdd")
+            })
     })
 @Model(adaptables = Resource.class)
 public class Tabs extends AbstractComponent {
 
+    private static final Predicate<ComponentNode> TAB_PREDICATE = componentNode -> componentNode != null
+        && componentNode.getResource().isResourceType(Tab.RESOURCE_TYPE);
+
     private List<Tab> tabs;
 
     public String getName() {
-        return this.getResource().getName();
+        return getResource().getName();
     }
 
     @DialogField(fieldLabel = "Tab Type")
@@ -48,7 +53,7 @@ public class Tabs extends AbstractComponent {
 
     public List<Tab> getTabs() {
         if (tabs == null) {
-            tabs = getComponentNodes(new TabPredicate())
+            tabs = getComponentNodes(TAB_PREDICATE)
                 .stream()
                 .map(componentNode -> componentNode.getResource().adaptTo(Tab.class))
                 .collect(Collectors.toList());
@@ -60,13 +65,4 @@ public class Tabs extends AbstractComponent {
     public Boolean isHasTabs() {
         return !getTabs().isEmpty();
     }
-}
-
-final class TabPredicate implements Predicate<ComponentNode> {
-
-    @Override
-    public boolean apply(ComponentNode input) {
-        return input != null && input.getResource() != null && input.getResource().isResourceType(Tab.RESOURCE_TYPE);
-    }
-
 }
