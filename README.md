@@ -258,11 +258,25 @@ Pages are assembled by configuring the **List Construction** properties in the c
 | Render As Link? | If checked, the page title will be wrapped in a link to the page |
 | Title Heading Type | Heading type to render for page title |
 
+### Classified Content
+
+Classified Content is a "classifiable" container with a paragraph system.  The paragraph system is rendered inside of a `<div>` element with a class attribute containing the authored classification tags.
+
+| Dialog Field | Description |
+| ------------ | ----------- |
+| Classification | Set of classification tags for this content container |
+
 ### Container Component
 
 * Group: Harbor Scaffolding
 * Classifiable
 * Container
+
+A container wraps a paragraph system in a Bootstrap "container" `<div>` or `<section>` element.  All components on a page should be placed in a container for proper rendering.
+ 
+#### Baked-In Container
+
+The Baked-In Container variant allows for a container to be statically included in a page component.
 
 ### Column Row Component
 
@@ -306,6 +320,29 @@ While it is not recommended due to the various complexities it introduces in aut
 | Classification | Input support for classifiability of the column component instance.  Classifies the single column within the row. |
 | Inherit Content | When set to Yes the Paragraph System for the column will be rendered as an Inheriting Paragraph System | 
 | ID | A unique identifier for the Column.  If no ID is set no id attribute will be rendered |
+
+### Tabs Component
+
+* Group: Harbor Scaffolding
+* Classifiable
+
+The Tabs component creates a set of paragraph system containers in Bootstrap tabs or pills.
+
+#### Authorability
+
+Individual tabs can be added by clicking the "Add Tab" button in the component's edit toolbar.  Each tab contains a title (i.e. the tab/pill label) and a paragraph system for adding nested components into the tab container.  Tabs can also be rearranged using the up/down arrows in the edit toolbar for each individual tab.
+
+##### Tabs
+
+| Dialog Field | Description | 
+| ------------ | ----------- |
+| Tab Type | Selection to render as Bootstrap "tabs" or "pills"  |
+
+##### Tab
+
+| Dialog Field | Description | 
+| ------------ | ----------- |
+| Title | Title to display atop the tab or pill |
 
 ### Breadcrumb Component
 
