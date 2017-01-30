@@ -64,7 +64,7 @@ public class BootstrapPageNavigableRenderableTree implements Tree<NavigablePage>
     }
 
     public String getBrandLinkImage() {
-        return brandLinkImage.or(StringUtils.EMPTY);
+        return brandLinkImage.or("");
     }
 
     public boolean isHasBrandLinkImage() {

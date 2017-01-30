@@ -66,7 +66,7 @@ public class MetaPage {
     @TextField
     public String getTwitterPublisherHandle() {
         //TODO: SHould this inherit?
-        return currentPage.get("twitterPublisherHandle", StringUtils.EMPTY);
+        return currentPage.get("twitterPublisherHandle", "");
     }
 
     @DialogField(fieldLabel = "Open Graph Type",
@@ -92,7 +92,7 @@ public class MetaPage {
     )
     public String getOgType() {
         //TODO: Should this inherit?
-        return currentPage.get("ogType", StringUtils.EMPTY);
+        return currentPage.get("ogType", "");
     }
 
     @DialogField(fieldLabel = "Canonical Url", fieldDescription = "Canonical Url of the content of this page",

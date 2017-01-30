@@ -33,7 +33,7 @@ public class CallToAction extends AbstractCallToAction {
         @Option(text = "Open in a New Window/Tab", qtip = "Opens link to specified path in a new window or tab.",
             value = LINK_IN_WINDOW) })
     public String getAction() {
-        return get("action", StringUtils.EMPTY);
+        return get("action", "");
     }
 
     @DialogField(fieldLabel = "Link Target", fieldDescription = "URL path this button leads to", ranking = 2)

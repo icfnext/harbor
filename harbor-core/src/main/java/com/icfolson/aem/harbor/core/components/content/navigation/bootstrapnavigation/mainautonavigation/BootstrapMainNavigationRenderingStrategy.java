@@ -10,7 +10,6 @@ import com.google.common.base.Optional;
 import com.icfolson.aem.harbor.api.content.page.navigation.NavigablePage;
 import com.icfolson.aem.harbor.api.trees.rendering.TreeRenderingStrategy;
 import com.icfolson.aem.library.core.components.AbstractComponent;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
 
@@ -39,7 +38,7 @@ public class BootstrapMainNavigationRenderingStrategy extends AbstractComponent 
         fieldDescription = "Text to present as the brand of the navigation bar", ranking = 20)
     @TextField
     public String getBrandLinkText() {
-        return getInherited("brandLinkText", StringUtils.EMPTY);
+        return getInherited("brandLinkText", "");
     }
 
     @DialogField(fieldLabel = "Brand Link Image", fieldDescription = "Brand Link Image",

@@ -42,8 +42,8 @@ public class Tabs extends AbstractComponent {
         return getResource().getName();
     }
 
-    @DialogField(fieldLabel = "Tab Type")
-    @Selection(options = {
+    @DialogField(fieldLabel = "Tab Type", value = "tabs")
+    @Selection(type = Selection.SELECT, options = {
         @Option(text = "Tabs", value = "tabs"),
         @Option(text = "Pills", value = "pills")
     })

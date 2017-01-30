@@ -51,11 +51,7 @@ public class Container extends AbstractComponent {
         name = "./" + FULL_WIDTH_PROPERTY, ranking = 0)
     @Switch(offText = "No", onText = "Yes")
     public Boolean getIsContainerFullWidth() {
-        if (isInherits()) {
-            return getInherited(FULL_WIDTH_PROPERTY, false);
-        }
-
-        return get(FULL_WIDTH_PROPERTY, false);
+        return isInherits() ? getInherited(FULL_WIDTH_PROPERTY, false) : get(FULL_WIDTH_PROPERTY, false);
     }
 
     @DialogField(fieldLabel = "Container Inheritance",
@@ -63,11 +59,7 @@ public class Container extends AbstractComponent {
         ranking = 10)
     @Switch(offText = "No", onText = "Yes")
     public boolean isParsysInherits() {
-        if (isInherits()) {
-            return getInherited("parsysInherits", false);
-        }
-
-        return get("parsysInherits", false);
+        return isInherits() ? getInherited("parsysInherits", false) : get("parsysInherits", false);
     }
 
     @DialogField(ranking = 20)
@@ -81,11 +73,7 @@ public class Container extends AbstractComponent {
         tab = 2)
     @TextField
     public String getDomId() {
-        if (isInherits()) {
-            return getInherited("domId", StringUtils.EMPTY);
-        }
-
-        return get("domId", StringUtils.EMPTY);
+        return isInherits() ? getInherited("domId", "") : get("domId", "");
     }
 
     public String getContainerClass() {
@@ -109,7 +97,7 @@ public class Container extends AbstractComponent {
             return StringUtils.join(classification.getClassificationNames(), " ");
         }
 
-        return StringUtils.EMPTY;
+        return "";
     }
 
     public String getContainerElement() {

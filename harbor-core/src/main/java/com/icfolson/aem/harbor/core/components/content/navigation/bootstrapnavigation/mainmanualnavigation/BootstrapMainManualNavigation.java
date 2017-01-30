@@ -15,7 +15,6 @@ import com.icfolson.aem.harbor.core.constants.groups.ComponentGroups;
 import com.icfolson.aem.library.api.link.Link;
 import com.icfolson.aem.library.core.components.AbstractComponent;
 import com.icfolson.aem.library.core.constants.PathConstants;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
 
@@ -67,7 +66,7 @@ public class BootstrapMainManualNavigation extends AbstractComponent {
         fieldDescription = "Text to present as the brand of the navigation bar", ranking = 4)
     @TextField
     public String getBrandLinkText() {
-        return getInherited("brandLinkText", StringUtils.EMPTY);
+        return getInherited("brandLinkText", "");
     }
 
     @DialogField(fieldLabel = "Brand Link", fieldDescription = "The page or URL the brand should link to", ranking = 5)

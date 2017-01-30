@@ -19,9 +19,13 @@ import org.apache.sling.models.annotations.Model;
     actionConfigs = {
         @ActionConfig(xtype = "tbseparator"),
         @ActionConfig(text = "Move Up", handler = "function(){Harbor.Components.Tabs.moveUp( this )}",
-            additionalProperties = { @ActionConfigProperty(name = "icon", value = "coral-Icon--accordionUp") }),
+            additionalProperties = {
+                @ActionConfigProperty(name = "icon", value = "coral-Icon--accordionUp")
+            }),
         @ActionConfig(text = "Move Down", handler = "function(){Harbor.Components.Tabs.moveDown( this )}",
-            additionalProperties = { @ActionConfigProperty(name = "icon", value = "coral-Icon--accordionDown") })
+            additionalProperties = {
+                @ActionConfigProperty(name = "icon", value = "coral-Icon--accordionDown")
+            })
     },
     listeners = {
         @Listener(name = "afteredit", value = "REFRESH_PARENT"),
@@ -37,7 +41,7 @@ public class Tab extends AbstractComponent {
     @DialogField(fieldLabel = "Title", fieldDescription = "The title to be presented within the Tab")
     @TextField
     public String getTitle() {
-        return IconUtils.iconify(this.get("title", this.getName()));
+        return IconUtils.iconify(get("title", getName()));
     }
 
     public String getName() {
