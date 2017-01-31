@@ -282,13 +282,24 @@ Classified Content is a "classifiable" container with a paragraph system.  The p
 
 * Group: Harbor Scaffolding
 * Classifiable
-* Container
 
 A container wraps a paragraph system in a Bootstrap "container" `<div>` or `<section>` element.  All components on a page should be placed in a container for proper rendering.
  
 #### Baked-In Container
 
 The Baked-In Container variant allows for a container to be statically included in a page component.
+
+### Responsive Container Component
+
+* Group: Harbor Scaffolding
+
+A content container which can be shown or hidden at various device size breakpoints.
+
+#### Authorability
+
+| Dialog Field | Description | 
+| ------------ | ----------- |
+| Hide In | Selection of one or more device types where the container content should be hidden |
 
 ### Column Row Component
 
