@@ -344,6 +344,68 @@ Individual tabs can be added by clicking the "Add Tab" button in the component's
 | ------------ | ----------- |
 | Title | Title to display atop the tab or pill |
 
+### Main Auto Navigation
+
+A navigation header constructed from a page hierarchy (or "tree").  Beginning with the current page, the navigation elements are assembled by traversing the page hierarchy to an optionally specified depth.
+
+#### Authorability
+
+Authoring of the Main Auto Navigation component is divided into two sections: "construction" and "rendering".  The former is concerned with how pages are included in the list of navigation elements, while the latter determines how these elements are rendered on the page.
+
+##### Page Navigation Construction
+
+| Dialog Field | Description |
+| ------------ | ----------- |
+| Navigation Depth | Limits how deep the page hierarchy is traversed from the root page.  A value of 1 would limit to only immediate children of the current page, a value of 2 would include grandchildren, and so on. |
+
+##### Page Navigation Rendering
+
+| Dialog Field | Description |
+| ------------ | ----------- |
+| Enable Sticky Navigation? | If selected, the navbar position will be fixed to the top of the page |
+| Brand Link | If enabled, display a link to the root page as the first navigation element |
+| Brand Link Text | Text to display inside of the brank link (will not render if Brand Link Image is selected) |
+| Brand Link Image | Image to render inside of the brand link |
+| Full Width | Enable the full width container rather than the default responsive fixed width container |
+| Present Main Navigation Item in Drop Down | Render the parent navigation element in the context of the drop down and enable expansion of the dropdown via clicking on the entire navigation element.  If unchecked, a separate dropdown icon will render which must be clicked in order to expand the dropdown. |
+
+### Main Manual Navigation
+
+A navigation header constructed from a manually-selected list of pages.
+
+#### Authorability
+
+| Dialog Field | Description |
+| ------------ | ----------- |
+| Enable Sticky Navigation? | If selected, the navbar position will be fixed to the top of the page |
+| Show Brand Link | If enabled, display a link to the root page as the first navigation element |
+| Brand Link Text | Text to display inside of the brank link (will not render if Brand Link Image is selected) |
+| Brand Link Image | Image to render inside of the brand link |
+| Brand Link | Link target for navbar brand element at upper left corner of navbar |
+| Full Width | Enable the full width container rather than the default responsive fixed width container |
+| Present Main Navigation Item in Drop Down | Render the parent navigation element in the context of the drop down and enable expansion of the dropdown via clicking on the entire navigation element.  If unchecked, a separate dropdown icon will render which must be clicked in order to expand the dropdown. |
+
+##### Adding Navigation Items
+
+To add an item to the manual navigation list, click the 'Add Navigation Item' button in the component's edit toolbar.  This will render a new element which can be authored individually. 
+
+| Dialog Field | Description |
+| ------------ | ----------- |
+| Element Title | Title to render in the navbar.  If left blank, the page title for the Element Link will be used. |
+| Element Link | Page or external link to render for this element |
+| Has Dropdown? | If enabled, a caret will be added to this element to produce a dropdown/flyout |
+
+### Secondary Navigation
+
+Secondary navigation is a vertically-oriented (i.e. "pills") navigation list that can be added or baked into a page.
+
+#### Authorability
+
+| Dialog Field | Description |
+| ------------ | ----------- |
+| Navigation Depth | Limits how deep the page hierarchy is traversed from the root page.  A value of 1 would limit to only immediate children of the current page, a value of 2 would include grandchildren, and so on. |
+| Root Page Type | Select 'Home Page' if this navigation should be rooted at the current site's Home Page or 'Section Landing Page' if this navigation should be rooted at the nearest parent Section Landing Page |
+
 ### Breadcrumb Component
 
 * Group: Harbor Navigation
