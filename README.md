@@ -71,6 +71,18 @@ Text is edited via the text in-place editor.
 | ------------ | ----------- |
 | Classification | Input support for classifiability of the text component instance. |
 
+### HTML Component
+
+* Group: Harbor
+
+This component is designed to accept any sort of HTML snippet such as an image or anchor tag.
+
+#### Authorability
+
+| Dialog Field | Description |
+| ------------ | ----------- |
+| Source        | It allows to add HTML snippet |
+
 ### Call to Action Component
 
 * Group: Harbor
@@ -438,6 +450,37 @@ Inheritance capabilities are dependent on instances of this component having an 
 The Baked-In Breadcrumb component further extends the Inheriting Breadcrumb for static inclusion in a page component.
 
 `<sly data-sly-resource="${'breadcrumb' @ resourceType = 'harbor/components/content/bakedinbreadcrumb'}"></sly>`
+
+### Main Auto Navigation Component
+
+* Group: Harbor Navigation
+
+This component is designed as a a site wide nested navigation
+
+#### Authorability
+
+| Dialog Field | Description |
+| ------------ | ----------- |
+| Navigation Depth      | Indicates how many levels of the page tree under the root page should be presented in the navigation. |
+| Enable Sticky Navigation        | When enabled the site navigation will stick to the top of the browser viewport during page scrolling. Note, navigation stickyness will only be enabled in preview and publish mode. Further in preview mode, while stickyness will be enabled the results may not be visible in the Touch UI due to how the interface is rendered. To test the results fully remove editor.html from the browser's address bar. Also, when enabling stickyness ensure your design accounts for this and adds margin to the elements below the navigation otherwise these will render behind the navigation. |
+| Brand Link       | Indicates whether a Brand Link should be presented. A Brand Link appears as a link to the Home Page of the site with text defaulted to the site's title.  |
+| Brand Link Text        | Text to present in the Brand Link when shown. |
+| Brand Link Image        | Image Asset to present in the Brand Link when shown. |
+| Full Width       | Indicates whether the navigation should span the full width of the browser or operate at a fixed width. |
+| Present Main Navigation Item in Drop Down        | When more than a single level of navigation is presented, nested items appear in drop downs under each top level item. In this case a decision must be made concerning whether clicking on the top level navigation item should open the drop down or whether it should take the user to the associated page. Enabling this option will cause the click to open the dropdown and the link to the associated page will be re-presented within the dropdown. When disabled clicking a top level navigation item will route the user to the associated page and users will have to click a toggle icon next to the menu item text to open the drop down. |
+
+### Secondary Navigation Component
+
+* Group: Harbor Navigation
+
+This component is designed as a rooted tree navigation of arbitrary depth
+
+#### Authorability
+
+| Dialog Field | Description |
+| ------------ | ----------- |
+| Root Page Type       | Allows navigation to be rooted at the containing Home Page or the closest containing Section Landing Page. |
+| Navigation Depth        | Indicates how many levels of the page tree under the root page should be presented in the navigation. |
 
 ## Core Concepts
 
