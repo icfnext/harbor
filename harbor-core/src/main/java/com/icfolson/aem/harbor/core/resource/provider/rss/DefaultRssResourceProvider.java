@@ -1,16 +1,28 @@
 package com.icfolson.aem.harbor.core.resource.provider.rss;
 
+import com.google.common.base.Optional;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.icfolson.aem.harbor.api.content.rss.RSSChannel;
 import com.icfolson.aem.harbor.api.content.rss.RSSFeed;
 import com.icfolson.aem.harbor.api.content.rss.RSSItem;
 import com.icfolson.aem.harbor.api.services.rss.RSSFeedGeneratorService;
 import com.icfolson.aem.harbor.api.services.rss.RssResourceProvider;
-import com.google.common.base.Optional;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.felix.scr.annotations.*;
-import org.apache.sling.api.resource.*;
+import org.apache.felix.scr.annotations.Activate;
+import org.apache.felix.scr.annotations.Component;
+import org.apache.felix.scr.annotations.Modified;
+import org.apache.felix.scr.annotations.Property;
+import org.apache.felix.scr.annotations.Reference;
+import org.apache.felix.scr.annotations.Service;
+import org.apache.sling.api.resource.AbstractResource;
+import org.apache.sling.api.resource.ModifyingResourceProvider;
+import org.apache.sling.api.resource.PersistenceException;
+import org.apache.sling.api.resource.Resource;
+import org.apache.sling.api.resource.ResourceMetadata;
+import org.apache.sling.api.resource.ResourceProvider;
+import org.apache.sling.api.resource.ResourceResolver;
+import org.apache.sling.api.resource.ValueMap;
 import org.apache.sling.api.wrappers.ValueMapDecorator;
 import org.apache.sling.commons.osgi.PropertiesUtil;
 import org.slf4j.Logger;
@@ -27,18 +39,25 @@ public class DefaultRssResourceProvider implements ModifyingResourceProvider, Rs
 
     private static final Logger LOG = LoggerFactory.getLogger(DefaultRssResourceProvider.class);
 
-    @Property(label = "RSS Feed Title", value = "", description = "A title used to identify this Service Instance externally.  Setting the title has no systematic consequence as far as the feed itself is concerned")
+    @Property(label = "RSS Feed Title", value = "",
+        description = "A title used to identify this Service Instance externally.  Setting the title has no systematic consequence as far as the feed itself is concerned")
     private static final String TITLE_PROPERTY = "rssFeedTitle";
+
     private String rssFeedTitle;
 
-    @Property(label = "Resource Provider Root", value = "", description = "The root in the content tree which this service will respond to")
+    @Property(label = "Resource Provider Root", value = "",
+        description = "The root in the content tree which this service will respond to")
     private static final String PROVIDER_ROOT_PROPERTY = ResourceProvider.ROOTS;
+
     private String providerRoot;
+
     private String absoluteProviderRoot;
 
     //TODO: Determine why making the value blank here instead of 'none' causes the maven-bundle-plugin to error on build
-    @Property(label = "RSS Feed URL", value = "none", description = "This is temporary config.  Point it to the URL of the RSS feed")
+    @Property(label = "RSS Feed URL", value = "none",
+        description = "This is temporary config.  Point it to the URL of the RSS feed")
     private static final String RSS_FEED_URL_PROPERTY = "rssFeedUrl";
+
     private String rssFeedUrl;
 
     @Reference
@@ -48,10 +67,10 @@ public class DefaultRssResourceProvider implements ModifyingResourceProvider, Rs
     @Activate
     @Modified
     protected void activate(final Map<String, Object> properties) throws Exception {
-        this.providerRoot = PropertiesUtil.toString(properties.get(PROVIDER_ROOT_PROPERTY), "");
-        this.absoluteProviderRoot = "/" + this.providerRoot;
-        this.rssFeedUrl = PropertiesUtil.toString(properties.get(RSS_FEED_URL_PROPERTY), "none");
-        this.rssFeedTitle = PropertiesUtil.toString(properties.get(TITLE_PROPERTY), rssFeedUrl);
+        providerRoot = PropertiesUtil.toString(properties.get(PROVIDER_ROOT_PROPERTY), "");
+        absoluteProviderRoot = "/" + providerRoot;
+        rssFeedUrl = PropertiesUtil.toString(properties.get(RSS_FEED_URL_PROPERTY), "none");
+        rssFeedTitle = PropertiesUtil.toString(properties.get(TITLE_PROPERTY), rssFeedUrl);
     }
 
     @Deprecated
@@ -63,13 +82,15 @@ public class DefaultRssResourceProvider implements ModifyingResourceProvider, Rs
     /**
      * Paths produced for the resource will be the root for the channel or the root followed by a number for a
      * post.  The posts are numbered in the order they are returned from the feed generator service
+     *
      * @param resourceResolver
      * @param path
      * @return
      */
     @Override
     public Resource getResource(ResourceResolver resourceResolver, String path) {
-        if (StringUtils.isBlank(getRssFeedUrl()) || "none".equals(getRssFeedUrl()) || StringUtils.isBlank(absoluteProviderRoot)) {
+        if (StringUtils.isBlank(getRssFeedUrl()) || "none".equals(getRssFeedUrl()) || StringUtils.isBlank(
+            absoluteProviderRoot)) {
             return null;
         }
 
@@ -79,12 +100,12 @@ public class DefaultRssResourceProvider implements ModifyingResourceProvider, Rs
             if (absoluteProviderRoot.equals(path)) {
                 RSSChannelValueMap rssChannelValueMap = new RSSChannelValueMap(rssFeedOptional.get().getChannel());
                 return new RSSChannelResource(resourceResolver, path, rssChannelValueMap);
-            }
-            else {
+            } else {
                 if (path.matches(getRssPathRegularExpression())) {
                     Integer requestedRssItem = Integer.valueOf(path.substring(path.lastIndexOf("/")));
                     if (rssFeedOptional.get().getChannel().getItems().size() >= requestedRssItem) {
-                        return new RSSItemResource(resourceResolver, path, new RSSItemValueMap(rssFeedOptional.get().getChannel().getItems().get(requestedRssItem)));
+                        return new RSSItemResource(resourceResolver, path,
+                            new RSSItemValueMap(rssFeedOptional.get().getChannel().getItems().get(requestedRssItem)));
                     }
                 }
             }
@@ -95,31 +116,36 @@ public class DefaultRssResourceProvider implements ModifyingResourceProvider, Rs
 
     /**
      * The only Resource in an RSS feed which will have children will be the Channel resource.
+     *
      * @param resource
      * @return
      */
     @Override
-    public Iterator<Resource> listChildren(Resource resource) {
-        if (StringUtils.isBlank(getRssFeedUrl()) || StringUtils.isBlank(absoluteProviderRoot)) {
-            return null;
-        }
+    public Iterator<Resource> listChildren(final Resource resource) {
+        Iterator<Resource> resources = null;
 
-        Optional<RSSFeed> rssFeedOptional = rssFeedGeneratorService.getRSSFeed(getRssFeedUrl());
+        if (!StringUtils.isBlank(getRssFeedUrl()) && !StringUtils.isBlank(absoluteProviderRoot)) {
+            final Optional<RSSFeed> rssFeedOptional = rssFeedGeneratorService.getRSSFeed(getRssFeedUrl());
 
-        if (rssFeedOptional.isPresent()) {
-            if (absoluteProviderRoot.equals(resource.getPath())) {
-                List<Resource> children = Lists.newArrayList();
-                for (int i=0; i<rssFeedOptional.get().getChannel().getItems().size(); i++) {
-                    RSSItem currentRssFeedItem = rssFeedOptional.get().getChannel().getItems().get(i);
+            if (rssFeedOptional.isPresent()) {
+                if (absoluteProviderRoot.equals(resource.getPath())) {
+                    final List<Resource> children = Lists.newArrayList();
 
-                    children.add(new RSSItemResource(resource.getResourceResolver(), absoluteProviderRoot + "/" + i, new RSSItemValueMap(currentRssFeedItem)));
+                    final List<? extends RSSItem> items = rssFeedOptional.get().getChannel().getItems();
+
+                    for (int i = 0; i < items.size(); i++) {
+                        final RSSItem currentRssFeedItem = items.get(i);
+
+                        children.add(new RSSItemResource(resource.getResourceResolver(), absoluteProviderRoot + "/" + i,
+                            new RSSItemValueMap(currentRssFeedItem)));
+                    }
+
+                    resources = children.iterator();
                 }
-
-                return children.iterator();
             }
         }
 
-        return null;
+        return resources;
     }
 
     @Override
@@ -142,7 +168,8 @@ public class DefaultRssResourceProvider implements ModifyingResourceProvider, Rs
     }
 
     @Override
-    public Resource create(ResourceResolver resourceResolver, String s, Map<String, Object> stringObjectMap) throws PersistenceException {
+    public Resource create(ResourceResolver resourceResolver, String s, Map<String, Object> stringObjectMap)
+        throws PersistenceException {
         LOG.debug("Create request for " + s);
         return null;
     }
@@ -173,8 +200,11 @@ public class DefaultRssResourceProvider implements ModifyingResourceProvider, Rs
         public static final String RESOURCE_TYPE = "harbor/rss/channel";
 
         private final String path;
+
         private final ResourceMetadata metadata;
+
         private final ValueMap valueMap;
+
         private final ResourceResolver resolver;
 
         public RSSChannelResource(ResourceResolver resourceResolver, String path, ValueMap valueMap) {
@@ -219,8 +249,8 @@ public class DefaultRssResourceProvider implements ModifyingResourceProvider, Rs
         @Override
         @SuppressWarnings("unchecked")
         public <AdapterType> AdapterType adaptTo(Class<AdapterType> type) {
-            if(type == ValueMap.class) {
-                return (AdapterType)valueMap;
+            if (type == ValueMap.class) {
+                return (AdapterType) valueMap;
             }
             return super.adaptTo(type);
         }
@@ -244,8 +274,11 @@ public class DefaultRssResourceProvider implements ModifyingResourceProvider, Rs
         public static final String RESOURCE_TYPE = "harbor/rss/item";
 
         private final String path;
+
         private final ResourceMetadata metadata;
+
         private final ValueMap valueMap;
+
         private final ResourceResolver resolver;
 
         public RSSItemResource(ResourceResolver resourceResolver, String path, ValueMap valueMap) {
@@ -290,8 +323,8 @@ public class DefaultRssResourceProvider implements ModifyingResourceProvider, Rs
         @Override
         @SuppressWarnings("unchecked")
         public <AdapterType> AdapterType adaptTo(Class<AdapterType> type) {
-            if(type == ValueMap.class) {
-                return (AdapterType)valueMap;
+            if (type == ValueMap.class) {
+                return (AdapterType) valueMap;
             }
             return super.adaptTo(type);
         }
@@ -302,11 +335,11 @@ public class DefaultRssResourceProvider implements ModifyingResourceProvider, Rs
 
         //TODO: Fill this out
         public RSSItemValueMap(RSSItem item) {
-            super(Maps.<String, Object>newHashMap());
+            super(Maps.newHashMap());
+
             put("title", item.getTitle());
             put("link", item.getLink());
             put("description", item.getDescription());
         }
-
     }
 }

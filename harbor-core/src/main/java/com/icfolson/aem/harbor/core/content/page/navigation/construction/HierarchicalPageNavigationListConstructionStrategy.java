@@ -23,9 +23,11 @@ public class HierarchicalPageNavigationListConstructionStrategy extends PageNavi
     private PageDecorator currentPage;
 
     @DialogField(fieldLabel = "Root Page Type",
-        fieldDescription = "Select Home Page if this navigation should be rooted at the current site's Home Page and Section Landing Page if this navigation should be rooted at the nearest parent Section Landing Page")
-    @Selection(type = Selection.SELECT, options = { @Option(text = "Home Page", value = Types.ICF_OLSON_HOME_PAGE),
-        @Option(text = "Section Landing Page", value = Types.ICF_OLSON_SECTION_LANDING_PAGE) })
+        fieldDescription = "Select Home Page if this navigation should be rooted at the current site's Home Page or Section Landing Page if this navigation should be rooted at the nearest parent Section Landing Page")
+    @Selection(type = Selection.SELECT, options = {
+        @Option(text = "Home Page", value = Types.ICF_OLSON_HOME_PAGE),
+        @Option(text = "Section Landing Page", value = Types.ICF_OLSON_SECTION_LANDING_PAGE)
+    })
     @Override
     public Optional<NavigablePage> getNavigationRoot() {
         if (navigationRoot == null) {
