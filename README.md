@@ -389,6 +389,19 @@ The Baked-In Breadcrumb component further extends the Inheriting Breadcrumb for 
 
 `<sly data-sly-resource="${'breadcrumb' @ resourceType = 'harbor/components/content/bakedinbreadcrumb'}"></sly>`
 
+### Secondary Navigation Component
+
+* Group: Harbor Navigation
+
+This component is designed as a rooted tree navigation of arbitrary depth
+
+#### Authorability
+
+| Dialog Field | Description |
+| ------------ | ----------- |
+| Root Page Type       | Allows navigation to be rooted at the containing Home Page or the closest containing Section Landing Page. |
+| Navigation Depth        | Indicates how many levels of the page tree under the root page should be presented in the navigation. |
+
 ## Core Concepts
 
 ### End User Core Concepts
