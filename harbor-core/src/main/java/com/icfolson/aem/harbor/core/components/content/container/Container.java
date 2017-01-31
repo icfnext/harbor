@@ -77,19 +77,19 @@ public class Container extends AbstractComponent {
     }
 
     public String getContainerClass() {
-        final StringBuilder classStringBuffer = new StringBuilder();
+        final StringBuilder builder = new StringBuilder();
 
         if (getIsContainerFullWidth()) {
-            classStringBuffer.append(getContainerFullWidthClass());
+            builder.append(getContainerFullWidthClass());
         } else {
-            classStringBuffer.append(getContainerDefaultClass());
+            builder.append(getContainerDefaultClass());
         }
 
         if (!isSection() && classification.isHasClassifications()) {
-            classStringBuffer.append(" ").append(StringUtils.join(classification.getClassificationNames(), " "));
+            builder.append(" ").append(StringUtils.join(classification.getClassificationNames(), " "));
         }
 
-        return classStringBuffer.toString();
+        return builder.toString();
     }
 
     public String getSectionClass() {
