@@ -71,6 +71,18 @@ Text is edited via the text in-place editor.
 | ------------ | ----------- |
 | Classification | Input support for classifiability of the text component instance. |
 
+### HTML Component
+
+* Group: Harbor
+
+This component is designed to accept any sort of HTML snippet such as an image or anchor tag.
+
+#### Authorability
+
+| Dialog Field | Description |
+| ------------ | ----------- |
+| Source        | It allows to add HTML snippet |
+
 ### Call to Action Component
 
 * Group: Harbor
