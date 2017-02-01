@@ -6,6 +6,7 @@ import com.citytechinc.cq.component.annotations.Listener;
 import com.citytechinc.cq.component.annotations.editconfig.ActionConfig;
 import com.citytechinc.cq.component.annotations.editconfig.ActionConfigProperty;
 import com.citytechinc.cq.component.annotations.widgets.TextField;
+import com.google.common.collect.Iterables;
 import com.icfolson.aem.harbor.core.util.icon.IconUtils;
 import com.icfolson.aem.library.core.components.AbstractComponent;
 import com.icfolson.aem.library.core.constants.ComponentConstants;
@@ -54,8 +55,10 @@ public class AccordionItem extends AbstractComponent {
 
     public Boolean isOpen() {
         if (open == null) {
-            open = getResource().getParent().getChildren().iterator().next().getPath().equals(
-                getResource().getPath()) && getResource().getParent().adaptTo(Accordion.class).isOpenFirstItem();
+            final Resource parent = getResource().getParent();
+            final Accordion accordion = parent.adaptTo(Accordion.class);
+
+            open = Iterables.get(parent.getChildren(), 0).getPath().equals(getPath()) && accordion.isOpenFirstItem();
         }
 
         return open;

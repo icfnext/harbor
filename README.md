@@ -71,6 +71,18 @@ Text is edited via the text in-place editor.
 | ------------ | ----------- |
 | Classification | Input support for classifiability of the text component instance. |
 
+### HTML Component
+
+* Group: Harbor
+
+This component is designed to accept any sort of HTML snippet such as an image or anchor tag.
+
+#### Authorability
+
+| Dialog Field | Description |
+| ------------ | ----------- |
+| Source        | It allows to add HTML snippet |
+
 ### Call to Action Component
 
 * Group: Harbor
@@ -270,13 +282,24 @@ Classified Content is a "classifiable" container with a paragraph system.  The p
 
 * Group: Harbor Scaffolding
 * Classifiable
-* Container
 
 A container wraps a paragraph system in a Bootstrap "container" `<div>` or `<section>` element.  All components on a page should be placed in a container for proper rendering.
  
 #### Baked-In Container
 
 The Baked-In Container variant allows for a container to be statically included in a page component.
+
+### Responsive Container Component
+
+* Group: Harbor Scaffolding
+
+A content container which can be shown or hidden at various device size breakpoints.
+
+#### Authorability
+
+| Dialog Field | Description | 
+| ------------ | ----------- |
+| Hide In | Selection of one or more device types where the container content should be hidden |
 
 ### Column Row Component
 
@@ -342,7 +365,99 @@ Individual tabs can be added by clicking the "Add Tab" button in the component's
 
 | Dialog Field | Description | 
 | ------------ | ----------- |
-| Title | Title to display atop the tab or pill |
+| Title | Title to display atop the tab or pill 
+
+### Header Component
+
+* Group: Harbor Scaffolding
+
+This component is designed to effectively introduce the brand to the primary audience
+
+#### Authorability
+
+| Dialog Field | Description |
+| ------------ | ----------- |
+| Full Width        | When set to true, will render across the full width of the browser window |
+| Container Inheritance       | When enabled, an inherting paragraph system is produced for this container instance |
+| Classification        | Input support for classifiability of the header component instance. Classifies the header |
+| ID     | A unique identifier for the Header. If no ID is set no id attribute will be rendered |
+
+### Footer Component
+
+* Group: Harbor Scaffolding
+
+The footer, as its name suggests, is the final piece of content located at the bottom of each page of the web site. The purpose of the footer is to signal to the user that they are at the bottom of the web page and to provide links or shortcuts to other areas of the site. The footer is the area that many users expect to find the ‘fine print’ - legal information such as ‘terms and conditions’, ‘privacy policies’, etc. Typical short cuts links include: Contact Us, Sitemap, Privacy Policy, Terms &amp; Conditions.
+
+#### Authorability
+
+| Dialog Field | Description |
+| ------------ | ----------- |
+| Full Width        | When set to true, will render across the full width of the browser window |
+| Container Inheritance       | When enabled, an inherting paragraph system is produced for this container instance |
+| Classification        | Input support for classifiability of the footer component instance. Classifies the footer |
+| ID     | A unique identifier for the footer If no ID is set no id attribute will be rendered |
+
+### Main Auto Navigation
+
+A navigation header constructed from a page hierarchy (or "tree").  Beginning with the current page, the navigation elements are assembled by traversing the page hierarchy to an optionally specified depth.
+
+#### Authorability
+
+Authoring of the Main Auto Navigation component is divided into two sections: "construction" and "rendering".  The former is concerned with how pages are included in the list of navigation elements, while the latter determines how these elements are rendered on the page.
+
+##### Page Navigation Construction
+
+| Dialog Field | Description |
+| ------------ | ----------- |
+| Navigation Depth | Limits how deep the page hierarchy is traversed from the root page.  A value of 1 would limit to only immediate children of the current page, a value of 2 would include grandchildren, and so on. |
+
+##### Page Navigation Rendering
+
+| Dialog Field | Description |
+| ------------ | ----------- |
+| Enable Sticky Navigation? | If selected, the navbar position will be fixed to the top of the page |
+| Brand Link | If enabled, display a link to the root page as the first navigation element |
+| Brand Link Text | Text to display inside of the brank link (will not render if Brand Link Image is selected) |
+| Brand Link Image | Image to render inside of the brand link |
+| Full Width | Enable the full width container rather than the default responsive fixed width container |
+| Present Main Navigation Item in Drop Down | Render the parent navigation element in the context of the drop down and enable expansion of the dropdown via clicking on the entire navigation element.  If unchecked, a separate dropdown icon will render which must be clicked in order to expand the dropdown. |
+
+### Main Manual Navigation
+
+A navigation header constructed from a manually-selected list of pages.
+
+#### Authorability
+
+| Dialog Field | Description |
+| ------------ | ----------- |
+| Enable Sticky Navigation? | If selected, the navbar position will be fixed to the top of the page |
+| Show Brand Link | If enabled, display a link to the root page as the first navigation element |
+| Brand Link Text | Text to display inside of the brank link (will not render if Brand Link Image is selected) |
+| Brand Link Image | Image to render inside of the brand link |
+| Brand Link | Link target for navbar brand element at upper left corner of navbar |
+| Full Width | Enable the full width container rather than the default responsive fixed width container |
+| Present Main Navigation Item in Drop Down | Render the parent navigation element in the context of the drop down and enable expansion of the dropdown via clicking on the entire navigation element.  If unchecked, a separate dropdown icon will render which must be clicked in order to expand the dropdown. |
+
+##### Adding Navigation Items
+
+To add an item to the manual navigation list, click the 'Add Navigation Item' button in the component's edit toolbar.  This will render a new element which can be authored individually. 
+
+| Dialog Field | Description |
+| ------------ | ----------- |
+| Element Title | Title to render in the navbar.  If left blank, the page title for the Element Link will be used. |
+| Element Link | Page or external link to render for this element |
+| Has Dropdown? | If enabled, a caret will be added to this element to produce a dropdown/flyout |
+
+### Secondary Navigation
+
+Secondary navigation is a vertically-oriented (i.e. "pills") navigation list that can be added or baked into a page.
+
+#### Authorability
+
+| Dialog Field | Description |
+| ------------ | ----------- |
+| Navigation Depth | Limits how deep the page hierarchy is traversed from the root page.  A value of 1 would limit to only immediate children of the current page, a value of 2 would include grandchildren, and so on. |
+| Root Page Type | Select 'Home Page' if this navigation should be rooted at the current site's Home Page or 'Section Landing Page' if this navigation should be rooted at the nearest parent Section Landing Page |
 
 ### Breadcrumb Component
 
@@ -376,6 +491,37 @@ Inheritance capabilities are dependent on instances of this component having an 
 The Baked-In Breadcrumb component further extends the Inheriting Breadcrumb for static inclusion in a page component.
 
 `<sly data-sly-resource="${'breadcrumb' @ resourceType = 'harbor/components/content/bakedinbreadcrumb'}"></sly>`
+
+### Main Auto Navigation Component
+
+* Group: Harbor Navigation
+
+This component is designed as a a site wide nested navigation
+
+#### Authorability
+
+| Dialog Field | Description |
+| ------------ | ----------- |
+| Navigation Depth      | Indicates how many levels of the page tree under the root page should be presented in the navigation. |
+| Enable Sticky Navigation        | When enabled the site navigation will stick to the top of the browser viewport during page scrolling. Note, navigation stickyness will only be enabled in preview and publish mode. Further in preview mode, while stickyness will be enabled the results may not be visible in the Touch UI due to how the interface is rendered. To test the results fully remove editor.html from the browser's address bar. Also, when enabling stickyness ensure your design accounts for this and adds margin to the elements below the navigation otherwise these will render behind the navigation. |
+| Brand Link       | Indicates whether a Brand Link should be presented. A Brand Link appears as a link to the Home Page of the site with text defaulted to the site's title.  |
+| Brand Link Text        | Text to present in the Brand Link when shown. |
+| Brand Link Image        | Image Asset to present in the Brand Link when shown. |
+| Full Width       | Indicates whether the navigation should span the full width of the browser or operate at a fixed width. |
+| Present Main Navigation Item in Drop Down        | When more than a single level of navigation is presented, nested items appear in drop downs under each top level item. In this case a decision must be made concerning whether clicking on the top level navigation item should open the drop down or whether it should take the user to the associated page. Enabling this option will cause the click to open the dropdown and the link to the associated page will be re-presented within the dropdown. When disabled clicking a top level navigation item will route the user to the associated page and users will have to click a toggle icon next to the menu item text to open the drop down. |
+
+### Secondary Navigation Component
+
+* Group: Harbor Navigation
+
+This component is designed as a rooted tree navigation of arbitrary depth
+
+#### Authorability
+
+| Dialog Field | Description |
+| ------------ | ----------- |
+| Root Page Type       | Allows navigation to be rooted at the containing Home Page or the closest containing Section Landing Page. |
+| Navigation Depth        | Indicates how many levels of the page tree under the root page should be presented in the navigation. |
 
 ## Core Concepts
 

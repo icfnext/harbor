@@ -36,6 +36,9 @@ import java.util.stream.Collectors;
 @Model(adaptables = Resource.class)
 public class Accordion extends AbstractComponent {
 
+    private static final Predicate<ComponentNode> ACCORDION_ITEM_PREDICATE = componentNode -> componentNode != null
+        && componentNode.getResource().isResourceType(AccordionItem.RESOURCE_TYPE);
+
     private List<AccordionItem> accordionItems;
 
     public String getName() {
@@ -51,7 +54,7 @@ public class Accordion extends AbstractComponent {
 
     public List<AccordionItem> getItems() {
         if (accordionItems == null) {
-            accordionItems = getComponentNodes(new AccordionItemPredicate())
+            accordionItems = getComponentNodes(ACCORDION_ITEM_PREDICATE)
                 .stream()
                 .map(componentNode -> componentNode.getResource().adaptTo(AccordionItem.class))
                 .collect(Collectors.toList());
@@ -62,13 +65,5 @@ public class Accordion extends AbstractComponent {
 
     public Boolean isHasItems() {
         return !getItems().isEmpty();
-    }
-}
-
-final class AccordionItemPredicate implements Predicate<ComponentNode> {
-
-    public boolean apply(ComponentNode input) {
-        return input != null && input.getResource() != null && input.getResource().isResourceType(
-            AccordionItem.RESOURCE_TYPE);
     }
 }

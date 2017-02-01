@@ -2,11 +2,9 @@ package com.icfolson.aem.harbor.core.components.content.navigation.bootstrapnavi
 
 import com.citytechinc.cq.component.annotations.Component;
 import com.citytechinc.cq.component.annotations.DialogField;
-import com.citytechinc.cq.component.annotations.Option;
 import com.citytechinc.cq.component.annotations.editconfig.ActionConfig;
 import com.citytechinc.cq.component.annotations.widgets.Html5SmartImage;
 import com.citytechinc.cq.component.annotations.widgets.PathField;
-import com.citytechinc.cq.component.annotations.widgets.Selection;
 import com.citytechinc.cq.component.annotations.widgets.Switch;
 import com.citytechinc.cq.component.annotations.widgets.TextField;
 import com.google.common.base.Optional;
@@ -54,12 +52,9 @@ public class BootstrapMainManualNavigation extends AbstractComponent {
     @DialogField(fieldLabel = "Show Brand Link",
         fieldDescription = "Enable this to display a link to the root path as the first navigation element",
         ranking = 3)
-    @Selection(type = Selection.SELECT, options = {
-        @Option(text = "Show", value = "show"),
-        @Option(text = "Hide", value = "hide")
-    })
+    @Switch(offText = "No", onText = "Yes")
     public Boolean isShowBrandLink() {
-        return getInherited("showBrandLink", "hide").equals("show");
+        return getInherited("showBrandLink", false);
     }
 
     @DialogField(fieldLabel = "Brand Link Text",

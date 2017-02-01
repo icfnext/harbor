@@ -1,9 +1,7 @@
 package com.icfolson.aem.harbor.core.components.content.navigation.bootstrapnavigation.mainautonavigation;
 
 import com.citytechinc.cq.component.annotations.DialogField;
-import com.citytechinc.cq.component.annotations.Option;
 import com.citytechinc.cq.component.annotations.widgets.Html5SmartImage;
-import com.citytechinc.cq.component.annotations.widgets.Selection;
 import com.citytechinc.cq.component.annotations.widgets.Switch;
 import com.citytechinc.cq.component.annotations.widgets.TextField;
 import com.google.common.base.Optional;
@@ -17,7 +15,7 @@ import org.apache.sling.models.annotations.Model;
 public class BootstrapMainNavigationRenderingStrategy extends AbstractComponent implements
     TreeRenderingStrategy<NavigablePage, BootstrapPageNavigableRenderableTree> {
 
-    @DialogField(fieldLabel = "Enable Sticky Navigation",
+    @DialogField(fieldLabel = "Enable Sticky Navigation?",
         fieldDescription = "Disabled in Edit mode. Use Preview mode to view.", ranking = 0)
     @Switch(offText = "No", onText = "Yes")
     public Boolean isSticky() {
@@ -26,12 +24,9 @@ public class BootstrapMainNavigationRenderingStrategy extends AbstractComponent 
 
     @DialogField(fieldLabel = "Brand Link",
         fieldDescription = "Present a brand link as the first element of the navigation.", ranking = 10)
-    @Selection(type = Selection.SELECT, options = {
-        @Option(text = "Show", value = "show"),
-        @Option(text = "Hide", value = "hide")
-    })
+    @Switch(offText = "No", onText = "Yes")
     public Boolean getShowBrandLink() {
-        return getInherited("showBrandLink", "hide").equals("show");
+        return getInherited("showBrandLink", false);
     }
 
     @DialogField(fieldLabel = "Brand Link Text",

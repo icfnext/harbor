@@ -56,11 +56,7 @@ public class BootstrapPageNavigableRenderableTree implements Tree<NavigablePage>
     }
 
     public String getHref() {
-        if (rootPage != null) {
-            return rootPage.getHref();
-        }
-
-        return "#";
+        return rootPage == null ? "#" : rootPage.getHref();
     }
 
     public String getBrandLinkImage() {
@@ -86,11 +82,7 @@ public class BootstrapPageNavigableRenderableTree implements Tree<NavigablePage>
     }
 
     public String getContainerClass() {
-        if (isFullWidth()) {
-            return Bootstrap.CONTAINER_FULL_WIDTH_CLASS;
-        }
-
-        return Bootstrap.CONTAINER_CLASS;
+        return isFullWidth() ? Bootstrap.CONTAINER_FULL_WIDTH_CLASS : Bootstrap.CONTAINER_CLASS;
     }
 
     public boolean isPresentMainNavigationItemInDropDown() {
