@@ -591,6 +591,15 @@ Section Landing Pages may be nested arbitrarily.
 
 ###### Structural Page
 
+A Structural Page is one which is not intended to be navigated to by an end user.  Such pages may serve a 
+number of purposes such as serving as path place holders, country/language pages, etc.  Structural pages 
+to not show up in navigations or other page listings of that type.  
+
+###### Content Page
+
+A Content Page is any page which is not a Home Page, a Section Landing Page, or a Structural Page.  There is 
+no separate mixin type for Content Page. 
+
 ###### Page Types in Template Definitions
 
 Page templates must define their respective page types on the `jcr:content` template node.  The following is 
