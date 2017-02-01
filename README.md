@@ -365,7 +365,37 @@ Individual tabs can be added by clicking the "Add Tab" button in the component's
 
 | Dialog Field | Description | 
 | ------------ | ----------- |
-| Title | Title to display atop the tab or pill |
+| Title | Title to display atop the tab or pill 
+
+### Header Component
+
+* Group: Harbor Scaffolding
+
+This component is designed to effectively introduce the brand to the primary audience
+
+#### Authorability
+
+| Dialog Field | Description |
+| ------------ | ----------- |
+| Full Width        | When set to true, will render across the full width of the browser window |
+| Container Inheritance       | When enabled, an inherting paragraph system is produced for this container instance |
+| Classification        | Input support for classifiability of the header component instance. Classifies the header |
+| ID     | A unique identifier for the Header. If no ID is set no id attribute will be rendered |
+
+### Footer Component
+
+* Group: Harbor Scaffolding
+
+The footer, as its name suggests, is the final piece of content located at the bottom of each page of the web site. The purpose of the footer is to signal to the user that they are at the bottom of the web page and to provide links or shortcuts to other areas of the site. The footer is the area that many users expect to find the ‘fine print’ - legal information such as ‘terms and conditions’, ‘privacy policies’, etc. Typical short cuts links include: Contact Us, Sitemap, Privacy Policy, Terms &amp; Conditions.
+
+#### Authorability
+
+| Dialog Field | Description |
+| ------------ | ----------- |
+| Full Width        | When set to true, will render across the full width of the browser window |
+| Container Inheritance       | When enabled, an inherting paragraph system is produced for this container instance |
+| Classification        | Input support for classifiability of the footer component instance. Classifies the footer |
+| ID     | A unique identifier for the footer If no ID is set no id attribute will be rendered |
 
 ### Main Auto Navigation
 
@@ -523,6 +553,75 @@ Numerous properties with consistent semantics unique to Harbor are namespaced un
 the included `com.icfolson.aem.namespace:aem-namespace-extension` module.  This module also exposes String constants 
 for notable properties, namespace prefixes, and URIs.  A key element of cohesion across Harbor is the use of consistent 
 semantics in the creation of a data space defining the content presentation Harbor affords within AEM.  
+
+##### Page Types
+
+The ICF namespace defines four types of pages:
+
+* Home Page `icf:HomePage`
+* Section Landing Page `icf:SectionLandingPage`
+* Structural Page `icf:StructuralPage`
+* Content Page (any page which is not one of the above)
+
+A Page is defined to be of a type if it has a jcr:mixinType value of one of the above.  For example, a 
+page with jcr:mixinType `icf:HomePage` is a home page.  
+
+Any Page may be adapted to a `HierarchicalPage` which exposes methods for finding the containing 
+Home Page and Section Landing Page.  Similarly any page may be adapted to a `HomePage` or `SectionLandingPage`.  
+These later adaptations will only succeed if the page under adaptation is in fact a Home Page or 
+Section Landing Page respectively.
+
+Numerous components leverage these Page Type semantics.  Most notably are the navigational components which 
+know how to construct a relevant navigation starting from either a containing Home Page or Section Landing Page. 
+
+###### Home Page
+
+A Home Page is intended to be the root page for a site.  Home Pages may be nested under other Home Pages 
+supporting use cases such as one main site housing numerous micro sites.
+
+###### Section Landing Page
+
+Sites are often broken into large sections with unique purpose.  The Section Landing Page represents the 
+root of a major section of a site.  For example, a site may be broken up into "Products", "Services", and "About Us". 
+Each of these sections would be rooted by a Section Landing Page which would inform the behavior of the 
+components used within the sections.  For instance, a secondary navigation specific to Products can be 
+automatically generated specifically for the site section based on the semantics of the Section Landing Page. 
+
+Section Landing Pages may be nested arbitrarily. 
+
+###### Structural Page
+
+A Structural Page is one which is not intended to be navigated to by an end user.  Such pages may serve a 
+number of purposes such as serving as path place holders, country/language pages, etc.  Structural pages 
+to not show up in navigations or other page listings of that type.  
+
+###### Content Page
+
+A Content Page is any page which is not a Home Page, a Section Landing Page, or a Structural Page.  There is 
+no separate mixin type for Content Page. 
+
+###### Page Types in Template Definitions
+
+Page templates must define their respective page types on the `jcr:content` template node.  The following is 
+an example template definition for a Home Page
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
+          xmlns:cq="http://www.day.com/jcr/cq/1.0"
+          xmlns:jcr="http://www.jcp.org/jcr/1.0"
+          xmlns:icf="http://www.icfolson.com/ns/aem/"
+          jcr:primaryType="cq:Template"
+          jcr:title="Project Harbor Home Page"
+          allowedPaths="/content(/.*)?"
+          ranking="0">
+    <jcr:content
+            jcr:primaryType="cq:PageContent"
+            cq:designPath="/etc/designs/project-name"
+            jcr:mixinTypes="[icf:HomePage]"
+            sling:resourceType="project-name/components/page/homepage"/>
+</jcr:root>
+```
 
 #### Lists
 
