@@ -42,11 +42,7 @@ public class AccordionItem extends AbstractComponent {
     @DialogField(fieldLabel = "Title", fieldDescription = "The title of the accordion item.")
     @TextField
     public String getTitle() {
-        return IconUtils.iconify(get("title", getName()));
-    }
-
-    public String getName() {
-        return getResource().getName();
+        return IconUtils.iconify(get("title", getDefaultTitle()));
     }
 
     public String getAccordionUniqueId() {
@@ -62,5 +58,12 @@ public class AccordionItem extends AbstractComponent {
         }
 
         return open;
+    }
+
+    private String getDefaultTitle() {
+        final Resource parent = getResource().getParent();
+        final int index = Iterables.indexOf(parent.getChildren(), resource -> resource.getPath().equals(getPath())) + 1;
+
+        return "Accordion Item " + index;
     }
 }
