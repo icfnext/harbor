@@ -365,7 +365,37 @@ Individual tabs can be added by clicking the "Add Tab" button in the component's
 
 | Dialog Field | Description | 
 | ------------ | ----------- |
-| Title | Title to display atop the tab or pill |
+| Title | Title to display atop the tab or pill 
+
+### Header Component
+
+* Group: Harbor Scaffolding
+
+This component is designed to effectively introduce the brand to the primary audience
+
+#### Authorability
+
+| Dialog Field | Description |
+| ------------ | ----------- |
+| Full Width        | When set to true, will render across the full width of the browser window |
+| Container Inheritance       | When enabled, an inherting paragraph system is produced for this container instance |
+| Classification        | Input support for classifiability of the header component instance. Classifies the header |
+| ID     | A unique identifier for the Header. If no ID is set no id attribute will be rendered |
+
+### Footer Component
+
+* Group: Harbor Scaffolding
+
+The footer, as its name suggests, is the final piece of content located at the bottom of each page of the web site. The purpose of the footer is to signal to the user that they are at the bottom of the web page and to provide links or shortcuts to other areas of the site. The footer is the area that many users expect to find the ‘fine print’ - legal information such as ‘terms and conditions’, ‘privacy policies’, etc. Typical short cuts links include: Contact Us, Sitemap, Privacy Policy, Terms &amp; Conditions.
+
+#### Authorability
+
+| Dialog Field | Description |
+| ------------ | ----------- |
+| Full Width        | When set to true, will render across the full width of the browser window |
+| Container Inheritance       | When enabled, an inherting paragraph system is produced for this container instance |
+| Classification        | Input support for classifiability of the footer component instance. Classifies the footer |
+| ID     | A unique identifier for the footer If no ID is set no id attribute will be rendered |
 
 ### Main Auto Navigation
 
