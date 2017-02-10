@@ -14,13 +14,6 @@
     <name>Harbor Core</name>
 
     <build>
-        <resources>
-            <resource>
-                <directory>src/main/resources/META-INF</directory>
-                <targetPath>META-INF</targetPath>
-                <filtering>true</filtering>
-            </resource>
-        </resources>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -34,7 +27,11 @@
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
                         <Bundle-Name>${project.name}</Bundle-Name>
                         <Bundle-Vendor>${project.parent.organization.name}</Bundle-Vendor>
-                        <Export-Package>!*.impl,com.icfolson.aem.harbor.core.*</Export-Package>
+                        <Export-Package>
+                            !*.impl,
+                            !com.icfolson.aem.harbor.core.widget.*,
+                            com.icfolson.aem.harbor.core.*
+                        </Export-Package>
                         <Import-Package>!com.citytechinc.cq.component.*,!javassist</Import-Package>
                         <Require-Bundle>org.apache.sling.models.api</Require-Bundle>
                         <Sling-Model-Packages>com.icfolson.aem.harbor.core</Sling-Model-Packages>
@@ -124,8 +121,15 @@
 
         <!-- multicomposite addon -->
         <dependency>
-            <groupId>com.citytechinc.aem</groupId>
+            <groupId>com.icfolson.aem</groupId>
             <artifactId>multicomposite-addon</artifactId>
+        </dependency>
+
+        <!-- Groovy Console -->
+        <dependency>
+            <groupId>com.icfolson.aem.groovy.console</groupId>
+            <artifactId>aem-groovy-console</artifactId>
+            <version>${groovy.console.version}</version>
         </dependency>
 
         <!-- Harbor API -->

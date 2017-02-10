@@ -45,7 +45,7 @@
     </fileSets>
     <dependencySets>
         <dependencySet>
-            <outputDirectory>jcr_root/etc/packages/aem-library</outputDirectory>
+            <outputDirectory>jcr_root/etc/packages/harbor</outputDirectory>
             <useProjectArtifact>false</useProjectArtifact>
             <scope>compile</scope>
             <includes>
@@ -54,7 +54,7 @@
             <useStrictFiltering>true</useStrictFiltering>
         </dependencySet>
         <dependencySet>
-            <outputDirectory>jcr_root/etc/packages/aemnamespace</outputDirectory>
+            <outputDirectory>jcr_root/etc/packages/harbor</outputDirectory>
             <useProjectArtifact>false</useProjectArtifact>
             <scope>compile</scope>
             <includes>
@@ -63,20 +63,29 @@
             <useStrictFiltering>true</useStrictFiltering>
         </dependencySet>
         <dependencySet>
-            <outputDirectory>jcr_root/etc/packages/multicompositeaddon</outputDirectory>
+            <outputDirectory>jcr_root/etc/packages/harbor</outputDirectory>
             <useProjectArtifact>false</useProjectArtifact>
             <scope>compile</scope>
             <includes>
-                <include>com.citytechinc.aem:multicomposite-addon:zip</include>
+                <include>com.icfolson.aem:multicomposite-addon:zip</include>
             </includes>
             <useStrictFiltering>true</useStrictFiltering>
         </dependencySet>
         <dependencySet>
-            <outputDirectory>jcr_root/etc/packages/acs-aem-commons</outputDirectory>
+            <outputDirectory>jcr_root/etc/packages/harbor</outputDirectory>
             <useProjectArtifact>false</useProjectArtifact>
             <scope>compile</scope>
             <includes>
                 <include>com.adobe.acs:acs-aem-commons-content:zip</include>
+            </includes>
+            <useStrictFiltering>true</useStrictFiltering>
+        </dependencySet>
+        <dependencySet>
+            <outputDirectory>jcr_root/etc/packages/harbor</outputDirectory>
+            <useProjectArtifact>false</useProjectArtifact>
+            <scope>compile</scope>
+            <includes>
+                <include>com.icfolson.aem.groovy.console:aem-groovy-console:zip:exclude-groovy-bundle</include>
             </includes>
             <useStrictFiltering>true</useStrictFiltering>
         </dependencySet>

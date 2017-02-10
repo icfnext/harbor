@@ -20,5 +20,4 @@ public class PageType {
     public boolean isSectionLandingPage() {
         return PagePredicates.SECTION_LANDING_PAGE_PREDICATE.apply(currentPage);
     }
-
 }
