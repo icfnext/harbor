@@ -46,6 +46,11 @@ public final class Bootstrap {
 
     public static final String GRID_ROW_CLASS = "row";
 
+    public static final String IMAGE_CLASS = "img-responsive";
+    public static final String IMAGE_ROUNDED_CLASS = "img-rounded";
+    public static final String IMAGE_CIRCLE_CLASS = "img-circle";
+    public static final String IMAGE_THUMBNAIL_CLASS = "img-thumbnail";
+
     private Bootstrap() {
 
     }
