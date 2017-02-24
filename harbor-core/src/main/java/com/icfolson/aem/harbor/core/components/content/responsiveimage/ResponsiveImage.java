@@ -87,6 +87,12 @@ public class ResponsiveImage extends AbstractComponent {
         return get("alt", "");
     }
 
+    @DialogField(fieldLabel = "Sizes", fieldDescription = "Sizes attribute value for use with source set.", ranking = 7)
+    @TextField
+    public String getSizes() {
+        return get("sizes", "");
+    }
+
     public String getSourceSet() {
         return imageWidths.stream()
             .map(width -> new StringBuilder(getImageSource(width).or(""))
