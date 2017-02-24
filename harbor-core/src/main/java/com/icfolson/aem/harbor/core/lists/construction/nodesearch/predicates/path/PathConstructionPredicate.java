@@ -37,8 +37,7 @@ public class PathConstructionPredicate extends AbstractComponent implements Cons
     @Override
     public Optional<Predicate> asPredicate() {
         if (predicateOptional == null) {
-            predicateOptional = getSearchPath()
-                .transform(searchPath -> new Predicate(PATH).set(PATH, searchPath));
+            predicateOptional = getSearchPath().transform(searchPath -> new Predicate(PATH).set(PATH, searchPath));
         }
 
         return predicateOptional;

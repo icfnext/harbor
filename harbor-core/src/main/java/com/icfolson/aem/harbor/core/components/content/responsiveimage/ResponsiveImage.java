@@ -47,7 +47,7 @@ public class ResponsiveImage extends AbstractComponent {
     @Optional
     private List<Integer> imageWidths = Lists.newArrayList();
 
-    @DialogField(ranking = 7)
+    @DialogField(ranking = 8)
     @DialogFieldSet
     @Self
     private Classification classification;

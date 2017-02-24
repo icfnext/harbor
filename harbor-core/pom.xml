@@ -139,5 +139,20 @@
             <version>${project.version}</version>
             <scope>provided</scope>
         </dependency>
+
+        <!-- Test -->
+        <dependency>
+            <groupId>com.icfolson.aem.prosper</groupId>
+            <artifactId>prosper</artifactId>
+            <version>9.0.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.icfolson.aem.library</groupId>
+            <artifactId>aem-library-models</artifactId>
+            <version>${aem-library.version}</version>
+            <classifier>tests</classifier>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 </project>

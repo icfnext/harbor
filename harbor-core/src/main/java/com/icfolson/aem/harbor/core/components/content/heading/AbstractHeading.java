@@ -44,5 +44,4 @@ public abstract class AbstractHeading {
     }
 
     public abstract String getSize();
-
 }

@@ -50,7 +50,7 @@ public class Container extends AbstractComponent {
         fieldDescription = "When set to true, the container will render across the full width of the browser window",
         name = "./" + FULL_WIDTH_PROPERTY, ranking = 0)
     @Switch(offText = "No", onText = "Yes")
-    public Boolean getIsContainerFullWidth() {
+    public Boolean isContainerFullWidth() {
         return isInherits() ? getInherited(FULL_WIDTH_PROPERTY, false) : get(FULL_WIDTH_PROPERTY, false);
     }
 
@@ -79,7 +79,7 @@ public class Container extends AbstractComponent {
     public String getContainerClass() {
         final StringBuilder builder = new StringBuilder();
 
-        if (getIsContainerFullWidth()) {
+        if (isContainerFullWidth()) {
             builder.append(getContainerFullWidthClass());
         } else {
             builder.append(getContainerDefaultClass());
@@ -93,11 +93,15 @@ public class Container extends AbstractComponent {
     }
 
     public String getSectionClass() {
+        final String sectionClass;
+
         if (isSection() && classification.isHasClassifications()) {
-            return StringUtils.join(classification.getClassificationNames(), " ");
+            sectionClass = StringUtils.join(classification.getClassificationNames(), " ");
+        } else {
+            sectionClass = "";
         }
 
-        return "";
+        return sectionClass;
     }
 
     public String getContainerElement() {
