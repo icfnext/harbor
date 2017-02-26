@@ -47,7 +47,7 @@ public class ResponsiveImage extends AbstractComponent {
     @Optional
     private List<Integer> imageWidths = Lists.newArrayList();
 
-    @DialogField(ranking = 7)
+    @DialogField(ranking = 8)
     @DialogFieldSet
     @Self
     private Classification classification;
@@ -85,6 +85,12 @@ public class ResponsiveImage extends AbstractComponent {
     @TextField
     public String getAlt() {
         return get("alt", "");
+    }
+
+    @DialogField(fieldLabel = "Sizes", fieldDescription = "Sizes attribute value for use with source set.", ranking = 7)
+    @TextField
+    public String getSizes() {
+        return get("sizes", "");
     }
 
     public String getSourceSet() {

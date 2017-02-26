@@ -51,5 +51,4 @@ public abstract class AbstractHeading extends AbstractComponent {
     }
 
     public abstract String getSize();
-
 }

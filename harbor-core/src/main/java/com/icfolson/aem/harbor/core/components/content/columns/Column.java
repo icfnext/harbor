@@ -31,7 +31,7 @@ import java.util.List;
     },
     group = ComponentConstants.GROUP_HIDDEN,
     tabs = {
-        @Tab(title = "Column Row"),
+        @Tab(title = "Column"),
         @Tab(title = "Advanced")
     })
 @Model(adaptables = Resource.class)

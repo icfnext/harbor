@@ -31,7 +31,8 @@ public class CallToAction extends AbstractCallToAction {
         @Option(text = "Open in the Current Window", qtip = "Opens link to specified path in current window.",
             value = LINK_IN_CURRENT),
         @Option(text = "Open in a New Window/Tab", qtip = "Opens link to specified path in a new window or tab.",
-            value = LINK_IN_WINDOW) })
+            value = LINK_IN_WINDOW)
+    })
     public String getAction() {
         return get("action", "");
     }
@@ -42,11 +43,11 @@ public class CallToAction extends AbstractCallToAction {
         return getAsLink("linkTarget").or(currentPage.getLink());
     }
 
-    public Boolean getOpensInNewWindow() {
+    public Boolean isOpensInNewWindow() {
         return StringUtils.equalsIgnoreCase(getAction(), LINK_IN_WINDOW);
     }
 
-    public Boolean getOpensInCurrentWindow() {
+    public Boolean isOpensInCurrentWindow() {
         return StringUtils.equalsIgnoreCase(getAction(), LINK_IN_CURRENT);
     }
 }

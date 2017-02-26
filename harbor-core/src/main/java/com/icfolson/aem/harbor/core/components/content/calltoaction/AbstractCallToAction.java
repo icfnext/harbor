@@ -23,11 +23,14 @@ public class AbstractCallToAction extends AbstractComponent {
     }
 
     @DialogField(fieldLabel = "Size", fieldDescription = "Select the widget's size", ranking = 2)
-    @Selection(type = Selection.SELECT, options = { @Option(text = "Large", value = Bootstrap.BTN_LARGE),
-        @Option(text = "Default", value = Bootstrap.BTN_DEFAULT), @Option(text = "Small", value = Bootstrap.BTN_SMALL),
-        @Option(text = "Mini", value = Bootstrap.BTN_MINI) })
+    @Selection(type = Selection.SELECT, options = {
+        @Option(text = "Default", value = Bootstrap.BTN_DEFAULT),
+        @Option(text = "Large", value = Bootstrap.BTN_LARGE),
+        @Option(text = "Small", value = Bootstrap.BTN_SMALL),
+        @Option(text = "Mini", value = Bootstrap.BTN_MINI)
+    })
     public String getSize() {
-        return get("size", "");
+        return get("size", Bootstrap.BTN_DEFAULT);
     }
 
     @DialogField(fieldLabel = "Style", fieldDescription = "Select the widget's style", ranking = 3)
@@ -47,7 +50,8 @@ public class AbstractCallToAction extends AbstractComponent {
             value = Bootstrap.BTN_INVERSE),
         @Option(text = "Link",
             qtip = "Indicates that this button represents a simple link to a target resource or page",
-            value = Bootstrap.BTN_LINK) })
+            value = Bootstrap.BTN_LINK)
+    })
     public String getStyle() {
         return get("style", "");
     }
