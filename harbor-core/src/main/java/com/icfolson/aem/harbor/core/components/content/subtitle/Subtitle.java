@@ -1,18 +1,12 @@
 package com.icfolson.aem.harbor.core.components.content.subtitle;
 
-import com.icfolson.aem.library.api.page.PageDecorator;
-import com.icfolson.aem.harbor.core.components.content.heading.AbstractHeading;
-import com.icfolson.aem.harbor.core.util.icon.IconUtils;
-import com.citytechinc.cq.component.annotations.Tab;
-import org.apache.commons.lang3.StringUtils;
-
-import com.icfolson.aem.library.api.components.annotations.AutoInstantiate;
 import com.citytechinc.cq.component.annotations.Component;
+import com.citytechinc.cq.component.annotations.Tab;
 import com.icfolson.aem.harbor.api.constants.dom.Headings;
+import com.icfolson.aem.harbor.core.components.content.heading.AbstractHeading;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
-
-import javax.inject.Inject;
 
 /**
  * Represents the secondary title of a page. The text of the title defaults to the
@@ -32,15 +26,16 @@ public class Subtitle extends AbstractHeading {
 
     public static final String RESOURCE_TYPE = "harbor/components/content/subtitle";
 
-    @Inject
-    private PageDecorator currentPage;
+    private static final String DEFAULT_TEXT = "Subtitle";
 
-    public String getText() {
-        if (StringUtils.isNotBlank(super.getTextValue())) {
-            return super.getText();
-        }
+    @Override
+    protected String getTextValue() {
+        return StringUtils.defaultIfBlank(super.getTextValue(), "Subtitle");
+    }
 
-        return IconUtils.iconify(currentPage.get("subtitle", "Subtitle"));
+    @Override
+    protected String getDefaultText() {
+        return DEFAULT_TEXT;
     }
 
     /**
