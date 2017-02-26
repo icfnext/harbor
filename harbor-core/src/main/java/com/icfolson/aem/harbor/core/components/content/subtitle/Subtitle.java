@@ -36,7 +36,7 @@ public class Subtitle extends AbstractHeading {
     private PageDecorator currentPage;
 
     public String getText() {
-        if (StringUtils.isNotBlank(text)) {
+        if (StringUtils.isNotBlank(super.getTextValue())) {
             return super.getText();
         }
 
