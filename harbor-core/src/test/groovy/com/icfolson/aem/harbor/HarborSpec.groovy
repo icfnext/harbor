@@ -6,6 +6,9 @@ import com.icfolson.aem.namespace.api.ontology.Namespace
 
 import static com.day.cq.tagging.TagConstants.NT_TAG
 
+/**
+ * Base class for Harbor test specs.
+ */
 abstract class HarborSpec extends AemLibraryModelSpec {
 
     def setupSpec() {
