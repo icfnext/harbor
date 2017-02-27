@@ -29,7 +29,7 @@ public abstract class AbstractHeading extends AbstractComponent {
     @DialogField(fieldLabel = "ID", fieldDescription = "A unique identifier to apply to the Title element rendered in the page DOM.  This will default to a sanitized version of the text content of the heading if not overridden.", tab = 2)
     @TextField
     public String getDomId() {
-        domId = StringUtils.defaultString(domId, get("domId", String.class).or(StringUtils.EMPTY));
+        domId = StringUtils.defaultString(domId, get("domId", StringUtils.EMPTY));
         if (StringUtils.isNotBlank(domId)) {
             return domId;
         }
@@ -44,7 +44,7 @@ public abstract class AbstractHeading extends AbstractComponent {
     public abstract String getSize();
 
     protected String getTextValue() {
-        return StringUtils.isNotBlank(textValue) ? textValue : (textValue = get("text", String.class).or(StringUtils.EMPTY));
+        return StringUtils.defaultString(textValue, textValue = get("text", StringUtils.EMPTY));
     }
 
     protected String getDefaultText() {
