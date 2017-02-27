@@ -4,47 +4,44 @@ import com.icfolson.aem.harbor.HarborSpec
 import spock.lang.Unroll
 
 class SubtitleSpec extends HarborSpec {
+
     def setupSpec() {
         pageBuilder.content {
             harbor {
                 page1 {
                     "jcr:content"("jcr:title": null, pageTitle: null) {
                         subtitle1()
-                        subtitle2(domId: "", text: "")
-                        subtitle3(domId: "", text: "Component Title")
-                        subtitle4(domId: "1234", text: "")
-                        subtitle5(domId: "1234", text: "Component Title")
-                        subtitle6(domId: "1234", text: "{{icon Component Title}}")
+                        subtitle2(text: "Component Title")
+                        subtitle3(domId: "1234")
+                        subtitle4(domId: "1234", text: "Component Title")
+                        subtitle5(domId: "1234", text: "{{icon Component Title}}")
                     }
                 }
                 page2 {
                     "jcr:content"("jcr:title": "Page 1 Title", pageTitle: null) {
                         subtitle1()
-                        subtitle2(domId: "", text: "")
-                        subtitle3(domId: "", text: "Component Title")
-                        subtitle4(domId: "1234", text: "")
-                        subtitle5(domId: "1234", text: "Component Title")
-                        subtitle6(domId: "1234", text: "{{icon Component Title}}")
+                        subtitle2(text: "Component Title")
+                        subtitle3(domId: "1234")
+                        subtitle4(domId: "1234", text: "Component Title")
+                        subtitle5(domId: "1234", text: "{{icon Component Title}}")
                     }
                 }
                 page3 {
                     "jcr:content"("jcr:title": null, pageTitle: "Page 1 Page Title") {
                         subtitle1()
-                        subtitle2(domId: "", text: "")
-                        subtitle3(domId: "", text: "Component Title")
-                        subtitle4(domId: "1234", text: "")
-                        subtitle5(domId: "1234", text: "Component Title")
-                        subtitle6(domId: "1234", text: "{{icon Component Title}}")
+                        subtitle2(text: "Component Title")
+                        subtitle3(domId: "1234")
+                        subtitle4(domId: "1234", text: "Component Title")
+                        subtitle5(domId: "1234", text: "{{icon Component Title}}")
                     }
                 }
                 page4 {
                     "jcr:content"("jcr:title": "Page 1 Title", pageTitle: "Page 1 Page Title") {
                         subtitle1()
-                        subtitle2(domId: "", text: "")
-                        subtitle3(domId: "", text: "Component Title")
-                        subtitle4(domId: "1234", text: "")
-                        subtitle5(domId: "1234", text: "Component Title")
-                        subtitle6(domId: "1234", text: "{{icon Component Title}}")
+                        subtitle2(text: "Component Title")
+                        subtitle3(domId: "1234")
+                        subtitle4(domId: "1234", text: "Component Title")
+                        subtitle5(domId: "1234", text: "{{icon Component Title}}")
                     }
                 }
                 page5 {
@@ -72,29 +69,25 @@ class SubtitleSpec extends HarborSpec {
         where:
         path                                          | result
         "/content/harbor/page1/jcr:content/subtitle1" | "Subtitle"
-        "/content/harbor/page1/jcr:content/subtitle2" | "Subtitle"
-        "/content/harbor/page1/jcr:content/subtitle3" | "Component Title"
-        "/content/harbor/page1/jcr:content/subtitle4" | "Subtitle"
-        "/content/harbor/page1/jcr:content/subtitle5" | "Component Title"
-        "/content/harbor/page1/jcr:content/subtitle6" | '<i class="fa Component Title" aria-hidden="true"></i>'
+        "/content/harbor/page1/jcr:content/subtitle2" | "Component Title"
+        "/content/harbor/page1/jcr:content/subtitle3" | "Subtitle"
+        "/content/harbor/page1/jcr:content/subtitle4" | "Component Title"
+        "/content/harbor/page1/jcr:content/subtitle5" | '<i class="fa Component Title" aria-hidden="true"></i>'
         "/content/harbor/page2/jcr:content/subtitle1" | "Subtitle"
-        "/content/harbor/page2/jcr:content/subtitle2" | "Subtitle"
-        "/content/harbor/page2/jcr:content/subtitle3" | "Component Title"
-        "/content/harbor/page2/jcr:content/subtitle4" | "Subtitle"
-        "/content/harbor/page2/jcr:content/subtitle5" | "Component Title"
-        "/content/harbor/page2/jcr:content/subtitle6" | '<i class="fa Component Title" aria-hidden="true"></i>'
+        "/content/harbor/page2/jcr:content/subtitle2" | "Component Title"
+        "/content/harbor/page2/jcr:content/subtitle3" | "Subtitle"
+        "/content/harbor/page2/jcr:content/subtitle4" | "Component Title"
+        "/content/harbor/page2/jcr:content/subtitle5" | '<i class="fa Component Title" aria-hidden="true"></i>'
         "/content/harbor/page3/jcr:content/subtitle1" | "Subtitle"
-        "/content/harbor/page3/jcr:content/subtitle2" | "Subtitle"
-        "/content/harbor/page3/jcr:content/subtitle3" | "Component Title"
-        "/content/harbor/page3/jcr:content/subtitle4" | "Subtitle"
-        "/content/harbor/page3/jcr:content/subtitle5" | "Component Title"
-        "/content/harbor/page3/jcr:content/subtitle6" | '<i class="fa Component Title" aria-hidden="true"></i>'
+        "/content/harbor/page3/jcr:content/subtitle2" | "Component Title"
+        "/content/harbor/page3/jcr:content/subtitle3" | "Subtitle"
+        "/content/harbor/page3/jcr:content/subtitle4" | "Component Title"
+        "/content/harbor/page3/jcr:content/subtitle5" | '<i class="fa Component Title" aria-hidden="true"></i>'
         "/content/harbor/page4/jcr:content/subtitle1" | "Subtitle"
-        "/content/harbor/page4/jcr:content/subtitle2" | "Subtitle"
-        "/content/harbor/page4/jcr:content/subtitle3" | "Component Title"
-        "/content/harbor/page4/jcr:content/subtitle4" | "Subtitle"
-        "/content/harbor/page4/jcr:content/subtitle5" | "Component Title"
-        "/content/harbor/page4/jcr:content/subtitle6" | '<i class="fa Component Title" aria-hidden="true"></i>'
+        "/content/harbor/page4/jcr:content/subtitle2" | "Component Title"
+        "/content/harbor/page4/jcr:content/subtitle3" | "Subtitle"
+        "/content/harbor/page4/jcr:content/subtitle4" | "Component Title"
+        "/content/harbor/page4/jcr:content/subtitle5" | '<i class="fa Component Title" aria-hidden="true"></i>'
         "/content/harbor/page5/jcr:content/subtitle1" | 'Subtitle'
         "/content/harbor/page6/jcr:content/subtitle1" | 'Subtitle'
     }
@@ -109,32 +102,28 @@ class SubtitleSpec extends HarborSpec {
 
         where:
         path                                          | result
-        "/content/harbor/page1/jcr:content/subtitle1" | "subtitle"
-        "/content/harbor/page1/jcr:content/subtitle2" | "subtitle"
-        "/content/harbor/page1/jcr:content/subtitle3" | "component-title"
+        "/content/harbor/page1/jcr:content/subtitle1" | ""
+        "/content/harbor/page1/jcr:content/subtitle2" | "component-title"
+        "/content/harbor/page1/jcr:content/subtitle3" | "1234"
         "/content/harbor/page1/jcr:content/subtitle4" | "1234"
-        "/content/harbor/page1/jcr:content/subtitle5" | "1234"
-        "/content/harbor/page1/jcr:content/subtitle6" | '1234'
-        "/content/harbor/page2/jcr:content/subtitle1" | "subtitle"
-        "/content/harbor/page2/jcr:content/subtitle2" | "subtitle"
-        "/content/harbor/page2/jcr:content/subtitle3" | "component-title"
+        "/content/harbor/page1/jcr:content/subtitle5" | '1234'
+        "/content/harbor/page2/jcr:content/subtitle1" | ""
+        "/content/harbor/page2/jcr:content/subtitle2" | "component-title"
+        "/content/harbor/page2/jcr:content/subtitle3" | "1234"
         "/content/harbor/page2/jcr:content/subtitle4" | "1234"
-        "/content/harbor/page2/jcr:content/subtitle5" | "1234"
-        "/content/harbor/page2/jcr:content/subtitle6" | '1234'
-        "/content/harbor/page3/jcr:content/subtitle1" | "subtitle"
-        "/content/harbor/page3/jcr:content/subtitle2" | "subtitle"
-        "/content/harbor/page3/jcr:content/subtitle3" | "component-title"
+        "/content/harbor/page2/jcr:content/subtitle5" | '1234'
+        "/content/harbor/page3/jcr:content/subtitle1" | ""
+        "/content/harbor/page3/jcr:content/subtitle2" | "component-title"
+        "/content/harbor/page3/jcr:content/subtitle3" | "1234"
         "/content/harbor/page3/jcr:content/subtitle4" | "1234"
-        "/content/harbor/page3/jcr:content/subtitle5" | "1234"
-        "/content/harbor/page3/jcr:content/subtitle6" | '1234'
-        "/content/harbor/page4/jcr:content/subtitle1" | "subtitle"
-        "/content/harbor/page4/jcr:content/subtitle2" | "subtitle"
-        "/content/harbor/page4/jcr:content/subtitle3" | "component-title"
+        "/content/harbor/page3/jcr:content/subtitle5" | '1234'
+        "/content/harbor/page4/jcr:content/subtitle1" | ""
+        "/content/harbor/page4/jcr:content/subtitle2" | "component-title"
+        "/content/harbor/page4/jcr:content/subtitle3" | "1234"
         "/content/harbor/page4/jcr:content/subtitle4" | "1234"
-        "/content/harbor/page4/jcr:content/subtitle5" | "1234"
-        "/content/harbor/page4/jcr:content/subtitle6" | '1234'
-        "/content/harbor/page5/jcr:content/subtitle1" | 'subtitle'
-        "/content/harbor/page6/jcr:content/subtitle1" | 'subtitle'
+        "/content/harbor/page4/jcr:content/subtitle5" | '1234'
+        "/content/harbor/page5/jcr:content/subtitle1" | ""
+        "/content/harbor/page6/jcr:content/subtitle1" | ""
     }
 
     @Unroll("subtitle component at #path should have returned size '#result'")

@@ -7,10 +7,7 @@ import com.citytechinc.cq.component.annotations.Tab;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
 import com.icfolson.aem.harbor.api.constants.dom.Headings;
 import org.apache.sling.api.resource.Resource;
-import org.apache.sling.models.annotations.Default;
 import org.apache.sling.models.annotations.Model;
-
-import javax.inject.Inject;
 
 /**
  * The Heading component is intended to be used to title content sections. The
@@ -39,11 +36,8 @@ public class Heading extends AbstractHeading {
         @Option(text = Headings.H5_LABEL, value = Headings.H5),
         @Option(text = Headings.H6_LABEL, value = Headings.H6)
     })
-    @Inject
-    @Default(values = Headings.H2)
-    private String size;
-
+    @Override
     public String getSize() {
-        return size;
+        return get("size", Headings.H2);
     }
 }
