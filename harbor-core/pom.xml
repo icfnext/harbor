@@ -61,6 +61,35 @@
         </plugins>
     </build>
 
+    <profiles>
+        <!-- activate this profile to enable logging of test executions -->
+        <profile>
+            <id>test-logging</id>
+            <activation>
+                <property>
+                    <name>test-logging</name>
+                </property>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-simple</artifactId>
+                    <version>1.7.5</version>
+                </dependency>
+                <dependency>
+                    <groupId>com.icfolson.aem.prosper</groupId>
+                    <artifactId>prosper</artifactId>
+                    <exclusions>
+                        <exclusion>
+                            <groupId>org.slf4j</groupId>
+                            <artifactId>slf4j-nop</artifactId>
+                        </exclusion>
+                    </exclusions>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
+
     <dependencies>
         <!-- uber jar -->
         <dependency>
@@ -144,7 +173,7 @@
         <dependency>
             <groupId>com.icfolson.aem.prosper</groupId>
             <artifactId>prosper</artifactId>
-            <version>9.0.1</version>
+            <version>10.0.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
