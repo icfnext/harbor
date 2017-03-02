@@ -5,13 +5,12 @@ import com.citytechinc.cq.component.annotations.widgets.Switch;
 import com.citytechinc.cq.component.annotations.widgets.TagInputField;
 import com.citytechinc.cq.component.annotations.widgets.TextField;
 import com.day.cq.search.Predicate;
-import com.day.cq.search.PredicateGroup;
-import com.day.cq.search.eval.JcrPropertyPredicateEvaluator;
 import com.day.cq.tagging.Tag;
 import com.day.cq.tagging.TagManager;
 import com.day.cq.wcm.api.NameConstants;
 import com.google.common.base.Optional;
 import com.icfolson.aem.harbor.api.lists.construction.search.ConstructionPredicate;
+import com.icfolson.aem.harbor.core.lists.construction.nodesearch.predicates.builder.TagsPredicateBuilder;
 import com.icfolson.aem.library.core.components.AbstractComponent;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
@@ -95,32 +94,16 @@ public class TagsConstructionPredicate extends AbstractComponent implements Cons
     public Optional<Predicate> asPredicate() {
         if (predicateOptional == null) {
             if (!getTags().isEmpty()) {
-                if (getTags().size() > 1) {
-                    final PredicateGroup predicateGroup = new PredicateGroup();
-
-                    predicateGroup.setAllRequired(isComposeWithAnd());
-
-                    for (final Tag tag : getTags()) {
-                        predicateGroup.add(createTagPredicate(tag));
-                    }
-
-                    predicateOptional = Optional.of(predicateGroup);
-                } else {
-                    final Tag tag = getTags().get(0);
-
-                    predicateOptional = Optional.of(createTagPredicate(tag));
-                }
+                predicateOptional = Optional.of(new TagsPredicateBuilder()
+                    .withTags(getTags())
+                    .withRelativePath(getRelativePath().or(NameConstants.PN_TAGS))
+                    .composeWithAnd(isComposeWithAnd())
+                    .build());
             } else {
                 predicateOptional = Optional.absent();
             }
         }
 
         return predicateOptional;
-    }
-
-    private Predicate createTagPredicate(final Tag tag) {
-        return new Predicate(JcrPropertyPredicateEvaluator.PROPERTY)
-            .set(JcrPropertyPredicateEvaluator.PROPERTY, getRelativePath().or(NameConstants.PN_TAGS))
-            .set(JcrPropertyPredicateEvaluator.VALUE, tag.getTagID());
     }
 }
