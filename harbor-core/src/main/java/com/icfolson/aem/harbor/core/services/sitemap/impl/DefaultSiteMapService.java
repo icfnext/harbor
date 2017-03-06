@@ -20,7 +20,7 @@ import java.util.Set;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 @Service
-@Component(name = "Site Map Service", label = "Site Map Service")
+@Component(name = "Site Map Service")
 public class DefaultSiteMapService implements SiteMapService {
 
     protected static final Logger LOG = LoggerFactory.getLogger(DefaultSiteMapService.class);

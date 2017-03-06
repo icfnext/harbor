@@ -222,14 +222,5 @@
             <version>${acs.aem.commons.version}</version>
             <type>zip</type>
         </dependency>
-
-        <!-- Groovy Console -->
-        <dependency>
-            <groupId>com.icfolson.aem.groovy.console</groupId>
-            <artifactId>aem-groovy-console</artifactId>
-            <version>${groovy.console.version}</version>
-            <type>zip</type>
-            <classifier>exclude-groovy-bundle</classifier>
-        </dependency>
     </dependencies>
 </project>

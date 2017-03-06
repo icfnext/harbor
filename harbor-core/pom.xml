@@ -164,13 +164,6 @@
             <artifactId>multicomposite-addon</artifactId>
         </dependency>
 
-        <!-- Groovy Console -->
-        <dependency>
-            <groupId>com.icfolson.aem.groovy.console</groupId>
-            <artifactId>aem-groovy-console</artifactId>
-            <version>${groovy.console.version}</version>
-        </dependency>
-
         <!-- Harbor API -->
         <dependency>
             <groupId>${project.groupId}</groupId>

@@ -58,7 +58,6 @@
         <component.plugin.version>4.2.0</component.plugin.version>
         <multicompositeaddon.version>3.0.0</multicompositeaddon.version>
         <acs.aem.commons.version>3.6.2</acs.aem.commons.version>
-        <groovy.console.version>10.1.1</groovy.console.version>
         <package.skip>true</package.skip>
         <osgi.bundle.status.skip>true</osgi.bundle.status.skip>
         <core.name>harbor-core</core.name>
