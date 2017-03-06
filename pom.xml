@@ -21,6 +21,12 @@
         <module>harbor-ui</module>
     </modules>
 
+    <scm>
+        <connection>scm:git:git@github.com:OlsonDigital/harbor.git</connection>
+        <url>https://github.com/OlsonDigital/harbor</url>
+        <developerConnection>scm:git:git@github.com:OlsonDigital/harbor.git</developerConnection>
+    </scm>
+
     <organization>
         <name>ICF Olson</name>
         <url>http://www.icfolson.com</url>
