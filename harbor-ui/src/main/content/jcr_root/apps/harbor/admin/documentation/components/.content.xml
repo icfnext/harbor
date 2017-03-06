@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:granite="http://www.adobe.com/jcr/granite/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="cq:Page">
+    <jcr:content
+        jcr:mixinTypes="[sling:VanityPath]"
+        jcr:primaryType="nt:unstructured"
+        jcr:title="Harbor Components"
+        sling:resourceType="granite/ui/components/foundation/page"
+        sling:vanityOrder="{Long}301"
+        sling:vanityPath="">
+
+        <head jcr:primaryType="nt:unstructured">
+            <viewport
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/foundation/admin/page/viewport"/>
+            <meta
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/foundation/meta"
+                content="chrome=1"
+                name="X-UA-Compatible"/>
+            <winmode
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="cq/gui/components/siteadmin/admin/page/winmode"/>
+            <title
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="cq/gui/components/siteadmin/admin/page/title"/>
+            <favicon
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/foundation/page/favicon"/>
+            <clientlibs
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/foundation/includeclientlibs"
+                categories="[coralui2,granite.ui.foundation,granite.ui.foundation.admin,cq.common.wcm,cq.siteadmin.admin,cq.listview.columns.personalization,cq.listview.analytics,cq.siteadmin.admin.pagecard]"/>
+        </head>
+        <body
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="granite/ui/components/foundation/page/body">
+            <layout
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/endor/layouts/page"/>
+            <rail
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/endor/navcolumns"
+                currentId="harbor-admin-documentation-components"
+                srcPath="cq/core/content/nav"/>
+            <breadcrumbs
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="harbor/admin/documentation/breadcrumb"
+                    href="/apps/harbor/admin/documentation.html"
+                    title="Harbor Documentation"/>
+            <title
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="cq/gui/components/siteadmin/admin/endor/title"
+                    contentPath="/apps/harbor/admin/documentation/components"
+                    rootTitle="Harbor"/>
+            <content
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/foundation/container">
+                <items jcr:primaryType="nt:unstructured">
+                    <childpages
+                        granite:rel="cq-siteadmin-admin-childpages"
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/foundation/container"
+                        itemscope="{Boolean}true">
+                        <granite:data
+                            jcr:primaryType="nt:unstructured"
+                            foundation-mode-group="cq-siteadmin-admin-childpages"/>
+                        <layout
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/foundation/layouts/multilayouts"
+                            layout="card"
+                            skipEmpty="columns">
+                            <layouts jcr:primaryType="nt:unstructured">
+                                <card
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/layouts/cardview"
+                                        itemprop="item"
+                                        layoutId="card"
+                                        limit="{Long}20"
+                                        maximized="{Boolean}true"
+                                        path="/apps/harbor/admin/documentation/components"
+                                        selectionMode="{Boolean}false"
+                                        src="/libs/wcm/core/content/sites/jcr:content/body/content/content/items/childpages{.offset,limit}.html{+id}"
+                                        stateId="cq.sites.childpages"/>
+                            </layouts>
+                        </layout>
+                        <datasource
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="cq/gui/components/common/wcm/datasources/childpages"
+                            exclude="/content/(catalogs|dam|launches|mac|publications|usergenerated|communities|community-components|community-templates|forms|projects|phonegap)(/.*)*"
+                            itemResourceType="harbor/admin/documentation/pagecard"
+                            limit="${empty requestPathInfo.selectors[1] ? &quot;20&quot; : requestPathInfo.selectors[1]}"
+                            offset="${requestPathInfo.selectors[0]}"
+                            path="/apps/harbor/admin/documentation/components"/>
+                    </childpages>
+
+                </items>
+            </content>
+        </body>
+    </jcr:content>
+</jcr:root>

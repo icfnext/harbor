@@ -1,0 +1,8 @@
+<template data-sly-template.nestednavitem="${@ currentNode, navigationComponent}">
+    <li><a href="${currentNode.href}">${currentNode.navigationLink.title}</a>
+        <ul data-sly-test="${currentNode.hasChildNodes}">
+            <sly data-sly-repeat.currentInnerNode="${currentNode.childNodesIterator}"
+                 data-sly-call="${nestednavitem @ currentNode = currentInnerNode, navigationComponent = navigationComponent}"/>
+        </ul>
+    </li>
+</template>

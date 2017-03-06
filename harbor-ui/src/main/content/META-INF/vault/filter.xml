@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <workspaceFilter version="1.0">
-    <filter root="/libs/harbor/components" />
-    <filter root="/libs/harbor/templates" />
-    <filter root="/libs/harbor/install" />
-    <filter root="/etc/clientlibs/harbor" />
+    <filter root="/apps/harbor/admin"/>
+    <filter root="/apps/harbor/components"/>
+    <filter root="/apps/harbor/templates"/>
+    <filter root="/apps/harbor/install"/>
+    <filter root="/apps/cq/core/content/nav/harbor"/>
+    <filter root="/apps/cq/gui/components/siteadmin/admin/pagecard"/>
+    <filter root="/etc/clientlibs/harbor"/>
     <filter root="/etc/designs/harbor">
         <exclude pattern="/etc/designs/harbor/jcr:content/(.*)?"/>
         <exclude pattern="/etc/designs/harbor/clientlib(/.*)?"/>
         <exclude pattern="/etc/designs/harbor/brand/clientlib(/.*)?"/>
     </filter>
-    <filter root="/etc/packages/bedrock"/>
-    <filter root="/etc/packages/aemnamespace"/>
-    <filter root="/etc/packages/authorabledesignmanager"/>
+    <filter root="/etc/packages/harbor"/>
 </workspaceFilter>

@@ -1,0 +1,9 @@
+<sly data-sly-use.contentContainer="${component.properties['className']}">
+    <div data-sly-test="${isEditMode}" class="author-help-message">
+        <p>${contentContainer.authorHelpMessage}</p>
+    </div>
+    <sly data-sly-test="${!contentContainer.parsysInherits}"
+         data-sly-resource="${'container-par' @ resourceType='wcm/foundation/components/parsys'}"/>
+    <sly data-sly-test="${contentContainer.parsysInherits}"
+         data-sly-resource="${'container-par' @ resourceType='wcm/foundation/components/iparsys'}"/>
+</sly>

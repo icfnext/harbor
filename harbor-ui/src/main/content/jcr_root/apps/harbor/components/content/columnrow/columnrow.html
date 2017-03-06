@@ -1,0 +1,13 @@
+<div data-sly-test="${isEditMode}" class="author-help-message">
+    Column Row - Press the &quot;Add Experience&quot; button in the edit bar to add columns.
+</div>
+<div data-sly-use.columnRow="com.icfolson.aem.harbor.core.components.content.columns.ColumnRow"
+     class="${columnRow.cssClass}" data-sly-attribute.id="${columnRow.domId}">
+    <div data-sly-test="${columnRow.columns}"
+         data-sly-repeat.column="${columnRow.columns}"
+         data-sly-attribute.class="${column.columnWidthClasses}"
+         name="${column.name}"
+         data-sly-attribute.id="${column.domId}"
+         data-sly-resource="${column.name @ resourceType='harbor/components/content/column', decorationTagName='div'}">
+    </div>
+</div>

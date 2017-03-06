@@ -1,0 +1,6 @@
+<div class="navbar-collapse collapse" data-sly-use.bootstrapMainManualNavigation="com.icfolson.aem.harbor.core.components.content.navigation.bootstrapnavigation.mainmanualnavigation.BootstrapMainManualNavigation" id="${bootstrapMainManualNavigation.id}">
+    <ul class="nav navbar-nav manual-navigation" data-sly-list.currentElement="${bootstrapMainManualNavigation.bootstrapMainNavigationElementList}">
+        <!--/* li is inserted due to CQ's insertion of divs for editing the nav elements. This breaks the navbar. */-->
+        <sly data-sly-resource="${currentElement.relativePath @ resourceType=currentElement.resourceType}"></sly>
+    </ul>
+</div>

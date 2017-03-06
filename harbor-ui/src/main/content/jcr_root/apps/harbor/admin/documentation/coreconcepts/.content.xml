@@ -1,0 +1,699 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:granite="http://www.adobe.com/jcr/granite/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="cq:Page">
+    <jcr:content
+        jcr:mixinTypes="[sling:VanityPath]"
+        jcr:primaryType="nt:unstructured"
+        jcr:title="Core Concepts"
+        sling:resourceType="granite/ui/components/foundation/page"
+        sling:vanityOrder="{Long}301"
+        sling:vanityPath="">
+
+        <head jcr:primaryType="nt:unstructured">
+            <viewport
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/foundation/admin/page/viewport"/>
+            <meta
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/foundation/meta"
+                content="chrome=1"
+                name="X-UA-Compatible"/>
+            <winmode
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="cq/gui/components/siteadmin/admin/page/winmode"/>
+            <title
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="cq/gui/components/siteadmin/admin/page/title"/>
+            <favicon
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/foundation/page/favicon"/>
+            <clientlibs
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/foundation/includeclientlibs"
+                categories="[coralui2,granite.ui.foundation,granite.ui.foundation.admin,cq.common.wcm,cq.siteadmin.admin,cq.listview.columns.personalization,cq.listview.analytics,cq.siteadmin.admin.pagecard]"/>
+        </head>
+        <body
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="granite/ui/components/foundation/page/body">
+            <layout
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/endor/layouts/page"/>
+            <rail
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/endor/navcolumns"
+                currentId="harbor-admin-documentation-coreconcepts"
+                srcPath="cq/core/content/nav"/>
+            <breadcrumbs
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="harbor/admin/documentation/breadcrumb"
+                    href="/apps/harbor/admin/documentation.html"
+                    title="Harbor Documentation"/>
+            <title
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="cq/gui/components/siteadmin/admin/endor/title"
+                contentPath="/apps/harbor/admin/documentation/coreconcepts"
+                rootTitle="Harbor"/>
+            <content
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/foundation/container">
+                <layout
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/foundation/layouts/tabs"
+                        type="large"/>
+                <items jcr:primaryType="nt:unstructured">
+                    <tab1
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/foundation/container"
+                            jcr:title="Author Guide">
+                        <items jcr:primaryType="nt:unstructured">
+                            <title
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/foundation/heading"
+                                    class="coral-Heading coral-Heading--1"
+                                    level="2"
+                                    text="Core Concepts"/>
+                            <description
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/foundation/text"
+                                    text="Core Concepts."/>
+                        </items>
+                    </tab1>
+
+                    <!-- Start of Developer Documentation -->
+                    <tab2
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/foundation/container"
+                            jcr:title="Developer Guide">
+                        <items jcr:primaryType="nt:unstructured">
+                            <!-- Start of List Documentation -->
+                            <list-section-heading
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/foundation/heading"
+                                    class="coral-Heading coral-Heading--2"
+                                    level="2"
+                                    text="Lists"/>
+                            <description-p1
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="screens/ui/components/admin/text"
+                                    line1="The functionality of many of the Components created for a particular project can be distilled down to the presentation of a List of items.  Lists therefore are central to Harbor and enabled by Interfaces and Abstract Classes suggesting a pattern to follow in List Component development."
+                                    />
+                            <description-p2
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="screens/ui/components/admin/text"
+                                    line1="List Components are a composition of a List Construction Strategy and a List Rendering Strategy.  The List Construction Strategy is responsible for the creation of a list of items based on the logic of the strategy.  These items are passed to the List Rendering Strategy which has an opportunity to add additional properties germane to the rendering of a particular component.  Construction and Rendering Strategies may be mixed and matched within the context of concrete List Component implementations allowing reuse of both across multiple component types."
+                                    />
+                            <description-p3
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="screens/ui/components/admin/text"
+                                    line1="TODO: Insert example of reuse from the various page listing components"
+                                    />
+
+                            <listcomponent-title
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/foundation/heading"
+                                    class="coral-Heading coral-Heading--3"
+                                    level="3"
+                                    text="com.icfolson.aem.harbor.api.components.content.list.ListComponent&lt;T extends Iterable&gt;"/>
+                            <listcomponent-description
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="screens/ui/components/admin/text"
+                                    line1="A ListComponent is a component type which intends to hold and manage an ordered collection of items for rendering."
+                                    />
+                            <listcomponent-method-table
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="harbor/admin/documentation/table">
+                                <header1
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/heading"
+                                        text="Method Signature"
+                                        />
+                                <header2
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/heading"
+                                        text="Description"
+                                        />
+                                <row1
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/container">
+                                    <row1col1
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="public T getItems"
+                                            />
+                                    <row1col2
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="Returns the Iterable containing the list items along with any properties necessary for rendering of the component as a whole."
+                                            />
+                                </row1>
+                                <row2
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/container">
+                                    <row2col1
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="public Iterator&lt;?&gt; getIterator"
+                                            />
+                                    <row2col2
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="Provides an Iterator for the Iterable returned by getItems.  This method exists largely to service jsp component implementations where the c:forEach loop does not accept Iterables.  If using Sightly this method should not need to be used."
+                                            />
+                                </row2>
+                            </listcomponent-method-table>
+
+
+                            <listconstructionstrategy-title
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/foundation/heading"
+                                    class="coral-Heading coral-Heading--3"
+                                    level="3"
+                                    text="com.icfolson.aem.harbor.api.lists.construction.ListConstructionStrategy&lt;T&gt;"/>
+                            <listconstructionstrategy-description
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="screens/ui/components/admin/text"
+                                    line1="Represents an implementation of a mechanism for the building up of a list of items of type T."
+                                    />
+                            <listconstructionstrategy-method-table
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="harbor/admin/documentation/table">
+                                <header1
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/heading"
+                                        text="Method Signature"
+                                        />
+                                <header2
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/heading"
+                                        text="Description"
+                                        />
+                                <row1
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/container">
+                                    <row1col1
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="public Iterable&lt;T&gt; construct"
+                                            />
+                                    <row1col2
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="Produces a list of items.  Implementations should focus on the construction of a suitable item list and should not include in the business logic of the method any consideration of the list's presentation as this is the responsibility of the rendering strategy."
+                                            />
+                                </row1>
+                            </listconstructionstrategy-method-table>
+
+
+                            <listrenderingstrategy-title
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/foundation/heading"
+                                    class="coral-Heading coral-Heading--3"
+                                    level="3"
+                                    text="com.icfolson.aem.harbor.api.lists.rendering.ListRenderingStrategy&lt;T, R extends Iterable&lt;?&gt;&gt;"/>
+                            <listrenderingstrategy-description
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="screens/ui/components/admin/text"
+                                    line1="A List Rendering Strategy is able to take an Iterable of type T and produce a new Iterable imbued with any properties which are germane specifically to the rendering of the items in the list."
+                                    />
+                            <listrenderingstrategy-method-table
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="harbor/admin/documentation/table">
+                                <header1
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/heading"
+                                        text="Method Signature"
+                                        />
+                                <header2
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/heading"
+                                        text="Description"
+                                        />
+                                <row1
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/container">
+                                    <row1col1
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="public R toRenderableList(Iterable&lt;T&gt;)"
+                                            />
+                                    <row1col2
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="Transforms a list of items into an Iterable suitable for rendering."
+                                            />
+                                </row1>
+                            </listrenderingstrategy-method-table>
+
+
+                            <abstractlistcomponent-title
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/foundation/heading"
+                                    class="coral-Heading coral-Heading--3"
+                                    level="3"
+                                    text="com.icfolson.aem.harbor.core.components.content.list.AbstractListComponent&lt;T, R extends Iterable&lt;?&gt;&gt;"/>
+                            <abstractlistcomponent-description
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="screens/ui/components/admin/text"
+                                    line1="The AbstractListComponent class embodies the common pattern for the usage of ListConstructionStrategies and ListRenderingStrategies within the context of a concrete list component within its implementation of the getItems method."
+                                    />
+                            <abstractlistcomponent-method-table
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="harbor/admin/documentation/table">
+                                <header1
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/heading"
+                                        text="Method Signature"
+                                        />
+                                <header2
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/heading"
+                                        text="Description"
+                                        />
+                                <row1
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/container">
+                                    <row1col1
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="public R getItems()"
+                                            />
+                                    <row1col2
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="Calls upon the component's ListConstructionStrategy to produce an item list.  This item list is then passed to the component's ListRenderingStrategy and the result is returned."
+                                            />
+                                </row1>
+                                <row2
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/container">
+                                    <row2col1
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="protected abstract ListConstructionStrategy&lt;T&gt; getListConstructionStrategy()"
+                                            />
+                                    <row2col2
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="List Component implementations should use this method to return a ListConstructionStrategy germane to the requirements of the concrete component."
+                                            />
+                                </row2>
+                                <row3
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/container">
+                                    <row3col1
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="protected abstract ListRenderingStrategy&lt;T, R&gt; getListRenderingStrategy()"
+                                            />
+                                    <row3col2
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="List Component implementations should use this method to return a ListRenderingStrategy germane to the requirements of the concrete component."
+                                            />
+                                </row3>
+                            </abstractlistcomponent-method-table>
+                            <!-- End of List Documentation -->
+
+                            <tree-section-heading
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/foundation/heading"
+                                    class="coral-Heading coral-Heading--2"
+                                    level="2"
+                                    text="Trees"/>
+
+                            <treesDescription-p1
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="screens/ui/components/admin/text"
+                                    line1="Similar to Lists, Trees pair a Construction Strategy with a Rendering Strategy allowing for reusability and extention via composition."/>
+                            <treesDescription-p2
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="screens/ui/components/admin/text"
+                                    line1="A Tree has a single TreeNode instance as its root.  A TreeNode may in turn have any number of child TreeNodes of the same type."/>
+                            <treesDescription-p3
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="screens/ui/components/admin/text"
+                                    line1="Tree Components are in turn components which intend to manage a Tree data structure's construction and presentation."/>
+
+                            <treecomponent-title
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/foundation/heading"
+                                    class="coral-Heading coral-Heading--3"
+                                    level="3"
+                                    text="com.icfolson.aem.harbor.api.components.content.list.TreeComponent&lt;T extends Tree&gt;"/>
+                            <treecomponent-description
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="screens/ui/components/admin/text"
+                                    line1="A TreeComponent is a component which intends to hold an manage the root of a Tree."
+                                    />
+                            <treecomponent-method-table
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="harbor/admin/documentation/table">
+                                <header1
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/heading"
+                                        text="Method Signature"
+                                        />
+                                <header2
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/heading"
+                                        text="Description"
+                                        />
+                                <row1
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/container">
+                                    <row1col1
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="public T getTree"
+                                            />
+                                    <row1col2
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="Returns the Tree containing the Tree root along with any properties necessary for rendering of the component as a whole."
+                                            />
+                                </row1>
+                                <row2
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/container">
+                                    <row2col1
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="public boolean isHasRoot"
+                                            />
+                                    <row2col2
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="Indicates whether the tree contains anything.  This method will return false when the tree is empty."
+                                            />
+                                </row2>
+                            </treecomponent-method-table>
+
+                            <treeInterface-title
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/foundation/heading"
+                                    class="coral-Heading coral-Heading--3"
+                                    level="3"
+                                    text="com.icfolson.aem.harbor.api.trees.Tree&lt;T extends TreeNode&gt;"/>
+                            <treeInterface-description
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="screens/ui/components/admin/text"
+                                    line1="An Interface representing a rooted Tree"
+                                    />
+                            <treeInterface-method-table
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="harbor/admin/documentation/table">
+                                <header1
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/heading"
+                                        text="Method Signature"
+                                        />
+                                <header2
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/heading"
+                                        text="Description"
+                                        />
+                                <row1
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/container">
+                                    <row1col1
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="public T getRoot"
+                                            />
+                                    <row1col2
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="Returns the root of the Tree."
+                                            />
+                                </row1>
+                                <row2
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/container">
+                                    <row2col1
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="public boolean isHasRoot"
+                                            />
+                                    <row2col2
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="Indicates whether the tree contains anything.  This method will return false when the tree is empty."
+                                            />
+                                </row2>
+                            </treeInterface-method-table>
+
+                            <treeNode-title
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/foundation/heading"
+                                    class="coral-Heading coral-Heading--3"
+                                    level="3"
+                                    text="com.icfolson.aem.harbor.api.trees.TreeNode&lt;T&gt;"/>
+                            <treeNode-description
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="screens/ui/components/admin/text"
+                                    line1="An Interface representing a node in a Tree.  The root of a Tree is itself a TreeNode."
+                                    />
+                            <treeNode-method-table
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="harbor/admin/documentation/table">
+                                <header1
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/heading"
+                                        text="Method Signature"
+                                        />
+                                <header2
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/heading"
+                                        text="Description"
+                                        />
+                                <row1
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/container">
+                                    <row1col1
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="public Iterable&lt;T&gt; getChildNodes"
+                                            />
+                                    <row1col2
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="Returns an Iterable of the TreeNodes which are direct children of this node."
+                                            />
+                                </row1>
+                                <row2
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/container">
+                                    <row2col1
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="public boolean isHasChildNodes"
+                                            />
+                                    <row2col2
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="Indicates whether this TreeNode has any children."
+                                            />
+                                </row2>
+                                <row3
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/container">
+                                    <row3col1
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="public Iterator&lt;T&gt; getChildNodesIterator"
+                                            />
+                                    <row3col2
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="Intended to return an Iterator over the Iterable returned by getChildNodes. This method is used for JSP rendering of trees as the c:forEach tag takes an Iterator and not an Iterable."
+                                            />
+                                </row3>
+                            </treeNode-method-table>
+
+
+                            <treeConstructionStrategy-title
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/foundation/heading"
+                                    class="coral-Heading coral-Heading--3"
+                                    level="3"
+                                    text="com.icfolson.aem.harbor.api.trees.construction.TreeConstructionStrategy&lt;T extends TreeNode&gt;"/>
+                            <treeConstructionStrategy-description
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="screens/ui/components/admin/text"
+                                    line1="Implementations of this interface are responsible for producing a singularly rooted tree or an absent tree."
+                                    />
+                            <treeConstructionStrategy-method-table
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="harbor/admin/documentation/table">
+                                <header1
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/heading"
+                                        text="Method Signature"
+                                        />
+                                <header2
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/heading"
+                                        text="Description"
+                                        />
+                                <row1
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/container">
+                                    <row1col1
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="public Optional&lt;T&gt; construct"
+                                            />
+                                    <row1col2
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="Responsible for constructing the root TreeNode of a tree.  In cases where the tree has no content this method should return an absent Optional."
+                                            />
+                                </row1>
+                            </treeConstructionStrategy-method-table>
+
+
+                            <treeRenderingStrategy-title
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/foundation/heading"
+                                    class="coral-Heading coral-Heading--3"
+                                    level="3"
+                                    text="com.icfolson.aem.harbor.api.trees.rendering.TreeRenderingStrategy&lt;T extends TreeNode, R extends Tree&gt;"/>
+                            <treeRenderingStrategy-description
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="screens/ui/components/admin/text"
+                                    line1="Implementations of this interface are responsible for augmenting a Tree and its nodes with information relevant to the rendering of the Tree."
+                                    />
+                            <treeRenderingStrategy-method-table
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="harbor/admin/documentation/table">
+                                <header1
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/heading"
+                                        text="Method Signature"
+                                        />
+                                <header2
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/heading"
+                                        text="Description"
+                                        />
+                                <row1
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/container">
+                                    <row1col1
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="public R toRenderableTree(T rootNode)"
+                                            />
+                                    <row1col2
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="Transforms a TreeNode into a renderable Tree."
+                                            />
+                                </row1>
+                            </treeRenderingStrategy-method-table>
+
+
+
+                            <abstractTreeComponent-title
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/foundation/heading"
+                                    class="coral-Heading coral-Heading--3"
+                                    level="3"
+                                    text="com.icfolson.aem.harbor.core.components.content.list.AbstractTreeComponent&lt;T extends TreeNode, R extends Tree&gt;"/>
+                            <abstractTreeComponent-description
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="screens/ui/components/admin/text"
+                                    line1="The AbstractTreeComponent class embodies the common pattern for the usage of TreeConstructionStrategies and TreeRenderingStrategies within the context of a concrete tree component within its implementation of the getTree method."
+                                    />
+                            <abstractTreeComponent-method-table
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="harbor/admin/documentation/table">
+                                <header1
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/heading"
+                                        text="Method Signature"
+                                        />
+                                <header2
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/heading"
+                                        text="Description"
+                                        />
+                                <row1
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/container">
+                                    <row1col1
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="public R getTree()"
+                                            />
+                                    <row1col2
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="Implements the common pattern of using the TreeConstructionStrategy proper to an implementing class to construct a root TreeNode and the passing of said TreeNode to the TreeRenderingStrategy proper to an implementing class."
+                                            />
+                                </row1>
+                                <row2
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/container">
+                                    <row2col1
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="public boolean isHasRoot()"
+                                            />
+                                    <row2col2
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="Simply checks the method of the same name of the object returned by getTree."
+                                            />
+                                </row2>
+                                <row3
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/container">
+                                    <row3col1
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="protected Optional&lt;T&gt; getRawItemsOptional()"
+                                            />
+                                    <row3col2
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="Executes the call to the TreeConstructionStrategy proper to an implementing class"
+                                            />
+                                </row3>
+                                <row4
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/container">
+                                    <row4col1
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="protected abstract TreeConstructionStrategy&lt;T&gt; getTreeConstructionStrategy()"
+                                            />
+                                    <row4col2
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="Tree Component implementations should use this method to return a TreeConstructionStrategy germane to the requirements of the concrete component."
+                                            />
+                                </row4>
+                                <row5
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/foundation/container">
+                                    <row5col1
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="protected abstract TreeRenderingStrategy&lt;T, R&gt; getTreeRenderingStrategy()"
+                                            />
+                                    <row5col2
+                                            jcr:primaryType="nt:unstructured"
+                                            sling:resourceType="granite/ui/components/foundation/text"
+                                            text="Tree Component implementations should use this method to return a TreeRenderingStrategy germane to the requirements of the concrete component."
+                                            />
+                                </row5>
+                            </abstractTreeComponent-method-table>
+                        </items>
+                    </tab2>
+                    <!-- End of Developer Documentation -->
+                </items>
+            </content>
+        </body>
+    </jcr:content>
+</jcr:root>

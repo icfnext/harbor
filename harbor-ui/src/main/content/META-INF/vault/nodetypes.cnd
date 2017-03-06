@@ -1,8 +1,11 @@
-<'ct'='http://www.citytechinc.com/ns/aem/'>
-<'cq'='http://www.day.com/jcr/cq/1.0'>
+<'icf'='http://www.citytechinc.com/ns/aem/'>
+<'icf'='http://www.day.com/jcr/cq/1.0'>
 
-[ct:SectionLandingPage]
-  > cq:PageContent
+[icf:SectionLandingPage]
+  mixin
 
-[ct:HomePage]
-  > ct:SectionLandingPage
+[icf:HomePage]
+  mixin
+
+[icf:StructuralPage]
+  mixin

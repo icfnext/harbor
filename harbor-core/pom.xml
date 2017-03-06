@@ -1,119 +1,167 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
-	<parent>
-		<groupId>com.citytechinc.aem.harbor</groupId>
-		<artifactId>harbor</artifactId>
-		<version>0.4.0</version>
-	</parent>
+    <parent>
+        <groupId>com.icfolson.aem.harbor</groupId>
+        <artifactId>harbor</artifactId>
+        <version>1.0.0</version>
+    </parent>
 
-	<modelVersion>4.0.0</modelVersion>
-	<artifactId>harbor-core</artifactId>
-	<packaging>bundle</packaging>
-	<name>CITYTECH, Inc. Harbor Core</name>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>harbor-core</artifactId>
+    <packaging>bundle</packaging>
+    <name>Harbor Core</name>
 
-	<build>
-        <resources>
-            <resource>
-                <directory>src/main/resources/META-INF</directory>
-                <targetPath>META-INF</targetPath>
-                <filtering>true</filtering>
-            </resource>
-        </resources>
-		<plugins>
-			<plugin>
+    <build>
+        <plugins>
+            <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <compilerId>groovy-eclipse-compiler</compilerId>
-                    <source>1.6</source>
-                    <target>1.6</target>
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.codehaus.groovy</groupId>
-                        <artifactId>groovy-eclipse-compiler</artifactId>
-                        <version>2.8.0-01</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.codehaus.groovy</groupId>
-                        <artifactId>groovy-eclipse-batch</artifactId>
-                        <version>2.1.8-01</version>
-                    </dependency>
-                </dependencies>
             </plugin>
-			<plugin>
-				<groupId>org.apache.felix</groupId>
-				<artifactId>maven-bundle-plugin</artifactId>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
                         <Bundle-Name>${project.name}</Bundle-Name>
                         <Bundle-Vendor>${project.parent.organization.name}</Bundle-Vendor>
-                        <Export-Package>!*.impl,com.citytechinc.aem.harbor.core.*</Export-Package>
+                        <Export-Package>
+                            !*.impl,
+                            !com.icfolson.aem.harbor.core.widget.*,
+                            com.icfolson.aem.harbor.core.*
+                        </Export-Package>
                         <Import-Package>!com.citytechinc.cq.component.*,!javassist</Import-Package>
+                        <Require-Bundle>org.apache.sling.models.api</Require-Bundle>
+                        <Sling-Model-Packages>com.icfolson.aem.harbor.core</Sling-Model-Packages>
                         <DynamicImport-Package>*</DynamicImport-Package>
-
                     </instructions>
                 </configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.felix</groupId>
-				<artifactId>maven-scr-plugin</artifactId>
-				<extensions>true</extensions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-scr-plugin</artifactId>
+                <extensions>true</extensions>
                 <configuration>
                     <scanClasses>true</scanClasses>
                 </configuration>
-				<executions>
-					<execution>
-						<id>generate-scr-scrdescriptor</id>
-						<goals>
-							<goal>scr</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <includes>
-                        <include>**/*Spec*</include>
-                    </includes>
-                </configuration>
-			</plugin>
-		</plugins>
-	</build>
+                <executions>
+                    <execution>
+                        <id>generate-scr-scrdescriptor</id>
+                        <goals>
+                            <goal>scr</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <artifactId>maven-jar-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>test-jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
-	<dependencies>
+    <profiles>
+        <!-- activate this profile to enable logging of test executions -->
+        <profile>
+            <id>test-logging</id>
+            <activation>
+                <property>
+                    <name>test-logging</name>
+                </property>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-simple</artifactId>
+                    <version>1.7.5</version>
+                </dependency>
+                <dependency>
+                    <groupId>com.icfolson.aem.prosper</groupId>
+                    <artifactId>prosper</artifactId>
+                    <exclusions>
+                        <exclusion>
+                            <groupId>org.slf4j</groupId>
+                            <artifactId>slf4j-nop</artifactId>
+                        </exclusion>
+                    </exclusions>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
 
-        <!-- Sling Scripting -->
+    <dependencies>
+        <!-- uber jar -->
         <dependency>
-            <groupId>org.apache.sling</groupId>
-            <artifactId>org.apache.sling.scripting.jsp</artifactId>
+            <groupId>com.adobe.aem</groupId>
+            <artifactId>uber-jar</artifactId>
+            <classifier>apis</classifier>
         </dependency>
-		<dependency>
-			<groupId>org.apache.sling</groupId>
-			<artifactId>org.apache.sling.scripting.jsp.taglib</artifactId>
-		</dependency>
-	
-        <!-- Bedrock -->
-		<dependency>
-			<groupId>com.citytechinc.aem.bedrock</groupId>
-			<artifactId>bedrock-core</artifactId>
-		</dependency>
 
-		<!-- Component Annotation -->
-		<dependency>
-			<groupId>com.citytechinc.cq.cq-component-plugin</groupId>
-			<artifactId>cq-component-annotations</artifactId>
+        <!-- third party -->
+        <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-all</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+
+        <!-- AEM Library -->
+        <dependency>
+            <groupId>com.icfolson.aem.library</groupId>
+            <artifactId>aem-library-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.icfolson.aem.library</groupId>
+            <artifactId>aem-library-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.icfolson.aem.library</groupId>
+            <artifactId>aem-library-models</artifactId>
+        </dependency>
+
+        <!-- Component Annotation -->
+        <dependency>
+            <groupId>com.citytechinc.cq.cq-component-plugin</groupId>
+            <artifactId>cq-component-annotations</artifactId>
             <version>${component.plugin.version}</version>
-		</dependency>
+        </dependency>
+        <dependency>
+            <groupId>com.citytechinc.cq.cq-component-plugin</groupId>
+            <artifactId>cq-component-maven-plugin</artifactId>
+            <version>${component.plugin.version}</version>
+        </dependency>
 
         <!-- AEM Namespace -->
         <dependency>
-            <groupId>com.citytechinc.aem.namespace</groupId>
+            <groupId>com.icfolson.aem.namespace</groupId>
             <artifactId>aem-namespace-extension-api</artifactId>
+        </dependency>
+
+        <!-- multicomposite addon -->
+        <dependency>
+            <groupId>com.icfolson.aem</groupId>
+            <artifactId>multicomposite-addon</artifactId>
         </dependency>
 
         <!-- Harbor API -->
@@ -124,11 +172,19 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- Authorable Design -->
+        <!-- Test -->
         <dependency>
-            <groupId>com.citytechinc.aem.designmanager</groupId>
-            <artifactId>authorable-design-manager-api</artifactId>
+            <groupId>com.icfolson.aem.prosper</groupId>
+            <artifactId>prosper</artifactId>
+            <version>10.0.0</version>
+            <scope>test</scope>
         </dependency>
-        
-	</dependencies>
+        <dependency>
+            <groupId>com.icfolson.aem.library</groupId>
+            <artifactId>aem-library-models</artifactId>
+            <version>${aem-library.version}</version>
+            <classifier>tests</classifier>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 </project>

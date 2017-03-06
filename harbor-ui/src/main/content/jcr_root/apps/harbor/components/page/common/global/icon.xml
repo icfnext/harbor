@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+          jcr:primaryType="cq:Panel"
+          title="Icon">
+    <items jcr:primaryType="cq:WidgetCollection">
+        <icon
+            jcr:primaryType="cq:Widget"
+            collapsed="{Boolean}false"
+            collapsible="{Boolean}false"
+            xtype="dialogfieldset">
+            <items jcr:primaryType="cq:WidgetCollection">
+                <icons
+                    jcr:primaryType="cq:Widget"
+                    fieldLabel="Icon"
+                    name="./icon"
+                    xtype="graphiciconselection"
+                    options="/etc/acs-commons/lists/font-awesome-icons/_jcr_content.list.json"/>
+            </items>
+        </icon>
+    </items>
+</jcr:root>

@@ -15,6 +15,7 @@
             <excludes>
                 <exclude>**/.DS_Store</exclude>
                 <exclude>/etc/clientlibs/harbor/**</exclude>
+                <exclude>/apps/harbor/admin/documentation/components/**</exclude>
             </excludes>
             <filtered>true</filtered>
         </fileSet>
@@ -24,6 +25,14 @@
             <excludes>
                 <exclude>**/.DS_Store</exclude>
             </excludes>
+        </fileSet>
+        <fileSet>
+            <directory>${basedir}/src/main/content/jcr_root/apps/harbor/admin/documentation/components</directory>
+            <outputDirectory>jcr_root/apps/harbor/admin/documentation/components</outputDirectory>
+            <excludes>
+                <exclude>**/.DS_Store</exclude>
+            </excludes>
+            <filtered>false</filtered>
         </fileSet>
         <fileSet>
             <directory>${basedir}/src/main/content/META-INF</directory>
@@ -36,39 +45,48 @@
     </fileSets>
     <dependencySets>
         <dependencySet>
-            <outputDirectory>jcr_root/etc/packages/bedrock</outputDirectory>
+            <outputDirectory>jcr_root/etc/packages/harbor</outputDirectory>
             <useProjectArtifact>false</useProjectArtifact>
             <scope>compile</scope>
             <includes>
-                <include>com.citytechinc.aem.bedrock:bedrock-ui:zip</include>
+                <include>com.icfolson.aem.library:aem-library-ui:zip</include>
             </includes>
             <useStrictFiltering>true</useStrictFiltering>
         </dependencySet>
         <dependencySet>
-            <outputDirectory>jcr_root/etc/packages/aemnamespace</outputDirectory>
+            <outputDirectory>jcr_root/etc/packages/harbor</outputDirectory>
             <useProjectArtifact>false</useProjectArtifact>
             <scope>compile</scope>
             <includes>
-                <include>com.citytechinc.aem.namespace:aem-namespace-extension-ui:zip</include>
+                <include>com.icfolson.aem.namespace:aem-namespace-extension-ui:zip</include>
             </includes>
             <useStrictFiltering>true</useStrictFiltering>
         </dependencySet>
         <dependencySet>
-            <outputDirectory>jcr_root/etc/packages/authorabledesignmanager</outputDirectory>
+            <outputDirectory>jcr_root/etc/packages/harbor</outputDirectory>
             <useProjectArtifact>false</useProjectArtifact>
             <scope>compile</scope>
             <includes>
-                <include>com.citytechinc.aem.designmanager:authorable-design-manager-ui:zip</include>
+                <include>com.icfolson.aem:multicomposite-addon:zip</include>
             </includes>
             <useStrictFiltering>true</useStrictFiltering>
         </dependencySet>
         <dependencySet>
-            <outputDirectory>jcr_root/libs/harbor/install</outputDirectory>
+            <outputDirectory>jcr_root/etc/packages/harbor</outputDirectory>
             <useProjectArtifact>false</useProjectArtifact>
             <scope>compile</scope>
             <includes>
-                <include>com.citytechinc.aem.harbor:harbor-api</include>
-                <include>com.citytechinc.aem.harbor:harbor-core</include>
+                <include>com.adobe.acs:acs-aem-commons-content:zip</include>
+            </includes>
+            <useStrictFiltering>true</useStrictFiltering>
+        </dependencySet>
+        <dependencySet>
+            <outputDirectory>jcr_root/apps/harbor/install</outputDirectory>
+            <useProjectArtifact>false</useProjectArtifact>
+            <scope>compile</scope>
+            <includes>
+                <include>com.icfolson.aem.harbor:harbor-api</include>
+                <include>com.icfolson.aem.harbor:harbor-core</include>
             </includes>
             <useStrictFiltering>true</useStrictFiltering>
         </dependencySet>

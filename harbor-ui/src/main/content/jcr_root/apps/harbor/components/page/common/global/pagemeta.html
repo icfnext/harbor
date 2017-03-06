@@ -1,0 +1,30 @@
+<sly data-sly-use.metaPage="com.icfolson.aem.harbor.core.components.page.metapage.MetaPage">
+    <sly data-sly-test="${!metaPage.disableSchemaOrg}">
+        <meta itemprop="name" content="${metaPage.pageName}">
+        <meta itemprop="description" content="${metaPage.description}">
+        <meta itemprop="image" content="${metaPage.fullyQualifiedPageImage}">
+    </sly>
+    <sly data-sly-test="${metaPage.publisherHandle}">
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="${metaPage.publisherHandle}">
+        <meta name="twitter:title" content="${metaPage.pageName}">
+        <meta name="twitter:description" content="${metaPage.description}">
+        <meta name="twitter:image" data-sly-test="${metaPage.fullyQualifiedPageImage}" content="${metaPage.fullyQualifiedPageImage}">
+        <meta name="twitter:url" content="${metaPage.fullyQualifiedPageUrl}">
+    </sly>
+    <sly data-sly-test="${metaPage.ogType}">
+        <meta property="og:title" content="${metaPage.pageName}" />
+        <meta property="og:type" content="${metaPage.ogType}" />
+        <meta property="og:url" data-sly-test="${metaPage.cannonicalUrl}" content="${metaPage.cannonicalUrl}" />
+        <meta property="og:url" data-sly-test="${!metaPage.cannonicalUrl}" content="${metaPage.fullyQualifiedPageUrl}" />
+        <meta property="og:image" data-sly-test="${metaPage.fullyQualifiedPageImage}" content="${metaPage.fullyQualifiedPageImage}" />
+        <meta property="og:description" content="${metaPage.description}" />
+        <meta property="og:site_name" data-sly-test="${metaPage.homePageTitle}" content="${metaPage.homePageTitle}" />
+    </sly>
+    <sly data-sly-test="${metaPage.canonicalUrl}">
+        <link rel="canonical" href="${metaPage.canonicalUrl}" />
+    </sly>
+    <sly data-sly-test="${metaPage.robotsTags}">
+        <meta name="robots" content="${metaPage.robotsTags @ join=', '}">
+    </sly>
+</sly>

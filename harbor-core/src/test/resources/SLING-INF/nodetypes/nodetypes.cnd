@@ -1,0 +1,11 @@
+<'icf'='http://www.icfolson.com/ns/aem/'>
+<'cq'='http://www.day.com/jcr/cq/1.0'>
+
+[icf:SectionLandingPage]
+  mixin
+
+[icf:HomePage]
+  mixin
+
+[icf:StructuralPage]
+  mixin
