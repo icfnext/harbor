@@ -6,12 +6,12 @@
                 <li role="separator" class="divider"></li>
                 <li data-sly-repeat.currentInnerNode="${currentNode.childNodesIterator}" class="subpage-link"><a href="${currentInnerNode.href}">${currentInnerNode.navigationLink.title}</a>
                     <ul data-sly-test="${currentInnerNode.hasChildNodes}">
-                        <sly data-sly-repeat.currentNestedInnerNode="${currentInnerNode.items}"
+                        <sly data-sly-repeat.currentNestedInnerNode="${currentInnerNode.childNodesIterator}"
                              data-sly-call="${nestednavitemrenderer.nestednavitem @ currentNode = currentNestedInnerNode, navigationComponent = navigationComponent}"/>
                     </ul>
                 </li>
             </ul>
-        </li>`
+        </li>
     </sly>
     <sly data-sly-test="${currentNode.hasChildNodes && !navigationComponent.tree.presentMainNavigationItemInDropDown}">
         <li class="dropdown-split-left"><a href="${currentNode.href}">${currentNode.navigationLink.title}</a></li>
