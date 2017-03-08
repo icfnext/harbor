@@ -10,9 +10,5 @@
         <exclude pattern="/etc/designs/harbor/clientlib(/.*)?"/>
         <exclude pattern="/etc/designs/harbor/brand/clientlib(/.*)?"/>
     </filter>
-    <filter root="/etc/packages/aem-library"/>
-    <filter root="/etc/packages/aemnamespace"/>
-    <filter root="/etc/packages/authorabledesignmanager"/>
-    <filter root="/etc/packages/multicompositeaddon"/>
-    <filter root="/etc/packages/acs-aem-commons"/>
+    <filter root="/etc/packages/harbor"/>
 </workspaceFilter>

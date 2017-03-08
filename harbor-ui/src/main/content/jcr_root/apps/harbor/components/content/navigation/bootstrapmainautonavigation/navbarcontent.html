@@ -1,6 +1,6 @@
 <div data-sly-use.bootstrapMainAutoNavigation="${component.properties['className']}" data-sly-use.navigationitemrenderer="navigationitem.html" class="navbar-collapse collapse" id="${bootstrapMainAutoNavigation.id}">
     <nav class="main-navigation" role="navigation">
-        <ul class="nav navbar-nav meun-primary">
+        <ul class="nav navbar-nav menu-primary">
             <li data-sly-test="${bootstrapMainAutoNavigation.onStructuralPage}"><a href="#">Navigation not rendered on Structural Page</a></li>
             <sly data-sly-repeat.currentNode="${bootstrapMainAutoNavigation.tree.root.childNodesIterator}"
                  data-sly-call="${navigationitemrenderer.navigationitem @ currentNode = currentNode, navigationComponent = bootstrapMainAutoNavigation}"/>

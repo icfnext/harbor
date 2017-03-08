@@ -1,0 +1,12 @@
+<p data-sly-test="${isEditMode}" class="authoring-placeholder">Responsive Image</p>
+
+<sly data-sly-use.responsiveImage="com.icfolson.aem.harbor.core.components.content.responsiveimage.ResponsiveImage">
+    <a href="${responsiveImage.imageLink}" data-sly-unwrap="${!responsiveImage.imageLink}">
+        <img class="${responsiveImage.cssClass}"
+             src="${responsiveImage.image}"
+             srcset="${responsiveImage.sourceSet}"
+             sizes="${responsiveImage.sizes}"
+             alt="${responsiveImage.alt}"
+             title="${responsiveImage.title}">
+    </a>
+</sly>

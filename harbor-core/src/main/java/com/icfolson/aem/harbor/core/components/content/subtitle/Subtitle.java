@@ -1,14 +1,11 @@
 package com.icfolson.aem.harbor.core.components.content.subtitle;
 
-import com.icfolson.aem.library.api.page.PageDecorator;
-import com.icfolson.aem.harbor.core.components.content.heading.AbstractHeading;
-import com.icfolson.aem.harbor.core.util.icon.IconUtils;
-import com.citytechinc.cq.component.annotations.Tab;
-import org.apache.commons.lang3.StringUtils;
-
-import com.icfolson.aem.library.api.components.annotations.AutoInstantiate;
 import com.citytechinc.cq.component.annotations.Component;
+import com.citytechinc.cq.component.annotations.Tab;
+import com.google.common.base.Optional;
 import com.icfolson.aem.harbor.api.constants.dom.Headings;
+import com.icfolson.aem.harbor.core.components.content.heading.AbstractHeading;
+import com.icfolson.aem.library.api.page.PageDecorator;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
 
@@ -20,27 +17,31 @@ import javax.inject.Inject;
  * secondary title of the page is rendered as an H2 DOM element.
  */
 @Component(
-        value = "Subtitle",
-        resourceSuperType = AbstractHeading.RESOURCE_TYPE,
-        tabs = {
-                @Tab(title = "Subtitle"),
-                @Tab(title = "Advanced")
-        }
+    value = "Subtitle",
+    resourceSuperType = AbstractHeading.RESOURCE_TYPE,
+    tabs = {
+        @Tab(title = "Subtitle"),
+        @Tab(title = "Advanced")
+    }
 )
 @Model(adaptables = Resource.class)
 public class Subtitle extends AbstractHeading {
 
     public static final String RESOURCE_TYPE = "harbor/components/content/subtitle";
 
+    private static final String DEFAULT_TEXT = "Subtitle";
+
     @Inject
     private PageDecorator currentPage;
 
-    public String getText() {
-        if (StringUtils.isNotBlank(text)) {
-            return super.getText();
-        }
+    @Override
+    protected Optional<String> getTextValue() {
+        return super.getTextValue().or(currentPage.get("subtitle", String.class));
+    }
 
-        return IconUtils.iconify(currentPage.get("subtitle", "Subtitle"));
+    @Override
+    protected String getDefaultText() {
+        return DEFAULT_TEXT;
     }
 
     /**
@@ -49,8 +50,8 @@ public class Subtitle extends AbstractHeading {
      *
      * @return H2
      */
+    @Override
     public String getSize() {
         return Headings.H2;
     }
-
 }

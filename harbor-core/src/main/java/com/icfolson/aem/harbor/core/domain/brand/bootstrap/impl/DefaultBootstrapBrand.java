@@ -16,5 +16,4 @@ public class DefaultBootstrapBrand implements BootstrapBrand {
     public Map<String, String> getVariables() {
         return bootstrapProperties;
     }
-
 }

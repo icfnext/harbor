@@ -15,5 +15,5 @@ public @interface IconPicker {
      *
      * @return path to a generic list containing the icons for selection
      */
-    String path() default "";
+    String path() default "/etc/acs-commons/lists/font-awesome-icons";
 }

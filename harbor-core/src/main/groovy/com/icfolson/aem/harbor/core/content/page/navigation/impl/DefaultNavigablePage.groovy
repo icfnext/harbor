@@ -9,6 +9,13 @@ import com.icfolson.aem.library.api.page.PageDecorator
 
 class DefaultNavigablePage implements NavigablePage {
 
+    private static final Function<PageDecorator, String> PAGE_PATH = new Function<PageDecorator, String>() {
+        @Override
+        String apply(PageDecorator page) {
+            page.path
+        }
+    }
+
     @Delegate
     private final PageDecorator pageDecorator
 
@@ -62,13 +69,7 @@ class DefaultNavigablePage implements NavigablePage {
 
     @Override
     NavigationLink getNavigationLink() {
-        def currentPagePath = navigationElementConfiguration.currentPage.transform(new Function<PageDecorator, String>() {
-            @Override
-            String apply(PageDecorator page) {
-                page.path
-            }
-        }).orNull()
-
+        def currentPagePath = navigationElementConfiguration.currentPage.transform(PAGE_PATH).orNull()
         def isActive = currentPagePath && currentPagePath.startsWith(pageDecorator.path)
 
         pageDecorator.getNavigationLink(isActive)

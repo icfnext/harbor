@@ -11,7 +11,7 @@ import org.apache.felix.scr.annotations.Service
 import javax.xml.bind.JAXBContext
 
 @Service
-@Component(label = "RSS Feed Generator Service", immediate = true)
+@Component(name = "RSS Feed Generator Service", immediate = true)
 @Slf4j("LOG")
 class DefaultRSSFeedGeneratorService implements RSSFeedGeneratorService {
 

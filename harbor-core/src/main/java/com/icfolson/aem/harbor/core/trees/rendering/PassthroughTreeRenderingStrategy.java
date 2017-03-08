@@ -9,5 +9,4 @@ public class PassthroughTreeRenderingStrategy<T extends TreeNode> implements Tre
     public PassthroughTree<T> toRenderableTree(T rootNode) {
         return new PassthroughTree<>(rootNode);
     }
-
 }
