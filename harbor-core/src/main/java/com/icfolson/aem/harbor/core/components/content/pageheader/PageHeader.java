@@ -14,6 +14,7 @@ import org.apache.sling.models.annotations.Model;
     value = "Page Header",
     group = ComponentGroups.HARBOR_SCAFFOLDING,
     resourceSuperType = Container.RESOURCE_TYPE,
+    isContainer = true,
     tabs = {
         @Tab(title = "Container"),
         @Tab(title = "Advanced")

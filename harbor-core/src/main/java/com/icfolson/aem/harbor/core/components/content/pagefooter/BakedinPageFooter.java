@@ -15,6 +15,7 @@ import org.apache.sling.models.annotations.Model;
     },
     resourceSuperType = PageFooter.RESOURCE_TYPE,
     disableTargeting = true,
+    isContainer = true,
     actions = { "text: Page Footer", "-", "edit" })
 @Model(adaptables = Resource.class)
 public class BakedinPageFooter extends PageFooter {
