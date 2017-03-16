@@ -19,11 +19,11 @@ import java.util.stream.Collectors;
 public class ManualPageListConstructionStrategy extends AbstractComponent implements ListConstructionStrategy<PageDecorator> {
 
     @Inject
-    private PageManagerDecorator pageManagerDecorator;
+    private PageManagerDecorator pageManager;
 
     private List<PageDecorator> pages;
 
-    @DialogField(fieldLabel = "Paths", fieldDescription = "Path to search for nodes under.")
+    @DialogField(fieldLabel = "Paths", fieldDescription = "List of page paths.")
     @PathField(rootPath = PathConstants.PATH_CONTENT)
     @MultiField
     public List<String> getPaths() {
@@ -35,7 +35,7 @@ public class ManualPageListConstructionStrategy extends AbstractComponent implem
         if (pages == null) {
             pages = getPaths()
                 .stream()
-                .map(path -> pageManagerDecorator.getPage(path))
+                .map(path -> pageManager.getPage(path))
                 .collect(Collectors.toList());
         }
 
