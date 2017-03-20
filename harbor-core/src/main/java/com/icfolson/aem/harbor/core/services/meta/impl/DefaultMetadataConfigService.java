@@ -12,6 +12,7 @@ import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.Service;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.Resource;
+import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.commons.osgi.PropertiesUtil;
 
 import java.util.Map;
@@ -39,10 +40,10 @@ public class DefaultMetadataConfigService implements MetadataConfigService {
 
     @Override
     public String getExternalUrl(SlingHttpServletRequest requestContext, Resource resource, String extension) {
-        String externalLink = externalizer.externalLink(
-            requestContext.getResourceResolver(),
-            externalizerName,
-            requestContext.getResourceResolver().map(requestContext, resource.getPath()));
+        final ResourceResolver resourceResolver = requestContext.getResourceResolver();
+
+        String externalLink = externalizer.externalLink(resourceResolver, externalizerName,
+            resourceResolver.map(requestContext, resource.getPath()));
 
         if (StringUtils.isNotBlank(extension)) {
             return externalLink + "." + extension;
