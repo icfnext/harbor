@@ -12,7 +12,7 @@
     <groupId>com.icfolson.aem.harbor</groupId>
     <artifactId>harbor</artifactId>
     <packaging>pom</packaging>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <name>Harbor</name>
 
     <modules>
@@ -32,20 +32,6 @@
         <url>http://www.icfolson.com</url>
     </organization>
 
-    <repositories>
-        <repository>
-            <id>citytech-public</id>
-            <url>http://nexus.citytech.ctmsp.com/content/groups/public</url>
-        </repository>
-    </repositories>
-
-    <pluginRepositories>
-        <pluginRepository>
-            <id>citytech-public</id>
-            <url>http://nexus.citytech.ctmsp.com/content/groups/public</url>
-        </pluginRepository>
-    </pluginRepositories>
-
     <distributionManagement>
         <snapshotRepository>
             <id>sonatype-nexus-staging</id>
@@ -62,8 +48,8 @@
         <aem-library.version>8.1.0</aem-library.version>
         <authorable.design.manager.version>1.0.0</authorable.design.manager.version>
         <component.plugin.version>4.2.0</component.plugin.version>
-        <multicompositeaddon.version>3.0.0</multicompositeaddon.version>
-        <acs.aem.commons.version>3.6.2</acs.aem.commons.version>
+        <multicompositeaddon.version>3.1.0</multicompositeaddon.version>
+        <acs.aem.commons.version>3.7.0</acs.aem.commons.version>
         <package.skip>true</package.skip>
         <osgi.bundle.status.skip>true</osgi.bundle.status.skip>
         <core.name>harbor-core</core.name>
