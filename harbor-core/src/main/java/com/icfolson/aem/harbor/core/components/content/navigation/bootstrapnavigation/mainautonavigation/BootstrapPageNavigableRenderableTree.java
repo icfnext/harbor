@@ -21,16 +21,19 @@ public class BootstrapPageNavigableRenderableTree implements Tree<NavigablePage>
 
     private final Optional<String> brandLinkImage;
 
+    private final String brandLinkImageAltText;
+
     private final boolean fullWidth;
 
     private final boolean presentMainNavigationItemInDropDown;
 
     public BootstrapPageNavigableRenderableTree(Boolean sticky, Boolean showBrandLink, String brandLinkText,
-        Optional<String> brandLinkImage, NavigablePage rootPage, boolean fullWidth,
+        Optional<String> brandLinkImage, String brandLinkImageAltText, NavigablePage rootPage, boolean fullWidth,
         boolean presentMainNavigationItemInDropDown) {
         this.isSticky = sticky;
         this.showBrandLink = showBrandLink;
         this.brandLinkText = brandLinkText;
+        this.brandLinkImageAltText = brandLinkImageAltText;
         this.rootPage = rootPage;
         this.brandLinkImage = brandLinkImage;
         this.fullWidth = fullWidth;
@@ -65,6 +68,10 @@ public class BootstrapPageNavigableRenderableTree implements Tree<NavigablePage>
 
     public boolean isHasBrandLinkImage() {
         return brandLinkImage.isPresent();
+    }
+
+    public String getBrandLinkImageAltText() {
+        return brandLinkImageAltText != null ? brandLinkImageAltText : "";
     }
 
     @Override

@@ -43,7 +43,14 @@ public class BootstrapMainNavigationRenderingStrategy extends AbstractComponent 
         return getImageReferenceInherited("brandLinkImage");
     }
 
-    @DialogField(fieldLabel = "Full Width", ranking = 40)
+    @DialogField(fieldLabel = "Brand Image Alt Text",
+            fieldDescription = "Text to populate the 'alt' field in the img tag.", ranking = 40)
+    @TextField
+    public String getBrandLinkImageAltText() {
+        return getInherited("brandLinkImageAltText", "");
+    }
+
+    @DialogField(fieldLabel = "Full Width", ranking = 50)
     @Switch(offText = "No", onText = "Yes")
     public Boolean getFullWidth() {
         return getInherited("fullWidth", false);
@@ -51,7 +58,7 @@ public class BootstrapMainNavigationRenderingStrategy extends AbstractComponent 
 
     @DialogField(fieldLabel = "Present Main Navigation Item in Drop Down",
         fieldDescription = "In cases of nested navigation elements setting this property to true will render the parent navigation element in the context of the drop down and enable expansion of the dropdown via clicking on the entire navigation element.  Setting this property to false will cause a separate drop down icon to render which must be clicked in order to expand the dropdown.",
-        ranking = 50)
+        ranking = 60)
     @Switch(offText = "No", onText = "Yes")
     public Boolean getPresentMainNavigationItemInDropDown() {
         return getInherited("presentMainNavigationItemInDropDown", false);
@@ -60,6 +67,6 @@ public class BootstrapMainNavigationRenderingStrategy extends AbstractComponent 
     @Override
     public BootstrapPageNavigableRenderableTree toRenderableTree(NavigablePage rootedItem) {
         return new BootstrapPageNavigableRenderableTree(isSticky(), getShowBrandLink(), getBrandLinkText(),
-            getBrandLinkImage(), rootedItem, getFullWidth(), getPresentMainNavigationItemInDropDown());
+            getBrandLinkImage(), getBrandLinkImageAltText(), rootedItem, getFullWidth(), getPresentMainNavigationItemInDropDown());
     }
 }
