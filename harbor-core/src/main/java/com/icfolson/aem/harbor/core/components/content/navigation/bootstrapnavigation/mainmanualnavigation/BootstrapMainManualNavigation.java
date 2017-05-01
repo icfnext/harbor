@@ -49,28 +49,35 @@ public class BootstrapMainManualNavigation extends AbstractComponent {
         return getImageSourceInherited("brandLinkImage");
     }
 
+    @DialogField(fieldLabel = "Brand Image Alt Text",
+            fieldDescription = "Text to populate the 'alt' field in the img tag.", ranking = 3)
+    @TextField
+    public String getBrandLinkImageAltText() {
+        return getInherited("brandLinkImageAltText", "");
+    }
+
     @DialogField(fieldLabel = "Show Brand Link",
         fieldDescription = "Enable this to display a link to the root path as the first navigation element",
-        ranking = 3)
+        ranking = 4)
     @Switch(offText = "No", onText = "Yes")
     public Boolean isShowBrandLink() {
         return getInherited("showBrandLink", false);
     }
 
     @DialogField(fieldLabel = "Brand Link Text",
-        fieldDescription = "Text to present as the brand of the navigation bar", ranking = 4)
+        fieldDescription = "Text to present as the brand of the navigation bar", ranking = 5)
     @TextField
     public String getBrandLinkText() {
         return getInherited("brandLinkText", "");
     }
 
-    @DialogField(fieldLabel = "Brand Link", fieldDescription = "The page or URL the brand should link to", ranking = 5)
+    @DialogField(fieldLabel = "Brand Link", fieldDescription = "The page or URL the brand should link to", ranking = 6)
     @PathField(rootPath = PathConstants.PATH_CONTENT)
     public Link getBrandLink() {
         return getAsLink("brandLink").or(getLink());
     }
 
-    @DialogField(fieldLabel = "Full Width", ranking = 6)
+    @DialogField(fieldLabel = "Full Width", ranking = 7)
     @Switch(offText = "No", onText = "Yes")
     public boolean isFullWidth() {
         return get("fullWidth", false);
