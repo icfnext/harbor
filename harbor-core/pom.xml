@@ -176,7 +176,7 @@
         <dependency>
             <groupId>com.icfolson.aem.prosper</groupId>
             <artifactId>prosper</artifactId>
-            <version>10.0.0</version>
+            <version>10.1.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
