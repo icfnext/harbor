@@ -15,6 +15,7 @@ import org.apache.sling.models.annotations.Model;
     },
     resourceSuperType = PageHeader.RESOURCE_TYPE,
     disableTargeting = true,
+    isContainer = true,
     actions = { "text: Page Header", "-", "edit" })
 @Model(adaptables = Resource.class)
 public class BakedinPageHeader extends PageHeader {

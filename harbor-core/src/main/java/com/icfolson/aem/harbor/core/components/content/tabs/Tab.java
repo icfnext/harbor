@@ -16,6 +16,7 @@ import org.apache.sling.models.annotations.Model;
     value = "Tab",
     name = "tabs/tab",
     actions = { "text: Tab", "-", "edit", "delete" },
+    isContainer = true,
     actionConfigs = {
         @ActionConfig(xtype = "tbseparator"),
         @ActionConfig(text = "Move Up", handler = "function(){Harbor.Components.Tabs.moveUp( this )}",
