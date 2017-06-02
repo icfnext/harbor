@@ -10,5 +10,8 @@
         <exclude pattern="/etc/designs/harbor/clientlib(/.*)?"/>
         <exclude pattern="/etc/designs/harbor/brand/clientlib(/.*)?"/>
     </filter>
-    <filter root="/etc/packages/harbor"/>
+    <filter root="/etc/packages/harbor/aem-library-ui-${aem-library.version}.zip"/>
+    <filter root="/etc/packages/harbor/aem-namespace-extension-ui-${aem.namespace.version}.zip"/>
+    <filter root="/etc/packages/harbor/multicomposite-addon-${multicompositeaddon.version}.zip"/>
+    <filter root="/etc/packages/harbor/acs-aem-commons-content-${acs.aem.commons.version}.zip"/>
 </workspaceFilter>

@@ -12,11 +12,11 @@
         <meta name="twitter:image" data-sly-test="${metaPage.fullyQualifiedPageImage}" content="${metaPage.fullyQualifiedPageImage}">
         <meta name="twitter:url" content="${metaPage.fullyQualifiedPageUrl}">
     </sly>
-    <sly data-sly-test="${metaPage.ogType}">
+    <sly data-sly-test="${metaPage.ogType && metaPage.ogType != 'none'}">
         <meta property="og:title" content="${metaPage.pageName}" />
         <meta property="og:type" content="${metaPage.ogType}" />
-        <meta property="og:url" data-sly-test="${metaPage.cannonicalUrl}" content="${metaPage.cannonicalUrl}" />
-        <meta property="og:url" data-sly-test="${!metaPage.cannonicalUrl}" content="${metaPage.fullyQualifiedPageUrl}" />
+        <meta property="og:url" data-sly-test="${metaPage.canonicalUrl}" content="${metaPage.canonicalUrl}" />
+        <meta property="og:url" data-sly-test="${!metaPage.canonicalUrl}" content="${metaPage.fullyQualifiedPageUrl}" />
         <meta property="og:image" data-sly-test="${metaPage.fullyQualifiedPageImage}" content="${metaPage.fullyQualifiedPageImage}" />
         <meta property="og:description" content="${metaPage.description}" />
         <meta property="og:site_name" data-sly-test="${metaPage.homePageTitle}" content="${metaPage.homePageTitle}" />
