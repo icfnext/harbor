@@ -21,6 +21,7 @@ import java.util.stream.Collectors;
     value = "Tabs",
     group = ComponentGroups.HARBOR_SCAFFOLDING,
     actions = { "text: Tabs", "-", "edit", "-", "copymove", "delete", "-", "insert" },
+    isContainer = true,
     actionConfigs = {
         @ActionConfig(xtype = "tbseparator"),
         @ActionConfig(

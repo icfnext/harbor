@@ -17,6 +17,7 @@ import org.apache.sling.models.annotations.Model;
     value = "Accordion Item",
     name = "accordion/accordionitem",
     actions = { "text: Accordion Item", "-", "edit", "delete" },
+    isContainer = true,
     listeners = {
         @Listener(name = "afteredit", value = "REFRESH_SELF"),
         @Listener(name = "afterdelete", value = "REFRESH_PARENT")

@@ -10,7 +10,7 @@ import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.injectorspecific.Self;
 
-@Component(value = "Classified Content", group = ComponentGroups.HARBOR_SCAFFOLDING)
+@Component(value = "Classified Content", group = ComponentGroups.HARBOR_SCAFFOLDING, isContainer = true)
 @Model(adaptables = Resource.class)
 public class ClassifiedContent extends AbstractComponent {
 
