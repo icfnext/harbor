@@ -41,7 +41,7 @@
         <aem.namespace.version>0.4.0</aem.namespace.version>
         <aem-library.version>9.0.0-SNAPSHOT</aem-library.version>
         <authorable.design.manager.version>1.0.0</authorable.design.manager.version>
-        <component.plugin.version>4.2.0</component.plugin.version>
+        <component.plugin.version>4.3.0</component.plugin.version>
         <multicompositeaddon.version>3.1.0</multicompositeaddon.version>
         <acs.aem.commons.version>3.7.0</acs.aem.commons.version>
         <package.skip>true</package.skip>
