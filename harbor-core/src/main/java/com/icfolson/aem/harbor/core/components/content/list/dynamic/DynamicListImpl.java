@@ -36,6 +36,8 @@ public class DynamicListImpl implements DynamicList {
 
     static final String ADD_ITEM_DIALOG = "/apps/" + DynamicListItem.RESOURCE_TYPE + "/new/" + NewDynamicListItem.DIALOG_FILE_NAME;
 
+    public static final String ALLOWED_LIST_ITEMS = "icf:allowedDynamicListItems";
+
     //@Inject @Self
     private List<DynamicListItem> items;
 
