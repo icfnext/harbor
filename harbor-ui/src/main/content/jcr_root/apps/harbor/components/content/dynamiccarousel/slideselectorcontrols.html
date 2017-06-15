@@ -1,0 +1,5 @@
+<ol data-sly-use.carousel="${component.properties['className']}"
+    class="${carousel.indicatorsCssClass}"
+    data-sly-list.slide="${carousel.slides}">
+    <li data-target="#${carousel.id}-carousel" data-slide-to="${slideList.index}" class="${slideList.first ? 'active' : ''}"></li>
+</ol>

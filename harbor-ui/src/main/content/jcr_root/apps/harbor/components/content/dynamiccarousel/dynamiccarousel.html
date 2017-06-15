@@ -1,0 +1,18 @@
+<div data-sly-use.carousel="${component.properties['className']}"
+     id="${carousel.id}-carousel"
+     class="${carousel.cssClass}"
+     data-ride="carousel"
+     data-interval="${carousel.interval == 0 ? 'false' : carousel.interval}"
+     data-pause="${carousel.pauseOnHover ? 'hover' : ''}"
+     data-keyboard="${carousel.keyboard ? 'true' : ''}"
+     data-wrap="${carousel.wrap ? 'true' : ''}">
+
+    <!-- Indicators -->
+    <sly data-sly-test="${carousel.showSlideSelectorControls}" data-sly-include="slideselectorcontrols.html"></sly>
+
+    <!-- Wrapper for slides -->
+    <sly data-sly-include="slides.html"></sly>
+
+    <!-- Controls -->
+    <sly data-sly-test="${carousel.showPreviousAndNextControls}" data-sly-include="previousandnextcontrols.html"></sly>
+</div>
