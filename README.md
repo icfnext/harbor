@@ -545,6 +545,33 @@ for extended usage such as targeting of styles or unique indexability.
 
 Classifications are always authored as Tags.
 
+#### Dynamics
+
+A common authoring pattern is the creation of lists or sets of things which may 
+have disparate natures.  Take for example a list.  An author may want to create 
+a list which contains
+
+* Simple text items
+* Some links to external sites
+* Some links to internal pages
+* Some more complex links which show both a title and a thumbnail of the item linked to
+
+Components in the Harbor Dynamics family enable this pattern by exposing a means 
+to select the type of item you are going to add to a set or list.  
+
+Returning to the example of a list, the Dynamic List component OOB gives authors 
+the ability to choose whether they want to create an external link item, an 
+internal link item, or a text item, each time they add a new item to the list. 
+This mechanism is also extensible at a project level giving your developers the 
+ability to add new types of list items. 
+
+The Harbor Dynamics component family currently consists of 
+
+* Dynamic List
+* Dynamic Column Row (still under development)
+* Dynamic Tabs (still under development)
+* Dynamic Carousel (still under development)
+
 ### Developer Core Concepts
 
 #### Namespace
