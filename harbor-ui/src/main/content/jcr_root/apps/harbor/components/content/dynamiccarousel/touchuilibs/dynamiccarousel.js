@@ -24,12 +24,14 @@ Harbor.Components.DynamicCarousel = function ( ns, channel ) {
 
         };
 
-        this.gotoNextSlide = function() {
-            console.log( 'GOTO Next Slide' );
+        this.nextSlide = function( component ) {
+            console.log( 'GOTO Next Slide for ' + component.path );
+            ns.ContentFrame.postMessage( 'harbor-DynamicCarousel-nextSlide', { path: component.path } );
         };
 
-        this.gotoPreviousSlide = function() {
-            console.log( 'GOTO Previous Slide' );
+        this.previousSlide = function( component ) {
+            console.log( 'GOTO Previous Slide for ' + component.path );
+            ns.ContentFrame.postMessage( 'harbor-DynamicCarousel-previousSlide', { path: component.path } );
         };
 
     };

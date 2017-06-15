@@ -23,7 +23,18 @@ import javax.inject.Inject;
                         handler = "function() { Harbor.Components.DynamicCarousel.addSlide( this, '" + "/apps/" + NewSlide.RESOURCE_TYPE + "/" + NewSlide.DIALOG_FILE_NAME + "' ) }",
                         additionalProperties = {
                                 @ActionConfigProperty(name = "icon", value = "coral-Icon--experienceAdd")
-                        } ) } )
+                        } ),
+                @ActionConfig(text = "Previous Slide",
+                        handler = "function() { Harbor.Components.DynamicCarousel.previousSlide( this ) }",
+                        additionalProperties = {
+                                @ActionConfigProperty(name = "icon", value = "coral-Icon--rewindCircle")
+                        } ),
+                @ActionConfig(text = "Next Slide",
+                        handler = "function() { Harbor.Components.DynamicCarousel.nextSlide( this ) }",
+                        additionalProperties = {
+                                @ActionConfigProperty(name = "icon", value = "coral-Icon--fastForwardCircle")
+                        } )
+                 } )
 @Model(adaptables = Resource.class)
 public class DynamicCarousel {
 
@@ -106,4 +117,8 @@ public class DynamicCarousel {
         return INDICATORS_CSS_CLASS;
     }
 
+    public String getId() {
+        //TODO: Cleanup and decide if this is what we want the ID to be
+        return resource.getPath().replaceAll("/", "_").replaceAll(":", "__");
+    }
 }

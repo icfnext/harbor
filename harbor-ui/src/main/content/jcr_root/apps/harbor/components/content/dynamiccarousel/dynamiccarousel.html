@@ -1,11 +1,12 @@
 <div data-sly-use.carousel="${component.properties['className']}"
      id="${carousel.id}-carousel"
      class="${carousel.cssClass}"
-     data-ride="carousel"
+     data-ride="${(isPreviewMode || isPublish) ? 'carousel' : ''}"
      data-interval="${carousel.interval == 0 ? 'false' : carousel.interval}"
      data-pause="${carousel.pauseOnHover ? 'hover' : ''}"
      data-keyboard="${carousel.keyboard ? 'true' : ''}"
-     data-wrap="${carousel.wrap ? 'true' : ''}">
+     data-wrap="${carousel.wrap ? 'true' : ''}"
+     data-sly-attribute.data-path="${isAuthor ? resource.path : ''}">
 
     <!-- Indicators -->
     <sly data-sly-test="${carousel.showSlideSelectorControls}" data-sly-include="slideselectorcontrols.html"></sly>
