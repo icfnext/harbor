@@ -28,10 +28,6 @@ import org.apache.sling.models.annotations.Model;
             additionalProperties = { @ActionConfigProperty(name = "icon", value = "coral-Icon--accordionUp") }),
         @ActionConfig(text = "Move Down", handler = "function(){Harbor.Components.LinkList.moveDown( this )}",
             additionalProperties = { @ActionConfigProperty(name = "icon", value = "coral-Icon--accordionDown") })
-    },
-    listeners = {
-        @Listener(name = "afterinsert", value = "REFRESH_PAGE"),
-        @Listener(name = "afterdelete", value = "REFRESH_PAGE")
     }
 )
 @Model(adaptables = Resource.class)
