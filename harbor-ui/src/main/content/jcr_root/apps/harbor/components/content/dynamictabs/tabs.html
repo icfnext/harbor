@@ -1,0 +1,8 @@
+<ul class="nav nav-tabs"
+    role="tablist"
+    data-sly-use.dynamicTabs="${component.properties['className']}"
+    data-sly-attribute.data-path="${isAuthor ? resource.path : ''}">
+    <li data-sly-repeat.currentTab="${dynamicTabs.tabs}" data-sly-attribute.class="${currentTabList.first ? 'active' : ''}">
+        <a href="#${currentTab.id}" aria-controls="${currentTab.id}" role="tab" data-toggle="tab">${currentTab.label || 'Tab'}</a>
+    </li>
+</ul>

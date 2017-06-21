@@ -1,8 +1,8 @@
-Harbor.Components.DynamicCarousel = function ( ns, channel ) {
+Harbor.Components.DynamicTabs = function ( ns, channel ) {
 
-    var DynamicCarouselEditor = function() {
+    var DynamicTabsEditor = function() {
 
-        this.addSlide = function( component, dialogPath ) {
+        this.addTab = function( component, dialogPath ) {
             Harbor.Lists.ListsEditor.addDynamicListItem( component, dialogPath );
         };
 
@@ -26,20 +26,21 @@ Harbor.Components.DynamicCarousel = function ( ns, channel ) {
 
         };
 
-        this.nextSlide = function( component ) {
-            ns.ContentFrame.postMessage( 'harbor-DynamicCarousel-nextSlide', { path: component.path } );
+        this.nextTab = function( component ) {
+            console.log( 'GOTO Next Tab for ' + component.path );
+            ns.ContentFrame.postMessage( 'harbor-DynamicTabs-nextTab', { path: component.path } );
             Harbor.Lists.removeSelection();
-
         };
 
-        this.previousSlide = function( component ) {
-            ns.ContentFrame.postMessage( 'harbor-DynamicCarousel-previousSlide', { path: component.path } );
+        this.previousTab = function( component ) {
+            console.log( 'GOTO Previous Tab for ' + component.path );
+            ns.ContentFrame.postMessage( 'harbor-DynamicTabs-previousTab', { path: component.path } );
             Harbor.Lists.removeSelection();
         };
 
     };
 
-    return new DynamicCarouselEditor();
+    return new DynamicTabsEditor();
 
 }( Granite.author, jQuery( document ) );
 

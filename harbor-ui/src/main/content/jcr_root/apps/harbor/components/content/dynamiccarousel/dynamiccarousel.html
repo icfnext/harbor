@@ -9,11 +9,11 @@
      data-sly-attribute.data-path="${isAuthor ? resource.path : ''}">
 
     <!-- Indicators -->
-    <sly data-sly-test="${carousel.showSlideSelectorControls}" data-sly-include="slideselectorcontrols.html"></sly>
+    <sly data-sly-test="${(isPreviewMode || isPublish) && carousel.showSlideSelectorControls}" data-sly-include="slideselectorcontrols.html"></sly>
 
     <!-- Wrapper for slides -->
     <sly data-sly-include="slides.html"></sly>
 
     <!-- Controls -->
-    <sly data-sly-test="${carousel.showPreviousAndNextControls}" data-sly-include="previousandnextcontrols.html"></sly>
+    <sly data-sly-test="${(isPreviewMode || isPublish) && carousel.showPreviousAndNextControls}" data-sly-include="previousandnextcontrols.html"></sly>
 </div>

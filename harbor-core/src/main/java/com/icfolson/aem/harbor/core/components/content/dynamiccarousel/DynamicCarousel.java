@@ -1,7 +1,6 @@
 package com.icfolson.aem.harbor.core.components.content.dynamiccarousel;
 
 import com.citytechinc.cq.component.annotations.Component;
-import com.citytechinc.cq.component.annotations.ContentProperty;
 import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.editconfig.ActionConfig;
 import com.citytechinc.cq.component.annotations.editconfig.ActionConfigProperty;

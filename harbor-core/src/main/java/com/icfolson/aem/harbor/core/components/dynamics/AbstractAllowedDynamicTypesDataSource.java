@@ -1,4 +1,4 @@
-package com.icfolson.aem.harbor.core.components.content.list.dynamic;
+package com.icfolson.aem.harbor.core.components.dynamics;
 
 import com.day.cq.wcm.api.components.Component;
 import com.day.cq.wcm.api.components.ComponentManager;

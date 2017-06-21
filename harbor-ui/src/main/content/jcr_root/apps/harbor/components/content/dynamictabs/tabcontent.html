@@ -1,0 +1,9 @@
+<div class="tab-content" data-sly-use.dynamicTabs="${component.properties['className']}">
+    <div data-sly-repeat.currentTab="${dynamicTabs.tabs}"
+         role="tabpanel"
+         class="tab-pane active"
+         data-sly-attribute.class="${currentTabList.first ? 'tab-pane active' : 'tab-pane'}"
+         id="${currentTab.id}">
+        <div data-sly-resource="${currentTab.path @ resourceType=currentTab.type}"></div>
+    </div>
+</div>

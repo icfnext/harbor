@@ -273,9 +273,16 @@ Harbor.Lists = function( ns, channel ) {
         }
     };
 
+    var removeSelection = function() {
+        ns.selection.deselectAll();
+        ns.selection.deactivateCurrent();
+        ns.EditorFrame.editableToolbar.close();
+    };
+
     return {
         ListsEditor: new ListsEditor(),
-        refreshListParent: refreshListParent
+        refreshListParent: refreshListParent,
+        removeSelection: removeSelection
     };
 
 }( Granite.author, jQuery( document ) );

@@ -1,6 +1,6 @@
 package com.icfolson.aem.harbor.core.components.content.dynamiccarousel;
 
-import com.icfolson.aem.harbor.core.components.content.list.dynamic.AbstractAllowedDynamicTypesDataSource;
+import com.icfolson.aem.harbor.core.components.dynamics.AbstractAllowedDynamicTypesDataSource;
 import org.apache.felix.scr.annotations.sling.SlingServlet;
 
 @SlingServlet(resourceTypes = NewSlide.DESIGN_DATA_SOURCE_RESOURCE_TYPE)
