@@ -8,17 +8,23 @@
         if ( typeof Granite !== 'undefined' && Granite.author && Granite.author.inner && Granite.author.inner.EditorFrame ) {
 
             Granite.author.inner.EditorFrame.subscribeRequestMessage( 'harbor-DynamicTabs-nextTab', function( r ) {
-                console.log( r );
-                var nextTab = jQuery( 'ul[role="tablist"][data-path="' + r.data.path + '"] > li.active' ).next() ||
-                                jQuery( 'ul[role="tablist"][data-path="' + r.data.path + '"] > li:first' );
-                nextTab.tab( 'show' );
+                var nextTab = jQuery( 'ul[role="tablist"][data-path="' + r.data.path + '"] > li.active' ).next();
+
+                if ( nextTab.length === 0 ) {
+                    nextTab = jQuery( 'ul[role="tablist"][data-path="' + r.data.path + '"] > li:first' );
+                }
+
+                nextTab.find( 'a[data-toggle="tab"]' ).tab( 'show' );
             } );
 
             Granite.author.inner.EditorFrame.subscribeRequestMessage( 'harbor-DynamicTabs-previousTab', function( r ) {
-                console.log( r );
-                var previousTab = jQuery( 'ul[role="tablist"][data-path="' + r.data.path + '"] > li.active' ).prev() ||
-                    jQuery( 'ul[role="tablist"][data-path="' + r.data.path + '"] > li:last' );
-                previousTab.tab( 'show' );
+                var previousTab = jQuery( 'ul[role="tablist"][data-path="' + r.data.path + '"] > li.active' ).prev();
+
+                if ( previousTab.length === 0 ) {
+                    previousTab = jQuery( 'ul[role="tablist"][data-path="' + r.data.path + '"] > li:last' );
+                }
+
+                previousTab.find( 'a[data-toggle="tab"]' ).tab( 'show' );
             } );
         }
     } )
