@@ -1,4 +1,4 @@
-<div class="tab-content" data-sly-use.dynamicTabs="${component.properties['className']}">
+<div class="tab-content ${dynamicTabs.classification.classNames}" data-sly-use.dynamicTabs="${component.properties['className']}">
     <div data-sly-repeat.currentTab="${dynamicTabs.tabs}"
          role="tabpanel"
          class="tab-pane active"

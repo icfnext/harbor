@@ -1,11 +1,14 @@
 package com.icfolson.aem.harbor.core.components.content.dynamictabs;
 
 import com.citytechinc.cq.component.annotations.Component;
+import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.editconfig.ActionConfig;
 import com.citytechinc.cq.component.annotations.editconfig.ActionConfigProperty;
+import com.citytechinc.cq.component.annotations.widgets.DialogFieldSet;
 import com.google.common.collect.Lists;
 import com.icfolson.aem.harbor.api.components.content.dynamictabs.Tab;
 import com.icfolson.aem.harbor.core.components.content.dynamiccarousel.NewSlide;
+import com.icfolson.aem.harbor.core.components.mixins.classifiable.Classification;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.injectorspecific.Self;
@@ -42,10 +45,18 @@ public class DynamicTabs {
     @Inject
     private Resource resource;
 
+    @Inject @Self
+    private Classification classification;
+
     public List<Tab> getTabs() {
         //TODO: I feel like I should not have to do this - the injection of the list should be able to adapt to the tabs directly.  Check into http://svn.apache.org/repos/asf/sling/trunk/bundles/extensions/models/impl/src/main/java/org/apache/sling/models/impl/ModelAdapterFactory.java
         //Caused by: org.apache.sling.models.factory.ModelClassException: interface java.util.List is neither a parameterized Collection or List
         return Lists.newArrayList(resource.getChildren()).stream().map(r -> r.adaptTo(Tab.class)).collect(Collectors.toList());
+    }
+
+    @DialogField(ranking = 20) @DialogFieldSet
+    public Classification getClassification() {
+        return classification;
     }
 
 }
