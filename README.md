@@ -367,6 +367,41 @@ Individual tabs can be added by clicking the "Add Tab" button in the component's
 | ------------ | ----------- |
 | Title | Title to display atop the tab or pill 
 
+### Dynamic Tabs Component
+
+* Group: Harbor Scaffolding
+* Classifiable
+* Part of Dynamics
+
+The Dynamic Tabs component allows for the creation of any number of typed tabs.  
+Which tab types are supported by a particular instance of Dynamic Tabs is based on 
+the established site design.  
+
+#### Authorability
+
+Individual tabs can be added by clicking the "Add Tab" button in the component's edit toolbar 
+and selecting a tab type.  If no tab types are available this means that the site design must 
+be modified to allow the desired types.  
+
+The content and configuration of each tab is authored within the tab itself.
+#### Design
+
+Additional tab types may be made available by updating a site's design.  This can be done at a 
+component instance level by switching to design mode and adding the component types to the Dynamic 
+Tabs component instance's design, or at a design level by updating the design for primary paragraph 
+systems through the site's design page.
+
+#### Dynamic Tab Types
+
+The following tab types are made available by Harbor.  See developer documentation below concerning 
+the creation of new project specific types.
+
+##### ParsysTab
+
+* Classifiable
+
+A tab which exposes a single paragraph system for editing.
+
 ### Header Component
 
 * Group: Harbor Scaffolding
