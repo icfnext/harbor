@@ -17,6 +17,7 @@ import javax.inject.Inject;
 @Component(value = "Parsys Tab",
         group = ".hidden",
         resourceSuperType = Tab.RESOURCE_TYPE,
+        actions = { "text: Parsys Tab", "edit", "-", "delete" },
         name = "dynamictabs/tabs/parsystab",
         listeners = {
                 @Listener(name = "afterinsert", value = "REFRESH_PARENT"),
