@@ -212,6 +212,53 @@ The Link List component maintains a collection of List Items as direct child Res
 | List Item Resource Type | harbor/components/content/lists/linklist/listablelink |
 | List Item Backing Class | com.icfolson.aem.harbor.core.components.content.list.link.ListableLink |
 
+### Dynamic List Component
+
+* Group: Harbor Lists
+* Classifiable
+* Part of Dynamics
+
+A Dynamic list implementation which allows for the authoring of any number 
+of list items of various types. 
+ 
+#### Design
+
+Additional list item types may be made available by updating a site's design.  This can be done at a 
+component instance level by switching to design mode and adding the component types to the Dynamic 
+Carousel component instance's design, or at a design level by updating the design for primary paragraph 
+systems through the site's design page.
+
+#### Dynamic List Item Types
+
+The following list item types are made available by Harbor.  See developer documentation below concerning 
+the creation of new project specific types.
+
+##### External Link Item
+
+A list item which links to an external URL.
+
+| Dialog Field | Description |
+| ------------ | ----------- |
+| URL | External URL to link to |
+| Label | Text lable for the presented link |
+
+##### Internal Link Item
+
+A list item which links to an internal page.
+
+| Dialog Field | Description |
+| ------------ | ----------- |
+| Linked Page | Path to page which will be linked to |
+| Label | Text lable for the presented link |
+
+##### Text Item
+
+A list item which simply presents text.
+
+| Dialog Field | Description |
+| ------------ | ----------- |
+| Text Content | Text to be presented as the content of the list item |
+
 ### Manual Page List Component
 
 * Group: Harbor Lists
@@ -384,6 +431,7 @@ and selecting a tab type.  If no tab types are available this means that the sit
 be modified to allow the desired types.  
 
 The content and configuration of each tab is authored within the tab itself.
+
 #### Design
 
 Additional tab types may be made available by updating a site's design.  This can be done at a 
@@ -396,7 +444,7 @@ systems through the site's design page.
 The following tab types are made available by Harbor.  See developer documentation below concerning 
 the creation of new project specific types.
 
-##### ParsysTab
+##### Parsys Tab
 
 * Classifiable
 
@@ -428,9 +476,44 @@ The footer, as its name suggests, is the final piece of content located at the b
 | Dialog Field | Description |
 | ------------ | ----------- |
 | Full Width        | When set to true, will render across the full width of the browser window |
-| Container Inheritance       | When enabled, an inherting paragraph system is produced for this container instance |
+| Container Inheritance       | When enabled, an inheriting paragraph system is produced for this container instance |
 | Classification        | Input support for classifiability of the footer component instance. Classifies the footer |
 | ID     | A unique identifier for the footer If no ID is set no id attribute will be rendered |
+
+### Dynamic Carousel Component
+
+* Group: Harbor
+* Classifiable
+* Part of Dynamics
+
+A Dynamic Carousel implementation allowing for the creation of any number of 
+slides of varying types.  The content and configuration of each slide is authored 
+within the slide itself.  Authors may switch the current slide being authored 
+using the previous and next slide buttons presented in the Dynamic Carousel's 
+edit toolbar. 
+
+#### Design
+
+Additional slide types may be made available by updating a site's design.  This can be done at a 
+component instance level by switching to design mode and adding the component types to the Dynamic 
+Carousel component instance's design, or at a design level by updating the design for primary paragraph 
+systems through the site's design page.
+
+#### Dynamic Slide Types
+
+The following carousel slide types are made available by Harbor.  See developer documentation below concerning 
+the creation of new project specific types.
+
+##### Parsys Slide
+
+* Classifiable 
+
+A slide which exposes a single paragraph system for editing.
+
+##### Image and Caption Slide
+
+The Image and Caption Slide type is still under evaluation and development. 
+Use at your own risk.
 
 ### Main Auto Navigation
 
@@ -604,8 +687,9 @@ The Harbor Dynamics component family currently consists of
 
 * Dynamic List
 * Dynamic Column Row (still under development)
-* Dynamic Tabs (still under development)
-* Dynamic Carousel (still under development)
+* Dynamic Tabs 
+* Dynamic Carousel 
+* Dynamic Accordion (still under development)
 
 ### Developer Core Concepts
 
@@ -733,124 +817,3 @@ It then uses Classification's `classNames()` method to output a space delimited 
 
 
 
-
-
-
-#OLD
-
-## Lists
-
-Many of the components which are built for a particular project are, at their core, a list of things.  The concern
-of such components then is three-fold.
-
-1. Construct the list of things germane to the instance of the component
-2. Transform the list of things found in step one into a list of things ready for rendering (in practice this step is often combined with step 1)
-3. Produce a rendering or visualization of the transformed list of things
-
-The List API proposed by Harbor encapsulates each step allowing for the development of new components based on a composition
-of implementations of the three steps listed above.
-
-### Step 1: List Construction and the ListConstructionStrategy
-
-Implementations of the ListConstructionStrategy cover Step 1 of the list workflow laid-out above.
-
-```java
-public interface ListConstructionStrategy <T> {
-
-    Iterable<T> construct();
-
-}
-```
-
-Such an implementation exposes a single `construct` method which produces a generic `Iterable`.  An implementation would
-generally encapsulate the logic necessary to build up the list of things of interest to the component based on any number
-of component-specific mechanisms.  The generic type is intended to be a domain object unencumbered with properties specific
-to its presentation.
-
-### Step 2: List Transformation and the ListRenderingStrategy
-
-Once a List of domain objects has been constructed by a ListConstructionStrategy, this list can be fed into a
-ListRenderingStrategy.
-
-```java
-public interface ListRenderingStrategy <T, R extends Iterable<?>> {
-
-    public R toRenderableList(Iterable<T> itemIterable);
-
-}
-```
-
-Implementations of the ListRenderingStrategy expose a single `toRenderableList` method which takes as input the output
-from a ListConstructionStrategy's `construct` method and produces an Iterable of some type.  In the generic signature,
-implementations must provide the type produced by the ListConstructionStrategy and a type of Iterable to be returned.
-As such, developers of implementations are free to define their own Iterable implementations which is useful if the
-transformed list needs to contain information germane to the entire list and not just the individual elements (for example,
-if the list's ability to render as an ordered or unordered list is authorable, this information is relevant to the entire
-list and not the individual items).  The elements of the transformed list should expose methods proper to the rendering of the element.
-
-### Step 3: List Visualization
-
-Visualization of a list is left to the rendering mechanism employed, be it a .jsp, a servlet returning json, or any other
-mechanic.  At a high level, rendering involves iterating over the Iterable produced by the `ListRenderingStrategy` and
-rendering each item as necessary.
-
-#### The RenderableItem Interface
-
-Implementations of the `RenderableItem` interface represent list items which are able to produce their own rendering.
-
-```java
-public interface RenderableItem {
-
-    public String render();
-
-}
-```
-
-An implementation of `RenderableItem` exposes a single `render` method which is intended to return a String representation
-of the item.  If appropriate, an implementation of this interface may be returned as the members of the Iterable produced
-by the `ListRenderingStrategy`'s `toRenderableList` method after which rendering mechanisms may simply call the `render` method
-on each item to produce a rendering.
-
-### List APIs and the Component Plugin
-
-Using these APIs, new List components are made of a composition of a `ListConstructionStrategy` and a `ListRenderingStrategy`.  This
-composition approach also allows for the creation of an authoring dialog via composition.  By attributing a `@DialogFieldSet` annotation
-to both the `ListConstructionStrategy` and the `ListRenderingStrategy` and further annotating the members of these strategies with
-appropriate `@DialogField` annotations, both your component and your authoring can be composed.  The
-`com.icfolson.aem.harbor.core.components.content.navigation.bootstrapnavigation.mainnavigation.BootstrapMainAutoNavigation`
-component is a reasonable exemplar of this type of implementation.
-
-### The ListComponent and AbstractListComponent
-
-The `ListComponent` Interface and `AbstractListComponent` abstract class establish a general pattern for list component
-composition.
-
-```java
-public interface ListComponent <T extends Iterable> {
-
-    public T getItems();
-
-    public Iterator<?> getIterator();
-
-}
-```
-
-A `ListComponent` is known to produce some manner of Iterable.  This mirrors what the `ListRenderingStrategy` is able
-to produce.  As a convenience, a `ListComponent` implementation will expose a `getIterator` method which is useful if
-rendering using .jsp since the jstl `forEach` tag can iterate over an Iterator but not over an Iterable.
-
-The 'AbstractListComponent` abstract class represents the super class of a standard List component.  Among other things it
-exposes two abstract methods.
-
-```java
-protected abstract ListConstructionStrategy<T> getListConstructionStrategy();
-
-protected abstract ListRenderingStrategy<T, R> getListRenderingStrategy();
-```
-
-These methods respecively return the `ListConstructionStrategy` and `ListRenderingStrategy` which the component employ.
-The `AbstractListComponent` implements the `ListComponent` interface.  The object returned by the `AbstractListComponent`s
-`getItems` method is the result of calling the rendering strategy's `toRenderableList` method on the results of the construction
- strategy's `construct` method.
-
-*More Documentation Coming*

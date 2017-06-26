@@ -4,11 +4,14 @@ import com.citytechinc.cq.component.annotations.Component;
 import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.editconfig.ActionConfig;
 import com.citytechinc.cq.component.annotations.editconfig.ActionConfigProperty;
+import com.citytechinc.cq.component.annotations.widgets.DialogFieldSet;
 import com.citytechinc.cq.component.annotations.widgets.NumberField;
 import com.citytechinc.cq.component.annotations.widgets.Switch;
+import com.icfolson.aem.harbor.core.components.mixins.classifiable.Classification;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Default;
 import org.apache.sling.models.annotations.Model;
+import org.apache.sling.models.annotations.injectorspecific.Self;
 
 import javax.inject.Inject;
 
@@ -63,6 +66,9 @@ public class DynamicCarousel {
 
     @Inject
     private Resource resource;
+
+    @Inject @Self
+    private Classification classification;
 
     @DialogField(fieldLabel = "Show Previous and Next Controls", ranking = 1)
     @Switch(offText = "No", onText = "Yes")
@@ -119,5 +125,10 @@ public class DynamicCarousel {
     public String getId() {
         //TODO: Cleanup and decide if this is what we want the ID to be
         return resource.getPath().replaceAll("/", "_").replaceAll(":", "__");
+    }
+
+    @DialogField(ranking = 100) @DialogFieldSet
+    public Classification getClassification() {
+        return this.classification;
     }
 }

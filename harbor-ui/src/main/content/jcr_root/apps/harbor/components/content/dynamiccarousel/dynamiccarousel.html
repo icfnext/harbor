@@ -1,6 +1,6 @@
 <div data-sly-use.carousel="${component.properties['className']}"
      id="${carousel.id}-carousel"
-     class="${carousel.cssClass}"
+     class="${carousel.cssClass} ${carousel.classification.classNames}"
      data-ride="${(isPreviewMode || isPublish) ? 'carousel' : ''}"
      data-interval="${carousel.interval == 0 ? 'false' : carousel.interval}"
      data-pause="${carousel.pauseOnHover ? 'hover' : ''}"

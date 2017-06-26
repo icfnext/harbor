@@ -9,6 +9,7 @@ import com.google.common.collect.Lists;
 import com.icfolson.aem.harbor.api.components.content.dynamictabs.Tab;
 import com.icfolson.aem.harbor.core.components.content.dynamiccarousel.NewSlide;
 import com.icfolson.aem.harbor.core.components.mixins.classifiable.Classification;
+import com.icfolson.aem.harbor.core.constants.groups.ComponentGroups;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.injectorspecific.Self;
@@ -21,6 +22,7 @@ import java.util.stream.Collectors;
         value = "Dynamic Tabs",
         actions = { "text: Dynamic Tabs", "edit", "-", "copymove", "delete", "-", "insert" },
         isContainer = true,
+        group = ComponentGroups.HARBOR_SCAFFOLDING,
         actionConfigs = {
                 @ActionConfig(xtype = "tbseparator"),
                 @ActionConfig(text = "Add Tab",
