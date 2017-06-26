@@ -120,6 +120,7 @@
                     <componentPathBase>jcr_root/apps/harbor/components</componentPathBase>
                     <defaultComponentGroup>Harbor</defaultComponentGroup>
                     <transformerName>lower-case</transformerName>
+                    <generateClassicUiDialogs>false</generateClassicUiDialogs>
                     <additionalFeatures>
                         <additionalFeature>rte-touchui</additionalFeature>
                         <additionalFeature>tagspickerwidget</additionalFeature>
