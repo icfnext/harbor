@@ -1,25 +1,18 @@
 package com.icfolson.aem.harbor.core.domain.brand.bootstrap;
 
 import com.google.common.base.Optional;
-import com.google.common.base.Predicate;
-import com.google.common.collect.Maps;
 import com.icfolson.aem.harbor.core.domain.brand.bootstrap.impl.DefaultBootstrapBrand;
 import com.icfolson.aem.library.api.node.ComponentNode;
 import com.icfolson.aem.namespace.api.ontology.Properties;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.sling.api.resource.ValueMap;
 
-import javax.jcr.Property;
-import javax.jcr.RepositoryException;
-import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public final class BootstrapBrands {
-
-    private static final Logger LOG = LoggerFactory.getLogger(BootstrapBrands.class);
 
     private BootstrapBrands() {
 
@@ -29,17 +22,7 @@ public final class BootstrapBrands {
 
     public static final Integer BOOTSTRAP_PROPERTY_PREFIX_LENGTH = BOOTSTRAP_PROPERTY_PREFIX.length();
 
-    public static final Predicate<Property> BOOTSTRAP_PROPERTY_PREDICATE = property -> {
-        try {
-            return property.getName().startsWith(BOOTSTRAP_PROPERTY_PREFIX);
-        } catch (RepositoryException e) {
-            LOG.error("Repository Exception encountered checking property name");
-
-            return false;
-        }
-    };
-
-    public static Optional<BootstrapBrand> forTemplateResource(final Resource resource) throws RepositoryException {
+    public static Optional<BootstrapBrand> forTemplateResource(final Resource resource) {
         final Optional<String> brandPath = resource.adaptTo(ComponentNode.class).get(Properties.ICF_OLSON_BRAND,
             String.class);
 
@@ -56,25 +39,17 @@ public final class BootstrapBrands {
 
     }
 
-    public static Optional<BootstrapBrand> forBrandResource(final Resource resource) throws RepositoryException {
+    public static Optional<BootstrapBrand> forBrandResource(final Resource resource) {
         final Resource brandProperties = resource.getChild("brandproperties");
 
         if (brandProperties != null) {
-            final List<Property> bootstrapPropertyList = brandProperties.adaptTo(ComponentNode.class).getProperties(
-                BOOTSTRAP_PROPERTY_PREDICATE);
+            final ValueMap brandPropertiesMap = brandProperties.getValueMap();
 
-            final Map<String, String> bootstrapPropertyValueMap = Maps.newHashMap();
-
-            for (final Property currentProperty : bootstrapPropertyList) {
-                try {
-                    final String propertyName = currentProperty.getName();
-
-                    bootstrapPropertyValueMap.put(propertyName.substring(BOOTSTRAP_PROPERTY_PREFIX_LENGTH),
-                        currentProperty.getString());
-                } catch (RepositoryException e) {
-                    LOG.error("error processing bootstrap brand properties during construction of Bootstrap Brand domain object", e);
-                }
-            }
+            final Map<String, String> bootstrapPropertyValueMap = brandPropertiesMap.keySet()
+                .stream()
+                .filter(propertyName -> propertyName.startsWith(BOOTSTRAP_PROPERTY_PREFIX))
+                .collect(Collectors.toMap(propertyName -> propertyName.substring(BOOTSTRAP_PROPERTY_PREFIX_LENGTH),
+                    propertyName -> brandPropertiesMap.get(propertyName, "")));
 
             if (!bootstrapPropertyValueMap.isEmpty()) {
                 final BootstrapBrand newBootstrapBrand = new DefaultBootstrapBrand(bootstrapPropertyValueMap);

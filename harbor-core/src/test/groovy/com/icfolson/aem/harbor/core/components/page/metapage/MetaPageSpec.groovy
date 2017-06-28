@@ -12,8 +12,10 @@ class MetaPageSpec extends HarborSpec {
     def setupSpec() {
         pageBuilder.content {
             harbor("Harbor", pageTitle: "Harbor Page") {
-                one("One", canonicalUrl: "/one")
-                two("Two", canonicalUrl: "http://www.two.com")
+                one("One", canonicalUrl: "/one", noindex: false, nofollow: false)
+                two("Two", canonicalUrl: "http://www.two.com", noindex: true, nofollow: true)
+                three("Three", noindex: false, nofollow: true)
+                four("Three", noindex: true, nofollow: false)
             }
         }
 
@@ -80,5 +82,24 @@ class MetaPageSpec extends HarborSpec {
         "/content/harbor"     | ""
         "/content/harbor/one" | "/content/harbor/one.html"
         "/content/harbor/two" | "http://www.two.com"
+    }
+
+    def "get robots content"() {
+        setup:
+        def request = requestBuilder.build {
+            path = pagePath
+        }
+
+        def metaPage = request.adaptTo(MetaPage)
+
+        expect:
+        metaPage.robotsContent == robotsContent
+
+        where:
+        pagePath                | robotsContent
+        "/content/harbor/one"   | ""
+        "/content/harbor/two"   | "NOINDEX, NOFOLLOW"
+        "/content/harbor/three" | "INDEX, NOFOLLOW"
+        "/content/harbor/four"  | "NOINDEX, FOLLOW"
     }
 }
