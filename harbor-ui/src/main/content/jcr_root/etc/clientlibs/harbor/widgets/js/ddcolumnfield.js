@@ -16,23 +16,20 @@ if ( typeof CQ !== 'undefined' ) {
         initComponent: function () {
 
             Harbor.Widgets.DdColumnField.superclass.initComponent.call(this);
+
             var parentContext = this;
 
             var parentDialog = this.findParentByType("dialog");
 
             this.buttonBar = new function () {
 
-                this.addColumn = function (element) {
-
+                this.addColumn = function () {
                     parentContext.addColumn(parentContext);
-
-                }
+                };
 
                 this.removeColumn = function () {
-
                     parentContext.removeColumn();
-
-                }
+                };
 
             };
 
@@ -258,7 +255,7 @@ if ( typeof CQ !== 'undefined' ) {
                     class: '',
                     canAddColumn: false,
                     name: this.columnManifest[id].data.name
-                }
+                };
 
                 lastCol.remove();
                 this.columnCount--;

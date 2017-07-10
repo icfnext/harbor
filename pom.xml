@@ -18,6 +18,7 @@
     <modules>
         <module>harbor-api</module>
         <module>harbor-core</module>
+        <module>harbor-widgets</module>
         <module>harbor-ui</module>
     </modules>
 
