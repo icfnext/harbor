@@ -59,7 +59,7 @@ public class PageLinkItem {
                 return linkedPage.getPageTitle();
             }
 
-            return linkedPage.getPageTitle();
+            return linkedPage.getTitle();
         }
 
         return StringUtils.EMPTY;
