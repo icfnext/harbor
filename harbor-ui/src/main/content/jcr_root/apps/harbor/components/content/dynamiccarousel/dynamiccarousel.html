@@ -1,3 +1,6 @@
+<div data-sly-test="${(isEditMode || isDesignMode)}" class="author-help-message">
+    Dynamic Carousel - Press the &quot;Add Experience&quot; button in the edit bar to add slides.
+</div>
 <div data-sly-use.carousel="${component.properties['className']}"
      id="${carousel.id}-carousel"
      class="${carousel.cssClass} ${carousel.classification.classNames}"

@@ -44,8 +44,6 @@ public class DynamicCarousel {
 
     public static final String INDICATORS_CSS_CLASS = "carousel-indicators";
 
-    public static final String SLIDE_RESOURCE_TYPE = "harbor/components/content/dynamiccarousel/slide";
-
     @Inject @Default(booleanValues = true)
     private boolean showPreviousAndNextControls;
 
