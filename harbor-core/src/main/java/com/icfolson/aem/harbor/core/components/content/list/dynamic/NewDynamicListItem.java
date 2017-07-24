@@ -10,18 +10,19 @@ import org.apache.sling.models.annotations.Optional;
 
 import javax.inject.Inject;
 
-@Component(value = "Dynamic List Item", group = ".hidden", name = "lists/dynamiclist/item/new", touchFileName = "listitemdialog")
+@Component(value = "Dynamic List Item", group = ".hidden", name = "lists/dynamiclist/item/new", touchFileName = NewDynamicListItem.DIALOG_FILE_NAME, editConfig = false)
 @Model(adaptables = Resource.class)
-public class NewDynamicListItem implements DynamicListItem {
+public class NewDynamicListItem {
+
+    public static final String RESOURCE_TYPE = DynamicListItem.RESOURCE_TYPE + "/new";
 
     static final String DIALOG_FILE_NAME = "listitemdialog";
-    static final String DATA_SOURCE_RESOURCE_TYPE = RESOURCE_TYPE + "/new/options";
 
     @Inject @Optional
     private String type;
 
     @DialogField(value = "List Item Type", name = "./sling:resourceType")
-    @Selection(type = Selection.SELECT, dataSource = NewDynamicListItem.DATA_SOURCE_RESOURCE_TYPE)
+    @Selection(type = Selection.SELECT, dataSource = NewDynamicListItemDataSource.RESOURCE_TYPE)
     public String getType() {
         return type;
     }

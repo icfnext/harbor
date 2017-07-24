@@ -5,15 +5,11 @@ import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.editconfig.ActionConfig;
 import com.citytechinc.cq.component.annotations.editconfig.ActionConfigProperty;
 import com.citytechinc.cq.component.annotations.widgets.DialogFieldSet;
-import com.icfolson.aem.harbor.api.components.content.list.dynamic.DynamicList;
-import com.icfolson.aem.harbor.api.components.content.list.dynamic.DynamicListItem;
 import com.icfolson.aem.harbor.core.components.mixins.classifiable.Classification;
 import com.icfolson.aem.harbor.core.constants.groups.ComponentGroups;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.injectorspecific.Self;
-
-import java.util.List;
 
 @Component(
         value = "Dynamic List",
@@ -25,28 +21,19 @@ import java.util.List;
                 @ActionConfig(xtype = "tbseparator"),
                 @ActionConfig(
                         text = "Add Item",
-                        handler = "function() { Harbor.Components.DynamicList.addItem( this, '" + DynamicListImpl.ADD_ITEM_DIALOG + "' ); }",
+                        handler = "function() { Harbor.Components.DynamicList.addItem( this, '/apps/" + NewDynamicListItem.RESOURCE_TYPE + "/" + NewDynamicListItem.DIALOG_FILE_NAME + "' ); }",
                         additionalProperties = {
                                 @ActionConfigProperty(name = "icon", value = "coral-Icon--experienceAdd")
                         })
         }
 )
 @Model(adaptables = Resource.class)
-public class DynamicListImpl implements DynamicList {
+public class DynamicList {
 
-    static final String ADD_ITEM_DIALOG = "/apps/" + DynamicListItem.RESOURCE_TYPE + "/new/" + NewDynamicListItem.DIALOG_FILE_NAME;
-
-    public static final String ALLOWED_LIST_ITEMS = "icf:allowedDynamicListItems";
-
-    //@Inject @Self
-    private List<DynamicListItem> items;
+    public static final String RESOURCE_TYPE = "harbor/components/content/lists/dynamiclist";
 
     @Self
     private Classification classification;
-
-    public List<DynamicListItem> getItems() {
-        return items;
-    }
 
     @DialogField
     @DialogFieldSet

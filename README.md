@@ -686,7 +686,6 @@ ability to add new types of list items.
 The Harbor Dynamics component family currently consists of 
 
 * Dynamic List
-* Dynamic Column Row (still under development)
 * Dynamic Tabs 
 * Dynamic Carousel 
 * Dynamic Accordion (still under development)
