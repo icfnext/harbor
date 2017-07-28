@@ -7,6 +7,7 @@ import com.citytechinc.cq.component.annotations.editconfig.ActionConfig;
 import com.citytechinc.cq.component.annotations.editconfig.ActionConfigProperty;
 import com.citytechinc.cq.component.annotations.widgets.TextField;
 import com.icfolson.aem.harbor.api.components.content.list.dynamic.DynamicListItem;
+import com.icfolson.aem.harbor.core.util.icon.IconUtils;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.Optional;
@@ -46,7 +47,7 @@ public class ExternalLinkItem {
     }
 
     public String getLabel() {
-        return label;
+        return IconUtils.iconify(label);
     }
 
 }

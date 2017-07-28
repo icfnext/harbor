@@ -9,6 +9,7 @@ import com.citytechinc.cq.component.annotations.editconfig.ActionConfigProperty;
 import com.citytechinc.cq.component.annotations.widgets.PathField;
 import com.citytechinc.cq.component.annotations.widgets.TextField;
 import com.icfolson.aem.harbor.api.components.content.list.dynamic.DynamicListItem;
+import com.icfolson.aem.harbor.core.util.icon.IconUtils;
 import com.icfolson.aem.library.api.page.PageDecorator;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.sling.api.resource.Resource;
@@ -51,15 +52,15 @@ public class PageLinkItem {
 
     public String getLabel() {
         if (StringUtils.isNotBlank(label)) {
-            return label;
+            return IconUtils.iconify(label);
         }
 
         if (linkedPage != null) {
             if (StringUtils.isNotBlank(linkedPage.getPageTitle())) {
-                return linkedPage.getPageTitle();
+                return IconUtils.iconify(linkedPage.getPageTitle());
             }
 
-            return linkedPage.getTitle();
+            return IconUtils.iconify(linkedPage.getTitle());
         }
 
         return StringUtils.EMPTY;

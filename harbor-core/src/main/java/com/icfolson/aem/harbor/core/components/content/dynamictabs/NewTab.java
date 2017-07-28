@@ -11,7 +11,7 @@ import org.apache.sling.models.annotations.Optional;
 
 import javax.inject.Inject;
 
-@Component(value = "Dynamic Tabs Item", group = ".hidden", name = "dynamictabs/tab/new", touchFileName = NewTab.DIALOG_FILE_NAME)
+@Component(value = "New Dynamic Tabs Item", group = ".hidden", name = "dynamictabs/tab/new", touchFileName = NewTab.DIALOG_FILE_NAME)
 @Model(adaptables = Resource.class)
 public class NewTab {
 
