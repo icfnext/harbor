@@ -32,7 +32,7 @@ import javax.inject.Inject;
         @Tab(title = "Advanced")
     }
 )
-@Model(adaptables = Resource.class)
+@Model(adaptables = Resource.class, adapters = Heading.class, resourceType = Title.RESOURCE_TYPE)
 public class Title implements Heading {
 
     public static final String RESOURCE_TYPE = "harbor/components/content/title/v1/title";
@@ -59,7 +59,7 @@ public class Title implements Heading {
             tab = 2)
     @TextField
     public String getDomId() {
-        return !StringUtils.isBlank(domId) ? domId : ComponentUtils.sanitizeTextAsDomId(getTitleText());
+        return StringUtils.isNotBlank(domId) ? domId : ComponentUtils.sanitizeTextAsDomId(getTitleText());
     }
 
     /**

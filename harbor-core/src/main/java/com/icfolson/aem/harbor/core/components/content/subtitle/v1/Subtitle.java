@@ -31,7 +31,7 @@ import javax.inject.Inject;
             @Tab(title = "Advanced")
     }
 )
-@Model(adaptables = Resource.class)
+@Model(adaptables = Resource.class, adapters = Heading.class, resourceType = Subtitle.RESOURCE_TYPE)
 public class Subtitle implements Heading {
 
     public static final String RESOURCE_TYPE = "harbor/components/content/subtitle/v1/subtitle";
@@ -73,7 +73,7 @@ public class Subtitle implements Heading {
     }
 
     protected String getSubtitleText() {
-        return !StringUtils.isNotBlank(text) ? text : currentPage.get("subtitle", DEFAULT_TEXT);
+        return StringUtils.isNotBlank(text) ? text : currentPage.get("subtitle", Subtitle.DEFAULT_TEXT);
     }
 
 }
