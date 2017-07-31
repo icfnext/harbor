@@ -5,6 +5,7 @@ import com.citytechinc.cq.component.annotations.widgets.TagInputField;
 import com.day.cq.tagging.Tag;
 import com.day.cq.tagging.TagManager;
 import com.google.common.collect.Lists;
+import com.icfolson.aem.harbor.api.components.mixins.classifiable.Classification;
 import com.icfolson.aem.library.core.components.AbstractComponent;
 import com.icfolson.aem.namespace.api.ontology.Properties;
 import org.apache.commons.lang3.StringUtils;
@@ -32,10 +33,10 @@ import java.util.stream.Collectors;
  * "upper-left-panel," "site-sidebar," etc are not good classifications as they have more to do with the
  * position of the content.
  */
-@Model(adaptables = Resource.class)
-public class Classification extends AbstractComponent {
+@Model(adaptables = Resource.class, adapters = Classification.class)
+public class DefaultClassification extends AbstractComponent implements Classification {
 
-    private static final Logger LOG = LoggerFactory.getLogger(Classification.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DefaultClassification.class);
 
     public static final String CLASSIFICATION_FIELD_LABEL = "Classification";
 
