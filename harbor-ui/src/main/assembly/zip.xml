@@ -14,6 +14,7 @@
             <outputDirectory>jcr_root</outputDirectory>
             <excludes>
                 <exclude>**/.DS_Store</exclude>
+                <exclude>**/*.md</exclude>
                 <exclude>/etc/clientlibs/harbor/**</exclude>
                 <exclude>/apps/harbor/admin/documentation/components/**</exclude>
             </excludes>

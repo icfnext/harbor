@@ -1,6 +1,7 @@
 package com.icfolson.aem.harbor.core.components.content.subtitle
 
 import com.icfolson.aem.harbor.HarborSpec
+import com.icfolson.aem.harbor.core.components.content.subtitle.v1.Subtitle
 import spock.lang.Unroll
 
 class SubtitleSpec extends HarborSpec {

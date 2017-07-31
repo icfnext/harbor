@@ -1,6 +1,7 @@
 package com.icfolson.aem.harbor.core.components.content.title
 
 import com.icfolson.aem.harbor.HarborSpec
+import com.icfolson.aem.harbor.core.components.content.title.v1.Title
 import spock.lang.Unroll
 
 class TitleSpec extends HarborSpec {
