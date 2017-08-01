@@ -20,6 +20,8 @@ The following videos were developed (poorly) to promote Harbor internally.
   * [Heading (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/heading/v1/heading)
   * [Title (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/title/v1/title)
   * [Subtitle (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/subtitle/v1/subtitle)
+* Page
+  * [Global (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/page/global/v1/global)
 
 ### Title Component
 
