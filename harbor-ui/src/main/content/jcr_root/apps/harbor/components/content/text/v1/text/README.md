@@ -14,6 +14,10 @@ Uses the `com.icfolson.aem.harbor.api.components.content.text.Text` Model interf
 
 ## Authorable Properties
 
+###### Dialog Fields
 * `content`: The text to present in the Text component.
 * `classification`: A list of tag based classifications associated with this text.
 
+###### Dialog Field Types
+* `content`: Inline Rich Text Editor
+* `classification`: Tag Input Field
