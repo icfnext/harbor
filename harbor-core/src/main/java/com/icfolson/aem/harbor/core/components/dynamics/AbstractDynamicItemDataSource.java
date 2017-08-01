@@ -10,7 +10,6 @@ import com.icfolson.aem.library.api.page.PageDecorator;
 import com.icfolson.aem.library.api.request.ComponentServletRequest;
 import com.icfolson.aem.library.core.servlets.datasource.AbstractOptionsDataSourceServlet;
 import com.icfolson.aem.library.core.servlets.optionsprovider.Option;
-import org.apache.felix.scr.annotations.sling.SlingServlet;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.api.resource.ResourceResolverFactory;

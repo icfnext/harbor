@@ -1,1 +1,3 @@
-<sly data-sly-resource="${'mainpar' @ resourceType='wcm/foundation/components/parsys'}"/>
+<div
+    data-sly-use.containerDesign="com.icfolson.aem.harbor.api.components.design.container.ContainerDesign"
+    data-sly-resource="${'mainpar' @ resourceType=containerDesign.usesResponsiveGrid ? 'wcm/foundation/components/responsivegrid' : 'wcm/foundation/components/parsys'}"/>
