@@ -38,8 +38,6 @@ public class DefaultClassification extends AbstractComponent implements Classifi
 
     private static final Logger LOG = LoggerFactory.getLogger(DefaultClassification.class);
 
-    public static final String CLASSIFICATION_FIELD_LABEL = "Classification";
-
     @Inject
     private TagManager tagManager;
 
@@ -50,8 +48,6 @@ public class DefaultClassification extends AbstractComponent implements Classifi
      *
      * @return A list of the Tag based classifications associated with this Resource.
      */
-    @DialogField(fieldLabel = CLASSIFICATION_FIELD_LABEL, name = "./" + Properties.ICF_OLSON_CLASSIFICATION)
-    @TagInputField
     public List<Tag> getClassifications() {
         if (classifications == null) {
             classifications = Lists.newArrayList();

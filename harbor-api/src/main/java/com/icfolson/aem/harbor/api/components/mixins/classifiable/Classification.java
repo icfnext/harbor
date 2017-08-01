@@ -1,6 +1,9 @@
 package com.icfolson.aem.harbor.api.components.mixins.classifiable;
 
+import com.citytechinc.cq.component.annotations.DialogField;
+import com.citytechinc.cq.component.annotations.widgets.TagInputField;
 import com.day.cq.tagging.Tag;
+import com.icfolson.aem.namespace.api.ontology.Properties;
 
 import java.util.List;
 
@@ -26,6 +29,8 @@ public interface Classification {
      *
      * @return A list of the Tag based classifications associated with this Resource.
      */
+    @DialogField(fieldLabel = "Classification", name = "./" + Properties.ICF_OLSON_CLASSIFICATION)
+    @TagInputField
     List<Tag> getClassifications();
 
     /**
