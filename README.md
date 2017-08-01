@@ -16,6 +16,11 @@ The following videos were developed (poorly) to promote Harbor internally.
 
 ## Components
 
+* Group: Harbor
+  * [Heading (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/heading/v1/heading)
+  * [Title (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/title/v1/title)
+  * [Subtitle (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/subtitle/v1/subtitle)
+
 ### Title Component
 
 * Group: Harbor

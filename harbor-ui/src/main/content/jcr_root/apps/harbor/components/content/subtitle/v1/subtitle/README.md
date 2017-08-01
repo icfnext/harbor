@@ -4,7 +4,7 @@ A Page Subtitle rendered as an `h2` element.
 
 ## Usage
 
-See [usage video]().
+See [usage video](https://youtu.be/9phpmkQQ0Uw).
 
 ## General Information
 

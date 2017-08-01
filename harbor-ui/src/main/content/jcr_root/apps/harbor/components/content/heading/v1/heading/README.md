@@ -4,7 +4,7 @@ A generic section heading supporting types `h2` - `h6`.  When an `h1` is needed 
 
 ## Usage
 
-See [usage video](https://drive.google.com/open?id=0B2FwTcEm5yJ6ZFp5cS1vVG4xT0U).
+See [usage video](https://youtu.be/0g05zx9d7qg).
 
 ## General Information
 
