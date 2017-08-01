@@ -72,5 +72,17 @@
             <groupId>com.icfolson.aem.namespace</groupId>
             <artifactId>aem-namespace-extension-api</artifactId>
         </dependency>
+
+        <!-- Component Annotation -->
+        <dependency>
+            <groupId>com.citytechinc.cq.cq-component-plugin</groupId>
+            <artifactId>cq-component-annotations</artifactId>
+            <version>${component.plugin.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.citytechinc.cq.cq-component-plugin</groupId>
+            <artifactId>cq-component-maven-plugin</artifactId>
+            <version>${component.plugin.version}</version>
+        </dependency>
     </dependencies>
 </project>
