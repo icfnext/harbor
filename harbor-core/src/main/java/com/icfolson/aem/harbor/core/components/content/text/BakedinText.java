@@ -12,7 +12,7 @@ import org.apache.sling.models.annotations.Model;
         suppressFieldInheritanceForTouchUI = true,
         suppressTouchUIDialog = true,
         resourceSuperType = DefaultText.RESOURCE_TYPE,
-        name = "text/bakedin"
+        name = "text/v1/bakedin"
 )
 @Model(adaptables = Resource.class, adapters = Text.class, resourceType = BakedinText.RESOURCE_TYPE)
 public class BakedinText extends DefaultText {
