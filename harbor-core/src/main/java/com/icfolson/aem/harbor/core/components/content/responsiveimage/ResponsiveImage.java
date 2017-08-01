@@ -13,7 +13,7 @@ import com.citytechinc.cq.component.annotations.widgets.Selection;
 import com.citytechinc.cq.component.annotations.widgets.TextField;
 import com.google.common.collect.Lists;
 import com.icfolson.aem.harbor.api.constants.bootstrap.Bootstrap;
-import com.icfolson.aem.harbor.core.components.mixins.classifiable.Classification;
+import com.icfolson.aem.harbor.api.components.mixins.classifiable.Classification;
 import com.icfolson.aem.harbor.core.constants.groups.ComponentGroups;
 import com.icfolson.aem.library.core.components.AbstractComponent;
 import com.icfolson.aem.library.core.constants.PathConstants;

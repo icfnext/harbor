@@ -20,7 +20,7 @@ class ClassificationSpec extends HarborSpec {
 
     def "get classification IDs"() {
         setup:
-        def classification = getResource("/content/harbor/jcr:content").adaptTo(Classification)
+        def classification = getResource("/content/harbor/jcr:content").adaptTo(DefaultClassification)
 
         expect:
         classification.hasClassifications
@@ -31,7 +31,7 @@ class ClassificationSpec extends HarborSpec {
 
     def "get class names"() {
         setup:
-        def classification = getResource("/content/harbor/jcr:content").adaptTo(Classification)
+        def classification = getResource("/content/harbor/jcr:content").adaptTo(DefaultClassification)
 
         expect:
         classification.classNames == "green red blue"

@@ -9,7 +9,7 @@ import com.citytechinc.cq.component.annotations.widgets.TextField;
 import com.google.common.base.Optional;
 import com.icfolson.aem.harbor.api.constants.bootstrap.Bootstrap;
 import com.icfolson.aem.harbor.api.constants.dom.Elements;
-import com.icfolson.aem.harbor.core.components.mixins.classifiable.Classification;
+import com.icfolson.aem.harbor.api.components.mixins.classifiable.Classification;
 import com.icfolson.aem.harbor.core.components.mixins.classifiable.InheritedClassification;
 import com.icfolson.aem.harbor.core.constants.groups.ComponentGroups;
 import com.icfolson.aem.library.core.components.AbstractComponent;

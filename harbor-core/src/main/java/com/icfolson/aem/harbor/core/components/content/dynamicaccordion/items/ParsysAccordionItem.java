@@ -6,7 +6,7 @@ import com.citytechinc.cq.component.annotations.Listener;
 import com.citytechinc.cq.component.annotations.widgets.DialogFieldSet;
 import com.citytechinc.cq.component.annotations.widgets.TextField;
 import com.icfolson.aem.harbor.api.components.content.dynamicaccordion.AccordionItem;
-import com.icfolson.aem.harbor.core.components.mixins.classifiable.Classification;
+import com.icfolson.aem.harbor.api.components.mixins.classifiable.Classification;
 import com.icfolson.aem.harbor.core.util.ComponentUtils;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;

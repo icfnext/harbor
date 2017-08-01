@@ -7,7 +7,7 @@ import org.apache.sling.models.annotations.Model;
 import java.util.List;
 
 @Model(adaptables = Resource.class)
-public class InheritedClassification extends Classification {
+public class InheritedClassification extends DefaultClassification {
 
     @Override
     protected List<String> getClassificationIdStrings() {
