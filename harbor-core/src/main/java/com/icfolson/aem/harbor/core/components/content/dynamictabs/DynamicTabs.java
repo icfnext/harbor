@@ -8,7 +8,7 @@ import com.citytechinc.cq.component.annotations.widgets.DialogFieldSet;
 import com.google.common.collect.Lists;
 import com.icfolson.aem.harbor.api.components.content.dynamictabs.Tab;
 import com.icfolson.aem.harbor.core.components.content.dynamiccarousel.NewSlide;
-import com.icfolson.aem.harbor.core.components.mixins.classifiable.Classification;
+import com.icfolson.aem.harbor.api.components.mixins.classifiable.Classification;
 import com.icfolson.aem.harbor.core.constants.groups.ComponentGroups;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
