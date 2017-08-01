@@ -1,5 +1,6 @@
 package com.icfolson.aem.harbor.core.components.content.breadcrumb;
 
+import javax.annotation.Nonnull;
 import java.util.Iterator;
 import java.util.List;
 
@@ -19,7 +20,6 @@ public class BreadcrumbTrail implements Iterable<BreadcrumbItem> {
         BreadcrumbItemConfiguration intermediateItemConfiguration, BreadcrumbItemConfiguration currentItemConfiguration,
         List<BreadcrumbItem> renderableList) {
         this.renderAsLink = renderAsLink;
-
         this.rootItemConfiguration = rootItemConfiguration;
         this.intermediateItemConfiguration = intermediateItemConfiguration;
         this.currentItemConfiguration = currentItemConfiguration;
@@ -38,6 +38,7 @@ public class BreadcrumbTrail implements Iterable<BreadcrumbItem> {
         return currentItemConfiguration;
     }
 
+    @Nonnull
     @Override
     public Iterator<BreadcrumbItem> iterator() {
         return renderableList.iterator();

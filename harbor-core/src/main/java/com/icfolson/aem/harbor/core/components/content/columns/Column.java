@@ -214,7 +214,7 @@ public class Column {
         return classification;
     }
 
-    public Boolean getIsInherited() {
+    public Boolean isInherited() {
         return inherited;
     }
 
@@ -227,10 +227,6 @@ public class Column {
     }
 
     public String getParagraphResourceType() {
-        if (getIsInherited()) {
-            return "wcm/foundation/components/iparsys";
-        }
-
-        return "wcm/foundation/components/parsys";
+        return isInherited() ? "wcm/foundation/components/iparsys" : "wcm/foundation/components/parsys";
     }
 }
