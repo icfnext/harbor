@@ -1,20 +1,20 @@
-<sly data-sly-use.metaPage="com.icfolson.aem.harbor.core.components.page.metapage.MetaPage">
+<sly data-sly-use.metaPage="com.icfolson.aem.harbor.api.components.page.metapage.MetaPage">
     <sly data-sly-test="${!metaPage.disableSchemaOrg}">
         <meta itemprop="name" content="${metaPage.pageName}">
-        <meta itemprop="description" content="${metaPage.description}">
-        <meta itemprop="image" content="${metaPage.fullyQualifiedPageImage}">
+        <meta itemprop="description" content="${metaPage.description}" data-sly-test="${metaPage.description}">
+        <meta itemprop="image" content="${metaPage.fullyQualifiedPageImage}" data-sly-test="${metaPage.fullyQualifiedPageImage}">
     </sly>
-    <sly data-sly-test="${metaPage.publisherHandle}">
+    <sly data-sly-test="${metaPage.twitterPublisherHandle}">
         <meta name="twitter:card" content="summary">
-        <meta name="twitter:site" content="${metaPage.publisherHandle}">
+        <meta name="twitter:site" content="${metaPage.twitterPublisherHandle}">
         <meta name="twitter:title" content="${metaPage.pageName}">
         <meta name="twitter:description" content="${metaPage.description}">
         <meta name="twitter:image" data-sly-test="${metaPage.fullyQualifiedPageImage}" content="${metaPage.fullyQualifiedPageImage}">
         <meta name="twitter:url" content="${metaPage.fullyQualifiedPageUrl}">
     </sly>
-    <sly data-sly-test="${metaPage.ogType && metaPage.ogType != 'none'}">
+    <sly data-sly-test="${metaPage.facebookOpenGraphType && metaPage.facebookOpenGraphType != 'none'}">
         <meta property="og:title" content="${metaPage.pageName}" />
-        <meta property="og:type" content="${metaPage.ogType}" />
+        <meta property="og:type" content="${metaPage.facebookOpenGraphType}" />
         <meta property="og:url" data-sly-test="${metaPage.canonicalUrl}" content="${metaPage.canonicalUrl}" />
         <meta property="og:url" data-sly-test="${!metaPage.canonicalUrl}" content="${metaPage.fullyQualifiedPageUrl}" />
         <meta property="og:image" data-sly-test="${metaPage.fullyQualifiedPageImage}" content="${metaPage.fullyQualifiedPageImage}" />

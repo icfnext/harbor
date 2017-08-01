@@ -2,6 +2,7 @@ package com.icfolson.aem.harbor.core.components.page.metapage
 
 import com.icfolson.aem.harbor.HarborSpec
 import com.icfolson.aem.harbor.api.services.meta.MetadataConfigService
+import com.icfolson.aem.harbor.core.components.page.metapage.v1.DefaultMetaPage
 import org.apache.sling.api.SlingHttpServletRequest
 import org.apache.sling.api.resource.Resource
 import spock.lang.Unroll
@@ -43,7 +44,7 @@ class MetaPageSpec extends HarborSpec {
             path = pagePath
         }
 
-        def metaPage = request.adaptTo(MetaPage)
+        def metaPage = request.adaptTo(DefaultMetaPage)
 
         expect:
         metaPage.pageName == pageName
@@ -60,7 +61,7 @@ class MetaPageSpec extends HarborSpec {
             path = "/content/harbor"
         }
 
-        def metaPage = request.adaptTo(MetaPage)
+        def metaPage = request.adaptTo(DefaultMetaPage)
 
         expect:
         metaPage.fullyQualifiedPageUrl == "/content/harbor.html"
@@ -72,7 +73,7 @@ class MetaPageSpec extends HarborSpec {
             path = pagePath
         }
 
-        def metaPage = request.adaptTo(MetaPage)
+        def metaPage = request.adaptTo(DefaultMetaPage)
 
         expect:
         metaPage.canonicalUrl == canonicalUrl
@@ -90,7 +91,7 @@ class MetaPageSpec extends HarborSpec {
             path = pagePath
         }
 
-        def metaPage = request.adaptTo(MetaPage)
+        def metaPage = request.adaptTo(DefaultMetaPage)
 
         expect:
         metaPage.robotsContent == robotsContent

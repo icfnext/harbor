@@ -1,10 +1,11 @@
-package com.icfolson.aem.harbor.core.components.page.sitemappedpage;
+package com.icfolson.aem.harbor.core.components.page.sitemappedpage.v1;
 
 import com.citytechinc.cq.component.annotations.Component;
 import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.Option;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
 import com.citytechinc.cq.component.annotations.widgets.Switch;
+import com.icfolson.aem.harbor.api.components.page.sitemappedpage.SitemappedPage;
 import com.icfolson.aem.harbor.api.domain.sitemap.ChangeFrequency;
 import com.icfolson.aem.library.api.page.PageDecorator;
 import org.apache.sling.api.resource.Resource;
@@ -17,8 +18,8 @@ import javax.inject.Named;
 
 @Component(value = "Sitemap", editConfig = false, path = "/page/common", name = "global",
     touchFileName = "touch-sitemap")
-@Model(adaptables = Resource.class)
-public class SitemappedPage {
+@Model(adaptables = Resource.class, adapters = SitemappedPage.class, resourceType = "wcm/foundation/components/page") //TODO: Evaluate resource type
+public class DefaultSitemappedPage {
 
     @Inject
     private PageDecorator page;
@@ -73,4 +74,5 @@ public class SitemappedPage {
     public PageDecorator getPage() {
         return page;
     }
+
 }

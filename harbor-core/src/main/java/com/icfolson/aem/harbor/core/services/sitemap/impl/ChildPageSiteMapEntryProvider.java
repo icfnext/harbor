@@ -2,10 +2,10 @@ package com.icfolson.aem.harbor.core.services.sitemap.impl;
 
 import com.day.cq.commons.Externalizer;
 import com.google.common.collect.Lists;
+import com.icfolson.aem.harbor.api.components.page.sitemappedpage.SitemappedPage;
 import com.icfolson.aem.harbor.api.domain.sitemap.ChangeFrequency;
 import com.icfolson.aem.harbor.api.domain.sitemap.SiteMapEntry;
 import com.icfolson.aem.harbor.api.services.sitemap.SiteMapEntryProvider;
-import com.icfolson.aem.harbor.core.components.page.sitemappedpage.SitemappedPage;
 import com.icfolson.aem.library.api.page.PageDecorator;
 import org.apache.felix.scr.annotations.Activate;
 import org.apache.felix.scr.annotations.Component;

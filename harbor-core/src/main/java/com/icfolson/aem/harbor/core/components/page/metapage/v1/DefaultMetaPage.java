@@ -1,4 +1,4 @@
-package com.icfolson.aem.harbor.core.components.page.metapage;
+package com.icfolson.aem.harbor.core.components.page.metapage.v1;
 
 import com.citytechinc.cq.component.annotations.Component;
 import com.citytechinc.cq.component.annotations.DialogField;
@@ -7,40 +7,41 @@ import com.citytechinc.cq.component.annotations.widgets.PathField;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
 import com.citytechinc.cq.component.annotations.widgets.Switch;
 import com.citytechinc.cq.component.annotations.widgets.TextField;
+import com.day.cq.commons.Externalizer;
 import com.google.common.collect.Lists;
+import com.icfolson.aem.harbor.api.components.page.metapage.MetaPage;
 import com.icfolson.aem.harbor.api.content.page.HierarchicalPage;
-import com.icfolson.aem.harbor.api.services.meta.MetadataConfigService;
 import com.icfolson.aem.library.api.page.PageDecorator;
 import com.icfolson.aem.library.core.constants.PathConstants;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.Resource;
+import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.models.annotations.Model;
 
 import javax.inject.Inject;
 import java.util.List;
 
-@Component(value = "SEO Metadata", editConfig = false, path = "/page/common", name = "global",
+@Component(value = "SEO Metadata", editConfig = false, path = "/page/common", name = "global/v1/global",
     touchFileName = "touch-metadata")
-@Model(adaptables = SlingHttpServletRequest.class)
-public class MetaPage {
+@Model(adaptables = SlingHttpServletRequest.class, adapters = MetaPage.class, resourceType = "wcm/foundation/components/page") //TODO: Evaulate resourceType
+public class DefaultMetaPage implements MetaPage {
 
     @Inject
     private PageDecorator currentPage;
 
     @Inject
-    private MetadataConfigService metadataConfigService;
+    private Externalizer externalizer;
 
     @Inject
     private SlingHttpServletRequest request;
 
     @DialogField(fieldLabel = "Schema.org Page Metadata",
-        fieldDescription = "When enabled, Google metadata tags name, description, and image will be output as part of the page meta data.",
+        fieldDescription = "When enabled, Google metadata tags name, description, and image will be output as part of the page meta data. Configuration is inherited by child pages.",
         ranking = 0)
     @Switch(onText = "Disabled", offText = "Enabled")
     public boolean isDisableSchemaOrg() {
-        //TODO: Should this inherit?
-        return currentPage.getProperties().get("disableSchemaOrg", false);
+        return currentPage.getInherited("disableSchemaOrg", false);
     }
 
     public String getPageName() {
@@ -57,16 +58,16 @@ public class MetaPage {
     }
 
     public String getFullyQualifiedPageUrl() {
-        return metadataConfigService.getExternalUrlForPage(request, currentPage.adaptTo(Resource.class));
+
+        return getExternalUrl(request, currentPage.adaptTo(Resource.class), "html");
     }
 
     @DialogField(fieldLabel = "Twitter Publisher Handle",
-        fieldDescription = "e.g. @icfi.  If this value is present Twitter metadata will be included on the page",
+        fieldDescription = "e.g. @yourhandle.  If this value is present Twitter metadata will be included on the page.  Configuration is inherited by child pages.",
         ranking = 10)
     @TextField
     public String getTwitterPublisherHandle() {
-        //TODO: SHould this inherit?
-        return currentPage.get("twitterPublisherHandle", "");
+        return currentPage.getInherited("twitterPublisherHandle", "");
     }
 
     @DialogField(fieldLabel = "Open Graph Type",
@@ -90,7 +91,7 @@ public class MetaPage {
             @Option(text = "Radio Station", value = "music.radio_station")
         }
     )
-    public String getOgType() {
+    public String getFacebookOpenGraphType() {
         //TODO: Should this inherit?
         return currentPage.get("ogType", "");
     }
@@ -105,7 +106,7 @@ public class MetaPage {
             if (canonicalUrl.startsWith("http:") || canonicalUrl.startsWith("https:")) {
                 url = canonicalUrl;
             } else {
-                url = metadataConfigService.getExternalUrlForPage(request, currentPage.adaptTo(Resource.class));
+                url = getExternalUrl(request, currentPage.adaptTo(Resource.class), "html");
             }
 
             return url;
@@ -174,4 +175,22 @@ public class MetaPage {
 
         return content.toString();
     }
+
+    public String getExternalizerName() {
+        return "publish";
+    }
+
+    private String getExternalUrl(SlingHttpServletRequest requestContext, Resource resource, String extension) {
+        final ResourceResolver resourceResolver = requestContext.getResourceResolver();
+
+        String externalLink = externalizer.externalLink(resourceResolver, getExternalizerName(),
+                resourceResolver.map(requestContext, resource.getPath()));
+
+        if (StringUtils.isNotBlank(extension)) {
+            return externalLink + "." + extension;
+        }
+
+        return externalLink;
+    }
+
 }
