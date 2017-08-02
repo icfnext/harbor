@@ -16,7 +16,7 @@ import org.apache.sling.models.annotations.Optional;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-@Component(value = "Sitemap", editConfig = false, path = "/page/common", name = "global",
+@Component(value = "Sitemap", editConfig = false, path = "/page/common", name = "global/v1/global",
     touchFileName = "touch-sitemap")
 @Model(adaptables = Resource.class, adapters = SitemappedPage.class, resourceType = "wcm/foundation/components/page") //TODO: Evaluate resource type
 public class DefaultSitemappedPage implements SitemappedPage {
