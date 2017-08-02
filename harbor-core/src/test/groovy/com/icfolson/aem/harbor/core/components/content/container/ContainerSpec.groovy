@@ -2,6 +2,7 @@ package com.icfolson.aem.harbor.core.components.content.container
 
 import com.icfolson.aem.harbor.HarborSpec
 import com.icfolson.aem.harbor.api.constants.bootstrap.Bootstrap
+import com.icfolson.aem.harbor.core.components.content.container.v1.DefaultContainer
 import com.icfolson.aem.namespace.api.ontology.Properties
 import spock.lang.Unroll
 
@@ -24,7 +25,7 @@ class ContainerSpec extends HarborSpec {
 
     def "get container class"() {
         setup:
-        def container = getResource(path).adaptTo(Container)
+        def container = getResource(path).adaptTo(DefaultContainer)
 
         expect:
         container.containerClass == containerClass
@@ -37,7 +38,7 @@ class ContainerSpec extends HarborSpec {
 
     def "get section class"() {
         setup:
-        def container = getResource("/content/harbor/jcr:content/container2").adaptTo(Container)
+        def container = getResource("/content/harbor/jcr:content/container2").adaptTo(DefaultContainer)
 
         expect:
         container.sectionClass == "green red"

@@ -39,7 +39,7 @@ class ClassificationSpec extends HarborSpec {
 
     def "get inherited class names"() {
         setup:
-        def classification = getResource("/content/harbor/section/jcr:content").adaptTo(InheritedClassification)
+        def classification = getResource("/content/harbor/section/jcr:content").adaptTo(DefaultInheritedClassification)
 
         expect:
         classification.classNames == "green red blue"

@@ -221,7 +221,7 @@
                                         <row3col2
                                                 jcr:primaryType="nt:unstructured"
                                                 sling:resourceType="granite/ui/components/foundation/text"
-                                                text="com.icfolson.aem.harbor.core.components.content.container.Container"/>
+                                                text="com.icfolson.aem.harbor.core.components.content.container.v1.DefaultContainer"/>
                                     </row3>
                                 </contentContainerAspects>
 
@@ -292,7 +292,7 @@
                                         <row4col2
                                                 jcr:primaryType="nt:unstructured"
                                                 sling:resourceType="granite/ui/components/foundation/text"
-                                                text="com.icfolson.aem.harbor.core.components.content.container.BakedinContainer"/>
+                                                text="com.icfolson.aem.harbor.core.components.content.container.v1.BakedinContainer"/>
                                     </row4>
                                 </bakedInContentContainerAspects>
                             </items>
