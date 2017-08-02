@@ -1,4 +1,4 @@
-package com.icfolson.aem.harbor.core.components.content.container;
+package com.icfolson.aem.harbor.core.components.content.container.v1;
 
 import com.citytechinc.cq.component.annotations.Component;
 import com.citytechinc.cq.component.annotations.DialogField;
@@ -6,11 +6,12 @@ import com.citytechinc.cq.component.annotations.Tab;
 import com.citytechinc.cq.component.annotations.widgets.DialogFieldSet;
 import com.citytechinc.cq.component.annotations.widgets.Switch;
 import com.citytechinc.cq.component.annotations.widgets.TextField;
-import com.google.common.base.Optional;
+import com.icfolson.aem.harbor.api.components.content.container.Container;
+import com.icfolson.aem.harbor.api.components.mixins.classifiable.Classification;
+import com.icfolson.aem.harbor.api.components.mixins.classifiable.InheritedClassification;
+import com.icfolson.aem.harbor.api.components.mixins.inheritable.Inheritable;
 import com.icfolson.aem.harbor.api.constants.bootstrap.Bootstrap;
 import com.icfolson.aem.harbor.api.constants.dom.Elements;
-import com.icfolson.aem.harbor.api.components.mixins.classifiable.Classification;
-import com.icfolson.aem.harbor.core.components.mixins.classifiable.InheritedClassification;
 import com.icfolson.aem.harbor.core.constants.groups.ComponentGroups;
 import com.icfolson.aem.library.core.components.AbstractComponent;
 import org.apache.commons.lang3.StringUtils;
@@ -20,19 +21,19 @@ import org.apache.sling.models.annotations.Model;
 import javax.annotation.PostConstruct;
 
 @Component(
-    value = "Container",
+    value = "Container (v1)",
     description = "A container in which content may be placed.  All content should be placed in a container element.",
-    name = "contentcontainer",
+    name = "contentcontainer/v1/contentcontainer",
     group = ComponentGroups.HARBOR_SCAFFOLDING,
     isContainer = true,
     tabs = {
         @Tab(title = "Container"),
         @Tab(title = "Advanced")
     })
-@Model(adaptables = Resource.class)
-public class Container extends AbstractComponent {
+@Model(adaptables = Resource.class,adapters = Container.class, resourceType = DefaultContainer.RESOURCE_TYPE)
+public class DefaultContainer extends AbstractComponent implements Container, Inheritable {
 
-    public static final String RESOURCE_TYPE = "harbor/components/content/contentcontainer";
+    public static final String RESOURCE_TYPE = "harbor/components/content/contentcontainer/v1/contentcontainer";
 
     public static final String FULL_WIDTH_PROPERTY = "fullWidth";
 
@@ -51,7 +52,7 @@ public class Container extends AbstractComponent {
         fieldDescription = "When set to true, the container will render across the full width of the browser window",
         name = "./" + FULL_WIDTH_PROPERTY, ranking = 0)
     @Switch(offText = "No", onText = "Yes")
-    public Boolean isContainerFullWidth() {
+    public boolean isContainerFullWidth() {
         return isInherits() ? getInherited(FULL_WIDTH_PROPERTY, false) : get(FULL_WIDTH_PROPERTY, false);
     }
 
@@ -109,16 +110,12 @@ public class Container extends AbstractComponent {
         return Elements.DIV;
     }
 
-    public Optional<String> getRoleOptional() {
-        return Optional.absent();
-    }
-
-    public Boolean isHasRole() {
-        return getRoleOptional().isPresent();
+    public boolean isHasRole() {
+        return getRole() != null;
     }
 
     public String getRole() {
-        return getRoleOptional().orNull();
+        return null;
     }
 
     /**
@@ -153,7 +150,7 @@ public class Container extends AbstractComponent {
      *
      * @return boolean
      */
-    protected boolean isInherits() {
+    public boolean isInherits() {
         return false;
     }
 }

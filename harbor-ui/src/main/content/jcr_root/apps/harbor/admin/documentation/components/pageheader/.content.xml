@@ -181,7 +181,7 @@
                                         <row4col2
                                                 jcr:primaryType="nt:unstructured"
                                                 sling:resourceType="granite/ui/components/foundation/text"
-                                                text="com.icfolson.aem.harbor.core.components.content.pageheader.PageHeader"/>
+                                                text="com.icfolson.aem.harbor.core.components.content.pageheader.v1.PageHeader"/>
                                     </row4>
                                 </contentContainerAspects>
 
@@ -252,7 +252,7 @@
                                         <row4col2
                                                 jcr:primaryType="nt:unstructured"
                                                 sling:resourceType="granite/ui/components/foundation/text"
-                                                text="com.icfolson.aem.harbor.core.components.content.pageheader.BakedinPageHeader"/>
+                                                text="com.icfolson.aem.harbor.core.components.content.pageheader.v1.BakedinPageHeader"/>
                                     </row4>
                                 </bakedInContentContainerAspects>
                             </items>

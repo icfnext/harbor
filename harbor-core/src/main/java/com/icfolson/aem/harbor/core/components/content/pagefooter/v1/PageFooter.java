@@ -1,32 +1,33 @@
-package com.icfolson.aem.harbor.core.components.content.pagefooter;
+package com.icfolson.aem.harbor.core.components.content.pagefooter.v1;
 
 import com.citytechinc.cq.component.annotations.Component;
 import com.citytechinc.cq.component.annotations.Tab;
-import com.google.common.base.Optional;
+import com.icfolson.aem.harbor.api.components.content.container.Container;
 import com.icfolson.aem.harbor.api.constants.dom.Elements;
 import com.icfolson.aem.harbor.api.constants.ontology.Roles;
-import com.icfolson.aem.harbor.core.components.content.container.Container;
+import com.icfolson.aem.harbor.core.components.content.container.v1.DefaultContainer;
 import com.icfolson.aem.harbor.core.constants.groups.ComponentGroups;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
 
 @Component(
-    value = "Page Footer",
+    value = "Page Footer (v1)",
     group = ComponentGroups.HARBOR_SCAFFOLDING,
-    resourceSuperType = Container.RESOURCE_TYPE,
+    resourceSuperType = DefaultContainer.RESOURCE_TYPE,
     isContainer = true,
+    name = "pagefooter/v1/pagefooter",
     tabs = {
         @Tab(title = "Container"),
         @Tab(title = "Advanced")
     })
-@Model(adaptables = Resource.class)
-public class PageFooter extends Container {
+@Model(adaptables = Resource.class, adapters = Container.class, resourceType = PageFooter.RESOURCE_TYPE)
+public class PageFooter extends DefaultContainer {
 
-    public static final String RESOURCE_TYPE = "harbor/components/content/pagefooter";
+    public static final String RESOURCE_TYPE = "harbor/components/content/pagefooter/v1/pagefooter";
 
     @Override
-    public Optional<String> getRoleOptional() {
-        return Optional.of(Roles.PAGE_FOOTER);
+    public String getRole() {
+        return Roles.PAGE_FOOTER;
     }
 
     @Override
@@ -35,7 +36,7 @@ public class PageFooter extends Container {
     }
 
     @Override
-    protected boolean isInherits() {
+    public boolean isInherits() {
         return true;
     }
 
@@ -43,4 +44,5 @@ public class PageFooter extends Container {
     public String getAuthorHelpMessage() {
         return "Page Footer";
     }
+
 }
