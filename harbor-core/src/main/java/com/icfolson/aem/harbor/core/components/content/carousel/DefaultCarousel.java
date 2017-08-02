@@ -8,10 +8,12 @@ import com.citytechinc.cq.component.annotations.widgets.NumberField;
 import com.citytechinc.cq.component.annotations.widgets.Switch;
 import com.icfolson.aem.harbor.api.components.content.carousel.Carousel;
 import com.icfolson.aem.harbor.api.components.content.carousel.CarouselSlide;
-import com.icfolson.aem.library.core.components.AbstractComponent;
+import com.icfolson.aem.library.api.node.ComponentNode;
 import org.apache.sling.api.resource.Resource;
+import org.apache.sling.models.annotations.Default;
 import org.apache.sling.models.annotations.Model;
 
+import javax.inject.Inject;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,7 +28,10 @@ import java.util.stream.Collectors;
     contentAdditionalProperties = { @ContentProperty(name = "dependencies",
         value = "[harbor.components.content.carousel,harbor.bootstrap.carousel]") })
 @Model(adaptables = Resource.class, adapters = Carousel.class, resourceType = DefaultCarousel.RESOURCE_TYPE)
-public class DefaultCarousel extends AbstractComponent implements Carousel {
+public class DefaultCarousel implements Carousel {
+
+    @Inject
+    private ComponentNode componentNode;
 
     private List<CarouselSlide> slides;
 
@@ -38,47 +43,71 @@ public class DefaultCarousel extends AbstractComponent implements Carousel {
 
     @DialogField(fieldLabel = "Show Previous and Next Controls", ranking = 1)
     @Switch(offText = "No", onText = "Yes")
-    public boolean isShowPreviousAndNextControls() {
-        return get("showPreviousAndNextControls", false);
-    }
+    @Inject
+    @Default(booleanValues = false)
+    private boolean showPreviousAndNextControls;
 
     @DialogField(fieldLabel = "Show Slide Selector Controls", ranking = 2)
     @Switch(offText = "No", onText = "Yes")
-    public boolean isShowSlideSelectorControls() {
-        return get("showSlideSelectorControls", false);
-    }
+    @Inject
+    @Default(booleanValues = false)
+    private boolean showSlideSelectorControls;
 
     @DialogField(fieldLabel = "Interval",
         fieldDescription = "The amount of time to delay between automatically cycling an item.  Defaults to 5000.  If set to 0, automatic cycling will be disabled.", value = "5000", ranking = 3)
     @NumberField(allowDecimals = false, allowNegative = false)
-    public Integer getInterval() {
-        return get("interval", 5000);
-    }
+    @Inject
+    @Default(intValues = 5000)
+    private Integer interval;
 
     @DialogField(fieldLabel = "Pause on Hover?",
         fieldDescription = "Whether cycling of the carousel should pause on mouse hover.", ranking = 4)
     @Switch(offText = "No", onText = "Yes")
-    public boolean isPauseOnHover() {
-        return get("pauseOnHover", false);
-    }
+    @Inject
+    @Default(booleanValues = false)
+    private boolean pauseOnHover;
 
     @DialogField(fieldLabel = "Wrap?",
         fieldDescription = "Whether the carousel should cycle continuously or have hard stops.", ranking = 5)
     @Switch(offText = "No", onText = "Yes")
-    public boolean isWrap() {
-        return get("wrap", false);
-    }
+    @Inject
+    @Default(booleanValues = false)
+    private boolean wrap;
 
     @DialogField(fieldLabel = "Keyboard?",
         fieldDescription = "Whether the carousel should react to keyboard events.", ranking = 6)
     @Switch(offText = "No", onText = "Yes")
+    @Inject
+    @Default(booleanValues = false)
+    private boolean keyboard;
+
+    public boolean isShowPreviousAndNextControls() {
+        return showPreviousAndNextControls;
+    }
+
+    public boolean isShowSlideSelectorControls() {
+        return showSlideSelectorControls;
+    }
+
+    public Integer getInterval() {
+        return interval;
+    }
+
+    public boolean isPauseOnHover() {
+        return pauseOnHover;
+    }
+
+    public boolean isWrap() {
+        return wrap;
+    }
+
     public boolean isKeyboard() {
-        return get("keyboard", false);
+        return keyboard;
     }
 
     public List<CarouselSlide> getSlides() {
         if (slides == null) {
-            slides = getComponentNodes()
+            slides = componentNode.getComponentNodes()
                 .stream()
                 .map(componentNode -> componentNode.getResource().adaptTo(CarouselSlide.class))
                 .collect(Collectors.toList());
