@@ -1,8 +1,7 @@
-package com.icfolson.aem.harbor.core.components.content.text;
+package com.icfolson.aem.harbor.core.components.content.text.v1;
 
 import com.citytechinc.cq.component.annotations.Component;
 import com.icfolson.aem.harbor.api.components.content.text.Text;
-import com.icfolson.aem.harbor.core.components.content.text.v1.DefaultText;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
 
