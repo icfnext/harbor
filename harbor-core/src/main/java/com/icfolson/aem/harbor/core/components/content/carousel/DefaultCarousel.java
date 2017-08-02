@@ -6,6 +6,8 @@ import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.editconfig.ActionConfig;
 import com.citytechinc.cq.component.annotations.widgets.NumberField;
 import com.citytechinc.cq.component.annotations.widgets.Switch;
+import com.icfolson.aem.harbor.api.components.content.carousel.Carousel;
+import com.icfolson.aem.harbor.api.components.content.carousel.CarouselSlide;
 import com.icfolson.aem.library.core.components.AbstractComponent;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
@@ -15,6 +17,7 @@ import java.util.stream.Collectors;
 
 @Component(
     value = "Carousel",
+    name = "carousel/v1/carousel",
     actions = { "text: Carousel", "edit", "-", "copymove", "delete", "-", "insert" },
     isContainer = true,
     actionConfigs = {
@@ -22,10 +25,12 @@ import java.util.stream.Collectors;
         @ActionConfig(text = "Add Slide", handler = "function() { Harbor.Components.Carousel.addSlide(this) }") },
     contentAdditionalProperties = { @ContentProperty(name = "dependencies",
         value = "[harbor.components.content.carousel,harbor.bootstrap.carousel]") })
-@Model(adaptables = Resource.class)
-public class Carousel extends AbstractComponent {
+@Model(adaptables = Resource.class, adapters = Carousel.class, resourceType = DefaultCarousel.RESOURCE_TYPE)
+public class DefaultCarousel extends AbstractComponent implements Carousel {
 
     private List<CarouselSlide> slides;
+
+    public static final String RESOURCE_TYPE = "harbor/components/content/carousel/v1/carousel";
 
     public static final String CSS_CLASS = "carousel slide";
 

@@ -1,14 +1,14 @@
 <div class="carousel-inner"
-     data-sly-use.carousel="com.icfolson.aem.harbor.core.components.content.carousel.Carousel"
+     data-sly-use.carousel="com.icfolson.aem.harbor.api.components.content.carousel.Carousel"
      data-sly-test="${!isEditMode}">
     <div data-sly-repeat.slide="${carousel.slides}"
          data-sly-attribute.class="${slideList.first ? 'item active' : 'item'}"
-         data-sly-resource="${slide.path @ resourceType='harbor/components/content/carousel/carouselslide'}">
+         data-sly-resource="${slide.path @ resourceType='harbor/components/content/carousel/v1/carousel/carouselslide'}">
     </div>
 </div>
 
 <div class="carousel-slide-container"
      data-sly-test="${isEditMode}"
      data-sly-repeat.slide="${carousel.slides}"
-     data-sly-resource="${slide.path @ resourceType='harbor/components/content/carousel/carouselslide'}">
+     data-sly-resource="${slide.path @ resourceType='harbor/components/content/carousel/v1/carousel/carouselslide'}">
 </div>

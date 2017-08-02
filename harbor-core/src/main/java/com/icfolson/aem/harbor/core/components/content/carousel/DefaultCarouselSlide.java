@@ -10,6 +10,7 @@ import com.citytechinc.cq.component.annotations.widgets.NumberField;
 import com.citytechinc.cq.component.annotations.widgets.PathField;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
 import com.citytechinc.cq.component.annotations.widgets.TextField;
+import com.icfolson.aem.harbor.api.components.content.carousel.CarouselSlide;
 import com.icfolson.aem.harbor.api.constants.dom.Headings;
 import com.icfolson.aem.library.core.components.AbstractComponent;
 import com.icfolson.aem.library.core.constants.ComponentConstants;
@@ -20,7 +21,7 @@ import org.apache.sling.models.annotations.Model;
 @Component(
     value = "Carousel Slide",
     group = ComponentConstants.GROUP_HIDDEN,
-    name = "carousel/carouselslide",
+    name = "carousel/v1/carousel/carouselslide",
     tabs = {
         @Tab(title = "Image"),
         @Tab(title = "Caption")
@@ -29,8 +30,10 @@ import org.apache.sling.models.annotations.Model;
         @Listener(name = "afterinsert", value = "REFRESH_PAGE"),
         @Listener(name = "afteredit", value = "REFRESH_PAGE")
     })
-@Model(adaptables = Resource.class)
-public class CarouselSlide extends AbstractComponent {
+@Model(adaptables = Resource.class, adapters = CarouselSlide.class, resourceType = DefaultCarouselSlide.RESOURCE_TYPE)
+public class DefaultCarouselSlide extends AbstractComponent implements CarouselSlide {
+
+    public static final String RESOURCE_TYPE = "harbor/components/content/carousel/v1/carousel/carouselslide";
 
     @DialogField(fieldLabel = "Image", fieldDescription = "Image", tab = 1, ranking = 1)
     @Html5SmartImage(tab = false, allowUpload = false, uploadUrl = "", title = "Drag & Drop Image")
