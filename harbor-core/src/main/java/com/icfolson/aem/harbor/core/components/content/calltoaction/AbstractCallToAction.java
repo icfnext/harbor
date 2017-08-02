@@ -6,9 +6,12 @@ import com.citytechinc.cq.component.annotations.widgets.Selection;
 import com.citytechinc.cq.component.annotations.widgets.TextField;
 import com.icfolson.aem.harbor.api.constants.bootstrap.Bootstrap;
 import com.icfolson.aem.harbor.core.util.icon.IconUtils;
-import com.icfolson.aem.library.core.components.AbstractComponent;
+import com.icfolson.aem.library.api.node.ComponentNode;
+import org.apache.sling.models.annotations.Default;
 
-public class AbstractCallToAction extends AbstractComponent {
+import javax.inject.Inject;
+
+public abstract class AbstractCallToAction {
 
     public static final String BUTTON_ID_PREFIX = "callToActionButton-";
 
@@ -16,11 +19,14 @@ public class AbstractCallToAction extends AbstractComponent {
 
     public static final String CONTAINER_PAR_ID_PREFIX = "container-par-";
 
+    @Inject
+    protected ComponentNode componentNode;
+
     @DialogField(fieldLabel = "Text", fieldDescription = "Provide the widget's text", ranking = 0)
     @TextField
-    public String getText() {
-        return IconUtils.iconify(get("text", "Call to Action"));
-    }
+    @Inject
+    @Default(values = "Call to Action")
+    private String text;
 
     @DialogField(fieldLabel = "Size", fieldDescription = "Select the widget's size", ranking = 2)
     @Selection(type = Selection.SELECT, options = {
@@ -29,9 +35,9 @@ public class AbstractCallToAction extends AbstractComponent {
         @Option(text = "Small", value = Bootstrap.BTN_SMALL),
         @Option(text = "Mini", value = Bootstrap.BTN_MINI)
     })
-    public String getSize() {
-        return get("size", Bootstrap.BTN_DEFAULT);
-    }
+    @Inject
+    @Default(values = Bootstrap.BTN_DEFAULT)
+    private String size;
 
     @DialogField(fieldLabel = "Style", fieldDescription = "Select the widget's style", ranking = 3)
     @Selection(type = Selection.SELECT, options = {
@@ -52,19 +58,31 @@ public class AbstractCallToAction extends AbstractComponent {
             qtip = "Indicates that this button represents a simple link to a target resource or page",
             value = Bootstrap.BTN_LINK)
     })
+    @Inject
+    @Default(values = "")
+    private String style;
+
+    public String getText() {
+        return IconUtils.iconify(text);
+    }
+
+    public String getSize() {
+        return size;
+    }
+
     public String getStyle() {
-        return get("style", "");
+        return style;
     }
 
     public String getButtonId() {
-        return BUTTON_ID_PREFIX + getId();
+        return BUTTON_ID_PREFIX + componentNode.getId();
     }
 
     public String getModalId() {
-        return MODAL_ID_PREFIX + getId();
+        return MODAL_ID_PREFIX + componentNode.getId();
     }
 
     public String getContainerParId() {
-        return CONTAINER_PAR_ID_PREFIX + getId();
+        return CONTAINER_PAR_ID_PREFIX + componentNode.getId();
     }
 }

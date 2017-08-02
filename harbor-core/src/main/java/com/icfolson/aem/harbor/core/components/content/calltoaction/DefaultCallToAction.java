@@ -12,6 +12,7 @@ import com.icfolson.aem.library.api.page.PageDecorator;
 import com.icfolson.aem.library.core.constants.PathConstants;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.sling.api.resource.Resource;
+import org.apache.sling.models.annotations.Default;
 import org.apache.sling.models.annotations.Model;
 
 import javax.inject.Inject;
@@ -29,12 +30,25 @@ public class DefaultCallToAction extends AbstractCallToAction implements CallToA
     @Inject
     private PageDecorator currentPage;
 
-    public String getAction() {
-        return get("action", "");
+    @DialogField(fieldLabel = "Action", fieldDescription = "Select the widget's action upon being clicked", ranking = 4)
+    @Selection(type = Selection.SELECT, options = {
+            @Option(text = "Open in the Current Window", qtip = "Opens link to specified path in current window.",
+                    value = LINK_IN_CURRENT),
+            @Option(text = "Open in a New Window/Tab", qtip = "Opens link to specified path in a new window or tab.",
+                    value = LINK_IN_WINDOW)
+    })
+    @Inject
+    @Default(values = "")
+    private String action;
+
+    @DialogField(fieldLabel = "Link Target", fieldDescription = "URL path this button leads to", ranking = 2)
+    @PathField(rootPath = PathConstants.PATH_CONTENT)
+    public Link getLinkTarget() {
+        return componentNode.getAsLink("linkTarget").or(currentPage.getLink());
     }
 
-    public Link getLinkTarget() {
-        return getAsLink("linkTarget").or(currentPage.getLink());
+    public String getAction() {
+        return action;
     }
 
     public Boolean isOpensInNewWindow() {
