@@ -19,7 +19,7 @@ import javax.inject.Named;
 @Component(value = "Sitemap", editConfig = false, path = "/page/common", name = "global",
     touchFileName = "touch-sitemap")
 @Model(adaptables = Resource.class, adapters = SitemappedPage.class, resourceType = "wcm/foundation/components/page") //TODO: Evaluate resource type
-public class DefaultSitemappedPage {
+public class DefaultSitemappedPage implements SitemappedPage {
 
     @Inject
     private PageDecorator page;
