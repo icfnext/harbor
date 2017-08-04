@@ -1,4 +1,4 @@
-package com.icfolson.aem.harbor.core.components.content.carousel;
+package com.icfolson.aem.harbor.core.components.content.carousel.v1;
 
 import com.citytechinc.cq.component.annotations.Component;
 import com.citytechinc.cq.component.annotations.ContentProperty;
@@ -54,7 +54,7 @@ public class DefaultCarousel implements Carousel {
     private boolean showSlideSelectorControls;
 
     @DialogField(fieldLabel = "Interval",
-        fieldDescription = "The amount of time to delay between automatically cycling an item.  Defaults to 5000.  If set to 0, automatic cycling will be disabled.", value = "5000", ranking = 3)
+        fieldDescription = "The amount of time in milliseconds to delay between automatically cycling an item.  Defaults to 5000 (5 seconds).  If set to 0, automatic cycling will be disabled.", value = "5000", ranking = 3)
     @NumberField(allowDecimals = false, allowNegative = false)
     @Inject
     @Default(intValues = 5000)

@@ -1,4 +1,4 @@
-package com.icfolson.aem.harbor.core.components.content.dynamiccarousel;
+package com.icfolson.aem.harbor.core.components.content.dynamiccarousel.v1;
 
 import com.citytechinc.cq.component.annotations.Component;
 import com.citytechinc.cq.component.annotations.DialogField;
@@ -7,6 +7,7 @@ import com.citytechinc.cq.component.annotations.editconfig.ActionConfigProperty;
 import com.citytechinc.cq.component.annotations.widgets.DialogFieldSet;
 import com.citytechinc.cq.component.annotations.widgets.NumberField;
 import com.citytechinc.cq.component.annotations.widgets.Switch;
+import com.icfolson.aem.harbor.api.components.content.dynamiccarousel.DynamicCarousel;
 import com.icfolson.aem.harbor.api.components.mixins.classifiable.Classification;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Default;
@@ -17,12 +18,13 @@ import javax.inject.Inject;
 
 @Component(
         value = "Dynamic Carousel",
+        name = "dynamiccarousel/v1/dynamiccarousel",
         actions = { "text: Dynamic Carousel", "edit", "-", "copymove", "delete", "-", "insert" },
         isContainer = true,
         actionConfigs = {
                 @ActionConfig(xtype = "tbseparator"),
                 @ActionConfig(text = "Add Slide",
-                        handler = "function() { Harbor.Components.DynamicCarousel.addSlide( this, '" + "/apps/" + NewSlide.RESOURCE_TYPE + "/" + NewSlide.DIALOG_FILE_NAME + "' ) }",
+                        handler = "function() { Harbor.Components.DynamicCarousel.addSlide( this, '" + "/apps/" + DefaultNewSlide.RESOURCE_TYPE + "/" + DefaultNewSlide.DIALOG_FILE_NAME + "' ) }",
                         additionalProperties = {
                                 @ActionConfigProperty(name = "icon", value = "coral-Icon--experienceAdd")
                         } ),
@@ -37,12 +39,10 @@ import javax.inject.Inject;
                                 @ActionConfigProperty(name = "icon", value = "coral-Icon--fastForwardCircle")
                         } )
                  } )
-@Model(adaptables = Resource.class)
-public class DynamicCarousel {
+@Model(adaptables = Resource.class, adapters = DynamicCarousel.class, resourceType = DefaultDynamicCarousel.RESOURCE_TYPE)
+public class DefaultDynamicCarousel implements DynamicCarousel {
 
-    public static final String CSS_CLASS = "carousel slide";
-
-    public static final String INDICATORS_CSS_CLASS = "carousel-indicators";
+    public static final String RESOURCE_TYPE = "harbor/components/content/dynamiccarousel/v1/dynamiccarousel";
 
     @Inject @Default(booleanValues = true)
     private boolean showPreviousAndNextControls;
@@ -81,7 +81,7 @@ public class DynamicCarousel {
     }
 
     @DialogField(fieldLabel = "Interval",
-            fieldDescription = "The amount of time to delay between automatically cycling an item.  Defaults to 5000.  If set to 0, automatic cycling will be disabled.", value = "5000", ranking = 3)
+            fieldDescription = "The amount of time in milliseconds to delay between automatically cycling an item.  Defaults to 5000 (5 seconds).  If set to 0, automatic cycling will be disabled.", value = "5000", ranking = 3)
     @NumberField(allowDecimals = false, allowNegative = false)
     public Integer getInterval() {
         return interval;

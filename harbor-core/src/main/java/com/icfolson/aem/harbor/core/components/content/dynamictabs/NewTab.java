@@ -4,7 +4,6 @@ import com.citytechinc.cq.component.annotations.Component;
 import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
 import com.icfolson.aem.harbor.api.components.content.dynamictabs.Tab;
-import com.icfolson.aem.harbor.core.components.content.dynamiccarousel.NewSlide;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.Optional;

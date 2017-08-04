@@ -10,7 +10,7 @@
                         <items jcr:primaryType="nt:unstructured">
                             <allowedTypes cq:hideOnEdit="{Boolean}false" cq:showOnCreate="{Boolean}true" disabled="{Boolean}false" jcr:primaryType="nt:unstructured" name="./icf:allowedDynamicTypes" renderReadOnly="{Boolean}true" required="{Boolean}false" sling:resourceType="granite/ui/components/foundation/form/multifield">
                                 <field cq:hideOnEdit="{Boolean}false" cq:showOnCreate="{Boolean}true" disabled="{Boolean}false" jcr:primaryType="nt:unstructured" multiple="{Boolean}false" name="./icf:allowedDynamicTypes" renderReadOnly="{Boolean}true" required="{Boolean}false" sling:resourceType="granite/ui/components/foundation/form/select">
-                                    <datasource jcr:primaryType="nt:unstructured" sling:resourceType="harbor/components/content/dynamiccarousel/slide/new/allowedoptions"/>
+                                    <datasource jcr:primaryType="nt:unstructured" sling:resourceType="harbor/components/content/dynamiccarousel/v1/dynamiccarousel/slide/new/allowedoptions"/>
                                 </field>
                             </allowedTypes>
                         </items>
