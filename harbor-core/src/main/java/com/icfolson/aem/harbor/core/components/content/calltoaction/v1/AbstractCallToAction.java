@@ -1,4 +1,4 @@
-package com.icfolson.aem.harbor.core.components.content.calltoaction;
+package com.icfolson.aem.harbor.core.components.content.calltoaction.v1;
 
 import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.Option;
