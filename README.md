@@ -17,6 +17,8 @@ Harbor is a collection of content and page components, services, and patterns co
   * [Content Container (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/contentcontainer/v1/contentcontainer)
   * [Page Header (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/pageheader/v1/pageheader)
   * [Page Footer (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/pagefooter/v1/pagefooter)
+* Group: Harbor Lists
+  * [Link List (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/lists/linklist/v1/linklist)
 * Page
   * [Global (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/page/global/v1/global)
 
@@ -220,9 +222,9 @@ The Link List component maintains a collection of List Items as direct child Res
 | ------------ | ----------- |
 | Resource Type | harbor/components/content/lists/linklist |
 | Component Group | Harbor Lists |
-| Backing Class | com.icfolson.aem.harbor.core.components.content.list.link.LinkList |
+| Backing Class | com.icfolson.aem.harbor.core.components.content.list.linklist.v1.LinkList |
 | List Item Resource Type | harbor/components/content/lists/linklist/listablelink |
-| List Item Backing Class | com.icfolson.aem.harbor.core.components.content.list.link.ListableLink |
+| List Item Backing Class | com.icfolson.aem.harbor.core.components.content.list.linklist.v1.ListableLink |
 
 ### Dynamic List Component
 

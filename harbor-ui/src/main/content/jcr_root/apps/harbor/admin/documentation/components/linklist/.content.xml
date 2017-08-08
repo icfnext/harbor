@@ -249,7 +249,7 @@
                                         <row3col2
                                                 jcr:primaryType="nt:unstructured"
                                                 sling:resourceType="granite/ui/components/foundation/text"
-                                                text="com.icfolson.aem.harbor.core.components.content.list.link.LinkList"/>
+                                                text="com.icfolson.aem.harbor.core.components.content.list.linklist.v1.DefaultLinkList"/>
                                     </row3>
                                     <row4
                                             jcr:primaryType="nt:unstructured"
@@ -273,7 +273,7 @@
                                         <row5col2
                                                 jcr:primaryType="nt:unstructured"
                                                 sling:resourceType="granite/ui/components/foundation/text"
-                                                text="com.icfolson.aem.harbor.core.components.content.list.link.ListableLink"/>
+                                                text="com.icfolson.aem.harbor.core.components.content.list.linklist.v1.DefaultListableLink"/>
                                     </row5>
                                 </linklistAspects>
                             </items>
