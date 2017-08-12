@@ -12,6 +12,7 @@ import com.citytechinc.cq.component.annotations.widgets.PathField;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
 import com.citytechinc.cq.component.annotations.widgets.TextField;
 import com.google.common.collect.Lists;
+import com.icfolson.aem.harbor.api.components.content.responsiveimage.ResponsiveImage;
 import com.icfolson.aem.harbor.api.constants.bootstrap.Bootstrap;
 import com.icfolson.aem.harbor.api.components.mixins.classifiable.Classification;
 import com.icfolson.aem.harbor.core.constants.groups.ComponentGroups;
@@ -28,6 +29,7 @@ import java.util.stream.Collectors;
 
 @Component(
     value = "Responsive Image",
+    name = "responsiveimage/v1/responsiveimage",
     group = ComponentGroups.HARBOR,
     listeners = {
         @Listener(name = "afterinsert", value = "REFRESH_PAGE"),
@@ -35,8 +37,10 @@ import java.util.stream.Collectors;
         @Listener(name = "afterdelete", value = "REFRESH_PAGE")
     }
 )
-@Model(adaptables = Resource.class)
-public class ResponsiveImage extends AbstractComponent {
+@Model(adaptables = Resource.class, adapters = ResponsiveImage.class, resourceType = DefaultResponsiveImage.RESOURCE_TYPE)
+public class DefaultResponsiveImage extends AbstractComponent implements ResponsiveImage {
+
+    public static final String RESOURCE_TYPE = "harbor/components/content/responsiveimage/v1/responsiveimage";
 
     @DialogField(fieldLabel = "Image Widths",
         fieldDescription = "Widths to define the image source set.  Renditions will be generated for each width value.",
