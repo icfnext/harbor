@@ -1,7 +1,0 @@
-<p data-sly-test="${isEditMode}" class="authoring-placeholder">Secondary Navigation</p>
-
-<sly data-sly-use.secondaryNavigation="${component.properties['className']}">
-    <ul class="nav nav-pills nav-stacked" data-sly-test="${secondaryNavigation.hasRoot && secondaryNavigation.tree.root.hasChildNodes}" data-sly-use.navigationItemTemplate="navigationitem.html">
-        <sly data-sly-repeat="${secondaryNavigation.tree.root.childNodes}" data-sly-call="${navigationItemTemplate.navigationItem @ item=item}"/>
-    </ul>
-</sly>

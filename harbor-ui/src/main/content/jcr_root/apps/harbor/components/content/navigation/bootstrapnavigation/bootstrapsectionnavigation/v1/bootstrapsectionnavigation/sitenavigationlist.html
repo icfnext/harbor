@@ -1,0 +1,9 @@
+<template data-sly-template.sitenavigationlist="${@ root}">
+    <ul class="nav nav-pills nav-stacked">
+        <li data-sly-repeat.currentPage="${root.childNodes}" data-sly-attribute.class="${currentPage.alongActivePath ? 'active' : ''}">
+            <a href="${currentPage.href}" data-sly-attribute.target="${currentPage.external ? '_blank' : ''}">${currentPage.title}</a>
+            <sly data-sly-test="${currentPage.alongActivePath && currentPage.hasChildNodes}"
+                 data-sly-call="${sitenavigationlist @ root=currentPage}"/>
+        </li>
+    </ul>
+</template>

@@ -1,0 +1,5 @@
+<nav data-sly-use.navigation="com.icfolson.aem.harbor.api.components.content.navigation.sitenavigation.SiteNavigation"
+     data-sly-use.listtemplate="sitenavigationlist.html">
+    <sly data-sly-test="${navigation.hasRoot}"
+         data-sly-call="${listtemplate.sitenavigationlist @ root=navigation.root}"/>
+</nav>

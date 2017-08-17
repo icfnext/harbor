@@ -1,8 +1,0 @@
-<template data-sly-template.navigationItem="${@ item='Current Navigation Item TreeNode instance'}" data-sly-use.innerNavigationItem="navigationitem.html">
-    <li data-sly-attribute.class="${item.navigationLink.active ? 'active' : ''}">
-        <a href="${item.navigationLink.href}">${item.navigationLink.title}</a>
-        <ul data-sly-test="${item.navigationLink.active && item.hasChildNodes}" class="nav nav-pills nav-stacked">
-            <sly data-sly-repeat.nestedItem="${item.childNodes}" data-sly-call="${innerNavigationItem.navigationItem @ item=nestedItem}"/>
-        </ul>
-    </li>
-</template>

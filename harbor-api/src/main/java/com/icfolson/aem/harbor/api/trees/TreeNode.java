@@ -8,13 +8,16 @@ import java.util.Iterator;
  * the node and its children will be of the same type.
  *
  * @param <T> The type of the child nodes under this node
+ * @param <R> Indicates the contents of the node
  */
-public interface TreeNode<T> {
+public interface TreeNode<T, R> {
 
     Iterable<T> getChildNodes();
 
     boolean isHasChildNodes();
 
     Iterator<T> getChildNodesIterator();
+
+    R getValue();
 
 }

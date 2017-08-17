@@ -2,7 +2,7 @@ package com.icfolson.aem.harbor.core.content.page.navigation.impl
 
 import com.day.cq.wcm.api.NameConstants
 import com.icfolson.aem.harbor.HarborSpec
-import com.icfolson.aem.harbor.core.content.page.navigation.NavigationElementConfiguration
+import com.icfolson.aem.harbor.core.content.page.navigation.navigablepage.v1.NavigationElementConfiguration
 import spock.lang.Unroll
 
 @Unroll
