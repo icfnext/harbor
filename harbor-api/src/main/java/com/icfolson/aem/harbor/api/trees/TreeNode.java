@@ -10,7 +10,7 @@ import java.util.Iterator;
  * @param <T> The type of the child nodes under this node
  * @param <R> Indicates the contents of the node
  */
-public interface TreeNode<T, R> {
+public interface TreeNode<T extends TreeNode, R> {
 
     Iterable<T> getChildNodes();
 

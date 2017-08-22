@@ -3,6 +3,7 @@ package com.icfolson.aem.harbor.core.components.content.navigation.sectionnaviga
 import com.citytechinc.cq.component.annotations.Component;
 import com.google.common.base.Optional;
 import com.icfolson.aem.harbor.api.components.content.navigation.primarynavigation.PrimaryNavigation;
+import com.icfolson.aem.harbor.api.components.content.navigation.sectionnavigation.SectionNavigation;
 import com.icfolson.aem.harbor.api.components.content.navigation.sitenavigation.SiteNavigation;
 import com.icfolson.aem.harbor.api.content.page.HierarchicalPage;
 import com.icfolson.aem.harbor.api.content.page.HomePage;
@@ -21,7 +22,7 @@ import javax.inject.Inject;
 @Model(adaptables = Resource.class,
         adapters = { SiteNavigation.class, PrimaryNavigation.class },
         resourceType = DefaultSectionNavigation.RESOURCE_TYPE)
-public class DefaultSectionNavigation extends DefaultSiteNavigation {
+public class DefaultSectionNavigation extends DefaultSiteNavigation implements SectionNavigation {
 
     public static final String RESOURCE_TYPE = "harbor/components/content/navigation/sectionnavigation/v1/sectionnavigation";
 
