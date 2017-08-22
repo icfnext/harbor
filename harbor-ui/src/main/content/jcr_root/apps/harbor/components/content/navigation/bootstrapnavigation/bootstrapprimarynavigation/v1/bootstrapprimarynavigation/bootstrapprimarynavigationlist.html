@@ -1,8 +1,8 @@
 <template data-sly-template.primarynavigationlist="${@ root, level}">
-    <ul data-sly-attribute.class="${level == 0 ? 'nav navbar-nav' : '' )}" data-level="${level}">
+    <ul data-sly-attribute.class="${level == 0 ? 'nav navbar-nav' : ''}" data-level="${level}">
         <li data-sly-repeat.currentPage="${root.navigableChildren}" data-sly-attribute.class="${currentPage.alongActivePath}">
             <a href="${currentPage.href}" data-sly-attribute.target="${currentPage.external ? '_blank' : ''}">${currentPage.title}</a>
-            <sly data-sly-test="${currentPage.hasChildNodes"
+            <sly data-sly-test="${currentPage.hasChildNodes}"
                  data-sly-call="${primarynavigationlist @ root=currentPage, level=(level + 1)}"/>
         </li>
     </ul>
