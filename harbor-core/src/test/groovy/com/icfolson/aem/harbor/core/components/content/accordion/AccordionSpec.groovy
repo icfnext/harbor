@@ -1,6 +1,8 @@
 package com.icfolson.aem.harbor.core.components.content.accordion
 
 import com.icfolson.aem.harbor.HarborSpec
+import com.icfolson.aem.harbor.core.components.content.accordion.v1.DefaultAccordion
+import com.icfolson.aem.harbor.core.components.content.accordion.v1.DefaultAccordionItem
 import spock.lang.Unroll
 
 @Unroll
@@ -11,12 +13,12 @@ class AccordionSpec extends HarborSpec {
             harbor {
                 "jcr:content" {
                     accordion1(openFirstItem: true) {
-                        item1("sling:resourceType": AccordionItem.RESOURCE_TYPE, title: "Item 1")
-                        item2("sling:resourceType": AccordionItem.RESOURCE_TYPE)
+                        item1("sling:resourceType": DefaultAccordionItem.RESOURCE_TYPE, title: "Item 1")
+                        item2("sling:resourceType": DefaultAccordionItem.RESOURCE_TYPE)
                     }
                     accordion2() {
-                        item1("sling:resourceType": AccordionItem.RESOURCE_TYPE)
-                        item2("sling:resourceType": AccordionItem.RESOURCE_TYPE)
+                        item1("sling:resourceType": DefaultAccordionItem.RESOURCE_TYPE)
+                        item2("sling:resourceType": DefaultAccordionItem.RESOURCE_TYPE)
                     }
                     accordion3()
                 }
@@ -27,7 +29,7 @@ class AccordionSpec extends HarborSpec {
     def "accordion name"() {
         setup:
         def resource = getResource("/content/harbor/jcr:content/accordion1")
-        def accordion = resource.adaptTo(Accordion)
+        def accordion = resource.adaptTo(DefaultAccordion)
 
         expect:
         accordion.name == "accordion1"
@@ -35,7 +37,7 @@ class AccordionSpec extends HarborSpec {
 
     def "accordion items"() {
         setup:
-        def accordion = getResource(path).adaptTo(Accordion)
+        def accordion = getResource(path).adaptTo(DefaultAccordion)
 
         expect:
         accordion.hasItems == hasItems
@@ -51,7 +53,7 @@ class AccordionSpec extends HarborSpec {
 
     def "accordion item unique ID"() {
         setup:
-        def accordion = getResource("/content/harbor/jcr:content/accordion1").adaptTo(Accordion)
+        def accordion = getResource("/content/harbor/jcr:content/accordion1").adaptTo(DefaultAccordion)
 
         accordion.items*.accordionUniqueId == [
             "content-harbor-jcr:content-accordion1-item1",
@@ -61,7 +63,7 @@ class AccordionSpec extends HarborSpec {
 
     def "accordion item is open"() {
         setup:
-        def accordion = getResource(path).adaptTo(Accordion)
+        def accordion = getResource(path).adaptTo(DefaultAccordion)
 
         expect:
         accordion.items.get(index).open == isOpen
@@ -76,7 +78,7 @@ class AccordionSpec extends HarborSpec {
 
     def "accordion item title"() {
         setup:
-        def accordion = getResource("/content/harbor/jcr:content/accordion1").adaptTo(Accordion)
+        def accordion = getResource("/content/harbor/jcr:content/accordion1").adaptTo(DefaultAccordion)
 
         expect:
         accordion.items.get(index).title == title

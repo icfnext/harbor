@@ -1,4 +1,4 @@
-package com.icfolson.aem.harbor.core.components.content.accordion;
+package com.icfolson.aem.harbor.core.components.content.accordion.v1;
 
 import com.citytechinc.cq.component.annotations.Component;
 import com.citytechinc.cq.component.annotations.DialogField;
@@ -7,6 +7,8 @@ import com.citytechinc.cq.component.annotations.editconfig.ActionConfig;
 import com.citytechinc.cq.component.annotations.editconfig.ActionConfigProperty;
 import com.citytechinc.cq.component.annotations.widgets.TextField;
 import com.google.common.collect.Iterables;
+import com.icfolson.aem.harbor.api.components.content.accordion.Accordion;
+import com.icfolson.aem.harbor.api.components.content.accordion.AccordionItem;
 import com.icfolson.aem.harbor.core.util.icon.IconUtils;
 import com.icfolson.aem.library.core.components.AbstractComponent;
 import com.icfolson.aem.library.core.constants.ComponentConstants;
@@ -14,17 +16,15 @@ import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
 
 @Component(
-    value = "Accordion Item",
-    name = "accordion/accordionitem",
-    actions = { "text: Accordion Item", "-", "edit", "delete" },
+    value = "Accordion Item (v1)",
+    name = "accordion/v1/accordionitem",
+    actions = { "text: Accordion Item (v1)", "-", "edit", "delete" },
     isContainer = true,
     listeners = {
         @Listener(name = "afteredit", value = "REFRESH_SELF"),
         @Listener(name = "afterdelete", value = "REFRESH_PARENT")
     },
     group = ComponentConstants.GROUP_HIDDEN,
-    //noDecoration = true, //when enabled, it breakes the rollover edit layout, but it's needed for the collapse to work
-    layout = "rollover",
     actionConfigs = {
         @ActionConfig(xtype = "tbseparator"),
         @ActionConfig(text = "Move Up", handler = "function(){Harbor.Components.Accordion.v1.Accordion.moveUp( this )}",
@@ -33,12 +33,14 @@ import org.apache.sling.models.annotations.Model;
             additionalProperties = { @ActionConfigProperty(name = "icon", value = "coral-Icon--accordionDown") })
     }
 )
-@Model(adaptables = Resource.class)
-public class AccordionItem extends AbstractComponent {
+@Model(adaptables = Resource.class, adapters = AccordionItem.class, resourceType = DefaultAccordionItem.RESOURCE_TYPE)
+public class DefaultAccordionItem extends AbstractComponent implements AccordionItem {
 
-    public static final String RESOURCE_TYPE = "harbor/components/content/accordion/accordionitem";
+    public static final String RESOURCE_TYPE = "harbor/components/content/accordion/v1/accordionitem";
 
     private Boolean open;
+    private Integer index;
+    private Accordion accordion;
 
     @DialogField(fieldLabel = "Title", fieldDescription = "The title of the accordion item.")
     @TextField
@@ -46,25 +48,26 @@ public class AccordionItem extends AbstractComponent {
         return IconUtils.iconify(get("title", getDefaultTitle()));
     }
 
-    public String getAccordionUniqueId() {
-        return getResource().getParent().adaptTo(Accordion.class).getId();
-    }
-
-    public Boolean isOpen() {
-        if (open == null) {
-            final Resource parent = getResource().getParent();
-            final Accordion accordion = parent.adaptTo(Accordion.class);
-
-            open = Iterables.get(parent.getChildren(), 0).getPath().equals(getPath()) && accordion.isOpenFirstItem();
+    @Override
+    public Accordion getAccordion() {
+        if (accordion == null) {
+            accordion = getResource().getParent().adaptTo(Accordion.class);
         }
 
-        return open;
+        return accordion;
     }
 
-    private String getDefaultTitle() {
-        final Resource parent = getResource().getParent();
-        final int index = Iterables.indexOf(parent.getChildren(), resource -> resource.getPath().equals(getPath())) + 1;
+    @Override
+    public Integer getItemIndex() {
+        if (index == null) {
+            index = getIndex();
+        }
 
-        return "Accordion Item " + index;
+        return index;
     }
+
+    protected String getDefaultTitle() {
+        return "Accordion Item " + this.getItemIndex();
+    }
+
 }

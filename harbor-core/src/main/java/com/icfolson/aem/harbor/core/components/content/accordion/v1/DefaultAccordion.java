@@ -1,12 +1,12 @@
-package com.icfolson.aem.harbor.core.components.content.accordion;
+package com.icfolson.aem.harbor.core.components.content.accordion.v1;
 
 import com.citytechinc.cq.component.annotations.Component;
 import com.citytechinc.cq.component.annotations.ContentProperty;
-import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.editconfig.ActionConfig;
 import com.citytechinc.cq.component.annotations.editconfig.ActionConfigProperty;
-import com.citytechinc.cq.component.annotations.widgets.Switch;
 import com.google.common.base.Predicate;
+import com.icfolson.aem.harbor.api.components.content.accordion.Accordion;
+import com.icfolson.aem.harbor.api.components.content.accordion.AccordionItem;
 import com.icfolson.aem.harbor.core.constants.groups.ComponentGroups;
 import com.icfolson.aem.library.api.node.ComponentNode;
 import com.icfolson.aem.library.core.components.AbstractComponent;
@@ -14,31 +14,27 @@ import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Component(
-    value = "Accordion Group",
+    value = "Accordion Group (v1)",
     group = ComponentGroups.HARBOR,
     actions = { "text: Accordion", "-", "edit", "-", "copymove", "delete", "-", "insert" },
     isContainer = true,
     actionConfigs = {
         @ActionConfig(
             text = "Add Item",
-            handler = "function(){Harbor.Components.Accordion.v1.Accordion.addItem( this, 'harbor/components/content/accordion/accordionitem' )}",
+            handler = "function(){Harbor.Components.Accordion.v1.Accordion.addItem( this, '" + DefaultAccordionItem.RESOURCE_TYPE + "' )}",
             additionalProperties = {
                 @ActionConfigProperty(name = "icon", value = "coral-Icon--experienceAdd")
             })
-    },
-    contentAdditionalProperties = {
-        @ContentProperty(name = "dependencies",
-            value = "[harbor.components.content.accordion,harbor.components.content.accordion.author]")
     }
 )
-@Model(adaptables = Resource.class)
-public class Accordion extends AbstractComponent {
+@Model(adaptables = Resource.class, adapters = Accordion.class, resourceType = DefaultAccordion.RESOURCE_TYPE)
+public class DefaultAccordion extends AbstractComponent implements Accordion {
 
-    private static final Predicate<ComponentNode> ACCORDION_ITEM_PREDICATE = componentNode -> componentNode != null
-        && componentNode.getResource().isResourceType(AccordionItem.RESOURCE_TYPE);
+    public static final String RESOURCE_TYPE = "harbor/components/content/accordion/v1/accordion";
 
     private List<AccordionItem> accordionItems;
 
@@ -46,25 +42,23 @@ public class Accordion extends AbstractComponent {
         return getResource().getName();
     }
 
-    @DialogField(fieldLabel = "Open First Item",
-        fieldDescription = "Whether the first Accordion Item in the Accordion Group should be opened by default.")
-    @Switch(offText = "No", onText = "Yes")
-    public Boolean isOpenFirstItem() {
+    public boolean isOpenFirstItem() {
         return get("openFirstItem", false);
     }
 
     public List<AccordionItem> getItems() {
         if (accordionItems == null) {
-            accordionItems = getComponentNodes(ACCORDION_ITEM_PREDICATE)
+            accordionItems = getComponentNodes()
                 .stream()
                 .map(componentNode -> componentNode.getResource().adaptTo(AccordionItem.class))
+                .filter(Objects::nonNull)
                 .collect(Collectors.toList());
         }
 
         return accordionItems;
     }
 
-    public Boolean isHasItems() {
+    public boolean isHasItems() {
         return !getItems().isEmpty();
     }
 }
