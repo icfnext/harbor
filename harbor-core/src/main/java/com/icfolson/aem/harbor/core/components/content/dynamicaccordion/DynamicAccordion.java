@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
         actionConfigs = {
                 @ActionConfig(xtype = "tbseparator"),
                 @ActionConfig(text = "Add Item",
-                        handler = "function() { Harbor.Components.DynamicAccordion.addItem( this, '" + "/apps/" + NewAccordionItem.RESOURCE_TYPE + "/" + NewAccordionItem.DIALOG_FILE_NAME + "' ) }",
+                        handler = "function() { Harbor.Components.DynamicAccordion.v1.DynamicAccordion.addItem( this, '" + "/apps/" + NewAccordionItem.RESOURCE_TYPE + "/" + NewAccordionItem.DIALOG_FILE_NAME + "' ) }",
                         additionalProperties = {
                                 @ActionConfigProperty(name = "icon", value = "coral-Icon--experienceAdd")
                         } )

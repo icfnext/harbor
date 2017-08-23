@@ -27,9 +27,9 @@ import org.apache.sling.models.annotations.Model;
     layout = "rollover",
     actionConfigs = {
         @ActionConfig(xtype = "tbseparator"),
-        @ActionConfig(text = "Move Up", handler = "function(){Harbor.Components.Accordion.moveUp( this )}",
+        @ActionConfig(text = "Move Up", handler = "function(){Harbor.Components.Accordion.v1.Accordion.moveUp( this )}",
             additionalProperties = { @ActionConfigProperty(name = "icon", value = "coral-Icon--accordionUp") }),
-        @ActionConfig(text = "Move Down", handler = "function(){Harbor.Components.Accordion.moveDown( this )}",
+        @ActionConfig(text = "Move Down", handler = "function(){Harbor.Components.Accordion.v1.Accordion.moveDown( this )}",
             additionalProperties = { @ActionConfigProperty(name = "icon", value = "coral-Icon--accordionDown") })
     }
 )

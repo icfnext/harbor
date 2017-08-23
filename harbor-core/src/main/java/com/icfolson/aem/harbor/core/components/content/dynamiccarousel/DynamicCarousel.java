@@ -22,17 +22,17 @@ import javax.inject.Inject;
         actionConfigs = {
                 @ActionConfig(xtype = "tbseparator"),
                 @ActionConfig(text = "Add Slide",
-                        handler = "function() { Harbor.Components.DynamicCarousel.addSlide( this, '" + "/apps/" + NewSlide.RESOURCE_TYPE + "/" + NewSlide.DIALOG_FILE_NAME + "' ) }",
+                        handler = "function() { Harbor.Components.DynamicCarousel.v1.DynamicCarousel.addSlide( this, '" + "/apps/" + NewSlide.RESOURCE_TYPE + "/" + NewSlide.DIALOG_FILE_NAME + "' ) }",
                         additionalProperties = {
                                 @ActionConfigProperty(name = "icon", value = "coral-Icon--experienceAdd")
                         } ),
                 @ActionConfig(text = "Previous Slide",
-                        handler = "function() { Harbor.Components.DynamicCarousel.previousSlide( this ) }",
+                        handler = "function() { Harbor.Components.DynamicCarousel.v1.DynamicCarousel.previousSlide( this ) }",
                         additionalProperties = {
                                 @ActionConfigProperty(name = "icon", value = "coral-Icon--rewindCircle")
                         } ),
                 @ActionConfig(text = "Next Slide",
-                        handler = "function() { Harbor.Components.DynamicCarousel.nextSlide( this ) }",
+                        handler = "function() { Harbor.Components.DynamicCarousel.v1.DynamicCarousel.nextSlide( this ) }",
                         additionalProperties = {
                                 @ActionConfigProperty(name = "icon", value = "coral-Icon--fastForwardCircle")
                         } )

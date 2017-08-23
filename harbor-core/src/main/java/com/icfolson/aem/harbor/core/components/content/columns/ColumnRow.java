@@ -42,7 +42,7 @@ import java.util.List;
     actions = { "text: Column Row", "-", "edit", "-", "copymove", "delete", "-", "insert" },
     actionConfigs = {
         @ActionConfig(
-            handler = "function() { Harbor.Components.ColumnRow.addColumn( this, 'harbor/components/content/column' ); }",
+            handler = "function() { Harbor.Components.ColumnRow.v1.ColumnRow.addColumn( this, 'harbor/components/content/column' ); }",
             text = "Add Column",
             additionalProperties = { @ActionConfigProperty(name = "icon", value = "coral-Icon--experienceAdd") }
         )

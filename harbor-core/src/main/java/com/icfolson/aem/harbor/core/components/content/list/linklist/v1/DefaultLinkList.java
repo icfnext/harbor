@@ -22,7 +22,7 @@ import org.apache.sling.models.annotations.injectorspecific.Self;
         @ActionConfig(xtype = "tbseparator"),
         @ActionConfig(
             text = "Add Link",
-            handler = "function() { Harbor.Components.LinkList.addLink( this, '" + DefaultListableLink.RESOURCE_TYPE + "' ); }",
+            handler = "function() { Harbor.Components.LinkList.v1.LinkList.addLink( this, '" + DefaultListableLink.RESOURCE_TYPE + "' ); }",
             additionalProperties = {
                 @ActionConfigProperty(name = "icon", value = "coral-Icon--experienceAdd")
             })

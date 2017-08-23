@@ -1,4 +1,6 @@
-Harbor.Components.ColumnRow = function (ns, channel) {
+Harbor.Components.ColumnRow = Harbor.Components.ColumnRow || {};
+Harbor.Components.ColumnRow.v1 = {};
+Harbor.Components.ColumnRow.v1.ColumnRow = function (ns, channel) {
 
     var bootstrapSizeProperties = [
         "xsSize",
@@ -11,7 +13,7 @@ Harbor.Components.ColumnRow = function (ns, channel) {
 
         this.addColumn = function (component, columnResourceType) {
 
-            Harbor.Lists.ListsEditor.addListItem(component, {
+            Harbor.Lists.v1.ListsEditor.addListItem(component, {
                 "sling:resourceType": columnResourceType
             }, {
                 //listName: "columns",

@@ -3,7 +3,7 @@ Harbor.Components.GlobalNavigation = function (ns, channel) {
     var NavigationEditor = function () {
 
         this.addNavigationElement = function (component) {
-            Harbor.Lists.ListsEditor.addListItem(component, {
+            Harbor.Lists.v1.ListsEditor.addListItem(component, {
                 'sling:resourceType': 'harbor/components/content/bootstrapmainnavigationelement'
             }, {
                 listName: 'elements',

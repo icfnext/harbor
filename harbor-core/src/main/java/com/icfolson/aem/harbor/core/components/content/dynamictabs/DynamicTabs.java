@@ -26,17 +26,17 @@ import java.util.stream.Collectors;
         actionConfigs = {
                 @ActionConfig(xtype = "tbseparator"),
                 @ActionConfig(text = "Add Tab",
-                        handler = "function() { Harbor.Components.DynamicTabs.addTab( this, '" + "/apps/" + NewTab.RESOURCE_TYPE + "/" + NewTab.DIALOG_FILE_NAME + "' ) }",
+                        handler = "function() { Harbor.Components.DynamicTabs.v1.DynamicTabs.addTab( this, '" + "/apps/" + NewTab.RESOURCE_TYPE + "/" + NewTab.DIALOG_FILE_NAME + "' ) }",
                         additionalProperties = {
                                 @ActionConfigProperty(name = "icon", value = "coral-Icon--experienceAdd")
                         } ),
                 @ActionConfig(text = "Previous Slide",
-                        handler = "function() { Harbor.Components.DynamicTabs.previousTab( this ) }",
+                        handler = "function() { Harbor.Components.DynamicTabs.v1.DynamicTabs.previousTab( this ) }",
                         additionalProperties = {
                                 @ActionConfigProperty(name = "icon", value = "coral-Icon--rewindCircle")
                         } ),
                 @ActionConfig(text = "Next Slide",
-                        handler = "function() { Harbor.Components.DynamicTabs.nextTab( this ) }",
+                        handler = "function() { Harbor.Components.DynamicTabs.v1.DynamicTabs.nextTab( this ) }",
                         additionalProperties = {
                                 @ActionConfigProperty(name = "icon", value = "coral-Icon--fastForwardCircle")
                         } )

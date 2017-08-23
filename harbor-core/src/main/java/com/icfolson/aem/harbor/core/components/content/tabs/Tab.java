@@ -19,11 +19,11 @@ import org.apache.sling.models.annotations.Model;
     isContainer = true,
     actionConfigs = {
         @ActionConfig(xtype = "tbseparator"),
-        @ActionConfig(text = "Move Up", handler = "function(){Harbor.Components.Tabs.moveUp( this )}",
+        @ActionConfig(text = "Move Up", handler = "function(){Harbor.Components.Tabs.v1.Tabs.moveUp( this )}",
             additionalProperties = {
                 @ActionConfigProperty(name = "icon", value = "coral-Icon--accordionUp")
             }),
-        @ActionConfig(text = "Move Down", handler = "function(){Harbor.Components.Tabs.moveDown( this )}",
+        @ActionConfig(text = "Move Down", handler = "function(){Harbor.Components.Tabs.v1.Tabs.moveDown( this )}",
             additionalProperties = {
                 @ActionConfigProperty(name = "icon", value = "coral-Icon--accordionDown")
             })

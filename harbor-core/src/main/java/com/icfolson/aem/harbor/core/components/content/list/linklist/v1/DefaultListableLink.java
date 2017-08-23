@@ -32,9 +32,9 @@ import javax.inject.Named;
     actions = { "text: Listable Link", "-", "edit", "delete" },
     actionConfigs = {
         @ActionConfig(xtype = "tbseparator"),
-        @ActionConfig(text = "Move Up", handler = "function(){Harbor.Components.LinkList.moveUp( this )}",
+        @ActionConfig(text = "Move Up", handler = "function(){Harbor.Components.LinkList.v1.LinkList.moveUp( this )}",
             additionalProperties = { @ActionConfigProperty(name = "icon", value = "coral-Icon--accordionUp") }),
-        @ActionConfig(text = "Move Down", handler = "function(){Harbor.Components.LinkList.moveDown( this )}",
+        @ActionConfig(text = "Move Down", handler = "function(){Harbor.Components.LinkList.v1.LinkList.moveDown( this )}",
             additionalProperties = { @ActionConfigProperty(name = "icon", value = "coral-Icon--accordionDown") })
     }
 )

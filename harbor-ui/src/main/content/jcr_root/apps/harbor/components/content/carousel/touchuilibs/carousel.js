@@ -1,9 +1,11 @@
-Harbor.Components.Carousel = function (ns, channel) {
+Harbor.Components.Carousel = Harbor.Components.Carousel || {};
+Harbor.Components.Carousel.v1 = {};
+Harbor.Components.Carousel.v1.Carousel = function (ns, channel) {
 
     var CarouselEditor = function () {
 
         this.addSlide = function (component) {
-            Harbor.Lists.ListsEditor.addListItem(component, {
+            Harbor.Lists.v1.ListsEditor.addListItem(component, {
                 'sling:resourceType': 'harbor/components/content/carousel/carouselslide'
             }, {
                 listItemNameBase: 'slide-'

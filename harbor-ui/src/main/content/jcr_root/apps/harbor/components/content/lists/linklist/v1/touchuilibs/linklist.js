@@ -1,9 +1,11 @@
-Harbor.Components.LinkList = function ( ns, channel ) {
+Harbor.Components.LinkList = Harbor.Components.LinkList || {};
+Harbor.Components.LinkList.v1 = {};
+Harbor.Components.LinkList.v1.LinkList = function ( ns, channel ) {
 
     var LinkListEditor = function() {
 
         this.addLink = function( component, linkResourceType ) {
-            Harbor.Lists.ListsEditor.addListItem(component, {
+            Harbor.Lists.v1.ListsEditor.addListItem(component, {
                 "sling:resourceType": linkResourceType
             }, {
                 //listName: "columns",
@@ -16,7 +18,7 @@ Harbor.Components.LinkList = function ( ns, channel ) {
 
         this.moveUp = function( component ) {
 
-            Harbor.Lists.ListsEditor.moveBackward( component )
+            Harbor.Lists.v1.ListsEditor.moveBackward( component )
                 .then( function() {
                     ns.edit.actions.doRefresh( component.getParent() );
                 } );
@@ -25,7 +27,7 @@ Harbor.Components.LinkList = function ( ns, channel ) {
 
         this.moveDown = function( component ) {
 
-            Harbor.Lists.ListsEditor.moveForward( component )
+            Harbor.Lists.v1.ListsEditor.moveForward( component )
                 .then( function() {
                     ns.edit.actions.doRefresh( component.getParent() );
                 } );

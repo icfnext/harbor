@@ -1,10 +1,12 @@
-Harbor.Components.Accordion = function ( ns, channel ) {
+Harbor.Components.Accordion = Harbor.Components.Accordion || {};
+Harbor.Components.Accordion.v1 = {};
+Harbor.Components.Accordion.v1.Accordion = function ( ns, channel ) {
 
     var AccordionEditor = function() {
 
         this.addItem = function ( component, itemResourceType ) {
 
-            Harbor.Lists.ListsEditor.addListItem(component, {
+            Harbor.Lists.v1.ListsEditor.addListItem(component, {
                 "sling:resourceType": itemResourceType
             }, {
                 listItemNameBase: "item"
@@ -18,7 +20,7 @@ Harbor.Components.Accordion = function ( ns, channel ) {
 
         this.moveUp = function( component ) {
 
-            Harbor.Lists.ListsEditor.moveBackward( component )
+            Harbor.Lists.v1.ListsEditor.moveBackward( component )
                 .then( function() {
                     ns.edit.actions.doRefresh( component.getParent() );
                 } );
@@ -27,7 +29,7 @@ Harbor.Components.Accordion = function ( ns, channel ) {
 
         this.moveDown = function( component ) {
 
-            Harbor.Lists.ListsEditor.moveForward( component )
+            Harbor.Lists.v1.ListsEditor.moveForward( component )
                 .then( function() {
                     ns.edit.actions.doRefresh( component.getParent() );
                 } );
