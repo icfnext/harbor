@@ -42,7 +42,11 @@ public class Tab extends AbstractComponent {
     @DialogField(fieldLabel = "Title", fieldDescription = "The title to be presented within the Tab")
     @TextField
     public String getTitle() {
-        return IconUtils.iconify(get("title", getName()));
+        return IconUtils.iconify(get("title", "Tab " + getNumber()));
+    }
+
+    public Integer getNumber() {
+        return getIndex() + 1;
     }
 
     public String getName() {
