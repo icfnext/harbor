@@ -13,6 +13,10 @@ Harbor is a collection of content and page components, services, and patterns co
   * [Title (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/title/v1/title)
   * [Subtitle (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/subtitle/v1/subtitle)
   * [Text (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/text/v1/text)
+  * [Accordiong (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/accordion/v1/accordion)
+  * [Dynamic Accordion (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/dynamicaccordion/v1/dynamicaccordion)
+    * [Parsys Accordion Item (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/dynamicaccordion/items/parsysaccordionitem/v1/parsysaccordionitem)
+  * [Call to Action (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/calltoaction/v1/calltoaction)
 * Group: Harbor Scaffolding
   * [Content Container (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/contentcontainer/v1/contentcontainer)
   * [Page Header (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/pageheader/v1/pageheader)
