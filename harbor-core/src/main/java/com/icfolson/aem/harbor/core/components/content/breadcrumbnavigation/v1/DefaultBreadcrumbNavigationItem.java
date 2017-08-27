@@ -1,21 +1,21 @@
-package com.icfolson.aem.harbor.core.components.content.breadcrumb.v1;
+package com.icfolson.aem.harbor.core.components.content.breadcrumbnavigation.v1;
 
-import com.icfolson.aem.harbor.api.components.content.breadcrumb.BreadcrumbItem;
+import com.icfolson.aem.harbor.api.components.content.breadcrumb.BreadcrumbNavigationItem;
 import com.icfolson.aem.library.api.page.PageDecorator;
 
-public class DefaultBreadcrumbItem implements BreadcrumbItem {
+public class DefaultBreadcrumbNavigationItem implements BreadcrumbNavigationItem {
 
     private final PageDecorator page;
     private final boolean rootPage;
     private final boolean currentPage;
 
-    public DefaultBreadcrumbItem(final PageDecorator page) {
+    public DefaultBreadcrumbNavigationItem(final PageDecorator page) {
         this.page = page;
         this.rootPage = false;
         this.currentPage = false;
     }
 
-    public DefaultBreadcrumbItem(final PageDecorator page, boolean rootPage, boolean currentPage) {
+    public DefaultBreadcrumbNavigationItem(final PageDecorator page, boolean rootPage, boolean currentPage) {
         this.page = page;
         this.rootPage = rootPage;
         this.currentPage = currentPage;

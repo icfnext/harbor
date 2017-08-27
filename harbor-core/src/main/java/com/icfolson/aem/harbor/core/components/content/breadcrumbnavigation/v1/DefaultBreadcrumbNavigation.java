@@ -1,4 +1,4 @@
-package com.icfolson.aem.harbor.core.components.content.breadcrumb.v1;
+package com.icfolson.aem.harbor.core.components.content.breadcrumbnavigation.v1;
 
 import com.citytechinc.cq.component.annotations.Component;
 import com.citytechinc.cq.component.annotations.Tab;
@@ -16,10 +16,10 @@ import java.util.Optional;
 
 @Component(value = "Breadcrumb (v1)",
     group = ComponentGroups.HARBOR_NAVIGATION,
-    name = "breadcrumb/v1/breadcrumb",
+    name = "breadcrumbnavigation/v1/breadcrumbnavigation",
     tabs = { @Tab(title = "Breadcrumb (v1)", touchUINodeName = "breadcrumb") })
-@Model(adaptables = Resource.class, adapters = Breadcrumb.class, resourceType = DefaultBreadcrumb.RESOURCE_TYPE)
-public class DefaultBreadcrumb implements Breadcrumb<BreadcrumbItem> {
+@Model(adaptables = Resource.class, adapters = BreadcrumbNavigation.class, resourceType = DefaultBreadcrumbNavigation.RESOURCE_TYPE)
+public class DefaultBreadcrumbNavigation implements BreadcrumbNavigation<BreadcrumbNavigationItem> {
 
     public static final String RESOURCE_TYPE = "harbor/components/content/breadcrumb/v1/breadcrumb";
 
@@ -27,10 +27,29 @@ public class DefaultBreadcrumb implements Breadcrumb<BreadcrumbItem> {
     private PageDecorator currentPage;
 
     private Optional<PageDecorator> rootPageOptional;
-    private List<BreadcrumbItem> trail;
+    private List<BreadcrumbNavigationItem> trail;
 
     @Override
-    public Iterable<BreadcrumbItem> getTrail() {
+    public Iterable<BreadcrumbNavigationItem> getTrail() {
+        return getTrailList();
+    }
+
+    @Override
+    public boolean includeCurrentPage() {
+        return true;
+    }
+
+    @Override
+    public boolean includeRootPage() {
+        return true;
+    }
+
+    @Override
+    public int getLength() {
+        return getTrailList().size();
+    }
+
+    protected List<BreadcrumbNavigationItem> getTrailList() {
         if (trail != null) {
             return trail;
         }
@@ -43,7 +62,7 @@ public class DefaultBreadcrumb implements Breadcrumb<BreadcrumbItem> {
         }
 
         if (includeCurrentPage()) {
-            trail.add(new DefaultBreadcrumbItem(currentPage,
+            trail.add(new DefaultBreadcrumbNavigationItem(currentPage,
                     currentPage.getPath().equals(rootPageOptional.get().getPath()),
                     true));
         }
@@ -52,29 +71,19 @@ public class DefaultBreadcrumb implements Breadcrumb<BreadcrumbItem> {
 
         while(currentPagePointer != null && !currentPagePointer.getPath().equals(rootPageOptional.get().getPath())) {
             if (!currentPagePointer.isHideInNav()) {
-                trail.add(new DefaultBreadcrumbItem(currentPagePointer));
+                trail.add(new DefaultBreadcrumbNavigationItem(currentPagePointer));
             }
 
             currentPagePointer = currentPagePointer.getParent();
         }
 
         if (includeRootPage() && !currentPage.getPath().equals(rootPageOptional.get().getPath())) {
-            trail.add(new DefaultBreadcrumbItem(currentPagePointer, true, false));
+            trail.add(new DefaultBreadcrumbNavigationItem(currentPagePointer, true, false));
         }
 
         trail = Lists.reverse(trail);
 
         return trail;
-    }
-
-    @Override
-    public boolean includeCurrentPage() {
-        return true;
-    }
-
-    @Override
-    public boolean includeRootPage() {
-        return true;
     }
 
     protected Optional<PageDecorator> getRootPage() {
