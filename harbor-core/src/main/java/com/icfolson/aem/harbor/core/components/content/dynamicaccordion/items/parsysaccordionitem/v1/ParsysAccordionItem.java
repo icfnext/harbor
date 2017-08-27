@@ -1,11 +1,11 @@
-package com.icfolson.aem.harbor.core.components.content.dynamicaccordion.items;
+package com.icfolson.aem.harbor.core.components.content.dynamicaccordion.items.parsysaccordionitem.v1;
 
 import com.citytechinc.cq.component.annotations.Component;
 import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.Listener;
 import com.citytechinc.cq.component.annotations.widgets.DialogFieldSet;
 import com.citytechinc.cq.component.annotations.widgets.TextField;
-import com.icfolson.aem.harbor.api.components.content.dynamicaccordion.AccordionItem;
+import com.icfolson.aem.harbor.api.components.content.dynamicaccordion.DynamicAccordionItem;
 import com.icfolson.aem.harbor.api.components.mixins.classifiable.Classification;
 import com.icfolson.aem.harbor.core.util.ComponentUtils;
 import org.apache.sling.api.resource.Resource;
@@ -16,18 +16,18 @@ import javax.inject.Inject;
 
 @Component(value = "Parsys Accordion Item",
         group = ".hidden",
-        resourceSuperType = AccordionItem.RESOURCE_TYPE,
+        resourceSuperType = DynamicAccordionItem.RESOURCE_TYPE,
         actions = { "text: Parsys Accordion Item", "edit", "-", "delete" },
-        name = "dynamicaccordion/items/parsysaccordionitem",
+        name = "dynamicaccordion/items/parsysaccordionitem/v1/parsysaccordionitem",
         listeners = {
                 @Listener(name = "afterinsert", value = "REFRESH_PARENT"),
                 @Listener(name = "afteredit", value = "REFRESH_PARENT"),
                 @Listener(name = "afterdelete", value = "REFRESH_PARENT")
         })
-@Model(adaptables = Resource.class, adapters = AccordionItem.class, resourceType = ParsysAccordionItem.RESOURCE_TYPE)
-public class ParsysAccordionItem implements AccordionItem {
+@Model(adaptables = Resource.class, adapters = DynamicAccordionItem.class, resourceType = ParsysAccordionItem.RESOURCE_TYPE)
+public class ParsysAccordionItem implements DynamicAccordionItem {
 
-    public static final String RESOURCE_TYPE = "harbor/components/content/dynamicaccordion/items/parsysaccordionitem";
+    public static final String RESOURCE_TYPE = "harbor/components/content/dynamicaccordion/items/parsysaccordionitem/v1/parsysaccordionitem";
 
     @Inject @Optional
     private String headingText;

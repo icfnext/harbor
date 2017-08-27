@@ -1,0 +1,14 @@
+<sly data-sly-test="${(isEditMode || isDesignMode)}" data-sly-include="authorhelp.html"/>
+
+<div data-sly-use.accordion="com.icfolson.aem.harbor.api.components.content.dynamicaccordion.DynamicAccordion"
+     data-sly-use.panelHeading="panelheading.html"
+     data-sly-use.panelBody="panelbody.html"
+     class="panel-group"
+     id="accordion-${accordion.id}"
+     role="tablist"
+     aria-multiselectable="true">
+    <div data-sly-repeat.item="${accordion.items}" class="panel ${item.style} ${item.classification ? item.classification.classNames : ''}">
+        <sly data-sly-call="${panelHeading.template @ item=item}"/>
+        <sly data-sly-call="${panelBody.template @ item=item}"/>
+    </div>
+</div>

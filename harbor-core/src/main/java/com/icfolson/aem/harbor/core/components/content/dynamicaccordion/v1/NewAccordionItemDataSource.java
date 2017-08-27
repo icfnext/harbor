@@ -1,6 +1,6 @@
-package com.icfolson.aem.harbor.core.components.content.dynamicaccordion;
+package com.icfolson.aem.harbor.core.components.content.dynamicaccordion.v1;
 
-import com.icfolson.aem.harbor.api.components.content.dynamicaccordion.AccordionItem;
+import com.icfolson.aem.harbor.api.components.content.dynamicaccordion.DynamicAccordionItem;
 import com.icfolson.aem.harbor.core.components.dynamics.AbstractDynamicItemDataSource;
 import org.apache.felix.scr.annotations.sling.SlingServlet;
 
@@ -11,7 +11,7 @@ public class NewAccordionItemDataSource extends AbstractDynamicItemDataSource {
 
     @Override
     public String getItemResourceType() {
-        return AccordionItem.RESOURCE_TYPE;
+        return DynamicAccordionItem.RESOURCE_TYPE;
     }
 
 }

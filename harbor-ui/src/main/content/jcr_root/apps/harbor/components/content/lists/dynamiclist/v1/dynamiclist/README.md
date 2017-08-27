@@ -11,7 +11,6 @@ See [usage video](https://youtu.be/QGzQaqD2Sqo).
 
 * `group`: Harbor Lists
 * `resourceType`: `harbor/components/content/lists/dynamiclist/v1/dynamiclist`
-* `resourceSuperType`: `harbor/components/content/heading/v1/abstractheading`
 
 ## Sling Model
 

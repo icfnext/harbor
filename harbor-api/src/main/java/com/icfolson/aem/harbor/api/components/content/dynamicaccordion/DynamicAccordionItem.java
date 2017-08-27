@@ -1,11 +1,11 @@
 package com.icfolson.aem.harbor.api.components.content.dynamicaccordion;
 
-public interface AccordionItem {
+import com.icfolson.aem.harbor.api.components.mixins.identifiable.Identifiable;
+
+public interface DynamicAccordionItem extends Identifiable {
 
     String RESOURCE_TYPE = "harbor/components/content/dynamicaccordion/item";
     String DEFAULT_STYLE = "panel-default";
-
-    String getId();
 
     String getHeadingText();
 
