@@ -46,7 +46,7 @@
     </fileSets>
     <dependencySets>
         <dependencySet>
-            <outputDirectory>jcr_root/etc/packages/harbor</outputDirectory>
+            <outputDirectory>jcr_root/etc/packages/aem-library</outputDirectory>
             <useProjectArtifact>false</useProjectArtifact>
             <scope>compile</scope>
             <includes>
@@ -55,7 +55,7 @@
             <useStrictFiltering>true</useStrictFiltering>
         </dependencySet>
         <dependencySet>
-            <outputDirectory>jcr_root/etc/packages/harbor</outputDirectory>
+            <outputDirectory>jcr_root/etc/packages/aem-namespace-extension</outputDirectory>
             <useProjectArtifact>false</useProjectArtifact>
             <scope>compile</scope>
             <includes>
@@ -64,7 +64,7 @@
             <useStrictFiltering>true</useStrictFiltering>
         </dependencySet>
         <dependencySet>
-            <outputDirectory>jcr_root/etc/packages/harbor</outputDirectory>
+            <outputDirectory>jcr_root/etc/packages/multicomposite-addon</outputDirectory>
             <useProjectArtifact>false</useProjectArtifact>
             <scope>compile</scope>
             <includes>
@@ -73,7 +73,7 @@
             <useStrictFiltering>true</useStrictFiltering>
         </dependencySet>
         <dependencySet>
-            <outputDirectory>jcr_root/etc/packages/harbor</outputDirectory>
+            <outputDirectory>jcr_root/etc/packages/acs-commons</outputDirectory>
             <useProjectArtifact>false</useProjectArtifact>
             <scope>compile</scope>
             <includes>

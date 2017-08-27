@@ -10,6 +10,7 @@
     <entry key="buildCount">1</entry>
     <entry key="version">${project.version}</entry>
     <entry key="dependencies"/>
+    <entry key="groupId">com.icfolson.aem.harbor</entry>
     <entry key="group"/>
     <entry key="packageFormatVersion">2</entry>
     <entry key="lastWrapped">${timestamp}</entry>
