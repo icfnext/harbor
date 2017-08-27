@@ -1,14 +1,11 @@
 package com.icfolson.aem.harbor.core.components.content.accordion.v1;
 
 import com.citytechinc.cq.component.annotations.Component;
-import com.citytechinc.cq.component.annotations.ContentProperty;
 import com.citytechinc.cq.component.annotations.editconfig.ActionConfig;
 import com.citytechinc.cq.component.annotations.editconfig.ActionConfigProperty;
-import com.google.common.base.Predicate;
 import com.icfolson.aem.harbor.api.components.content.accordion.Accordion;
 import com.icfolson.aem.harbor.api.components.content.accordion.AccordionItem;
 import com.icfolson.aem.harbor.core.constants.groups.ComponentGroups;
-import com.icfolson.aem.library.api.node.ComponentNode;
 import com.icfolson.aem.library.core.components.AbstractComponent;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
