@@ -1,0 +1,13 @@
+<ol class="breadcrumb" data-sly-use.breadcrumb="com.icfolson.aem.harbor.api.components.content.breadcrumb.Breadcrumb"
+    data-sly-use.currentPageTemplate="currentpage.html"
+    data-sly-use.intermediaryPageTemplate="intermediarypage.html"
+    data-sly-use.rootPageTemplate="rootpage.html">
+    <li data-sly-repeat.currentTrailItem="${breadcrumb.trail}">
+        <sly data-sly-test="${currentTrailItem.isRootPage}"
+             data-sly-call="${rootPageTemplate.template @ item=currentTrailItem}"/>
+        <sly data-sly-test="${!currentTrailItem.isRootPage && !currentTrailItem.isCurrentPage}"
+             data-sly-call="${intermediaryPageTemplate.template @ item=currentTrailItem}"/>
+        <sly data-sly-test="${currentTrailItem.isCurrentPage}"
+             data-sly-call="${currentPageTemplate.template @ item=currentTrailItem}"/>
+    </li>
+</ol>
