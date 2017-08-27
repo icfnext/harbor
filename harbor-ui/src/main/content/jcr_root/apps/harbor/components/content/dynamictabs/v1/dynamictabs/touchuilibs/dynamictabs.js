@@ -30,13 +30,13 @@ Harbor.Components.DynamicTabs.v1.DynamicTabs = function ( ns, channel ) {
 
         this.nextTab = function( component ) {
             console.log( 'GOTO Next Tab for ' + component.path );
-            ns.ContentFrame.postMessage( 'harbor-DynamicTabs-nextTab', { path: component.path } );
+            ns.ContentFrame.postMessage( 'harbor-DynamicTabs-v1-nextTab', { path: component.path } );
             Harbor.Lists.v1.removeSelection();
         };
 
         this.previousTab = function( component ) {
             console.log( 'GOTO Previous Tab for ' + component.path );
-            ns.ContentFrame.postMessage( 'harbor-DynamicTabs-previousTab', { path: component.path } );
+            ns.ContentFrame.postMessage( 'harbor-DynamicTabs-v1-previousTab', { path: component.path } );
             Harbor.Lists.v1.removeSelection();
         };
 

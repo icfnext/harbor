@@ -1,7 +1,7 @@
 package com.icfolson.aem.harbor.core.components.content.list.dynamic.v1;
 
 import com.icfolson.aem.harbor.api.components.content.list.dynamic.DynamicListItem;
-import com.icfolson.aem.harbor.core.components.dynamics.AbstractDynamicItemDataSource;
+import com.icfolson.aem.harbor.core.components.dynamics.v1.AbstractDynamicItemDataSource;
 import org.apache.felix.scr.annotations.sling.SlingServlet;
 
 @SlingServlet(resourceTypes = NewDynamicListItemDataSource.RESOURCE_TYPE)

@@ -1,6 +1,6 @@
 package com.icfolson.aem.harbor.api.components.content.dynamictabs;
 
-public interface Tab {
+public interface DynamicTab {
 
     String RESOURCE_TYPE = "harbor/components/content/dynamictabs/tab";
 

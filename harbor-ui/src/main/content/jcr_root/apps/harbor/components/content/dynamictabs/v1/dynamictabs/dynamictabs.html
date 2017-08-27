@@ -1,0 +1,7 @@
+<sly data-sly-test="${(isEditMode || isDesignMode) && !resource.hasChildren}" data-sly-include="empty.html"/>
+
+<!-- Nav tabs -->
+<sly data-sly-include="tabs.html"></sly>
+
+<!-- Tab panes -->
+<sly data-sly-include="tabcontent.html"></sly>

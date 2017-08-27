@@ -1,7 +1,7 @@
-package com.icfolson.aem.harbor.core.components.content.dynamictabs;
+package com.icfolson.aem.harbor.core.components.content.dynamictabs.v1;
 
-import com.icfolson.aem.harbor.api.components.content.dynamictabs.Tab;
-import com.icfolson.aem.harbor.core.components.dynamics.AbstractDynamicItemDataSource;
+import com.icfolson.aem.harbor.api.components.content.dynamictabs.DynamicTab;
+import com.icfolson.aem.harbor.core.components.dynamics.v1.AbstractDynamicItemDataSource;
 import org.apache.felix.scr.annotations.sling.SlingServlet;
 
 @SlingServlet(resourceTypes = NewTabDataSource.RESOURCE_TYPE)
@@ -11,7 +11,7 @@ public class NewTabDataSource extends AbstractDynamicItemDataSource {
 
     @Override
     public String getItemResourceType() {
-        return Tab.RESOURCE_TYPE;
+        return DynamicTab.RESOURCE_TYPE;
     }
 
 }
