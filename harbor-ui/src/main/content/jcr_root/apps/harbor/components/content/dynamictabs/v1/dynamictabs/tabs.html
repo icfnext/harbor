@@ -1,8 +1,9 @@
-<ul class="nav nav-tabs ${dynamicTabs.classification.classNames}"
-    role="tablist"
-    data-sly-use.dynamicTabs="com.icfolson.aem.harbor.api.components.content.dynamictabs.DynamicTabs"
-    data-sly-attribute.data-path="${isAuthor ? resource.path : ''}">
-    <li data-sly-repeat.currentTab="${dynamicTabs.tabs}" data-sly-attribute.class="${currentTabList.first ? 'active' : ''}">
-        <a href="#${currentTab.id}" aria-controls="${currentTab.id}" role="tab" data-toggle="tab">${currentTab.label || 'Tab'}</a>
-    </li>
-</ul>
+<template data-sly-template.template="${@ dynamicTabs}">
+    <ul class="nav nav-tabs ${dynamicTabs.classification.classNames}"
+        role="tablist"
+        data-sly-attribute.data-path="${isAuthor ? resource.path : ''}">
+        <li data-sly-repeat.currentTab="${dynamicTabs.tabs}" data-sly-attribute.class="${currentTabList.first ? 'active' : ''}">
+            <a href="#${currentTab.id}" aria-controls="${currentTab.id}" role="tab" data-toggle="tab">${currentTab.label || 'Tab'}</a>
+        </li>
+    </ul>
+</template>

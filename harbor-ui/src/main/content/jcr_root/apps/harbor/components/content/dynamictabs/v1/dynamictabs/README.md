@@ -63,11 +63,13 @@ next.
   Responsible for inclusion of `empty`, `tabs`, and `tabcontent`
 * `empty.html` - A helper message indicating that the Tabs container has no 
   contents.
-* `tabs.html` - HTL producing the tabs themselves based on the interface 
-  exposed by `DynamicTab`.
-* `tabcontent.html` - HTL producing the tab pane for each `DynamicTab` and 
+* `tabs.html` - HTL template producing the tabs themselves based on the interface 
+  exposed by `DynamicTab`.  Takes a single `dynamicTabs` input intended to be 
+  the instance of `DynamicTabs` being rendered.
+* `tabcontent.html` - HTL template producing the tab pane for each `DynamicTab` and 
   including the tab's content using `data-sly-resource` calling upon the 
-  `DynamicTab` instance by type.
+  `DynamicTab` instance by type.  Takes a single `dynamicTabs` input intended to be 
+  the instance of `DynamicTabs` being rendered.
   
 ## Example Proxy
 

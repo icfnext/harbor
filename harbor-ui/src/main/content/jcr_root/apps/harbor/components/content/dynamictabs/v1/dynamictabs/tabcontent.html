@@ -1,10 +1,11 @@
-<div class="tab-content ${dynamicTabs.classification.classNames}"
-     data-sly-use.dynamicTabs="com.icfolson.aem.harbor.api.components.content.dynamictabs.DynamicTabs">
-    <div data-sly-repeat.currentTab="${dynamicTabs.tabs}"
-         role="tabpanel"
-         class="tab-pane active"
-         data-sly-attribute.class="${currentTabList.first ? 'tab-pane active' : 'tab-pane'}"
-         id="${currentTab.id}">
-        <div data-sly-resource="${currentTab.path @ resourceType=currentTab.type}"></div>
+<template data-sly-template.template="${@ dynamicTabs}">
+    <div class="tab-content ${dynamicTabs.classification.classNames}">
+        <div data-sly-repeat.currentTab="${dynamicTabs.tabs}"
+             role="tabpanel"
+             class="tab-pane active"
+             data-sly-attribute.class="${currentTabList.first ? 'tab-pane active' : 'tab-pane'}"
+             id="${currentTab.id}">
+            <div data-sly-resource="${currentTab.path @ resourceType=currentTab.type}"></div>
+        </div>
     </div>
-</div>
+</template>
