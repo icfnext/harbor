@@ -1,4 +1,8 @@
-<sly data-sly-test="${(isEditMode || isDesignMode) && !resource.hasChildren}" data-sly-include="empty.html"/>
+<sly data-sly-test="${(isEditMode || isDesignMode) && !resource.hasChildren}">
+    <sly data-sly-use.dynamicTabs="com.icfolson.aem.harbor.api.components.content.dynamictabs.DynamicTabs"
+         data-sly-test="dynamicTabs.tabs.empty"
+         data-sly-include="empty.html"/>
+</sly>
 
 <!-- Nav tabs -->
 <sly data-sly-include="tabs.html"></sly>

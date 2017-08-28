@@ -43,7 +43,7 @@ import java.util.stream.Collectors;
                         } )
         } )
 @Model(adaptables = Resource.class, adapters = DynamicTabs.class, resourceType = DefaultDynamicTabs.RESOURCE_TYPE)
-public class DefaultDynamicTabs {
+public class DefaultDynamicTabs implements DynamicTabs {
 
     public static final String RESOURCE_TYPE = "harbor/components/content/dynamictabs/v1/dynamictabs";
 
