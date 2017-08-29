@@ -7,7 +7,8 @@
     </button>
 
     <a class="navbar-brand" href="${bootstrapMainManualNavigation.brandLink.href}" data-sly-test="${bootstrapMainManualNavigation.showBrandLink}">
-        <img data-sly-test="${bootstrapMainManualNavigation.hasBrandLinkImage}" src="${bootstrapMainManualNavigation.brandLinkImageSrc}" title="${bootstrapMainManualNavigation.brandLinkText}"/>
+        <img data-sly-test="${bootstrapMainManualNavigation.hasBrandLinkImage}" src="${bootstrapMainManualNavigation.brandLinkImageSrc}" title="${bootstrapMainManualNavigation.brandLinkText}"
+             alt="${bootstrapMainManualNavigation.brandLinkImageAltText}"/>
         <sly data-sly-test="${!bootstrapMainManualNavigation.hasBrandLinkImage}">${bootstrapMainManualNavigation.brandLinkText}</sly>
     </a>
 </div>

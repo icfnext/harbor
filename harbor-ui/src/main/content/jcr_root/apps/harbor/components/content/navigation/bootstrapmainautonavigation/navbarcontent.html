@@ -4,7 +4,6 @@
             <li data-sly-test="${bootstrapMainAutoNavigation.onStructuralPage}"><a href="#">Navigation not rendered on Structural Page</a></li>
             <sly data-sly-repeat.currentNode="${bootstrapMainAutoNavigation.tree.root.childNodesIterator}"
                  data-sly-call="${navigationitemrenderer.navigationitem @ currentNode = currentNode, navigationComponent = bootstrapMainAutoNavigation}"/>
-            </li>
         </ul>
     </nav>
 </div>
