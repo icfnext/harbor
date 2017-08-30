@@ -1,7 +1,7 @@
 package com.icfolson.aem.harbor.core.components.content.modalcalltoaction;
 
 import com.citytechinc.cq.component.annotations.Component;
-import com.icfolson.aem.harbor.core.components.content.calltoaction.AbstractCallToAction;
+import com.icfolson.aem.harbor.core.components.content.calltoaction.v1.AbstractCallToAction;
 import com.icfolson.aem.harbor.core.constants.groups.ComponentGroups;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;

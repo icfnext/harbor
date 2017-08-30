@@ -1,0 +1,22 @@
+<div data-sly-test="${(isEditMode || isDesignMode)}" class="author-help-message">
+    Dynamic Carousel - Press the &quot;Add Experience&quot; button in the edit bar to add slides.
+</div>
+<div data-sly-use.carousel="com.icfolson.aem.harbor.api.components.content.dynamiccarousel.DynamicCarousel"
+     id="${carousel.id}-carousel"
+     class="${carousel.cssClass} ${carousel.classification.classNames}"
+     data-ride="${(isPreviewMode || isPublish) ? 'carousel' : ''}"
+     data-interval="${carousel.interval == 0 ? 'false' : carousel.interval}"
+     data-pause="${carousel.pauseOnHover ? 'hover' : ''}"
+     data-keyboard="${carousel.keyboard ? 'true' : ''}"
+     data-wrap="${carousel.wrap ? 'true' : ''}"
+     data-sly-attribute.data-path="${isAuthor ? resource.path : ''}">
+
+    <!-- Indicators -->
+    <sly data-sly-test="${(isPreviewMode || isPublish) && carousel.showSlideSelectorControls}" data-sly-include="slideselectorcontrols.html"></sly>
+
+    <!-- Wrapper for slides -->
+    <sly data-sly-include="slides.html"></sly>
+
+    <!-- Controls -->
+    <sly data-sly-test="${(isPreviewMode || isPublish) && carousel.showPreviousAndNextControls}" data-sly-include="previousandnextcontrols.html"></sly>
+</div>

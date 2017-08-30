@@ -1,0 +1,132 @@
+package com.icfolson.aem.harbor.core.components.content.dynamiccarousel.v1;
+
+import com.citytechinc.cq.component.annotations.Component;
+import com.citytechinc.cq.component.annotations.DialogField;
+import com.citytechinc.cq.component.annotations.editconfig.ActionConfig;
+import com.citytechinc.cq.component.annotations.editconfig.ActionConfigProperty;
+import com.citytechinc.cq.component.annotations.widgets.DialogFieldSet;
+import com.citytechinc.cq.component.annotations.widgets.NumberField;
+import com.citytechinc.cq.component.annotations.widgets.Switch;
+import com.icfolson.aem.harbor.api.components.content.dynamiccarousel.DynamicCarousel;
+import com.icfolson.aem.harbor.api.components.mixins.classifiable.Classification;
+import org.apache.sling.api.resource.Resource;
+import org.apache.sling.models.annotations.Default;
+import org.apache.sling.models.annotations.Model;
+import org.apache.sling.models.annotations.injectorspecific.Self;
+
+import javax.inject.Inject;
+
+@Component(
+        value = "Dynamic Carousel",
+        name = "dynamiccarousel/v1/dynamiccarousel",
+        actions = { "text: Dynamic Carousel", "edit", "-", "copymove", "delete", "-", "insert" },
+        isContainer = true,
+        actionConfigs = {
+                @ActionConfig(xtype = "tbseparator"),
+                @ActionConfig(text = "Add Slide",
+                        handler = "function() { Harbor.Components.DynamicCarousel.v1.DynamicCarousel.addSlide( this, '" + "/apps/" + DefaultNewSlide.RESOURCE_TYPE + "/" + DefaultNewSlide.DIALOG_FILE_NAME + "' ) }",
+                        additionalProperties = {
+                                @ActionConfigProperty(name = "icon", value = "coral-Icon--experienceAdd")
+                        } ),
+                @ActionConfig(text = "Previous Slide",
+                        handler = "function() { Harbor.Components.DynamicCarousel.v1.DynamicCarousel.previousSlide( this ) }",
+                        additionalProperties = {
+                                @ActionConfigProperty(name = "icon", value = "coral-Icon--rewindCircle")
+                        } ),
+                @ActionConfig(text = "Next Slide",
+                        handler = "function() { Harbor.Components.DynamicCarousel.v1.DynamicCarousel.nextSlide( this ) }",
+                        additionalProperties = {
+                                @ActionConfigProperty(name = "icon", value = "coral-Icon--fastForwardCircle")
+                        } )
+                 } )
+@Model(adaptables = Resource.class, adapters = DynamicCarousel.class, resourceType = DefaultDynamicCarousel.RESOURCE_TYPE)
+public class DefaultDynamicCarousel implements DynamicCarousel {
+
+    public static final String RESOURCE_TYPE = "harbor/components/content/dynamiccarousel/v1/dynamiccarousel";
+
+    @Inject @Default(booleanValues = true)
+    private boolean showPreviousAndNextControls;
+
+    @Inject @Default(booleanValues = true)
+    private boolean showSlideSelectorControls;
+
+    @Inject @Default(intValues = 5000)
+    private Integer interval;
+
+    @Inject @Default(booleanValues = false)
+    private boolean pauseOnHover;
+
+    @Inject @Default(booleanValues = true)
+    private boolean wrap;
+
+    @Inject @Default(booleanValues = false)
+    private boolean keyboard;
+
+    @Inject
+    private Resource resource;
+
+    @Inject @Self
+    private Classification classification;
+
+    @DialogField(fieldLabel = "Show Previous and Next Controls", ranking = 1)
+    @Switch(offText = "No", onText = "Yes")
+    public boolean isShowPreviousAndNextControls() {
+        return showPreviousAndNextControls;
+    }
+
+    @DialogField(fieldLabel = "Show Slide Selector Controls", ranking = 2)
+    @Switch(offText = "No", onText = "Yes")
+    public boolean isShowSlideSelectorControls() {
+        return showSlideSelectorControls;
+    }
+
+    @DialogField(fieldLabel = "Interval",
+            fieldDescription = "The amount of time in milliseconds to delay between automatically cycling an item.  Defaults to 5000 (5 seconds).  If set to 0, automatic cycling will be disabled.", value = "5000", ranking = 3)
+    @NumberField(allowDecimals = false, allowNegative = false)
+    public Integer getInterval() {
+        return interval;
+    }
+
+    @DialogField(fieldLabel = "Pause on Hover?",
+            fieldDescription = "Whether cycling of the carousel should pause on mouse hover.", ranking = 4)
+    @Switch(offText = "No", onText = "Yes")
+    public boolean isPauseOnHover() {
+        return pauseOnHover;
+    }
+
+    @DialogField(fieldLabel = "Wrap?",
+            fieldDescription = "Whether the carousel should cycle continuously or have hard stops.", ranking = 5)
+    @Switch(offText = "No", onText = "Yes")
+    public boolean isWrap() {
+        return wrap;
+    }
+
+    @DialogField(fieldLabel = "Keyboard?",
+            fieldDescription = "Whether the carousel should react to keyboard events.", ranking = 6)
+    @Switch(offText = "No", onText = "Yes")
+    public boolean isKeyboard() {
+        return keyboard;
+    }
+
+    public Iterable<Resource> getSlides() {
+        return resource.getChildren();
+    }
+
+    public String getCssClass() {
+        return CSS_CLASS;
+    }
+
+    public String getIndicatorsCssClass() {
+        return INDICATORS_CSS_CLASS;
+    }
+
+    public String getId() {
+        //TODO: Cleanup and decide if this is what we want the ID to be
+        return resource.getPath().replaceAll("/", "_").replaceAll(":", "__");
+    }
+
+    @DialogField(ranking = 100) @DialogFieldSet
+    public Classification getClassification() {
+        return this.classification;
+    }
+}

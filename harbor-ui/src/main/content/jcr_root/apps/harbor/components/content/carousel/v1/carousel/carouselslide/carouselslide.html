@@ -1,0 +1,13 @@
+<p data-sly-use.carouselSlide="com.icfolson.aem.harbor.api.components.content.carousel.CarouselSlide"
+   data-sly-test="${isEditMode}" class="author-help-message">Slide ${carouselSlide.displayIndex}</p>
+
+<a href="${carouselSlide.imageLink}" data-sly-unwrap="${!carouselSlide.imageLink}">
+    <img data-sly-test="${carouselSlide.image}" src="${carouselSlide.image}" alt="${carouselSlide.alt}" title="${carouselSlide.title}">
+</a>
+
+<div class="carousel-caption" data-sly-test="${carouselSlide.captionHeading || carouselSlide.captionText}">
+    <h3 data-sly-test="${carouselSlide.captionHeading}" data-sly-element="${carouselSlide.captionHeadingType}">
+        ${carouselSlide.captionHeading}
+    </h3>
+    <p data-sly-test="${carouselSlide.captionText}">${carouselSlide.captionText @ context='html'}</p>
+</div>
