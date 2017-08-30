@@ -36,7 +36,7 @@ public class DefaultCarouselSlide extends AbstractComponent implements CarouselS
     public static final String RESOURCE_TYPE = "harbor/components/content/carousel/v1/carousel/carouselslide";
 
     @DialogField(fieldLabel = "Image", fieldDescription = "Image", tab = 1, ranking = 1)
-    @Html5SmartImage(tab = false, allowUpload = false, uploadUrl = "", title = "Drag & Drop Image")
+    @Html5SmartImage(tab = false)
     public String getImage() {
         final Integer width = getWidth();
 
