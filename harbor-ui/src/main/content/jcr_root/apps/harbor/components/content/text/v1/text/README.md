@@ -2,6 +2,10 @@
 
 A simple text component for editing and displaying text. Uses an in-place Rich Text Editor for authoring.
 
+## Usage
+
+See [usage video](https://youtu.be/EGAT9z0Erx4)
+
 ## General Information
 
 * `group`: Harbor

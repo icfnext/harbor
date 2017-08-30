@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
     isContainer = true,
     actionConfigs = {
         @ActionConfig(xtype = "tbseparator"),
-        @ActionConfig(text = "Add Slide", handler = "function() { Harbor.Components.Carousel.addSlide(this) }") },
+        @ActionConfig(text = "Add Slide", handler = "function() { Harbor.Components.Carousel.v1.Carousel.addSlide(this) }") },
     contentAdditionalProperties = { @ContentProperty(name = "dependencies",
         value = "[harbor.components.content.carousel,harbor.bootstrap.carousel]") })
 @Model(adaptables = Resource.class, adapters = Carousel.class, resourceType = DefaultCarousel.RESOURCE_TYPE)

@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
         @ActionConfig(xtype = "tbseparator"),
         @ActionConfig(
             text = "Add Tab",
-            handler = "function(){Harbor.Components.Tabs.addTab( this, '" + Tab.RESOURCE_TYPE + "' ) }",
+            handler = "function(){Harbor.Components.Tabs.v1.Tabs.addTab( this, '" + Tab.RESOURCE_TYPE + "' ) }",
             additionalProperties = {
                 @ActionConfigProperty(name = "icon", value = "coral-Icon--experienceAdd")
             })

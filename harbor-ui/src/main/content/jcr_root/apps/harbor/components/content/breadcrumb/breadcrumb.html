@@ -1,8 +1,0 @@
-<ol class="breadcrumb" data-sly-use.breadcrumb="${component.properties['className']}">
-    <li data-sly-repeat.currentTrailItem="${breadcrumb.items}">
-        <a data-sly-unwrap="${!breadcrumb.items.renderAsLink || currentTrailItem.currentPage}" href="${currentTrailItem.href}">
-            <i data-sly-test="${!currentTrailItem.hideIcon}" class="${currentTrailItem.pageIcon}"></i>
-            <sly data-sly-test="${!currentTrailItem.hideTitle}">${currentTrailItem.title}</sly>
-        </a>
-    </li>
-</ol>

@@ -7,6 +7,7 @@ import com.citytechinc.cq.component.annotations.widgets.DialogFieldSet;
 import com.citytechinc.cq.component.annotations.widgets.Switch;
 import com.citytechinc.cq.component.annotations.widgets.TextField;
 import com.icfolson.aem.harbor.api.components.content.container.Container;
+import com.icfolson.aem.harbor.api.components.design.container.ContainerDesign;
 import com.icfolson.aem.harbor.api.components.mixins.classifiable.Classification;
 import com.icfolson.aem.harbor.api.components.mixins.classifiable.InheritedClassification;
 import com.icfolson.aem.harbor.api.components.mixins.inheritable.Inheritable;
@@ -31,13 +32,14 @@ import javax.annotation.PostConstruct;
         @Tab(title = "Advanced")
     })
 @Model(adaptables = Resource.class,adapters = Container.class, resourceType = DefaultContainer.RESOURCE_TYPE)
-public class DefaultContainer extends AbstractComponent implements Container, Inheritable {
+public class DefaultContainer extends AbstractComponent implements Container, Inheritable, ContainerDesign {
 
     public static final String RESOURCE_TYPE = "harbor/components/content/contentcontainer/v1/contentcontainer";
 
     public static final String FULL_WIDTH_PROPERTY = "fullWidth";
 
     private Classification classification;
+    private ContainerDesign containerDesign;
 
     @PostConstruct
     public void init() {
@@ -153,4 +155,18 @@ public class DefaultContainer extends AbstractComponent implements Container, In
     public boolean isInherits() {
         return false;
     }
+
+    @Override
+    public boolean isUsesResponsiveGrid() {
+        return this.getContainerDesign().isUsesResponsiveGrid();
+    }
+
+    protected ContainerDesign getContainerDesign() {
+        if (this.containerDesign == null) {
+            this.containerDesign = this.getResource().adaptTo(ContainerDesign.class);
+        }
+
+        return this.containerDesign;
+    }
+
 }

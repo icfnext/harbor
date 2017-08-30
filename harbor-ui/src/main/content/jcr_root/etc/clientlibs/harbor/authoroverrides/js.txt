@@ -1,5 +1,0 @@
-#base=js
-editablevisability.js
-cq-overrides.js
-searchtree.js
-editableContextualization.js

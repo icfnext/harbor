@@ -23,3 +23,14 @@ Uses the `com.icfolson.aem.harbor.components.content.container.Container` Model 
 * `Container Inheritance`: If set to true an inheriting paragraph system will be used in place of a paragraph system
 * `Classification`: Exposes the classifiability of the container
 * `ID`: Writes an ID to the presented DOM element.  Used for anchoring to the container
+
+## Using Layout Mode
+
+The Harbor Content Container respects the `icf:usesResponsiveGrid` design property. 
+When set to true a `wcm/foundation/components/responsivegrid` will be used in place 
+of the standard paragraph system.  
+
+NOTE: There is not an inheriting counterpart to the responsive grid.  If you configure 
+a container to use an inheriting paragraph system AND it is designed to use the 
+responsive grid, the inheriting paragraph system configuration will take precedence 
+and a `wcm/foundation/components/iparsys` will be rendered.
