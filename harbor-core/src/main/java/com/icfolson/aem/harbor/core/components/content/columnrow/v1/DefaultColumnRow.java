@@ -1,19 +1,19 @@
-package com.icfolson.aem.harbor.core.components.content.columns;
+package com.icfolson.aem.harbor.core.components.content.columnrow.v1;
 
 import com.citytechinc.cq.component.annotations.Component;
 import com.citytechinc.cq.component.annotations.DialogField;
-import com.citytechinc.cq.component.annotations.Tab;
 import com.citytechinc.cq.component.annotations.editconfig.ActionConfig;
 import com.citytechinc.cq.component.annotations.editconfig.ActionConfigProperty;
 import com.citytechinc.cq.component.annotations.widgets.DialogFieldSet;
-import com.citytechinc.cq.component.annotations.widgets.TextField;
-import com.icfolson.aem.harbor.api.constants.bootstrap.Bootstrap;
+import com.google.common.collect.Lists;
+import com.icfolson.aem.harbor.api.components.content.columnrow.Column;
+import com.icfolson.aem.harbor.api.components.content.columnrow.ColumnRow;
 import com.icfolson.aem.harbor.api.components.mixins.classifiable.Classification;
 import com.icfolson.aem.harbor.core.constants.groups.ComponentGroups;
+import com.icfolson.aem.harbor.core.util.ComponentUtils;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.Optional;
-import org.apache.sling.models.annotations.injectorspecific.ChildResource;
 import org.apache.sling.models.annotations.injectorspecific.Self;
 
 import javax.inject.Inject;
@@ -37,47 +37,42 @@ import java.util.List;
  * This component is Classifiable
  */
 @Component(
-    value = "Column Row",
+    value = "Column Row (v1)",
     group = ComponentGroups.HARBOR_SCAFFOLDING,
-    actions = { "text: Column Row", "-", "edit", "-", "copymove", "delete", "-", "insert" },
+    actions = { "text: Column Row (v1)", "-", "edit", "-", "copymove", "delete", "-", "insert" },
+    name = "columnrow/v1/columnrow",
     actionConfigs = {
         @ActionConfig(
-            handler = "function() { Harbor.Components.ColumnRow.v1.ColumnRow.addColumn( this, 'harbor/components/content/column' ); }",
+            handler = "function() { Harbor.Components.ColumnRow.v1.ColumnRow.addColumn( this, '" + DefaultColumn.RESOURCE_TYPE + "' ); }",
             text = "Add Column",
             additionalProperties = { @ActionConfigProperty(name = "icon", value = "coral-Icon--experienceAdd") }
         )
     },
-    allowedParents = "*/parsys",
-    resourceSuperType = "foundation/components/parbase",
-    tabs = {
-        @Tab(title = "Column Row")
-    },
     isContainer = true
 )
-@Model(adaptables = Resource.class)
-public class ColumnRow {
+@Model(adaptables = Resource.class, adapters = ColumnRow.class, resourceType = DefaultColumnRow.RESOURCE_TYPE)
+public class DefaultColumnRow implements ColumnRow<Column> {
 
-    @Inject
-    @Optional
-    @Named(".")
-    @ChildResource
+    public static final String RESOURCE_TYPE = "harbor/components/content/columnrow/v1/columnrow";
+
     private List<Column> columns;
 
-    @DialogField(ranking = 3)
-    @DialogFieldSet
-    @Self
+    @Inject @Self
+    private Resource resource;
+
+    @DialogField(ranking = 3) @DialogFieldSet @Self
     private Classification classification;
 
-    @DialogField(
-        fieldLabel = "ID",
-        fieldDescription = "A unique identifier to apply to the Row element rendered in the page DOM.  If left blank, no id attribute will be applied to the rendered element.",
-        tab = 1)
-    @TextField
-    @Inject
-    @Optional
-    private String domId;
-
     public List<Column> getColumns() {
+        if (columns == null) {
+            columns = Lists.newArrayList();
+            resource.listChildren().forEachRemaining(currentResource -> {
+                Column currentColumn = currentResource.adaptTo(Column.class);
+                if (currentColumn != null) {
+                    columns.add(currentColumn);
+                }
+            });
+        }
         return columns;
     }
 
@@ -85,22 +80,9 @@ public class ColumnRow {
         return classification;
     }
 
-    public String getCssClass() {
-        final StringBuilder builder = new StringBuilder(Bootstrap.GRID_ROW_CLASS);
-
-        if (getClassification().isHasClassifications()) {
-            builder.append(" ");
-            builder.append(getClassification().getClassNames());
-        }
-
-        return builder.toString();
+    @Override
+    public String getId() {
+        return ComponentUtils.DomIdForResourcePath(resource.getPath());
     }
 
-    public String getDomId() {
-        return domId;
-    }
-
-    public boolean isHasDomId() {
-        return domId != null;
-    }
 }

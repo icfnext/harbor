@@ -21,6 +21,8 @@ Harbor is a collection of content and page components, services, and patterns co
   * [Content Container (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/contentcontainer/v1/contentcontainer)
   * [Page Header (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/pageheader/v1/pageheader)
   * [Page Footer (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/pagefooter/v1/pagefooter)
+  * [Column Row (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/columnrow/v1/columnrow)
+    * [Column (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/columnrow/v1/column)
 * Group: Harbor Lists
   * [Link List (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/lists/linklist/v1/linklist)
   * [Dynamic List (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/lists/dynamiclist/v1/dynamiclist)

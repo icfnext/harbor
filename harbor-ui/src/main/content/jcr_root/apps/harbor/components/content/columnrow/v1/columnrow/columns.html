@@ -1,0 +1,8 @@
+<template data-sly-template.template="${@ columnRow}">
+    <div data-sly-test="${columnRow.columns}"
+         data-sly-repeat.column="${columnRow.columns}"
+         data-sly-attribute.class="${column.columnWidthClasses} ${column.classification.classNames}"
+         data-sly-attribute.id="${column.id}"
+         data-sly-resource="${column.path @ resourceType=column.type, decorationTagName='div'}">
+    </div>
+</template>
