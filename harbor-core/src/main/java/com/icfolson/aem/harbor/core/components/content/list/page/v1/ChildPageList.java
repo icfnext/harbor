@@ -12,26 +12,27 @@ import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
 
 import javax.inject.Inject;
+import java.util.List;
 import java.util.stream.Collectors;
 
-@Component(value = "Page List (v1)",
-        name = "lists/pagelist/v1/pagelist",
+@Component(value = "Child Page List (v1)",
+        name = "lists/childpagelist/v1/childpagelist",
         resourceSuperType = AbstractAutomatedList.RESOURCE_TYPE,
         group = ComponentGroups.HARBOR_LISTS
     )
-@Model(adaptables = Resource.class, adapters = ListComponent.class, resourceType = DefaultPageList.RESOURCE_TYPE)
-public class DefaultPageList extends AbstractAutomatedList<ListableLink> {
+@Model(adaptables = Resource.class, adapters = ListComponent.class, resourceType = ChildPageList.RESOURCE_TYPE)
+public class ChildPageList extends AbstractAutomatedList<ListableLink> {
 
-    public static final String RESOURCE_TYPE = "harbor/components/content/lists/pagelist/v1/pagelist";
+    public static final String RESOURCE_TYPE = "harbor/components/content/lists/childpagelist/v1/childpagelist";
 
     @Inject
     private PageDecorator currentPage;
 
     @Override
     public Iterable<ListableLink> getItems() {
-        return getStartingPage().getChildren(getInclusionPredicate())
+        return getPageItems()
                 .stream()
-                .map(DefaultPageListItem::new)
+                .map(this::transformPageItem)
                 .collect(Collectors.toList());
     }
 
@@ -46,6 +47,14 @@ public class DefaultPageList extends AbstractAutomatedList<ListableLink> {
 
     public PageDecorator getStartingPage() {
         return currentPage;
+    }
+
+    public List<PageDecorator> getPageItems() {
+        return getStartingPage().getChildren(getInclusionPredicate());
+    }
+
+    public ListableLink transformPageItem(PageDecorator page) {
+        return new DefaultPageListItem(page);
     }
 
 }

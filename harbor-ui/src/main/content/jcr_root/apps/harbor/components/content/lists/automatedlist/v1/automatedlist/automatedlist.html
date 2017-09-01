@@ -1,5 +1,7 @@
-<ul data-sly-use.list="com.icfolson.aem.harbor.api.components.content.list.ListComponent"
-    data-sly-use.item="item.html"
-    data-sly-element="${list.listType}">
-    <sly data-sly-repeat.currentItem="${list.items}" data-sly-call="${item.template @ list=list, item=currentItem}"/>
-</ul>
+<sly  data-sly-use.list="com.icfolson.aem.harbor.api.components.content.list.ListComponent">
+    <sly data-sly-test="${(isEditMode || isDesignMode) && !list.items}" data-sly-include="empty.html"/>
+    <ul data-sly-use.item="item.html"
+        data-sly-element="${list.listType}">
+        <sly data-sly-repeat.currentItem="${list.items}" data-sly-call="${item.template @ list=list, item=currentItem}"/>
+    </ul>
+</sly>
