@@ -18,7 +18,6 @@
     <modules>
         <module>harbor-api</module>
         <module>harbor-core</module>
-        <module>harbor-widgets</module>
         <module>harbor-ui</module>
     </modules>
 
@@ -44,7 +43,6 @@
         <authorable.design.manager.version>1.0.0</authorable.design.manager.version>
         <component.plugin.version>5.0.0</component.plugin.version>
         <multicompositeaddon.version>3.1.0</multicompositeaddon.version>
-        <acs.aem.commons.version>3.9.0</acs.aem.commons.version>
         <package.skip>true</package.skip>
         <osgi.bundle.status.skip>true</osgi.bundle.status.skip>
         <core.name>harbor-core</core.name>

@@ -12,5 +12,4 @@
     <filter root="/etc/packages/aem-library/aem-library-ui-${aem-library.version}.zip"/>
     <filter root="/etc/packages/aem-namespace-extension/aem-namespace-extension-ui-${aem.namespace.version}.zip"/>
     <filter root="/etc/packages/multicomposite-addon/multicomposite-addon-${multicompositeaddon.version}.zip"/>
-    <filter root="/etc/packages/acs-commons/acs-aem-commons-content-${acs.aem.commons.version}.zip"/>
 </workspaceFilter>
