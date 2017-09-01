@@ -18,15 +18,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component(
-    value = "Carousel",
+    value = "Carousel (v1)",
     name = "carousel/v1/carousel",
-    actions = { "text: Carousel", "edit", "-", "copymove", "delete", "-", "insert" },
+    actions = { "text: Carousel (v1)", "edit", "-", "copymove", "delete", "-", "insert" },
     isContainer = true,
     actionConfigs = {
         @ActionConfig(xtype = "tbseparator"),
-        @ActionConfig(text = "Add Slide", handler = "function() { Harbor.Components.Carousel.v1.Carousel.addSlide(this) }") },
-    contentAdditionalProperties = { @ContentProperty(name = "dependencies",
-        value = "[harbor.components.content.carousel,harbor.bootstrap.carousel]") })
+        @ActionConfig(text = "Add Slide", handler = "function() { Harbor.Components.Carousel.v1.Carousel.addSlide(this, '" + DefaultCarouselSlide.RESOURCE_TYPE + "') }") })
 @Model(adaptables = Resource.class, adapters = Carousel.class, resourceType = DefaultCarousel.RESOURCE_TYPE)
 public class DefaultCarousel implements Carousel {
 

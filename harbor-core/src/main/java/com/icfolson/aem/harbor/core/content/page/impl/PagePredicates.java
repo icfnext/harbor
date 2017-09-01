@@ -1,5 +1,6 @@
 package com.icfolson.aem.harbor.core.content.page.impl;
 
+import com.day.cq.wcm.api.Page;
 import com.google.common.base.Predicate;
 import com.icfolson.aem.harbor.api.content.page.HomePage;
 import com.icfolson.aem.harbor.api.content.page.SectionLandingPage;
@@ -31,6 +32,10 @@ public final class PagePredicates {
             return false;
         }
     };
+
+    public static final Predicate<PageDecorator> ALL_PAGES_PREDICATE = page -> true;
+
+    public static final Predicate<PageDecorator> NAVIGABLE_PAGES_PREDICATE = Page::isHideInNav;
 
     private PagePredicates() {
 
