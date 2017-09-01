@@ -1,4 +1,4 @@
-package com.icfolson.aem.harbor.api.components.mixins;
+package com.icfolson.aem.harbor.api.components.mixins.paragraphsystem;
 
 /**
  * Created by pmichelotti on 8/30/17.

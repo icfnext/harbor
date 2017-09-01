@@ -19,6 +19,7 @@ Harbor is a collection of content and page components, services, and patterns co
   * [Dynamic Tabs (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/dynamictabs/v1/dynamictabs)
     * [Parsys Tab (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/dynamictabs/tabs/parsystab/v1/parsystab)
   * [Call to Action (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/calltoaction/v1/calltoaction)
+  * [HTML (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/html/v1/html)
 * Group: Harbor Scaffolding
   * [Content Container (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/contentcontainer/v1/contentcontainer)
   * [Page Header (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/pageheader/v1/pageheader)

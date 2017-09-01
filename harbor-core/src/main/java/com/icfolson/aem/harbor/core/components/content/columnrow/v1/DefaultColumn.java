@@ -9,7 +9,7 @@ import com.citytechinc.cq.component.annotations.widgets.Selection;
 import com.google.common.collect.Lists;
 import com.icfolson.aem.harbor.api.components.content.columnrow.Column;
 import com.icfolson.aem.harbor.api.components.content.columnrow.ParagraphSystemColumn;
-import com.icfolson.aem.harbor.api.components.mixins.ParagraphSystemContainer;
+import com.icfolson.aem.harbor.api.components.mixins.paragraphsystem.ParagraphSystemContainer;
 import com.icfolson.aem.harbor.api.constants.bootstrap.Bootstrap;
 import com.icfolson.aem.harbor.api.components.mixins.classifiable.Classification;
 import com.icfolson.aem.harbor.core.util.ComponentUtils;
