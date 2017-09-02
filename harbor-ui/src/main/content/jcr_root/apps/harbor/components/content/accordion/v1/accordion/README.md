@@ -11,7 +11,7 @@ the Accordion JavaScript Authoring API - see the Authoring API section below.
 
 ## General Information
 
-* `group`: Harbor
+* `group`: Harbor Scaffolding 
 * `resourceType`: `harbor/components/content/accordion/v1/accordion`
 * `identifiable`
 

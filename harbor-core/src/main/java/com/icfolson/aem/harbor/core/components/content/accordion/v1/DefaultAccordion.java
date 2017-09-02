@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 
 @Component(
     value = "Accordion Group (v1)",
-    group = ComponentGroups.HARBOR,
+    group = ComponentGroups.HARBOR_SCAFFOLDING,
     actions = { "text: Accordion", "-", "edit", "-", "copymove", "delete", "-", "insert" },
     isContainer = true,
     actionConfigs = {

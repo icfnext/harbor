@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
         value = "Dynamic Accordion (v1)",
         actions = { "text: Dynamic Accordion (v1)", "edit", "-", "copymove", "delete", "-", "insert" },
         isContainer = true,
-        group = ComponentGroups.HARBOR,
+        group = ComponentGroups.HARBOR_SCAFFOLDING,
         name = "dynamicaccordion/v1/dynamicaccordion",
         actionConfigs = {
                 @ActionConfig(xtype = "tbseparator"),

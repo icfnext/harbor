@@ -12,7 +12,7 @@ Accordion Item implementations.
 
 ## General Information
 
-* `group`: Harbor
+* `group`: Harbor Scaffolding
 * `resourceType`: `harbor/components/content/dynamicaccordion/v1/dynamicaccordion`
 * `base AccordionItem resourceType`: `harbor/components/content/dynamicaccordion/item`
 * `identifiable`
