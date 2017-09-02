@@ -1,0 +1,9 @@
+<sly data-sly-use.tabs="com.icfolson.aem.harbor.api.components.content.tabs.Tabs"
+     data-sly-use.tabsbar="tabsbar.html"
+     data-sly-use.tabscontent="tabscontent.html">
+    <sly data-sly-test="${isEditMode && !tabs.tabs}" data-sly-include="empty.html"/>
+
+    <sly data-sly-call="${tabsbar.template @ tabs=tabs}"/>
+
+    <sly data-sly-call="${tabscontent.template @ tabs=tabs}"/>
+</sly>

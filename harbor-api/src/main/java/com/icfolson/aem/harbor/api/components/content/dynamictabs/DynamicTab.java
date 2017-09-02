@@ -6,10 +6,10 @@ public interface DynamicTab extends Identifiable {
 
     String RESOURCE_TYPE = "harbor/components/content/dynamictabs/tab";
 
-    public String getLabel();
+    String getLabel();
 
-    public String getType();
+    String getType();
 
-    public String getPath();
+    String getPath();
 
 }

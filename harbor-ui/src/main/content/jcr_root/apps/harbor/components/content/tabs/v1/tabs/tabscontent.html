@@ -1,0 +1,8 @@
+<template data-sly-template.template="${@ tabs}">
+    <div class="tab-content">
+        <div data-sly-repeat.currentTab="${tabs.tabs}" id="tab-${currentTab.id}" data-sly-attribute.class="${currentTabList.first ? 'tab-pane active' : 'tab-pane'}">
+            <section data-sly-resource="${currentTab.path @ resourceType=currentTab.resource.resourceType, decorationTagName='div'}">
+            </section>
+        </div>
+    </div>
+</template>

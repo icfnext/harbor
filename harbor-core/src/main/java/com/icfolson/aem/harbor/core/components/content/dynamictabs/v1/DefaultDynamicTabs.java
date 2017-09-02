@@ -31,12 +31,12 @@ import java.util.stream.Collectors;
                         additionalProperties = {
                                 @ActionConfigProperty(name = "icon", value = "coral-Icon--experienceAdd")
                         } ),
-                @ActionConfig(text = "Previous Slide",
+                @ActionConfig(text = "Previous Tab",
                         handler = "function() { Harbor.Components.DynamicTabs.v1.DynamicTabs.previousTab( this ) }",
                         additionalProperties = {
                                 @ActionConfigProperty(name = "icon", value = "coral-Icon--rewindCircle")
                         } ),
-                @ActionConfig(text = "Next Slide",
+                @ActionConfig(text = "Next Tab",
                         handler = "function() { Harbor.Components.DynamicTabs.v1.DynamicTabs.nextTab( this ) }",
                         additionalProperties = {
                                 @ActionConfigProperty(name = "icon", value = "coral-Icon--fastForwardCircle")

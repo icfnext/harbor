@@ -1,0 +1,9 @@
+<template data-sly-template.template="${@ tabs}">
+    <ul class="nav nav-tabs"
+        role="tablist"
+        data-sly-attribute.data-path="${isAuthor ? resource.path : ''}">
+        <li data-sly-repeat.currentTab="${tabs.tabs}" data-sly-attribute.class="${currentTabList.first ? 'active' : ''}">
+            <a href="#${currentTab.id}" aria-controls="${currentTab.id}" role="tab" data-toggle="tab">${currentTab.label @ context='html'}</a>
+        </li>
+    </ul>
+</template>
