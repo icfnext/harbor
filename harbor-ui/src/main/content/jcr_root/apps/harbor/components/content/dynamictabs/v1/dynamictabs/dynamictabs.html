@@ -1,0 +1,11 @@
+<sly data-sly-use.dynamicTabs="com.icfolson.aem.harbor.api.components.content.dynamictabs.DynamicTabs"
+     data-sly-use.tabs="tabs.html"
+     data-sly-use.tabcontent="tabcontent.html">
+
+    <sly data-sly-test="${(isEditMode || isDesignMode) && dynamicTabs.tabs.empty}" data-sly-include="empty.html"/>
+
+    <sly data-sly-call="${tabs.template @ dynamicTabs=dynamicTabs}"/>
+
+    <sly data-sly-call="${tabcontent.template @ dynamicTabs=dynamicTabs}"/>
+
+</sly>

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <workspaceFilter version="1.0">
-    <filter root="/apps/harbor/admin"/>
     <filter root="/apps/harbor/components"/>
     <filter root="/apps/harbor/templates"/>
     <filter root="/apps/harbor/install"/>
@@ -10,8 +9,7 @@
         <exclude pattern="/etc/designs/harbor/clientlib(/.*)?"/>
         <exclude pattern="/etc/designs/harbor/brand/clientlib(/.*)?"/>
     </filter>
-    <filter root="/etc/packages/harbor/aem-library-ui-${aem-library.version}.zip"/>
-    <filter root="/etc/packages/harbor/aem-namespace-extension-ui-${aem.namespace.version}.zip"/>
-    <filter root="/etc/packages/harbor/multicomposite-addon-${multicompositeaddon.version}.zip"/>
-    <filter root="/etc/packages/harbor/acs-aem-commons-content-${acs.aem.commons.version}.zip"/>
+    <filter root="/etc/packages/aem-library/aem-library-ui-${aem-library.version}.zip"/>
+    <filter root="/etc/packages/aem-namespace-extension/aem-namespace-extension-ui-${aem.namespace.version}.zip"/>
+    <filter root="/etc/packages/multicomposite-addon/multicomposite-addon-${multicompositeaddon.version}.zip"/>
 </workspaceFilter>

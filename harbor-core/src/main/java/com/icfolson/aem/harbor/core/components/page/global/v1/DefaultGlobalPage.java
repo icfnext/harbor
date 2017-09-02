@@ -8,8 +8,7 @@ import org.apache.sling.models.annotations.Model;
 
 @Component(value = "Harbor Global Page", editConfig = false, path = "/page/common", name = "global/v1/global", tabs = {
     @Tab(touchUIPath = DefaultGlobalPage.RESOURCE_TYPE + "/touch-sitemap/content/items/SitemappedPage"),
-    @Tab(touchUIPath = DefaultGlobalPage.RESOURCE_TYPE + "/touch-metadata/content/items/MetaPage"),
-    @Tab(touchUIPath = DefaultGlobalPage.RESOURCE_TYPE + "/touch-theme/content/items/ThemedPage")
+    @Tab(touchUIPath = DefaultGlobalPage.RESOURCE_TYPE + "/touch-metadata/content/items/MetaPage")
 })
 @Model(adaptables = Resource.class, adapters = Global.class, resourceType = DefaultGlobalPage.RESOURCE_TYPE)
 public class DefaultGlobalPage implements Global {

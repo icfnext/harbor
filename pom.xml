@@ -18,7 +18,6 @@
     <modules>
         <module>harbor-api</module>
         <module>harbor-core</module>
-        <module>harbor-widgets</module>
         <module>harbor-ui</module>
     </modules>
 
@@ -42,9 +41,8 @@
         <aem.namespace.version>0.4.0</aem.namespace.version>
         <aem-library.version>9.0.0</aem-library.version>
         <authorable.design.manager.version>1.0.0</authorable.design.manager.version>
-        <component.plugin.version>5.0.0-SNAPSHOT</component.plugin.version>
+        <component.plugin.version>5.0.0</component.plugin.version>
         <multicompositeaddon.version>3.1.0</multicompositeaddon.version>
-        <acs.aem.commons.version>3.9.0</acs.aem.commons.version>
         <package.skip>true</package.skip>
         <osgi.bundle.status.skip>true</osgi.bundle.status.skip>
         <core.name>harbor-core</core.name>
@@ -115,26 +113,6 @@
                 <configuration>
                     <generateBackupPoms>false</generateBackupPoms>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>com.github.searls</groupId>
-                <artifactId>jasmine-maven-plugin</artifactId>
-                <version>1.3.1.5</version>
-                <inherited>false</inherited>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>test</goal>
-                        </goals>
-                        <configuration>
-                            <jsTestSrcDir>${project.basedir}/harbor-ui/src/test/javascript</jsTestSrcDir>
-                            <preloadSources>
-                                <source>${project.basedir}/harbor-ui/src/main/content/jcr_root/etc/clientlibs/harbor/namespace/js/namespace.js</source>
-                                <source>${project.basedir}/harbor-ui/src/main/content/jcr_root/etc/clientlibs/harbor/authoroverrides/js/searchtree.js</source>
-                            </preloadSources>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
             <plugin>
                 <artifactId>maven-javadoc-plugin</artifactId>

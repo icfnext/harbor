@@ -1,8 +1,11 @@
 package com.icfolson.aem.harbor.api.components.content.list;
 
-import java.util.Iterator;
+public interface ListComponent<T> {
 
-public interface ListComponent<T extends Iterable> {
+    String UNORDERED_LIST_TYPE = "ul";
+    String ORDERED_LIST_TYPE = "ol";
+    String DEFINITION_LIST_TYPE = "dl";
+    String CONTAINER_LIST_TYPE = "div";
 
     /**
      * Produces an Iterable over the elements which constitute the List which a
@@ -10,14 +13,8 @@ public interface ListComponent<T extends Iterable> {
      *
      * @return An Iterable over the elements which constitute the List which a given component instance represents
      */
-    T getItems();
+    Iterable<T> getItems();
 
-    /**
-     * Produces an Iterator from the Iterable returned by {@link #getItems()}.
-     * This exists largely for use in JSP where the c:forEach loop does not
-     * accept an Iterable.
-     *
-     * @return Iterable based on the results of {@link #getItems()}
-     */
-    Iterator<?> getIterator();
+    String getListType();
+
 }

@@ -13,12 +13,28 @@ Harbor is a collection of content and page components, services, and patterns co
   * [Title (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/title/v1/title)
   * [Subtitle (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/subtitle/v1/subtitle)
   * [Text (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/text/v1/text)
+  * [Call to Action (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/calltoaction/v1/calltoaction)
+  * [HTML (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/html/v1/html)
 * Group: Harbor Scaffolding
   * [Content Container (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/contentcontainer/v1/contentcontainer)
   * [Page Header (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/pageheader/v1/pageheader)
   * [Page Footer (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/pagefooter/v1/pagefooter)
+  * [Column Row (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/columnrow/v1/columnrow)
+    * [Column (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/columnrow/v1/column)
+  * [Accordion (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/accordion/v1/accordion)
+    * [Accordion Item (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/accordion/v1/accordionitem)
+  * [Dynamic Accordion (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/dynamicaccordion/v1/dynamicaccordion)
+    * [Parsys Accordion Item (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/dynamicaccordion/items/parsysaccordionitem/v1/parsysaccordionitem)
+  * [Tabs (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/tabs/v1/tabs)
+    * [Tab (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/tabs/v1/tab)
+  * [Dynamic Tabs (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/dynamictabs/v1/dynamictabs)
+    * [Parsys Tab (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/dynamictabs/tabs/parsystab/v1/parsystab)
 * Group: Harbor Lists
   * [Link List (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/lists/linklist/v1/linklist)
+  * [Dynamic List (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/lists/dynamiclist/v1/dynamiclist)
+  * [Child Page List (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/lists/childpagelist/v1/childpagelist)
+* Group: Harbor Navigation
+  * [Breadcrumb Navigation (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/breadcrumbnavigation/v1/breadcrumbnavigation)
 * Page
   * [Global (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/page/global/v1/global)
 

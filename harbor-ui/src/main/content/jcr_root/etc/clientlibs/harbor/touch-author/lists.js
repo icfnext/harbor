@@ -1,4 +1,5 @@
-Harbor.Lists = function( ns, channel ) {
+Harbor.Lists = Harbor.Lists || {};
+Harbor.Lists.v1 = function( ns, channel ) {
 
     var autopopulatedProperties = [
         "jcr:created",

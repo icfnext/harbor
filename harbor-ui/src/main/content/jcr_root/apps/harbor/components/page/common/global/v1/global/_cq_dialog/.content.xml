@@ -31,32 +31,6 @@
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="granite/ui/components/foundation/include"
                         path="foundation/components/page/cq:dialog/content/items/tabs/items/thumbnail"/>
-                    <icon
-                        cq:showOnCreate="{Boolean}true"
-                        jcr:primaryType="nt:unstructured"
-                        jcr:title="Icon"
-                        sling:resourceType="granite/ui/components/foundation/section">
-                        <layout
-                            jcr:primaryType="nt:unstructured"
-                            sling:resourceType="granite/ui/components/foundation/layouts/fixedcolumns"
-                            margin="{Boolean}false"/>
-                        <items jcr:primaryType="nt:unstructured">
-                            <column
-                                jcr:primaryType="nt:unstructured"
-                                sling:resourceType="granite/ui/components/foundation/container">
-                                <items jcr:primaryType="nt:unstructured">
-                                    <icon
-                                        jcr:primaryType="nt:unstructured"
-                                        fieldLabel="Icon" name="./icf:iconicRepresentation"
-                                        sling:resourceType="acs-commons/components/authoring/graphiciconselect">
-                                        <datasource jcr:primaryType="nt:unstructured"
-                                                    path="/etc/acs-commons/lists/font-awesome-icons"
-                                                    sling:resourceType="acs-commons/components/utilities/genericlist/datasource"/>
-                                    </icon>
-                                </items>
-                            </column>
-                        </items>
-                    </icon>
                     <sitemap
                         jcr:primaryType="nt:unstructured"
                         path="harbor/components/page/common/global/touch-sitemap/content/items/Sitemap"
