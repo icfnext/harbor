@@ -1,6 +1,8 @@
 package com.icfolson.aem.harbor.api.components.content.navigation.bootstrapnavigation.navbar;
 
-public interface BootstrapPrimaryNavbar {
+import com.icfolson.aem.harbor.api.components.mixins.identifiable.Identifiable;
+
+public interface BootstrapPrimaryNavbar extends Identifiable {
 
     boolean isSticky();
 

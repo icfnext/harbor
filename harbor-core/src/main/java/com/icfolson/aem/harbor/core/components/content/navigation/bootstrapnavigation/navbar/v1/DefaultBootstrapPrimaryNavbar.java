@@ -5,8 +5,10 @@ import com.icfolson.aem.harbor.api.components.content.navigation.bootstrapnaviga
 import com.icfolson.aem.harbor.core.components.content.navigation.bootstrapnavigation.bootstrapprimarynavigation.v1.DefaultBootstrapPrimaryNavigation;
 import com.icfolson.aem.harbor.core.components.content.navigation.brand.bootstrapbrand.v1.DefaultBootstrapBrand;
 import com.icfolson.aem.harbor.core.constants.groups.ComponentGroups;
+import com.icfolson.aem.harbor.core.util.ComponentUtils;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
+import org.apache.sling.models.annotations.injectorspecific.Self;
 
 @Component(value = "Bootstrap Primary Navbar (v1)",
     group = ComponentGroups.HARBOR_NAVIGATION,
@@ -15,6 +17,9 @@ import org.apache.sling.models.annotations.Model;
 public class DefaultBootstrapPrimaryNavbar implements BootstrapPrimaryNavbar {
 
     public static final String RESOURCE_TYPE = "harbor/components/content/navigation/bootstrapnavigation/bootstrapprimarynavbar/v1/bootstrapprimarynavbar";
+
+    @Self
+    private Resource resource;
 
     @Override
     public boolean isSticky() {
@@ -34,6 +39,11 @@ public class DefaultBootstrapPrimaryNavbar implements BootstrapPrimaryNavbar {
     @Override
     public String getPrimaryNavigationResourceType() {
         return DefaultBootstrapPrimaryNavigation.RESOURCE_TYPE;
+    }
+
+    @Override
+    public String getId() {
+        return ComponentUtils.DomIdForResourcePath(resource.getPath());
     }
 
 }

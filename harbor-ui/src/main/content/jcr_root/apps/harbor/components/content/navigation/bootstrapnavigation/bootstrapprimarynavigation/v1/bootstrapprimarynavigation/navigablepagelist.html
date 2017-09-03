@@ -1,7 +1,23 @@
 <template data-sly-template.template="${@ root}">
-    <ul data-sly-attribute.class="${root.depth == 0 ? 'nav navbar-nav' : ''}" data-level="${root.depth}">
-        <li data-sly-repeat.currentNode="${root.childNodes}" data-sly-attribute.class="${currentNode.value.alongActivePath ? 'active' : ''}">
-            <a href="${currentNode.value.href}" data-sly-attribute.target="${currentNode.value.redirect ? '_blank' : ''}">${currentNode.value.title}</a>
+    <ul data-sly-attribute.class="${root.depth == 0 ? 'nav navbar-nav' : ( root.depth == 1 ? 'dropdown-menu' : '' )}"
+        data-level="${root.depth}">
+        <li data-sly-test="${root.depth == 1}"
+            data-sly-attribute.class="${root.value.alongActivePath ? 'active' : ''}">
+            <a href="${root.value.href}"
+               data-sly-attribute.target="${root.value.redirect ? '_blank' : ''}">${root.value.title}</a>
+        </li>
+        <li data-sly-repeat.currentNode="${root.childNodes}"
+            data-sly-attribute.class="${currentNode.value.alongActivePath ? 'active' : ''}">
+            <a href="${currentNode.value.href}"
+               data-sly-attribute.target="${currentNode.value.redirect ? '_blank' : ''}"
+               data-sly-test="${root.depth != 0 || !currentNode.hasChildNodes}">${currentNode.value.title}</a>
+            <a href="#"
+               class="dropdown-toggle"
+               data-toggle="dropdown"
+               role="button"
+               aria-haspopup="true"
+               aria-expanded="false"
+               data-sly-test="${root.depth == 0 && currentNode.hasChildNodes}">${currentNode.value.title} <span class="caret"></span></a>
             <sly data-sly-test="${currentNode.hasChildNodes}"
                  data-sly-call="${template @ root=currentNode}"/>
         </li>
