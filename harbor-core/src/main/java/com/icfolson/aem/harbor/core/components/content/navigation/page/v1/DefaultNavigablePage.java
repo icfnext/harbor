@@ -25,7 +25,7 @@ public class DefaultNavigablePage implements NavigablePage {
 
     @Override
     public boolean isAlongActivePath() {
-        return getCurrentPage() != null && getPage().getPath().indexOf(getCurrentPage().getPath()) == 1;
+        return getCurrentPage() != null && getCurrentPage().getPath().indexOf(getPage().getPath()) == 0;
     }
 
     @Override

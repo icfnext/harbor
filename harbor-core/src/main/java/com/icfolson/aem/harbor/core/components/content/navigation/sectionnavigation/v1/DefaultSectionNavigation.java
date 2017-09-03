@@ -8,7 +8,6 @@ import com.icfolson.aem.library.api.page.PageDecorator;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
 
-import javax.inject.Inject;
 
 @Component(value = "Section Navigation (v1)",
         group = "Harbor Hidden",
@@ -21,16 +20,13 @@ public class DefaultSectionNavigation extends DefaultNavigablePageTree {
 
     public static final String RESOURCE_TYPE = "harbor/components/content/navigation/sectionnavigation/v1/sectionnavigation";
 
-    @Inject
-    private PageDecorator currentPage;
-
     @Override
     public PageDecorator getRootPage() {
-        if (currentPage == null) {
+        if (getCurrentPage() == null) {
             return null;
         }
 
-        return currentPage.adaptTo(HierarchicalPage.class)
+        return getCurrentPage().adaptTo(HierarchicalPage.class)
                 .getSectionLandingPage()
                 .transform(PageDecorator::getParent)
                 .orNull();

@@ -46,7 +46,7 @@ public class DefaultNavigablePageTree implements TreeComponent<NavigablePage> {
     }
 
     public TreeNode<NavigablePage> transformPageAndChildren(PageDecorator page, List<TreeNode<NavigablePage>> children, int depth) {
-        return new DefaultTreeNode<>(new DefaultNavigablePage(page, currentPage), children, depth);
+        return new DefaultTreeNode<>(new DefaultNavigablePage(page, getCurrentPage()), children, depth);
     }
 
     public PageDecorator getRootPage() {
@@ -55,6 +55,10 @@ public class DefaultNavigablePageTree implements TreeComponent<NavigablePage> {
 
     public Optional<Integer> getDepth() {
         return Optional.empty();
+    }
+
+    public PageDecorator getCurrentPage() {
+        return currentPage;
     }
 
     protected TreeNode<NavigablePage> buildTreeNodeForPage(PageDecorator page, int currentDepth) {
@@ -70,5 +74,7 @@ public class DefaultNavigablePageTree implements TreeComponent<NavigablePage> {
 
         return transformPageAndChildren(page, children, currentDepth);
     }
+
+
 
 }
