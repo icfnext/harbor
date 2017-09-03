@@ -69,7 +69,7 @@ public class DefaultNavigablePageTree implements TreeComponent<NavigablePage> {
         List<TreeNode<NavigablePage>> children = page
                 .getChildren(getInclusionPredicate())
                 .stream()
-                .map(currentPage -> this.buildTreeNodeForPage(currentPage, currentDepth + 1))
+                .map(currentChild -> this.buildTreeNodeForPage(currentChild, currentDepth + 1))
                 .collect(Collectors.toList());
 
         return transformPageAndChildren(page, children, currentDepth);
