@@ -34,6 +34,13 @@ Harbor is a collection of content and page components, services, and patterns co
   * [Dynamic List (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/lists/dynamiclist/v1/dynamiclist)
   * [Child Page List (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/lists/childpagelist/v1/childpagelist)
 * Group: Harbor Navigation
+  * [Navigable Page Tree (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/navigation/navigablepagetree/v1/navigablepagetree)
+  * [Primary Navigation (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/navigation/primarynavigation/v1/primarynavigation)
+  * [Section Navigation (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/navigation/sectionnavigation/v1/sectionnavigation)
+  * [Bootstrap Primary Navigation (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/navigation/bootstrapnavigation/bootstrapprimarynavigation/v1/bootstrapprimarynavigation)
+  * [Bootstrap Primary Navbar (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/navigation/bootstrapnavigation/bootstrapprimarynavbar/v1/bootstrapprimarynavbar)
+  * [Bootstrap Section Navigation (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/navigation/bootstrapnavigation/bootstrapsectionnavigation/v1/bootstrapsectionnavigation)
+  * [Bootstrap Brand (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/navigation/brand/bootstrapbrand/v1/bootstrapbrand)
   * [Breadcrumb Navigation (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/breadcrumbnavigation/v1/breadcrumbnavigation)
 * Page
   * [Global (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/page/global/v1/global)

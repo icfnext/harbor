@@ -64,15 +64,6 @@
             <useStrictFiltering>true</useStrictFiltering>
         </dependencySet>
         <dependencySet>
-            <outputDirectory>jcr_root/etc/packages/multicomposite-addon</outputDirectory>
-            <useProjectArtifact>false</useProjectArtifact>
-            <scope>compile</scope>
-            <includes>
-                <include>com.icfolson.aem:multicomposite-addon:zip</include>
-            </includes>
-            <useStrictFiltering>true</useStrictFiltering>
-        </dependencySet>
-        <dependencySet>
             <outputDirectory>jcr_root/apps/harbor/install</outputDirectory>
             <useProjectArtifact>false</useProjectArtifact>
             <scope>compile</scope>

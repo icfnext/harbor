@@ -201,13 +201,6 @@
                 <type>zip</type>
                 <scope>provided</scope>
             </dependency>
-
-            <!-- multicomposite addon -->
-            <dependency>
-                <groupId>com.icfolson.aem</groupId>
-                <artifactId>multicomposite-addon</artifactId>
-                <version>${multicompositeaddon.version}</version>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 </project>

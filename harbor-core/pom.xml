@@ -158,12 +158,6 @@
             <artifactId>aem-namespace-extension-api</artifactId>
         </dependency>
 
-        <!-- multicomposite addon -->
-        <dependency>
-            <groupId>com.icfolson.aem</groupId>
-            <artifactId>multicomposite-addon</artifactId>
-        </dependency>
-
         <!-- Harbor API -->
         <dependency>
             <groupId>${project.groupId}</groupId>
