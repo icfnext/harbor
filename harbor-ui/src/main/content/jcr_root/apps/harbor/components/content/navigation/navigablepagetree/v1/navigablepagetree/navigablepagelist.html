@@ -1,6 +1,7 @@
 <template data-sly-template.template="${@ root}">
-    <ul>
-        <li data-sly-repeat.currentNode="${root.childNodes}">
+    <ul data-level="${root.depth}">
+        <li data-sly-repeat.currentNode="${root.childNodes}"
+            data-sly-attribute.class="${currentNode.value.alongActivePath ? 'active' : ''}">
             <a href="${currentNode.value.href}" data-sly-attribute.target="${currentNode.value.redirect ? '_blank' : ''}">${currentNode.value.title}</a>
             <sly data-sly-test="${currentNode.hasChildNodes}"
                  data-sly-call="${template @ root=currentNode}"/>
