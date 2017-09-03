@@ -35,7 +35,8 @@ public final class PagePredicates {
 
     public static final Predicate<PageDecorator> ALL_PAGES_PREDICATE = page -> true;
 
-    public static final Predicate<PageDecorator> NAVIGABLE_PAGES_PREDICATE = Page::isHideInNav;
+    public static final Predicate<PageDecorator> NAVIGABLE_PAGES_PREDICATE = page ->
+            (page != null && !page.isHideInNav());
 
     private PagePredicates() {
 

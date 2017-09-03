@@ -1,0 +1,6 @@
+<nav data-sly-use.navigation="com.icfolson.aem.harbor.api.components.content.tree.TreeComponent"
+     data-sly-use.pagelist="navigablepagelist.html">
+    <sly data-sly-test="${(isEditMode || isDesignMode) && !navigation.tree}" data-sly-include="empty.html"/>
+    <sly data-sly-test="${navigation.tree}"
+         data-sly-call="${pagelist.template @ root=navigation.tree}"/>
+</nav>

@@ -96,7 +96,7 @@ implementation selection.
 
 * API
   * `com.icfolson.aem.harbor.api.trees.Tree`
-  * `com.icfolson.aem.harbor.api.trees.TreeNode`
+  * `com.icfolson.aem.harbor.api.datastructure.tree.TreeNode`
   * `com.icfolson.aem.harbor.api.model.page.pagetree.PageTree`
   * `com.icfolson.aem.harbor.api.model.page.pagetree.PageTreeNode`
   * `com.icfolson.aem.harbor.api.components.content.navigation.sitenavigation.SiteNavigation`
