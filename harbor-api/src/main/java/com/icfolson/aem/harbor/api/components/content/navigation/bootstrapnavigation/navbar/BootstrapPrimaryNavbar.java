@@ -12,4 +12,6 @@ public interface BootstrapPrimaryNavbar extends Identifiable {
 
     String getPrimaryNavigationResourceType();
 
+    String getNavigationToggleScreenReaderLabel();
+
 }

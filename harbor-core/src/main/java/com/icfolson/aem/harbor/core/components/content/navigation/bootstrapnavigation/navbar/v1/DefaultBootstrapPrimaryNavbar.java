@@ -8,7 +8,10 @@ import com.icfolson.aem.harbor.core.constants.groups.ComponentGroups;
 import com.icfolson.aem.harbor.core.util.ComponentUtils;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
+import org.apache.sling.models.annotations.Optional;
 import org.apache.sling.models.annotations.injectorspecific.Self;
+
+import javax.inject.Inject;
 
 @Component(value = "Bootstrap Primary Navbar (v1)",
     group = ComponentGroups.HARBOR_NAVIGATION,
@@ -20,6 +23,9 @@ public class DefaultBootstrapPrimaryNavbar implements BootstrapPrimaryNavbar {
 
     @Self
     private Resource resource;
+
+    @Inject @Optional
+    private String navigationToggleScreenReaderLabel;
 
     @Override
     public boolean isSticky() {
@@ -39,6 +45,11 @@ public class DefaultBootstrapPrimaryNavbar implements BootstrapPrimaryNavbar {
     @Override
     public String getPrimaryNavigationResourceType() {
         return DefaultBootstrapPrimaryNavigation.RESOURCE_TYPE;
+    }
+
+    @Override
+    public String getNavigationToggleScreenReaderLabel() {
+        return navigationToggleScreenReaderLabel;
     }
 
     @Override

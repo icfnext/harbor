@@ -1,5 +1,5 @@
 <template data-sly-template.template="${@ root}">
-    <ul     class="nav nav-pills nav-stacked" data-level="${root.depth}">
+    <ul class="nav nav-pills nav-stacked" data-level="${root.depth}">
         <li data-sly-repeat.currentNode="${root.childNodes}" data-sly-attribute.class="${currentNode.value.alongActivePath ? 'active' : ''}">
             <a href="${currentNode.value.href}" data-sly-attribute.target="${currentNode.value.redirect ? '_blank' : ''}">${currentNode.value.title}</a>
             <sly data-sly-test="${currentNode.value.alongActivePath && currentNode.hasChildNodes}"
