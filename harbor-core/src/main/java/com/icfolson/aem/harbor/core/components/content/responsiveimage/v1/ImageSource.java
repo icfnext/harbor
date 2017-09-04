@@ -1,4 +1,4 @@
-package com.icfolson.aem.harbor.core.components.content.responsiveimage;
+package com.icfolson.aem.harbor.core.components.content.responsiveimage.v1;
 
 import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.widgets.Html5SmartImage;
