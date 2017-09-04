@@ -1,6 +1,5 @@
 package com.icfolson.aem.harbor.core.components.page.metapage.v1;
 
-import com.citytechinc.cq.component.annotations.Component;
 import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.Option;
 import com.citytechinc.cq.component.annotations.widgets.PathField;
@@ -11,6 +10,7 @@ import com.day.cq.commons.Externalizer;
 import com.google.common.collect.Lists;
 import com.icfolson.aem.harbor.api.components.page.metapage.MetaPage;
 import com.icfolson.aem.harbor.api.content.page.HierarchicalPage;
+import com.icfolson.aem.harbor.core.components.page.global.v1.DefaultGlobalPage;
 import com.icfolson.aem.library.api.page.PageDecorator;
 import com.icfolson.aem.library.core.constants.PathConstants;
 import org.apache.commons.lang3.StringUtils;
@@ -22,9 +22,7 @@ import org.apache.sling.models.annotations.Model;
 import javax.inject.Inject;
 import java.util.List;
 
-@Component(value = "SEO Metadata", editConfig = false, path = "/page/common", name = "global/v1/global",
-    touchFileName = "touch-metadata")
-@Model(adaptables = SlingHttpServletRequest.class, adapters = MetaPage.class, resourceType = "wcm/foundation/components/page") //TODO: Evaulate resourceType
+@Model(adaptables = SlingHttpServletRequest.class, adapters = MetaPage.class, resourceType = {"wcm/foundation/components/page", DefaultGlobalPage.RESOURCE_TYPE})
 public class DefaultMetaPage implements MetaPage {
 
     @Inject
@@ -41,25 +39,25 @@ public class DefaultMetaPage implements MetaPage {
         ranking = 0)
     @Switch(onText = "Disabled", offText = "Enabled")
     public boolean isDisableSchemaOrg() {
-        return currentPage.getInherited("disableSchemaOrg", false);
+        return getCurrentPage().getInherited("disableSchemaOrg", false);
     }
 
     public String getPageName() {
-        return StringUtils.isNotBlank(currentPage.getPageTitle()) ? currentPage.getPageTitle() : currentPage.getName();
+        return StringUtils.isNotBlank(getCurrentPage().getPageTitle()) ? getCurrentPage().getPageTitle() : getCurrentPage().getName();
     }
 
     public String getDescription() {
-        return currentPage.getDescription();
+        return getCurrentPage().getDescription();
     }
 
     public String getFullyQualifiedPageImage() {
         //TODO: See what this actually returns - it might need externalization
-        return currentPage.isHasImage() ? currentPage.getImageSource().or("") : "";
+        return getCurrentPage().isHasImage() ? getCurrentPage().getImageSource().or("") : "";
     }
 
     public String getFullyQualifiedPageUrl() {
 
-        return getExternalUrl(request, currentPage.adaptTo(Resource.class), "html");
+        return getExternalUrl(getRequest(), getCurrentPage().adaptTo(Resource.class), "html");
     }
 
     @DialogField(fieldLabel = "Twitter Publisher Handle",
@@ -67,7 +65,7 @@ public class DefaultMetaPage implements MetaPage {
         ranking = 10)
     @TextField
     public String getTwitterPublisherHandle() {
-        return currentPage.getInherited("twitterPublisherHandle", "");
+        return getCurrentPage().getInherited("twitterPublisherHandle", "");
     }
 
     @DialogField(fieldLabel = "Open Graph Type",
@@ -93,20 +91,20 @@ public class DefaultMetaPage implements MetaPage {
     )
     public String getFacebookOpenGraphType() {
         //TODO: Should this inherit?
-        return currentPage.get("ogType", "");
+        return getCurrentPage().get("ogType", "");
     }
 
     @DialogField(fieldLabel = "Canonical Url", fieldDescription = "Canonical Url of the content of this page",
         ranking = 30)
     @PathField(rootPath = PathConstants.PATH_CONTENT)
     public String getCanonicalUrl() {
-        return currentPage.get("canonicalUrl", String.class).transform(canonicalUrl -> {
+        return getCurrentPage().get("canonicalUrl", String.class).transform(canonicalUrl -> {
             final String url;
 
             if (canonicalUrl.startsWith("http:") || canonicalUrl.startsWith("https:")) {
                 url = canonicalUrl;
             } else {
-                url = getExternalUrl(request, currentPage.adaptTo(Resource.class), "html");
+                url = getExternalUrl(request, getCurrentPage().adaptTo(Resource.class), "html");
             }
 
             return url;
@@ -114,7 +112,7 @@ public class DefaultMetaPage implements MetaPage {
     }
 
     public String getHomePageTitle() {
-        final HierarchicalPage hierarchicalPage = currentPage.adaptTo(HierarchicalPage.class);
+        final HierarchicalPage hierarchicalPage = getCurrentPage().adaptTo(HierarchicalPage.class);
 
         String title = "";
 
@@ -133,7 +131,7 @@ public class DefaultMetaPage implements MetaPage {
         fieldDescription = "This setting requests the automated internet bots avoid indexing this page", ranking = 40)
     @Switch(offText = "No", onText = "Yes")
     public boolean isNoIndex() {
-        return currentPage.get("noIndex", false);
+        return getCurrentPage().get("noIndex", false);
     }
 
     @DialogField(fieldLabel = "Add NOFOLLOW metadata tag",
@@ -141,7 +139,7 @@ public class DefaultMetaPage implements MetaPage {
         ranking = 50)
     @Switch(offText = "No", onText = "Yes")
     public boolean isNoFollow() {
-        return currentPage.get("noFollow", false);
+        return getCurrentPage().get("noFollow", false);
     }
 
     public List<String> getRobotsTags() {
@@ -161,8 +159,8 @@ public class DefaultMetaPage implements MetaPage {
     public String getRobotsContent() {
         final StringBuilder content = new StringBuilder();
 
-        final boolean noIndexIndicator = currentPage.get("noindex", false);
-        final boolean noFollowIndicator = currentPage.get("nofollow", false);
+        final boolean noIndexIndicator = getCurrentPage().get("noindex", false);
+        final boolean noFollowIndicator = getCurrentPage().get("nofollow", false);
 
         if (noIndexIndicator) {
             content.append("NOINDEX");
@@ -183,7 +181,7 @@ public class DefaultMetaPage implements MetaPage {
     private String getExternalUrl(SlingHttpServletRequest requestContext, Resource resource, String extension) {
         final ResourceResolver resourceResolver = requestContext.getResourceResolver();
 
-        String externalLink = externalizer.externalLink(resourceResolver, getExternalizerName(),
+        String externalLink = getExternalizer().externalLink(resourceResolver, getExternalizerName(),
                 resourceResolver.map(requestContext, resource.getPath()));
 
         if (StringUtils.isNotBlank(extension)) {
@@ -193,4 +191,15 @@ public class DefaultMetaPage implements MetaPage {
         return externalLink;
     }
 
+    protected PageDecorator getCurrentPage() {
+        return currentPage;
+    }
+
+    protected Externalizer getExternalizer() {
+        return externalizer;
+    }
+
+    protected SlingHttpServletRequest getRequest() {
+        return request;
+    }
 }
