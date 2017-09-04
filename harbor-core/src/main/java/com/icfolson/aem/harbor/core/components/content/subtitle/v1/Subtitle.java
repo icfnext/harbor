@@ -22,17 +22,8 @@ import javax.inject.Inject;
  * authored page subtitle but can be overridden with static text if necessary. The
  * secondary title of the page is rendered as an H2 DOM element.
  */
-@Component(
-    value = "Subtitle (v1)",
-    resourceSuperType = AbstractHeading.RESOURCE_TYPE,
-    name = "subtitle/v1/subtitle",
-    tabs = {
-            @Tab(title = "Subtitle"),
-            @Tab(title = "Advanced")
-    }
-)
 @Model(adaptables = Resource.class, adapters = Heading.class, resourceType = Subtitle.RESOURCE_TYPE)
-public class Subtitle implements Heading {
+public class Subtitle extends AbstractHeading {
 
     public static final String RESOURCE_TYPE = "harbor/components/content/subtitle/v1/subtitle";
 
@@ -41,24 +32,13 @@ public class Subtitle implements Heading {
     @Inject @Optional
     private String text;
 
-    @Inject @Optional
-    private String domId;
-
     @Inject
     private PageDecorator currentPage;
 
     @DialogField(fieldLabel = "Subtitle", fieldDescription = "The textual content of the rendered subtitle.  Will default to the Page's configured subtitle if available.")
     @TextField
     public String getText() {
-        return IconUtils.iconify(getSubtitleText());
-    }
-
-    @DialogField(fieldLabel = "ID",
-            fieldDescription = "A unique identifier to apply to the Subtitle element rendered in the page DOM.  This will default to a sanitized version of the text content of the subtitle if not overridden.",
-            tab = 2)
-    @TextField
-    public String getDomId() {
-        return !StringUtils.isBlank(domId) ? domId : ComponentUtils.sanitizeTextAsDomId(getSubtitleText());
+        return getSubtitleText();
     }
 
     /**

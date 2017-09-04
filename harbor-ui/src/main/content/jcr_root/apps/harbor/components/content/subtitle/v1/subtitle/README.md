@@ -2,10 +2,6 @@
 
 A Page Subtitle rendered as an `h2` element.
 
-## Usage
-
-See [usage video](https://youtu.be/9phpmkQQ0Uw).
-
 ## General Information
 
 * `group`: Harbor
@@ -16,8 +12,15 @@ See [usage video](https://youtu.be/9phpmkQQ0Uw).
 
 Uses the `com.icfolson.aem.harbor.components.content.heading.Heading` Model interface.
 
-## Authorable Properties
+## HTL
 
-* `text`: The text to present in the Subtitle.  Defaults to the Page's subtitle if available.
-* `domId`: An identifier written to the subtitle's DOM element.  Used for anchoring and identification.  Defaults to a sanitized version of the subtitle text.
+Does not override the HTL from Abstract Heading
 
+## Default Implementation
+
+`com.icfolson.aem.harbor.core.components.content.subtitle.v1.Subtitle`
+
+Assumes the following resource properties
+
+* `text` - The text to present within the heading
+* `size` - The heading element type to produce

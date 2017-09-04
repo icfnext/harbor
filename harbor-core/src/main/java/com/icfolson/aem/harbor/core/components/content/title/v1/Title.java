@@ -1,8 +1,6 @@
 package com.icfolson.aem.harbor.core.components.content.title.v1;
 
-import com.citytechinc.cq.component.annotations.Component;
 import com.citytechinc.cq.component.annotations.DialogField;
-import com.citytechinc.cq.component.annotations.Tab;
 import com.citytechinc.cq.component.annotations.widgets.TextField;
 import com.icfolson.aem.harbor.api.components.content.heading.Heading;
 import com.icfolson.aem.harbor.api.constants.dom.Headings;
@@ -23,17 +21,8 @@ import javax.inject.Inject;
  * authored page title but can be overridden with static text if necessary. The
  * primary title of the page is rendered as an H1 DOM element.
  */
-@Component(
-    value = "Title (v1)",
-    resourceSuperType = AbstractHeading.RESOURCE_TYPE,
-    name = "title/v1/title",
-    tabs = {
-        @Tab(title = "Title"),
-        @Tab(title = "Advanced")
-    }
-)
 @Model(adaptables = Resource.class, adapters = Heading.class, resourceType = Title.RESOURCE_TYPE)
-public class Title implements Heading {
+public class Title extends AbstractHeading {
 
     public static final String RESOURCE_TYPE = "harbor/components/content/title/v1/title";
 
@@ -41,9 +30,6 @@ public class Title implements Heading {
 
     @Inject @Optional
     private String text;
-
-    @Inject @Optional
-    private String domId;
 
     @Inject
     private PageDecorator currentPage;
@@ -54,12 +40,8 @@ public class Title implements Heading {
         return IconUtils.iconify(getTitleText());
     }
 
-    @DialogField(fieldLabel = "ID",
-            fieldDescription = "A unique identifier to apply to the Title element rendered in the page DOM.  This will default to a sanitized version of the text content of the heading if not overridden.",
-            tab = 2)
-    @TextField
     public String getDomId() {
-        return StringUtils.isNotBlank(domId) ? domId : ComponentUtils.sanitizeTextAsDomId(getTitleText());
+        return ComponentUtils.sanitizeTextAsDomId(getTitleText());
     }
 
     /**

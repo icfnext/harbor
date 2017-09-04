@@ -1,10 +1,10 @@
 package com.icfolson.aem.harbor.api.components.content.heading;
 
-public interface Heading {
+import com.icfolson.aem.harbor.api.components.mixins.identifiable.Identifiable;
+
+public interface Heading extends Identifiable {
 
     String getText();
-
-    String getDomId();
 
     String getSize();
 
