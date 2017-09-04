@@ -45,6 +45,12 @@ Harbor is a collection of content and page components, services, and patterns co
 * Page
   * [Global (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/page/global/v1/global)
 
+
+## --- NOTE - Old Documentation Below This Point ---
+
+All documentation below this point is from the 2.x versions of Harbor and has not 
+yet been reviewed for accuracy on the 3.x version. 
+
 ## Internal Promotional Videos
 
 The following videos were developed (poorly) to promote Harbor internally.
