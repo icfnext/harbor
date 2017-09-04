@@ -1,4 +1,4 @@
-if ( typeof CQ !== 'undefined' ) {
+if (typeof CQ !== 'undefined') {
 
     /**
      * Provides contextualization of editables in Author Mode.  Editables in the current context are shown on the page
@@ -12,8 +12,7 @@ if ( typeof CQ !== 'undefined' ) {
 
                 if (curEditable.indexOf(contextPath) === 0) {
                     editables[curEditable].harborInCurrentContext = true;
-                }
-                else {
+                } else {
                     editables[curEditable].harborInCurrentContext = false;
                 }
             }
@@ -26,6 +25,5 @@ if ( typeof CQ !== 'undefined' ) {
             }
         }
     };
-
 }
 

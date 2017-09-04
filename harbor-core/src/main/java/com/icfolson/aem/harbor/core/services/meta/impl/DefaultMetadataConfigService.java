@@ -61,12 +61,12 @@ public class DefaultMetadataConfigService implements MetadataConfigService {
 		}
 		*/
 
-        return getExternalUrl(requestContext, resource, ".html");
+        return getExternalUrl(requestContext, resource, "html");
     }
 
     @Override
     public String getExternalUrlForImage(SlingHttpServletRequest requestContext, Resource resource) {
         //TODO: Check on this output
-        return getExternalUrl(requestContext, resource, ".png");
+        return getExternalUrl(requestContext, resource, "png");
     }
 }

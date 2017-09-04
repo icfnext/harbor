@@ -5,5 +5,4 @@ import java.util.Map;
 public interface BootstrapBrand {
 
     Map<String, String> getVariables();
-
 }

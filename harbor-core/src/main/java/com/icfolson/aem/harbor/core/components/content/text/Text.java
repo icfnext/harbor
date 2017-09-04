@@ -41,6 +41,8 @@ import javax.inject.Named;
 @Model(adaptables = Resource.class)
 public class Text {
 
+    public static final String RESOURCE_TYPE = "harbor/components/content/text";
+
     public static final String TAB_1_NODE_NAME = "contenttab";
 
     @DialogField(fieldLabel = "Content", name = "./text", suppressTouchUI = true)

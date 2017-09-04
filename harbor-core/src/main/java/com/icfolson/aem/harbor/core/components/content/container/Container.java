@@ -24,6 +24,7 @@ import javax.annotation.PostConstruct;
     description = "A container in which content may be placed.  All content should be placed in a container element.",
     name = "contentcontainer",
     group = ComponentGroups.HARBOR_SCAFFOLDING,
+    isContainer = true,
     tabs = {
         @Tab(title = "Container"),
         @Tab(title = "Advanced")

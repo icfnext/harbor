@@ -51,7 +51,9 @@ import java.util.List;
     resourceSuperType = "foundation/components/parbase",
     tabs = {
         @Tab(title = "Column Row")
-    })
+    },
+    isContainer = true
+)
 @Model(adaptables = Resource.class)
 public class ColumnRow {
 

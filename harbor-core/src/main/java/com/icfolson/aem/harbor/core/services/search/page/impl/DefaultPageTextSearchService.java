@@ -57,7 +57,7 @@ public class DefaultPageTextSearchService implements PageTextSearchService {
 
     private List<PageHit> extractHits(QueryResult result, Set<String> searchPaths, String searchForText) throws RepositoryException {
         /* use a linked hash set to bounce duplicates while maintaining sort order */
-        Set<PageHit> hits = new LinkedHashSet<PageHit>();
+        Set<PageHit> hits = new LinkedHashSet<>();
         for (RowIterator it = result.getRows(); it.hasNext();) {
             Row row = it.nextRow();
             Node node = row.getNode();
@@ -111,7 +111,7 @@ public class DefaultPageTextSearchService implements PageTextSearchService {
         }
 
         if (requestedPageNbr > totalNbrOfPages) {
-            return new DefaultPageOfResults(requestedPageNbr, totalNbrOfPages, Collections.EMPTY_LIST);
+            return new DefaultPageOfResults(requestedPageNbr, totalNbrOfPages, Collections.emptyList());
         }
 
         int indexOfFirstHitForRequestedPage = (requestedPageNbr - 1) * pageSize;

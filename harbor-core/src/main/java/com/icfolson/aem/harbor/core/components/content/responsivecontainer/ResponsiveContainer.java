@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 
 @Component(value = "Responsive Container",
     description = "A content container which can be shown or hidden at various device size breakpoints.",
+    isContainer = true,
     group = ComponentGroups.HARBOR_SCAFFOLDING)
 @Model(adaptables = Resource.class)
 public class ResponsiveContainer extends AbstractComponent {

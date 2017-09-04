@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
     value = "Accordion Group",
     group = ComponentGroups.HARBOR,
     actions = { "text: Accordion", "-", "edit", "-", "copymove", "delete", "-", "insert" },
+    isContainer = true,
     actionConfigs = {
         @ActionConfig(
             text = "Add Item",

@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 @Component(
     value = "Carousel",
     actions = { "text: Carousel", "edit", "-", "copymove", "delete", "-", "insert" },
+    isContainer = true,
     actionConfigs = {
         @ActionConfig(xtype = "tbseparator"),
         @ActionConfig(text = "Add Slide", handler = "function() { Harbor.Components.Carousel.addSlide(this) }") },

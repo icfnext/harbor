@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.icfolson.aem.harbor</groupId>
         <artifactId>harbor</artifactId>
-        <version>1.0.2</version>
+        <version>2.0.0</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
@@ -142,6 +142,7 @@
                     <componentPathBase>jcr_root/apps/harbor/components</componentPathBase>
                     <defaultComponentGroup>Harbor</defaultComponentGroup>
                     <transformerName>lower-case</transformerName>
+                    <generateClassicUiDialogs>false</generateClassicUiDialogs>
                     <additionalFeatures>
                         <additionalFeature>rte-touchui</additionalFeature>
                         <additionalFeature>tagspickerwidget</additionalFeature>

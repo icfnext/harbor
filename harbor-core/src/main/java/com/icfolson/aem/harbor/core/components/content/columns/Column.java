@@ -33,7 +33,9 @@ import java.util.List;
     tabs = {
         @Tab(title = "Column"),
         @Tab(title = "Advanced")
-    })
+    },
+    isContainer = true
+)
 @Model(adaptables = Resource.class)
 public class Column {
 

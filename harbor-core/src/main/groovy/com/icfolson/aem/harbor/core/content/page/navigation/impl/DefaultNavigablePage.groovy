@@ -1,6 +1,7 @@
 package com.icfolson.aem.harbor.core.content.page.navigation.impl
 
 import com.google.common.base.Function
+import com.google.common.base.Objects
 import com.icfolson.aem.harbor.api.content.page.navigation.NavigablePage
 import com.icfolson.aem.harbor.core.content.page.navigation.NavigablePages
 import com.icfolson.aem.harbor.core.content.page.navigation.NavigationElementConfiguration
@@ -33,17 +34,17 @@ class DefaultNavigablePage implements NavigablePage {
         if (!navigablePageList) {
             navigablePageList = []
 
-            if (navigationElementConfiguration.navigationDepth > 0) {
-                pageDecorator.getChildren(navigationElementConfiguration.respectHideInNavigation).each { page ->
-                    if (navigationElementConfiguration.currentPage.isPresent()) {
+            def depth = navigationElementConfiguration.navigationDepth
+            def respectHideInNavigation = navigationElementConfiguration.respectHideInNavigation
+
+            if (depth > 0) {
+                pageDecorator.getChildren(respectHideInNavigation).each { page ->
+                    if (navigationElementConfiguration.currentPage.present) {
                         navigablePageList.add(NavigablePages.forPageAndDepthAndChildPolicyAndCurrentPage(page,
-                            navigationElementConfiguration.navigationDepth - 1,
-                            navigationElementConfiguration.respectHideInNavigation,
-                            navigationElementConfiguration.currentPage.get()))
+                            depth - 1, respectHideInNavigation, navigationElementConfiguration.currentPage.get()))
                     } else {
-                        navigablePageList.add(NavigablePages.forPageAndDepthAndChildPolicy(page,
-                            navigationElementConfiguration.navigationDepth - 1,
-                            navigationElementConfiguration.respectHideInNavigation))
+                        navigablePageList.add(NavigablePages.forPageAndDepthAndChildPolicy(page, depth - 1,
+                            respectHideInNavigation))
                     }
                 }
             }
@@ -73,5 +74,13 @@ class DefaultNavigablePage implements NavigablePage {
         def isActive = currentPagePath && currentPagePath.startsWith(pageDecorator.path)
 
         pageDecorator.getNavigationLink(isActive)
+    }
+
+    @Override
+    String toString() {
+        Objects.toStringHelper(this)
+            .add("path", pageDecorator.path)
+            .add("navigationElementConfiguration", navigationElementConfiguration)
+            .toString()
     }
 }

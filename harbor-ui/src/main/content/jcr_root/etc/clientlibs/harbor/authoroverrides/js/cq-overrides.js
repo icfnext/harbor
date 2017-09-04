@@ -1,4 +1,4 @@
-if ( typeof CQ !== 'undefined' ) {
+if (typeof CQ !== 'undefined') {
 
     $(function () {
         var top = CQ.WCM.getTopWindow();

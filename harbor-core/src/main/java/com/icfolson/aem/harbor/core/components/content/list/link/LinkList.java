@@ -18,6 +18,7 @@ import org.apache.sling.models.annotations.injectorspecific.Self;
     value = "Link List",
     group = ComponentGroups.HARBOR_LISTS,
     name = "lists/linklist",
+    isContainer = true,
     actions = { "text:Link List", "edit", "-", "copymove", "delete", "insert" },
     contentAdditionalProperties = {
         @ContentProperty(name = "dependencies", value = "[harbor.components.content.linklist,acs-commons.fontawesome]")

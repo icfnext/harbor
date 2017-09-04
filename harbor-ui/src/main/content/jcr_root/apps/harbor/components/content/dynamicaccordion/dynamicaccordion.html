@@ -1,0 +1,18 @@
+<div data-sly-test="${(isEditMode || isDesignMode)}" class="author-help-message">
+    Dynamic Accordion - Press the &quot;Add Experience&quot; button in the edit bar to add an item.
+</div>
+<div data-sly-use.accordion="${component.properties['className']}" class="panel-group" id="accordion-${accordion.id}" role="tablist" aria-multiselectable="true">
+    <div data-sly-repeat.item="${accordion.items}" class="panel ${item.style} ${item.classification ? item.classification.classNames : ''}">
+        <div class="panel-heading" role="tab" id="heading-${item.id}">
+            <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-parent="#accordion-${accordion.id}" href="#collapse-${item.id}" aria-expanded="true" aria-controls="collapse-${item.id}">
+                    ${item.headingText || 'Heading'}
+                </a>
+            </h4>
+        </div>
+        <div id="collapse-${item.id}" class="panel-collapse collapse ${(itemList.first || (isEditMode || isDesignMode)) ? 'in' : ''}" role="tabpanel" aria-labelledby="heading-${item.id}">
+            <div class="panel-body" data-sly-resource="${item.path @ resourceType = item.type}">
+            </div>
+        </div>
+    </div>
+</div>
