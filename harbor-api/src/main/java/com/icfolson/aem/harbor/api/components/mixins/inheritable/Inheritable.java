@@ -5,7 +5,7 @@ public interface Inheritable {
     /**
      * Indicates whether the inheritable component should inherit its properties from a parent
      *
-     * @return
+     * @return true if properties of the component instance are to be inherited from parent pages, false otherwise
      */
     boolean isInherits();
 

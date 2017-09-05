@@ -1,10 +1,21 @@
-<sly data-sly-use.contentContainer="com.icfolson.aem.harbor.api.components.content.container.Container">
-    <section data-sly-test="${contentContainer.section}" data-sly-attribute.class="${contentContainer.sectionClass}" data-sly-attribute.id="${contentContainer.domId}">
-        <div data-sly-attribute.class="${contentContainer.containerClass}" data-sly-attribute.data-role="${contentContainer.role}" data-sly-element="${contentContainer.containerElement}">
-            <sly data-sly-include="innercontentcontainer.html"/>
+<sly data-sly-use.contentContainer="com.icfolson.aem.harbor.api.components.content.container.Container"
+     data-sly-use.innerContentContainer="innercontentcontainer.html">
+    <section data-sly-test="${contentContainer.section}"
+             data-sly-attribute.class="${contentContainer.classification.classificationNames @ join=' '}"
+             data-sly-attribute.id="${contentContainer.id}">
+        <div data-sly-attribute.class="${contentContainer.fullWidth ? 'container-fluid' : 'container'}"
+             data-sly-attribute.data-role="${contentContainer.role}"
+             data-sly-element="${contentContainer.containerElement}">
+            <sly data-sly-test="${isEditMode}" data-sly-include="authorhelp.html"/>
+            <sly data-sly-call="${innerContentContainer.template @ contentContainer = contentContainer}"/>
         </div>
     </section>
-    <div data-sly-test="${!contentContainer.section}" data-sly-attribute.class="${contentContainer.containerClass}" data-sly-attribute.id="${contentContainer.domId}" data-sly-attribute.data-role="${contentContainer.role}" data-sly-element="${contentContainer.containerElement}">
-        <sly data-sly-include="innercontentcontainer.html"/>
+    <div data-sly-test="${!contentContainer.section}"
+         data-sly-attribute.class="${contentContainer.fullWidth ? 'container-fluid' : 'container'} ${contentContainer.classification.classificationNames @ join=' '}"
+         data-sly-attribute.id="${contentContainer.id}"
+         data-sly-attribute.data-role="${contentContainer.role}"
+         data-sly-element="${contentContainer.containerElement}">
+        <sly data-sly-test="${isEditMode}" data-sly-include="authorhelp.html"/>
+        <sly data-sly-call="${innerContentContainer.template @ contentContainer = contentContainer}"/>
     </div>
 </sly>

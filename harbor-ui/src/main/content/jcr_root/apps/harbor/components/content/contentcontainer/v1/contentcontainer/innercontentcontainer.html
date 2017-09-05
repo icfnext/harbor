@@ -1,11 +1,3 @@
-<sly data-sly-use.contentContainer="com.icfolson.aem.harbor.api.components.content.container.Container">
-    <div data-sly-test="${isEditMode}" class="author-help-message">
-        <p>${contentContainer.authorHelpMessage}</p>
-    </div>
-    <sly data-sly-test="${!contentContainer.parsysInherits && !contentContainer.usesResponsiveGrid}"
-         data-sly-resource="${'container-par' @ resourceType='wcm/foundation/components/parsys'}"/>
-    <sly data-sly-test="${!contentContainer.parsysInherits && contentContainer.usesResponsiveGrid}"
-         data-sly-resource="${'container-par' @ resourceType='wcm/foundation/components/responsivegrid'}"/>
-    <sly data-sly-test="${contentContainer.parsysInherits}"
-         data-sly-resource="${'container-par' @ resourceType='wcm/foundation/components/iparsys'}"/>
-</sly>
+<template data-sly-template.template="${@ contentContainer}">
+    <div data-sly-resource="${'container-par' @ resourceType=contentContainer.paragraphSystemType}"></div>
+</template>

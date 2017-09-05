@@ -2,35 +2,42 @@
 
 A generic container for content exposing a paragraph system for the creation of content.
 
-## Usage
-
-See [usage video](https://youtu.be/i7fQr5E5op4).
-
 ## General Information
 
 * `group`: Harbor Scaffolding 
-* `resourceType`: `harbor/components/content/heading/v1/heading`
-* `resourceSuperType`: `harbor/components/content/heading/v1/abstractheading`
+* `resourceType`: `harbor/components/content/contentcontainer/v1/contentcontainer`
 * `classifiable`
+* `identifiable`
+* `inheritable`
+* `designed container`
 
 ## Sling Model
 
 Uses the `com.icfolson.aem.harbor.components.content.container.Container` Model interface.
 
-## Authorable Properties
+## HTL
 
-* `Full Width`: Indicates whether the container should span the entire width of the available space
-* `Container Inheritance`: If set to true an inheriting paragraph system will be used in place of a paragraph system
-* `Classification`: Exposes the classifiability of the container
-* `ID`: Writes an ID to the presented DOM element.  Used for anchoring to the container
+* `contentcontainer.html` - Principal rendering HTL.  Responsible for choosing 
+  whether to render a `section` DOM element around the container based on the 
+  `isSection()` method of the container implementation.  Also responsible for 
+  calling the `innercontentcontainer.html` HTL template.
+* `innercontentcontainer.html` - HTL template rendering an appropriate paragraph 
+  system populated with child resource `container-par`.
+* `authorhelp.html` - An author help message providing a hook which may be 
+  clicked on to open the editbar for the container.
 
-## Using Layout Mode
+## Default Implementation 
 
-The Harbor Content Container respects the `icf:usesResponsiveGrid` design property. 
-When set to true a `wcm/foundation/components/responsivegrid` will be used in place 
-of the standard paragraph system.  
+`com.icfolson.aem.harbor.core.components.content.container.v1.DefaultContainer`
 
-NOTE: There is not an inheriting counterpart to the responsive grid.  If you configure 
-a container to use an inheriting paragraph system AND it is designed to use the 
-responsive grid, the inheriting paragraph system configuration will take precedence 
-and a `wcm/foundation/components/iparsys` will be rendered.
+Makes the following choices for the Container methods:
+
+* `isFullWidth()` - `false`
+* `getClassification()` - uses tag based Classification
+* `getContainerElement()` - div
+* `getRole()` - `null`
+* `isSection()` - `true`
+* `isInherits()` - `false`
+* `getParagraphSystemType()` - If the site is designed to use the responsive 
+  grid, it uses that, otherwise it checks whether the container is to be an 
+  inheriting parsys and uses that, otherwise it falls back to a parsys.
