@@ -109,9 +109,9 @@ public class DefaultResponsiveImage extends AbstractComponent implements Respons
     public String getCssClass() {
         final StringBuilder builder = new StringBuilder(getShape());
 
-        if (classification.isHasClassifications()) {
+        if (classification.isClassified()) {
             builder.append(" ");
-            builder.append(classification.getClassNames());
+            builder.append(String.join(" ", classification.getClassificationNames()));
         }
 
         return builder.toString();

@@ -3,7 +3,7 @@
 </div>
 <div data-sly-use.carousel="com.icfolson.aem.harbor.api.components.content.dynamiccarousel.DynamicCarousel"
      id="${carousel.id}-carousel"
-     class="${carousel.cssClass} ${carousel.classification.classNames}"
+     class="${carousel.cssClass} ${carousel.classification.classificationNames @ join = ' '}"
      data-ride="${(isPreviewMode || isPublish) ? 'carousel' : ''}"
      data-interval="${carousel.interval == 0 ? 'false' : carousel.interval}"
      data-pause="${carousel.pauseOnHover ? 'hover' : ''}"

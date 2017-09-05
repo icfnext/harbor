@@ -1,4 +1,4 @@
-<ul data-sly-use.dynamicList="com.icfolson.aem.harbor.api.components.content.list.dynamic.DynamicList" data-sly-attribute.class="${dynamicList.classification.classNames}">
+<ul data-sly-use.dynamicList="com.icfolson.aem.harbor.api.components.content.list.dynamic.DynamicList" data-sly-attribute.class="${dynamicList.classification.classificationNames @ join = ' '}">
     <li class="author-help-message" data-sly-test="${isEditMode && !resource.listChildren}">Press '+' to Add a List Item</li>
     <sly data-sly-repeat="${resource.listChildren}" data-sly-resource="${item.path @ resourceType=item.resourceType, decorationTagName='li'}"/>
 </ul>

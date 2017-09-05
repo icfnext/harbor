@@ -7,7 +7,7 @@
      id="accordion-${accordion.id}"
      role="tablist"
      aria-multiselectable="true">
-    <div data-sly-repeat.item="${accordion.items}" class="panel ${item.style} ${item.classification ? item.classification.classNames : ''}">
+    <div data-sly-repeat.item="${accordion.items}" class="panel ${item.style} ${item.classification.classificationNames @ join = ' '}">
         <sly data-sly-call="${panelHeading.template @ item=item}"/>
         <sly data-sly-call="${panelBody.template @ item=item}"/>
     </div>

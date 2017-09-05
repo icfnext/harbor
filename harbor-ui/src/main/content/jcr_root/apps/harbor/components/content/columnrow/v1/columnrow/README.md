@@ -46,4 +46,8 @@ The editable is intended to be the editable representing the Column Row.
 
 `com.icfolson.aem.harbor.core.components.content.columnrow.v1.DefaultColumnRow`
 
+Treats all direct children of the Column Row resource as the Columns of the row 
+and adapts them to `Column`s when providing a response to `List<Column> getColumns()`.
+
+Uses the `TagBasedClassification` implementation to expose Classifiability.
 

@@ -1,5 +1,5 @@
 <div data-sly-use.slide="${component.properties['className']}"
-     class="${slide.classification.classNames}">
+     class="${slide.classification.classificationNames @ join = ' '}">
     <div class="carousel-caption">
         <div data-sly-resource="${'heading' @ resourceType='harbor/components/content/heading/bakedin'}"></div>
         <div data-sly-resource="${'text' @ resourceType='harbor/components/content/text/bakedin'}"></div>

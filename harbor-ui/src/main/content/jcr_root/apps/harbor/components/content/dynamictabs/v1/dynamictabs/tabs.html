@@ -1,5 +1,5 @@
 <template data-sly-template.template="${@ dynamicTabs}">
-    <ul class="nav nav-tabs ${dynamicTabs.classification.classNames}"
+    <ul class="nav nav-tabs ${dynamicTabs.classification.classificationNames @ join = ' '}"
         role="tablist"
         data-sly-attribute.data-path="${isAuthor ? resource.path : ''}">
         <li data-sly-repeat.currentTab="${dynamicTabs.tabs}" data-sly-attribute.class="${currentTabList.first ? 'active' : ''}">

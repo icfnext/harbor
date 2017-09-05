@@ -3,9 +3,10 @@ package com.icfolson.aem.harbor.core.components.content.container.v1;
 import com.icfolson.aem.harbor.api.components.content.container.Container;
 import com.icfolson.aem.harbor.api.components.design.container.ContainerDesign;
 import com.icfolson.aem.harbor.api.components.mixins.classifiable.Classification;
-import com.icfolson.aem.harbor.api.components.mixins.classifiable.InheritedClassification;
 import com.icfolson.aem.harbor.api.components.mixins.paragraphsystem.ParagraphSystemContainer;
 import com.icfolson.aem.harbor.api.constants.dom.Elements;
+import com.icfolson.aem.harbor.core.components.mixins.classifiable.InheritedTagBasedClassification;
+import com.icfolson.aem.harbor.core.components.mixins.classifiable.TagBasedClassification;
 import com.icfolson.aem.library.core.components.AbstractComponent;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.sling.api.resource.Resource;
@@ -28,9 +29,9 @@ public class DefaultContainer extends AbstractComponent implements Container, Co
     public Classification getClassification() {
         if (classification == null) {
             if (isInherits()) {
-                classification = getResource().adaptTo(InheritedClassification.class);
+                classification = getResource().adaptTo(InheritedTagBasedClassification.class);
             } else {
-                classification = getResource().adaptTo(Classification.class);
+                classification = getResource().adaptTo(TagBasedClassification.class);
             }
         }
         return classification;

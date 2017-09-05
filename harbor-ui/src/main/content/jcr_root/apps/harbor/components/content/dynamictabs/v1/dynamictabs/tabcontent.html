@@ -1,5 +1,5 @@
 <template data-sly-template.template="${@ dynamicTabs}">
-    <div class="tab-content ${dynamicTabs.classification.classNames}">
+    <div class="tab-content ${dynamicTabs.classification.classificationNames @ join = ' '}">
         <div data-sly-repeat.currentTab="${dynamicTabs.tabs}"
              role="tabpanel"
              class="tab-pane active"

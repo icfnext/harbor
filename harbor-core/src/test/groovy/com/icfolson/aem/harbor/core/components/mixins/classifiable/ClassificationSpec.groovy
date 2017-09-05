@@ -20,10 +20,10 @@ class ClassificationSpec extends HarborSpec {
 
     def "get classification IDs"() {
         setup:
-        def classification = getResource("/content/harbor/jcr:content").adaptTo(DefaultClassification)
+        def classification = getResource("/content/harbor/jcr:content").adaptTo(TagBasedClassification)
 
         expect:
-        classification.hasClassifications
+        classification.classified
 
         and:
         classification.classificationIds == ["colors:green", "colors:red", "colors:blue"]
@@ -31,7 +31,7 @@ class ClassificationSpec extends HarborSpec {
 
     def "get class names"() {
         setup:
-        def classification = getResource("/content/harbor/jcr:content").adaptTo(DefaultClassification)
+        def classification = getResource("/content/harbor/jcr:content").adaptTo(TagBasedClassification)
 
         expect:
         classification.classNames == "green red blue"
@@ -39,7 +39,7 @@ class ClassificationSpec extends HarborSpec {
 
     def "get inherited class names"() {
         setup:
-        def classification = getResource("/content/harbor/section/jcr:content").adaptTo(DefaultInheritedClassification)
+        def classification = getResource("/content/harbor/section/jcr:content").adaptTo(InheritedTagBasedClassification)
 
         expect:
         classification.classNames == "green red blue"
