@@ -1,11 +1,8 @@
 package com.icfolson.aem.harbor.core.components.content.breadcrumbnavigation.v1;
 
-import com.citytechinc.cq.component.annotations.Component;
-import com.citytechinc.cq.component.annotations.Tab;
 import com.google.common.collect.Lists;
 import com.icfolson.aem.harbor.api.components.content.breadcrumb.*;
 import com.icfolson.aem.harbor.api.content.page.HierarchicalPage;
-import com.icfolson.aem.harbor.core.constants.groups.ComponentGroups;
 import com.icfolson.aem.library.api.page.PageDecorator;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
@@ -14,14 +11,10 @@ import javax.inject.Inject;
 import java.util.List;
 import java.util.Optional;
 
-@Component(value = "Breadcrumb (v1)",
-    group = ComponentGroups.HARBOR_NAVIGATION,
-    name = "breadcrumbnavigation/v1/breadcrumbnavigation",
-    tabs = { @Tab(title = "Breadcrumb (v1)", touchUINodeName = "breadcrumb") })
 @Model(adaptables = Resource.class, adapters = BreadcrumbNavigation.class, resourceType = DefaultBreadcrumbNavigation.RESOURCE_TYPE)
 public class DefaultBreadcrumbNavigation implements BreadcrumbNavigation<BreadcrumbNavigationItem> {
 
-    public static final String RESOURCE_TYPE = "harbor/components/content/breadcrumb/v1/breadcrumb";
+    public static final String RESOURCE_TYPE = "harbor/components/content/breadcrumbnavigation/v1/breadcrumbnavigation";
 
     @Inject
     private PageDecorator currentPage;
