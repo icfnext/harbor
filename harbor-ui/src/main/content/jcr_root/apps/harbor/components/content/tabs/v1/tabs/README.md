@@ -12,6 +12,7 @@ into a collection.
 * `group`: Harbor Scaffolding 
 * `resourceType`: `harbor/components/content/tabs/v1/tabs`
 * `default tab type`: `harbor/components/content/tabs/v1/tab`
+* `classifiable`
 
 ## Sling Model
 
@@ -74,3 +75,5 @@ Implemented such that the immediate children of the Tabs collection Resource
 are treated as individual Tab items.  Each Tab item must be adaptable to 
 `com.icfolson.aem.harbor.api.components.content.tabs.Tab`.  Any child resources 
 not adaptable to `Tab` are ignored.
+
+Uses `TagBasedClassification` as the means of classifiability.

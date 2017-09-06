@@ -3,6 +3,8 @@ package com.icfolson.aem.harbor.core.components.content.tabs.v1;
 import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.widgets.TextField;
 import com.icfolson.aem.harbor.api.components.content.tabs.Tab;
+import com.icfolson.aem.harbor.api.components.mixins.classifiable.Classification;
+import com.icfolson.aem.harbor.core.components.mixins.classifiable.TagBasedClassification;
 import com.icfolson.aem.harbor.core.util.ComponentUtils;
 import com.icfolson.aem.harbor.core.util.icon.IconUtils;
 import org.apache.sling.api.resource.Resource;
@@ -42,5 +44,10 @@ public class DefaultTab implements Tab {
     @Override
     public String getPath() {
         return resource.getPath();
+    }
+
+    @Override
+    public Classification getClassification() {
+        return resource.adaptTo(TagBasedClassification.class);
     }
 }

@@ -3,6 +3,8 @@ package com.icfolson.aem.harbor.core.components.content.tabs.v1;
 import com.google.common.collect.Lists;
 import com.icfolson.aem.harbor.api.components.content.tabs.Tab;
 import com.icfolson.aem.harbor.api.components.content.tabs.Tabs;
+import com.icfolson.aem.harbor.api.components.mixins.classifiable.Classification;
+import com.icfolson.aem.harbor.core.components.mixins.classifiable.TagBasedClassification;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.injectorspecific.Self;
@@ -34,4 +36,8 @@ public class DefaultTabs implements Tabs {
         return tabs;
     }
 
+    @Override
+    public Classification getClassification() {
+        return resource.adaptTo(TagBasedClassification.class);
+    }
 }

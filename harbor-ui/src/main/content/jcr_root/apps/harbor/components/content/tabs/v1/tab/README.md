@@ -10,6 +10,7 @@ The default tab implementation for the Tabs collection component.
  
 * `resourceType`: `harbor/components/content/tabs/v1/tab`
 * `identifiable`
+* `classifiable`
 
 ## Sling Model
 
@@ -26,6 +27,8 @@ Uses the `com.icfolson.aem.harbor.api.components.content.tabs.Tab` Model interfa
 ## Default Implementation
 
 `com.icfolson.aem.harbor.core.components.content.tabs.v1.DefaultTab`
+
+Uses `TagBasedClassification` as the means of classifiability.
 
 ### Dialog Fields
 
