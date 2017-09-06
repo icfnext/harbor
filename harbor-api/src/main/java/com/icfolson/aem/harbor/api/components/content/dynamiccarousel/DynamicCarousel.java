@@ -17,6 +17,6 @@ public interface DynamicCarousel extends Identifiable, Classifiable {
 
     boolean isKeyboard();
 
-    Iterable<Slide> getSlides();
+    Iterable<DynamicCarouselSlide> getSlides();
 
 }

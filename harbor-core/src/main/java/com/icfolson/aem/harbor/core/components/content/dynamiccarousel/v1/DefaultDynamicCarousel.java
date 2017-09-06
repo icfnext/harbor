@@ -2,7 +2,7 @@ package com.icfolson.aem.harbor.core.components.content.dynamiccarousel.v1;
 
 import com.google.common.collect.Lists;
 import com.icfolson.aem.harbor.api.components.content.dynamiccarousel.DynamicCarousel;
-import com.icfolson.aem.harbor.api.components.content.dynamiccarousel.Slide;
+import com.icfolson.aem.harbor.api.components.content.dynamiccarousel.DynamicCarouselSlide;
 import com.icfolson.aem.harbor.api.components.mixins.classifiable.Classification;
 import com.icfolson.aem.harbor.core.components.mixins.classifiable.TagBasedClassification;
 import com.icfolson.aem.harbor.core.util.ComponentUtils;
@@ -45,10 +45,10 @@ public class DefaultDynamicCarousel implements DynamicCarousel {
         return true;
     }
 
-    public Iterable<Slide> getSlides() {
+    public Iterable<DynamicCarouselSlide> getSlides() {
         return Lists.newArrayList(resource.getChildren())
                 .stream()
-                .map(currentChild -> currentChild.adaptTo(Slide.class))
+                .map(currentChild -> currentChild.adaptTo(DynamicCarouselSlide.class))
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
     }
