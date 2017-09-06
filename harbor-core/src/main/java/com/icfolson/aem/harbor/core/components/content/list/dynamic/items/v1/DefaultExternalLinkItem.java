@@ -9,7 +9,6 @@ import com.citytechinc.cq.component.annotations.widgets.TextField;
 import com.icfolson.aem.harbor.api.components.content.list.dynamic.DynamicListItem;
 import com.icfolson.aem.harbor.api.components.content.list.dynamic.items.ExternalLinkItem;
 import com.icfolson.aem.harbor.api.components.content.list.dynamic.items.LinkItem;
-import com.icfolson.aem.harbor.core.util.icon.IconUtils;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.Optional;
@@ -51,7 +50,7 @@ public class DefaultExternalLinkItem implements ExternalLinkItem {
     }
 
     public String getLabel() {
-        return IconUtils.iconify(label);
+        return label;
     }
 
 }

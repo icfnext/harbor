@@ -6,7 +6,6 @@ import com.icfolson.aem.harbor.api.components.content.tabs.Tab;
 import com.icfolson.aem.harbor.api.components.mixins.classifiable.Classification;
 import com.icfolson.aem.harbor.core.components.mixins.classifiable.TagBasedClassification;
 import com.icfolson.aem.harbor.core.util.ComponentUtils;
-import com.icfolson.aem.harbor.core.util.icon.IconUtils;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Default;
 import org.apache.sling.models.annotations.Model;
@@ -33,7 +32,7 @@ public class DefaultTab implements Tab {
     @DialogField(fieldLabel = "Label", fieldDescription = "The label to be presented within the Tab") @TextField
     @Override
     public String getLabel() {
-        return IconUtils.iconify(label);
+        return label;
     }
 
     @Override

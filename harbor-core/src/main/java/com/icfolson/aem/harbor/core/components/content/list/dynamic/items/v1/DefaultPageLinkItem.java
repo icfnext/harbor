@@ -1,6 +1,5 @@
 package com.icfolson.aem.harbor.core.components.content.list.dynamic.items.v1;
 
-
 import com.citytechinc.cq.component.annotations.Component;
 import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.Listener;
@@ -11,7 +10,6 @@ import com.citytechinc.cq.component.annotations.widgets.TextField;
 import com.icfolson.aem.harbor.api.components.content.list.dynamic.DynamicListItem;
 import com.icfolson.aem.harbor.api.components.content.list.dynamic.items.LinkItem;
 import com.icfolson.aem.harbor.api.components.content.list.dynamic.items.PageLinkItem;
-import com.icfolson.aem.harbor.core.util.icon.IconUtils;
 import com.icfolson.aem.library.api.page.PageDecorator;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.sling.api.resource.Resource;
@@ -56,15 +54,15 @@ public class DefaultPageLinkItem implements PageLinkItem {
 
     public String getLabel() {
         if (StringUtils.isNotBlank(label)) {
-            return IconUtils.iconify(label);
+            return label;
         }
 
         if (linkedPage != null) {
             if (StringUtils.isNotBlank(linkedPage.getPageTitle())) {
-                return IconUtils.iconify(linkedPage.getPageTitle());
+                return linkedPage.getPageTitle();
             }
 
-            return IconUtils.iconify(linkedPage.getTitle());
+            return linkedPage.getTitle();
         }
 
         return StringUtils.EMPTY;

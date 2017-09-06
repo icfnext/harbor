@@ -6,7 +6,6 @@ import com.icfolson.aem.harbor.api.components.content.heading.Heading;
 import com.icfolson.aem.harbor.api.constants.dom.Headings;
 import com.icfolson.aem.harbor.core.components.content.heading.v1.AbstractHeading;
 import com.icfolson.aem.harbor.core.util.ComponentUtils;
-import com.icfolson.aem.harbor.core.util.icon.IconUtils;
 import com.icfolson.aem.library.api.page.PageDecorator;
 import com.icfolson.aem.library.api.page.enums.TitleType;
 import org.apache.commons.lang3.StringUtils;
@@ -37,7 +36,7 @@ public class Title extends AbstractHeading {
     @DialogField(fieldLabel = "Title", fieldDescription = "The textual content of the rendered title.  Will default to the Page's Page Title if available and will fall back to the Page's Title if available.")
     @TextField
     public String getText() {
-        return IconUtils.iconify(getTitleText());
+        return getTitleText();
     }
 
     public String getDomId() {

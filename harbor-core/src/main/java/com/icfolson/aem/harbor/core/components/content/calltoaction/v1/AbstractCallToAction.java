@@ -5,7 +5,6 @@ import com.citytechinc.cq.component.annotations.Option;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
 import com.citytechinc.cq.component.annotations.widgets.TextField;
 import com.icfolson.aem.harbor.api.constants.bootstrap.Bootstrap;
-import com.icfolson.aem.harbor.core.util.icon.IconUtils;
 import com.icfolson.aem.library.api.node.ComponentNode;
 import org.apache.sling.models.annotations.Default;
 
@@ -63,7 +62,7 @@ public abstract class AbstractCallToAction {
     private String style;
 
     public String getText() {
-        return IconUtils.iconify(text);
+        return text;
     }
 
     public String getSize() {
