@@ -1,6 +1,5 @@
 package com.icfolson.aem.harbor.core.components.content.html.v1;
 
-import com.citytechinc.cq.component.annotations.Component;
 import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.Property;
 import com.citytechinc.cq.component.annotations.widgets.TextArea;
@@ -11,8 +10,6 @@ import org.apache.sling.models.annotations.Model;
 
 import javax.inject.Inject;
 
-@Component(value = "HTML (v1)",
-        name = "html/v1/html")
 @Model(adaptables = Resource.class, adapters = HTML.class, resourceType = DefaultHTML.RESOURCE_TYPE)
 public class DefaultHTML implements HTML {
 

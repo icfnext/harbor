@@ -17,3 +17,6 @@ Model interface.
 * `html.html` - The primary rendering HTL.  Outputs the HTML Source using the 
   `html` HTL context.
   
+## Dialog Fields
+
+* `htmlSource` - A Text Area where raw HTML is to be written or, more commonly, pasted.
