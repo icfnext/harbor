@@ -3,10 +3,6 @@
 Part of the dynamic family of components.  Produces a list of items of potentially 
 disparate types.
 
-## Usage
-
-See [usage video](https://youtu.be/QGzQaqD2Sqo).
-
 ## General Information
 
 * `group`: Harbor Lists
@@ -16,12 +12,18 @@ See [usage video](https://youtu.be/QGzQaqD2Sqo).
 
 Uses the `com.icfolson.aem.harbor.api.components.content.list.dynamic.DynamicList` Model interface.
 
-## Authorable Properties
+Each item is expected to implement `com.icfolson.aem.harbor.api.components.content.list.dynamic.DynamicListItem`
 
-* `classification`:  A list of tag based classifications associated with this list.
+## HTL
 
-## Design Properties
+* `dynamiclist.html` - Principal rendering HTL for the dynamic list.  Includes 
+  `empty.html` if the list is empty.  Iterates over all `DynamicListItem`s rendering 
+  each based on the type of the item's implementation.
+* `empty.html` - Author help message indicating that there are no items in the list
 
-* `Allowed Dynamic List Items`: A multifield of Dynamic List Item types which are 
-  allowed at this point in the design tree.  
+## Default Implementation
 
+`com.icfolson.aem.harbor.core.components.content.list.dynamic.v1.DefaultDynamicList`
+
+Treats the immediate child resources of the component instance as `DynamicListItem`s. 
+Any resource which does not adapt as such is ignored.
