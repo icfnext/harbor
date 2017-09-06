@@ -1,4 +1,4 @@
-# Harbor Accordion Component
+# Harbor Accordion Group (v1)
 
 A homogeneous Accordion. 
 
@@ -14,6 +14,7 @@ the Accordion JavaScript Authoring API - see the Authoring API section below.
 * `group`: Harbor Scaffolding 
 * `resourceType`: `harbor/components/content/accordion/v1/accordion`
 * `identifiable`
+* `classifiable`
 
 ## Sling Model
 
@@ -38,3 +39,21 @@ item to swap places in order with its prior sibling.
 Called by passing an editable representing a single Accordion Item.  Causes the 
 item to swap places in order with its next sibling.  
 
+## HTL
+
+* `accordion.html` - Principal rendering HTL for the accordion group.  Includes 
+  `authorhelp.html` when in edit mode.  Establishes the parameters of the accordion group 
+  and calls `accordionitems.html` to include the items.
+* `accordionitems.html` - HTL template for rendering the `AccordionItem`s based on the 
+  resource type and path defined by the item's implementation.
+* `authorhelp.html` - Author help message providing a hook to select in order to bring up 
+  the tool bar for the component.
+
+## Default Implementation
+
+`com.icfolson.aem.harbor.core.components.content.accordion.v1.DefaultAccordion`
+
+Treats all child resources of the accordion resource as `AccordionItem`s.  Any child 
+resource which can not be adapted to an `AccordionItem` is ignored.
+
+Uses `TagBasedClassification` as the means of classifiability.
