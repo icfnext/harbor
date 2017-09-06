@@ -1,6 +1,8 @@
 package com.icfolson.aem.harbor.api.components.content.list.dynamic.items;
 
-public interface LinkItem {
+import com.icfolson.aem.harbor.api.components.content.list.dynamic.DynamicListItem;
+
+public interface LinkItem extends DynamicListItem {
 
     String getUrl();
 

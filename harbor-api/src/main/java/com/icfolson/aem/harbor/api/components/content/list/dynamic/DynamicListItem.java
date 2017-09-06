@@ -4,6 +4,8 @@ public interface DynamicListItem {
 
     String RESOURCE_TYPE = "harbor/components/content/lists/dynamiclist/item";
 
+    public String getPath();
+
     public String getType();
 
 }

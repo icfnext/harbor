@@ -1,6 +1,8 @@
 package com.icfolson.aem.harbor.api.components.content.list.dynamic.items;
 
-public interface TextItem {
+import com.icfolson.aem.harbor.api.components.content.list.dynamic.DynamicListItem;
+
+public interface TextItem extends DynamicListItem {
 
     String getText();
 

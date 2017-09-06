@@ -1,45 +1,49 @@
 package com.icfolson.aem.harbor.core.components.content.list.dynamic.v1;
 
-import com.citytechinc.cq.component.annotations.Component;
-import com.citytechinc.cq.component.annotations.DialogField;
-import com.citytechinc.cq.component.annotations.editconfig.ActionConfig;
-import com.citytechinc.cq.component.annotations.editconfig.ActionConfigProperty;
-import com.citytechinc.cq.component.annotations.widgets.DialogFieldSet;
+import com.google.common.collect.Lists;
+import com.icfolson.aem.harbor.api.components.content.list.ListComponent;
 import com.icfolson.aem.harbor.api.components.content.list.dynamic.DynamicList;
+import com.icfolson.aem.harbor.api.components.content.list.dynamic.DynamicListItem;
 import com.icfolson.aem.harbor.api.components.mixins.classifiable.Classification;
-import com.icfolson.aem.harbor.core.constants.groups.ComponentGroups;
+import com.icfolson.aem.harbor.core.components.mixins.classifiable.TagBasedClassification;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
-import org.apache.sling.models.annotations.injectorspecific.Self;
 
-@Component(
-        value = "Dynamic List (v1)",
-        group = ComponentGroups.HARBOR_LISTS,
-        name = "lists/dynamiclist/v1/dynamiclist",
-        isContainer = true,
-        actions = { "text:Dynamic List", "edit", "-", "copymove", "delete", "insert" },
-        actionConfigs = {
-                @ActionConfig(xtype = "tbseparator"),
-                @ActionConfig(
-                        text = "Add Item",
-                        handler = "function() { Harbor.Components.DynamicList.v1.DynamicList.addItem( this, '/apps/" + NewDynamicListItem.RESOURCE_TYPE + "/" + NewDynamicListItem.DIALOG_FILE_NAME + "' ); }",
-                        additionalProperties = {
-                                @ActionConfigProperty(name = "icon", value = "coral-Icon--experienceAdd")
-                        })
-        }
-)
+import javax.inject.Inject;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+
 @Model(adaptables = Resource.class, adapters = DynamicList.class, resourceType = DefaultDynamicList.RESOURCE_TYPE)
-public class DefaultDynamicList implements DynamicList {
+public class DefaultDynamicList implements DynamicList<DynamicListItem> {
 
     public static final String RESOURCE_TYPE = "harbor/components/content/lists/dynamiclist/v1/dynamiclist";
 
-    @Self
-    private Classification classification;
+    @Inject
+    private Resource resource;
 
-    @DialogField
-    @DialogFieldSet
+    private List<DynamicListItem> items;
+
     public Classification getClassification() {
-        return classification;
+        return resource.adaptTo(TagBasedClassification.class);
+    }
+
+    @Override
+    public Iterable<DynamicListItem> getItems() {
+        if (items == null) {
+            items = Lists.newArrayList(resource.getChildren())
+                    .stream()
+                    .map(currentChild -> currentChild.adaptTo(DynamicListItem.class))
+                    .filter(Objects::nonNull)
+                    .collect(Collectors.toList());
+        }
+
+        return items;
+    }
+
+    @Override
+    public String getListType() {
+        return ListComponent.UNORDERED_LIST_TYPE;
     }
 
 }
