@@ -1,12 +1,9 @@
+<sly data-sly-test="${isEditMode}" data-sly-include="authorhelp.html"/>
 <div data-sly-use.accordion="com.icfolson.aem.harbor.api.components.content.accordion.Accordion"
-     class="panel-group"
+     data-sly-use.accordionItems="accordionitems.html"
+     class="panel-group ${accordion.classification.classificationNames @ join = ' '}"
      role="tablist"
      aria-multiselectable="true"
      id="${accordion.id}-accordion-container">
-    <sly data-sly-test="${accordion.items}"
-         data-sly-repeat.currentItem="${accordion.items}"
-         data-sly-resource="${currentItem.path @ resourceType='harbor/components/content/accordion/accordionitem', cssClassName='panel panel-default', decorationTagName='div'}"/>
-    <div data-sly-test="${isEditMode && !accordion.items}" class="author-help-message">
-        Add Accordion Items Using the 'Add Item' Button
-    </div>
+    <sly data-sly-call="${accordionitems.template @ accordion = accordion}"/>
 </div>

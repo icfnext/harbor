@@ -1,0 +1,14 @@
+<template data-sly-template.template="${@ accordionItem}">
+    <div class="panel-heading" role="tab" id="heading-${accordionItem.id}">
+        <h4 class="panel-title">
+            <sly data-sly-test="${!wcmmode.disabled && !wcmmode.preview}">${accordionItem.title}</sly>
+            <a data-sly-test="${wcmmode.disabled || wcmmode.preview}"
+               role="button"
+               data-parent="#${accordionItem.accordion.id}-accordion-container"
+               href="#${accordionItem.id}"
+               data-sly-attribute.aria-expanded="${ ( accordionItem.itemIndex == 0 && accordionItem.accordion.openFirstItem ) ? 'true' : ''}"
+               aria-controls="${accordionItem.id}"
+               data-toggle="collapse">${accordionItem.title}</a>
+        </h4>
+    </div>
+</template>

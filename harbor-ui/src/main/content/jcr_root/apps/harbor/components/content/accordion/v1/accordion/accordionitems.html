@@ -1,0 +1,4 @@
+<template data-sly-template.template="${@ accordion}">
+    <sly data-sly-repeat.currentItem="${accordion.items}"
+         data-sly-resource="${currentItem.path @ resourceType=currentItem.type, cssClassName='panel panel-default', decorationTagName='div'}"/>
+</template>
