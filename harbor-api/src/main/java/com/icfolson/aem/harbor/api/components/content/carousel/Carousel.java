@@ -1,8 +1,10 @@
 package com.icfolson.aem.harbor.api.components.content.carousel;
 
+import com.icfolson.aem.harbor.api.components.mixins.classifiable.Classifiable;
+
 import java.util.List;
 
-public interface Carousel<T extends CarouselSlide> {
+public interface Carousel<T extends CarouselSlide> extends Classifiable {
 
     String CSS_CLASS = "carousel slide";
 

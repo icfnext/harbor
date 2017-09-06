@@ -2,6 +2,8 @@ package com.icfolson.aem.harbor.core.components.content.carousel.v1;
 
 import com.icfolson.aem.harbor.api.components.content.carousel.Carousel;
 import com.icfolson.aem.harbor.api.components.content.carousel.CarouselSlide;
+import com.icfolson.aem.harbor.api.components.mixins.classifiable.Classification;
+import com.icfolson.aem.harbor.core.components.mixins.classifiable.TagBasedClassification;
 import com.icfolson.aem.library.api.node.ComponentNode;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
@@ -20,8 +22,6 @@ public class DefaultCarousel implements Carousel<CarouselSlide> {
     private List<CarouselSlide> slides;
 
     public static final String RESOURCE_TYPE = "harbor/components/content/carousel/v1/carousel";
-
-    public static final String INDICATORS_CSS_CLASS = "carousel-indicators";
 
     public boolean isShowPreviousAndNextControls() {
         return true;
@@ -57,6 +57,11 @@ public class DefaultCarousel implements Carousel<CarouselSlide> {
         }
 
         return slides;
+    }
+
+    @Override
+    public Classification getClassification() {
+        return componentNode.getResource().adaptTo(TagBasedClassification.class);
     }
 
 }

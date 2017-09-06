@@ -1,6 +1,8 @@
 package com.icfolson.aem.harbor.core.components.content.carousel.v1;
 
 import com.icfolson.aem.harbor.api.components.content.carousel.CarouselSlide;
+import com.icfolson.aem.harbor.api.components.mixins.classifiable.Classification;
+import com.icfolson.aem.harbor.core.components.mixins.classifiable.TagBasedClassification;
 import com.icfolson.aem.library.core.components.AbstractComponent;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
@@ -19,5 +21,9 @@ public class DefaultCarouselSlide extends AbstractComponent implements CarouselS
         return getResource().getResourceType();
     }
 
+    @Override
+    public Classification getClassification() {
+        return getResource().adaptTo(TagBasedClassification.class);
+    }
 
 }

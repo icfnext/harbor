@@ -1,6 +1,8 @@
 package com.icfolson.aem.harbor.api.components.content.carousel;
 
-public interface CarouselSlide {
+import com.icfolson.aem.harbor.api.components.mixins.classifiable.Classifiable;
+
+public interface CarouselSlide extends Classifiable {
 
     String getDisplayIndex();
 
