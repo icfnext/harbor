@@ -1,10 +1,8 @@
 package com.icfolson.aem.harbor.core.components.content.navigation.bootstrapnavigation.navbar.v1;
 
-import com.citytechinc.cq.component.annotations.Component;
 import com.icfolson.aem.harbor.api.components.content.navigation.bootstrapnavigation.navbar.BootstrapPrimaryNavbar;
 import com.icfolson.aem.harbor.core.components.content.navigation.bootstrapnavigation.bootstrapprimarynavigation.v1.DefaultBootstrapPrimaryNavigation;
 import com.icfolson.aem.harbor.core.components.content.navigation.brand.bootstrapbrand.v1.DefaultBootstrapBrand;
-import com.icfolson.aem.harbor.core.constants.groups.ComponentGroups;
 import com.icfolson.aem.harbor.core.util.ComponentUtils;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
@@ -13,9 +11,6 @@ import org.apache.sling.models.annotations.injectorspecific.Self;
 
 import javax.inject.Inject;
 
-@Component(value = "Bootstrap Primary Navbar (v1)",
-    group = ComponentGroups.HARBOR_NAVIGATION,
-    name = "navigation/bootstrapnavigation/bootstrapprimarynavbar/v1/bootstrapprimarynavbar")
 @Model(adaptables = Resource.class, adapters = BootstrapPrimaryNavbar.class, resourceType = DefaultBootstrapPrimaryNavbar.RESOURCE_TYPE)
 public class DefaultBootstrapPrimaryNavbar implements BootstrapPrimaryNavbar {
 

@@ -1,6 +1,5 @@
 package com.icfolson.aem.harbor.core.components.content.navigation.brand.bootstrapbrand.v1;
 
-import com.citytechinc.cq.component.annotations.Component;
 import com.day.cq.wcm.api.Page;
 import com.google.common.base.Optional;
 import com.icfolson.aem.harbor.api.components.content.navigation.brand.bootstrapbrand.BootstrapBrand;
@@ -12,10 +11,6 @@ import org.apache.sling.models.annotations.Model;
 
 import javax.inject.Inject;
 
-@Component(value = "Bootstrap Brand (v1)",
-        group = ".hidden",
-        actions = { "text: Bootstrap Brand (v1)", "-", "edit" },
-        name = "navigation/brand/bootstrapbrand/v1/bootstrapbrand")
 @Model(adaptables = Resource.class, adapters = BootstrapBrand.class, resourceType = DefaultBootstrapBrand.RESOURCE_TYPE)
 public class DefaultBootstrapBrand implements BootstrapBrand {
 
