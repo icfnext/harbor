@@ -1,7 +1,6 @@
 package com.icfolson.aem.harbor.core.components.content.dynamicaccordion.items.parsysaccordionitem.v1;
 
 import com.citytechinc.cq.component.annotations.DialogField;
-import com.citytechinc.cq.component.annotations.widgets.DialogFieldSet;
 import com.citytechinc.cq.component.annotations.widgets.TextField;
 import com.icfolson.aem.harbor.api.components.content.dynamicaccordion.DynamicAccordionItem;
 import com.icfolson.aem.harbor.api.components.mixins.classifiable.Classification;

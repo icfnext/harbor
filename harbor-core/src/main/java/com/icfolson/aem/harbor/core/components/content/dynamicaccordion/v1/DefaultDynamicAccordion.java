@@ -3,6 +3,8 @@ package com.icfolson.aem.harbor.core.components.content.dynamicaccordion.v1;
 import com.google.common.collect.Lists;
 import com.icfolson.aem.harbor.api.components.content.dynamicaccordion.DynamicAccordionItem;
 import com.icfolson.aem.harbor.api.components.content.dynamicaccordion.DynamicAccordion;
+import com.icfolson.aem.harbor.api.components.mixins.classifiable.Classification;
+import com.icfolson.aem.harbor.core.components.mixins.classifiable.TagBasedClassification;
 import com.icfolson.aem.harbor.core.util.ComponentUtils;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
@@ -32,4 +34,8 @@ public class DefaultDynamicAccordion implements DynamicAccordion<DynamicAccordio
         return ComponentUtils.DomIdForResourcePath(resource.getPath());
     }
 
+    @Override
+    public Classification getClassification() {
+        return resource.adaptTo(TagBasedClassification.class);
+    }
 }

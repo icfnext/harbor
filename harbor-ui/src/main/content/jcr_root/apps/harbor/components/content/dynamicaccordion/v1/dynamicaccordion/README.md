@@ -58,3 +58,11 @@ item to swap places in order with its next sibling.
   instance.  Renders the panel body and then calls `data-sly-resource` to include 
   the item content based on the resource type of the item.
   
+## Default Implementation
+
+`com.icfolson.aem.harbor.core.components.content.dynamicaccordion.v1.DefaultDynamicAccordion`
+
+Treats direct child resources as `DynamicAccordionItem`s, ignoring any which can not be 
+adapted as such.
+
+Uses `TagBasedClassification` as the means of classifiability.
