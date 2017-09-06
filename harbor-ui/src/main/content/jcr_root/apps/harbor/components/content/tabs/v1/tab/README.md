@@ -27,6 +27,6 @@ Uses the `com.icfolson.aem.harbor.api.components.content.tabs.Tab` Model interfa
 
 `com.icfolson.aem.harbor.core.components.content.tabs.v1.DefaultTab`
 
-### Properties
+### Dialog Fields
 
-* `label` - The set label of the Tab.
+* `label` - Text field defining the content of the tab label

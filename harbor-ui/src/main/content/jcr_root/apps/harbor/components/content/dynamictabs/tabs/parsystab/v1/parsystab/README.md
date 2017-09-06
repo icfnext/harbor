@@ -7,6 +7,7 @@ A Tab type for use in a Dynamic Tabs component exposing a single paragraph syste
 * `resourceType`: `harbor/components/content/dynamictabs/tabs/parsystab/v1/parsystab`
 * `resourceSuperType`: `harbor/components/content/dynamictabs/tab`
 * `classifiable`
+* `identifiable`
 
 ## Sling Model
 
@@ -19,3 +20,13 @@ Model interface.
   a paragraph system with relative path `tabcontent`.
 * `authorhelp.html` - A helper message presented above the Tab 
   to provide a clear handle to click on to bring up the instance's toolbar.
+  
+## Default Implementation
+
+`com.icfolson.aem.harbor.core.components.content.dynamictabs.tabs.parsystab.v1.ParsysTab`
+
+Uses `TagBasedClassification` as the means of classifiability.
+
+## Dialog Fields
+
+* `label` - Text label to be applied to the rendered Tab.

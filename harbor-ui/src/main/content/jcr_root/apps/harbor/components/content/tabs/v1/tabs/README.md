@@ -72,5 +72,5 @@ Tabs collection.
 
 Implemented such that the immediate children of the Tabs collection Resource 
 are treated as individual Tab items.  Each Tab item must be adaptable to 
-`com.icfolson.aem.harbor.api.components.content.tabs.Tab`, any which are not 
-are ignored. 
+`com.icfolson.aem.harbor.api.components.content.tabs.Tab`.  Any child resources 
+not adaptable to `Tab` are ignored.
