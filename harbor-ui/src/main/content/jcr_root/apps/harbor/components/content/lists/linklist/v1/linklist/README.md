@@ -1,10 +1,6 @@
-# Harbor Link List
+# Harbor Link List (v1)
 
 A homogeneous unordered list of link items.    
-
-## Usage
-
-See the [usage video](https://youtu.be/zSTChRO0Kn4).
 
 ## General Information
 
@@ -17,12 +13,17 @@ See the [usage video](https://youtu.be/zSTChRO0Kn4).
 
 Uses the `com.icfolson.aem.harbor.components.content.list.LinkList` Model interface.
 
-## Authorable Properties
+## HTL
 
-* `Classification`: Exposes the classifiability of the list
+* `linklist.html` - Primary rendering HTL.  Includes `empty.html` if no items have 
+  been configured.  Renders each resource by type using `li` as the decorating tag.
+* `empty.html` - Author help message indicating that no list items have been configured.
 
-### Link Item Authorable Properties
+## Default Implementation
 
-* `Link`: A path to an internal page or a fully qualified external URL
-* `Title`: The text title of the link
-* `Open in new window`: Indicates whether the link should open in a new window or tab when clicked.  Defaults to `false`
+`com.icfolson.aem.harbor.core.components.content.list.linklist.v1.DefaultLinkList`
+
+Treats all immediate child resources as list items adapting each to `ResourceBasedListableLink`. 
+Any which can not be adapted as such are ignored.
+
+Uses `TagBasedClassification` as the means of classifiability.

@@ -3,7 +3,6 @@ package com.icfolson.aem.harbor.core.components.content.list.linklist.v1;
 import com.google.common.collect.Lists;
 import com.icfolson.aem.harbor.api.components.content.list.ListComponent;
 import com.icfolson.aem.harbor.api.components.content.list.linklist.LinkList;
-import com.icfolson.aem.harbor.api.components.content.list.linklist.ListableLink;
 import com.icfolson.aem.harbor.api.components.content.list.linklist.ResourceBasedListableLink;
 import com.icfolson.aem.harbor.api.components.mixins.classifiable.Classification;
 import com.icfolson.aem.harbor.core.components.mixins.classifiable.TagBasedClassification;
