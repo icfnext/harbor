@@ -52,6 +52,7 @@ level group concrete component implementations.
 * Group: Harbor Lists
   * [Link List (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/lists/linklist/v1/linklist)
   * [Dynamic List (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/lists/dynamiclist/v1/dynamiclist)
+  * [Abstract Automated List (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/lists/automatedlist/v1/automatedlist)
   * [Child Page List (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/lists/childpagelist/v1/childpagelist)
 * Group: Harbor Navigation
   * [Navigable Page Tree (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/navigation/navigablepagetree/v1/navigablepagetree)
