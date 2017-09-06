@@ -1,8 +1,8 @@
 package com.icfolson.aem.harbor.api.components.content.calltoaction;
 
-import com.icfolson.aem.library.api.link.Link;
+import com.icfolson.aem.harbor.api.components.mixins.identifiable.Identifiable;
 
-public interface CallToAction {
+public interface CallToAction extends Identifiable {
 
     String LINK_IN_WINDOW = "window";
 
@@ -10,9 +10,9 @@ public interface CallToAction {
 
     String getAction();
 
-    Link getLinkTarget();
+    String getLinkHref();
 
-    Boolean isOpensInNewWindow();
+    boolean isOpensInNewWindow();
 
-    Boolean isOpensInCurrentWindow();
+    boolean isOpensInCurrentWindow();
 }

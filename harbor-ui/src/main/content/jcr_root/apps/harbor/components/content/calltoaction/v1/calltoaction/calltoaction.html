@@ -1,5 +1,5 @@
 <sly data-sly-use.cta="com.icfolson.aem.harbor.api.components.content.calltoaction.CallToAction">
-    <a data-sly-test="${cta.opensInCurrentWindow || cta.opensInNewWindow}" id="${cta.buttonId}" role="button" class="btn ${cta.size} ${cta.style} cta-btn" href="${cta.linkTarget.href}" data-sly-attribute.target="${cta.opensInNewWindow ? '_blank' : ''}">
+    <a data-sly-test="${cta.opensInCurrentWindow || cta.opensInNewWindow}" id="${cta.buttonId}" role="button" class="btn ${cta.size} ${cta.style} cta-btn" href="${cta.linkHref}" data-sly-attribute.target="${cta.opensInNewWindow ? '_blank' : ''}">
         ${cta.text @ context='html'}
     </a>
     <a data-sly-test="${!cta.opensInCurrentWindow && !cta.opensInNewWindow}" id="${cta.buttonId}" role="button" class="btn ${cta.size} ${cta.style} cta-btn">

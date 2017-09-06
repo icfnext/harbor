@@ -21,3 +21,7 @@ Model interface.
 * `intermediarypage.html` - HTL Template used to render the trail items representing all pages 
   which are neither the root page nor the current page.
 * `empty.html` - Author helper template which is rendered in Edit mode when the trail is empty. 
+
+## Default Implementation
+
+`com.icfolson.aem.harbor.core.components.content.breadcrumbnavigation.v1.DefaultBreadcrumbNavigation`
