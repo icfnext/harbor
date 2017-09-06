@@ -1,7 +1,5 @@
 <div data-sly-use.text="com.icfolson.aem.harbor.api.components.content.text.Text"
      data-sly-attribute.class="${text.classification.classificationNames @ join = ' '}">
-    <div data-sly-test="${isEditMode && !text.content}" class="author-help-message">
-        Enter Text
-    </div>
-    ${text.content @ context='html'}
+    <sly data-sly-test="${isEditMode && !text.content}" data-sly-include="empty.html"/>
+    ${text.content @ context = 'html'}
 </div>

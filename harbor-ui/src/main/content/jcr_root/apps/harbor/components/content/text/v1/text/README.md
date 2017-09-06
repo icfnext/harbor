@@ -1,10 +1,6 @@
 # Harbor Text Component
 
-A simple text component for editing and displaying text. Uses an in-place Rich Text Editor for authoring.
-
-## Usage
-
-See [usage video](https://youtu.be/EGAT9z0Erx4)
+A simple text component for editing and displaying text. 
 
 ## General Information
 
@@ -16,10 +12,17 @@ See [usage video](https://youtu.be/EGAT9z0Erx4)
 
 Uses the `com.icfolson.aem.harbor.api.components.content.text.Text` Model interface.
 
-## Authorable Properties
+## HTL
 
-### Dialog Fields
-* `classification`: A list of tag based classifications associated with this text.
+* `text.html` - Principal rendering HTL.  Outputs text content in a classified `div`.
+* `empty.html` - Included in edit mode - a help message presented when there is no 
+  text content authored yet.
 
-### Inline Editor Fields
-* `content`: Inline Rich Text Editor for textual content
+## Default Implementation
+
+`com.icfolson.aem.harbor.core.components.content.text.v1.DefaultText`
+
+Expects textual content to be stored under a `text` property.
+
+Uses `TagBasedClassification` as the means of classifiability.
+

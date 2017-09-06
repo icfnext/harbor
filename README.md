@@ -49,6 +49,8 @@ level group concrete component implementations.
     * [Tab (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/tabs/v1/tab)
   * [Dynamic Tabs (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/dynamictabs/v1/dynamictabs)
     * [Parsys Tab (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/dynamictabs/tabs/parsystab/v1/parsystab)
+  * [Carousel (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/carousel/v1/carousel)
+  * [Dynamic Carousel (v1)]()
 * Group: Harbor Lists
   * [Link List (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/lists/linklist/v1/linklist)
   * [Dynamic List (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/content/lists/dynamiclist/v1/dynamiclist)
