@@ -38,7 +38,7 @@ public class DefaultTab implements Tab {
 
     @Override
     public String getType() {
-        return RESOURCE_TYPE;
+        return resource.getResourceType();
     }
 
     @Override

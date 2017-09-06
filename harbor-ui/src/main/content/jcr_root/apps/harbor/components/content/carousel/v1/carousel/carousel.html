@@ -1,12 +1,19 @@
-<div data-sly-use.carousel="com.icfolson.aem.harbor.api.components.content.carousel.Carousel"
-     id="${carousel.id}-carousel" class="${carousel.cssClass}"
-     data-ride="${(isPreviewMode || isPublish) ? 'carousel' : ''}"
-     data-interval="${carousel.interval == 0 ? 'false' : carousel.interval}"
-     data-pause="${carousel.pauseOnHover ? 'hover' : ''}"
-     data-keyboard="${carousel.keyboard ? 'true' : ''}"
-     data-wrap="${carousel.wrap ? 'true' : ''}">
-    <p data-sly-test="${isEditMode && !carousel.slides}" class="author-help-message">Carousel</p>
-    <sly data-sly-test="${!isEditMode && carousel.showSlideSelectorControls}" data-sly-include="slideselectorcontrols.html"></sly>
-    <sly data-sly-include="slides.html"></sly>
-    <sly data-sly-test="${!isEditMode && carousel.showPreviousAndNextControls}" data-sly-include="previousandnextcontrols.html"></sly>
-</div>
+<sly data-sly-use.carousel="com.icfolson.aem.harbor.api.components.content.carousel.Carousel">
+    <sly data-sly-test="${isEditMode && !carousel.slides}" data-sly-include="empty.html"/>
+    <sly data-sly-test="${isEditMode && carousel.slides}" data-sly-include="authorhelp.html"/>
+    <div data-sly-use.slideSelectorControls="slideselectorcontrols.html"
+         data-sly-use.slides="slides.html"
+         data-sly-use.previousAndNextControls="previousandnextcontrols.html"
+         id="${carousel.id}-carousel"
+         class="carousel slide ${carousel.classification.classificationNames @ join = ' '}"
+         data-sly-attribute.data-path="${isAuthor ? resource.path : ''}"
+         data-ride="${(isPreviewMode || isPublish) ? 'carousel' : ''}"
+         data-interval="${carousel.interval == 0 ? 'false' : carousel.interval}"
+         data-pause="${carousel.pauseOnHover ? 'hover' : ''}"
+         data-keyboard="${carousel.keyboard ? 'true' : ''}"
+         data-wrap="${carousel.wrap ? 'true' : ''}">
+        <sly data-sly-test="${!isEditMode && carousel.showSlideSelectorControls}" data-sly-call="${slideselectorcontrols.template @ carousel = carousel}"></sly>
+        <sly data-sly-call="${slides.template @ carousel = carousel}"></sly>
+        <sly data-sly-test="${!isEditMode && carousel.showPreviousAndNextControls}" data-sly-call="${previousandnextcontrols.template @ carousel = carousel}"></sly>
+    </div>
+</sly>

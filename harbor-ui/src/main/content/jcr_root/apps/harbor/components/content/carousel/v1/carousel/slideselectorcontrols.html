@@ -1,5 +1,6 @@
-<ol data-sly-use.carousel="com.icfolson.aem.harbor.api.components.content.carousel.Carousel"
-    class="${carousel.indicatorsCssClass}"
-    data-sly-list.slide="${carousel.slides}">
-    <li data-target="#${carousel.id}-carousel" data-slide-to="${slideList.index}" class="${slideList.first ? 'active' : ''}"></li>
-</ol>
+<template data-sly-template.template="${@ carousel}">
+    <ol class="carousel-indicators"
+        data-sly-list.slide="${carousel.slides}">
+        <li data-target="#${carousel.id}-carousel" data-slide-to="${slideList.index}" class="${slideList.first ? 'active' : ''}"></li>
+    </ol>
+</template>

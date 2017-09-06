@@ -2,7 +2,7 @@ package com.icfolson.aem.harbor.api.components.content.carousel;
 
 import java.util.List;
 
-public interface Carousel {
+public interface Carousel<T extends CarouselSlide> {
 
     String CSS_CLASS = "carousel slide";
 
@@ -12,7 +12,7 @@ public interface Carousel {
 
     boolean isShowSlideSelectorControls();
 
-    Integer getInterval();
+    int getInterval();
 
     boolean isPauseOnHover();
 
@@ -20,10 +20,6 @@ public interface Carousel {
 
     boolean isKeyboard();
 
-    List<CarouselSlide> getSlides();
-
-    String getCssClass();
-
-    String getIndicatorsCssClass();
+    List<T> getSlides();
 
 }

@@ -1,13 +1,7 @@
-<p data-sly-use.carouselSlide="com.icfolson.aem.harbor.api.components.content.carousel.CarouselSlide"
-   data-sly-test="${isEditMode}" class="author-help-message">Slide ${carouselSlide.displayIndex}</p>
-
-<a href="${carouselSlide.imageLink}" data-sly-unwrap="${!carouselSlide.imageLink}">
-    <img data-sly-test="${carouselSlide.image}" src="${carouselSlide.image}" alt="${carouselSlide.alt}" title="${carouselSlide.title}">
-</a>
-
-<div class="carousel-caption" data-sly-test="${carouselSlide.captionHeading || carouselSlide.captionText}">
-    <h3 data-sly-test="${carouselSlide.captionHeading}" data-sly-element="${carouselSlide.captionHeadingType}">
-        ${carouselSlide.captionHeading}
-    </h3>
-    <p data-sly-test="${carouselSlide.captionText}">${carouselSlide.captionText @ context='html'}</p>
-</div>
+<sly data-sly-use.carouselSlide="com.icfolson.aem.harbor.api.components.content.carousel.CarouselSlide">
+    <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJ5ZXMiPz4KCjxzdmcgdmVyc2lvbj0iMS4xIiB2aWV3Qm94PSIwLjAgMC4wIDkwMC4wIDUwMC4wIiBmaWxsPSJub25lIiBzdHJva2U9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJzcXVhcmUiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+PGNsaXBQYXRoIGlkPSJwLjAiPjxwYXRoIGQ9Im0wIDBsOTAwLjAgMGwwIDUwMC4wbC05MDAuMCAwbDAgLTUwMC4weiIgY2xpcC1ydWxlPSJub256ZXJvIj48L3BhdGg+PC9jbGlwUGF0aD48ZyBjbGlwLXBhdGg9InVybCgjcC4wKSI+PHBhdGggZmlsbD0iIzAwMDAwMCIgZmlsbC1vcGFjaXR5PSIwLjAiIGQ9Im0wIDBsOTAwLjAgMGwwIDUwMC4wbC05MDAuMCAweiIgZmlsbC1ydWxlPSJldmVub2RkIj48L3BhdGg+PHBhdGggZmlsbD0iI2NjY2NjYyIgZD0ibTAgMGw5MDQuMCAwbDAgNTA0LjBsLTkwNC4wIDB6IiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjwvcGF0aD48L2c+PC9zdmc+Cgo=">
+    <div class="carousel-caption">
+        <h3>Slide ${carouselSlide.displayIndex}</h3>
+        <sly data-sly-test="${isEditMode}" data-sly-include="authorhelp.html"/>
+    </div>
+</sly>
