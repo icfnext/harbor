@@ -1,9 +1,10 @@
-<div data-sly-test="${(isEditMode || isDesignMode)}" class="author-help-message">
-    Dynamic Carousel - Press the &quot;Add Experience&quot; button in the edit bar to add slides.
-</div>
+<sly data-sly-test="${(isEditMode || isDesignMode)}" data-sly-include="authorhelp.html"/>
 <div data-sly-use.carousel="com.icfolson.aem.harbor.api.components.content.dynamiccarousel.DynamicCarousel"
+     data-sly-use.previousAndNextControls="previousandnextcontrols.html"
+     data-sly-use.slides="slides.html"
+     data-sly-use.slideSelectorControls="slideselectorcontrols.html"
      id="${carousel.id}-carousel"
-     class="${carousel.cssClass} ${carousel.classification.classificationNames @ join = ' '}"
+     class="carousel slide ${carousel.classification.classificationNames @ join = ' '}"
      data-ride="${(isPreviewMode || isPublish) ? 'carousel' : ''}"
      data-interval="${carousel.interval == 0 ? 'false' : carousel.interval}"
      data-pause="${carousel.pauseOnHover ? 'hover' : ''}"
@@ -12,11 +13,11 @@
      data-sly-attribute.data-path="${isAuthor ? resource.path : ''}">
 
     <!-- Indicators -->
-    <sly data-sly-test="${(isPreviewMode || isPublish) && carousel.showSlideSelectorControls}" data-sly-include="slideselectorcontrols.html"></sly>
+    <sly data-sly-test="${(isPreviewMode || isPublish) && carousel.showSlideSelectorControls}" data-sly-call="${slideselectorcontrols.template @ carousel = carousel}"></sly>
 
     <!-- Wrapper for slides -->
-    <sly data-sly-include="slides.html"></sly>
+    <sly data-sly-call="${slides.template @ carousel = carousel}"></sly>
 
     <!-- Controls -->
-    <sly data-sly-test="${(isPreviewMode || isPublish) && carousel.showPreviousAndNextControls}" data-sly-include="previousandnextcontrols.html"></sly>
+    <sly data-sly-test="${(isPreviewMode || isPublish) && carousel.showPreviousAndNextControls}" data-sly-call="${previousandnextcontrols.template @ carousel = carousel}"></sly>
 </div>

@@ -64,4 +64,9 @@ public class DefaultCarousel implements Carousel<CarouselSlide> {
         return componentNode.getResource().adaptTo(TagBasedClassification.class);
     }
 
+    @Override
+    public String getId() {
+        return componentNode.getId();
+    }
+
 }

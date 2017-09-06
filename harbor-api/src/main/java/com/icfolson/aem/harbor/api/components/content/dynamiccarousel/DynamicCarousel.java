@@ -1,19 +1,15 @@
 package com.icfolson.aem.harbor.api.components.content.dynamiccarousel;
 
-import com.icfolson.aem.harbor.api.components.mixins.classifiable.Classification;
-import org.apache.sling.api.resource.Resource;
+import com.icfolson.aem.harbor.api.components.mixins.classifiable.Classifiable;
+import com.icfolson.aem.harbor.api.components.mixins.identifiable.Identifiable;
 
-public interface DynamicCarousel {
-
-    String CSS_CLASS = "carousel slide";
-
-    String INDICATORS_CSS_CLASS = "carousel-indicators";
+public interface DynamicCarousel extends Identifiable, Classifiable {
 
     boolean isShowPreviousAndNextControls();
 
     boolean isShowSlideSelectorControls();
 
-    Integer getInterval();
+    int getInterval();
 
     boolean isPauseOnHover();
 
@@ -21,14 +17,6 @@ public interface DynamicCarousel {
 
     boolean isKeyboard();
 
-    Iterable<Resource> getSlides();
-
-    String getCssClass();
-
-    String getIndicatorsCssClass();
-
-    String getId();
-
-    Classification getClassification();
+    Iterable<Slide> getSlides();
 
 }

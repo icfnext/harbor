@@ -15,7 +15,7 @@ import javax.inject.Inject;
 @Model(adaptables = Resource.class, adapters = NewSlide.class, resourceType = DefaultNewSlide.RESOURCE_TYPE)
 public class DefaultNewSlide implements NewSlide {
 
-    static final String DIALOG_FILE_NAME = "slidedialog";
+    public static final String DIALOG_FILE_NAME = "slidedialog";
     public static final String RESOURCE_TYPE = Slide.RESOURCE_TYPE + "/new";
 
     @Inject
