@@ -1,3 +1,5 @@
-<template data-sly-template.template="${@ item}">
-    ${item.title}
+<template data-sly-template.template="${@ item, breadcrumb}">
+    <li>
+        ${item.title}
+    </li>
 </template>

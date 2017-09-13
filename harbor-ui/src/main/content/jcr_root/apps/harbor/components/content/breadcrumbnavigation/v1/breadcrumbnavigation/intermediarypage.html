@@ -1,5 +1,7 @@
-<template data-sly-template.template="${@ item}">
-    <a href="${item.href}">
-        ${item.title}
-    </a>
+<template data-sly-template.template="${@ item, breadcrumb}">
+    <li>
+        <a href="${item.href}">
+            ${item.title}
+        </a>
+    </li>
 </template>

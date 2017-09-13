@@ -4,13 +4,13 @@
     data-sly-use.intermediaryPageTemplate="intermediarypage.html"
     data-sly-use.rootPageTemplate="rootpage.html"
     data-sly-test="${breadcrumb.length > 0}">
-    <li data-sly-repeat.currentTrailItem="${breadcrumb.trail}">
+    <sly data-sly-repeat.currentTrailItem="${breadcrumb.trail}">
         <sly data-sly-test="${currentTrailItem.isRootPage}"
-             data-sly-call="${rootPageTemplate.template @ item=currentTrailItem}"/>
+             data-sly-call="${rootPageTemplate.template @ item=currentTrailItem, breadcrumb=breadcrumb}"/>
         <sly data-sly-test="${!currentTrailItem.isRootPage && !currentTrailItem.isCurrentPage}"
-             data-sly-call="${intermediaryPageTemplate.template @ item=currentTrailItem}"/>
+             data-sly-call="${intermediaryPageTemplate.template @ item=currentTrailItem, breadcrumb=breadcrumb}"/>
         <sly data-sly-test="${currentTrailItem.isCurrentPage}"
-             data-sly-call="${currentPageTemplate.template @ item=currentTrailItem}"/>
-    </li>
+             data-sly-call="${currentPageTemplate.template @ item=currentTrailItem, breadcrumb=breadcrumb}"/>
+    </sly>
 </ol>
 <sly data-sly-test="${breadcrumb.length == 0 && isEditMode}" data-sly-include="empty.html"/>

@@ -2,6 +2,7 @@ package com.icfolson.aem.harbor.core.content.page.navigation.impl
 
 import com.day.cq.wcm.api.NameConstants
 import com.icfolson.aem.harbor.HarborSpec
+import com.icfolson.aem.harbor.core.components.content.navigation.page.v1.DefaultNavigablePage
 import com.icfolson.aem.harbor.core.content.page.navigation.navigablepage.v1.NavigationElementConfiguration
 import spock.lang.Unroll
 
@@ -55,5 +56,21 @@ class DefaultNavigablePageSpec extends HarborSpec {
         depth | size
         1     | 0
         2     | 2
+    }
+
+    def "get title"() {
+
+    }
+
+    def "test if redirect"() {
+
+    }
+
+    def "test whether along active path"() {
+
+    }
+
+    def "get href"() {
+
     }
 }

@@ -16,10 +16,16 @@ Model interface.
 
 * `breadcrumbnavigation.html` - the primary rendering HTL.  Establishes the breadcrumb list and calls the appropriate 
   link rendering template for each item in the breadcrumb trail.
-* `rootpage.html` - HTL Template used to render the trail item representing the root page
+* `rootpage.html` - HTL Template used to render the trail item representing the root page.  
+  Takes two parameters: `item` - the current item in the trail, `breadcrumb` - the `BreadcrumbNavigation`
+  instance
 * `currentpage.html` - HTL Template used to render the trail item representing the current page
+  Takes two parameters: `item` - the current item in the trail, `breadcrumb` - the `BreadcrumbNavigation`
+  instance
 * `intermediarypage.html` - HTL Template used to render the trail items representing all pages 
   which are neither the root page nor the current page.
+  Takes two parameters: `item` - the current item in the trail, `breadcrumb` - the `BreadcrumbNavigation`
+  instance
 * `empty.html` - Author helper template which is rendered in Edit mode when the trail is empty. 
 
 ## Default Implementation
