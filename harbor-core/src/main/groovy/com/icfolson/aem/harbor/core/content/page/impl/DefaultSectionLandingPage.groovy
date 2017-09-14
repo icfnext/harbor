@@ -1,6 +1,7 @@
 package com.icfolson.aem.harbor.core.content.page.impl
 
 import com.icfolson.aem.harbor.api.content.page.SectionLandingPage
+import com.icfolson.aem.harbor.core.content.page.v1.PagePredicates
 import com.icfolson.aem.library.api.page.PageDecorator
 
 class DefaultSectionLandingPage extends DefaultHierarchicalPage implements SectionLandingPage {

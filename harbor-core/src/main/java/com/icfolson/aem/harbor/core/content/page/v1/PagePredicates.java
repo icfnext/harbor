@@ -1,6 +1,5 @@
-package com.icfolson.aem.harbor.core.content.page.impl;
+package com.icfolson.aem.harbor.core.content.page.v1;
 
-import com.day.cq.wcm.api.Page;
 import com.google.common.base.Predicate;
 import com.icfolson.aem.harbor.api.content.page.HomePage;
 import com.icfolson.aem.harbor.api.content.page.SectionLandingPage;

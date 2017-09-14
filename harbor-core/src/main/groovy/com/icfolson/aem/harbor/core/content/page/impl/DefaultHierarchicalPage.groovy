@@ -11,8 +11,8 @@ import com.icfolson.aem.namespace.api.ontology.Types
 
 import javax.jcr.Node as JcrNode
 
-import static com.icfolson.aem.harbor.core.content.page.impl.PagePredicates.HOME_PAGE_PREDICATE
-import static com.icfolson.aem.harbor.core.content.page.impl.PagePredicates.SECTION_LANDING_PAGE_PREDICATE
+import static com.icfolson.aem.harbor.core.content.page.v1.PagePredicates.HOME_PAGE_PREDICATE
+import static com.icfolson.aem.harbor.core.content.page.v1.PagePredicates.SECTION_LANDING_PAGE_PREDICATE
 
 class DefaultHierarchicalPage extends AbstractHierarchicalPage {
 

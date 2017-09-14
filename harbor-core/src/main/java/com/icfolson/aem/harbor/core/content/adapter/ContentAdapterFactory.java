@@ -7,7 +7,7 @@ import com.icfolson.aem.harbor.api.content.page.SectionLandingPage;
 import com.icfolson.aem.harbor.core.content.page.impl.DefaultHierarchicalPage;
 import com.icfolson.aem.harbor.core.content.page.impl.DefaultHomePage;
 import com.icfolson.aem.harbor.core.content.page.impl.DefaultSectionLandingPage;
-import com.icfolson.aem.harbor.core.content.page.impl.PagePredicates;
+import com.icfolson.aem.harbor.core.content.page.v1.PagePredicates;
 import com.icfolson.aem.library.api.page.PageDecorator;
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Properties;

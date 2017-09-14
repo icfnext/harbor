@@ -4,7 +4,7 @@ import com.google.common.base.Predicate;
 import com.icfolson.aem.harbor.api.components.content.list.ListComponent;
 import com.icfolson.aem.harbor.api.components.content.list.linklist.ListableLink;
 import com.icfolson.aem.harbor.core.components.content.list.automatedlist.v1.AbstractAutomatedList;
-import com.icfolson.aem.harbor.core.content.page.impl.PagePredicates;
+import com.icfolson.aem.harbor.core.content.page.v1.PagePredicates;
 import com.icfolson.aem.library.api.page.PageDecorator;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;

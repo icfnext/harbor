@@ -5,7 +5,7 @@ import com.google.common.collect.Lists;
 import com.icfolson.aem.harbor.api.components.content.navigation.page.NavigablePage;
 import com.icfolson.aem.harbor.api.components.content.tree.TreeComponent;
 import com.icfolson.aem.harbor.api.datastructure.tree.TreeNode;
-import com.icfolson.aem.harbor.core.content.page.impl.PagePredicates;
+import com.icfolson.aem.harbor.core.content.page.v1.PagePredicates;
 import com.icfolson.aem.harbor.core.trees.v1.DefaultTreeNode;
 import com.icfolson.aem.library.api.page.PageDecorator;
 import org.apache.sling.api.resource.Resource;
