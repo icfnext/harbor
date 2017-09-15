@@ -1,2 +1,3 @@
 <sly data-sly-test="${isEditMode}" data-sly-include="authorhelp.html"/>
-<sly data-sly-resource="${'tab-par' @ resourceType='wcm/foundation/components/parsys'}" />
+<sly data-sly-use.paragraphSystemContainer="com.icfolson.aem.harbor.api.components.mixins.paragraphsystem.ParagraphSystemContainer"
+     data-sly-resource="${'tab-par' @ resourceType=paragraphSystemContainer.paragraphSystemType}" />

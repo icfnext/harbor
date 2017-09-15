@@ -2,6 +2,7 @@ package com.icfolson.aem.harbor.core.components.content.dynamiccarousel.v1.slide
 
 import com.icfolson.aem.harbor.api.components.content.dynamiccarousel.DynamicCarouselSlide;
 import com.icfolson.aem.harbor.api.components.mixins.classifiable.Classification;
+import com.icfolson.aem.harbor.api.components.mixins.paragraphsystem.ParagraphSystemContainer;
 import com.icfolson.aem.harbor.core.components.mixins.classifiable.TagBasedClassification;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
@@ -9,8 +10,8 @@ import org.apache.sling.models.annotations.injectorspecific.Self;
 
 import javax.inject.Inject;
 
-@Model(adaptables = Resource.class, adapters = DynamicCarouselSlide.class, resourceType = ParsysSlide.RESOURCE_TYPE)
-public class ParsysSlide implements DynamicCarouselSlide {
+@Model(adaptables = Resource.class, adapters = {DynamicCarouselSlide.class, ParagraphSystemContainer.class}, resourceType = ParsysSlide.RESOURCE_TYPE)
+public class ParsysSlide implements DynamicCarouselSlide, ParagraphSystemContainer {
 
     public static final String RESOURCE_TYPE = "harbor/components/content/dynamiccarousel/slides/parsysslide/v1/parsysslide";
 
@@ -31,4 +32,8 @@ public class ParsysSlide implements DynamicCarouselSlide {
         return resource.getPath();
     }
 
+    @Override
+    public String getParagraphSystemType() {
+        return ParagraphSystemContainer.PARSYS;
+    }
 }

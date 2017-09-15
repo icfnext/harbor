@@ -5,13 +5,14 @@ import com.citytechinc.cq.component.annotations.widgets.TextField;
 import com.icfolson.aem.harbor.api.components.content.accordion.Accordion;
 import com.icfolson.aem.harbor.api.components.content.accordion.AccordionItem;
 import com.icfolson.aem.harbor.api.components.mixins.classifiable.Classification;
+import com.icfolson.aem.harbor.api.components.mixins.paragraphsystem.ParagraphSystemContainer;
 import com.icfolson.aem.harbor.core.components.mixins.classifiable.TagBasedClassification;
 import com.icfolson.aem.library.core.components.AbstractComponent;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
 
-@Model(adaptables = Resource.class, adapters = AccordionItem.class, resourceType = DefaultAccordionItem.RESOURCE_TYPE)
-public class DefaultAccordionItem extends AbstractComponent implements AccordionItem {
+@Model(adaptables = Resource.class, adapters = {AccordionItem.class, ParagraphSystemContainer.class}, resourceType = DefaultAccordionItem.RESOURCE_TYPE)
+public class DefaultAccordionItem extends AbstractComponent implements AccordionItem, ParagraphSystemContainer {
 
     public static final String RESOURCE_TYPE = "harbor/components/content/accordion/v1/accordionitem";
 
@@ -55,4 +56,10 @@ public class DefaultAccordionItem extends AbstractComponent implements Accordion
     public Classification getClassification() {
         return getResource().adaptTo(TagBasedClassification.class);
     }
+
+    @Override
+    public String getParagraphSystemType() {
+        return ParagraphSystemContainer.PARSYS;
+    }
+
 }

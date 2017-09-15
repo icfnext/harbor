@@ -1,4 +1,5 @@
 <sly data-sly-test="${(isEditMode || isDesignMode)}" data-sly-include="authorhelp.html"/>
-<div data-sly-resource="${'slidecontent' @ resourceType='wcm/foundation/components/parsys'}"
+<div data-sly-resource="${'slidecontent' @ resourceType=paragraphSystemContainer.paragraphSystemType}"
      data-sly-use.slide="com.icfolson.aem.harbor.api.components.content.dynamiccarousel.DynamicCarouselSlide"
+     data-sly-use.paragraphSystemContainer="com.icfolson.aem.harbor.api.components.mixins.paragraphsystem.ParagraphSystemContainer"
      class="${slide.classification.classificationNames  @ join = ' '}"></div>
