@@ -2,6 +2,6 @@
     <sly data-sly-test="${isEditMode && !resource.listChildren}" data-sly-include="empty.html"/>
     <ul data-sly-element="${linkList.listType}"
         data-sly-attribute.class="${linkList.classification.classificationNames @ join = ' '}">
-        <sly data-sly-repeat="${linkList.items}" data-sly-resource="${item.path @ resourceType=item.type, decorationTagName='li'}"/>
+        <sly data-sly-repeat="${linkList.items}" data-sly-resource="${item.name @ resourceType=item.type, decorationTagName='li'}"/>
     </ul>
 </sly>

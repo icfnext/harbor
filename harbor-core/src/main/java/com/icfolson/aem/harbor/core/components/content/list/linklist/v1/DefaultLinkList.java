@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-
 @Model(adaptables = Resource.class, adapters = LinkList.class, resourceType = DefaultLinkList.RESOURCE_TYPE)
 public class DefaultLinkList implements LinkList<ResourceBasedListableLink> {
 
@@ -33,7 +32,7 @@ public class DefaultLinkList implements LinkList<ResourceBasedListableLink> {
     @Override
     public Iterable<ResourceBasedListableLink> getItems() {
         if (items == null) {
-            items = Lists.newArrayList(resource.getChildren())
+            items = Lists.newArrayList(getResource().getChildren())
                     .stream()
                     .map(currentResource -> currentResource.adaptTo(ResourceBasedListableLink.class))
                     .filter(Objects::nonNull)
@@ -46,6 +45,10 @@ public class DefaultLinkList implements LinkList<ResourceBasedListableLink> {
     @Override
     public String getListType() {
         return ListComponent.UNORDERED_LIST_TYPE;
+    }
+
+    public Resource getResource() {
+        return resource;
     }
 
 }

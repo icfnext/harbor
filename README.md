@@ -69,6 +69,28 @@ level group concrete component implementations.
 * Page
   * [Global (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/page/global/v1/global)
 
+## --- NOTE - Unfinished Documentation Below This Point ---
+
+## Core Concepts
+
+### Classifiability
+
+### Paragraph System Containers
+
+### Inheriting Variants
+
+By default component instances receive their configuration from the concrete Resource 
+representing the instance.  In support of configuration inheritance, many components 
+expose an `inheriting` variant.  In all cases where inheriting variants exists, their 
+resource type is that of the extended component with `/inheriting` added to the path. 
+For example, the Text resource type is `harbor/components/content/text/v1/text` while 
+its inheriting variant is `harbor/components/content/text/v1/text/inheriting`.
+
+## FAQ
+
+### Where are the Dialogs?
+
+### How do I Bake in Components?
 
 ## --- NOTE - Old Documentation Below This Point ---
 

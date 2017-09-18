@@ -32,6 +32,11 @@ public class DefaultListableLink extends AbstractComponent implements ResourceBa
     }
 
     @Override
+    public String getName() {
+        return getResource().getName();
+    }
+
+    @Override
     public String getType() {
         return getResource().getResourceType();
     }

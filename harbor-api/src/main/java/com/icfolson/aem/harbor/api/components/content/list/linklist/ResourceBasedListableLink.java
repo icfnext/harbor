@@ -4,6 +4,8 @@ public interface ResourceBasedListableLink extends ListableLink {
 
     String getPath();
 
+    String getName();
+
     String getType();
 
 }

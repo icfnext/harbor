@@ -18,14 +18,19 @@ public class DefaultText implements Text {
     @Inject
     private Resource resource;
 
-    @Inject @Named("text") @Default(values = "")
-    private String content;
+    @Inject @Default(values = "")
+    private String text;
 
     public String getContent() {
-        return content;
+        return text;
     }
 
     public Classification getClassification() {
         return resource.adaptTo(TagBasedClassification.class);
     }
+
+    public Resource getResource() {
+        return resource;
+    };
+
 }
