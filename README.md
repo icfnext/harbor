@@ -86,6 +86,17 @@ resource type is that of the extended component with `/inheriting` added to the 
 For example, the Text resource type is `harbor/components/content/text/v1/text` while 
 its inheriting variant is `harbor/components/content/text/v1/text/inheriting`.
 
+#### On Inheritance for Child Resources
+
+Many of the component backing classes presume the existence and meaning of child 
+resources of a container resource.  For example, `DefaultLinkList` treats its direct 
+children as `ListableLink`s.  When inheriting children, if inheritance is overridden, 
+the new children are not combined with inherited children - they override them.  
+
+For example, if a link list exists on a Home Page with 3 items, and these are being 
+inherited on a child page, if an author adds a listable link to a child page, they 
+will not have 4 links on the child page, they will have 1, the new one they added.
+
 ## FAQ
 
 ### Where are the Dialogs?
