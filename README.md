@@ -103,6 +103,10 @@ will not have 4 links on the child page, they will have 1, the new one they adde
 
 ### How do I Bake in Components?
 
+### Are These Duplicates of Core Components?
+
+### Why not Just Contribute to Core Components?
+
 ## --- NOTE - Old Documentation Below This Point ---
 
 All documentation below this point is from the 2.x versions of Harbor and has not 
