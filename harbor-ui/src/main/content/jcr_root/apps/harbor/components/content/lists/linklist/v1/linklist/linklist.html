@@ -1,5 +1,5 @@
 <sly data-sly-use.linkList="com.icfolson.aem.harbor.api.components.content.list.linklist.LinkList">
-    <sly data-sly-test="${isEditMode && !resource.listChildren}" data-sly-include="empty.html"/>
+    <sly data-sly-test="${isEditMode && !linkList.items}" data-sly-include="empty.html"/>
     <ul data-sly-element="${linkList.listType}"
         data-sly-attribute.class="${linkList.classification.classificationNames @ join = ' '}">
         <sly data-sly-repeat="${linkList.items}" data-sly-resource="${item.name @ resourceType=item.type, decorationTagName='li'}"/>
