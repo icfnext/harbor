@@ -69,9 +69,59 @@ level group concrete component implementations.
 * Page
   * [Global (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/page/global/v1/global)
 
-## --- NOTE - Unfinished Documentation Below This Point ---
-
 ## Core Concepts
+
+### Page Types
+
+Harbor provides the following Page interfaces each representing a type of page generally 
+common to a site structure:
+
+* `com.icfolson.aem.harbor.api.content.page.HierarchicalPage`
+* `com.icfolson.aem.harbor.api.content.page.HomePage`
+* `com.icfolson.aem.harbor.api.content.page.SectionLandingPage`
+
+Each of these types has default implementations which are available for extension. 
+
+* `com.icfolson.aem.harbor.core.content.page.v1.DefaultHierarchicalPage`
+* `com.icfolson.aem.harbor.core.content.page.v1.DefaultHomePage`
+* `com.icfolson.aem.harbor.core.content.page.v1.DefaultSectionLandingPage`
+
+#### Hierarchical Page
+
+Represents any page within a page tree.  Exposes methods for finding both the nearest 
+SectionLandingPage and the nearest HomePage.  Also exposes two methods to help determine 
+the current page type, `isHomePage` and `isSectionLandingPage`.  
+
+At a project level, Hierarchical Page, Home Page, and Section Landing Page implementations 
+should all adapt to `HierarchicalPage`.  Given a page you should be able to determine the 
+type of the page by adapting the page's content resource to `HierarchicalPage` and calling 
+upon `isHomePage` and `isSectionLandingPage`.  Below is an example home page implementation 
+at a project level.
+
+```java
+@Model(adaptables = Resource.class,
+        adapters = {HomePage.class, HierarchicalPage.class},
+        resourceType = MyProjectHomePage.RESOURCE_TYPE)
+public class MyProjectHomePage extends DefaultHomePage {
+
+    public static final String RESOURCE_TYPE = "my-project/components/page/homepage";
+
+}
+```
+
+#### Home Page
+
+Represents the root of a site.  Hierarchical Pages expose the `getHomePage()` method 
+which attempts to find the closest home page, resulting in an `Optional<HomePage>`. 
+
+#### Section Landing Page
+
+Represents the root of a section of a site.  Section Landing Pages may be nested to 
+represent sub sections under sections.  Hierarchical Pages expose the `getSectionLandingPage()`
+method which attempts to find the closest section landing page, resulting in an 
+`Optional<SectionLandingPage>`.
+
+## --- NOTE - Unfinished Documentation Below This Point ---
 
 ### Classifiability
 
