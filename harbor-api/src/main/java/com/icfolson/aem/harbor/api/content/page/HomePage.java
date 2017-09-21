@@ -10,4 +10,5 @@ public interface HomePage extends HierarchicalPage, PageDecorator {
     String RDF_TYPE = Types.ICF_OLSON_HOME_PAGE;
 
     List<SectionLandingPage> getSectionLandingPages();
+
 }

@@ -1,10 +1,10 @@
-package com.icfolson.aem.harbor.core.content.page.impl
+package com.icfolson.aem.harbor.core.content.page.v1
 
 import com.google.common.base.Function
 import com.google.common.base.Optional
+import com.icfolson.aem.harbor.api.content.page.HierarchicalPage
 import com.icfolson.aem.harbor.api.content.page.HomePage
 import com.icfolson.aem.harbor.api.content.page.SectionLandingPage
-import com.icfolson.aem.harbor.core.content.page.AbstractHierarchicalPage
 import com.icfolson.aem.library.api.page.PageDecorator
 import com.icfolson.aem.namespace.api.ontology.Properties
 import com.icfolson.aem.namespace.api.ontology.Types
@@ -19,10 +19,6 @@ class DefaultHierarchicalPage extends AbstractHierarchicalPage {
     private Optional<SectionLandingPage> sectionLandingPage
 
     private Optional<HomePage> homePage
-
-    DefaultHierarchicalPage(final PageDecorator page) {
-        super(page)
-    }
 
     @Override
     Optional<SectionLandingPage> getSectionLandingPage() {
@@ -60,6 +56,16 @@ class DefaultHierarchicalPage extends AbstractHierarchicalPage {
 
     @Override
     boolean isStructuralPage() {
-        contentResource.adaptTo(JcrNode).isNodeType(Types.ICF_OLSON_STRUCTURAL_PAGE)
+        contentResource.adaptTo(HierarchicalPage) != null
+    }
+
+    @Override
+    boolean isHomePage() {
+        return false
+    }
+
+    @Override
+    boolean isSectionLandingPage() {
+        return false
     }
 }
