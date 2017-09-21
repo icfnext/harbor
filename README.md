@@ -13,9 +13,37 @@ be used in isolation from the other modules where useful.
 
 ### Harbor API
 
+The API layer of Harbor expresses a vocabulary of component types, component 
+interactions, and data structures.  
+
 ### Harbor Core
 
+The Core, or implementation, layer of Harbor proposes a concrete content structure 
+for component instances.  The implementations of the components presented in the 
+vocabulary expressed by the API presume certain property names and give certain meaning 
+to relations like the parent - child Resource relationship.  
+
+When this content structure is useful to you and in line with the needs of your project, 
+extend it either as a pure proxy or with overrides.  If you are going to structure your 
+content in a different way, then write your own implementation, our feelings won't be hurt - 
+you can still use the vocabulary expressed by the API with your own content structure 
+thus affording the benefits of the remainder of Harbor. 
+
 ### Harbor UI
+
+The UI layer of Harbor is default rendering of componentry focusing on the production 
+of clean and semantic HTML and on reusability.  Throughout the HTL implementations you will 
+find many of the renderings split into various HTL includes and template calls making it 
+easier to selectively override during extension.  
+
+Used classes in the HTL adapt from the API layer with models exposed using the Sling Models 
+resource type based instance lookup.  This means that your projects implementations will be 
+picked for usage without having to update the HTL in any way.
+
+Some of the classes and structures in the HTL are somewhat Bootstrap specific and as such 
+if using another framework (or no framework) you may need to override more than you would if 
+using Bootstrap, but many of the components just produce simple semantic HTML that should 
+be usable in pretty much any context.
 
 ## Components
 
