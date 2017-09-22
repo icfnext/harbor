@@ -6,7 +6,7 @@
                role="button"
                data-parent="#${accordionItem.accordion.id}-accordion-container"
                href="#${accordionItem.id}"
-               data-sly-attribute.aria-expanded="${ ( accordionItem.itemIndex == 0 && accordionItem.accordion.openFirstItem ) ? 'true' : ''}"
+               data-sly-attribute.aria-expanded="${accordionItem.expanded ? 'true' : ''}"
                aria-controls="${accordionItem.id}"
                data-toggle="collapse">${accordionItem.title}</a>
         </h4>

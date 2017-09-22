@@ -1,6 +1,6 @@
 <template data-sly-template.template="${@ accordionItem}">
     <div id="${accordionItem.id}"
-         data-sly-attribute.class="${(!wcmmode.disabled && !wcmmode.preview) || (accordionItem.itemIndex == 0 && accordionItem.accordion.openFirstItem) ? 'panel-collapse collapse in' : 'panel-collapse collapse'}"
+         data-sly-attribute.class="${(!wcmmode.disabled && !wcmmode.preview) || (accordionItem.expanded) ? 'panel-collapse collapse in' : 'panel-collapse collapse'}"
          role="tabpanel" aria-labelledby="heading-${accordionItem.id}">
         <div class="panel-body">
             <sly data-sly-resource="${'accordionitem-par' @ resourceType = 'wcm/foundation/components/parsys'}"/>

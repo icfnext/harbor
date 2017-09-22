@@ -47,6 +47,11 @@ public class DefaultAccordionItem extends AbstractComponent implements Accordion
         return getResource().getResourceType();
     }
 
+    @Override
+    public boolean isExpanded() {
+        return getItemIndex() == 0 && getAccordion().isOpenFirstItem();
+    }
+
     protected String getDefaultTitle() {
         return "Accordion Item " + this.getItemIndex();
     }

@@ -15,4 +15,6 @@ public interface AccordionItem extends Identifiable, Classifiable {
 
     String getType();
 
+    boolean isExpanded();
+
 }
