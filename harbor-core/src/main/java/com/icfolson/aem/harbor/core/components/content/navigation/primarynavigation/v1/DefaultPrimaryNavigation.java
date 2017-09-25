@@ -22,7 +22,7 @@ public class DefaultPrimaryNavigation extends DefaultNavigablePageTree {
             return null;
         }
 
-        Optional<HomePage> homePageOptional = getCurrentPage().adaptTo(HierarchicalPage.class).getHomePage();
+        Optional<HomePage> homePageOptional = getCurrentPage().getContentResource().adaptTo(HierarchicalPage.class).getHomePage();
 
         if (homePageOptional.isPresent()) {
             return homePageOptional.get().adaptTo(PageDecorator.class);

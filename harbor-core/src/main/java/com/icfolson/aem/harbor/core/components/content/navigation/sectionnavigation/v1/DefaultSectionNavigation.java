@@ -20,7 +20,7 @@ public class DefaultSectionNavigation extends DefaultNavigablePageTree {
             return null;
         }
 
-        return getCurrentPage().adaptTo(HierarchicalPage.class)
+        return getCurrentPage().getContentResource().adaptTo(HierarchicalPage.class)
                 .getSectionLandingPage()
                 .transform(PageDecorator::getParent)
                 .orNull();

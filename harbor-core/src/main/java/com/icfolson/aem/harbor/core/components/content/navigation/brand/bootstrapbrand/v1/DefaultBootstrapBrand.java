@@ -33,7 +33,7 @@ public class DefaultBootstrapBrand implements BootstrapBrand {
 
     protected Optional<HomePage> getHomePageOptional() {
         if (homePageOptional == null) {
-            homePageOptional = getCurrentPage().adaptTo(HierarchicalPage.class).getHomePage();
+            homePageOptional = getCurrentPage().getContentResource().adaptTo(HierarchicalPage.class).getHomePage();
         }
 
         return homePageOptional;

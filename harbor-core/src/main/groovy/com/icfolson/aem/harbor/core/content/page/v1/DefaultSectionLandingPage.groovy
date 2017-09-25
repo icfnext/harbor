@@ -11,7 +11,7 @@ class DefaultSectionLandingPage extends DefaultHierarchicalPage implements Secti
 
     @Override
     List<SectionLandingPage> getSectionLandingPages() {
-        pageManager.findPages(path, PagePredicates.SECTION_LANDING_PAGE_PREDICATE)*.adaptTo(SectionLandingPage)
+        pageManager.findPages(path, PagePredicates.SECTION_LANDING_PAGE_PREDICATE)*.contentResource.adaptTo(SectionLandingPage)
     }
 
     @Override

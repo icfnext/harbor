@@ -112,7 +112,7 @@ public class DefaultMetaPage implements MetaPage {
     }
 
     public String getHomePageTitle() {
-        final HierarchicalPage hierarchicalPage = getCurrentPage().adaptTo(HierarchicalPage.class);
+        final HierarchicalPage hierarchicalPage = getCurrentPage().getContentResource().adaptTo(HierarchicalPage.class);
 
         String title = "";
 

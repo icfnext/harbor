@@ -27,7 +27,7 @@ class DefaultHierarchicalPage extends AbstractHierarchicalPage {
                 new Function<PageDecorator, SectionLandingPage>() {
                     @Override
                     SectionLandingPage apply(PageDecorator page) {
-                        page.adaptTo(SectionLandingPage)
+                        page.contentResource.adaptTo(SectionLandingPage)
                     }
                 })
         }
@@ -41,7 +41,7 @@ class DefaultHierarchicalPage extends AbstractHierarchicalPage {
             homePage = findAncestor(HOME_PAGE_PREDICATE).transform(new Function<PageDecorator, HomePage>() {
                 @Override
                 HomePage apply(PageDecorator page) {
-                    page.adaptTo(HomePage)
+                    page.contentResource.adaptTo(HomePage)
                 }
             })
         }

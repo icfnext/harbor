@@ -81,7 +81,7 @@ public class DefaultBreadcrumbNavigation implements BreadcrumbNavigation<Breadcr
 
     protected Optional<PageDecorator> getRootPage() {
         if (this.rootPageOptional == null) {
-            HierarchicalPage hierarchicalPage = currentPage.adaptTo(HierarchicalPage.class);
+            HierarchicalPage hierarchicalPage = currentPage.getContentResource().adaptTo(HierarchicalPage.class);
 
             if (hierarchicalPage.getSectionLandingPage().isPresent()) {
                 this.rootPageOptional = Optional.of(hierarchicalPage.getSectionLandingPage().get());
