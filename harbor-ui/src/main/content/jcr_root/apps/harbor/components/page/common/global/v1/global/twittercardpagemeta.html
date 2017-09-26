@@ -1,0 +1,8 @@
+<template data-sly-template.template="${@ metaPage}">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" data-sly-test="${metaPage.twitterPublisherHandle}" content="${metaPage.twitterPublisherHandle}">
+    <meta name="twitter:title" data-sly-test="${metaPage.pageName}" content="${metaPage.pageName}">
+    <meta name="twitter:description" data-sly-test="${metaPage.description}" content="${metaPage.description}">
+    <meta name="twitter:image" data-sly-test="${metaPage.fullyQualifiedPageImage}" content="${metaPage.fullyQualifiedPageImage}">
+    <meta name="twitter:url" data-sly-test="${metaPage.fullyQualifiedPageUrl}" content="${metaPage.fullyQualifiedPageUrl}">
+</template>

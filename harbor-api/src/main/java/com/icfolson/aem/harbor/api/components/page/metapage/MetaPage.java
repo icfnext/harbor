@@ -31,4 +31,9 @@ public interface MetaPage {
     boolean isNoFollow();
 
     boolean isDisableSchemaOrg();
+
+    boolean isDisableTwitterCard();
+
+    boolean isDisableFacebookOpenGraph();
+
 }

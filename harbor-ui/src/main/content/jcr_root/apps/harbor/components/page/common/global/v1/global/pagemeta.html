@@ -1,30 +1,17 @@
 <sly data-sly-use.metaPage="com.icfolson.aem.harbor.api.components.page.metapage.MetaPage">
-    <sly data-sly-test="${!metaPage.disableSchemaOrg}">
-        <meta itemprop="name" content="${metaPage.pageName}">
-        <meta itemprop="description" content="${metaPage.description}" data-sly-test="${metaPage.description}">
-        <meta itemprop="image" content="${metaPage.fullyQualifiedPageImage}" data-sly-test="${metaPage.fullyQualifiedPageImage}">
-    </sly>
-    <sly data-sly-test="${metaPage.twitterPublisherHandle}">
-        <meta name="twitter:card" content="summary">
-        <meta name="twitter:site" content="${metaPage.twitterPublisherHandle}">
-        <meta name="twitter:title" content="${metaPage.pageName}">
-        <meta name="twitter:description" content="${metaPage.description}">
-        <meta name="twitter:image" data-sly-test="${metaPage.fullyQualifiedPageImage}" content="${metaPage.fullyQualifiedPageImage}">
-        <meta name="twitter:url" content="${metaPage.fullyQualifiedPageUrl}">
-    </sly>
-    <sly data-sly-test="${metaPage.facebookOpenGraphType && metaPage.facebookOpenGraphType != 'none'}">
-        <meta property="og:title" content="${metaPage.pageName}" />
-        <meta property="og:type" content="${metaPage.facebookOpenGraphType}" />
-        <meta property="og:url" data-sly-test="${metaPage.canonicalUrl}" content="${metaPage.canonicalUrl}" />
-        <meta property="og:url" data-sly-test="${!metaPage.canonicalUrl}" content="${metaPage.fullyQualifiedPageUrl}" />
-        <meta property="og:image" data-sly-test="${metaPage.fullyQualifiedPageImage}" content="${metaPage.fullyQualifiedPageImage}" />
-        <meta property="og:description" content="${metaPage.description}" />
-        <meta property="og:site_name" data-sly-test="${metaPage.homePageTitle}" content="${metaPage.homePageTitle}" />
-    </sly>
-    <sly data-sly-test="${metaPage.canonicalUrl}">
-        <link rel="canonical" href="${metaPage.canonicalUrl}" />
-    </sly>
-    <sly data-sly-test="${metaPage.robotsTags}">
-        <meta name="robots" content="${metaPage.robotsTags @ join=', '}">
-    </sly>
+    <sly data-sly-test="${!metaPage.disableSchemaOrg}"
+         data-sly-use.schemadotorgpagemeta="schemadotorgpagemeta.html"
+         data-sly-call="${schemadotorgpagemeta.template @ metaPage = metaPage}" />
+    <sly data-sly-test="${!metaPage.disableTwitterCard}"
+         data-sly-use.twittercardpagemeta="twittercardpagemeta.html"
+         data-sly-call="${twittercardpagemeta.template @ metaPage = metaPage}"/>
+    <sly data-sly-test="${!metaPage.disableFacebookOpenGraph}"
+         data-sly-use.facebookopengraphpagemeta="facebookopengraphpagemeta.html"
+         data-sly-call="${facebookopengraphpagemeta.template @ metaPage = metaPage}"/>
+    <sly data-sly-test="${metaPage.canonicalUrl}"
+         data-sly-use.canonicalurlpagemeta="canonicalurlpagemeta.html"
+         data-sly-call="${canonicalurlpagemeta.template @ metaPage = metaPage}"/>
+    <sly data-sly-test="${metaPage.robotsTags}"
+         data-sly-use.robotspagemeta="robotspagemeta.html"
+         data-sly-call="${robotspagemeta.template @ metaPage = metaPage}"/>
 </sly>

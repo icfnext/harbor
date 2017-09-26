@@ -42,6 +42,16 @@ public class DefaultMetaPage implements MetaPage {
         return getCurrentPage().getInherited("disableSchemaOrg", false);
     }
 
+    @Override
+    public boolean isDisableTwitterCard() {
+        return StringUtils.isBlank(getTwitterPublisherHandle());
+    }
+
+    @Override
+    public boolean isDisableFacebookOpenGraph() {
+        return StringUtils.isBlank(getFacebookOpenGraphType()) || "none".equals(getFacebookOpenGraphType());
+    }
+
     public String getPageName() {
         return StringUtils.isNotBlank(getCurrentPage().getPageTitle()) ? getCurrentPage().getPageTitle() : getCurrentPage().getName();
     }
