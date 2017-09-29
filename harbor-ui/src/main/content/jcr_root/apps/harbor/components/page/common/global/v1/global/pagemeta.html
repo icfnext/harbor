@@ -14,4 +14,6 @@
     <sly data-sly-test="${metaPage.robotsTags}"
          data-sly-use.robotspagemeta="robotspagemeta.html"
          data-sly-call="${robotspagemeta.template @ metaPage = metaPage}"/>
+    <sly data-sly-use.custompagemeta="custompagemeta.html"
+         data-sly-call="${custompagemeta.template @ metaPage = metaPage}"/>
 </sly>

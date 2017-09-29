@@ -34,10 +34,7 @@ public class DefaultMetaPage implements MetaPage {
     @Inject
     private SlingHttpServletRequest request;
 
-    @DialogField(fieldLabel = "Schema.org Page Metadata",
-        fieldDescription = "When enabled, Google metadata tags name, description, and image will be output as part of the page meta data. Configuration is inherited by child pages.",
-        ranking = 0)
-    @Switch(onText = "Disabled", offText = "Enabled")
+    @Override
     public boolean isDisableSchemaOrg() {
         return getCurrentPage().getInherited("disableSchemaOrg", false);
     }
@@ -52,19 +49,23 @@ public class DefaultMetaPage implements MetaPage {
         return StringUtils.isBlank(getFacebookOpenGraphType()) || "none".equals(getFacebookOpenGraphType());
     }
 
+    @Override
     public String getPageName() {
         return StringUtils.isNotBlank(getCurrentPage().getPageTitle()) ? getCurrentPage().getPageTitle() : getCurrentPage().getName();
     }
 
+    @Override
     public String getDescription() {
         return getCurrentPage().getDescription();
     }
 
+    @Override
     public String getFullyQualifiedPageImage() {
         //TODO: See what this actually returns - it might need externalization
         return getCurrentPage().isHasImage() ? getCurrentPage().getImageSource().or("") : "";
     }
 
+    @Override
     public String getFullyQualifiedPageUrl() {
 
         return getExternalUrl(getRequest(), getCurrentPage().adaptTo(Resource.class), "html");
@@ -100,13 +101,9 @@ public class DefaultMetaPage implements MetaPage {
         }
     )
     public String getFacebookOpenGraphType() {
-        //TODO: Should this inherit?
-        return getCurrentPage().get("ogType", "");
+        return getCurrentPage().getInherited("ogType", "");
     }
 
-    @DialogField(fieldLabel = "Canonical Url", fieldDescription = "Canonical Url of the content of this page",
-        ranking = 30)
-    @PathField(rootPath = PathConstants.PATH_CONTENT)
     public String getCanonicalUrl() {
         return getCurrentPage().get("canonicalUrl", String.class).transform(canonicalUrl -> {
             final String url;
@@ -137,17 +134,10 @@ public class DefaultMetaPage implements MetaPage {
         return title;
     }
 
-    @DialogField(fieldLabel = "Add NOINDEX metadata tag",
-        fieldDescription = "This setting requests the automated internet bots avoid indexing this page", ranking = 40)
-    @Switch(offText = "No", onText = "Yes")
     public boolean isNoIndex() {
         return getCurrentPage().get("noIndex", false);
     }
 
-    @DialogField(fieldLabel = "Add NOFOLLOW metadata tag",
-        fieldDescription = "This setting instructs some search engines that hyperlinks on this page should not be counted as votes in favor of the linked content",
-        ranking = 50)
-    @Switch(offText = "No", onText = "Yes")
     public boolean isNoFollow() {
         return getCurrentPage().get("noFollow", false);
     }
