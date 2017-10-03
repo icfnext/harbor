@@ -56,10 +56,13 @@ public class Title extends AbstractHeading {
     }
 
     protected String getTitleText() {
-        return StringUtils.isNotBlank(text) ? text :
+        return StringUtils.isNotBlank(getRawText()) ? getRawText() :
                 currentPage.getTitle(TitleType.PAGE_TITLE)
                         .or(currentPage.getTitle(TitleType.TITLE)
                         .or(DEFAULT_TEXT));
     }
 
+    protected String getRawText() {
+        return text;
+    }
 }

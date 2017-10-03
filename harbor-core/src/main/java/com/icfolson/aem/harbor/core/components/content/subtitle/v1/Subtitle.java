@@ -52,4 +52,8 @@ public class Subtitle extends AbstractHeading {
         return StringUtils.isNotBlank(text) ? text : currentPage.get("subtitle", Subtitle.DEFAULT_TEXT);
     }
 
+    protected String getRawText() {
+        return text;
+    }
+
 }

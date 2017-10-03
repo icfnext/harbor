@@ -26,7 +26,7 @@ public class DefaultLinkList implements LinkList<ResourceBasedListableLink> {
     List<ResourceBasedListableLink> items;
 
     public Classification getClassification() {
-        return resource.adaptTo(TagBasedClassification.class);
+        return getResource().adaptTo(TagBasedClassification.class);
     }
 
     @Override
