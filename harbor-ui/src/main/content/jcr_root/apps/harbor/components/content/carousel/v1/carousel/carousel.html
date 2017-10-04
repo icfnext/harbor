@@ -9,8 +9,8 @@
          data-sly-attribute.data-path="${isAuthor ? resource.path : ''}"
          data-ride="${(isPreviewMode || isPublish) ? 'carousel' : ''}"
          data-interval="${carousel.interval == 0 ? 'false' : carousel.interval}"
-         data-pause="${carousel.pauseOnHover ? 'hover' : ''}"
-         data-keyboard="${carousel.keyboard ? 'true' : ''}"
+         data-pause="${carousel.pauseOnHover && (isPreviewMode || isPublish) ? 'hover' : 'null'}"
+         data-keyboard="${carousel.keyboard && (isPreviewMode || isPublish) ? 'true' : ''}"
          data-wrap="${carousel.wrap ? 'true' : ''}">
         <sly data-sly-test="${!isEditMode && carousel.showSlideSelectorControls}" data-sly-call="${slideselectorcontrols.template @ carousel = carousel}"></sly>
         <sly data-sly-call="${slides.template @ carousel = carousel}"></sly>

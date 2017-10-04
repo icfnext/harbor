@@ -175,6 +175,44 @@ For example, if a link list exists on a Home Page with 3 items, and these are be
 inherited on a child page, if an author adds a listable link to a child page, they 
 will not have 4 links on the child page, they will have 1, the new one they added.
 
+## Usage as an SDK
+
+### Proxying Harbor Implementations
+
+Harbor implementation usage is similar to the Proxy Component Pattern advocated by 
+the Core Component development model.  Due to the nature of the Harbor implementations 
+however it differs in a few important ways.
+
+First, Harbor does not expose components in the classical sense.  That is to say, Harbor 
+contains no `cq:Component` Nodes, no dialogs, and no edit configurations.  These are all 
+to be produced by the projects using Harbor.  
+
+Documentation herein presumes the use of the Component Plugin in the implementing project. 
+While this is not a technical requirement for using Harbor it makes things a lot easier 
+in our opinion.  
+
+To proxy an entire Harbor implementation at a Project level we create a class which 
+extends from the Harbor implementation and is annotated to extend from the resource 
+type as well.  Here is an example of a title proxy.
+
+```java
+package com.harbor.my.awesome.project;
+
+import com.citytechinc.cq.component.annotations.Component;
+
+@Component(
+        value = "Title",
+        resourceSuperType = HarborTitle.RESOURCE_TYPE
+)
+class Title extends com.icfolson.aem.harbor.core.components.content.title.v1.Title {
+
+    public static final String RESOURCE_TYPE = "archetype-test/components/content/title";
+
+}
+```
+
+
+
 ## FAQ
 
 ### Where are the Dialogs?
