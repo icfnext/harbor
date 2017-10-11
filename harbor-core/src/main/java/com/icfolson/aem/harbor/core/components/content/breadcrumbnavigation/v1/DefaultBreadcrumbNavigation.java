@@ -60,18 +60,20 @@ public class DefaultBreadcrumbNavigation implements BreadcrumbNavigation<Breadcr
                     true));
         }
 
-        PageDecorator currentPagePointer = currentPage.getParent();
+        if (!currentPage.getPath().equals(rootPageOptional.get().getPath())) {
+            PageDecorator currentPagePointer = currentPage.getParent();
 
-        while(currentPagePointer != null && !currentPagePointer.getPath().equals(rootPageOptional.get().getPath())) {
-            if (!currentPagePointer.isHideInNav()) {
-                trail.add(new DefaultBreadcrumbNavigationItem(currentPagePointer));
+            while (currentPagePointer != null && !currentPagePointer.getPath().equals(rootPageOptional.get().getPath())) {
+                if (!currentPagePointer.isHideInNav()) {
+                    trail.add(new DefaultBreadcrumbNavigationItem(currentPagePointer));
+                }
+
+                currentPagePointer = currentPagePointer.getParent();
             }
 
-            currentPagePointer = currentPagePointer.getParent();
-        }
-
-        if (includeRootPage() && !currentPage.getPath().equals(rootPageOptional.get().getPath())) {
-            trail.add(new DefaultBreadcrumbNavigationItem(currentPagePointer, true, false));
+            if (includeRootPage()) {
+                trail.add(new DefaultBreadcrumbNavigationItem(currentPagePointer, true, false));
+            }
         }
 
         trail = Lists.reverse(trail);

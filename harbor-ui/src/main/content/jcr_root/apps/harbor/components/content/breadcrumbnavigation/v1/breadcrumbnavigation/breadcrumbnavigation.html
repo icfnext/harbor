@@ -5,7 +5,7 @@
     data-sly-use.rootPageTemplate="rootpage.html"
     data-sly-test="${breadcrumb.length > 0}">
     <sly data-sly-repeat.currentTrailItem="${breadcrumb.trail}">
-        <sly data-sly-test="${currentTrailItem.isRootPage}"
+        <sly data-sly-test="${currentTrailItem.isRootPage && !currentTrailItem.isCurrentPage}"
              data-sly-call="${rootPageTemplate.template @ item=currentTrailItem, breadcrumb=breadcrumb}"/>
         <sly data-sly-test="${!currentTrailItem.isRootPage && !currentTrailItem.isCurrentPage}"
              data-sly-call="${intermediaryPageTemplate.template @ item=currentTrailItem, breadcrumb=breadcrumb}"/>
