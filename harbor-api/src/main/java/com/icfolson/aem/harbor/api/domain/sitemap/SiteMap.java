@@ -1,26 +1,15 @@
 package com.icfolson.aem.harbor.api.domain.sitemap;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.JAXBException;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.List;
 
-import static com.google.common.collect.Lists.newArrayList;
 
-@XmlRootElement(name = "urlset", namespace = "http://www.sitemaps.org/schemas/sitemap/0.9")
-public class SiteMap {
+public interface SiteMap {
 
-    @XmlElement(name = "url")
-    final List<SiteMapEntry> siteMapEntries;
+    List<SiteMapEntry> getSiteMapEntries();
 
-    public SiteMap() {
-        siteMapEntries = newArrayList();
-    }
+    void marshall(OutputStream stream) throws JAXBException, IOException;
 
-    public SiteMap(List<SiteMapEntry> siteMapEntries) {
-        this.siteMapEntries = siteMapEntries;
-    }
-
-    public List<SiteMapEntry> getSiteMapEntries() {
-        return siteMapEntries;
-    }
 }

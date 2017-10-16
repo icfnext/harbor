@@ -2,8 +2,6 @@ package com.icfolson.aem.harbor.core.content.page.v1;
 
 import com.google.common.base.Predicate;
 import com.icfolson.aem.harbor.api.content.page.HierarchicalPage;
-import com.icfolson.aem.harbor.api.content.page.HomePage;
-import com.icfolson.aem.harbor.api.content.page.SectionLandingPage;
 import com.icfolson.aem.library.api.page.PageDecorator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

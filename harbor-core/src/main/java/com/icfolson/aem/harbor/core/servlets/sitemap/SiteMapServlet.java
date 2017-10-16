@@ -2,10 +2,10 @@ package com.icfolson.aem.harbor.core.servlets.sitemap;
 
 import com.day.cq.wcm.api.NameConstants;
 import com.icfolson.aem.harbor.api.domain.sitemap.SiteMap;
-import com.icfolson.aem.harbor.api.services.sitemap.SiteMapService;
+import com.icfolson.aem.harbor.core.domain.sitemap.v1.DefaultSiteMap;
+import com.icfolson.aem.harbor.core.domain.sitemap.v1.DefaultSiteMapEntry;
 import com.icfolson.aem.library.api.request.ComponentServletRequest;
 import com.icfolson.aem.library.core.servlets.AbstractComponentServlet;
-import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.sling.SlingServlet;
 import org.apache.sling.api.SlingHttpServletResponse;
 
@@ -26,12 +26,9 @@ public class SiteMapServlet extends AbstractComponentServlet {
 
     public static final String EXTENSION = "xml";
 
-    @Reference
-    private SiteMapService siteMapService;
-
     @Override
     protected void processGet(final ComponentServletRequest request) throws ServletException, IOException {
-        final SiteMap siteMap = siteMapService.getSitemap(request.getCurrentPage());
+        final SiteMap siteMap = request.getSlingRequest().adaptTo(SiteMap.class);
         final SlingHttpServletResponse slingResponse = request.getSlingResponse();
 
         try {
@@ -46,10 +43,6 @@ public class SiteMapServlet extends AbstractComponentServlet {
 
     protected void writeXmlResponse(final SlingHttpServletResponse slingHttpServletResponse, final SiteMap siteMap)
         throws JAXBException, IOException {
-        final JAXBContext context = JAXBContext.newInstance(SiteMap.class);
-        final Marshaller marshaller = context.createMarshaller();
-
-        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-        marshaller.marshal(siteMap, slingHttpServletResponse.getOutputStream());
+        siteMap.marshall(slingHttpServletResponse.getOutputStream());
     }
 }
