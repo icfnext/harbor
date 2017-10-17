@@ -2,17 +2,13 @@ package com.icfolson.aem.harbor.core.servlets.sitemap;
 
 import com.day.cq.wcm.api.NameConstants;
 import com.icfolson.aem.harbor.api.domain.sitemap.SiteMap;
-import com.icfolson.aem.harbor.core.domain.sitemap.v1.DefaultSiteMap;
-import com.icfolson.aem.harbor.core.domain.sitemap.v1.DefaultSiteMapEntry;
 import com.icfolson.aem.library.api.request.ComponentServletRequest;
 import com.icfolson.aem.library.core.servlets.AbstractComponentServlet;
 import org.apache.felix.scr.annotations.sling.SlingServlet;
 import org.apache.sling.api.SlingHttpServletResponse;
 
 import javax.servlet.ServletException;
-import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
 import java.io.IOException;
 
 @SlingServlet(

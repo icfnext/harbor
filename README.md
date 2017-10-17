@@ -97,6 +97,23 @@ level group concrete component implementations.
 * Page
   * [Global (v1)](harbor-ui/src/main/content/jcr_root/apps/harbor/components/page/global/v1/global)
 
+## Models, Services, and Servlets
+
+### Sitemap
+
+The Sitemap servlet, `com.icfolson.aem.harbor.core.servlets.sitemap.SiteMapServlet`, listens 
+for `cq:Page` requests with a selector of `sitemap` and an extension of `xml`.  This 
+servlet adapts the content resource of the page to the `com.icfolson.aem.harbor.api.domain.sitemap.SiteMap` 
+interface and uses that interface's `marshall(OutputStream)` method to marshall the 
+xml of the sitemap.  
+
+The default implementation, `com.icfolson.aem.harbor.core.domain.sitemap.v1.DefaultSiteMap` 
+is a Sling Model leveraging JAXB to create the XML representation of the sitemap.  
+Projects wishing to override the behavior of the sitemap generation will most often 
+be able to do so by creating a new SiteMap implementation, either by extending the default 
+or by creating from scratch, and registering the implementation as a Sling Model specific 
+to your page's resource type.
+
 ## Core Concepts
 
 ### Page Types
