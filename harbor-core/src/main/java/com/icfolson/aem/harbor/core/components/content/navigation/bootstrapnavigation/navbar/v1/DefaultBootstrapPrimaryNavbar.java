@@ -4,12 +4,11 @@ import com.icfolson.aem.harbor.api.components.content.navigation.bootstrapnaviga
 import com.icfolson.aem.harbor.core.components.content.navigation.bootstrapnavigation.bootstrapprimarynavigation.v1.DefaultBootstrapPrimaryNavigation;
 import com.icfolson.aem.harbor.core.components.content.navigation.brand.bootstrapbrand.v1.DefaultBootstrapBrand;
 import com.icfolson.aem.harbor.core.util.ComponentUtils;
+import com.icfolson.aem.library.models.annotations.InheritInject;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.Optional;
 import org.apache.sling.models.annotations.injectorspecific.Self;
-
-import javax.inject.Inject;
 
 @Model(adaptables = Resource.class, adapters = BootstrapPrimaryNavbar.class, resourceType = DefaultBootstrapPrimaryNavbar.RESOURCE_TYPE)
 public class DefaultBootstrapPrimaryNavbar implements BootstrapPrimaryNavbar {
@@ -19,7 +18,7 @@ public class DefaultBootstrapPrimaryNavbar implements BootstrapPrimaryNavbar {
     @Self
     private Resource resource;
 
-    @Inject @Optional
+    @InheritInject @Optional
     private String navigationToggleScreenReaderLabel;
 
     @Override
