@@ -47,12 +47,18 @@ public class DefaultColumn implements ParagraphSystemColumn {
     @Inject @Self
     private Resource resource;
 
+    public Resource getResource() {
+        return resource;
+    }
+
+    public String getName() { return getResource().getName(); }
+
     public String getPath() {
-        return resource.getPath();
+        return getResource().getPath();
     }
 
     public String getType() {
-        return resource.getResourceType();
+        return getResource().getResourceType();
     }
 
     public String getColumnWidthClasses() {
@@ -82,11 +88,11 @@ public class DefaultColumn implements ParagraphSystemColumn {
     }
 
     public Classification getClassification() {
-        return resource.adaptTo(TagBasedClassification.class);
+        return getResource().adaptTo(TagBasedClassification.class);
     }
 
     public String getId() {
-        return ComponentUtils.DomIdForResourcePath(resource.getPath());
+        return ComponentUtils.DomIdForResourcePath(getResource().getPath());
     }
 
     @Override

@@ -7,6 +7,8 @@ public interface Column extends Classifiable, Identifiable {
 
     String getPath();
 
+    String getName();
+
     String getType();
 
     String getColumnWidthClasses();

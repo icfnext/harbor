@@ -26,7 +26,7 @@ public class DefaultColumnRow implements ColumnRow<Column> {
     public List<Column> getColumns() {
         if (columns == null) {
             columns = Lists.newArrayList();
-            resource.listChildren().forEachRemaining(currentResource -> {
+            getResource().listChildren().forEachRemaining(currentResource -> {
                 Column currentColumn = currentResource.adaptTo(Column.class);
                 if (currentColumn != null) {
                     columns.add(currentColumn);
@@ -37,12 +37,16 @@ public class DefaultColumnRow implements ColumnRow<Column> {
     }
 
     public Classification getClassification() {
-        return resource.adaptTo(TagBasedClassification.class);
+        return getResource().adaptTo(TagBasedClassification.class);
     }
 
     @Override
     public String getId() {
-        return ComponentUtils.DomIdForResourcePath(resource.getPath());
+        return ComponentUtils.DomIdForResourcePath(getResource().getPath());
+    }
+
+    public Resource getResource() {
+        return resource;
     }
 
 }

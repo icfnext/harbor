@@ -3,6 +3,6 @@
          data-sly-repeat.column="${columnRow.columns}"
          data-sly-attribute.class="${column.columnWidthClasses} ${column.classification.classificationNames @ join=' '}"
          data-sly-attribute.id="${column.id}"
-         data-sly-resource="${column.path @ resourceType=column.type, decorationTagName='div'}">
+         data-sly-resource="${column.name @ resourceType=column.type, decorationTagName='div'}">
     </div>
 </template>

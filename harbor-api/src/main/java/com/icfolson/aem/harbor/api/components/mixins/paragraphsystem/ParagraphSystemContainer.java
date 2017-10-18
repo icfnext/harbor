@@ -1,8 +1,5 @@
 package com.icfolson.aem.harbor.api.components.mixins.paragraphsystem;
 
-/**
- * Created by pmichelotti on 8/30/17.
- */
 public interface ParagraphSystemContainer {
 
     public static final String PARSYS = "wcm/foundation/components/parsys";
