@@ -4,6 +4,7 @@ import com.icfolson.aem.harbor.api.components.content.accordion.Accordion;
 import com.icfolson.aem.harbor.api.components.content.accordion.AccordionItem;
 import com.icfolson.aem.harbor.api.components.mixins.classifiable.Classification;
 import com.icfolson.aem.harbor.core.components.mixins.classifiable.TagBasedClassification;
+import com.icfolson.aem.library.api.node.ComponentNode;
 import com.icfolson.aem.library.core.components.AbstractComponent;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;

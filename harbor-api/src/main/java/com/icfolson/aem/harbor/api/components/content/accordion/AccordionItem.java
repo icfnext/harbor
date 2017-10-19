@@ -13,6 +13,8 @@ public interface AccordionItem extends Identifiable, Classifiable {
 
     String getPath();
 
+    String getName();
+
     String getType();
 
     boolean isExpanded();
