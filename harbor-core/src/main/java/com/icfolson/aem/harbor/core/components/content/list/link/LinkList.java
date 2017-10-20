@@ -20,7 +20,7 @@ import org.apache.sling.models.annotations.injectorspecific.Self;
     name = "lists/linklist",
     actions = { "text:Link List", "edit", "-", "copymove", "delete", "insert" },
     contentAdditionalProperties = {
-        @ContentProperty(name = "dependencies", value = "[harbor.components.content.linklist,acs-commons.fontawesome]")
+        @ContentProperty(name = "dependencies", value = "[harbor.components.content.linklist]")
     },
     actionConfigs = {
         @ActionConfig(xtype = "tbseparator"),
