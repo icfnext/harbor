@@ -7,27 +7,25 @@ import com.icfolson.aem.harbor.api.components.mixins.classifiable.Classification
 import com.icfolson.aem.harbor.api.components.mixins.paragraphsystem.ParagraphSystemContainer;
 import com.icfolson.aem.harbor.core.components.mixins.classifiable.TagBasedClassification;
 import com.icfolson.aem.harbor.core.util.ComponentUtils;
+import com.icfolson.aem.library.api.node.BasicNode;
+import com.icfolson.aem.library.api.node.ComponentNode;
+import com.icfolson.aem.library.models.annotations.InheritInject;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.Optional;
 
 import javax.inject.Inject;
 
-@Model(adaptables = Resource.class, adapters = {DynamicAccordionItem.class, ParagraphSystemContainer.class}, resourceType = ParsysAccordionItem.RESOURCE_TYPE)
-public class ParsysAccordionItem implements DynamicAccordionItem, ParagraphSystemContainer {
+@Model(adaptables = Resource.class, adapters = DynamicAccordionItem.class, resourceType = InheritingParsysAccordionItem.RESOURCE_TYPE)
+public class InheritingParsysAccordionItem extends ParsysAccordionItem {
 
-    public static final String RESOURCE_TYPE = "harbor/components/content/dynamicaccordion/items/parsysaccordionitem/v1/parsysaccordionitem";
+    public static final String RESOURCE_TYPE = ParsysAccordionItem.RESOURCE_TYPE + "/inheriting";
 
-    @Inject @Optional
+    @InheritInject @Optional
     private String headingText;
 
     @Inject
     private Resource resource;
-
-    @Override
-    public String getId() {
-        return ComponentUtils.DomIdForResourcePath(getResource().getPath());
-    }
 
     @DialogField(fieldLabel = "Heading Text") @TextField
     @Override
@@ -36,31 +34,14 @@ public class ParsysAccordionItem implements DynamicAccordionItem, ParagraphSyste
     }
 
     @Override
-    public String getType() {
-        return getResource().getResourceType();
-    }
-
-    @Override
-    public String getPath() {
-        return getResource().getPath();
-    }
-
-    @Override
-    public String getName() {
-        return getResource().getName();
-    }
-
     public Resource getResource() {
-        return resource;
-    }
-
-    public Classification getClassification() {
-        return getResource().adaptTo(TagBasedClassification.class);
+        return resource.adaptTo(ComponentNode.class).getNodeInherited(".").transform(BasicNode::getResource).or(super.getResource());
     }
 
     @Override
     public String getParagraphSystemType() {
-        return ParagraphSystemContainer.PARSYS;
+        return ParagraphSystemContainer.I_PARSYS;
     }
+
 
 }

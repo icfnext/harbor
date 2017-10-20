@@ -1,2 +1,3 @@
 <sly data-sly-test="${(isEditMode || isDesignMode)}" data-sly-include="authorhelp.html"/>
-<div data-sly-resource="${'itemcontent' @ resourceType='wcm/foundation/components/parsys'}"></div>
+<div data-sly-use.container="com.icfolson.aem.harbor.api.components.mixins.paragraphsystem.ParagraphSystemContainer"
+     data-sly-resource="${'itemcontent' @ resourceType=container.paragraphSystemType}"></div>

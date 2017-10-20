@@ -23,7 +23,7 @@ public class DefaultDynamicAccordion implements DynamicAccordion<DynamicAccordio
     private Resource resource;
 
     public List<DynamicAccordionItem> getItems() {
-        return Lists.newArrayList(resource.getChildren())
+        return Lists.newArrayList(getResource().getChildren())
                 .stream()
                 .map(r -> r.adaptTo(DynamicAccordionItem.class))
                 .collect(Collectors.toList());
@@ -31,11 +31,16 @@ public class DefaultDynamicAccordion implements DynamicAccordion<DynamicAccordio
 
     @Override
     public String getId() {
-        return ComponentUtils.DomIdForResourcePath(resource.getPath());
+        return ComponentUtils.DomIdForResourcePath(getResource().getPath());
     }
 
     @Override
     public Classification getClassification() {
-        return resource.adaptTo(TagBasedClassification.class);
+        return getResource().adaptTo(TagBasedClassification.class);
     }
+
+    public Resource getResource() {
+        return resource;
+    }
+
 }

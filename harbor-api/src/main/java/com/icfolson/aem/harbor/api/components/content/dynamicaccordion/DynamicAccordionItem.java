@@ -14,6 +14,8 @@ public interface DynamicAccordionItem extends Identifiable, Classifiable {
 
     String getPath();
 
+    String getName();
+
     default String getStyle() {
         return DEFAULT_STYLE;
     }
