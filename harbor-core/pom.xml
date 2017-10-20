@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.icfolson.aem.harbor</groupId>
         <artifactId>harbor</artifactId>
-        <version>1.0.5</version>
+        <version>1.1.0</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
@@ -27,11 +27,7 @@
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
                         <Bundle-Name>${project.name}</Bundle-Name>
                         <Bundle-Vendor>${project.parent.organization.name}</Bundle-Vendor>
-                        <Export-Package>
-                            !*.impl,
-                            !com.icfolson.aem.harbor.core.widget.*,
-                            com.icfolson.aem.harbor.core.*
-                        </Export-Package>
+                        <Export-Package>!*.impl,com.icfolson.aem.harbor.core.*</Export-Package>
                         <Import-Package>!com.citytechinc.cq.component.*,!javassist</Import-Package>
                         <Require-Bundle>org.apache.sling.models.api</Require-Bundle>
                         <Sling-Model-Packages>com.icfolson.aem.harbor.core</Sling-Model-Packages>

@@ -12,7 +12,7 @@
     <groupId>com.icfolson.aem.harbor</groupId>
     <artifactId>harbor</artifactId>
     <packaging>pom</packaging>
-    <version>1.0.5</version>
+    <version>1.1.0</version>
     <name>Harbor</name>
 
     <modules>
@@ -45,11 +45,10 @@
 
     <properties>
         <aem.namespace.version>0.4.0</aem.namespace.version>
-        <aem-library.version>8.1.0</aem-library.version>
+        <aem-library.version>8.2.0</aem-library.version>
         <authorable.design.manager.version>1.0.0</authorable.design.manager.version>
-        <component.plugin.version>4.2.0</component.plugin.version>
-        <multicompositeaddon.version>3.1.0</multicompositeaddon.version>
-        <acs.aem.commons.version>3.7.0</acs.aem.commons.version>
+        <component.plugin.version>4.3.0</component.plugin.version>
+        <multicompositeaddon.version>3.2.1</multicompositeaddon.version>
         <package.skip>true</package.skip>
         <osgi.bundle.status.skip>true</osgi.bundle.status.skip>
         <core.name>harbor-core</core.name>
