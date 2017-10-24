@@ -25,7 +25,7 @@ public class DefaultTabs implements Tabs {
     public List<Tab> getTabs() {
         if (tabs == null) {
             tabs = Lists.newArrayList();
-            resource.getChildren().forEach(tabResource -> {
+            getResource().getChildren().forEach(tabResource -> {
                 Tab currentTab = tabResource.adaptTo(Tab.class);
                 if (currentTab != null) {
                     tabs.add(currentTab);
@@ -38,6 +38,11 @@ public class DefaultTabs implements Tabs {
 
     @Override
     public Classification getClassification() {
-        return resource.adaptTo(TagBasedClassification.class);
+        return getResource().adaptTo(TagBasedClassification.class);
     }
+
+    public Resource getResource() {
+        return resource;
+    }
+
 }

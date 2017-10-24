@@ -11,4 +11,6 @@ public interface Tab extends Identifiable, Classifiable {
 
     String getPath();
 
+    String getName();
+
 }
