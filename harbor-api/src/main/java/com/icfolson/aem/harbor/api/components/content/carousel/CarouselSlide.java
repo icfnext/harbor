@@ -10,4 +10,6 @@ public interface CarouselSlide extends Classifiable {
 
     String getType();
 
+    String getName();
+
 }

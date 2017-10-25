@@ -16,12 +16,12 @@ import java.util.stream.Collectors;
 @Model(adaptables = Resource.class, adapters = Carousel.class, resourceType = DefaultCarousel.RESOURCE_TYPE)
 public class DefaultCarousel implements Carousel<CarouselSlide> {
 
+    public static final String RESOURCE_TYPE = "harbor/components/content/carousel/v1/carousel";
+
     @Inject
-    private ComponentNode componentNode;
+    private Resource resource;
 
     private List<CarouselSlide> slides;
-
-    public static final String RESOURCE_TYPE = "harbor/components/content/carousel/v1/carousel";
 
     public boolean isShowPreviousAndNextControls() {
         return true;
@@ -49,7 +49,7 @@ public class DefaultCarousel implements Carousel<CarouselSlide> {
 
     public List<CarouselSlide> getSlides() {
         if (slides == null) {
-            slides = componentNode.getComponentNodes()
+            slides = getComponentNode().getComponentNodes()
                     .stream()
                     .map(componentNode -> componentNode.getResource().adaptTo(CarouselSlide.class))
                     .filter(Objects::nonNull)
@@ -61,12 +61,20 @@ public class DefaultCarousel implements Carousel<CarouselSlide> {
 
     @Override
     public Classification getClassification() {
-        return componentNode.getResource().adaptTo(TagBasedClassification.class);
+        return getComponentNode().getResource().adaptTo(TagBasedClassification.class);
     }
 
     @Override
     public String getId() {
-        return componentNode.getId();
+        return getComponentNode().getId();
+    }
+
+    public ComponentNode getComponentNode() {
+        return getResource().adaptTo(ComponentNode.class);
+    }
+
+    public Resource getResource() {
+        return resource;
     }
 
 }

@@ -26,4 +26,8 @@ public class DefaultCarouselSlide extends AbstractComponent implements CarouselS
         return getResource().adaptTo(TagBasedClassification.class);
     }
 
+    public String getName() {
+        return getResource().getName();
+    }
+
 }
