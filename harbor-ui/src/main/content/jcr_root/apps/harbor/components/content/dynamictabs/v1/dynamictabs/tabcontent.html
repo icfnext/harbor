@@ -5,7 +5,7 @@
              class="tab-pane active"
              data-sly-attribute.class="${currentTabList.first ? 'tab-pane active' : 'tab-pane'}"
              id="${currentTab.id}">
-            <div data-sly-resource="${currentTab.path @ resourceType=currentTab.type}"></div>
+            <div data-sly-resource="${currentTab.name @ resourceType=currentTab.type}"></div>
         </div>
     </div>
 </template>

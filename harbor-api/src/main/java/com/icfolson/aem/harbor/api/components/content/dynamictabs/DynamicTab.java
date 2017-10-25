@@ -13,4 +13,6 @@ public interface DynamicTab extends Identifiable, Classifiable {
 
     String getPath();
 
+    String getName();
+
 }

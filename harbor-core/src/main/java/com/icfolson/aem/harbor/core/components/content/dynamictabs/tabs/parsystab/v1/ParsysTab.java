@@ -4,6 +4,7 @@ import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.widgets.TextField;
 import com.icfolson.aem.harbor.api.components.content.dynamictabs.DynamicTab;
 import com.icfolson.aem.harbor.api.components.mixins.classifiable.Classification;
+import com.icfolson.aem.harbor.api.components.mixins.paragraphsystem.ParagraphSystemContainer;
 import com.icfolson.aem.harbor.core.components.mixins.classifiable.TagBasedClassification;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
@@ -11,8 +12,8 @@ import org.apache.sling.models.annotations.Optional;
 
 import javax.inject.Inject;
 
-@Model(adaptables = Resource.class, adapters = DynamicTab.class, resourceType = ParsysTab.RESOURCE_TYPE )
-public class ParsysTab implements DynamicTab {
+@Model(adaptables = Resource.class, adapters = {DynamicTab.class, ParagraphSystemContainer.class}, resourceType = ParsysTab.RESOURCE_TYPE )
+public class ParsysTab implements DynamicTab, ParagraphSystemContainer {
 
     public static final String RESOURCE_TYPE = "harbor/components/content/dynamictabs/tabs/parsystab/v1/parsystab";
 
@@ -35,7 +36,12 @@ public class ParsysTab implements DynamicTab {
 
     @Override
     public String getType() {
-        return ParsysTab.RESOURCE_TYPE;
+        return resource.getResourceType();
+    }
+
+    @Override
+    public String getName() {
+        return resource.getName();
     }
 
     @Override
@@ -45,6 +51,11 @@ public class ParsysTab implements DynamicTab {
 
     public Classification getClassification() {
         return resource.adaptTo(TagBasedClassification.class);
+    }
+
+    @Override
+    public String getParagraphSystemType() {
+        return ParagraphSystemContainer.PARSYS;
     }
 
 }

@@ -1,4 +1,5 @@
 <sly data-sly-test="${(isEditMode || isDesignMode)}" data-sly-include="authorhelp.html"/>
 <div data-sly-use.parsystab="com.icfolson.aem.harbor.api.components.content.dynamictabs.DynamicTab"
+     data-sly-use.container="com.icfolson.aem.harbor.api.components.mixins.paragraphsystem.ParagraphSystemContainer"
      data-sly-attribute.class="${parsystab.classification.classificationNames @ join = ' '}"
-     data-sly-resource="${'tabcontent' @ resourceType='wcm/foundation/components/parsys'}"></div>
+     data-sly-resource="${'tabcontent' @ resourceType=container.paragraphSystemType}"></div>
