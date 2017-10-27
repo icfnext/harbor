@@ -46,7 +46,7 @@ public class DefaultDynamicCarousel implements DynamicCarousel {
     }
 
     public Iterable<DynamicCarouselSlide> getSlides() {
-        return Lists.newArrayList(resource.getChildren())
+        return Lists.newArrayList(getResource().getChildren())
                 .stream()
                 .map(currentChild -> currentChild.adaptTo(DynamicCarouselSlide.class))
                 .filter(Objects::nonNull)
@@ -54,11 +54,15 @@ public class DefaultDynamicCarousel implements DynamicCarousel {
     }
 
     public String getId() {
-        return ComponentUtils.DomIdForResourcePath(resource.getPath());
+        return ComponentUtils.DomIdForResourcePath(getResource().getPath());
     }
 
     public Classification getClassification() {
-        return resource.adaptTo(TagBasedClassification.class);
+        return getResource().adaptTo(TagBasedClassification.class);
+    }
+
+    public Resource getResource() {
+        return resource;
     }
 
 }

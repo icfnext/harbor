@@ -8,7 +8,7 @@
         </div>
         <div data-sly-repeat.slide="${carousel.slides}"
              data-sly-attribute.class="${slideList.first ? 'item active' : 'item'}"
-             data-sly-resource="${slide.path @ resourceType=slide.type}">
+             data-sly-resource="${slide.name @ resourceType=slide.type}">
         </div>
     </div>
 </template>

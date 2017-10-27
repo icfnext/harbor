@@ -10,4 +10,6 @@ public interface DynamicCarouselSlide extends Classifiable {
 
     String getPath();
 
+    String getName();
+
 }
