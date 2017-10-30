@@ -31,14 +31,15 @@ thus affording the benefits of the remainder of Harbor.
 
 ### Harbor UI
 
-The UI layer of Harbor is default rendering of componentry focusing on the production 
+The UI layer of Harbor exposes the default rendering of componentry focusing on the production 
 of clean and semantic HTML and on reusability.  Throughout the HTL implementations you will 
 find many of the renderings split into various HTL includes and template calls making it 
 easier to selectively override during extension.  
 
-Used classes in the HTL adapt from the API layer with models exposed using the Sling Models 
-resource type based instance lookup.  This means that your projects implementations will be 
-picked for usage without having to update the HTL in any way.
+Used classes in the HTL adapt from the API layer with models exposed using the [Sling Models 
+resource type based instance lookup](https://sling.apache.org/documentation/bundles/models.html#associating-a-model-class-with-a-resource-type-since-130).  
+This means that your project's implementations will be picked for usage without having to 
+update the HTL in any way.
 
 Some of the classes and structures in the HTL are somewhat Bootstrap specific and as such 
 if using another framework (or no framework) you may need to override more than you would if 
@@ -174,7 +175,13 @@ Container component using a `Recipe` tag.  Systematically, for most components, 
 simply applies an additional class attribute to the rendered HTML for the component which allows 
 for extended usage such as targeting of styles or unique indexability.
 
-Classifications are always authored as Tags.
+The `com.icfolson.aem.harbor.api.components.mixins.classifiable.Classification` interface 
+exposes a `List<String> getClassificationNames()` method returning the list of classifications 
+for the classified component instance as a list of strings.  Harbor also provides an 
+implementation of `Classification`, `com.icfolson.aem.harbor.core.components.mixins.classifiable.TagBasedClassification` 
+which expects the classifications to be stored as Tags under the property `icf:classification`.  
+Default implementations within Harbor make use of the `TagBasedClassification`, however 
+you are free to provide your own implementation as your needs dictate. 
 
 ### Paragraph System Containers
 
