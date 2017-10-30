@@ -31,21 +31,25 @@ public class DefaultPageLinkItem implements PageLinkItem {
 
     @DialogField(fieldLabel = "Linked Page", name = "./linkedPage") @PathField
     public String getUrl() {
-        return linkedPage.getHref();
+        if (getLinkedPage() == null) {
+            return null;
+        }
+
+        return getLinkedPage().getHref();
     }
 
     @DialogField(fieldLabel = "Label") @TextField
     public String getLabel() {
-        if (StringUtils.isNotBlank(label)) {
-            return label;
+        if (StringUtils.isNotBlank(getAuthoredLabel())) {
+            return getAuthoredLabel();
         }
 
-        if (linkedPage != null) {
-            if (StringUtils.isNotBlank(linkedPage.getPageTitle())) {
-                return linkedPage.getPageTitle();
+        if (getLinkedPage() != null) {
+            if (StringUtils.isNotBlank(getLinkedPage().getPageTitle())) {
+                return getLinkedPage().getPageTitle();
             }
 
-            return linkedPage.getTitle();
+            return getLinkedPage().getTitle();
         }
 
         return StringUtils.EMPTY;
@@ -53,11 +57,29 @@ public class DefaultPageLinkItem implements PageLinkItem {
 
     @Override
     public String getPath() {
-        return resource.getPath();
+        return getResource().getPath();
     }
 
     @Override
     public String getType() {
-        return resource.getResourceType();
+        return getResource().getResourceType();
     }
+
+    @Override
+    public String getName() {
+        return getResource().getName();
+    }
+
+    public PageDecorator getLinkedPage() {
+        return linkedPage;
+    }
+
+    public String getAuthoredLabel() {
+        return label;
+    }
+
+    public Resource getResource() {
+        return resource;
+    }
+
 }

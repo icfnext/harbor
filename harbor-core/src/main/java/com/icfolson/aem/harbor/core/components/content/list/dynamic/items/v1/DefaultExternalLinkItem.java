@@ -38,11 +38,21 @@ public class DefaultExternalLinkItem implements ExternalLinkItem {
 
     @Override
     public String getPath() {
-        return resource.getPath();
+        return getResource().getPath();
     }
 
     @Override
     public String getType() {
-        return resource.getResourceType();
+        return getResource().getResourceType();
     }
+
+    @Override
+    public String getName() {
+        return getResource().getName();
+    }
+
+    public Resource getResource() {
+        return resource;
+    }
+
 }

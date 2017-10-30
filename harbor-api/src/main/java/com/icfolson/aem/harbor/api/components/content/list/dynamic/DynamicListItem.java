@@ -8,4 +8,6 @@ public interface DynamicListItem {
 
     public String getType();
 
+    public String getName();
+
 }

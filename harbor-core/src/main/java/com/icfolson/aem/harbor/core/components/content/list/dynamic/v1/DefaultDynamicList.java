@@ -25,13 +25,13 @@ public class DefaultDynamicList implements DynamicList<DynamicListItem> {
     private List<DynamicListItem> items;
 
     public Classification getClassification() {
-        return resource.adaptTo(TagBasedClassification.class);
+        return getResource().adaptTo(TagBasedClassification.class);
     }
 
     @Override
     public Iterable<DynamicListItem> getItems() {
         if (items == null) {
-            items = Lists.newArrayList(resource.getChildren())
+            items = Lists.newArrayList(getResource().getChildren())
                     .stream()
                     .map(currentChild -> currentChild.adaptTo(DynamicListItem.class))
                     .filter(Objects::nonNull)
@@ -44,6 +44,10 @@ public class DefaultDynamicList implements DynamicList<DynamicListItem> {
     @Override
     public String getListType() {
         return ListComponent.UNORDERED_LIST_TYPE;
+    }
+
+    public Resource getResource() {
+        return resource;
     }
 
 }

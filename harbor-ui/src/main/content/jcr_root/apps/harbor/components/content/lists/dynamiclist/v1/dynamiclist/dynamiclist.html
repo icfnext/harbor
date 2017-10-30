@@ -1,6 +1,6 @@
 <sly data-sly-use.dynamicList="com.icfolson.aem.harbor.api.components.content.list.dynamic.DynamicList">
-    <sly data-sly-test="${isEditMode && !resource.listChildren}" data-sly-include="empty.html"/>
+    <sly data-sly-test="${isEditMode && !dynamicList.items}" data-sly-include="empty.html"/>
     <ul data-sly-attribute.class="${dynamicList.classification.classificationNames @ join = ' '}">
-        <sly data-sly-repeat="${dynamicList.items}" data-sly-resource="${item.path @ resourceType=item.type, decorationTagName='li'}"/>
+        <sly data-sly-repeat="${dynamicList.items}" data-sly-resource="${item.name @ resourceType=item.type, decorationTagName='li'}"/>
     </ul>
 </sly>
