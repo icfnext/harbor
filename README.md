@@ -6,6 +6,14 @@ Harbor is a sites development SDK for AEM Sites built on the key tenants of
 * Semantics
 * Extensibility
 
+## Dependencies and Versions
+
+* [AEM Library](https://github.com/OlsonDigital/aem-library) `9.0.0`
+* [Component Plugin](https://github.com/OlsonDigital/cq-component-maven-plugin) `5.0.0`
+* [AEM Namespace Extension](https://github.com/OlsonDigital/aem-namespace-extension) `0.4.0`
+
+Built for use in AEM 6.3.
+
 ## Modules
 
 Each module in Harbor expresses an aspect of Harbor and, to some extent, may 
@@ -261,9 +269,9 @@ First, Harbor does not expose components in the classical sense.  That is to say
 contains no `cq:Component` Nodes, no dialogs, and no edit configurations.  These are all 
 to be produced by the projects using Harbor.  
 
-Documentation herein presumes the use of the Component Plugin in the implementing project. 
-While this is not a technical requirement for using Harbor it makes things a lot easier 
-in our opinion.  
+Documentation herein presumes the use of the [Component Plugin](https://github.com/OlsonDigital/cq-component-maven-plugin) 
+in the implementing project. While this is not a technical requirement for using Harbor
+it makes things a lot easier in our opinion.  
 
 To proxy an entire Harbor implementation at a Project level we create a class which 
 extends from the Harbor implementation and is annotated to extend from the resource 
