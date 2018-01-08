@@ -5,14 +5,14 @@
     <parent>
         <groupId>com.icfolson.aem.library</groupId>
         <artifactId>aem-library</artifactId>
-        <version>9.0.0</version>
+        <version>9.2.0</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.icfolson.aem.harbor</groupId>
     <artifactId>harbor</artifactId>
     <packaging>pom</packaging>
-    <version>3.0.0</version>
+    <version>3.1.0</version>
     <name>Harbor</name>
 
     <modules>
@@ -39,8 +39,8 @@
 
     <properties>
         <aem.namespace.version>0.4.0</aem.namespace.version>
-        <aem-library.version>9.0.0</aem-library.version>
-        <component.plugin.version>5.0.0</component.plugin.version>
+        <aem-library.version>9.2.0</aem-library.version>
+        <component.plugin.version>5.0.2</component.plugin.version>
         <package.skip>true</package.skip>
         <osgi.bundle.status.skip>true</osgi.bundle.status.skip>
         <core.name>harbor-core</core.name>
