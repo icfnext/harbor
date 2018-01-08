@@ -40,7 +40,7 @@
     <properties>
         <aem.namespace.version>0.4.0</aem.namespace.version>
         <aem-library.version>9.2.0</aem-library.version>
-        <component.plugin.version>5.0.0</component.plugin.version>
+        <component.plugin.version>5.0.2</component.plugin.version>
         <package.skip>true</package.skip>
         <osgi.bundle.status.skip>true</osgi.bundle.status.skip>
         <core.name>harbor-core</core.name>
