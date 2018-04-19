@@ -170,7 +170,7 @@
         <dependency>
             <groupId>com.icfolson.aem.prosper</groupId>
             <artifactId>prosper</artifactId>
-            <version>11.1.0</version>
+            <version>${prosper.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
