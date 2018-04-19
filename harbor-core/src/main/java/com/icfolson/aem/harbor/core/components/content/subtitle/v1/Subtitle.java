@@ -1,5 +1,6 @@
 package com.icfolson.aem.harbor.core.components.content.subtitle.v1;
 
+import com.adobe.cq.export.json.ExporterConstants;
 import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.widgets.TextField;
 import com.icfolson.aem.harbor.api.components.content.heading.Heading;
@@ -8,9 +9,11 @@ import com.icfolson.aem.harbor.core.components.content.heading.v1.AbstractHeadin
 import com.icfolson.aem.library.api.page.PageDecorator;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.sling.api.resource.Resource;
+import org.apache.sling.models.annotations.Exporter;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.Optional;
 
+import javax.annotation.Nonnull;
 import javax.inject.Inject;
 
 /**
@@ -19,6 +22,7 @@ import javax.inject.Inject;
  * secondary title of the page is rendered as an H2 DOM element.
  */
 @Model(adaptables = Resource.class, adapters = Heading.class, resourceType = Subtitle.RESOURCE_TYPE)
+@Exporter(name = ExporterConstants.SLING_MODEL_EXPORTER_NAME, extensions = ExporterConstants.SLING_MODEL_EXTENSION)
 public class Subtitle extends AbstractHeading {
 
     public static final String RESOURCE_TYPE = "harbor/components/content/subtitle/v1/subtitle";
@@ -30,6 +34,9 @@ public class Subtitle extends AbstractHeading {
 
     @Inject
     private PageDecorator currentPage;
+
+    @Inject
+    private Resource resource;
 
     @DialogField(fieldLabel = "Subtitle", fieldDescription = "The textual content of the rendered subtitle.  Will default to the Page's configured subtitle if available.")
     @TextField
@@ -46,6 +53,12 @@ public class Subtitle extends AbstractHeading {
     @Override
     public String getSize() {
         return Headings.H2;
+    }
+
+    @Nonnull
+    @Override
+    public String getExportedType() {
+        return resource.getResourceType();
     }
 
     protected String getSubtitleText() {
