@@ -12,7 +12,7 @@
     <groupId>com.icfolson.aem.harbor</groupId>
     <artifactId>harbor</artifactId>
     <packaging>pom</packaging>
-    <version>3.3.1-SNAPSHOT</version>
+    <version>3.3.1</version>
     <name>Harbor</name>
 
     <modules>
@@ -156,6 +156,27 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>external.atlassian.jgitflow</groupId>
+                <artifactId>jgitflow-maven-plugin</artifactId>
+                <version>1.0-m5.1</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.jcraft</groupId>
+                        <artifactId>jsch</artifactId>
+                        <version>0.1.54</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <flowInitContext>
+                        <featureBranchPrefix>feature-</featureBranchPrefix>
+                        <releaseBranchPrefix>release-</releaseBranchPrefix>
+                        <hotfixBranchPrefix>hotfix-</hotfixBranchPrefix>
+                    </flowInitContext>
+                    <autoVersionSubmodules>true</autoVersionSubmodules>
+                    <noDeploy>true</noDeploy>
+                </configuration>
             </plugin>
         </plugins>
     </build>
