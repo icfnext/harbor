@@ -12,7 +12,7 @@
     <groupId>com.icfolson.aem.harbor</groupId>
     <artifactId>harbor</artifactId>
     <packaging>pom</packaging>
-    <version>3.3.1-SNAPSHOT</version>
+    <version>3.3.1</version>
     <name>Harbor</name>
 
     <modules>
