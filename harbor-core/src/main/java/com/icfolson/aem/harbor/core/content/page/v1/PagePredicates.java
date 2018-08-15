@@ -14,10 +14,12 @@ public final class PagePredicates {
     private static final Logger LOG = LoggerFactory.getLogger(PagePredicates.class);
 
     public static final Predicate<PageDecorator> SECTION_LANDING_PAGE_PREDICATE = page ->
-            page != null && page.getContentResource().adaptTo(HierarchicalPage.class).isSectionLandingPage();
+            page != null && page.getContentResource() != null &&
+                    page.getContentResource().adaptTo(HierarchicalPage.class).isSectionLandingPage();
 
     public static final Predicate<PageDecorator> HOME_PAGE_PREDICATE = page ->
-            page != null && page.getContentResource().adaptTo(HierarchicalPage.class).isHomePage();
+            page != null && page.getContentResource() != null &&
+                    page.getContentResource().adaptTo(HierarchicalPage.class).isHomePage();
 
     public static final Predicate<PageDecorator> ALL_PAGES_PREDICATE = page -> true;
 
