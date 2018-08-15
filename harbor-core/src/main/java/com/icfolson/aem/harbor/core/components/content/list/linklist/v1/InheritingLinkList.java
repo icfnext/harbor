@@ -27,7 +27,7 @@ public class InheritingLinkList extends DefaultLinkList {
     public Resource getResource() {
         return super.getResource()
                 .adaptTo(ComponentNode.class)
-                .getNodeInherited(".")
+                .getComponentNodeInherited(".")
                 .transform(BasicNode::getResource)
                 .or(resource);
     }

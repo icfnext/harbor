@@ -22,7 +22,7 @@ public class InheritingColumnRow extends DefaultColumnRow {
     private Resource resource;
 
     public Resource getResource() {
-        return resource.adaptTo(ComponentNode.class).getNodeInherited(".").transform(BasicNode::getResource).or(resource);
+        return resource.adaptTo(ComponentNode.class).getComponentNodeInherited(".").transform(BasicNode::getResource).or(resource);
     }
 
 }

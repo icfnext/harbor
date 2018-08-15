@@ -11,7 +11,7 @@ public class InheritingCarouselSlide extends DefaultCarouselSlide {
     public static final String RESOURCE_TYPE = DefaultCarouselSlide.RESOURCE_TYPE + "/inheriting";
 
     public Resource getResource() {
-        return getNodeInherited(".").transform(BasicNode::getResource).or(super.getResource());
+        return getComponentNodeInherited(".").transform(BasicNode::getResource).or(super.getResource());
     }
 
 }
