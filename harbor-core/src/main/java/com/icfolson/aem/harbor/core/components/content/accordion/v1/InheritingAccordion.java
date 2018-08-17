@@ -26,7 +26,7 @@ public class InheritingAccordion extends DefaultAccordion {
 
     @Override
     public Resource getResource() {
-        return getNodeInherited(".").transform(BasicNode::getResource).or(super.getResource());
+        return getComponentNodeInherited(".").transform(BasicNode::getResource).or(super.getResource());
     }
 
     @Override

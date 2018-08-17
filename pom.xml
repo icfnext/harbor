@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <parent>
         <groupId>com.icfolson.aem.library</groupId>
         <artifactId>aem-library</artifactId>
-        <version>10.0.0</version>
+        <version>11.0.0</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.icfolson.aem.harbor</groupId>
     <artifactId>harbor</artifactId>
     <packaging>pom</packaging>
-    <version>3.2.0</version>
+    <version>4.0.0</version>
     <name>Harbor</name>
 
     <modules>
@@ -39,8 +38,9 @@
 
     <properties>
         <aem.namespace.version>0.4.0</aem.namespace.version>
-        <aem-library.version>10.0.0</aem-library.version>
-        <component.plugin.version>5.0.2</component.plugin.version>
+        <aem-library.version>11.0.0</aem-library.version>
+        <prosper.version>12.1.0</prosper.version>
+        <component.plugin.version>5.1.0</component.plugin.version>
         <package.skip>true</package.skip>
         <osgi.bundle.status.skip>true</osgi.bundle.status.skip>
         <core.name>harbor-core</core.name>
@@ -156,6 +156,27 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>external.atlassian.jgitflow</groupId>
+                <artifactId>jgitflow-maven-plugin</artifactId>
+                <version>1.0-m5.1</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.jcraft</groupId>
+                        <artifactId>jsch</artifactId>
+                        <version>0.1.54</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <flowInitContext>
+                        <featureBranchPrefix>feature-</featureBranchPrefix>
+                        <releaseBranchPrefix>release-</releaseBranchPrefix>
+                        <hotfixBranchPrefix>hotfix-</hotfixBranchPrefix>
+                    </flowInitContext>
+                    <autoVersionSubmodules>true</autoVersionSubmodules>
+                    <noDeploy>true</noDeploy>
+                </configuration>
             </plugin>
         </plugins>
     </build>

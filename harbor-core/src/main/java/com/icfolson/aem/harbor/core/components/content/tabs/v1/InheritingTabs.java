@@ -19,7 +19,7 @@ public class InheritingTabs extends DefaultTabs {
 
     @Override
     public Resource getResource() {
-        return resource.adaptTo(ComponentNode.class).getNodeInherited(".").transform(BasicNode::getResource).or(super.getResource());
+        return resource.adaptTo(ComponentNode.class).getComponentNodeInherited(".").transform(BasicNode::getResource).or(super.getResource());
     }
 
 }
