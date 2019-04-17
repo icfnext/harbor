@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.icfolson.aem.library</groupId>
         <artifactId>aem-library</artifactId>
-        <version>11.0.0</version>
+        <version>12.0.0</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
@@ -21,8 +21,8 @@
     </modules>
 
     <organization>
-        <name>ICF Olson</name>
-        <url>http://www.icfolson.com</url>
+        <name>ICF Next</name>
+        <url>http://www.icfnext.com</url>
     </organization>
 
     <distributionManagement>
@@ -38,8 +38,8 @@
 
     <properties>
         <aem.namespace.version>0.4.0</aem.namespace.version>
-        <aem-library.version>11.0.0</aem-library.version>
-        <prosper.version>12.1.0</prosper.version>
+        <aem-library.version>12.0.0</aem-library.version>
+        <prosper.version>14.0.0</prosper.version>
         <component.plugin.version>5.1.0</component.plugin.version>
         <package.skip>true</package.skip>
         <osgi.bundle.status.skip>true</osgi.bundle.status.skip>
@@ -85,32 +85,10 @@
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.5</version>
-                <configuration>
-                    <compilerId>groovy-eclipse-compiler</compilerId>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.codehaus.groovy</groupId>
-                        <artifactId>groovy-eclipse-compiler</artifactId>
-                        <version>2.9.2-01</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.codehaus.groovy</groupId>
-                        <artifactId>groovy-eclipse-batch</artifactId>
-                        <version>2.4.3-01</version>
-                    </dependency>
-                </dependencies>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>versions-maven-plugin</artifactId>
-                <version>2.2</version>
-                <configuration>
-                    <generateBackupPoms>false</generateBackupPoms>
-                </configuration>
             </plugin>
             <plugin>
                 <artifactId>maven-javadoc-plugin</artifactId>
@@ -136,7 +114,6 @@
             </plugin>
             <plugin>
                 <artifactId>maven-gpg-plugin</artifactId>
-                <version>1.6</version>
                 <executions>
                     <execution>
                         <phase>deploy</phase>
@@ -183,6 +160,13 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>com.adobe.aem</groupId>
+                <artifactId>uber-jar</artifactId>
+                <version>6.5.0</version>
+                <classifier>apis</classifier>
+            </dependency>
+
             <!-- AEM Library -->
             <dependency>
                 <groupId>com.icfolson.aem.library</groupId>
