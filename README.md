@@ -10,17 +10,17 @@ Harbor is a sites development SDK for AEM Sites built on the key tenants of
 
 Harbor Version(s) | AEM Version
 ------------ | -------------
+4.x.x | 6.4
 3.3.x | 6.3 SP2
 3.0.x | 6.3 
 
 ## Dependencies and Versions
 
-* [AEM Library](https://github.com/OlsonDigital/aem-library) `10.1.0`
-* [Component Plugin](https://github.com/OlsonDigital/cq-component-maven-plugin) `5.0.2`
+* [AEM Library](https://github.com/OlsonDigital/aem-library) `11.0.0`
+* [Component Plugin](https://github.com/OlsonDigital/cq-component-maven-plugin) `5.1.0`
 * [AEM Namespace Extension](https://github.com/OlsonDigital/aem-namespace-extension) `0.4.0`
 
-Built for use in AEM 6.3. 
-AEM 6.4 compatibility coming soon.
+Built for use in AEM 6.4. 
 
 ## Modules
 
