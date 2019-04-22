@@ -39,22 +39,6 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>maven-scr-plugin</artifactId>
-                <extensions>true</extensions>
-                <configuration>
-                    <scanClasses>true</scanClasses>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>generate-scr-scrdescriptor</id>
-                        <goals>
-                            <goal>scr</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
             </plugin>
             <plugin>
@@ -100,11 +84,23 @@
     </profiles>
 
     <dependencies>
-        <!-- uber jar -->
+        <!-- provided -->
         <dependency>
             <groupId>com.adobe.aem</groupId>
             <artifactId>uber-jar</artifactId>
             <classifier>apis</classifier>
+        </dependency>
+        <dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>osgi.core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>osgi.cmpn</artifactId>
         </dependency>
 
         <!-- third party -->
@@ -170,6 +166,13 @@
             <groupId>com.icfolson.aem.prosper</groupId>
             <artifactId>prosper</artifactId>
             <version>${prosper.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.icfolson.aem.library</groupId>
+            <artifactId>aem-library-core</artifactId>
+            <version>${aem-library.version}</version>
+            <classifier>tests</classifier>
             <scope>test</scope>
         </dependency>
         <dependency>

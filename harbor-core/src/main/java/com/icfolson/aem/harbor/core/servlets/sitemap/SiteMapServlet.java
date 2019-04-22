@@ -4,18 +4,21 @@ import com.day.cq.wcm.api.NameConstants;
 import com.icfolson.aem.harbor.api.domain.sitemap.SiteMap;
 import com.icfolson.aem.library.api.request.ComponentServletRequest;
 import com.icfolson.aem.library.core.servlets.AbstractComponentServlet;
-import org.apache.felix.scr.annotations.sling.SlingServlet;
 import org.apache.sling.api.SlingHttpServletResponse;
+import org.apache.sling.api.servlets.ServletResolverConstants;
+import org.osgi.service.component.annotations.Component;
 
+import javax.servlet.Servlet;
 import javax.servlet.ServletException;
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
 
-@SlingServlet(
-    resourceTypes = NameConstants.NT_PAGE,
-    selectors = SiteMapServlet.SELECTOR,
-    methods = "GET",
-    extensions = SiteMapServlet.EXTENSION)
+@Component(service = Servlet.class, property = {
+    ServletResolverConstants.SLING_SERVLET_RESOURCE_TYPES + "=" + NameConstants.NT_PAGE,
+    ServletResolverConstants.SLING_SERVLET_SELECTORS + "=" + SiteMapServlet.SELECTOR,
+    ServletResolverConstants.SLING_SERVLET_EXTENSIONS + "=" + SiteMapServlet.EXTENSION,
+    ServletResolverConstants.SLING_SERVLET_METHODS + "=GET"
+})
 public class SiteMapServlet extends AbstractComponentServlet {
 
     public static final String SELECTOR = "sitemap";

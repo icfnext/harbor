@@ -34,22 +34,6 @@
                     </instructions>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>maven-scr-plugin</artifactId>
-                <extensions>true</extensions>
-                <configuration>
-                    <scanClasses>true</scanClasses>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>generate-scr-scrdescriptor</id>
-                        <goals>
-                            <goal>scr</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
         </plugins>
     </build>
 
@@ -61,6 +45,10 @@
         </dependency>
 
         <!-- AEM Library -->
+        <dependency>
+            <groupId>com.icfolson.aem.library</groupId>
+            <artifactId>aem-library-api</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.icfolson.aem.library</groupId>
             <artifactId>aem-library-core</artifactId>
