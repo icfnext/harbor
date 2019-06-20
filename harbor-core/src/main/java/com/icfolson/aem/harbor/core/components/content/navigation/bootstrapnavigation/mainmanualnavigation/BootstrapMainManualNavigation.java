@@ -15,6 +15,7 @@ import com.icfolson.aem.library.core.components.AbstractComponent;
 import com.icfolson.aem.library.core.constants.PathConstants;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
+import com.icfolson.aem.library.api.node.BasicNode;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -90,7 +91,7 @@ public class BootstrapMainManualNavigation extends AbstractComponent {
 
     public List<BootstrapMainNavigationElement> getBootstrapMainNavigationElementList() {
         if (bootstrapMainNavigationElementList == null) {
-            bootstrapMainNavigationElementList = getNodesInherited("elements")
+            bootstrapMainNavigationElementList = getComponentNodesInherited("elements")
                 .stream()
                 .map(element -> element.getResource().adaptTo(BootstrapMainNavigationElement.class))
                 .collect(Collectors.toList());

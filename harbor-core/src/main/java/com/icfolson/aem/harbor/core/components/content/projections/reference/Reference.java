@@ -7,7 +7,7 @@ import com.citytechinc.cq.component.annotations.Tab;
 import com.citytechinc.cq.component.annotations.widgets.PathField;
 import com.citytechinc.cq.component.annotations.widgets.TextField;
 import com.icfolson.aem.harbor.core.constants.groups.ComponentGroups;
-import com.icfolson.aem.library.api.components.annotations.AutoInstantiate;
+//import com.icfolson.aem.library.api.components.annotations.AutoInstantiate;
 import com.icfolson.aem.library.core.components.AbstractComponent;
 import com.icfolson.aem.library.core.constants.PathConstants;
 import org.apache.commons.lang3.StringUtils;
@@ -18,7 +18,7 @@ import org.apache.sling.models.annotations.Model;
     @Tab(title = "Reference"),
     @Tab(title = "Advanced")
 }, group = ComponentGroups.HARBOR_PROJECTIONS)
-@AutoInstantiate
+//@AutoInstantiate
 @Model(adaptables = Resource.class)
 public class Reference extends AbstractComponent {
 

@@ -4,13 +4,13 @@ import com.citytechinc.cq.component.annotations.Component;
 import com.citytechinc.cq.component.annotations.DialogField;
 import com.citytechinc.cq.component.annotations.widgets.Selection;
 import com.google.common.base.Optional;
-import com.icfolson.aem.library.api.components.annotations.AutoInstantiate;
+//import com.icfolson.aem.library.api.components.annotations.AutoInstantiate;
 import com.icfolson.aem.library.core.components.AbstractComponent;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
 
 @Component("RSS Feed")
-@AutoInstantiate(instanceName = "rssFeed")
+//@AutoInstantiate(instanceName = "rssFeed")
 @Model(adaptables = Resource.class)
 public class RSSFeed extends AbstractComponent {
 
